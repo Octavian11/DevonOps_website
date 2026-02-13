@@ -7,6 +7,8 @@ const CALENDLY = "https://calendly.com/hassantariq1/15-minute-triage-call-hassan
 const COLORS = {
   navy: "#1B2A4A", steel: "#4A6FA5", gold: "#B8943E", offWhite: "#F8F9FA",
   charcoal: "#1A202C", border: "#E2E8F0", white: "#FFFFFF",
+  primary: "#14213D",
+  bodyMuted: "#4A5568",
   criticalBg: "#FFF5F5", criticalText: "#9B2C2C", criticalBorder: "#FEB2B2",
   highBg: "#FFFAF0", highText: "#C05621", highBorder: "#FBD38D",
   mediumBg: "#FFFFF0", mediumText: "#B7791F", mediumBorder: "#FEFCBF",
@@ -190,8 +192,41 @@ const globalCSS = `
   @keyframes slideDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
   .fade-in { animation: fadeIn 0.3s ease-out forwards; }
   .lever-expand { animation: fadeIn 0.2s ease-out forwards; }
-  input[type="range"] { height: 6px; }
-  input[type="range"]::-webkit-slider-thumb { cursor: pointer; }
+  /* Range slider – clear “lever” affordance */
+  input[type="range"].scorer-range {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 10px;
+    width: 100%;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+  }
+  input[type="range"].scorer-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    background: ${COLORS.gold};
+    border: 2px solid white;
+    border-radius: 50%;
+    cursor: grab;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+  input[type="range"].scorer-range::-webkit-slider-thumb:active { cursor: grabbing; }
+  input[type="range"].scorer-range::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    background: ${COLORS.gold};
+    border: 2px solid white;
+    border-radius: 50%;
+    cursor: grab;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+  input[type="range"].scorer-range::-moz-range-track {
+    height: 10px;
+    border-radius: 5px;
+    background: transparent;
+  }
 `;
 
 // ─── COMPONENTS ─────────────────────────────────────────────
@@ -239,15 +274,15 @@ function CTAButton({ text, small, variant, style: extraStyle }) {
 
 function SectionTitle({ children, sub }) {
   return (
-    <div style={{ marginBottom: sub ? "12px" : "32px" }}>
-      <h2 style={{ fontFamily: "'Libre Baskerville', serif", fontSize: sub ? "20px" : "28px", fontWeight: 700, color: COLORS.navy, lineHeight: 1.3 }}>{children}</h2>
+    <div style={{ marginBottom: sub ? "14px" : "36px" }}>
+      <h2 style={{ fontFamily: "'Libre Baskerville', serif", fontSize: sub ? "22px" : "30px", fontWeight: 700, color: COLORS.navy, lineHeight: 1.3 }}>{children}</h2>
     </div>
   );
 }
 
 function Card({ children, style: extraStyle }) {
   return (
-    <div style={{ background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: "6px", padding: "24px", marginBottom: "16px", ...extraStyle }}>
+    <div style={{ background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: "8px", padding: "28px", marginBottom: "20px", boxShadow: "0 1px 3px rgba(0,0,0,0.06)", ...extraStyle }}>
       {children}
     </div>
   );
@@ -263,7 +298,7 @@ function Nav({ page, setPage }) {
     { key: "about", label: "About" },
   ];
   return (
-    <nav style={{ position: "sticky", top: 0, zIndex: 100, background: COLORS.navy, borderBottom: `3px solid ${COLORS.gold}`, padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: "60px" }}>
+    <nav style={{ position: "sticky", top: 0, zIndex: 100, background: COLORS.primary, borderBottom: `3px solid ${COLORS.gold}`, padding: "0 28px", display: "flex", alignItems: "center", justifyContent: "space-between", height: "60px" }}>
       <div style={{ display: "flex", alignItems: "center", gap: "28px" }}>
         <span onClick={() => setPage("levers")} style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "15px", fontWeight: 700, color: "white", cursor: "pointer", whiteSpace: "nowrap", lineHeight: 1.3 }}>
           Hassan Tariq<br />
@@ -716,10 +751,10 @@ function ScorerPage() {
 
   return (
     <div className="fade-in" style={{ maxWidth: "800px" }}>
-      <h1 style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "32px", fontWeight: 700, color: COLORS.navy, marginBottom: "12px" }}>
+      <h1 style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "34px", fontWeight: 700, color: COLORS.navy, marginBottom: "14px" }}>
         Portfolio Stability Readiness Scorer
       </h1>
-      <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "16px", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "32px" }}>
+      <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "17px", color: COLORS.bodyMuted, lineHeight: 1.65, marginBottom: "36px" }}>
         Assess a portfolio company's operational stability across 6 dimensions. Identify where friction is highest and which interventions would create the most value.
       </p>
 
@@ -746,12 +781,22 @@ function ScorerPage() {
                   {scores[dim.key]}
                 </span>
               </div>
-              <input type="range" min={1} max={5} step={1} value={scores[dim.key]}
+              <input
+                type="range"
+                className="scorer-range"
+                min={1}
+                max={5}
+                step={1}
+                value={scores[dim.key]}
                 onChange={e => setScores({ ...scores, [dim.key]: parseInt(e.target.value) })}
-                style={{ width: "100%", accentColor: COLORS.navy, cursor: "pointer" }} />
-              <div style={{ display: "flex", justifyContent: "space-between", marginTop: "8px" }}>
-                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "12px", color: COLORS.steel, maxWidth: "40%" }}>{dim.low}</span>
-                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "12px", color: COLORS.steel, maxWidth: "40%", textAlign: "right" }}>{dim.high}</span>
+                style={{
+                  width: "100%",
+                  background: `linear-gradient(to right, ${COLORS.steel} 0%, ${COLORS.steel} ${((scores[dim.key] - 1) / 4) * 100}%, ${COLORS.border} ${((scores[dim.key] - 1) / 4) * 100}%, ${COLORS.border} 100%)`,
+                }}
+              />
+              <div style={{ display: "flex", justifyContent: "space-between", marginTop: "10px", gap: "12px" }}>
+                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: COLORS.bodyMuted, maxWidth: "42%", lineHeight: 1.4 }}>{dim.low}</span>
+                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: COLORS.bodyMuted, maxWidth: "42%", textAlign: "right", lineHeight: 1.4 }}>{dim.high}</span>
               </div>
             </Card>
           ))}
@@ -777,7 +822,7 @@ function ScorerPage() {
                   <PolarGrid stroke={COLORS.border} />
                   <PolarAngleAxis dataKey="subject" tick={{ fontSize: 12, fontFamily: "'DM Sans', sans-serif", fill: COLORS.charcoal }} />
                   <PolarRadiusAxis angle={90} domain={[0, 5]} tick={{ fontSize: 10, fill: COLORS.steel }} />
-                  <Radar name="Score" dataKey="score" stroke={COLORS.navy} fill={COLORS.navy} fillOpacity={0.15} strokeWidth={2} dot={{ r: 4, fill: COLORS.navy }} />
+                  <Radar name="Score" dataKey="score" stroke={COLORS.navy} fill={COLORS.navy} fillOpacity={0.4} strokeWidth={2} dot={{ r: 4, fill: COLORS.navy }} />
                 </RadarChart>
               </ResponsiveContainer>
             </Card>
@@ -816,10 +861,10 @@ function ScorerPage() {
 function ServicesPage() {
   return (
     <div className="fade-in" style={{ maxWidth: "800px" }}>
-      <h1 style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "32px", fontWeight: 700, color: COLORS.navy, marginBottom: "12px" }}>
+      <h1 style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "36px", fontWeight: 700, color: COLORS.navy, marginBottom: "16px" }}>
         Services
       </h1>
-      <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "16px", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "32px" }}>
+      <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "17px", color: COLORS.bodyMuted, lineHeight: 1.65, marginBottom: "36px" }}>
         Operational support for PE funds and portfolio companies — from pre-close diligence through post-close stabilization to ongoing governance.
       </p>
 
@@ -836,17 +881,17 @@ function ServicesPage() {
               <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: COLORS.steel, letterSpacing: "0.5px", textTransform: "uppercase" }}>{item.label}</span>
               <div style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "15px", color: COLORS.navy, fontWeight: 700, margin: "8px 0 4px" }}>{item.name}</div>
               <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "20px", color: COLORS.charcoal, fontWeight: 700, marginBottom: "4px" }}>{item.price}</div>
-              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "12px", color: COLORS.steel }}>{item.time}</div>
-              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "12px", color: COLORS.steel, marginTop: "4px", fontStyle: "italic" }}>{item.desc}</div>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: COLORS.bodyMuted }}>{item.time}</div>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: COLORS.bodyMuted, marginTop: "4px", fontStyle: "italic" }}>{item.desc}</div>
             </div>
           ))}
         </div>
-        <div style={{ marginTop: "16px", padding: "12px 16px", background: `${COLORS.gold}08`, borderRadius: "4px", border: `1px solid ${COLORS.gold}30` }}>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "8px" }}>
+        <div style={{ marginTop: "20px", padding: "16px 20px", background: `${COLORS.gold}08`, borderRadius: "6px", border: `1px solid ${COLORS.gold}30` }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", color: COLORS.bodyMuted, lineHeight: 1.65, marginBottom: "10px" }}>
             <strong style={{ color: COLORS.navy }}>Recommended:</strong> The bundle is the best path if you expect to close — diligence findings feed directly into the stabilization plan with no re-learning, compressing Day-1 readiness.
           </p>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: COLORS.charcoal, lineHeight: 1.6 }}>
-            <strong style={{ color: COLORS.navy }}>Ongoing:</strong> All engagements can transition to a <strong>Control Tower Retainer</strong> at <strong style={{ fontFamily: "'JetBrains Mono', monospace" }}>$7.5K+/month</strong> — the weekly operating rhythm, escalation support, and compliance cadence that keeps the portfolio company from drifting back.
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", color: COLORS.bodyMuted, lineHeight: 1.65 }}>
+            <strong style={{ color: COLORS.navy }}>Ongoing:</strong> All engagements can transition to a <strong style={{ color: COLORS.charcoal }}>Control Tower Retainer</strong> at <strong style={{ fontFamily: "'JetBrains Mono', monospace", color: COLORS.navy }}>$7.5K+/month</strong> — the weekly operating rhythm, escalation support, and compliance cadence that keeps the portfolio company from drifting back.
           </p>
         </div>
         {/* Sample report CTA */}
@@ -1044,7 +1089,7 @@ export default function App() {
   return (
     <div style={{ minHeight: "100vh", background: COLORS.offWhite, fontFamily: "'DM Sans', sans-serif" }}>
       <Nav page={page} setPage={setPage} />
-      <main style={{ maxWidth: "960px", margin: "0 auto", padding: "40px 24px 80px" }}>
+      <main style={{ maxWidth: "960px", margin: "0 auto", padding: "40px 32px 80px" }}>
         {pages[page]}
       </main>
       <footer style={{ borderTop: `1px solid ${COLORS.border}`, padding: "24px", textAlign: "center", background: COLORS.white }}>
