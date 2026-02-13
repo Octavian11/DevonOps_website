@@ -234,7 +234,7 @@ const globalCSS = `
 function SeverityBadge({ severity }) {
   const s = SEVERITY_STYLE[severity];
   return (
-    <span style={{ display: "inline-block", padding: "2px 10px", borderRadius: "3px", fontSize: "11px", fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, letterSpacing: "0.5px", textTransform: "uppercase", color: s.text, background: s.bg, border: `1px solid ${s.border}` }}>
+    <span style={{ display: "inline-block", padding: "3px 10px", borderRadius: "3px", fontSize: "12px", fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, letterSpacing: "0.5px", textTransform: "uppercase", color: s.text, background: s.bg, border: `1px solid ${s.border}` }}>
       {severity}
     </span>
   );
@@ -242,7 +242,7 @@ function SeverityBadge({ severity }) {
 
 function TimingBadge({ timing }) {
   return (
-    <span style={{ display: "inline-block", padding: "2px 10px", borderRadius: "3px", fontSize: "11px", fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, letterSpacing: "0.5px", color: "white", background: TIMING_COLORS[timing] || COLORS.ongoing }}>
+    <span style={{ display: "inline-block", padding: "3px 10px", borderRadius: "3px", fontSize: "12px", fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, letterSpacing: "0.5px", color: "white", background: TIMING_COLORS[timing] || COLORS.ongoing }}>
       {timing}
     </span>
   );
@@ -251,7 +251,7 @@ function TimingBadge({ timing }) {
 function DomainTag({ domain }) {
   const d = DOMAINS[domain];
   return (
-    <span style={{ display: "inline-block", padding: "2px 8px", borderRadius: "3px", fontSize: "11px", fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, color: d.color, background: `${d.color}15`, border: `1px solid ${d.color}30` }}>
+    <span style={{ display: "inline-block", padding: "3px 8px", borderRadius: "3px", fontSize: "12px", fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, color: d.color, background: `${d.color}15`, border: `1px solid ${d.color}30` }}>
       {d.short}
     </span>
   );
@@ -264,7 +264,7 @@ function CTAButton({ text, small, variant, style: extraStyle }) {
   const border = isPrimary ? "none" : `2px solid ${COLORS.gold}`;
   const hoverBg = isPrimary ? "#A07D2E" : `${COLORS.gold}15`;
   return (
-    <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", padding: small ? "8px 20px" : "12px 28px", background: bg, color, fontFamily: "'DM Sans', sans-serif", fontSize: small ? "13px" : "15px", fontWeight: 600, borderRadius: "4px", textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border, ...extraStyle }}
+    <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", padding: small ? "10px 22px" : "12px 28px", background: bg, color, fontFamily: "'DM Sans', sans-serif", fontSize: small ? "14px" : "16px", fontWeight: 600, borderRadius: "4px", textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border, ...extraStyle }}
       onMouseEnter={e => { e.target.style.background = hoverBg; }}
       onMouseLeave={e => { e.target.style.background = bg; }}>
       {text || "15-Minute Fit Check"}
@@ -298,17 +298,17 @@ function Nav({ page, setPage }) {
     { key: "about", label: "About" },
   ];
   return (
-    <nav style={{ position: "sticky", top: 0, zIndex: 100, background: COLORS.primary, borderBottom: `3px solid ${COLORS.gold}`, padding: "0 28px", display: "flex", alignItems: "center", justifyContent: "space-between", height: "60px" }}>
+    <nav style={{ position: "sticky", top: 0, zIndex: 100, background: COLORS.primary, borderBottom: `3px solid ${COLORS.gold}`, padding: "0 28px", display: "flex", alignItems: "center", justifyContent: "space-between", height: "76px", minHeight: "76px" }}>
       <div style={{ display: "flex", alignItems: "center", gap: "28px" }}>
-        <span onClick={() => setPage("levers")} style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "15px", fontWeight: 700, color: "white", cursor: "pointer", whiteSpace: "nowrap", lineHeight: 1.3 }}>
+        <span onClick={() => setPage("levers")} style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "18px", fontWeight: 700, color: "white", cursor: "pointer", whiteSpace: "nowrap", lineHeight: 1.35 }}>
           Hassan Tariq<br />
-          <span style={{ fontWeight: 400, fontSize: "11px", fontFamily: "'JetBrains Mono', monospace", color: "#94A3B8", letterSpacing: "0.3px" }}>Columbia Business School EMBA '26</span>
+          <span style={{ fontWeight: 400, fontSize: "13px", fontFamily: "'JetBrains Mono', monospace", color: "#94A3B8", letterSpacing: "0.3px" }}>Columbia Business School EMBA '26</span>
         </span>
-        <div style={{ width: "1px", height: "32px", background: "#334155" }} />
-        <div style={{ display: "flex", gap: "2px" }}>
+        <div style={{ width: "1px", height: "36px", background: "#334155" }} />
+        <div style={{ display: "flex", gap: "4px" }}>
           {items.map(({ key, label }) => (
             <button key={key} onClick={() => setPage(key)}
-              style={{ background: page === key ? `${COLORS.gold}20` : "transparent", border: "none", padding: "8px 12px", borderRadius: "4px", color: page === key ? COLORS.gold : "#CBD5E0", fontFamily: "'DM Sans', sans-serif", fontSize: "13px", fontWeight: page === key ? 600 : 400, cursor: "pointer", transition: "all 0.15s", letterSpacing: "0.3px" }}
+              style={{ background: page === key ? `${COLORS.gold}20` : "transparent", border: "none", padding: "10px 16px", borderRadius: "4px", color: page === key ? COLORS.gold : "#CBD5E0", fontFamily: "'DM Sans', sans-serif", fontSize: "15px", fontWeight: page === key ? 600 : 400, cursor: "pointer", transition: "all 0.15s", letterSpacing: "0.3px" }}
               onMouseEnter={e => { if (page !== key) e.target.style.color = "white"; }}
               onMouseLeave={e => { if (page !== key) e.target.style.color = "#CBD5E0"; }}>
               {label}
@@ -316,7 +316,7 @@ function Nav({ page, setPage }) {
           ))}
         </div>
       </div>
-      <CTAButton text="15-Minute Fit Check" small />
+      <CTAButton text="15-Minute Fit Check" />
     </nav>
   );
 }
@@ -419,24 +419,24 @@ function DomainLegend() {
   const [open, setOpen] = useState(false);
   return (
     <div style={{ marginBottom: "20px" }}>
-      <button onClick={() => setOpen(!open)} style={{ background: "none", border: "none", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: COLORS.steel, display: "flex", alignItems: "center", gap: "6px", padding: "4px 0" }}>
-        <span style={{ fontSize: "11px" }}>{open ? "▾" : "▸"}</span>
+      <button onClick={() => setOpen(!open)} style={{ background: "none", border: "none", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontSize: "15px", color: COLORS.steel, display: "flex", alignItems: "center", gap: "8px", padding: "6px 0" }}>
+        <span style={{ fontSize: "14px" }}>{open ? "▾" : "▸"}</span>
         <span>Domain codes legend</span>
-        <div style={{ display: "inline-flex", gap: "4px", marginLeft: "8px" }}>
+        <div style={{ display: "inline-flex", gap: "6px", marginLeft: "8px" }}>
           {Object.entries(DOMAINS).map(([k, v]) => (
-            <span key={k} style={{ display: "inline-block", padding: "1px 5px", borderRadius: "2px", fontSize: "10px", fontFamily: "'JetBrains Mono', monospace", color: v.color, background: `${v.color}10` }}>{v.short}</span>
+            <span key={k} style={{ display: "inline-block", padding: "2px 6px", borderRadius: "2px", fontSize: "12px", fontFamily: "'JetBrains Mono', monospace", color: v.color, background: `${v.color}10` }}>{v.short}</span>
           ))}
         </div>
       </button>
       {open && (
-        <div className="fade-in" style={{ marginTop: "8px", padding: "12px 16px", background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: "6px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "8px" }}>
+        <div className="fade-in" style={{ marginTop: "10px", padding: "16px 20px", background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: "6px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "12px" }}>
             {Object.entries(DOMAINS).map(([k, v]) => (
-              <div key={k} style={{ display: "flex", alignItems: "flex-start", gap: "8px" }}>
-                <span style={{ display: "inline-block", padding: "2px 8px", borderRadius: "3px", fontSize: "11px", fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, color: v.color, background: `${v.color}15`, border: `1px solid ${v.color}30`, flexShrink: 0, marginTop: "2px" }}>{v.short}</span>
+              <div key={k} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
+                <span style={{ display: "inline-block", padding: "3px 8px", borderRadius: "3px", fontSize: "12px", fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, color: v.color, background: `${v.color}15`, border: `1px solid ${v.color}30`, flexShrink: 0, marginTop: "2px" }}>{v.short}</span>
                 <div>
-                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", fontWeight: 600, color: COLORS.charcoal }}>{v.name}</span>
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "12px", color: COLORS.steel, marginTop: "1px" }}>{v.desc}</p>
+                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "15px", fontWeight: 600, color: COLORS.charcoal }}>{v.name}</span>
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", color: COLORS.bodyMuted, marginTop: "2px", lineHeight: 1.45 }}>{v.desc}</p>
                 </div>
               </div>
             ))}
@@ -463,24 +463,24 @@ function LeverExplorer({ setPage }) {
     return true;
   });
 
-  const selectStyle = { padding: "8px 12px", border: `1px solid ${COLORS.border}`, borderRadius: "4px", fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: COLORS.charcoal, background: "white", cursor: "pointer", minWidth: "160px" };
+  const selectStyle = { padding: "10px 14px", border: `1px solid ${COLORS.border}`, borderRadius: "4px", fontFamily: "'DM Sans', sans-serif", fontSize: "15px", color: COLORS.charcoal, background: "white", cursor: "pointer", minWidth: "160px" };
 
   return (
     <div className="fade-in">
       <HeroBlockWithNav setPage={setPage} />
 
-      <div style={{ marginBottom: "24px" }}>
-        <h2 style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "24px", fontWeight: 700, color: COLORS.navy, marginBottom: "8px" }}>
+      <div style={{ marginBottom: "28px" }}>
+        <h2 style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "28px", fontWeight: 700, color: COLORS.navy, marginBottom: "12px" }}>
           Operational Friction Lever Explorer
         </h2>
-        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", color: COLORS.steel, lineHeight: 1.6, maxWidth: "720px" }}>
+        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "16px", color: COLORS.bodyMuted, lineHeight: 1.65, maxWidth: "720px" }}>
           {LEVERS.length} operational friction points across 6 domains — with severity ratings, symptoms, and PE impact analysis. The levers show <em>what</em> is broken and <em>why</em> it matters. The remediation playbooks — the <em>how</em> — are delivered in the engagement.
         </p>
       </div>
 
       <DomainLegend />
 
-      <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: COLORS.steel, marginBottom: "12px", fontStyle: "italic" }}>
+      <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "15px", color: COLORS.bodyMuted, marginBottom: "14px", fontStyle: "italic" }}>
         Filter by timing (Pre-Close vs. First 100 Days), domain, or severity. Open any lever for symptoms and PE impact analysis.
       </p>
 
@@ -505,7 +505,7 @@ function LeverExplorer({ setPage }) {
         </select>
       </div>
 
-      <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: COLORS.steel, marginBottom: "16px" }}>
+      <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "15px", color: COLORS.bodyMuted, marginBottom: "18px" }}>
         Showing {filtered.length} of {LEVERS.length} levers
       </p>
 
@@ -514,12 +514,12 @@ function LeverExplorer({ setPage }) {
         <div key={lever.id}>
           <div style={{ background: COLORS.white, border: `1px solid ${expanded === lever.id ? COLORS.steel : COLORS.border}`, borderRadius: "6px", marginBottom: "8px", transition: "all 0.15s", cursor: "pointer" }}
             onClick={() => setExpanded(expanded === lever.id ? null : lever.id)}>
-            <div style={{ padding: "14px 20px", display: "flex", alignItems: "center", gap: "12px" }}>
-              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: COLORS.steel, width: "16px", flexShrink: 0 }}>
+            <div style={{ padding: "16px 22px", display: "flex", alignItems: "center", gap: "14px" }}>
+              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "15px", color: COLORS.steel, width: "20px", flexShrink: 0 }}>
                 {expanded === lever.id ? "▾" : "▸"}
               </span>
               <DomainTag domain={lever.domain} />
-              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", fontWeight: 500, color: COLORS.charcoal, flex: 1 }}>
+              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "16px", fontWeight: 500, color: COLORS.charcoal, flex: 1 }}>
                 {lever.name}
               </span>
               <div style={{ display: "flex", gap: "8px", flexShrink: 0 }}>
@@ -528,18 +528,18 @@ function LeverExplorer({ setPage }) {
               </div>
             </div>
             {expanded === lever.id && (
-              <div className="lever-expand" style={{ padding: "0 20px 20px 48px", borderTop: `1px solid ${COLORS.border}` }} onClick={e => e.stopPropagation()}>
-                <div style={{ paddingTop: "16px" }}>
-                  <h4 style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "14px", color: COLORS.navy, marginBottom: "6px" }}>Definition</h4>
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "16px" }}>{lever.definition}</p>
-                  <h4 style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "14px", color: COLORS.navy, marginBottom: "6px" }}>Symptoms</h4>
-                  <ul style={{ paddingLeft: "20px", marginBottom: "16px" }}>
-                    {lever.symptoms.map((s, i) => <li key={i} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "4px" }}>{s}</li>)}
+              <div className="lever-expand" style={{ padding: "0 22px 22px 52px", borderTop: `1px solid ${COLORS.border}` }} onClick={e => e.stopPropagation()}>
+                <div style={{ paddingTop: "18px" }}>
+                  <h4 style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "16px", color: COLORS.navy, marginBottom: "8px" }}>Definition</h4>
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "16px", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.definition}</p>
+                  <h4 style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "16px", color: COLORS.navy, marginBottom: "8px" }}>Symptoms</h4>
+                  <ul style={{ paddingLeft: "22px", marginBottom: "18px" }}>
+                    {lever.symptoms.map((s, i) => <li key={i} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "16px", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "6px" }}>{s}</li>)}
                   </ul>
-                  <h4 style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "14px", color: COLORS.navy, marginBottom: "6px" }}>PE Impact</h4>
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "16px" }}>{lever.peImpact}</p>
-                  <h4 style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "14px", color: COLORS.navy, marginBottom: "6px" }}>What Good Looks Like</h4>
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "16px" }}>{lever.whatGood}</p>
+                  <h4 style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "16px", color: COLORS.navy, marginBottom: "8px" }}>PE Impact</h4>
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "16px", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.peImpact}</p>
+                  <h4 style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "16px", color: COLORS.navy, marginBottom: "8px" }}>What Good Looks Like</h4>
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "16px", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.whatGood}</p>
                   <div style={{ display: "flex", gap: "16px", paddingTop: "8px", borderTop: `1px solid ${COLORS.border}` }}>
                     <button onClick={() => setPage("scorer")} style={{ background: "none", border: "none", fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: COLORS.steel, cursor: "pointer", textDecoration: "underline" }}>→ Assess your readiness</button>
                     <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: COLORS.gold, textDecoration: "underline" }}>→ 15-Minute Fit Check</a>
@@ -997,15 +997,15 @@ function ServicesPage() {
 function AboutPage() {
   return (
     <div className="fade-in" style={{ maxWidth: "700px" }}>
-      <h1 style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "32px", fontWeight: 700, color: COLORS.navy, marginBottom: "32px" }}>About</h1>
+      <h1 style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "36px", fontWeight: 700, color: COLORS.navy, marginBottom: "32px" }}>About</h1>
 
       <SectionTitle sub>What I Do</SectionTitle>
-      <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "15px", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "12px" }}>
+      <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "16px", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "14px" }}>
         I help PE funds and portfolio companies eliminate the operational friction that erodes EBITDA, extends hold periods, and creates risk that surfaces too late. From pre-close diligence through post-close stabilization to ongoing governance — I install the operating discipline that makes value creation plans actually executable.
       </p>
-      <div style={{ padding: "12px 16px", background: `${COLORS.navy}06`, border: `1px solid ${COLORS.border}`, borderRadius: "4px", marginBottom: "20px" }}>
-        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: COLORS.navy, lineHeight: 1.6, margin: 0 }}>
-          <strong>Best fit:</strong> PE-backed services, trading-adjacent infrastructure, and regulated platforms where incidents, change risk, vendor sprawl, and KPI drift are present.
+      <div style={{ padding: "14px 18px", background: `${COLORS.navy}06`, border: `1px solid ${COLORS.border}`, borderRadius: "6px", marginBottom: "20px" }}>
+        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "15px", color: COLORS.navy, lineHeight: 1.6, margin: 0 }}>
+          <strong>Best fit:</strong> Lower-middle-market PE funds, independent sponsors, and family offices doing control deals where operational risk can break the value creation plan.
         </p>
       </div>
       {/* Above-fold CTA */}
@@ -1018,15 +1018,15 @@ function AboutPage() {
       </div>
 
       <SectionTitle sub>How I Work</SectionTitle>
-      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "15px", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "24px" }}>
+      <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "16px", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "24px" }}>
         <p style={{ marginBottom: "12px" }}>For funds evaluating targets, I run an <strong>Ops Diligence Report</strong> that surfaces the friction points standard diligence misses — and delivers a risk-rated findings memo to the investment committee.</p>
         <p style={{ marginBottom: "12px" }}>Post-close, I execute a <strong>100-Day Stabilization Plan</strong>: install incident governance, change control, vendor oversight, KPI cadence, and board-ready reporting. Fast. Structured. Measurable from Day 1.</p>
         <p>For ongoing operational governance, I run a <strong>Control Tower Retainer</strong> — the weekly operating rhythm, escalation support, and compliance cadence that keeps the portfolio company from drifting back.</p>
       </div>
 
       <SectionTitle sub>Who I Am</SectionTitle>
-      <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "15px", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "24px" }}>
-        Hassan Tariq. 15+ years in platform operations across JP Morgan, Barclays, Bank of America, and Lazard — managing global trading operations, multi-billion dollar platform transformations, and operational risk at institutional scale. Columbia Business School Executive MBA (2026).
+      <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "16px", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "24px" }}>
+        Hassan Tariq. 15+ years in platform operations across JP Morgan, Barclays, Bank of America, and Lazard — managing global trading operations, multi-billion dollar platform transformations, and operational risk at institutional scale. I'm currently completing my Executive MBA at Columbia Business School ('26), where I've sharpened a PE operator lens on the operational risks that derail value creation in the first 100 days.
       </p>
 
       <SectionTitle sub>Representative Outcomes</SectionTitle>
@@ -1052,7 +1052,7 @@ function AboutPage() {
       </Card>
 
       <div style={{ textAlign: "center", padding: "32px 0" }}>
-        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "15px", color: COLORS.charcoal, marginBottom: "16px" }}>
+        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "16px", color: COLORS.charcoal, marginBottom: "18px" }}>
           15 minutes. We'll assess the portfolio company's situation and scope the right engagement.
         </p>
         <CTAButton text="15-Minute Fit Check" />
@@ -1093,7 +1093,7 @@ export default function App() {
         {pages[page]}
       </main>
       <footer style={{ borderTop: `1px solid ${COLORS.border}`, padding: "24px", textAlign: "center", background: COLORS.white }}>
-        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: COLORS.steel }}>
+        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", color: COLORS.bodyMuted }}>
           © 2026 Hassan Tariq · Columbia Business School EMBA 2026 · Portfolio Operations
         </p>
       </footer>
