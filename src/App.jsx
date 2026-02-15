@@ -9,9 +9,19 @@ const SAMPLE_SCORECARD_PDF = "/sample-ops-diligence-scorecard.pdf";
 const SAMPLE_100DAY_PDF = "/sample-100-day-stabilization-plan.pdf";
 const PDF_SCORECARD = "/ops-diligence-scorecard.pdf";
 const PDF_100DAY = "/100-day-stabilization-plan.pdf";
+const NDA_NOTE = "NDA-friendly. Minimal data handling. Anonymized formats accepted.";
 
 function mailtoHref(subject, body) {
   return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+async function copyToClipboard(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
 
 const COLORS = {
@@ -1553,11 +1563,338 @@ function FitCheckCTA() {
   );
 }
 
+// Traffic Selector
+function TrafficSelector() {
+  const box = {
+    border: `1px solid ${COLORS.border}`,
+    borderRadius: "8px",
+    padding: "16px",
+    background: "#FBFBFC",
+    marginBottom: "18px",
+  };
+
+  const btn = {
+    padding: "12px 16px",
+    borderRadius: "6px",
+    border: `2px solid ${COLORS.navy}`,
+    background: "transparent",
+    color: COLORS.navy,
+    fontFamily: FONTS.body,
+    fontWeight: 900,
+    cursor: "pointer",
+  };
+
+  const primary = { ...btn, background: COLORS.navy, color: "white" };
+
+  return (
+    <div style={box}>
+      <div style={{ fontFamily: FONTS.heading, fontSize: "1.2rem", fontWeight: 900, color: COLORS.navy }}>
+        What are you doing right now?
+      </div>
+      <div style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.6, marginTop: "6px" }}>
+        Choose the track and jump to the relevant section.
+      </div>
+
+      <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginTop: "12px" }}>
+        <button
+          style={primary}
+          onClick={() => (window.location.hash = "#pre-close")}
+        >
+          Evaluating a target (pre-close)
+        </button>
+
+        <button
+          style={btn}
+          onClick={() => (window.location.hash = "#sequence")}
+        >
+          First 100 days post-close
+        </button>
+
+        <button
+          style={btn}
+          onClick={() => (window.location.hash = "#ongoing")}
+        >
+          Ongoing governance
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// NDA Micro Block
+function NDAMicroBlock() {
+  return (
+    <div
+      style={{
+        marginTop: "10px",
+        fontFamily: FONTS.body,
+        fontSize: "0.95rem",
+        color: COLORS.bodyMuted,
+        display: "flex",
+        gap: "8px",
+        alignItems: "center",
+        justifyContent: "center",
+        flexWrap: "wrap",
+      }}
+    >
+      <span style={{ fontWeight: 900, color: COLORS.navy }}>Confidentiality:</span>
+      <span>{NDA_NOTE}</span>
+    </div>
+  );
+}
+
+// Typical Red Flags
+function TypicalRedFlags() {
+  return (
+    <Card>
+      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.5rem", color: COLORS.navy, marginTop: 0 }}>
+        Typical red flags we surface (IC-ready)
+      </h2>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
+        These are patterns that standard diligence often misses — framed the way PE teams use them.
+      </p>
+
+      <ul style={{ margin: 0, paddingLeft: "18px", fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7 }}>
+        <li><strong>Change-driven instability:</strong> incidents correlate to releases → EBITDA drag + Day-1 governance requirement.</li>
+        <li><strong>Key-person / tribal knowledge:</strong> single points of failure → operational continuity risk + scalability constraint.</li>
+        <li><strong>Vendor concentration + CoC constraints:</strong> fragile dependencies, renewal cliffs, restrictive terms → covenant/continuity risk.</li>
+        <li><strong>No KPI cadence / board pack:</strong> targets can't be managed → value creation plan execution risk + credibility risk.</li>
+        <li><strong>Audit posture mismatch:</strong> "stated vs documented vs practiced" controls → sale process friction + multiple discount risk.</li>
+      </ul>
+
+      <div style={{ marginTop: "14px", display: "flex", gap: "10px", flexWrap: "wrap" }}>
+        <a
+          href={PDF_SCORECARD}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            padding: "12px 18px",
+            background: "transparent",
+            color: COLORS.navy,
+            borderRadius: "4px",
+            border: `2px solid ${COLORS.navy}`,
+            textDecoration: "none",
+            fontFamily: FONTS.body,
+            fontWeight: 900,
+          }}
+        >
+          View the Scorecard (PDF)
+        </a>
+        <CTAButton text="15-Minute Fit Check" />
+      </div>
+    </Card>
+  );
+}
+
+// Sample Memo Screenshots
+function SampleMemoScreenshots() {
+  const box = {
+    border: `1px solid ${COLORS.border}`,
+    borderRadius: "8px",
+    padding: "16px",
+    background: "#FBFBFC",
+  };
+
+  const placeholder = {
+    border: `1px dashed ${COLORS.border}`,
+    borderRadius: "8px",
+    height: "180px",
+    background: "white",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontFamily: FONTS.body,
+    color: COLORS.bodyMuted,
+    fontWeight: 800,
+  };
+
+  return (
+    <Card>
+      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.5rem", color: COLORS.navy, marginTop: 0 }}>
+        Sample memo format (anonymized)
+      </h2>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
+        Add 2–4 blurred screenshots here (severity summary, red-flag table, evidence requests, Day-1 priorities). This is one of the strongest trust builders for cold traffic.
+      </p>
+
+      <div style={box}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "12px" }}>
+          <div style={placeholder}>Screenshot slot #1</div>
+          <div style={placeholder}>Screenshot slot #2</div>
+          <div style={placeholder}>Screenshot slot #3</div>
+        </div>
+        <div style={{ marginTop: "12px", fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.bodyMuted }}>
+          Tip: blur company names and numbers; keep structure legible.
+        </div>
+      </div>
+
+      <div style={{ marginTop: "14px", display: "flex", gap: "10px", flexWrap: "wrap" }}>
+        <a
+          href={PDF_SCORECARD}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            padding: "12px 18px",
+            background: "transparent",
+            color: COLORS.navy,
+            borderRadius: "4px",
+            border: `2px solid ${COLORS.navy}`,
+            textDecoration: "none",
+            fontFamily: FONTS.body,
+            fontWeight: 900,
+          }}
+        >
+          View Scorecard PDF
+        </a>
+        <a
+          href={PDF_100DAY}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            padding: "12px 18px",
+            background: "transparent",
+            color: COLORS.navy,
+            borderRadius: "4px",
+            border: `2px solid ${COLORS.navy}`,
+            textDecoration: "none",
+            fontFamily: FONTS.body,
+            fontWeight: 900,
+          }}
+        >
+          View 100-Day Plan PDF
+        </a>
+      </div>
+    </Card>
+  );
+}
+
+// Non-Meeting Lead Capture
+function NonMeetingLeadCapture() {
+  const [name, setName] = useState("");
+  const [firm, setFirm] = useState("");
+  const [stage, setStage] = useState("Evaluating a target");
+  const [note, setNote] = useState("");
+  const [copied, setCopied] = useState(false);
+
+  const template = `Hi Hassan,
+
+I'm interested in Devonshire Operations.
+
+Name: ${name || "[Your name]"}
+Firm: ${firm || "[Firm]"}
+Stage: ${stage}
+
+Context / priority concerns:
+${note || "[2–3 sentences: what's breaking / timeline / what you want delivered]"}
+
+Request:
+- Please share an anonymized sample memo format / example.
+- If we're a fit, propose a fixed-fee scope and timeline.
+
+Best,
+${name || ""}`.trim();
+
+  const input = {
+    width: "100%",
+    padding: "12px",
+    borderRadius: "6px",
+    border: `1px solid ${COLORS.border}`,
+    fontFamily: FONTS.body,
+    fontSize: "1rem",
+  };
+
+  const label = { fontFamily: FONTS.body, fontWeight: 900, color: COLORS.navy, marginBottom: "6px" };
+
+  return (
+    <Card>
+      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.5rem", color: COLORS.navy, marginTop: 0 }}>
+        Not ready to book? Get examples + scope by email
+      </h2>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
+        Cold traffic often needs a "next step" that isn't a meeting. Use this to request examples and a fixed-fee proposal.
+      </p>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "12px" }}>
+        <div>
+          <div style={label}>Name</div>
+          <input style={input} value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" />
+        </div>
+        <div>
+          <div style={label}>Firm</div>
+          <input style={input} value={firm} onChange={(e) => setFirm(e.target.value)} placeholder="Firm / fund" />
+        </div>
+        <div>
+          <div style={label}>Stage</div>
+          <select style={input} value={stage} onChange={(e) => setStage(e.target.value)}>
+            <option>Evaluating a target</option>
+            <option>First 100 days post-close</option>
+            <option>Mid-hold optimization</option>
+            <option>Ongoing governance</option>
+          </select>
+        </div>
+      </div>
+
+      <div style={{ marginTop: "12px" }}>
+        <div style={label}>What's going on?</div>
+        <textarea
+          style={{ ...input, minHeight: "110px" }}
+          value={note}
+          onChange={(e) => setNote(e.target.value)}
+          placeholder="2–3 sentences: what's breaking, urgency, and what you want delivered."
+        />
+      </div>
+
+      <div style={{ marginTop: "14px", display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "center" }}>
+        <a
+          href={mailtoHref("Devonshire Ops – request examples + scope", template)}
+          style={{
+            padding: "12px 18px",
+            background: COLORS.navy,
+            color: "white",
+            borderRadius: "4px",
+            border: "none",
+            fontFamily: FONTS.body,
+            fontWeight: 900,
+            textDecoration: "none",
+          }}
+        >
+          Send email request
+        </a>
+
+        <button
+          onClick={async () => {
+            const ok = await copyToClipboard(template);
+            setCopied(ok);
+            setTimeout(() => setCopied(false), 1500);
+          }}
+          style={{
+            padding: "12px 18px",
+            background: "transparent",
+            color: COLORS.navy,
+            borderRadius: "4px",
+            border: `2px solid ${COLORS.navy}`,
+            fontFamily: FONTS.body,
+            fontWeight: 900,
+            cursor: "pointer",
+          }}
+        >
+          {copied ? "Copied" : "Copy email template"}
+        </button>
+
+        <div style={{ fontFamily: FONTS.body, color: COLORS.bodyMuted, fontSize: "0.95rem" }}>
+          {NDA_NOTE}
+        </div>
+      </div>
+    </Card>
+  );
+}
+
 // ─── SERVICES PAGE ──────────────────────────────────────────
 function ServicesPage({ setPage }) {
   return (
     <div style={{ maxWidth: "980px", margin: "0 auto", padding: "48px 24px" }}>
       <ServicesMethodJumpBar />
+      <TrafficSelector />
 
       <div id="top">
         <h1 style={{ fontFamily: FONTS.heading, fontSize: "2.2rem", color: COLORS.navy, marginBottom: "12px" }}>
@@ -1575,9 +1912,14 @@ function ServicesPage({ setPage }) {
       </div>
 
       <ServicesSamplesRow />
+      <NDAMicroBlock />
 
       <div id="how-it-works" style={{ marginTop: "28px" }}>
         <ServicesSteps />
+      </div>
+
+      <div id="red-flags" style={{ marginTop: "28px" }}>
+        <TypicalRedFlags />
       </div>
 
       <div id="why-friction" style={{ marginTop: "28px" }}>
@@ -1586,6 +1928,10 @@ function ServicesPage({ setPage }) {
 
       <div id="rubric" style={{ marginTop: "28px" }}>
         <FrameworkRubricTable />
+      </div>
+
+      <div id="memo-samples" style={{ marginTop: "28px" }}>
+        <SampleMemoScreenshots />
       </div>
 
       <div id="worked-example" style={{ marginTop: "28px" }}>
@@ -1598,6 +1944,10 @@ function ServicesPage({ setPage }) {
 
       <div id="faq" style={{ marginTop: "28px" }}>
         <FAQBlock />
+      </div>
+
+      <div id="lead-capture" style={{ marginTop: "28px" }}>
+        <NonMeetingLeadCapture />
       </div>
 
       <div id="fit-check" style={{ marginTop: "28px" }}>
