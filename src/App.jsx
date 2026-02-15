@@ -1201,14 +1201,19 @@ function ServicesMethodJumpBar() {
     background: COLORS.white,
   };
 
+  const wrap = { display: "flex", gap: "10px", flexWrap: "wrap", marginBottom: "18px" };
+
   return (
-    <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginBottom: "18px" }}>
-      <a href="#offers" style={linkStyle}>Offers</a>
+    <div style={wrap}>
+      <a href="#pre-close" style={linkStyle}>Pre-Close</a>
+      <a href="#bundle" style={linkStyle}>Bundle</a>
+      <a href="#post-close" style={linkStyle}>Post-Close</a>
+      <a href="#ongoing" style={linkStyle}>Ongoing</a>
       <a href="#how-it-works" style={linkStyle}>How it works</a>
       <a href="#rubric" style={linkStyle}>Rubric</a>
-      <a href="#worked-example" style={linkStyle}>Worked example</a>
-      <a href="#sequence" style={linkStyle}>100-day sequence</a>
-      <a href="#fit-check" style={linkStyle}>Fit check</a>
+      <a href="#sequence" style={linkStyle}>100-Day sequence</a>
+      <a href="#faq" style={linkStyle}>FAQ</a>
+      <a href="#fit-check" style={linkStyle}>Fit Check</a>
     </div>
   );
 }
@@ -1445,16 +1450,16 @@ function StabilizationSequence() {
 // Services Pricing Ladder
 function ServicesPricingLadder() {
   const items = [
-    { label: "Pre-Close", name: "Ops Diligence Report", price: "$15K+", time: "2–3 weeks", desc: "Standalone assessment" },
-    { label: "Full Lifecycle Bundle", name: "Diligence + 100-Day Plan", price: "$25–$35K", time: "2–3 weeks + 100 days", desc: "Recommended — seamless transition" },
-    { label: "Post-Close Only", name: "100-Day Stabilization", price: "$30–$40K", time: "100 days", desc: "No prior diligence" },
+    { id: "pre-close", label: "Pre-Close", name: "Ops Diligence Report", price: "$15K+", time: "2–3 weeks", desc: "Standalone assessment" },
+    { id: "bundle", label: "Full Lifecycle Bundle", name: "Diligence + 100-Day Plan", price: "$25–$35K", time: "2–3 weeks + 100 days", desc: "Recommended — seamless transition" },
+    { id: "post-close", label: "Post-Close Only", name: "100-Day Stabilization", price: "$30–$40K", time: "100 days", desc: "No prior diligence" },
   ];
 
   return (
     <Card style={{ marginBottom: "32px", background: `${COLORS.navy}05` }}>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px" }}>
         {items.map((item, i) => (
-          <div key={i} style={{ padding: "16px", background: COLORS.white, borderRadius: "4px", border: `1px solid ${i === 1 ? COLORS.gold : COLORS.border}`, position: "relative" }}>
+          <div key={i} id={item.id} style={{ padding: "16px", background: COLORS.white, borderRadius: "4px", border: `1px solid ${i === 1 ? COLORS.gold : COLORS.border}`, position: "relative" }}>
             {i === 1 && <div style={{ position: "absolute", top: "-1px", left: 0, right: 0, height: "3px", background: COLORS.gold, borderRadius: "4px 4px 0 0" }} />}
             <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.navy, letterSpacing: "0.5px", textTransform: "uppercase", fontWeight: 600 }}>{item.label}</span>
             <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, fontWeight: 700, margin: "8px 0 4px" }}>{item.name}</div>
@@ -1516,12 +1521,34 @@ function ServicesRecommendedOngoingTight() {
 
 // Fit Check CTA
 function FitCheckCTA() {
+  const subject = "Devonshire Ops – Fit Check request";
+  const body =
+    "Hi Hassan,\n\nI reviewed the Services & Method page and would like to discuss fit.\n\nContext:\n- Company / deal stage:\n- Primary concern (incidents, change, vendor risk, KPI cadence, audit posture):\n- Timeline:\n\nBest,\n";
+
   return (
     <Card style={{ textAlign: "center" }}>
       <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "820px", margin: "0 auto 16px" }}>
         Not sure where to start? Book a 15-minute fit check. We'll assess the situation, identify the highest-priority friction points, and scope the right engagement.
       </p>
-      <CTAButton text="15-Minute Fit Check" />
+
+      <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
+        <CTAButton text="15-Minute Fit Check" />
+        <a
+          href={mailtoHref(subject, body)}
+          style={{
+            padding: "12px 18px",
+            background: "transparent",
+            color: COLORS.navy,
+            borderRadius: "4px",
+            border: `2px solid ${COLORS.navy}`,
+            fontFamily: FONTS.body,
+            fontWeight: 900,
+            textDecoration: "none",
+          }}
+        >
+          Email me instead
+        </a>
+      </div>
     </Card>
   );
 }
@@ -1541,11 +1568,13 @@ function ServicesPage({ setPage }) {
         </p>
       </div>
 
-      <div id="offers">
-        <ServicesPricingLadder />
+      <ServicesPricingLadder />
+
+      <div id="ongoing" style={{ marginTop: "20px" }}>
         <ServicesRecommendedOngoingTight />
-        <ServicesSamplesRow />
       </div>
+
+      <ServicesSamplesRow />
 
       <div id="how-it-works" style={{ marginTop: "28px" }}>
         <ServicesSteps />
@@ -1565,6 +1594,10 @@ function ServicesPage({ setPage }) {
 
       <div id="sequence" style={{ marginTop: "28px" }}>
         <StabilizationSequence />
+      </div>
+
+      <div id="faq" style={{ marginTop: "28px" }}>
+        <FAQBlock />
       </div>
 
       <div id="fit-check" style={{ marginTop: "28px" }}>
