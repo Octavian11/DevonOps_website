@@ -216,7 +216,7 @@ const globalCSS = `
   body {
     background: ${COLORS.offWhite};
     font-family: ${FONTS.body};
-    font-size: 18px;
+    font-size: 20px;
     line-height: 1.65;
     color: var(--text);
     -webkit-font-smoothing: antialiased;
@@ -237,7 +237,7 @@ const globalCSS = `
   ::-webkit-scrollbar-thumb { background: ${COLORS.steel}; border-radius: 3px; }
 
   @media (max-width: 768px) {
-    body { font-size: 16px; }
+    body { font-size: 18px; }
     :root { --maxcopy: 60ch; }
   }
 
@@ -385,7 +385,7 @@ function HeroBlock({ setPage }) {
 
       <div style={{ position: "relative", maxWidth: "720px" }}>
         {/* Tagline */}
-        <div style={{ fontFamily: FONTS.body, fontSize: "14px", color: COLORS.gold, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "16px" }}>
+        <div style={{ fontFamily: FONTS.body, fontSize: "18px", color: COLORS.gold, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "16px" }}>
           Portfolio Operations · Pre-Close Diligence · Post-Close Stabilization
         </div>
 
@@ -431,7 +431,7 @@ function HeroBlockWithNav({ setPage }) {
     <div style={{ background: `linear-gradient(135deg, ${COLORS.heroGradientStart} 0%, ${COLORS.heroGradientEnd} 100%)`, margin: "-40px -24px 32px", padding: "48px 40px 44px", position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0, opacity: 0.02, backgroundImage: "repeating-linear-gradient(0deg, white 0px, white 1px, transparent 1px, transparent 40px), repeating-linear-gradient(90deg, white 0px, white 1px, transparent 1px, transparent 40px)" }} />
       <div style={{ position: "relative", maxWidth: "720px" }}>
-        <div style={{ fontFamily: FONTS.body, fontSize: "14px", color: COLORS.gold, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "16px" }}>
+        <div style={{ fontFamily: FONTS.body, fontSize: "18px", color: COLORS.gold, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "16px" }}>
           Portfolio Operations · Pre-Close Diligence · Post-Close Stabilization
         </div>
         <h1 style={{ fontFamily: FONTS.heading, fontSize: "48px", fontWeight: 700, color: "white", lineHeight: 1.2, marginBottom: "20px" }}>
@@ -518,7 +518,7 @@ function LeverExplorer({ setPage }) {
     return true;
   });
 
-  const selectStyle = { padding: "10px 14px", border: `1px solid ${COLORS.border}`, borderRadius: "4px", fontFamily: FONTS.body, fontSize: "15px", color: COLORS.charcoal, background: "white", cursor: "pointer", minWidth: "160px" };
+  const selectStyle = { padding: "10px 14px", border: `1px solid ${COLORS.border}`, borderRadius: "4px", fontFamily: FONTS.body, fontSize: "17px", color: COLORS.charcoal, background: "white", cursor: "pointer", minWidth: "160px" };
 
   return (
     <div className="fade-in">
@@ -535,7 +535,7 @@ function LeverExplorer({ setPage }) {
 
       <DomainLegend />
 
-      <p style={{ fontFamily: FONTS.body, fontSize: "15px", color: COLORS.bodyMuted, marginBottom: "14px", fontStyle: "italic" }}>
+      <p style={{ fontFamily: FONTS.body, fontSize: "17px", color: COLORS.bodyMuted, marginBottom: "14px", fontStyle: "italic" }}>
         Filter by timing (Pre-Close vs. First 100 Days), domain, or severity. Open any lever for symptoms and PE impact analysis.
       </p>
 
@@ -560,7 +560,7 @@ function LeverExplorer({ setPage }) {
         </select>
       </div>
 
-      <p style={{ fontFamily: FONTS.body, fontSize: "15px", color: COLORS.bodyMuted, marginBottom: "18px" }}>
+      <p style={{ fontFamily: FONTS.body, fontSize: "17px", color: COLORS.bodyMuted, marginBottom: "18px" }}>
         Showing {filtered.length} of {LEVERS.length} levers
       </p>
 
@@ -606,7 +606,7 @@ function LeverExplorer({ setPage }) {
           {/* Mid-page CTA after 5th lever */}
           {idx === 4 && filtered.length > 5 && (
             <div style={{ margin: "12px 0 16px", padding: "16px 24px", background: `linear-gradient(135deg, ${COLORS.navy}08 0%, ${COLORS.gold}08 100%)`, border: `1px solid ${COLORS.border}`, borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
-              <p style={{ fontFamily: FONTS.body, fontSize: "14px", color: COLORS.charcoal, margin: 0 }}>
+              <p style={{ fontFamily: FONTS.body, fontSize: "17px", color: COLORS.charcoal, margin: 0 }}>
                 <strong style={{ color: COLORS.navy }}>Want the red-flag memo format?</strong> See exactly what the Ops Diligence Report delivers.
               </p>
               <div style={{ display: "flex", gap: "10px", flexShrink: 0 }}>
@@ -624,7 +624,7 @@ function LeverExplorer({ setPage }) {
 
       {/* Bottom CTA */}
       <Card style={{ textAlign: "center", marginTop: "24px", background: `${COLORS.navy}05`, padding: "28px" }}>
-        <p style={{ fontFamily: FONTS.body, fontSize: "15px", color: COLORS.charcoal, marginBottom: "16px" }}>
+        <p style={{ fontFamily: FONTS.body, fontSize: "17px", color: COLORS.charcoal, marginBottom: "16px" }}>
           Recognizing these patterns in a target or portfolio company?
         </p>
         <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
@@ -657,7 +657,7 @@ function FrameworkPage({ setPage }) {
       </p>
 
       <SectionTitle>Why Operational Friction Matters in PE</SectionTitle>
-      <div style={{ fontFamily: FONTS.body, fontSize: "15px", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "32px" }}>
+      <div style={{ fontFamily: FONTS.body, fontSize: "17px", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "32px" }}>
         <p style={{ marginBottom: "16px" }}>Operational friction is the gap between the value creation plan and what actually gets executed. It's why 100-day plans stall, why EBITDA improvements take 18 months instead of 6, and why exit processes surface risks that should have been addressed years earlier.</p>
         <Card>
           <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
@@ -676,7 +676,7 @@ function FrameworkPage({ setPage }) {
       </div>
 
       <SectionTitle>The Friction Evaluation Rubric</SectionTitle>
-      <p style={{ fontFamily: FONTS.body, fontSize: "15px", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "16px" }}>
+      <p style={{ fontFamily: FONTS.body, fontSize: "17px", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "16px" }}>
         Each operational friction lever is evaluated across six dimensions:
       </p>
       <Card>
@@ -734,7 +734,7 @@ function FrameworkPage({ setPage }) {
             </div>
           ))}
         </div>
-        <div style={{ fontFamily: FONTS.body, fontSize: "14px", color: COLORS.charcoal, lineHeight: 1.65 }}>
+        <div style={{ fontFamily: FONTS.body, fontSize: "17px", color: COLORS.charcoal, lineHeight: 1.65 }}>
           <p style={{ marginBottom: "8px" }}>
             <strong style={{ color: COLORS.navy }}>Pre-close implication:</strong> Uncontrolled changes are the #1 cause of production incidents. If the target has no change control, flag it in the diligence memo — this is direct EBITDA drag hiding in incident correlation data.
           </p>
@@ -746,7 +746,7 @@ function FrameworkPage({ setPage }) {
 
       {/* Mid-page CTA */}
       <div style={{ margin: "0 0 32px", padding: "16px 24px", background: `linear-gradient(135deg, ${COLORS.navy}08 0%, ${COLORS.gold}08 100%)`, border: `1px solid ${COLORS.border}`, borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
-        <p style={{ fontFamily: FONTS.body, fontSize: "14px", color: COLORS.charcoal, margin: 0 }}>
+        <p style={{ fontFamily: FONTS.body, fontSize: "17px", color: COLORS.charcoal, margin: 0 }}>
           <strong style={{ color: COLORS.navy }}>Want this analysis for a specific target?</strong> The Ops Diligence Report scores every lever against this rubric.
         </p>
         <div style={{ display: "flex", gap: "10px", flexShrink: 0 }}>
@@ -756,7 +756,7 @@ function FrameworkPage({ setPage }) {
       </div>
 
       <SectionTitle>The Stabilization Sequence</SectionTitle>
-      <p style={{ fontFamily: FONTS.body, fontSize: "15px", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "16px" }}>
+      <p style={{ fontFamily: FONTS.body, fontSize: "17px", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "16px" }}>
         Operational stabilization follows a consistent three-phase sequence regardless of portfolio company size or sector:
       </p>
       {[
@@ -769,9 +769,9 @@ function FrameworkPage({ setPage }) {
             <h3 style={{ fontFamily: FONTS.heading, fontSize: "16px", color: COLORS.navy }}>{p.phase}</h3>
             <span style={{ fontFamily: FONTS.body, fontSize: "12px", color: COLORS.steel }}>{p.days}</span>
           </div>
-          <p style={{ fontFamily: FONTS.body, fontSize: "14px", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "10px" }}>{p.desc}</p>
+          <p style={{ fontFamily: FONTS.body, fontSize: "17px", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "10px" }}>{p.desc}</p>
           <ul style={{ paddingLeft: "20px", marginBottom: "10px" }}>
-            {p.items.map((item, j) => <li key={j} style={{ fontFamily: FONTS.body, fontSize: "14px", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "2px" }}>{item}</li>)}
+            {p.items.map((item, j) => <li key={j} style={{ fontFamily: FONTS.body, fontSize: "17px", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "2px" }}>{item}</li>)}
           </ul>
           <div style={{ padding: "8px 12px", background: COLORS.offWhite, borderRadius: "4px", display: "flex", alignItems: "center", gap: "8px" }}>
             <span style={{ fontFamily: FONTS.body, fontSize: "11px", color: COLORS.steel, letterSpacing: "0.5px", textTransform: "uppercase", flexShrink: 0 }}>Deliverable</span>
@@ -819,7 +819,7 @@ function ScorerPage() {
           {CONTEXT_OPTIONS.map(opt => (
             <label key={opt.key} style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", padding: "8px 12px", borderRadius: "4px", background: context === opt.key ? `${COLORS.navy}08` : "transparent", border: `1px solid ${context === opt.key ? COLORS.steel : "transparent"}` }}>
               <input type="radio" name="context" checked={context === opt.key} onChange={() => setContext(opt.key)} style={{ accentColor: COLORS.navy }} />
-              <span style={{ fontFamily: FONTS.body, fontSize: "14px", color: COLORS.charcoal }}>{opt.label}</span>
+              <span style={{ fontFamily: FONTS.body, fontSize: "17px", color: COLORS.charcoal }}>{opt.label}</span>
             </label>
           ))}
         </div>
@@ -886,7 +886,7 @@ function ScorerPage() {
                 <span style={{ fontFamily: FONTS.body, fontSize: "32px", fontWeight: 700, color: ratingColor }}>{avg.toFixed(1)}</span>
               </div>
               <span style={{ fontFamily: FONTS.body, fontSize: "14px", fontWeight: 700, color: ratingColor, letterSpacing: "1px", marginBottom: "12px" }}>{ratingLabel}</span>
-              <p style={{ fontFamily: FONTS.body, fontSize: "14px", color: COLORS.charcoal, lineHeight: 1.6 }}>
+              <p style={{ fontFamily: FONTS.body, fontSize: "17px", color: COLORS.charcoal, lineHeight: 1.6 }}>
                 {CONTEXT_CALLOUTS[rating][context]}
               </p>
             </Card>
@@ -1011,12 +1011,12 @@ function ServicesPage() {
           <h3 style={{ fontFamily: FONTS.heading, fontSize: "22px", color: COLORS.navy, margin: "8px 0 4px" }}>{offer.name}</h3>
           <p style={{ fontFamily: FONTS.body, fontSize: "15px", color: COLORS.steel, fontStyle: "italic", marginBottom: "16px" }}>{offer.tagline}</p>
           <h4 style={{ fontFamily: FONTS.body, fontSize: "13px", fontWeight: 600, color: COLORS.navy, marginBottom: "4px", letterSpacing: "0.3px", textTransform: "uppercase" }}>Who it's for</h4>
-          <p style={{ fontFamily: FONTS.body, fontSize: "14px", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "12px" }}>{offer.who}</p>
+          <p style={{ fontFamily: FONTS.body, fontSize: "17px", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "12px" }}>{offer.who}</p>
           <h4 style={{ fontFamily: FONTS.body, fontSize: "13px", fontWeight: 600, color: COLORS.navy, marginBottom: "4px", letterSpacing: "0.3px", textTransform: "uppercase" }}>The problem</h4>
-          <p style={{ fontFamily: FONTS.body, fontSize: "14px", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "12px" }}>{offer.problem}</p>
+          <p style={{ fontFamily: FONTS.body, fontSize: "17px", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "12px" }}>{offer.problem}</p>
           <h4 style={{ fontFamily: FONTS.body, fontSize: "13px", fontWeight: 600, color: COLORS.navy, marginBottom: "4px", letterSpacing: "0.3px", textTransform: "uppercase" }}>What you get</h4>
           <ul style={{ paddingLeft: "20px", marginBottom: "12px" }}>
-            {offer.deliverables.map((d, j) => <li key={j} style={{ fontFamily: FONTS.body, fontSize: "14px", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "4px" }}>{d}</li>)}
+            {offer.deliverables.map((d, j) => <li key={j} style={{ fontFamily: FONTS.body, fontSize: "17px", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "4px" }}>{d}</li>)}
           </ul>
           <h4 style={{ fontFamily: FONTS.body, fontSize: "13px", fontWeight: 600, color: COLORS.steel, marginBottom: "4px", letterSpacing: "0.3px", textTransform: "uppercase" }}>Does not include</h4>
           <ul style={{ paddingLeft: "20px", marginBottom: "16px" }}>
@@ -1025,11 +1025,11 @@ function ServicesPage() {
           <div style={{ display: "flex", gap: "24px", flexWrap: "wrap", padding: "12px 0", borderTop: `1px solid ${COLORS.border}` }}>
             <div>
               <span style={{ fontFamily: FONTS.body, fontSize: "12px", color: COLORS.steel, textTransform: "uppercase", letterSpacing: "0.5px" }}>Timeline</span>
-              <div style={{ fontFamily: FONTS.body, fontSize: "14px", color: COLORS.charcoal, fontWeight: 500 }}>{offer.timeline}</div>
+              <div style={{ fontFamily: FONTS.body, fontSize: "17px", color: COLORS.charcoal, fontWeight: 500 }}>{offer.timeline}</div>
             </div>
             <div>
               <span style={{ fontFamily: FONTS.body, fontSize: "12px", color: COLORS.steel, textTransform: "uppercase", letterSpacing: "0.5px" }}>Investment</span>
-              <div style={{ fontFamily: FONTS.body, fontSize: "14px", color: COLORS.charcoal, fontWeight: 600 }}>{offer.price}</div>
+              <div style={{ fontFamily: FONTS.body, fontSize: "17px", color: COLORS.charcoal, fontWeight: 600 }}>{offer.price}</div>
             </div>
           </div>
           {offer.next && (
@@ -1039,7 +1039,7 @@ function ServicesPage() {
       ))}
 
       <Card style={{ textAlign: "center", background: `${COLORS.navy}05`, padding: "32px" }}>
-        <p style={{ fontFamily: FONTS.body, fontSize: "15px", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "16px" }}>
+        <p style={{ fontFamily: FONTS.body, fontSize: "17px", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "16px" }}>
           Not sure where to start? Book a 15-minute fit check. We'll assess the portfolio company's situation, identify the highest-priority friction points, and scope the right engagement — proposal within 24 hours.
         </p>
         <CTAButton text="15-Minute Fit Check" />
@@ -1144,8 +1144,8 @@ export default function App() {
         {pages[page]}
       </main>
       <footer style={{ borderTop: `1px solid ${COLORS.border}`, padding: "24px", textAlign: "center", background: COLORS.white }}>
-        <p style={{ fontFamily: FONTS.body, fontSize: "14px", color: COLORS.bodyMuted }}>
-          © 2026 Hassan Tariq · Columbia Business School EMBA 2026 · Portfolio Operations
+        <p style={{ fontFamily: FONTS.body, fontSize: "16px", color: COLORS.bodyMuted }}>
+          © {new Date().getFullYear()} Devonshire Operations. All rights reserved.
         </p>
       </footer>
     </div>
