@@ -3,8 +3,14 @@ import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Responsi
 
 // ─── CONSTANTS ──────────────────────────────────────────────
 const CALENDLY = "https://calendly.com/hassantariq1/15-minute-triage-call-hassan-tariq";
+const CONTACT_EMAIL = "hello@devonshireops.com"; // TODO: replace if different
+const LINKEDIN_URL = "https://www.linkedin.com/"; // TODO: replace with your LinkedIn
 const SAMPLE_SCORECARD_PDF = "/sample-ops-diligence-scorecard.pdf";
 const SAMPLE_100DAY_PDF = "/sample-100-day-stabilization-plan.pdf";
+
+function mailtoHref(subject, body) {
+  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
 
 const COLORS = {
   navy: "#14213D",
@@ -560,6 +566,7 @@ function ProofStrip() {
           </a>
         </div>
       </div>
+      <SecondaryCaptureRow contextLabel="Ops diligence / stabilization" />
     </Card>
   );
 }
@@ -661,6 +668,213 @@ function HowItWorks() {
   );
 }
 
+// ─── CHOOSE SITUATION ───────────────────────────────────────
+function ChooseSituation({ setPage }) {
+  const box = {
+    border: `1px solid ${COLORS.border}`,
+    borderRadius: "6px",
+    padding: "18px",
+    background: COLORS.white,
+    boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
+    flex: "1 1 340px",
+    minWidth: "300px",
+  };
+
+  const h = { fontFamily: FONTS.heading, fontSize: "1.15rem", color: COLORS.navy, margin: 0, marginBottom: "8px" };
+  const p = { fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, margin: 0 };
+
+  const li = { marginBottom: "8px", lineHeight: 1.55 };
+
+  return (
+    <div style={{ marginBottom: "22px" }}>
+      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.35rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>
+        Choose your situation
+      </h2>
+      <p style={{ ...p, maxWidth: "820px", marginBottom: "14px" }}>
+        Pick the track that matches where you are in the lifecycle. Both paths deliver risk-rated findings, PE impact framing, and a clear Day-1 critical path.
+      </p>
+
+      <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
+        <div style={box}>
+          <h3 style={h}>Evaluating a target (pre-close diligence)</h3>
+          <p style={{ ...p, marginBottom: "10px" }}>
+            Decision-useful ops diligence designed for the IC: severity-rated red flags + evidence requests.
+          </p>
+          <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
+            <li style={li}>Risk-rated findings memo (IC-ready)</li>
+            <li style={li}>Evidence requests + diligence questions</li>
+            <li style={li}>Day-1 → Day-100 stabilization priorities if you close</li>
+          </ul>
+
+          <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginTop: "14px" }}>
+            <CTAButton text="15-Minute Fit Check" />
+            <button onClick={() => setPage("scorer")}
+              style={{ padding: "12px 18px", background: "transparent", color: COLORS.navy, borderRadius: "4px", border: `2px solid ${COLORS.navy}`, fontFamily: FONTS.body, fontWeight: 700, cursor: "pointer" }}>
+              Use the Scorer
+            </button>
+          </div>
+        </div>
+
+        <div style={box}>
+          <h3 style={h}>First 100 days post-close</h3>
+          <p style={{ ...p, marginBottom: "10px" }}>
+            Install a governance baseline so value creation isn't blocked by instability.
+          </p>
+          <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
+            <li style={li}>Incident command (severity model, escalation, postmortems)</li>
+            <li style={li}>Change governance (CAB-lite, risk classification, rollback discipline)</li>
+            <li style={li}>KPI cadence (weekly operating reviews + board-ready pack)</li>
+          </ul>
+
+          <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginTop: "14px" }}>
+            <CTAButton text="15-Minute Fit Check" />
+            <a href={SAMPLE_100DAY_PDF} target="_blank" rel="noopener noreferrer"
+              style={{ padding: "12px 18px", background: "transparent", color: COLORS.navy, borderRadius: "4px", border: `2px solid ${COLORS.navy}`, textDecoration: "none", fontFamily: FONTS.body, fontWeight: 700 }}>
+              View 100-Day Plan (PDF)
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── DEAL IMPLICATIONS ──────────────────────────────────────
+function DealImplications() {
+  return (
+    <Card style={{ marginBottom: "22px" }}>
+      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.25rem", fontWeight: 700, color: COLORS.navy, marginTop: 0, marginBottom: "10px" }}>
+        Deal implications we surface
+      </h2>
+      <ul style={{ margin: 0, paddingLeft: "18px", fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65 }}>
+        <li>Operational fragility that belongs in the IC memo and value creation plan (severity-rated).</li>
+        <li>Vendor concentration risk and change-of-control clauses that become material post-close constraints.</li>
+        <li>Key-person dependency and "tribal knowledge" failure modes that block scaling and reporting.</li>
+        <li>Incident/change patterns that predict outages, missed SLAs, and board-level credibility risk.</li>
+      </ul>
+    </Card>
+  );
+}
+
+// ─── FIRST 14 DAYS ──────────────────────────────────────────
+function First14Days() {
+  return (
+    <Card style={{ marginBottom: "22px" }}>
+      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.25rem", fontWeight: 700, color: COLORS.navy, marginTop: 0, marginBottom: "10px" }}>
+        The first 14 days post-close
+      </h2>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginTop: 0 }}>
+        The Day-1 critical path is simple: stop new damage, then start measuring.
+      </p>
+      <ul style={{ margin: 0, paddingLeft: "18px", fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65 }}>
+        <li>Install incident command: ownership, severity model, escalation thresholds, and postmortem discipline.</li>
+        <li>Install change control: CAB-lite, risk classification, rollback discipline, and change-incident correlation.</li>
+        <li>Define the KPI set, baseline it, and start weekly operating reviews (board-ready reporting starts here).</li>
+      </ul>
+    </Card>
+  );
+}
+
+// ─── MINI CASES ─────────────────────────────────────────────
+function MiniCases() {
+  const box = {
+    border: `1px solid ${COLORS.border}`,
+    borderRadius: "6px",
+    padding: "16px",
+    background: COLORS.white,
+    boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
+    flex: "1 1 280px",
+    minWidth: "260px",
+  };
+
+  const h = { fontFamily: FONTS.heading, fontSize: "1.05rem", color: COLORS.navy, margin: 0, marginBottom: "8px" };
+  const p = { fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0 };
+
+  return (
+    <div style={{ marginBottom: "22px" }}>
+      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.25rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>
+        Proof in the format PE expects
+      </h2>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "820px", marginBottom: "14px" }}>
+        Example outcomes (anonymized). The point: install visibility, control, and cadence—then keep it durable.
+      </p>
+
+      <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
+        <div style={box}>
+          <h3 style={h}>Incident instability</h3>
+          <p style={p}><strong>Situation:</strong> Recurring incidents with unclear ownership and inconsistent escalation.</p>
+          <p style={{ ...p, marginTop: "8px" }}><strong>Delivered:</strong> Severity model, incident command roles, escalation paths, postmortem discipline.</p>
+          <p style={{ ...p, marginTop: "8px" }}><strong>Result:</strong> Faster containment, fewer repeat incidents, clearer executive visibility.</p>
+        </div>
+
+        <div style={box}>
+          <h3 style={h}>Change-driven outages</h3>
+          <p style={p}><strong>Situation:</strong> Releases correlated with incidents; no consistent controls.</p>
+          <p style={{ ...p, marginTop: "8px" }}><strong>Delivered:</strong> CAB-lite, risk classification, rollback readiness, change-incident correlation tracking.</p>
+          <p style={{ ...p, marginTop: "8px" }}><strong>Result:</strong> Reduced change failure rate and improved release confidence.</p>
+        </div>
+
+        <div style={box}>
+          <h3 style={h}>Board reporting / KPI ambiguity</h3>
+          <p style={p}><strong>Situation:</strong> KPIs undefined or ad hoc; board reporting inconsistent and lagging.</p>
+          <p style={{ ...p, marginTop: "8px" }}><strong>Delivered:</strong> KPI library + thresholds, weekly cadence, executive dashboard, board-ready pack structure.</p>
+          <p style={{ ...p, marginTop: "8px" }}><strong>Result:</strong> Predictable operating rhythm and faster issue detection.</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── FAQ BLOCK ──────────────────────────────────────────────
+function FAQBlock() {
+  const q = { fontFamily: FONTS.heading, fontSize: "1.05rem", color: COLORS.navy, margin: 0, marginBottom: "6px" };
+  const a = { fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, margin: 0, marginBottom: "14px" };
+
+  return (
+    <Card style={{ marginBottom: "26px" }}>
+      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.25rem", fontWeight: 700, color: COLORS.navy, marginTop: 0, marginBottom: "10px" }}>
+        FAQ
+      </h2>
+
+      <div>
+        <h3 style={q}>Do you replace the operating team?</h3>
+        <p style={a}>No. I install the operating system—governance, cadence, and controls—while ownership stays internal.</p>
+
+        <h3 style={q}>What do you need from us?</h3>
+        <p style={a}>A lightweight artifact pull (incident/change history, vendor list/contracts, KPIs, org/RACI, audit evidence folders) plus targeted stakeholder access.</p>
+
+        <h3 style={q}>How do you handle confidentiality?</h3>
+        <p style={a}>NDA-friendly by default. Minimal data handling; formats can be anonymized.</p>
+
+        <h3 style={q}>When are you not a fit?</h3>
+        <p style={{ ...a, marginBottom: 0 }}>
+          If the company already has mature incident/change governance, a live KPI cadence, and low volatility, you likely don't need stabilization—only optimization.
+        </p>
+      </div>
+    </Card>
+  );
+}
+
+// ─── SECONDARY CAPTURE ROW ──────────────────────────────────
+function SecondaryCaptureRow({ contextLabel, bodyExtra }) {
+  const subject = `Devonshire Ops – ${contextLabel} (request)`;
+  const body = `Hi Hassan,\n\nI reviewed Devonshire Operations and would like the memo format / examples.\n\nContext:\n${bodyExtra || "- (add a sentence about the deal/portco)"}\n\nBest,\n`;
+
+  return (
+    <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "center", marginTop: "10px" }}>
+      <a href={SAMPLE_SCORECARD_PDF} target="_blank" rel="noopener noreferrer"
+        style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 700, color: COLORS.navy, textDecoration: "none", borderBottom: `2px solid ${COLORS.navy}` }}>
+        View sample memo format
+      </a>
+
+      <a href={mailtoHref(subject, body)}
+        style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 700, color: COLORS.navy, textDecoration: "none", borderBottom: `2px solid ${COLORS.navy}` }}>
+        Email for examples
+      </a>
+    </div>
+  );
+}
+
 // ─── LEVER EXPLORER PAGE ────────────────────────────────────
 function LeverExplorer({ setPage }) {
   const [search, setSearch] = useState("");
@@ -683,7 +897,12 @@ function LeverExplorer({ setPage }) {
     <div className="fade-in">
       <HeroBlockWithNav setPage={setPage} />
       <ProofStrip />
+      <ChooseSituation setPage={setPage} />
+      <DealImplications />
+      <First14Days />
       <OfferCards setPage={setPage} />
+      <MiniCases />
+      <FAQBlock />
       <HowItWorks />
 
       <div style={{ marginBottom: "28px" }}>
@@ -1074,6 +1293,16 @@ function ScorerPage() {
 
                 <CTAButton text="15-Minute Fit Check" />
 
+                <a
+                  href={mailtoHref(
+                    `Devonshire Ops – Scorer result (${avg.toFixed(1)} / ${ratingLabel})`,
+                    `Hi Hassan,\n\nI completed the Portfolio Stability Readiness Scorer.\n\nSituation: ${context}\nScore: ${avg.toFixed(1)} (${ratingLabel})\n\nTop concerns:\n- \n- \n- \n\nCan you send a memo-format readout / next steps?\n\nBest,\n`
+                  )}
+                  style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 700, color: COLORS.navy, textDecoration: "none", borderBottom: `2px solid ${COLORS.navy}` }}
+                >
+                  Email me this assessment
+                </a>
+
                 <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", justifyContent: "center" }}>
                   <a href={SAMPLE_SCORECARD_PDF} target="_blank" rel="noopener noreferrer"
                     style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 700, color: COLORS.navy, textDecoration: "none", borderBottom: `2px solid ${COLORS.navy}` }}>
@@ -1336,10 +1565,25 @@ export default function App() {
       <main style={{ maxWidth: "960px", margin: "0 auto", padding: "40px 32px 80px" }}>
         {pages[page]}
       </main>
-      <footer style={{ borderTop: `1px solid ${COLORS.border}`, padding: "24px", textAlign: "center", background: COLORS.white }}>
-        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal }}>
-          © {new Date().getFullYear()} Devonshire Operations. All rights reserved.
-        </p>
+      <footer style={{ borderTop: `1px solid ${COLORS.border}`, padding: "24px", background: COLORS.white }}>
+        <div style={{ maxWidth: "980px", margin: "0 auto", display: "flex", flexWrap: "wrap", gap: "14px", alignItems: "center", justifyContent: "space-between" }}>
+          <div style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal }}>
+            © {new Date().getFullYear()} Devonshire Operations. All rights reserved.
+          </div>
+
+          <div style={{ display: "flex", gap: "14px", flexWrap: "wrap", alignItems: "center" }}>
+            <a href={`mailto:${CONTACT_EMAIL}`} style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 700, color: COLORS.navy, textDecoration: "none" }}>
+              {CONTACT_EMAIL}
+            </a>
+            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer"
+              style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 700, color: COLORS.navy, textDecoration: "none" }}>
+              LinkedIn
+            </a>
+            <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.bodyMuted }}>
+              NDA available on request.
+            </span>
+          </div>
+        </div>
       </footer>
     </div>
   );
