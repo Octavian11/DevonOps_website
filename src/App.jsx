@@ -471,7 +471,7 @@ function HeroBlockWithNav({ setPage }) {
             "Deliverable: Ops Diligence Report — risk-rated findings memo for the IC (2–3 weeks).",
             "Deliverable: 100-Day Stabilization Plan — Visibility → Control → Cadence across incident, change, KPIs, vendor, and audit readiness.",
             "Deliverable: Control Tower Retainer — weekly operating rhythm that prevents drift-back.",
-            "Credibility: 15+ years building "cannot-fail" operating systems across top-tier financial services environments.",
+            'Credibility: 15+ years building "cannot-fail" operating systems across top-tier financial services environments.',
             "Note: IC = investment committee.",
           ].map((text, i) => (
             <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "12px" }}>
