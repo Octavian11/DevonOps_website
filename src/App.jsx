@@ -3,12 +3,14 @@ import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Responsi
 
 // ─── CONSTANTS ──────────────────────────────────────────────
 const CALENDLY = "https://calendly.com/hassantariq1/15-minute-triage-call-hassan-tariq";
+const PDF_OPS_DILIGENCE_SCORECARD = "/pdfs/ops-diligence-scorecard.pdf";
+const PDF_100_DAY_STABILIZATION_PLAN = "/pdfs/100-day-stabilization-plan.pdf";
 const CONTACT_EMAIL = "hello@devonshireops.com"; // TODO: replace if different
 const LINKEDIN_URL = "https://www.linkedin.com/"; // TODO: replace with your LinkedIn
 const SAMPLE_SCORECARD_PDF = "/sample-ops-diligence-scorecard.pdf";
 const SAMPLE_100DAY_PDF = "/sample-100-day-stabilization-plan.pdf";
-const PDF_SCORECARD = "/ops-diligence-scorecard.pdf";
-const PDF_100DAY = "/100-day-stabilization-plan.pdf";
+const PDF_SCORECARD = "/pdfs/ops-diligence-scorecard.pdf";
+const PDF_100DAY = "/pdfs/100-day-stabilization-plan.pdf";
 const NDA_NOTE = "NDA-friendly. Minimal data handling. Anonymized formats accepted.";
 
 function mailtoHref(subject, body) {
@@ -1330,10 +1332,10 @@ function ServicesSamplesRow() {
 
   return (
     <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "14px" }}>
-      <a href={PDF_SCORECARD} target="_blank" rel="noopener noreferrer" style={btn}>
+      <a href={PDF_OPS_DILIGENCE_SCORECARD} target="_blank" rel="noopener noreferrer" style={btn}>
         📄 View Ops Diligence Scorecard (PDF)
       </a>
-      <a href={PDF_100DAY} target="_blank" rel="noopener noreferrer" style={btn}>
+      <a href={PDF_100_DAY_STABILIZATION_PLAN} target="_blank" rel="noopener noreferrer" style={btn}>
         📄 View 100-Day Stabilization Plan (PDF)
       </a>
     </div>
@@ -1664,7 +1666,7 @@ function TypicalRedFlags() {
 
       <div style={{ marginTop: "14px", display: "flex", gap: "10px", flexWrap: "wrap" }}>
         <a
-          href={PDF_SCORECARD}
+          href={PDF_OPS_DILIGENCE_SCORECARD}
           target="_blank"
           rel="noopener noreferrer"
           style={{
@@ -1686,83 +1688,49 @@ function TypicalRedFlags() {
   );
 }
 
-// Sample Memo Screenshots
-function SampleMemoScreenshots() {
-  const box = {
-    border: `1px solid ${COLORS.border}`,
-    borderRadius: "8px",
-    padding: "16px",
-    background: "#FBFBFC",
-  };
-
-  const placeholder = {
-    border: `1px dashed ${COLORS.border}`,
-    borderRadius: "8px",
-    height: "180px",
-    background: "white",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontFamily: FONTS.body,
-    color: COLORS.bodyMuted,
-    fontWeight: 800,
-  };
+// Memo Sample Screenshots
+function MemoSampleScreenshots() {
+  const samples = [
+    {
+      src: "/memo-samples/ops-dd-exec-summary.png",
+      alt: "Ops Diligence Scorecard executive summary excerpt",
+      caption: "Ops Diligence Scorecard — Executive Summary (overall rating + deal implications)",
+    },
+    {
+      src: "/memo-samples/domain-scores-1.png",
+      alt: "Operational risk summary table excerpt (top)",
+      caption: "Operational Risk Summary — domain ratings (excerpt 1 of 2)",
+    },
+    {
+      src: "/memo-samples/domain-scores-2.png",
+      alt: "Operational risk summary table excerpt (bottom)",
+      caption: "Operational Risk Summary — domain ratings (excerpt 2 of 2)",
+    },
+    {
+      src: "/memo-samples/100-day-phases.png",
+      alt: "100-Day Stabilization Plan phase overview excerpt",
+      caption: "100-Day Stabilization Plan — phase overview (Visibility → Control → Cadence)",
+    },
+  ];
 
   return (
-    <Card>
-      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.5rem", color: COLORS.navy, marginTop: 0 }}>
-        Sample memo format (anonymized)
-      </h2>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
-        Add 2–4 blurred screenshots here (severity summary, red-flag table, evidence requests, Day-1 priorities). This is one of the strongest trust builders for cold traffic.
+    <Card style={{ marginTop: "18px", background: `${COLORS.navy}03` }}>
+      <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.navy, marginBottom: "6px" }}>
+        Sample deliverable excerpts (anonymized)
+      </h3>
+      <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.55, marginBottom: "14px" }}>
+        Real format, clipped for readability. Full deliverables are severity-rated and IC-ready.
       </p>
 
-      <div style={box}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "12px" }}>
-          <div style={placeholder}>Screenshot slot #1</div>
-          <div style={placeholder}>Screenshot slot #2</div>
-          <div style={placeholder}>Screenshot slot #3</div>
-        </div>
-        <div style={{ marginTop: "12px", fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.bodyMuted }}>
-          Tip: blur company names and numbers; keep structure legible.
-        </div>
-      </div>
-
-      <div style={{ marginTop: "14px", display: "flex", gap: "10px", flexWrap: "wrap" }}>
-        <a
-          href={PDF_SCORECARD}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            padding: "12px 18px",
-            background: "transparent",
-            color: COLORS.navy,
-            borderRadius: "4px",
-            border: `2px solid ${COLORS.navy}`,
-            textDecoration: "none",
-            fontFamily: FONTS.body,
-            fontWeight: 900,
-          }}
-        >
-          View Scorecard PDF
-        </a>
-        <a
-          href={PDF_100DAY}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            padding: "12px 18px",
-            background: "transparent",
-            color: COLORS.navy,
-            borderRadius: "4px",
-            border: `2px solid ${COLORS.navy}`,
-            textDecoration: "none",
-            fontFamily: FONTS.body,
-            fontWeight: 900,
-          }}
-        >
-          View 100-Day Plan PDF
-        </a>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "14px" }}>
+        {samples.map((s, i) => (
+          <div key={i} style={{ border: `1px solid ${COLORS.border}`, borderRadius: "8px", overflow: "hidden", background: COLORS.white }}>
+            <img src={s.src} alt={s.alt} loading="lazy" style={{ width: "100%", height: "auto", display: "block" }} />
+            <div style={{ padding: "10px 12px", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.4 }}>
+              {s.caption}
+            </div>
+          </div>
+        ))}
       </div>
     </Card>
   );
@@ -1931,7 +1899,7 @@ function ServicesPage({ setPage }) {
       </div>
 
       <div id="memo-samples" style={{ marginTop: "28px" }}>
-        <SampleMemoScreenshots />
+        <MemoSampleScreenshots />
       </div>
 
       <div id="worked-example" style={{ marginTop: "28px" }}>
