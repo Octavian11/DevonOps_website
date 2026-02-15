@@ -1566,60 +1566,41 @@ function FitCheckCTA() {
 }
 
 // Traffic Selector
+// Traffic Selector
 function TrafficSelector() {
-  const box = {
-    border: `1px solid ${COLORS.border}`,
-    borderRadius: "8px",
-    padding: "16px",
-    background: "#FBFBFC",
-    marginBottom: "18px",
+  const jump = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
-
-  const btn = {
-    padding: "12px 16px",
-    borderRadius: "6px",
-    border: `2px solid ${COLORS.navy}`,
-    background: "transparent",
-    color: COLORS.navy,
-    fontFamily: FONTS.body,
-    fontWeight: 900,
-    cursor: "pointer",
-  };
-
-  const primary = { ...btn, background: COLORS.navy, color: "white" };
 
   return (
-    <div style={box}>
-      <div style={{ fontFamily: FONTS.heading, fontSize: "1.2rem", fontWeight: 900, color: COLORS.navy }}>
-        What are you doing right now?
+    <Card style={{ marginTop: "12px", marginBottom: "14px" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px", flexWrap: "wrap" }}>
+        <div>
+          <div style={{ fontFamily: FONTS.heading, fontSize: "1.05rem", color: COLORS.navy, marginBottom: "4px" }}>
+            What's your situation?
+          </div>
+          <div style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.5 }}>
+            Jump to the most relevant sections.
+          </div>
+        </div>
+        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+          <button
+            onClick={() => jump("pre-close")}
+            style={{ padding: "10px 14px", borderRadius: "6px", border: `1px solid ${COLORS.border}`, background: COLORS.white, fontFamily: FONTS.body, color: COLORS.navy, cursor: "pointer" }}
+          >
+            Evaluating a target
+          </button>
+          <button
+            onClick={() => jump("post-close")}
+            style={{ padding: "10px 14px", borderRadius: "6px", border: `1px solid ${COLORS.border}`, background: COLORS.white, fontFamily: FONTS.body, color: COLORS.navy, cursor: "pointer" }}
+          >
+            First 100 days post-close
+          </button>
+        </div>
       </div>
-      <div style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.6, marginTop: "6px" }}>
-        Choose the track and jump to the relevant section.
-      </div>
-
-      <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginTop: "12px" }}>
-        <button
-          style={primary}
-          onClick={() => (window.location.hash = "#pre-close")}
-        >
-          Evaluating a target (pre-close)
-        </button>
-
-        <button
-          style={btn}
-          onClick={() => (window.location.hash = "#sequence")}
-        >
-          First 100 days post-close
-        </button>
-
-        <button
-          style={btn}
-          onClick={() => (window.location.hash = "#ongoing")}
-        >
-          Ongoing governance
-        </button>
-      </div>
-    </div>
+    </Card>
   );
 }
 
@@ -1629,60 +1610,43 @@ function NDAMicroBlock() {
     <div
       style={{
         marginTop: "10px",
+        padding: "10px 12px",
+        borderRadius: "6px",
+        border: `1px solid ${COLORS.border}`,
+        background: `${COLORS.navy}03`,
         fontFamily: FONTS.body,
-        fontSize: "0.95rem",
-        color: COLORS.bodyMuted,
-        display: "flex",
-        gap: "8px",
-        alignItems: "center",
-        justifyContent: "center",
-        flexWrap: "wrap",
+        fontSize: "0.92rem",
+        color: COLORS.charcoal,
+        lineHeight: 1.45,
       }}
     >
-      <span style={{ fontWeight: 900, color: COLORS.navy }}>Confidentiality:</span>
-      <span>{NDA_NOTE}</span>
+      NDA-friendly. We can sign an NDA before receiving sensitive materials; initial triage can be done with high-level facts only.
     </div>
   );
 }
 
 // Typical Red Flags
 function TypicalRedFlags() {
+  const items = [
+    { title: "Hidden EBITDA drag", body: "Recurring incidents, rework, and unmanaged change inflate labor and vendor spend." },
+    { title: "Day-1 governance gaps", body: "No incident command, no change control, no KPI cadence → risk compounds under new ownership." },
+    { title: "Vendor concentration + renewal risk", body: "Single-vendor dependencies, auto-renew traps, and missing exit plans create holdback/TSA exposure." },
+    { title: "Audit/compliance fragility", body: "Evidence scattered, controls inconsistent, access reviews ad hoc → diligence and exit readiness risk." },
+    { title: "Key-person dependency", body: "Tribal knowledge and fragile staffing model → continuity risk and slower integration." },
+  ];
+
   return (
-    <Card>
-      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.5rem", color: COLORS.navy, marginTop: 0 }}>
-        Typical red flags we surface (IC-ready)
-      </h2>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
-        These are patterns that standard diligence often misses — framed the way PE teams use them.
-      </p>
-
-      <ul style={{ margin: 0, paddingLeft: "18px", fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7 }}>
-        <li><strong>Change-driven instability:</strong> incidents correlate to releases → EBITDA drag + Day-1 governance requirement.</li>
-        <li><strong>Key-person / tribal knowledge:</strong> single points of failure → operational continuity risk + scalability constraint.</li>
-        <li><strong>Vendor concentration + CoC constraints:</strong> fragile dependencies, renewal cliffs, restrictive terms → covenant/continuity risk.</li>
-        <li><strong>No KPI cadence / board pack:</strong> targets can't be managed → value creation plan execution risk + credibility risk.</li>
-        <li><strong>Audit posture mismatch:</strong> "stated vs documented vs practiced" controls → sale process friction + multiple discount risk.</li>
-      </ul>
-
-      <div style={{ marginTop: "14px", display: "flex", gap: "10px", flexWrap: "wrap" }}>
-        <a
-          href={PDF_OPS_DILIGENCE_SCORECARD}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            padding: "12px 18px",
-            background: "transparent",
-            color: COLORS.navy,
-            borderRadius: "4px",
-            border: `2px solid ${COLORS.navy}`,
-            textDecoration: "none",
-            fontFamily: FONTS.body,
-            fontWeight: 900,
-          }}
-        >
-          View the Scorecard (PDF)
-        </a>
-        <CTAButton text="15-Minute Fit Check" />
+    <Card style={{ marginTop: "18px" }}>
+      <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.navy, marginBottom: "6px" }}>
+        Typical red flags we surface (mapped to IC implications)
+      </h3>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "12px", marginTop: "12px" }}>
+        {items.map((it, idx) => (
+          <div key={idx} style={{ border: `1px solid ${COLORS.border}`, borderRadius: "8px", padding: "12px 12px", background: COLORS.white }}>
+            <div style={{ fontFamily: FONTS.heading, fontSize: "0.98rem", color: COLORS.navy, marginBottom: "4px" }}>{it.title}</div>
+            <div style={{ fontFamily: FONTS.body, fontSize: "0.92rem", color: COLORS.charcoal, lineHeight: 1.5 }}>{it.body}</div>
+          </div>
+        ))}
       </div>
     </Card>
   );
@@ -1736,123 +1700,133 @@ function MemoSampleScreenshots() {
   );
 }
 
-// Non-Meeting Lead Capture
-function NonMeetingLeadCapture() {
-  const [name, setName] = useState("");
-  const [firm, setFirm] = useState("");
-  const [stage, setStage] = useState("Evaluating a target");
-  const [note, setNote] = useState("");
-  const [copied, setCopied] = useState(false);
+// Lead Capture
+function LeadCapture() {
+  const [email, setEmail] = useState("");
+  const [situation, setSituation] = useState("Evaluating a target");
+  const [status, setStatus] = useState({ state: "idle", msg: "" });
 
-  const template = `Hi Hassan,
+  const emailTemplate = `Subject: Ops diligence / 100-day stabilization — quick triage
 
-I'm interested in Devonshire Operations.
+Hi Hassan,
 
-Name: ${name || "[Your name]"}
-Firm: ${firm || "[Firm]"}
-Stage: ${stage}
+I'm reaching out regarding: ${situation.toLowerCase()}.
 
-Context / priority concerns:
-${note || "[2–3 sentences: what's breaking / timeline / what you want delivered]"}
+Company: [Name]
+Sector: [Sector]
+What's happening / top concern: [1–2 sentences]
+Timing: [e.g., LOI / pre-close / days post-close]
 
-Request:
-- Please share an anonymized sample memo format / example.
-- If we're a fit, propose a fixed-fee scope and timeline.
+Can you advise on fit and next steps?
 
-Best,
-${name || ""}`.trim();
+Thanks,
+[Name]
+[Fund / Role]
+`;
 
-  const input = {
-    width: "100%",
-    padding: "12px",
-    borderRadius: "6px",
-    border: `1px solid ${COLORS.border}`,
-    fontFamily: FONTS.body,
-    fontSize: "1rem",
+  const copyTemplate = async () => {
+    try {
+      await navigator.clipboard.writeText(emailTemplate);
+      setStatus({ state: "ok", msg: "Copied email template." });
+      setTimeout(() => setStatus({ state: "idle", msg: "" }), 2000);
+    } catch {
+      setStatus({ state: "error", msg: "Could not copy. Please manually copy from the template." });
+    }
   };
 
-  const label = { fontFamily: FONTS.body, fontWeight: 900, color: COLORS.navy, marginBottom: "6px" };
+  const submit = async (e) => {
+    e.preventDefault();
+    if (!email || !email.includes("@")) {
+      setStatus({ state: "error", msg: "Enter a valid email." });
+      return;
+    }
+    setStatus({ state: "loading", msg: "Sending…" });
+    try {
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, situation, source: "merged-page" }),
+      });
+      if (!res.ok) throw new Error("bad_status");
+      setStatus({ state: "ok", msg: "Received. We'll follow up by email." });
+      setEmail("");
+    } catch {
+      // graceful fallback: still provide a path to convert
+      setStatus({ state: "error", msg: "Could not submit. Use the email template below." });
+    }
+  };
 
   return (
-    <Card>
-      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.5rem", color: COLORS.navy, marginTop: 0 }}>
-        Not ready to book? Get examples + scope by email
-      </h2>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
-        Cold traffic often needs a "next step" that isn't a meeting. Use this to request examples and a fixed-fee proposal.
+    <Card style={{ marginTop: "18px" }}>
+      <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.navy, marginBottom: "6px" }}>
+        Not ready to book a call?
+      </h3>
+      <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.55, marginBottom: "12px" }}>
+        Share your email and situation. I'll reply with fit + next steps. (No sensitive materials needed up front.)
       </p>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "12px" }}>
+      <form onSubmit={submit} style={{ display: "grid", gridTemplateColumns: "1fr 260px", gap: "10px", alignItems: "end" }}>
         <div>
-          <div style={label}>Name</div>
-          <input style={input} value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" />
+          <label style={{ display: "block", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, marginBottom: "6px" }}>
+            Your email
+          </label>
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@fund.com"
+            style={{ width: "100%", padding: "10px 12px", borderRadius: "6px", border: `1px solid ${COLORS.border}`, fontFamily: FONTS.body }}
+          />
         </div>
         <div>
-          <div style={label}>Firm</div>
-          <input style={input} value={firm} onChange={(e) => setFirm(e.target.value)} placeholder="Firm / fund" />
-        </div>
-        <div>
-          <div style={label}>Stage</div>
-          <select style={input} value={stage} onChange={(e) => setStage(e.target.value)}>
+          <label style={{ display: "block", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, marginBottom: "6px" }}>
+            Situation
+          </label>
+          <select
+            value={situation}
+            onChange={(e) => setSituation(e.target.value)}
+            style={{ width: "100%", padding: "10px 12px", borderRadius: "6px", border: `1px solid ${COLORS.border}`, fontFamily: FONTS.body }}
+          >
             <option>Evaluating a target</option>
             <option>First 100 days post-close</option>
             <option>Mid-hold optimization</option>
-            <option>Ongoing governance</option>
           </select>
         </div>
-      </div>
 
-      <div style={{ marginTop: "12px" }}>
-        <div style={label}>What's going on?</div>
-        <textarea
-          style={{ ...input, minHeight: "110px" }}
-          value={note}
-          onChange={(e) => setNote(e.target.value)}
-          placeholder="2–3 sentences: what's breaking, urgency, and what you want delivered."
-        />
-      </div>
-
-      <div style={{ marginTop: "14px", display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "center" }}>
-        <a
-          href={mailtoHref("Devonshire Ops – request examples + scope", template)}
-          style={{
-            padding: "12px 18px",
-            background: COLORS.navy,
-            color: "white",
-            borderRadius: "4px",
-            border: "none",
-            fontFamily: FONTS.body,
-            fontWeight: 900,
-            textDecoration: "none",
-          }}
-        >
-          Send email request
-        </a>
-
-        <button
-          onClick={async () => {
-            const ok = await copyToClipboard(template);
-            setCopied(ok);
-            setTimeout(() => setCopied(false), 1500);
-          }}
-          style={{
-            padding: "12px 18px",
-            background: "transparent",
-            color: COLORS.navy,
-            borderRadius: "4px",
-            border: `2px solid ${COLORS.navy}`,
-            fontFamily: FONTS.body,
-            fontWeight: 900,
-            cursor: "pointer",
-          }}
-        >
-          {copied ? "Copied" : "Copy email template"}
-        </button>
-
-        <div style={{ fontFamily: FONTS.body, color: COLORS.bodyMuted, fontSize: "0.95rem" }}>
-          {NDA_NOTE}
+        <div style={{ gridColumn: "1 / -1", display: "flex", gap: "10px", flexWrap: "wrap", marginTop: "8px" }}>
+          <button
+            type="submit"
+            style={{ padding: "10px 14px", borderRadius: "6px", border: `1px solid ${COLORS.gold}`, background: COLORS.gold, color: COLORS.white, fontFamily: FONTS.body, cursor: "pointer" }}
+          >
+            Send
+          </button>
+          <button
+            type="button"
+            onClick={copyTemplate}
+            style={{ padding: "10px 14px", borderRadius: "6px", border: `1px solid ${COLORS.border}`, background: COLORS.white, color: COLORS.navy, fontFamily: FONTS.body, cursor: "pointer" }}
+          >
+            Copy email template
+          </button>
+          <a
+            href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Ops diligence / 100-day stabilization — quick triage")}`}
+            style={{ padding: "10px 14px", borderRadius: "6px", border: `1px solid ${COLORS.border}`, background: COLORS.white, color: COLORS.navy, fontFamily: FONTS.body, textDecoration: "none" }}
+          >
+            Email me instead
+          </a>
         </div>
-      </div>
+
+        {status.state !== "idle" && (
+          <div style={{ gridColumn: "1 / -1", marginTop: "10px", fontFamily: FONTS.body, fontSize: "0.92rem", color: status.state === "ok" ? "green" : status.state === "loading" ? COLORS.charcoal : "crimson" }}>
+            {status.msg}
+          </div>
+        )}
+
+        {/* fallback template (only useful if submit fails) */}
+        {status.state === "error" && (
+          <pre style={{ gridColumn: "1 / -1", marginTop: "10px", padding: "12px", borderRadius: "8px", border: `1px solid ${COLORS.border}`, background: "#fafafa", overflowX: "auto", fontSize: "0.85rem" }}>
+{emailTemplate}
+          </pre>
+        )}
+      </form>
     </Card>
   );
 }
@@ -1915,7 +1889,7 @@ function ServicesPage({ setPage }) {
       </div>
 
       <div id="lead-capture" style={{ marginTop: "28px" }}>
-        <NonMeetingLeadCapture />
+        <LeadCapture />
       </div>
 
       <div id="fit-check" style={{ marginTop: "28px" }}>
