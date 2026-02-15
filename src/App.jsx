@@ -3,6 +3,8 @@ import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Responsi
 
 // ─── CONSTANTS ──────────────────────────────────────────────
 const CALENDLY = "https://calendly.com/hassantariq1/15-minute-triage-call-hassan-tariq";
+const SAMPLE_SCORECARD_PDF = "/sample-ops-diligence-scorecard.pdf";
+const SAMPLE_100DAY_PDF = "/sample-100-day-stabilization-plan.pdf";
 
 const COLORS = {
   navy: "#14213D",
@@ -194,9 +196,21 @@ const CONTEXT_OPTIONS = [
 ];
 
 const CONTEXT_CALLOUTS = {
-  stable: { pre: "This target shows operational maturity. Diligence should validate these findings, but the operational risk profile is favorable.", post: "Operations are well-governed. A Control Tower Retainer can maintain this posture and free management bandwidth for growth initiatives.", mid: "Strong operational foundation. Focus on optimization and ensuring this posture is durable for exit diligence." },
-  atRisk: { pre: "Operational friction is present and should be factored into the value creation plan. A post-close stabilization engagement is recommended within the first 30 days.", post: "Friction is accumulating. A 100-Day Stabilization Plan can establish the governance baseline before these gaps become EBITDA drag.", mid: "Operational drift is occurring. Recommend a targeted intervention to re-establish governance discipline before exit preparation." },
-  critical: { pre: "Significant operational risk. These findings should inform deal pricing and the 100-day plan. Recommend an Ops Diligence Report before close.", post: "Immediate stabilization needed. A 100-Day Stabilization Plan should be the first post-close priority.", mid: "Operational risk is material and will impact exit valuation. Recommend immediate intervention." },
+  stable: {
+    pre: "Operational posture appears mature. Validate with targeted diligence, but the risk profile is favorable.",
+    post: "Operations are well-governed. Focus on optimization and durability for exit diligence.",
+    mid: "Strong operational foundation. Shift to efficiency and ensuring the posture is durable through exit preparation.",
+  },
+  atRisk: {
+    pre: "Operational friction is present and should be reflected in the value creation plan. Identify the top red flags and convert them into evidence requests and diligence asks.",
+    post: "Friction is accumulating. Establish the governance baseline in the first 30 days: incident discipline, change control, and KPI cadence.",
+    mid: "Operational drift is occurring. Re-establish governance discipline and cadence before exit preparation.",
+  },
+  critical: {
+    pre: "Operational risk is material. These findings should inform deal terms and the Day-1 critical path. Recommend formal ops diligence before close.",
+    post: "Immediate stabilization is needed. The first 30 days should prioritize incident command, change control, and board-ready KPI cadence.",
+    mid: "Operational risk is material and will impact exit valuation. Immediate intervention is recommended to restore control and visibility.",
+  },
 };
 
 // ─── STYLES ─────────────────────────────────────────────────
@@ -346,13 +360,19 @@ function Card({ children, style: extraStyle }) {
 
 // ─── NAVIGATION ─────────────────────────────────────────────
 function Nav({ page, setPage }) {
-  const items = [
-    { key: "levers", label: "Levers" },
-    { key: "services", label: "Services" },
-    { key: "framework", label: "Framework" },
-    { key: "scorer", label: "Scorer" },
-    { key: "about", label: "About" },
-  ];
+  const items = page === "levers"
+    ? [
+        { key: "levers", label: "Levers" },
+        { key: "scorer", label: "Scorer" },
+        { key: "services", label: "Services" },
+      ]
+    : [
+        { key: "levers", label: "Levers" },
+        { key: "services", label: "Services" },
+        { key: "framework", label: "Framework" },
+        { key: "scorer", label: "Scorer" },
+        { key: "about", label: "About" },
+      ];
   return (
     <nav style={{ position: "sticky", top: 0, zIndex: 100, background: COLORS.primary, borderBottom: `3px solid ${COLORS.gold}`, padding: "0 28px", display: "flex", alignItems: "center", justifyContent: "space-between", height: "76px", minHeight: "76px" }}>
       <div style={{ display: "flex", alignItems: "center", gap: "28px" }}>
@@ -437,21 +457,28 @@ function HeroBlockWithNav({ setPage }) {
         <div style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.gold, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "16px" }}>
           Portfolio Operations · Pre-Close Diligence · Post-Close Stabilization
         </div>
-        <h1 style={{ fontFamily: FONTS.heading, fontSize: "2.4rem", fontWeight: 700, color: "white", lineHeight: 1.2, marginBottom: "20px" }}>
-          Operational red flags that standard diligence misses — and the governance baseline for the first 100 days.
+        <h1 style={{ fontFamily: FONTS.heading, fontSize: "2.4rem", fontWeight: 700, color: "white", lineHeight: 1.2, marginBottom: "18px" }}>
+          Pre-close red flags — and a first-100-days stabilization baseline — for operationally fragile businesses.
         </h1>
-        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: "rgba(255,255,255,0.9)", lineHeight: 1.6, marginBottom: "24px" }}>
-          15+ years building incident command, change governance, and KPI control towers across JP Morgan, Barclays, Bank of America, and Lazard.
+        <p style={{ fontFamily: FONTS.body, fontSize: "1.02rem", color: "rgba(255,255,255,0.92)", lineHeight: 1.65, marginBottom: "22px" }}>
+          I help PE deal teams and operating partners risk-rate operational instability in diligence and then stand up incident command, change governance, and KPI cadence in the first 100 days.
         </p>
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "28px" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "26px" }}>
           {[
-            "Ops Diligence Report: risk-rated findings memo for the IC. 2–3 weeks.",
-            "100-Day Stabilization Plan: incident command, change control, KPIs, vendor governance, board reporting.",
-            "For PE funds, operating partners, and independent sponsors evaluating or managing portfolio companies.",
+            "Pain: Vendor dependency, key-person risk, and incident/change patterns are under-examined—or assessed by generalists.",
+            "Pain: Post-close, board reporting demands KPIs and governance before the company has an operating cadence to produce them.",
+            "Pain: Operational fragility becomes a hidden tax on EBITDA and a weak exit narrative.",
+            "Deliverable: Ops Diligence Report — risk-rated findings memo for the IC (2–3 weeks).",
+            "Deliverable: 100-Day Stabilization Plan — Visibility → Control → Cadence across incident, change, KPIs, vendor, and audit readiness.",
+            "Deliverable: Control Tower Retainer — weekly operating rhythm that prevents drift-back.",
+            "Credibility: 15+ years building "cannot-fail" operating systems across top-tier financial services environments.",
+            "Note: IC = investment committee.",
           ].map((text, i) => (
             <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "12px" }}>
               <span style={{ color: COLORS.gold, fontSize: "0.95rem", lineHeight: "28px", flexShrink: 0 }}>→</span>
-              <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: "rgba(255,255,255,0.95)", lineHeight: 1.6 }}>{text}</span>
+              <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: "rgba(255,255,255,0.95)", lineHeight: 1.6 }}>
+                {text}
+              </span>
             </div>
           ))}
         </div>
@@ -505,6 +532,135 @@ function DomainLegend() {
   );
 }
 
+// ─── PROOF STRIP ────────────────────────────────────────────
+function ProofStrip() {
+  return (
+    <Card style={{ border: `1px solid ${COLORS.border}`, marginBottom: "18px" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "18px", flexWrap: "wrap" }}>
+        <div style={{ flex: "1 1 420px" }}>
+          <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.15rem", color: COLORS.navy, margin: 0, marginBottom: "8px" }}>
+            Want the red-flag memo format?
+          </h3>
+          <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0 }}>
+            See the exact structure of the Ops Diligence Scorecard: severity-rated findings, PE impact, and a stabilization priority matrix.
+          </p>
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.bodyMuted, marginTop: "10px", marginBottom: 0 }}>
+            Samples are anonymized/fictional and provided for format demonstration only.
+          </p>
+        </div>
+
+        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+          <a href={SAMPLE_SCORECARD_PDF} target="_blank" rel="noopener noreferrer"
+             style={{ padding: "12px 18px", background: COLORS.navy, color: "white", borderRadius: "4px", textDecoration: "none", fontFamily: FONTS.body, fontWeight: 600 }}>
+            View Sample Scorecard (PDF)
+          </a>
+          <a href={SAMPLE_100DAY_PDF} target="_blank" rel="noopener noreferrer"
+             style={{ padding: "12px 18px", background: "transparent", color: COLORS.navy, borderRadius: "4px", textDecoration: "none", fontFamily: FONTS.body, fontWeight: 600, border: `2px solid ${COLORS.navy}` }}>
+            View 100-Day Plan (PDF)
+          </a>
+        </div>
+      </div>
+    </Card>
+  );
+}
+
+// ─── OFFER CARDS ────────────────────────────────────────────
+function OfferCards({ setPage }) {
+  const box = {
+    border: `1px solid ${COLORS.border}`,
+    borderRadius: "6px",
+    padding: "18px",
+    background: COLORS.white,
+    boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
+    flex: "1 1 260px",
+    minWidth: "260px",
+  };
+
+  const title = { fontFamily: FONTS.heading, fontSize: "1.05rem", color: COLORS.navy, margin: 0, marginBottom: "8px" };
+  const tag = { fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.bodyMuted, marginBottom: "10px" };
+  const li = { marginBottom: "8px", lineHeight: 1.55 };
+
+  return (
+    <div style={{ marginBottom: "22px" }}>
+      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.35rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>
+        Services & Pricing (fast orientation)
+      </h2>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1.02rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "14px", maxWidth: "760px" }}>
+        Choose the track that matches your deal lifecycle. Each deliverable is designed to be decision-useful for PE: severity-rated findings, PE impact, and a pragmatic Day-1 critical path.
+      </p>
+
+      <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
+        <div style={box}>
+          <h3 style={title}>Ops Diligence Report (Pre-Close)</h3>
+          <div style={tag}>Starting at $15,000 · 2–3 weeks</div>
+          <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
+            <li style={li}>Risk-rated red flags with severity + PE impact</li>
+            <li style={li}>Evidence requests + diligence questions</li>
+            <li style={li}>IC-ready memo format</li>
+          </ul>
+        </div>
+
+        <div style={box}>
+          <h3 style={title}>Bundle (Recommended)</h3>
+          <div style={tag}>$25,000–$35,000 · diligence + 100 days</div>
+          <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
+            <li style={li}>Diligence findings roll straight into execution</li>
+            <li style={li}>Day-1 critical path + phased stabilization plan</li>
+            <li style={li}>Clear ownership + cadence for the first 100 days</li>
+          </ul>
+        </div>
+
+        <div style={box}>
+          <h3 style={title}>Control Tower Retainer (Ongoing)</h3>
+          <div style={tag}>Starting at $7,500/month · ongoing</div>
+          <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
+            <li style={li}>Weekly operating review + board-ready KPI pack</li>
+            <li style={li}>Incident + change governance discipline</li>
+            <li style={li}>Vendor controls + audit readiness cadence</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style={{ display: "flex", gap: "12px", marginTop: "14px", flexWrap: "wrap" }}>
+        <CTAButton text="15-Minute Fit Check" />
+        <button onClick={() => setPage("services")}
+          style={{ padding: "12px 18px", background: "transparent", color: COLORS.navy, borderRadius: "4px", border: `2px solid ${COLORS.navy}`, fontFamily: FONTS.body, fontWeight: 700, cursor: "pointer" }}>
+          View Full Services & Details
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ─── HOW IT WORKS ───────────────────────────────────────────
+function HowItWorks() {
+  const stepTitle = { fontFamily: FONTS.heading, fontSize: "1.05rem", color: COLORS.navy, margin: 0, marginBottom: "6px" };
+  const p = { fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, margin: 0 };
+
+  return (
+    <Card style={{ marginBottom: "26px" }}>
+      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.25rem", fontWeight: 700, color: COLORS.navy, marginTop: 0, marginBottom: "10px" }}>
+        How it works
+      </h2>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "14px" }}>
+        <div>
+          <h3 style={stepTitle}>1) Baseline (Week 1)</h3>
+          <p style={p}>We request what exists: incident history, change/release artifacts, vendor list/contracts, KPI packs, org/RACI, audit evidence folders, and escalation/on-call.</p>
+        </div>
+        <div>
+          <h3 style={stepTitle}>2) Diagnose (Weeks 1–3)</h3>
+          <p style={p}>You receive a decision-useful output: severity-rated findings, PE impact framing, and a prioritized Day-1 critical path.</p>
+        </div>
+        <div>
+          <h3 style={stepTitle}>3) Stabilize (Day 1–100)</h3>
+          <p style={p}>Post-close, we install the governance baseline: incident command, change control, KPI cadence, vendor governance, and board-ready reporting.</p>
+        </div>
+      </div>
+    </Card>
+  );
+}
+
 // ─── LEVER EXPLORER PAGE ────────────────────────────────────
 function LeverExplorer({ setPage }) {
   const [search, setSearch] = useState("");
@@ -526,6 +682,9 @@ function LeverExplorer({ setPage }) {
   return (
     <div className="fade-in">
       <HeroBlockWithNav setPage={setPage} />
+      <ProofStrip />
+      <OfferCards setPage={setPage} />
+      <HowItWorks />
 
       <div style={{ marginBottom: "28px" }}>
         <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.4rem", fontWeight: 700, color: COLORS.navy, marginBottom: "12px" }}>
@@ -884,14 +1043,48 @@ function ScorerPage() {
                 </RadarChart>
               </ResponsiveContainer>
             </Card>
-            <Card style={{ flex: "1 1 280px", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
-              <div style={{ width: "100px", height: "100px", borderRadius: "50%", border: `4px solid ${ratingColor}`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "16px" }}>
+            <Card style={{ flex: "1 1 320px", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
+              <div style={{ width: "100px", height: "100px", borderRadius: "50%", border: `4px solid ${ratingColor}`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "14px" }}>
                 <span style={{ fontFamily: FONTS.body, fontSize: "1.6rem", fontWeight: 700, color: ratingColor }}>{avg.toFixed(1)}</span>
               </div>
-              <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 700, color: ratingColor, letterSpacing: "1px", marginBottom: "12px" }}>{ratingLabel}</span>
-              <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.6 }}>
+
+              <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 700, color: ratingColor, letterSpacing: "1px", marginBottom: "10px" }}>
+                {ratingLabel}
+              </span>
+
+              <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px", maxWidth: "360px" }}>
                 {CONTEXT_CALLOUTS[rating][context]}
               </p>
+
+              <div style={{ textAlign: "left", width: "100%", maxWidth: "360px", marginBottom: "14px" }}>
+                <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 800, color: COLORS.navy, marginBottom: "8px" }}>
+                  Recommended next steps
+                </div>
+                <ul style={{ margin: 0, paddingLeft: "18px", fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.55 }}>
+                  <li>Days 1–14: install incident ownership + severity model + escalation thresholds</li>
+                  <li>Days 1–14: install change control (risk classification, CAB-lite, rollback discipline)</li>
+                  <li>Days 1–30: define KPI set, baseline it, and begin weekly operating reviews</li>
+                </ul>
+              </div>
+
+              <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "10px", alignItems: "center" }}>
+                <div style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.bodyMuted, maxWidth: "360px" }}>
+                  Translate this score into diligence asks or a first-30-day stabilization priority list.
+                </div>
+
+                <CTAButton text="15-Minute Fit Check" />
+
+                <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", justifyContent: "center" }}>
+                  <a href={SAMPLE_SCORECARD_PDF} target="_blank" rel="noopener noreferrer"
+                    style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 700, color: COLORS.navy, textDecoration: "none", borderBottom: `2px solid ${COLORS.navy}` }}>
+                    View sample memo format
+                  </a>
+                  <a href={SAMPLE_100DAY_PDF} target="_blank" rel="noopener noreferrer"
+                    style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 700, color: COLORS.navy, textDecoration: "none", borderBottom: `2px solid ${COLORS.navy}` }}>
+                    View 100-day plan format
+                  </a>
+                </div>
+              </div>
             </Card>
           </div>
           {lowDims.length > 0 && (
@@ -906,9 +1099,6 @@ function ScorerPage() {
               ))}
             </Card>
           )}
-          <div style={{ textAlign: "center", padding: "16px 0" }}>
-            <CTAButton text="15-Minute Fit Check" />
-          </div>
         </div>
       )}
     </div>
