@@ -5,8 +5,8 @@ import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Responsi
 const CALENDLY = "https://calendly.com/hassantariq1/15-minute-triage-call-hassan-tariq";
 const PDF_OPS_DILIGENCE_SCORECARD = "/pdfs/ops-diligence-scorecard.pdf";
 const PDF_100_DAY_STABILIZATION_PLAN = "/pdfs/100-day-stabilization-plan.pdf";
-const CONTACT_EMAIL = "hello@devonshireops.com"; // TODO: replace if different
-const LINKEDIN_URL = "https://www.linkedin.com/"; // TODO: replace with your LinkedIn
+const CONTACT_EMAIL = "hassan@devonshireops.com";
+const LINKEDIN_URL = "https://www.linkedin.com/in/hassantar/";
 const SAMPLE_SCORECARD_PDF = "/sample-ops-diligence-scorecard.pdf";
 const SAMPLE_100DAY_PDF = "/sample-100-day-stabilization-plan.pdf";
 const PDF_SCORECARD = "/pdfs/ops-diligence-scorecard.pdf";
