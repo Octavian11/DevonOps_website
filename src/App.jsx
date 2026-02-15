@@ -3,8 +3,8 @@ import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Responsi
 
 // ─── CONSTANTS ──────────────────────────────────────────────
 const CALENDLY = "https://calendly.com/hassantariq1/15-minute-triage-call-hassan-tariq";
-const CONTACT_EMAIL = "hello@devonshireops.com"; // TODO: replace if different
-const LINKEDIN_URL = "https://www.linkedin.com/"; // TODO: replace with your LinkedIn
+const CONTACT_EMAIL = "hassan@devonshireops.com"; // TODO: replace if different
+const LINKEDIN_URL = "https://www.linkedin.com/hassantar/"; // TODO: replace with your LinkedIn
 const SAMPLE_SCORECARD_PDF = "/sample-ops-diligence-scorecard.pdf";
 const SAMPLE_100DAY_PDF = "/sample-100-day-stabilization-plan.pdf";
 
