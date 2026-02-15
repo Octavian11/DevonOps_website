@@ -7,6 +7,8 @@ const CONTACT_EMAIL = "hello@devonshireops.com"; // TODO: replace if different
 const LINKEDIN_URL = "https://www.linkedin.com/"; // TODO: replace with your LinkedIn
 const SAMPLE_SCORECARD_PDF = "/sample-ops-diligence-scorecard.pdf";
 const SAMPLE_100DAY_PDF = "/sample-100-day-stabilization-plan.pdf";
+const PDF_SCORECARD = "/ops-diligence-scorecard.pdf";
+const PDF_100DAY = "/100-day-stabilization-plan.pdf";
 
 function mailtoHref(subject, body) {
   return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
