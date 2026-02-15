@@ -7,6 +7,8 @@ const CONTACT_EMAIL = "hassan@devonshireops.com"; // TODO: replace if different
 const LINKEDIN_URL = "https://www.linkedin.com/hassantar/"; // TODO: replace with your LinkedIn
 const SAMPLE_SCORECARD_PDF = "/sample-ops-diligence-scorecard.pdf";
 const SAMPLE_100DAY_PDF = "/sample-100-day-stabilization-plan.pdf";
+const PDF_SCORECARD = "/ops-diligence-scorecard.pdf";
+const PDF_100DAY = "/100-day-stabilization-plan.pdf";
 
 function mailtoHref(subject, body) {
   return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -374,8 +376,7 @@ function Nav({ page, setPage }) {
       ]
     : [
         { key: "levers", label: "Levers" },
-        { key: "services", label: "Services" },
-        { key: "framework", label: "Framework" },
+        { key: "services", label: "Services & Method" },
         { key: "scorer", label: "Scorer" },
         { key: "about", label: "About" },
       ];
@@ -1021,156 +1022,6 @@ function LeverExplorer({ setPage }) {
   );
 }
 
-// ─── FRAMEWORK PAGE ─────────────────────────────────────────
-function FrameworkPage({ setPage }) {
-  return (
-    <div className="fade-in" style={{ maxWidth: "760px" }}>
-      <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.6rem", fontWeight: 700, color: COLORS.navy, marginBottom: "12px" }}>
-        Operational Friction Evaluation Framework
-      </h1>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "8px" }}>
-        A structured methodology for diagnosing where execution friction is degrading portfolio company performance — and prioritizing interventions by EBITDA impact, execution risk, and timeline to proof.
-      </p>
-      {/* Bridge to Services */}
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "32px" }}>
-        This is the method behind the{" "}
-        <span onClick={() => setPage("services")} style={{ color: COLORS.gold, cursor: "pointer", textDecoration: "underline" }}>Ops Diligence Report and 100-Day Plan</span>.
-      </p>
-
-      <SectionTitle>Why Operational Friction Matters in PE</SectionTitle>
-      <div style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "32px" }}>
-        <p style={{ marginBottom: "16px" }}>Operational friction is the gap between the value creation plan and what actually gets executed. It's why 100-day plans stall, why EBITDA improvements take 18 months instead of 6, and why exit processes surface risks that should have been addressed years earlier.</p>
-        <Card>
-          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-            {[
-              { title: "Leverage amplifies friction.", body: "Debt service leaves no margin for extended firefighting or missed targets. An operational disruption that a public company absorbs becomes a covenant risk for a levered portfolio company." },
-              { title: "Hold periods create urgency.", body: "Every month spent stabilizing is a month not spent on growth initiatives. Friction in Year 1 compounds into missed EBITDA targets in Year 3." },
-              { title: "Exit narratives are built on operational credibility.", body: "The next buyer's diligence team will audit incident history, vendor dependencies, governance maturity, and operational metrics. Unresolved friction becomes a multiple discount." },
-            ].map((item, i) => (
-              <div key={i} style={{ paddingLeft: "16px", borderLeft: `3px solid ${COLORS.gold}` }}>
-                <strong style={{ color: COLORS.navy }}>{item.title}</strong>
-                <span style={{ color: COLORS.charcoal }}> {item.body}</span>
-              </div>
-            ))}
-          </div>
-        </Card>
-      </div>
-
-      <SectionTitle>The Friction Evaluation Rubric</SectionTitle>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "16px" }}>
-        Each operational friction lever is evaluated across six dimensions:
-      </p>
-      <Card>
-        <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: FONTS.body, fontSize: "0.8rem" }}>
-          <thead>
-            <tr style={{ borderBottom: `2px solid ${COLORS.navy}` }}>
-              {["Criterion", "What It Tests", "Scoring", "Action Trigger"].map(h => (
-                <th key={h} style={{ textAlign: "left", padding: "8px 10px", fontWeight: 600, color: COLORS.navy, fontSize: "0.9rem", letterSpacing: "0.3px" }}>{h}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {[
-              ["EBITDA Impact", "Directly erode earnings or margin?", "Direct / Indirect / Minimal", "Direct → flag in IC memo, quantify drag"],
-              ["Time to Proof", "How quickly can we show improvement?", "< 30 / 30–90 / 90+ days", "< 30 days → Day-1 quick win candidate"],
-              ["Execution Certainty", "How proven is the playbook?", "High / Medium / Low", "High → include in 100-day plan scope"],
-              ["Exit Story Impact", "Improve risk profile for next buyer?", "Strengthens / Neutral / None", "Strengthens → prioritize for exit prep"],
-              ["Reversibility", "Can we course-correct if it fails?", "Easily / Partially / One-way", "One-way → requires board approval"],
-              ["Attention Load", "Management bandwidth required?", "Low / Medium / High", "High → defer early in hold period"],
-            ].map(([c, w, s, a], i) => (
-              <tr key={i} style={{ borderBottom: `1px solid ${COLORS.border}` }}>
-                <td style={{ padding: "8px 10px", fontWeight: 600, color: COLORS.charcoal, whiteSpace: "nowrap", fontSize: "0.9rem" }}>{c}</td>
-                <td style={{ padding: "8px 10px", color: COLORS.charcoal, fontSize: "0.9rem" }}>{w}</td>
-                <td style={{ padding: "8px 10px", fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.charcoal }}>{s}</td>
-                <td style={{ padding: "8px 10px", fontSize: "0.85rem", color: COLORS.navy, fontWeight: 500 }}>{a}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </Card>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "24px", fontStyle: "italic" }}>
-        Levers scoring well on EBITDA Impact + Time to Proof + Low Attention Load are highest-priority quick wins. Strong Exit Story Impact with longer timelines are strategic investments.
-      </p>
-
-      {/* Worked example */}
-      <Card style={{ borderLeft: `4px solid ${COLORS.highText}`, marginBottom: "32px" }}>
-        <div style={{ marginBottom: "8px" }}>
-          <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.navy, letterSpacing: "0.5px", textTransform: "uppercase", fontWeight: 600 }}>Worked Example</span>
-        </div>
-        <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "12px" }}>
-          "No Change Advisory Board or Change Control Process"
-        </h3>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "8px", marginBottom: "16px" }}>
-          {[
-            { label: "EBITDA Impact", value: "Direct", color: COLORS.criticalText },
-            { label: "Time to Proof", value: "< 30 days", color: COLORS.stable },
-            { label: "Execution Certainty", value: "High", color: COLORS.stable },
-            { label: "Exit Story Impact", value: "Strengthens", color: COLORS.stable },
-            { label: "Reversibility", value: "Easily", color: COLORS.stable },
-            { label: "Attention Load", value: "Low", color: COLORS.stable },
-          ].map((item, i) => (
-            <div key={i} style={{ padding: "8px 10px", background: COLORS.offWhite, borderRadius: "4px" }}>
-              <div style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.charcoal, marginBottom: "2px" }}>{item.label}</div>
-              <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, color: item.color }}>{item.value}</div>
-            </div>
-          ))}
-        </div>
-        <div style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65 }}>
-          <p style={{ marginBottom: "8px" }}>
-            <strong style={{ color: COLORS.navy }}>Pre-close implication:</strong> Uncontrolled changes are the #1 cause of production incidents. If the target has no change control, flag it in the diligence memo — this is direct EBITDA drag hiding in incident correlation data.
-          </p>
-          <p>
-            <strong style={{ color: COLORS.navy }}>First 100 days implication:</strong> Install a lightweight CAB within the first two weeks. This is a high-certainty, low-attention, fast-proof intervention — the textbook quick win. Change-incident correlation tracking starts producing board-ready data within 30 days.
-          </p>
-        </div>
-      </Card>
-
-      {/* Mid-page CTA */}
-      <div style={{ margin: "0 0 32px", padding: "16px 24px", background: `linear-gradient(135deg, ${COLORS.navy}08 0%, ${COLORS.gold}08 100%)`, border: `1px solid ${COLORS.border}`, borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
-        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, margin: 0 }}>
-          <strong style={{ color: COLORS.navy }}>Want this analysis for a specific target?</strong> The Ops Diligence Report scores every lever against this rubric.
-        </p>
-        <div style={{ display: "flex", gap: "10px", flexShrink: 0 }}>
-          <button onClick={() => setPage("services")} style={{ padding: "7px 18px", background: COLORS.navy, color: "white", border: "none", borderRadius: "4px", fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 600, cursor: "pointer" }}>View Services & Pricing</button>
-          <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ padding: "7px 18px", background: COLORS.gold, color: "white", border: "none", borderRadius: "4px", fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 600, cursor: "pointer", textDecoration: "none" }}>15-Minute Fit Check</a>
-        </div>
-      </div>
-
-      <SectionTitle>The Stabilization Sequence</SectionTitle>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "16px" }}>
-        Operational stabilization follows a consistent three-phase sequence regardless of portfolio company size or sector:
-      </p>
-      {[
-        { phase: "Phase 1: Visibility", days: "Days 1–14", desc: "You can't fix what you can't see. Establish baseline visibility into what's actually happening — not what management says is happening.", items: ["Incident volume, severity, MTTR, recurrence rate", "Change frequency, failure rate, rollback frequency", "Vendor inventory, contract terms, concentration exposure", "Current compliance posture vs. stated posture"], deliverable: "Baseline assessment memo + operational risk heatmap" },
-        { phase: "Phase 2: Control", days: "Days 15–45", desc: "Install the minimum governance gates that prevent new damage from accumulating while you address existing debt.", items: ["Incident command structure with severity classification", "Change control process with risk classification", "Escalation paths with defined thresholds", "Access review and vendor oversight cadence"], deliverable: "CAB charter + severity policy + escalation matrix" },
-        { phase: "Phase 3: Cadence", days: "Days 45–100", desc: "Governance installed ad hoc decays without rhythm. Build the operating cadence that makes stability self-sustaining.", items: ["Weekly operating review with defined KPIs and thresholds", "Monthly board-ready reporting package", "Quarterly vendor scorecards and control testing", "Postmortem → recurrence prevention → backlog loop"], deliverable: "Board ops dashboard + first QBR pack + audit evidence index" },
-      ].map((p, i) => (
-        <Card key={i} style={{ borderLeft: `4px solid ${[COLORS.steel, COLORS.navy, COLORS.gold][i]}`, marginBottom: "12px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "8px" }}>
-            <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy }}>{p.phase}</h3>
-            <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, fontWeight: 600 }}>{p.days}</span>
-          </div>
-          <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "10px" }}>{p.desc}</p>
-          <ul style={{ paddingLeft: "20px", marginBottom: "10px" }}>
-            {p.items.map((item, j) => <li key={j} style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "2px" }}>{item}</li>)}
-          </ul>
-          <div style={{ padding: "8px 12px", background: COLORS.offWhite, borderRadius: "4px", display: "flex", alignItems: "center", gap: "8px" }}>
-            <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.navy, letterSpacing: "0.5px", textTransform: "uppercase", flexShrink: 0, fontWeight: 600 }}>Deliverable</span>
-            <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, fontWeight: 500 }}>{p.deliverable}</span>
-          </div>
-        </Card>
-      ))}
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, marginTop: "16px", marginBottom: "32px", fontStyle: "italic" }}>
-        After Day 100, the Control Tower Retainer takes over — maintaining the cadence, running the operating rhythm, and ensuring the portfolio company doesn't drift back.
-      </p>
-
-      <div style={{ textAlign: "center", padding: "24px 0" }}>
-        <CTAButton text="15-Minute Fit Check" />
-      </div>
-    </div>
-  );
-}
-
 // ─── SCORER PAGE ────────────────────────────────────────────
 function ScorerPage() {
   const [context, setContext] = useState(null);
@@ -1334,65 +1185,304 @@ function ScorerPage() {
   );
 }
 
-// ─── SERVICES PAGE ──────────────────────────────────────────
-function ServicesPage() {
+// ─── SERVICES & METHOD COMPONENTS ───────────────────────────
+
+// Jump Bar
+function ServicesMethodJumpBar() {
+  const linkStyle = {
+    fontFamily: FONTS.body,
+    fontSize: "0.95rem",
+    fontWeight: 800,
+    color: COLORS.navy,
+    textDecoration: "none",
+    padding: "10px 12px",
+    borderRadius: "6px",
+    border: `1px solid ${COLORS.border}`,
+    background: COLORS.white,
+  };
+
   return (
-    <div className="fade-in" style={{ maxWidth: "800px" }}>
-      <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 700, color: COLORS.navy, marginBottom: "16px" }}>
-        Services
-      </h1>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "36px" }}>
-        Operational support for PE funds and portfolio companies — from pre-close diligence through post-close stabilization to ongoing governance.
+    <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginBottom: "18px" }}>
+      <a href="#offers" style={linkStyle}>Offers</a>
+      <a href="#how-it-works" style={linkStyle}>How it works</a>
+      <a href="#rubric" style={linkStyle}>Rubric</a>
+      <a href="#worked-example" style={linkStyle}>Worked example</a>
+      <a href="#sequence" style={linkStyle}>100-day sequence</a>
+      <a href="#fit-check" style={linkStyle}>Fit check</a>
+    </div>
+  );
+}
+
+// Accordion
+function Accordion({ title, children, defaultOpen = false }) {
+  const [open, setOpen] = useState(defaultOpen);
+
+  return (
+    <Card>
+      <button
+        onClick={() => setOpen(!open)}
+        style={{
+          width: "100%",
+          textAlign: "left",
+          background: "transparent",
+          border: "none",
+          padding: "0",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "12px",
+        }}
+      >
+        <div>
+          <div style={{ fontFamily: FONTS.heading, fontSize: "1.25rem", fontWeight: 800, color: COLORS.navy }}>
+            {title}
+          </div>
+          <div style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.bodyMuted, marginTop: "6px" }}>
+            Click to {open ? "collapse" : "expand"}.
+          </div>
+        </div>
+        <div style={{ fontFamily: FONTS.body, fontSize: "1.25rem", fontWeight: 900, color: COLORS.navy }}>
+          {open ? "−" : "+"}
+        </div>
+      </button>
+
+      {open && <div style={{ marginTop: "16px" }}>{children}</div>}
+    </Card>
+  );
+}
+
+// MiniMetric
+function MiniMetric({ label, value, valueColor }) {
+  return (
+    <div style={{ border: `1px solid ${COLORS.border}`, borderRadius: "6px", padding: "12px", background: COLORS.white }}>
+      <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 900, color: COLORS.bodyMuted, marginBottom: "6px" }}>{label}</div>
+      <div style={{ fontFamily: FONTS.heading, fontSize: "1.25rem", fontWeight: 900, color: valueColor || COLORS.navy }}>{value}</div>
+    </div>
+  );
+}
+
+// Worked Example Accordion
+function WorkedExampleAccordion() {
+  return (
+    <Accordion title='Worked example: "No Change Advisory Board or Change Control Process"' defaultOpen={false}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "12px" }}>
+        <MiniMetric label="EBITDA Impact" value="Direct" valueColor="#8B1E1E" />
+        <MiniMetric label="Time to Proof" value="< 30 days" valueColor="#1F6F3A" />
+        <MiniMetric label="Execution Certainty" value="High" valueColor="#1F6F3A" />
+        <MiniMetric label="Exit Story Impact" value="Strengthens" valueColor="#1F6F3A" />
+        <MiniMetric label="Reversibility" value="Easily" valueColor="#1F6F3A" />
+        <MiniMetric label="Attention Load" value="Low" valueColor="#1F6F3A" />
+      </div>
+
+      <div style={{ marginTop: "16px", fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
+        <p style={{ marginTop: 0 }}>
+          <strong>Pre-close implication:</strong> Uncontrolled changes are a leading cause of production incidents. If the target has no change control,
+          flag it in the diligence memo — this is direct EBITDA drag hiding in incident correlation data.
+        </p>
+        <p style={{ marginBottom: 0 }}>
+          <strong>First 100 days implication:</strong> Install a lightweight CAB within the first two weeks. This is a high-certainty, low-attention, fast-proof intervention.
+          Change-incident correlation tracking starts producing board-ready data within 30 days.
+        </p>
+      </div>
+
+      <div style={{ marginTop: "16px", display: "flex", gap: "10px", flexWrap: "wrap" }}>
+        <button onClick={() => window.location.hash = "#offers"}
+          style={{ padding: "12px 18px", background: COLORS.navy, color: "white", borderRadius: "4px", border: "none", fontFamily: FONTS.body, fontWeight: 800, cursor: "pointer" }}>
+          See offers & pricing
+        </button>
+        <CTAButton text="15-Minute Fit Check" />
+      </div>
+    </Accordion>
+  );
+}
+
+// Services Samples Row
+function ServicesSamplesRow() {
+  const btn = {
+    padding: "12px 16px",
+    borderRadius: "6px",
+    border: `1px solid ${COLORS.border}`,
+    background: COLORS.white,
+    color: COLORS.navy,
+    textDecoration: "none",
+    fontFamily: FONTS.body,
+    fontWeight: 900,
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+  };
+
+  return (
+    <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "14px" }}>
+      <a href={PDF_SCORECARD} target="_blank" rel="noopener noreferrer" style={btn}>
+        📄 View Ops Diligence Scorecard (PDF)
+      </a>
+      <a href={PDF_100DAY} target="_blank" rel="noopener noreferrer" style={btn}>
+        📄 View 100-Day Stabilization Plan (PDF)
+      </a>
+    </div>
+  );
+}
+
+// Framework Why Friction Tight
+function FrameworkWhyFrictionTight() {
+  return (
+    <Card>
+      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.5rem", color: COLORS.navy, marginTop: 0 }}>
+        Operational friction matters in PE
+      </h2>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "860px" }}>
+        This is the evaluation method used in the Ops Diligence Report and 100-Day Stabilization Plan: diagnose friction, then prioritize interventions by
+        EBITDA impact, execution risk, and time to proof.
       </p>
 
-      {/* Pricing overview */}
-      <Card style={{ marginBottom: "32px", background: `${COLORS.navy}05` }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px" }}>
-          {[
-            { label: "Pre-Close", name: "Ops Diligence Report", price: "$15K+", time: "2–3 weeks", desc: "Standalone assessment" },
-            { label: "Full Lifecycle Bundle", name: "Diligence + 100-Day Plan", price: "$25–$35K", time: "2–3 weeks + 100 days", desc: "Recommended — seamless transition" },
-            { label: "Post-Close Only", name: "100-Day Stabilization", price: "$30–$40K", time: "100 days", desc: "No prior diligence" },
-          ].map((item, i) => (
-            <div key={i} style={{ padding: "16px", background: COLORS.white, borderRadius: "4px", border: `1px solid ${i === 1 ? COLORS.gold : COLORS.border}`, position: "relative" }}>
-              {i === 1 && <div style={{ position: "absolute", top: "-1px", left: 0, right: 0, height: "3px", background: COLORS.gold, borderRadius: "4px 4px 0 0" }} />}
-              <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.navy, letterSpacing: "0.5px", textTransform: "uppercase", fontWeight: 600 }}>{item.label}</span>
-              <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, fontWeight: 700, margin: "8px 0 4px" }}>{item.name}</div>
-              <div style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, fontWeight: 700, marginBottom: "4px" }}>{item.price}</div>
-              <div style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal }}>{item.time}</div>
-              <div style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, marginTop: "4px", fontStyle: "italic" }}>{item.desc}</div>
-            </div>
-          ))}
+      <div style={{ border: `1px solid ${COLORS.border}`, borderRadius: "6px", padding: "16px", background: "#FBFBFC" }}>
+        <div style={{ fontFamily: FONTS.heading, fontSize: "1.15rem", fontWeight: 900, color: COLORS.navy, marginBottom: "10px" }}>
+          Three reasons it shows up in outcomes
         </div>
-        <div style={{ marginTop: "20px", padding: "16px 20px", background: `${COLORS.gold}08`, borderRadius: "6px", border: `1px solid ${COLORS.gold}30` }}>
-          <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "10px" }}>
-            <strong style={{ color: COLORS.navy }}>Recommended:</strong> The bundle is the best path if you expect to close — diligence findings feed directly into the stabilization plan with no re-learning, compressing Day-1 readiness.
-          </p>
-          <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65 }}>
-            <strong style={{ color: COLORS.navy }}>Ongoing:</strong> All engagements can transition to a <strong style={{ color: COLORS.charcoal }}>Control Tower Retainer</strong> at <strong style={{ fontFamily: FONTS.body, color: COLORS.navy }}>$7.5K+/month</strong> — the weekly operating rhythm, escalation support, and compliance cadence that keeps the portfolio company from drifting back.
-          </p>
-        </div>
-        {/* Sample report CTA */}
-        <div style={{ marginTop: "12px", display: "flex", gap: "12px", flexWrap: "wrap" }}>
-          <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "8px 16px", background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: "4px", fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.navy, fontWeight: 500, textDecoration: "none", cursor: "pointer", transition: "all 0.15s" }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = COLORS.steel; }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = COLORS.border; }}>
-            <span style={{ fontSize: "0.9rem" }}>📄</span> Request a sample red-flag memo
-          </a>
-          <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "8px 16px", background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: "4px", fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.navy, fontWeight: 500, textDecoration: "none", cursor: "pointer", transition: "all 0.15s" }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = COLORS.steel; }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = COLORS.border; }}>
-            <span style={{ fontSize: "0.9rem" }}>📋</span> Request a sample 100-day board pack outline
-          </a>
-        </div>
-      </Card>
+        <ul style={{ margin: 0, paddingLeft: "18px", fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7 }}>
+          <li><strong>Leverage amplifies friction:</strong> disruption becomes covenant risk.</li>
+          <li><strong>Hold periods create urgency:</strong> months spent stabilizing compress the value creation window.</li>
+          <li><strong>Exit narratives rely on operational credibility:</strong> unresolved friction becomes a multiple discount.</li>
+        </ul>
+      </div>
+    </Card>
+  );
+}
 
-      {/* Process strip */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0", marginBottom: "32px", border: `1px solid ${COLORS.border}`, borderRadius: "6px", overflow: "hidden" }}>
-        {[
-          { step: "1", title: "Fit Check", desc: "15-minute call. Assess the situation, confirm scope, and determine fit.", icon: "📞" },
-          { step: "2", title: "Scoping + Data Request", desc: "Targeted data request. Fixed-fee proposal with timeline within 48 hours.", icon: "📋" },
-          { step: "3", title: "Deliverable", desc: "Risk-rated findings memo or phased stabilization plan. Board-ready from day one.", icon: "📊" },
-        ].map((item, i) => (
+// Framework Rubric Table
+function FrameworkRubricTable() {
+  return (
+    <Card>
+      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.5rem", color: COLORS.navy, marginTop: 0 }}>
+        The Friction Evaluation Rubric
+      </h2>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
+        Each lever is evaluated across six dimensions. The output is a prioritization logic you can use in diligence and in the first 100 days.
+      </p>
+
+      <div style={{ marginTop: "14px", overflowX: "auto" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: FONTS.body, fontSize: "0.8rem" }}>
+          <thead>
+            <tr style={{ borderBottom: `2px solid ${COLORS.navy}` }}>
+              {["Criterion", "What It Tests", "Scoring", "Action Trigger"].map(h => (
+                <th key={h} style={{ textAlign: "left", padding: "8px 10px", fontWeight: 600, color: COLORS.navy, fontSize: "0.9rem", letterSpacing: "0.3px" }}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              ["EBITDA Impact", "Directly erode earnings or margin?", "Direct / Indirect / Minimal", "Direct → flag in IC memo, quantify drag"],
+              ["Time to Proof", "How quickly can we show improvement?", "< 30 / 30–90 / 90+ days", "< 30 days → Day-1 quick win candidate"],
+              ["Execution Certainty", "How proven is the playbook?", "High / Medium / Low", "High → include in 100-day plan scope"],
+              ["Exit Story Impact", "Improve risk profile for next buyer?", "Strengthens / Neutral / None", "Strengthens → prioritize for exit prep"],
+              ["Reversibility", "Can we course-correct if it fails?", "Easily / Partially / One-way", "One-way → requires board approval"],
+              ["Attention Load", "Management bandwidth required?", "Low / Medium / High", "High → defer early in hold period"],
+            ].map(([c, w, s, a], i) => (
+              <tr key={i} style={{ borderBottom: `1px solid ${COLORS.border}` }}>
+                <td style={{ padding: "8px 10px", fontWeight: 600, color: COLORS.charcoal, whiteSpace: "nowrap", fontSize: "0.9rem" }}>{c}</td>
+                <td style={{ padding: "8px 10px", color: COLORS.charcoal, fontSize: "0.9rem" }}>{w}</td>
+                <td style={{ padding: "8px 10px", fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.charcoal }}>{s}</td>
+                <td style={{ padding: "8px 10px", fontSize: "0.85rem", color: COLORS.navy, fontWeight: 500 }}>{a}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginTop: "14px" }}>
+        Levers scoring well on <em>EBITDA Impact + Time to Proof + Low Attention Load</em> are highest-priority quick wins.
+        Strong <em>Exit Story Impact</em> with longer timelines are strategic investments.
+      </p>
+    </Card>
+  );
+}
+
+// Stabilization Sequence
+function StabilizationSequence() {
+  const phases = [
+    { phase: "Phase 1: Visibility", days: "Days 1–14", desc: "You can't fix what you can't see. Establish baseline visibility into what's actually happening — not what management says is happening.", items: ["Incident volume, severity, MTTR, recurrence rate", "Change frequency, failure rate, rollback frequency", "Vendor inventory, contract terms, concentration exposure", "Current compliance posture vs. stated posture"], deliverable: "Baseline assessment memo + operational risk heatmap" },
+    { phase: "Phase 2: Control", days: "Days 15–45", desc: "Install the minimum governance gates that prevent new damage from accumulating while you address existing debt.", items: ["Incident command structure with severity classification", "Change control process with risk classification", "Escalation paths with defined thresholds", "Access review and vendor oversight cadence"], deliverable: "CAB charter + severity policy + escalation matrix" },
+    { phase: "Phase 3: Cadence", days: "Days 45–100", desc: "Governance installed ad hoc decays without rhythm. Build the operating cadence that makes stability self-sustaining.", items: ["Weekly operating review with defined KPIs and thresholds", "Monthly board-ready reporting package", "Quarterly vendor scorecards and control testing", "Postmortem → recurrence prevention → backlog loop"], deliverable: "Board ops dashboard + first QBR pack + audit evidence index" },
+  ];
+
+  return (
+    <Card>
+      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.5rem", color: COLORS.navy, marginTop: 0 }}>
+        The stabilization sequence
+      </h2>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
+        Operational stabilization follows a consistent three-phase sequence: Visibility → Control → Cadence.
+      </p>
+
+      <div style={{ marginTop: "14px" }}>
+        {phases.map((p, i) => (
+          <Card key={i} style={{ borderLeft: `4px solid ${[COLORS.steel, COLORS.navy, COLORS.gold][i]}`, marginBottom: "12px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "8px" }}>
+              <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy }}>{p.phase}</h3>
+              <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, fontWeight: 600 }}>{p.days}</span>
+            </div>
+            <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "10px" }}>{p.desc}</p>
+            <ul style={{ paddingLeft: "20px", marginBottom: "10px" }}>
+              {p.items.map((item, j) => <li key={j} style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "2px" }}>{item}</li>)}
+            </ul>
+            <div style={{ padding: "8px 12px", background: COLORS.offWhite, borderRadius: "4px", display: "flex", alignItems: "center", gap: "8px" }}>
+              <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.navy, letterSpacing: "0.5px", textTransform: "uppercase", flexShrink: 0, fontWeight: 600 }}>Deliverable</span>
+              <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, fontWeight: 500 }}>{p.deliverable}</span>
+            </div>
+          </Card>
+        ))}
+      </div>
+
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginTop: "14px" }}>
+        After Day 100, the Control Tower Retainer maintains the cadence and prevents drift-back.
+      </p>
+    </Card>
+  );
+}
+
+// Services Pricing Ladder
+function ServicesPricingLadder() {
+  const items = [
+    { label: "Pre-Close", name: "Ops Diligence Report", price: "$15K+", time: "2–3 weeks", desc: "Standalone assessment" },
+    { label: "Full Lifecycle Bundle", name: "Diligence + 100-Day Plan", price: "$25–$35K", time: "2–3 weeks + 100 days", desc: "Recommended — seamless transition" },
+    { label: "Post-Close Only", name: "100-Day Stabilization", price: "$30–$40K", time: "100 days", desc: "No prior diligence" },
+  ];
+
+  return (
+    <Card style={{ marginBottom: "32px", background: `${COLORS.navy}05` }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px" }}>
+        {items.map((item, i) => (
+          <div key={i} style={{ padding: "16px", background: COLORS.white, borderRadius: "4px", border: `1px solid ${i === 1 ? COLORS.gold : COLORS.border}`, position: "relative" }}>
+            {i === 1 && <div style={{ position: "absolute", top: "-1px", left: 0, right: 0, height: "3px", background: COLORS.gold, borderRadius: "4px 4px 0 0" }} />}
+            <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.navy, letterSpacing: "0.5px", textTransform: "uppercase", fontWeight: 600 }}>{item.label}</span>
+            <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, fontWeight: 700, margin: "8px 0 4px" }}>{item.name}</div>
+            <div style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, fontWeight: 700, marginBottom: "4px" }}>{item.price}</div>
+            <div style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal }}>{item.time}</div>
+            <div style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, marginTop: "4px", fontStyle: "italic" }}>{item.desc}</div>
+          </div>
+        ))}
+      </div>
+    </Card>
+  );
+}
+
+// Services Steps
+function ServicesSteps() {
+  const steps = [
+    { step: "1", title: "Fit Check", desc: "15-minute call. Assess the situation, confirm scope, and determine fit.", icon: "📞" },
+    { step: "2", title: "Scoping + Data Request", desc: "Targeted data request. Fixed-fee proposal with timeline within 48 hours.", icon: "📋" },
+    { step: "3", title: "Deliverable", desc: "Risk-rated findings memo or phased stabilization plan. Board-ready from day one.", icon: "📊" },
+  ];
+
+  return (
+    <Card>
+      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.5rem", color: COLORS.navy, marginTop: 0, marginBottom: "14px" }}>
+        How it works
+      </h2>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0", border: `1px solid ${COLORS.border}`, borderRadius: "6px", overflow: "hidden" }}>
+        {steps.map((item, i) => (
           <div key={i} style={{ padding: "20px", background: COLORS.white, borderRight: i < 2 ? `1px solid ${COLORS.border}` : "none", position: "relative" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
               <span style={{ fontSize: "1rem" }}>{item.icon}</span>
@@ -1404,68 +1494,82 @@ function ServicesPage() {
           </div>
         ))}
       </div>
+    </Card>
+  );
+}
 
-      {/* Detailed offers */}
-      {[
-        { tag: "PRE-CLOSE", name: "Ops Diligence Report", tagline: "Operational clarity before you close.",
-          who: "PE funds, independent sponsors, and deal teams evaluating an acquisition target's operational risk profile.",
-          problem: "Financial and commercial diligence is rigorous. Operational diligence often isn't. Vendor dependencies, key-person risk, incident history, governance gaps, and compliance posture are either under-examined or assessed by generalists who don't know what to look for.",
-          deliverables: ["Operational risk assessment: friction points standard diligence misses", "Infrastructure and vendor dependency mapping with concentration risk analysis", "Key-person risk and organizational resilience evaluation", "Incident and change history analysis (pattern recognition, not just counts)", "Compliance posture gap assessment (stated vs. documented vs. practiced)", "Risk-rated findings memo for the investment committee, mapped to the value creation plan"],
-          excludes: ["Tools implementation or platform migration", "Vendor renegotiation or contract execution", "On-site presence (remote delivery; on-site available at additional cost)", "Legal, tax, or financial diligence"],
-          timeline: "2–3 weeks", price: "Starting at $15,000",
-          next: "If the deal closes, diligence findings feed directly into the 100-Day Stabilization Plan — no ramp-up, no re-learning. Bundle pricing ($25–$35K) rewards early engagement." },
-        { tag: "POST-CLOSE", name: "100-Day Stabilization Plan", tagline: "Install operational governance in the first 100 days.",
-          who: "PE-backed portfolio companies in the first 100 days post-close — or any time operational friction is dragging on performance.",
-          problem: "New ownership creates urgency. The board wants KPIs. The value creation plan assumes operational stability. But the portfolio company has no incident command, no change governance, no vendor oversight, and no board-ready reporting.",
-          deliverables: ["100-day operating plan mapped to the value creation thesis", "KPI cadence installation: board-ready operational metrics from Day 1", "Incident command and change governance baseline", "Vendor inventory, scorecard framework, and renewal calendar", "Quick wins: cost takeout and efficiency opportunities with measurable impact", "Audit-ready artifact pack: evidence index, control documentation, compliance baseline"],
-          excludes: ["Tools procurement or platform implementation", "Vendor contract negotiation or execution", "Full-time on-site staffing (weekly on-site cadence available at additional cost)", "Hiring, HR, or organizational restructuring"],
-          timeline: "100 days (Visibility → Control → Cadence)", price: "Starting at $25,000 bundled with Diligence Report. Standalone: starting at $30,000.",
-          next: "Most engagements transition to a Control Tower Retainer — maintaining the operating cadence and ensuring the portfolio company doesn't drift back." },
-        { tag: "ONGOING", name: "Control Tower Retainer", tagline: "Portco control tower for stabilization and board reporting.",
-          who: "Portfolio companies that need ongoing operational leadership without a full-time hire.",
-          problem: "Governance installed without ongoing ownership decays. The operating cadence slips. Postmortems stop. Vendor scorecards go stale. The portfolio company quietly drifts back to the pre-intervention baseline.",
-          deliverables: ["Weekly operating review + KPI reporting to management and the board", "Incident/problem management: postmortems, recurrence prevention, escalation support", "Change governance: CAB facilitation, risk classification, deployment oversight", "Vendor control: scorecards, renewal management, SLA hygiene", "Audit & compliance cadence: evidence trails, quarterly control testing", "Ongoing advisory: prioritization, risk trade-offs, operational decisions"],
-          excludes: ["Full-time embedded headcount", "Tools implementation or engineering execution", "Vendor contract negotiation on your behalf"],
-          timeline: "Weekly operating rhythm + on-call escalation", price: "Starting at $7,500/month", next: null },
-      ].map((offer, i) => (
-        <Card key={i} style={{ marginBottom: "24px", borderLeft: `4px solid ${[COLORS.steel, COLORS.navy, COLORS.gold][i]}` }}>
-          <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.navy, letterSpacing: "0.5px", textTransform: "uppercase", fontWeight: 600 }}>{offer.tag}</span>
-          <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.navy, margin: "8px 0 4px" }}>{offer.name}</h3>
-          <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, fontStyle: "italic", marginBottom: "16px" }}>{offer.tagline}</p>
-          <h4 style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, color: COLORS.navy, marginBottom: "4px", letterSpacing: "0.3px", textTransform: "uppercase" }}>Who it's for</h4>
-          <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "12px" }}>{offer.who}</p>
-          <h4 style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, color: COLORS.navy, marginBottom: "4px", letterSpacing: "0.3px", textTransform: "uppercase" }}>The problem</h4>
-          <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "12px" }}>{offer.problem}</p>
-          <h4 style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, color: COLORS.navy, marginBottom: "4px", letterSpacing: "0.3px", textTransform: "uppercase" }}>What you get</h4>
-          <ul style={{ paddingLeft: "20px", marginBottom: "12px" }}>
-            {offer.deliverables.map((d, j) => <li key={j} style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "4px" }}>{d}</li>)}
-          </ul>
-          <h4 style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, color: COLORS.navy, marginBottom: "4px", letterSpacing: "0.3px", textTransform: "uppercase" }}>Does not include</h4>
-          <ul style={{ paddingLeft: "20px", marginBottom: "16px" }}>
-            {offer.excludes.map((ex, j) => <li key={j} style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "2px" }}>{ex}</li>)}
-          </ul>
-          <div style={{ display: "flex", gap: "24px", flexWrap: "wrap", padding: "12px 0", borderTop: `1px solid ${COLORS.border}` }}>
-            <div>
-              <span style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.navy, textTransform: "uppercase", letterSpacing: "0.5px", fontWeight: 600 }}>Timeline</span>
-              <div style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, fontWeight: 500 }}>{offer.timeline}</div>
-            </div>
-            <div>
-              <span style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.navy, textTransform: "uppercase", letterSpacing: "0.5px", fontWeight: 600 }}>Investment</span>
-              <div style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, fontWeight: 600 }}>{offer.price}</div>
-            </div>
-          </div>
-          {offer.next && (
-            <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, fontStyle: "italic", marginTop: "8px" }}>{offer.next}</p>
-          )}
-        </Card>
-      ))}
-
-      <Card style={{ textAlign: "center", background: `${COLORS.navy}05`, padding: "32px" }}>
-        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "16px" }}>
-          Not sure where to start? Book a 15-minute fit check. We'll assess the portfolio company's situation, identify the highest-priority friction points, and scope the right engagement — proposal within 24 hours.
+// Services Recommended Ongoing Tight
+function ServicesRecommendedOngoingTight() {
+  return (
+    <Card style={{ marginTop: "14px", background: "#FBF7EE", border: `1px solid ${COLORS.border}` }}>
+      <div style={{ fontFamily: FONTS.body, fontSize: "1.02rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
+        <p style={{ marginTop: 0 }}>
+          <strong>Recommended:</strong> Choose the bundle if you expect to close — diligence findings feed directly into Day-1 priorities with no re-learning.
         </p>
-        <CTAButton text="15-Minute Fit Check" />
-      </Card>
+        <p style={{ marginBottom: 0 }}>
+          <strong>Ongoing:</strong> Transition to the Control Tower Retainer to maintain cadence and prevent drift-back.
+        </p>
+      </div>
+    </Card>
+  );
+}
+
+// Fit Check CTA
+function FitCheckCTA() {
+  return (
+    <Card style={{ textAlign: "center" }}>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "820px", margin: "0 auto 16px" }}>
+        Not sure where to start? Book a 15-minute fit check. We'll assess the situation, identify the highest-priority friction points, and scope the right engagement.
+      </p>
+      <CTAButton text="15-Minute Fit Check" />
+    </Card>
+  );
+}
+
+// ─── SERVICES PAGE ──────────────────────────────────────────
+function ServicesPage({ setPage }) {
+  return (
+    <div style={{ maxWidth: "980px", margin: "0 auto", padding: "48px 24px" }}>
+      <ServicesMethodJumpBar />
+
+      <div id="top">
+        <h1 style={{ fontFamily: FONTS.heading, fontSize: "2.2rem", color: COLORS.navy, marginBottom: "12px" }}>
+          Services
+        </h1>
+        <p style={{ fontFamily: FONTS.body, fontSize: "1.1rem", color: COLORS.charcoal, lineHeight: 1.7, marginTop: 0, marginBottom: "22px", maxWidth: "860px" }}>
+          Operational support for PE funds and portfolio companies — from pre-close diligence through post-close stabilization to ongoing governance.
+        </p>
+      </div>
+
+      <div id="offers">
+        <ServicesPricingLadder />
+        <ServicesRecommendedOngoingTight />
+        <ServicesSamplesRow />
+      </div>
+
+      <div id="how-it-works" style={{ marginTop: "28px" }}>
+        <ServicesSteps />
+      </div>
+
+      <div id="why-friction" style={{ marginTop: "28px" }}>
+        <FrameworkWhyFrictionTight />
+      </div>
+
+      <div id="rubric" style={{ marginTop: "28px" }}>
+        <FrameworkRubricTable />
+      </div>
+
+      <div id="worked-example" style={{ marginTop: "28px" }}>
+        <WorkedExampleAccordion />
+      </div>
+
+      <div id="sequence" style={{ marginTop: "28px" }}>
+        <StabilizationSequence />
+      </div>
+
+      <div id="fit-check" style={{ marginTop: "28px" }}>
+        <FitCheckCTA />
+      </div>
     </div>
   );
 }
@@ -1553,8 +1657,7 @@ export default function App() {
 
   const pages = {
     levers: <LeverExplorer setPage={setPage} />,
-    services: <ServicesPage />,
-    framework: <FrameworkPage setPage={setPage} />,
+    services: <ServicesPage setPage={setPage} />,
     scorer: <ScorerPage />,
     about: <AboutPage />,
   };
