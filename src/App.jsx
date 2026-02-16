@@ -517,11 +517,11 @@ function Section({
 }) {
   const containerStyle = {
     background: background || COLORS.white,
-    border: `1.5px solid ${COLORS.border}`,  // More visible border
+    border: `2px solid ${COLORS.steel}`,  // Steel Grey brand color - VISIBLE
     borderRadius: "8px",
     padding: noPadding ? "0" : "32px",
     marginBottom: "24px",
-    boxShadow: "0 2px 8px rgba(0,0,0,0.08)"  // More visible shadow
+    boxShadow: "0 4px 12px rgba(67, 97, 125, 0.15)"  // Steel shadow - VISIBLE
   };
 
   const bodyTextStyle = {
@@ -1033,13 +1033,12 @@ function MiniCases() {
   const p = { fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0 };
 
   return (
-    <div style={{ marginBottom: "22px" }}>
-      <SectionTitle>Proof in the Format PE Expects</SectionTitle>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "820px", marginBottom: "14px" }}>
+    <Section title="Proof in the Format PE Expects" noCTA>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "820px", marginBottom: "20px" }}>
         Example outcomes (anonymized). The point: install visibility, control, and cadence—then keep it durable.
       </p>
 
-      <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
+      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
         <div style={box}>
           <h3 style={h}>Incident instability</h3>
           <p style={p}><strong>Situation:</strong> Recurring incidents with unclear ownership and inconsistent escalation.</p>
@@ -1061,7 +1060,7 @@ function MiniCases() {
           <p style={{ ...p, marginTop: "8px" }}><strong>Result:</strong> Predictable operating rhythm and faster issue detection.</p>
         </div>
       </div>
-    </div>
+    </Section>
   );
 }
 
