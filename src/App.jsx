@@ -362,10 +362,130 @@ function CTAButton({ text, small, variant, style: extraStyle }) {
   );
 }
 
+// Standardized section heading - consistent across all pages
 function SectionTitle({ children, sub }) {
   return (
-    <div style={{ marginBottom: sub ? "14px" : "36px" }}>
-      <h2 style={{ fontFamily: FONTS.heading, fontSize: sub ? "1.1rem" : "1.5rem", fontWeight: 700, color: COLORS.navy, lineHeight: 1.3 }}>{children}</h2>
+    <div style={{ marginBottom: sub ? "16px" : "32px" }}>
+      <h2 style={{
+        fontFamily: FONTS.heading,
+        fontSize: sub ? "1.25rem" : "1.75rem",  // Standardized: 1.75rem for main, 1.25rem for sub
+        fontWeight: 700,
+        color: COLORS.navy,
+        lineHeight: 1.3,
+        marginTop: 0
+      }}>
+        {children}
+      </h2>
+    </div>
+  );
+}
+
+// Standardized two-button vertical layout
+function ButtonPair({
+  primaryText = "15-Minute Fit Check",
+  primaryAction,
+  secondaryText,
+  secondaryAction,
+  primaryLink = CALENDLY,
+  secondaryLink,
+  centered = false
+}) {
+  return (
+    <div style={{
+      display: "flex",
+      flexDirection: "column",  // VERTICAL stacking
+      gap: "12px",
+      alignItems: centered ? "center" : "stretch",
+      maxWidth: centered ? "320px" : "100%",
+      margin: centered ? "0 auto" : "0"
+    }}>
+      {/* Primary Gold Button */}
+      {primaryLink ? (
+        <a href={primaryLink} target="_blank" rel="noopener noreferrer"
+           style={{
+             display: "block",
+             padding: "14px 24px",
+             background: COLORS.gold,
+             color: "white",
+             borderRadius: "6px",
+             textDecoration: "none",
+             fontFamily: FONTS.body,
+             fontSize: "1rem",
+             fontWeight: 600,
+             textAlign: "center",
+             transition: "all 0.2s",
+             border: "none"
+           }}
+           onMouseEnter={e => { e.target.style.background = "#A07D2E"; }}
+           onMouseLeave={e => { e.target.style.background = COLORS.gold; }}>
+          {primaryText}
+        </a>
+      ) : (
+        <button onClick={primaryAction}
+           style={{
+             display: "block",
+             padding: "14px 24px",
+             background: COLORS.gold,
+             color: "white",
+             borderRadius: "6px",
+             fontFamily: FONTS.body,
+             fontSize: "1rem",
+             fontWeight: 600,
+             textAlign: "center",
+             transition: "all 0.2s",
+             border: "none",
+             cursor: "pointer"
+           }}
+           onMouseEnter={e => { e.target.style.background = "#A07D2E"; }}
+           onMouseLeave={e => { e.target.style.background = COLORS.gold; }}>
+          {primaryText}
+        </button>
+      )}
+
+      {/* Secondary Navy Border Button */}
+      {(secondaryText || secondaryAction || secondaryLink) && (
+        secondaryLink ? (
+          <a href={secondaryLink} target="_blank" rel="noopener noreferrer"
+             style={{
+               display: "block",
+               padding: "14px 24px",
+               background: "transparent",
+               color: COLORS.navy,
+               borderRadius: "6px",
+               textDecoration: "none",
+               fontFamily: FONTS.body,
+               fontSize: "1rem",
+               fontWeight: 600,
+               textAlign: "center",
+               border: `2px solid ${COLORS.navy}`,
+               transition: "all 0.2s"
+             }}
+             onMouseEnter={e => { e.target.style.background = `${COLORS.navy}08`; }}
+             onMouseLeave={e => { e.target.style.background = "transparent"; }}>
+            {secondaryText}
+          </a>
+        ) : (
+          <button onClick={secondaryAction}
+             style={{
+               display: "block",
+               padding: "14px 24px",
+               background: "transparent",
+               color: COLORS.navy,
+               borderRadius: "6px",
+               fontFamily: FONTS.body,
+               fontSize: "1rem",
+               fontWeight: 600,
+               textAlign: "center",
+               border: `2px solid ${COLORS.navy}`,
+               transition: "all 0.2s",
+               cursor: "pointer"
+             }}
+             onMouseEnter={e => { e.target.style.background = `${COLORS.navy}08`; }}
+             onMouseLeave={e => { e.target.style.background = "transparent"; }}>
+            {secondaryText}
+          </button>
+        )
+      )}
     </div>
   );
 }
@@ -555,30 +675,20 @@ function DomainLegend() {
 function ProofStrip() {
   return (
     <Card style={{ border: `1px solid ${COLORS.border}`, marginBottom: "18px" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "18px", flexWrap: "wrap" }}>
-        <div style={{ flex: "1 1 420px" }}>
-          <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.15rem", color: COLORS.navy, margin: 0, marginBottom: "8px" }}>
-            Want the red-flag memo format?
-          </h3>
-          <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0 }}>
-            See the exact structure of the Ops Diligence Scorecard: severity-rated findings, PE impact, and a stabilization priority matrix.
-          </p>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.bodyMuted, marginTop: "10px", marginBottom: 0 }}>
-            Samples are anonymized/fictional and provided for format demonstration only.
-          </p>
-        </div>
-
-        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-          <a href={SAMPLE_SCORECARD_PDF} target="_blank" rel="noopener noreferrer"
-             style={{ padding: "12px 18px", background: COLORS.navy, color: "white", borderRadius: "4px", textDecoration: "none", fontFamily: FONTS.body, fontWeight: 600 }}>
-            View Sample Scorecard (PDF)
-          </a>
-          <a href={SAMPLE_100DAY_PDF} target="_blank" rel="noopener noreferrer"
-             style={{ padding: "12px 18px", background: "transparent", color: COLORS.navy, borderRadius: "4px", textDecoration: "none", fontFamily: FONTS.body, fontWeight: 600, border: `2px solid ${COLORS.navy}` }}>
-            View 100-Day Plan (PDF)
-          </a>
-        </div>
-      </div>
+      <SectionTitle sub>Want the red-flag memo format?</SectionTitle>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "10px" }}>
+        See the exact structure of the Ops Diligence Scorecard: severity-rated findings, PE impact, and a stabilization priority matrix.
+      </p>
+      <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.bodyMuted, marginBottom: "24px" }}>
+        Samples are anonymized/fictional and provided for format demonstration only.
+      </p>
+      <ButtonPair
+        primaryText="View Sample Scorecard (PDF)"
+        primaryLink={SAMPLE_SCORECARD_PDF}
+        secondaryText="View 100-Day Plan (PDF)"
+        secondaryLink={SAMPLE_100DAY_PDF}
+        centered={true}
+      />
       <SecondaryCaptureRow contextLabel="Ops diligence / stabilization" />
     </Card>
   );
@@ -602,16 +712,14 @@ function OfferCards({ setPage }) {
 
   return (
     <div style={{ marginBottom: "22px" }}>
-      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.35rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>
-        Services & Pricing (fast orientation)
-      </h2>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1.02rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "14px", maxWidth: "760px" }}>
+      <SectionTitle>Services & Pricing (fast orientation)</SectionTitle>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1.02rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "20px", maxWidth: "760px" }}>
         Choose the track that matches your deal lifecycle. Each deliverable is designed to be decision-useful for PE: severity-rated findings, PE impact, and a pragmatic Day-1 critical path.
       </p>
 
       <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
         <div style={box}>
-          <h3 style={title}>Ops Diligence Report (Pre-Close)</h3>
+          <SectionTitle sub>Ops Diligence Report (Pre-Close)</SectionTitle>
           <div style={tag}>Starting at $15,000 · 2–3 weeks</div>
           <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
             <li style={li}>Risk-rated red flags with severity + PE impact</li>
@@ -621,7 +729,7 @@ function OfferCards({ setPage }) {
         </div>
 
         <div style={box}>
-          <h3 style={title}>Bundle (Recommended)</h3>
+          <SectionTitle sub>Bundle (Recommended)</SectionTitle>
           <div style={tag}>$25,000–$35,000 · diligence + 100 days</div>
           <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
             <li style={li}>Diligence findings roll straight into execution</li>
@@ -631,7 +739,7 @@ function OfferCards({ setPage }) {
         </div>
 
         <div style={box}>
-          <h3 style={title}>Control Tower Retainer (Ongoing)</h3>
+          <SectionTitle sub>Control Tower Retainer (Ongoing)</SectionTitle>
           <div style={tag}>Starting at $7,500/month · ongoing</div>
           <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
             <li style={li}>Weekly operating review + board-ready KPI pack</li>
@@ -641,12 +749,13 @@ function OfferCards({ setPage }) {
         </div>
       </div>
 
-      <div style={{ display: "flex", gap: "12px", marginTop: "14px", flexWrap: "wrap" }}>
-        <CTAButton text="15-Minute Fit Check" />
-        <button onClick={() => setPage("services")}
-          style={{ padding: "12px 18px", background: "transparent", color: COLORS.navy, borderRadius: "4px", border: `2px solid ${COLORS.navy}`, fontFamily: FONTS.body, fontWeight: 700, cursor: "pointer" }}>
-          View Full Services & Details
-        </button>
+      <div style={{ marginTop: "20px", maxWidth: "320px", margin: "20px auto 0" }}>
+        <ButtonPair
+          primaryText="15-Minute Fit Check"
+          secondaryText="View Full Services & Details"
+          secondaryAction={() => setPage("services")}
+          centered={true}
+        />
       </div>
     </div>
   );
@@ -659,9 +768,7 @@ function HowItWorks() {
 
   return (
     <Card style={{ marginBottom: "26px" }}>
-      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.25rem", fontWeight: 700, color: COLORS.navy, marginTop: 0, marginBottom: "10px" }}>
-        How it works
-      </h2>
+      <SectionTitle sub>How it works</SectionTitle>
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "14px" }}>
         <div>
@@ -686,66 +793,56 @@ function ChooseSituation({ setPage }) {
   const box = {
     border: `1px solid ${COLORS.border}`,
     borderRadius: "6px",
-    padding: "18px",
+    padding: "24px",
     background: COLORS.white,
     boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
     flex: "1 1 340px",
     minWidth: "300px",
   };
 
-  const h = { fontFamily: FONTS.heading, fontSize: "1.15rem", color: COLORS.navy, margin: 0, marginBottom: "8px" };
   const p = { fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, margin: 0 };
-
   const li = { marginBottom: "8px", lineHeight: 1.55 };
 
   return (
     <div style={{ marginBottom: "22px" }}>
-      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.35rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>
-        Choose your situation
-      </h2>
-      <p style={{ ...p, maxWidth: "820px", marginBottom: "14px" }}>
+      <SectionTitle>Choose your situation</SectionTitle>
+      <p style={{ ...p, maxWidth: "820px", marginBottom: "20px" }}>
         Pick the track that matches where you are in the lifecycle. Both paths deliver risk-rated findings, PE impact framing, and a clear Day-1 critical path.
       </p>
 
-      <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
+      <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
         <div style={box}>
-          <h3 style={h}>Evaluating a target (pre-close diligence)</h3>
-          <p style={{ ...p, marginBottom: "10px" }}>
+          <SectionTitle sub>Evaluating a target (pre-close diligence)</SectionTitle>
+          <p style={{ ...p, marginBottom: "12px" }}>
             Decision-useful ops diligence designed for the IC: severity-rated red flags + evidence requests.
           </p>
-          <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
+          <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", marginBottom: "20px" }}>
             <li style={li}>Risk-rated findings memo (IC-ready)</li>
             <li style={li}>Evidence requests + diligence questions</li>
             <li style={li}>Day-1 → Day-100 stabilization priorities if you close</li>
           </ul>
-
-          <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginTop: "14px" }}>
-            <CTAButton text="15-Minute Fit Check" />
-            <button onClick={() => setPage("scorer")}
-              style={{ padding: "12px 18px", background: "transparent", color: COLORS.navy, borderRadius: "4px", border: `2px solid ${COLORS.navy}`, fontFamily: FONTS.body, fontWeight: 700, cursor: "pointer" }}>
-              Use the Scorer
-            </button>
-          </div>
+          <ButtonPair
+            primaryText="15-Minute Fit Check"
+            secondaryText="Use the Scorer"
+            secondaryAction={() => setPage("scorer")}
+          />
         </div>
 
         <div style={box}>
-          <h3 style={h}>First 100 days post-close</h3>
-          <p style={{ ...p, marginBottom: "10px" }}>
+          <SectionTitle sub>First 100 days post-close</SectionTitle>
+          <p style={{ ...p, marginBottom: "12px" }}>
             Install a governance baseline so value creation isn't blocked by instability.
           </p>
-          <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
+          <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", marginBottom: "20px" }}>
             <li style={li}>Incident command (severity model, escalation, postmortems)</li>
             <li style={li}>Change governance (CAB-lite, risk classification, rollback discipline)</li>
             <li style={li}>KPI cadence (weekly operating reviews + board-ready pack)</li>
           </ul>
-
-          <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginTop: "14px" }}>
-            <CTAButton text="15-Minute Fit Check" />
-            <a href={SAMPLE_100DAY_PDF} target="_blank" rel="noopener noreferrer"
-              style={{ padding: "12px 18px", background: "transparent", color: COLORS.navy, borderRadius: "4px", border: `2px solid ${COLORS.navy}`, textDecoration: "none", fontFamily: FONTS.body, fontWeight: 700 }}>
-              View 100-Day Plan (PDF)
-            </a>
-          </div>
+          <ButtonPair
+            primaryText="15-Minute Fit Check"
+            secondaryText="View 100-Day Plan (PDF)"
+            secondaryLink={SAMPLE_100DAY_PDF}
+          />
         </div>
       </div>
     </div>
@@ -756,9 +853,7 @@ function ChooseSituation({ setPage }) {
 function DealImplications() {
   return (
     <Card style={{ marginBottom: "22px" }}>
-      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.25rem", fontWeight: 700, color: COLORS.navy, marginTop: 0, marginBottom: "10px" }}>
-        Deal implications we surface
-      </h2>
+      <SectionTitle sub>Deal implications we surface</SectionTitle>
       <ul style={{ margin: 0, paddingLeft: "18px", fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65 }}>
         <li>Operational fragility that belongs in the IC memo and value creation plan (severity-rated).</li>
         <li>Vendor concentration risk and change-of-control clauses that become material post-close constraints.</li>
@@ -773,9 +868,7 @@ function DealImplications() {
 function First14Days() {
   return (
     <Card style={{ marginBottom: "22px" }}>
-      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.25rem", fontWeight: 700, color: COLORS.navy, marginTop: 0, marginBottom: "10px" }}>
-        The first 14 days post-close
-      </h2>
+      <SectionTitle sub>The first 14 days post-close</SectionTitle>
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginTop: 0 }}>
         The Day-1 critical path is simple: stop new damage, then start measuring.
       </p>
@@ -805,9 +898,7 @@ function MiniCases() {
 
   return (
     <div style={{ marginBottom: "22px" }}>
-      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.25rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>
-        Proof in the format PE expects
-      </h2>
+      <SectionTitle>Proof in the format PE expects</SectionTitle>
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "820px", marginBottom: "14px" }}>
         Example outcomes (anonymized). The point: install visibility, control, and cadence—then keep it durable.
       </p>
@@ -845,9 +936,7 @@ function FAQBlock() {
 
   return (
     <Card style={{ marginBottom: "26px" }}>
-      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.25rem", fontWeight: 700, color: COLORS.navy, marginTop: 0, marginBottom: "10px" }}>
-        FAQ
-      </h2>
+      <SectionTitle sub>FAQ</SectionTitle>
 
       <div>
         <h3 style={q}>Do you replace the operating team?</h3>
@@ -1018,17 +1107,15 @@ function LeverExplorer({ setPage }) {
 
       {/* Bottom CTA */}
       <Card style={{ textAlign: "center", marginTop: "24px", background: `${COLORS.navy}05`, padding: "28px" }}>
-        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, marginBottom: "16px" }}>
+        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, marginBottom: "20px" }}>
           Recognizing these patterns in a target or portfolio company?
         </p>
-        <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
-          <CTAButton text="15-Minute Fit Check" />
-          <button onClick={() => setPage("services")} style={{ display: "inline-block", padding: "12px 28px", background: "transparent", color: COLORS.navy, fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, borderRadius: "4px", border: `2px solid ${COLORS.navy}`, cursor: "pointer", transition: "all 0.2s" }}
-            onMouseEnter={e => { e.target.style.background = `${COLORS.navy}08`; }}
-            onMouseLeave={e => { e.target.style.background = "transparent"; }}>
-            View Services & Pricing
-          </button>
-        </div>
+        <ButtonPair
+          primaryText="15-Minute Fit Check"
+          secondaryText="View Services & Pricing"
+          secondaryAction={() => setPage("services")}
+          centered={true}
+        />
       </Card>
     </div>
   );
@@ -1346,9 +1433,7 @@ function ServicesSamplesRow() {
 function FrameworkWhyFrictionTight() {
   return (
     <Card>
-      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.5rem", color: COLORS.navy, marginTop: 0 }}>
-        Operational friction matters in PE
-      </h2>
+      <SectionTitle>Operational friction matters in PE</SectionTitle>
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "860px" }}>
         This is the evaluation method used in the Ops Diligence Report and 100-Day Stabilization Plan: diagnose friction, then prioritize interventions by
         EBITDA impact, execution risk, and time to proof.
@@ -1372,9 +1457,7 @@ function FrameworkWhyFrictionTight() {
 function FrameworkRubricTable() {
   return (
     <Card>
-      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.5rem", color: COLORS.navy, marginTop: 0 }}>
-        The Friction Evaluation Rubric
-      </h2>
+      <SectionTitle>The Friction Evaluation Rubric</SectionTitle>
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
         Each lever is evaluated across six dimensions. The output is a prioritization logic you can use in diligence and in the first 100 days.
       </p>
@@ -1539,28 +1622,15 @@ function FitCheckCTA() {
 
   return (
     <Card style={{ textAlign: "center" }}>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "820px", margin: "0 auto 16px" }}>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "820px", margin: "0 auto 20px" }}>
         Not sure where to start? Book a 15-minute fit check. We'll assess the situation, identify the highest-priority friction points, and scope the right engagement.
       </p>
-
-      <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
-        <CTAButton text="15-Minute Fit Check" />
-        <a
-          href={mailtoHref(subject, body)}
-          style={{
-            padding: "12px 18px",
-            background: "transparent",
-            color: COLORS.navy,
-            borderRadius: "4px",
-            border: `2px solid ${COLORS.navy}`,
-            fontFamily: FONTS.body,
-            fontWeight: 900,
-            textDecoration: "none",
-          }}
-        >
-          Email me instead
-        </a>
-      </div>
+      <ButtonPair
+        primaryText="15-Minute Fit Check"
+        secondaryText="Email me instead"
+        secondaryLink={mailtoHref(subject, body)}
+        centered={true}
+      />
     </Card>
   );
 }
