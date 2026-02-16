@@ -1286,59 +1286,74 @@ function HowItWorks() {
 
 // ─── CHOOSE SITUATION ───────────────────────────────────────
 function ChooseSituation({ setPage }) {
-  const box = {
-    border: `1px solid ${COLORS.border}`,
-    borderRadius: "6px",
-    padding: "24px",
-    background: COLORS.white,
-    boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
-    flex: "1 1 340px",
-    minWidth: "300px",
+  const leftSide = {
+    title: "Evaluating a Target",
+    description: "Decision-useful ops diligence designed for the IC: severity-rated red flags + evidence requests.",
+    items: [
+      "Risk-rated findings memo (IC-ready)",
+      "Evidence requests + diligence questions",
+      "Day-1 → Day-100 stabilization priorities if you close"
+    ]
   };
 
-  const p = { fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, margin: 0 };
-  const li = { marginBottom: "8px", lineHeight: 1.55 };
+  const rightSide = {
+    title: "First 100 Days Post-Close",
+    description: "Install a governance baseline so value creation isn't blocked by instability.",
+    items: [
+      "Incident command (severity model, escalation, postmortems)",
+      "Change governance (CAB-lite, risk classification, rollback discipline)",
+      "KPI cadence (weekly operating reviews + board-ready pack)"
+    ],
+    highlight: "Governance installed → value creation unlocked"
+  };
 
   return (
     <Section title="Choose Your Situation" noCTA>
-      <p style={{ ...p, maxWidth: "820px", marginBottom: "24px", lineHeight: 1.7 }}>
-        Pick the track that matches where you are in the lifecycle. Both paths deliver risk-rated findings, PE impact framing, and a clear Day-1 critical path.
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "820px", marginBottom: "24px" }}>
+        Pick the track that matches where you are in the lifecycle. Both paths deliver <strong>risk-rated findings, PE impact framing, and a clear Day-1 critical path</strong>.
       </p>
 
-      <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
-        <div style={box}>
-          <SectionTitle sub>Evaluating a Target (Pre-Close Diligence)</SectionTitle>
-          <p style={{ ...p, marginBottom: "12px", lineHeight: 1.7 }}>
-            Decision-useful ops diligence designed for the IC: severity-rated red flags + evidence requests.
-          </p>
-          <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", marginBottom: "20px" }}>
-            <li style={li}>Risk-rated findings memo (IC-ready)</li>
-            <li style={li}>Evidence requests + diligence questions</li>
-            <li style={li}>Day-1 → Day-100 stabilization priorities if you close</li>
-          </ul>
-          <ButtonPair
-            primaryText="15-Minute Fit Check"
-            secondaryText="Use the Scorer"
-            secondaryAction={() => setPage("scorer")}
-          />
-        </div>
+      <SplitContrast leftSide={leftSide} rightSide={rightSide} />
 
-        <div style={box}>
-          <SectionTitle sub>First 100 Days Post-Close</SectionTitle>
-          <p style={{ ...p, marginBottom: "12px", lineHeight: 1.7 }}>
-            Install a governance baseline so value creation isn't blocked by instability.
-          </p>
-          <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", marginBottom: "20px" }}>
-            <li style={li}>Incident command (severity model, escalation, postmortems)</li>
-            <li style={li}>Change governance (CAB-lite, risk classification, rollback discipline)</li>
-            <li style={li}>KPI cadence (weekly operating reviews + board-ready pack)</li>
-          </ul>
-          <ButtonPair
-            primaryText="15-Minute Fit Check"
-            secondaryText="View 100-Day Plan (PDF)"
-            secondaryLink={SAMPLE_100DAY_PDF}
-          />
-        </div>
+      <div style={{ display: "flex", gap: "16px", marginTop: "24px", justifyContent: "center", flexWrap: "wrap" }}>
+        <CTAButton text="15-Minute Fit Check" />
+        <button
+          onClick={() => setPage("scorer")}
+          style={{
+            fontFamily: FONTS.body,
+            fontSize: "1rem",
+            fontWeight: 600,
+            color: COLORS.navy,
+            background: COLORS.white,
+            border: `2px solid ${COLORS.navy}`,
+            borderRadius: "6px",
+            padding: "12px 28px",
+            cursor: "pointer",
+            transition: "all 0.2s ease"
+          }}
+        >
+          Use the Scorer
+        </button>
+        <a
+          href={SAMPLE_100DAY_PDF}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            fontFamily: FONTS.body,
+            fontSize: "1rem",
+            fontWeight: 600,
+            color: COLORS.navy,
+            background: COLORS.white,
+            border: `2px solid ${COLORS.navy}`,
+            borderRadius: "6px",
+            padding: "12px 28px",
+            textDecoration: "none",
+            display: "inline-block",
+            transition: "all 0.2s ease"
+          }}
+        >
+          View 100-Day Plan (PDF)
+        </a>
       </div>
     </Section>
   );
@@ -1428,46 +1443,50 @@ function First14Days() {
 
 // ─── MINI CASES ─────────────────────────────────────────────
 function MiniCases() {
-  const box = {
-    border: `1px solid ${COLORS.border}`,
-    borderRadius: "6px",
-    padding: "16px",
-    background: COLORS.white,
-    boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
-    flex: "1 1 280px",
-    minWidth: "260px",
-  };
-
-  const h = { fontFamily: FONTS.heading, fontSize: "1.05rem", color: COLORS.navy, margin: 0, marginBottom: "8px" };
-  const p = { fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0 };
+  const cases = [
+    {
+      title: "Incident instability",
+      situation: "Recurring incidents with unclear ownership and inconsistent escalation.",
+      delivered: "Severity model, incident command roles, escalation paths, postmortem discipline.",
+      result: "Faster containment, fewer repeat incidents, clearer executive visibility."
+    },
+    {
+      title: "Change-driven outages",
+      situation: "Releases correlated with incidents; no consistent controls.",
+      delivered: "CAB-lite, risk classification, rollback readiness, change-incident correlation tracking.",
+      result: "Reduced change failure rate and improved release confidence."
+    },
+    {
+      title: "Board reporting / KPI ambiguity",
+      situation: "KPIs undefined or ad hoc; board reporting inconsistent and lagging.",
+      delivered: "KPI library + thresholds, weekly cadence, executive dashboard, board-ready pack structure.",
+      result: "Predictable operating rhythm and faster issue detection."
+    }
+  ];
 
   return (
-    <Section title="Proof in the Format PE Expects" noCTA>
+    <Section title="Proof in the Format PE Expects" noCTA type="windowWithCards">
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "820px", marginBottom: "20px" }}>
-        Example outcomes (anonymized). The point: install visibility, control, and cadence—then keep it durable.
+        Example outcomes (anonymized). The point: <strong>install visibility, control, and cadence—then keep it durable</strong>.
       </p>
 
-      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
-        <div style={box}>
-          <h3 style={h}>Incident instability</h3>
-          <p style={p}><strong>Situation:</strong> Recurring incidents with unclear ownership and inconsistent escalation.</p>
-          <p style={{ ...p, marginTop: "8px" }}><strong>Delivered:</strong> Severity model, incident command roles, escalation paths, postmortem discipline.</p>
-          <p style={{ ...p, marginTop: "8px" }}><strong>Result:</strong> Faster containment, fewer repeat incidents, clearer executive visibility.</p>
-        </div>
-
-        <div style={box}>
-          <h3 style={h}>Change-driven outages</h3>
-          <p style={p}><strong>Situation:</strong> Releases correlated with incidents; no consistent controls.</p>
-          <p style={{ ...p, marginTop: "8px" }}><strong>Delivered:</strong> CAB-lite, risk classification, rollback readiness, change-incident correlation tracking.</p>
-          <p style={{ ...p, marginTop: "8px" }}><strong>Result:</strong> Reduced change failure rate and improved release confidence.</p>
-        </div>
-
-        <div style={box}>
-          <h3 style={h}>Board reporting / KPI ambiguity</h3>
-          <p style={p}><strong>Situation:</strong> KPIs undefined or ad hoc; board reporting inconsistent and lagging.</p>
-          <p style={{ ...p, marginTop: "8px" }}><strong>Delivered:</strong> KPI library + thresholds, weekly cadence, executive dashboard, board-ready pack structure.</p>
-          <p style={{ ...p, marginTop: "8px" }}><strong>Result:</strong> Predictable operating rhythm and faster issue detection.</p>
-        </div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "16px" }}>
+        {cases.map((item, i) => (
+          <Card key={i}>
+            <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.05rem", color: COLORS.navy, margin: 0, marginBottom: "12px" }}>
+              {item.title}
+            </h3>
+            <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0, marginBottom: "8px" }}>
+              <strong style={{ color: COLORS.steel }}>Situation:</strong> {item.situation}
+            </p>
+            <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0, marginBottom: "8px" }}>
+              <strong style={{ color: COLORS.gold }}>Delivered:</strong> {item.delivered}
+            </p>
+            <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0 }}>
+              <strong style={{ color: COLORS.navy }}>Result:</strong> {item.result}
+            </p>
+          </Card>
+        ))}
       </div>
     </Section>
   );
@@ -2628,10 +2647,9 @@ function AboutPage() {
         Hassan Tariq. 15+ years in platform operations across JP Morgan, Barclays, Bank of America, and Lazard — managing global trading operations, multi-billion dollar platform transformations, and operational risk at institutional scale. I'm currently completing my Executive MBA at Columbia Business School ('26), where I've sharpened a PE operator lens on the operational risks that derail value creation in the first 100 days.
       </p>
 
-      <SectionTitle sub>Representative Outcomes</SectionTitle>
-      <Card>
-        <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "16px", padding: "8px 12px", background: COLORS.offWhite, borderRadius: "4px" }}>
-          Representative outcomes from prior institutional operating roles — not client engagements. All results from managing trading platforms with $10B+ in assets under management. Ranges vary by baseline and scope. Details and references available on request.
+      <Section title="Representative Outcomes" noCTA type="windowWithCards">
+        <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "20px", padding: "12px 16px", background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: "6px" }}>
+          <strong>Note:</strong> Representative outcomes from prior institutional operating roles — not client engagements. All results from managing trading platforms with $10B+ in assets under management. Ranges vary by baseline and scope. Details and references available on request.
         </p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "16px" }}>
           {[
@@ -2642,13 +2660,13 @@ function AboutPage() {
             { metric: "~67%", label: "Incident volume reduction" },
             { metric: "~17%", label: "Compliance error reduction" },
           ].map((item, i) => (
-            <div key={i} style={{ padding: "12px", borderLeft: `3px solid ${COLORS.gold}` }}>
-              <div style={{ fontFamily: FONTS.body, fontSize: "1.1rem", fontWeight: 700, color: COLORS.navy }}>{item.metric}</div>
-              <div style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, marginTop: "4px" }}>{item.label}</div>
-            </div>
+            <Card key={i}>
+              <div style={{ fontFamily: FONTS.body, fontSize: "1.3rem", fontWeight: 700, color: COLORS.gold, marginBottom: "8px" }}>{item.metric}</div>
+              <div style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.5 }}>{item.label}</div>
+            </Card>
           ))}
         </div>
-      </Card>
+      </Section>
 
       {/* Proof artifacts before CTA */}
       <div style={{ marginBottom: "24px", padding: "16px", background: `${COLORS.navy}05`, border: `1px solid ${COLORS.border}`, borderRadius: "6px" }}>
@@ -2674,6 +2692,256 @@ function AboutPage() {
         <CTAButton text="15-Minute Fit Check" />
       </div>
     </div>
+  );
+}
+
+// ─── FOOTER ─────────────────────────────────────────────────
+function Footer({ setPage }) {
+  return (
+    <footer style={{
+      marginTop: "60px",
+      padding: "40px 0 32px 0",
+      borderTop: `2px solid ${COLORS.steel}`,
+      background: COLORS.navy
+    }}>
+      <div style={{
+        maxWidth: "1200px",
+        margin: "0 auto",
+        padding: "0 24px",
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+        gap: "32px"
+      }}>
+        {/* Contact Section */}
+        <div>
+          <h3 style={{
+            fontFamily: FONTS.heading,
+            fontSize: "1rem",
+            color: COLORS.gold,
+            marginBottom: "16px",
+            letterSpacing: "0.5px"
+          }}>
+            Contact
+          </h3>
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              style={{
+                fontFamily: FONTS.body,
+                fontSize: "0.95rem",
+                color: COLORS.offWhite,
+                textDecoration: "none",
+                transition: "color 0.2s"
+              }}
+              onMouseEnter={e => e.target.style.color = COLORS.gold}
+              onMouseLeave={e => e.target.style.color = COLORS.offWhite}
+            >
+              {CONTACT_EMAIL}
+            </a>
+            <a
+              href={LINKEDIN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                fontFamily: FONTS.body,
+                fontSize: "0.95rem",
+                color: COLORS.offWhite,
+                textDecoration: "none",
+                transition: "color 0.2s"
+              }}
+              onMouseEnter={e => e.target.style.color = COLORS.gold}
+              onMouseLeave={e => e.target.style.color = COLORS.offWhite}
+            >
+              LinkedIn →
+            </a>
+            <a
+              href={CALENDLY}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                fontFamily: FONTS.body,
+                fontSize: "0.95rem",
+                color: COLORS.gold,
+                textDecoration: "none",
+                fontWeight: 600,
+                transition: "opacity 0.2s"
+              }}
+              onMouseEnter={e => e.target.style.opacity = "0.8"}
+              onMouseLeave={e => e.target.style.opacity = "1"}
+            >
+              15-Minute Fit Check →
+            </a>
+          </div>
+        </div>
+
+        {/* Navigation Section */}
+        <div>
+          <h3 style={{
+            fontFamily: FONTS.heading,
+            fontSize: "1rem",
+            color: COLORS.gold,
+            marginBottom: "16px",
+            letterSpacing: "0.5px"
+          }}>
+            Navigation
+          </h3>
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+            <button
+              onClick={() => setPage("levers")}
+              style={{
+                fontFamily: FONTS.body,
+                fontSize: "0.95rem",
+                color: COLORS.offWhite,
+                background: "none",
+                border: "none",
+                padding: 0,
+                textAlign: "left",
+                cursor: "pointer",
+                transition: "color 0.2s"
+              }}
+              onMouseEnter={e => e.target.style.color = COLORS.gold}
+              onMouseLeave={e => e.target.style.color = COLORS.offWhite}
+            >
+              Levers
+            </button>
+            <button
+              onClick={() => setPage("services")}
+              style={{
+                fontFamily: FONTS.body,
+                fontSize: "0.95rem",
+                color: COLORS.offWhite,
+                background: "none",
+                border: "none",
+                padding: 0,
+                textAlign: "left",
+                cursor: "pointer",
+                transition: "color 0.2s"
+              }}
+              onMouseEnter={e => e.target.style.color = COLORS.gold}
+              onMouseLeave={e => e.target.style.color = COLORS.offWhite}
+            >
+              Services
+            </button>
+            <button
+              onClick={() => setPage("about")}
+              style={{
+                fontFamily: FONTS.body,
+                fontSize: "0.95rem",
+                color: COLORS.offWhite,
+                background: "none",
+                border: "none",
+                padding: 0,
+                textAlign: "left",
+                cursor: "pointer",
+                transition: "color 0.2s"
+              }}
+              onMouseEnter={e => e.target.style.color = COLORS.gold}
+              onMouseLeave={e => e.target.style.color = COLORS.offWhite}
+            >
+              About
+            </button>
+            <button
+              onClick={() => setPage("scorer")}
+              style={{
+                fontFamily: FONTS.body,
+                fontSize: "0.95rem",
+                color: COLORS.offWhite,
+                background: "none",
+                border: "none",
+                padding: 0,
+                textAlign: "left",
+                cursor: "pointer",
+                transition: "color 0.2s"
+              }}
+              onMouseEnter={e => e.target.style.color = COLORS.gold}
+              onMouseLeave={e => e.target.style.color = COLORS.offWhite}
+            >
+              Ops Friction Scorer
+            </button>
+          </div>
+        </div>
+
+        {/* Resources Section */}
+        <div>
+          <h3 style={{
+            fontFamily: FONTS.heading,
+            fontSize: "1rem",
+            color: COLORS.gold,
+            marginBottom: "16px",
+            letterSpacing: "0.5px"
+          }}>
+            Resources
+          </h3>
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+            <a
+              href={SAMPLE_SCORECARD_PDF}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                fontFamily: FONTS.body,
+                fontSize: "0.95rem",
+                color: COLORS.offWhite,
+                textDecoration: "none",
+                transition: "color 0.2s"
+              }}
+              onMouseEnter={e => e.target.style.color = COLORS.gold}
+              onMouseLeave={e => e.target.style.color = COLORS.offWhite}
+            >
+              Ops Diligence Scorecard (PDF)
+            </a>
+            <a
+              href={SAMPLE_100DAY_PDF}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                fontFamily: FONTS.body,
+                fontSize: "0.95rem",
+                color: COLORS.offWhite,
+                textDecoration: "none",
+                transition: "color 0.2s"
+              }}
+              onMouseEnter={e => e.target.style.color = COLORS.gold}
+              onMouseLeave={e => e.target.style.color = COLORS.offWhite}
+            >
+              100-Day Stabilization Plan (PDF)
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Copyright & Legal */}
+      <div style={{
+        maxWidth: "1200px",
+        margin: "0 auto",
+        padding: "24px 24px 0 24px",
+        marginTop: "32px",
+        borderTop: `1px solid ${COLORS.steel}40`,
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        flexWrap: "wrap",
+        gap: "16px"
+      }}>
+        <p style={{
+          fontFamily: FONTS.body,
+          fontSize: "0.85rem",
+          color: COLORS.offWhite,
+          opacity: 0.7,
+          margin: 0
+        }}>
+          © {new Date().getFullYear()} Devonshire Ops. All rights reserved.
+        </p>
+        <p style={{
+          fontFamily: FONTS.body,
+          fontSize: "0.85rem",
+          color: COLORS.offWhite,
+          opacity: 0.7,
+          margin: 0
+        }}>
+          NDA-friendly. Minimal data handling. Anonymized formats accepted.
+        </p>
+      </div>
+    </footer>
   );
 }
 
@@ -2703,26 +2971,7 @@ export default function App() {
       <main style={{ maxWidth: "960px", margin: "0 auto", padding: "40px 32px 80px" }}>
         {pages[page]}
       </main>
-      <footer style={{ borderTop: `1px solid ${COLORS.border}`, padding: "24px", background: COLORS.white }}>
-        <div style={{ maxWidth: "980px", margin: "0 auto", display: "flex", flexWrap: "wrap", gap: "14px", alignItems: "center", justifyContent: "space-between" }}>
-          <div style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal }}>
-            © {new Date().getFullYear()} Devonshire Operations. All rights reserved.
-          </div>
-
-          <div style={{ display: "flex", gap: "14px", flexWrap: "wrap", alignItems: "center" }}>
-            <a href={`mailto:${CONTACT_EMAIL}`} style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 700, color: COLORS.navy, textDecoration: "none" }}>
-              {CONTACT_EMAIL}
-            </a>
-            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer"
-              style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 700, color: COLORS.navy, textDecoration: "none" }}>
-              LinkedIn
-            </a>
-            <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.bodyMuted }}>
-              NDA available on request.
-            </span>
-          </div>
-        </div>
-      </footer>
+      <Footer setPage={setPage} />
     </div>
   );
 }
