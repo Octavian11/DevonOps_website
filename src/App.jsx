@@ -1192,57 +1192,60 @@ function ProofStrip() {
 
 // ─── OFFER CARDS ────────────────────────────────────────────
 function OfferCards({ setPage }) {
-  // Card styling for window-with-cards type
-  const box = {
-    border: `1px solid ${COLORS.steel}`,  // Steel border for visibility
-    borderRadius: "6px",
-    padding: "18px",
-    background: COLORS.white,
-    boxShadow: "0 3px 8px rgba(67, 97, 125, 0.12), 0 1px 3px rgba(67, 97, 125, 0.08)",  // Visible 3D effect
-    flex: "1 1 260px",
-    minWidth: "260px",
-  };
-
-  const title = { fontFamily: FONTS.heading, fontSize: "1.05rem", color: COLORS.navy, margin: 0, marginBottom: "8px" };
-  const tag = { fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.bodyMuted, marginBottom: "10px" };
-  const li = { marginBottom: "8px", lineHeight: 1.55 };
+  const services = [
+    {
+      title: "Ops Diligence Report (Pre-Close)",
+      pricing: "Starting at $15,000 · 2–3 weeks",
+      items: [
+        "Risk-rated red flags with severity + PE impact",
+        "Evidence requests + diligence questions",
+        "IC-ready memo format"
+      ]
+    },
+    {
+      title: "Bundle (Recommended)",
+      pricing: "$25,000–$35,000 · diligence + 100 days",
+      items: [
+        "Diligence findings roll straight into execution",
+        "Day-1 critical path + phased stabilization plan",
+        "Clear ownership + cadence for the first 100 days"
+      ]
+    },
+    {
+      title: "Control Tower Retainer (Ongoing)",
+      pricing: "Starting at $7,500/month · ongoing",
+      items: [
+        "Weekly operating review + board-ready KPI pack",
+        "Incident + change governance discipline",
+        "Vendor controls + audit readiness cadence"
+      ]
+    }
+  ];
 
   return (
     <Section title="Services & Pricing (Fast Orientation)" type="windowWithCards" noCTA>
       <p style={{ fontFamily: FONTS.body, fontSize: "1.02rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "24px", maxWidth: "760px" }}>
-        Choose the track that matches your deal lifecycle. Each deliverable is designed to be decision-useful for PE: severity-rated findings, PE impact, and a pragmatic Day-1 critical path.
+        Choose the track that matches your deal lifecycle. Each deliverable is designed to be <strong>decision-useful for PE: severity-rated findings, PE impact, and a pragmatic Day-1 critical path</strong>.
       </p>
 
-      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginBottom: "24px" }}>
-        <div style={box}>
-          <SectionTitle sub>Ops Diligence Report (Pre-Close)</SectionTitle>
-          <div style={tag}>Starting at $15,000 · 2–3 weeks</div>
-          <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
-            <li style={li}>Risk-rated red flags with severity + PE impact</li>
-            <li style={li}>Evidence requests + diligence questions</li>
-            <li style={li}>IC-ready memo format</li>
-          </ul>
-        </div>
-
-        <div style={box}>
-          <SectionTitle sub>Bundle (Recommended)</SectionTitle>
-          <div style={tag}>$25,000–$35,000 · diligence + 100 days</div>
-          <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
-            <li style={li}>Diligence findings roll straight into execution</li>
-            <li style={li}>Day-1 critical path + phased stabilization plan</li>
-            <li style={li}>Clear ownership + cadence for the first 100 days</li>
-          </ul>
-        </div>
-
-        <div style={box}>
-          <SectionTitle sub>Control Tower Retainer (Ongoing)</SectionTitle>
-          <div style={tag}>Starting at $7,500/month · ongoing</div>
-          <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
-            <li style={li}>Weekly operating review + board-ready KPI pack</li>
-            <li style={li}>Incident + change governance discipline</li>
-            <li style={li}>Vendor controls + audit readiness cadence</li>
-          </ul>
-        </div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "16px", marginBottom: "24px" }}>
+        {services.map((service, i) => (
+          <Card key={i}>
+            <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.05rem", color: COLORS.navy, margin: 0, marginBottom: "8px" }}>
+              {service.title}
+            </h3>
+            <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.gold, fontWeight: 600, marginBottom: "12px" }}>
+              {service.pricing}
+            </div>
+            <ul style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
+              {service.items.map((item, j) => (
+                <li key={j} style={{ marginBottom: "8px", lineHeight: 1.6 }}>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </Card>
+        ))}
       </div>
 
       <ButtonPair
@@ -1307,6 +1310,23 @@ function ChooseSituation({ setPage }) {
     highlight: "Governance installed → value creation unlocked"
   };
 
+  // Shared button style for equal formatting
+  const buttonStyle = {
+    fontFamily: FONTS.body,
+    fontSize: "1rem",
+    fontWeight: 600,
+    color: COLORS.navy,
+    background: COLORS.white,
+    border: `2px solid ${COLORS.navy}`,
+    borderRadius: "6px",
+    padding: "14px 32px",
+    cursor: "pointer",
+    transition: "all 0.2s ease",
+    flex: "1 1 240px",
+    maxWidth: "300px",
+    textAlign: "center"
+  };
+
   return (
     <Section title="Choose Your Situation" noCTA>
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "820px", marginBottom: "24px" }}>
@@ -1316,20 +1336,16 @@ function ChooseSituation({ setPage }) {
       <SplitContrast leftSide={leftSide} rightSide={rightSide} />
 
       <div style={{ display: "flex", gap: "16px", marginTop: "24px", justifyContent: "center", flexWrap: "wrap" }}>
-        <CTAButton text="15-Minute Fit Check" />
         <button
           onClick={() => setPage("scorer")}
-          style={{
-            fontFamily: FONTS.body,
-            fontSize: "1rem",
-            fontWeight: 600,
-            color: COLORS.navy,
-            background: COLORS.white,
-            border: `2px solid ${COLORS.navy}`,
-            borderRadius: "6px",
-            padding: "12px 28px",
-            cursor: "pointer",
-            transition: "all 0.2s ease"
+          style={buttonStyle}
+          onMouseEnter={e => {
+            e.target.style.background = COLORS.navy;
+            e.target.style.color = COLORS.white;
+          }}
+          onMouseLeave={e => {
+            e.target.style.background = COLORS.white;
+            e.target.style.color = COLORS.navy;
           }}
         >
           Use the Scorer
@@ -1339,17 +1355,19 @@ function ChooseSituation({ setPage }) {
           target="_blank"
           rel="noopener noreferrer"
           style={{
-            fontFamily: FONTS.body,
-            fontSize: "1rem",
-            fontWeight: 600,
-            color: COLORS.navy,
-            background: COLORS.white,
-            border: `2px solid ${COLORS.navy}`,
-            borderRadius: "6px",
-            padding: "12px 28px",
+            ...buttonStyle,
             textDecoration: "none",
-            display: "inline-block",
-            transition: "all 0.2s ease"
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+          onMouseEnter={e => {
+            e.target.style.background = COLORS.navy;
+            e.target.style.color = COLORS.white;
+          }}
+          onMouseLeave={e => {
+            e.target.style.background = COLORS.white;
+            e.target.style.color = COLORS.navy;
           }}
         >
           View 100-Day Plan (PDF)
