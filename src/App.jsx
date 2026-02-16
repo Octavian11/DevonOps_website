@@ -513,10 +513,15 @@ function Section({
   centered,
   background,
   noPadding,
+  type,  // New: 'default' or 'windowWithCards'
   id
 }) {
+  // Window-with-cards type: light tinted background for card contrast
+  const isWindowWithCards = type === 'windowWithCards';
+  const defaultBackground = isWindowWithCards ? COLORS.offWhite : COLORS.white;
+
   const containerStyle = {
-    background: background || COLORS.white,
+    background: background || defaultBackground,
     border: `2px solid ${COLORS.steel}`,  // Steel Grey brand color - VISIBLE
     borderRadius: "8px",
     padding: noPadding ? "0" : "32px",
@@ -840,12 +845,13 @@ function ProofStrip() {
 
 // ─── OFFER CARDS ────────────────────────────────────────────
 function OfferCards({ setPage }) {
+  // Card styling for window-with-cards type
   const box = {
-    border: `1px solid ${COLORS.border}`,
+    border: `1px solid ${COLORS.steel}`,  // Steel border for visibility
     borderRadius: "6px",
     padding: "18px",
     background: COLORS.white,
-    boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
+    boxShadow: "0 3px 8px rgba(67, 97, 125, 0.12), 0 1px 3px rgba(67, 97, 125, 0.08)",  // Visible 3D effect
     flex: "1 1 260px",
     minWidth: "260px",
   };
@@ -855,7 +861,7 @@ function OfferCards({ setPage }) {
   const li = { marginBottom: "8px", lineHeight: 1.55 };
 
   return (
-    <Section title="Services & Pricing (Fast Orientation)" noCTA>
+    <Section title="Services & Pricing (Fast Orientation)" type="windowWithCards" noCTA>
       <p style={{ fontFamily: FONTS.body, fontSize: "1.02rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "24px", maxWidth: "760px" }}>
         Choose the track that matches your deal lifecycle. Each deliverable is designed to be decision-useful for PE: severity-rated findings, PE impact, and a pragmatic Day-1 critical path.
       </p>
