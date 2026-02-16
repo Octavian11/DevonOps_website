@@ -31,7 +31,7 @@ const COLORS = {
   steel: "#43617D",
   gold: "#B8860B",
   offWhite: "#FCFCFC",
-  charcoal: "#1A202C",
+  charcoal: "#0A0A0A",  // Dark black for body text
   border: "#E2E8F0",
   white: "#FFFFFF",
   primary: "#14213D",
@@ -513,7 +513,7 @@ function TimelineRail({ items, compact = false }) {
         top: "12px",
         bottom: "12px",
         width: "2px",
-        background: COLORS.border,
+        background: COLORS.steel,
         zIndex: 0
       }} />
 
@@ -522,9 +522,9 @@ function TimelineRail({ items, compact = false }) {
         const isActive = item.active;
         const isCompleted = item.completed;
 
-        // Node color logic: completed = steel, active = gold, pending = border
-        let nodeColor = COLORS.border;
-        let nodeBorder = COLORS.border;
+        // Node color logic: completed = steel, active = gold, pending = white with steel border
+        let nodeColor = COLORS.white;
+        let nodeBorder = COLORS.steel;
         let cardGlow = "none";
 
         if (isCompleted) {
@@ -536,7 +536,7 @@ function TimelineRail({ items, compact = false }) {
           cardGlow = `0 0 0 3px rgba(184, 134, 11, 0.15)`;
         } else {
           nodeColor = COLORS.white;
-          nodeBorder = COLORS.border;
+          nodeBorder = COLORS.steel;
         }
 
         return (
