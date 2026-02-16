@@ -517,11 +517,11 @@ function Section({
 }) {
   const containerStyle = {
     background: background || COLORS.white,
-    border: `1px solid ${COLORS.border}`,
+    border: `1.5px solid ${COLORS.border}`,  // More visible border
     borderRadius: "8px",
     padding: noPadding ? "0" : "32px",
     marginBottom: "24px",
-    boxShadow: "0 1px 3px rgba(0,0,0,0.06)"
+    boxShadow: "0 2px 8px rgba(0,0,0,0.08)"  // More visible shadow
   };
 
   const bodyTextStyle = {
@@ -822,7 +822,7 @@ function DomainLegend() {
 function ProofStrip() {
   return (
     <Section
-      title="Want the red-flag memo format?"
+      title="Want the Red-Flag Memo Format?"
       primaryCTA={{ text: "View Sample Scorecard (PDF)", link: SAMPLE_SCORECARD_PDF }}
       secondaryCTA={{ text: "View 100-Day Plan (PDF)", link: SAMPLE_100DAY_PDF }}
       centered={true}
@@ -855,13 +855,12 @@ function OfferCards({ setPage }) {
   const li = { marginBottom: "8px", lineHeight: 1.55 };
 
   return (
-    <div style={{ marginBottom: "22px" }}>
-      <SectionTitle>Services & Pricing (fast orientation)</SectionTitle>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1.02rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "20px", maxWidth: "760px" }}>
+    <Section title="Services & Pricing (Fast Orientation)" noCTA>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1.02rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "24px", maxWidth: "760px" }}>
         Choose the track that matches your deal lifecycle. Each deliverable is designed to be decision-useful for PE: severity-rated findings, PE impact, and a pragmatic Day-1 critical path.
       </p>
 
-      <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
+      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginBottom: "24px" }}>
         <div style={box}>
           <SectionTitle sub>Ops Diligence Report (Pre-Close)</SectionTitle>
           <div style={tag}>Starting at $15,000 · 2–3 weeks</div>
@@ -893,15 +892,13 @@ function OfferCards({ setPage }) {
         </div>
       </div>
 
-      <div style={{ marginTop: "20px", maxWidth: "320px", margin: "20px auto 0" }}>
-        <ButtonPair
-          primaryText="15-Minute Fit Check"
-          secondaryText="View Full Services & Details"
-          secondaryAction={() => setPage("services")}
-          centered={true}
-        />
-      </div>
-    </div>
+      <ButtonPair
+        primaryText="15-Minute Fit Check"
+        secondaryText="View Full Services & Details"
+        secondaryAction={() => setPage("services")}
+        centered={true}
+      />
+    </Section>
   );
 }
 
@@ -911,7 +908,7 @@ function HowItWorks() {
   const p = { fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, margin: 0 };
 
   return (
-    <Section title="How it works" noCTA>
+    <Section title="How It Works" noCTA>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "20px" }}>
         <div>
           <h3 style={stepTitle}>1) Baseline (Week 1)</h3>
@@ -946,16 +943,15 @@ function ChooseSituation({ setPage }) {
   const li = { marginBottom: "8px", lineHeight: 1.55 };
 
   return (
-    <div style={{ marginBottom: "22px" }}>
-      <SectionTitle>Choose your situation</SectionTitle>
-      <p style={{ ...p, maxWidth: "820px", marginBottom: "20px" }}>
+    <Section title="Choose Your Situation" noCTA>
+      <p style={{ ...p, maxWidth: "820px", marginBottom: "24px", lineHeight: 1.7 }}>
         Pick the track that matches where you are in the lifecycle. Both paths deliver risk-rated findings, PE impact framing, and a clear Day-1 critical path.
       </p>
 
       <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
         <div style={box}>
-          <SectionTitle sub>Evaluating a target (pre-close diligence)</SectionTitle>
-          <p style={{ ...p, marginBottom: "12px" }}>
+          <SectionTitle sub>Evaluating a Target (Pre-Close Diligence)</SectionTitle>
+          <p style={{ ...p, marginBottom: "12px", lineHeight: 1.7 }}>
             Decision-useful ops diligence designed for the IC: severity-rated red flags + evidence requests.
           </p>
           <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", marginBottom: "20px" }}>
@@ -971,8 +967,8 @@ function ChooseSituation({ setPage }) {
         </div>
 
         <div style={box}>
-          <SectionTitle sub>First 100 days post-close</SectionTitle>
-          <p style={{ ...p, marginBottom: "12px" }}>
+          <SectionTitle sub>First 100 Days Post-Close</SectionTitle>
+          <p style={{ ...p, marginBottom: "12px", lineHeight: 1.7 }}>
             Install a governance baseline so value creation isn't blocked by instability.
           </p>
           <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", marginBottom: "20px" }}>
@@ -987,14 +983,14 @@ function ChooseSituation({ setPage }) {
           />
         </div>
       </div>
-    </div>
+    </Section>
   );
 }
 
 // ─── DEAL IMPLICATIONS ──────────────────────────────────────
 function DealImplications() {
   return (
-    <Section title="Deal implications we surface" noCTA>
+    <Section title="Deal Implications We Surface" noCTA>
       <ul style={{ margin: 0, paddingLeft: "18px", fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
         <li>Operational fragility that belongs in the IC memo and value creation plan (severity-rated).</li>
         <li>Vendor concentration risk and change-of-control clauses that become material post-close constraints.</li>
@@ -1008,7 +1004,7 @@ function DealImplications() {
 // ─── FIRST 14 DAYS ──────────────────────────────────────────
 function First14Days() {
   return (
-    <Section title="The first 14 days post-close" noCTA>
+    <Section title="The First 14 Days Post-Close" noCTA>
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "16px" }}>
         The Day-1 critical path is simple: stop new damage, then start measuring.
       </p>
@@ -1038,7 +1034,7 @@ function MiniCases() {
 
   return (
     <div style={{ marginBottom: "22px" }}>
-      <SectionTitle>Proof in the format PE expects</SectionTitle>
+      <SectionTitle>Proof in the Format PE Expects</SectionTitle>
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "820px", marginBottom: "14px" }}>
         Example outcomes (anonymized). The point: install visibility, control, and cadence—then keep it durable.
       </p>
@@ -1322,7 +1318,7 @@ function ScorerPage() {
 
       {context && (
         <div style={{ marginTop: "24px" }}>
-          <SectionTitle sub>Score each dimension (1–5)</SectionTitle>
+          <SectionTitle sub>Score Each Dimension (1–5)</SectionTitle>
           {SCORER_DIMS.map(dim => (
             <Card key={dim.key} style={{ marginBottom: "12px" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "12px" }}>
@@ -1603,7 +1599,7 @@ function ServicesSamplesRow() {
 // Framework Why Friction Tight
 function FrameworkWhyFrictionTight() {
   return (
-    <Section title="Operational friction matters in PE" noCTA>
+    <Section title="Operational Friction Matters in PE" noCTA>
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "860px", marginBottom: "20px" }}>
         This is the evaluation method used in the Ops Diligence Report and 100-Day Stabilization Plan: diagnose friction, then prioritize interventions by
         EBITDA impact, execution risk, and time to proof.
