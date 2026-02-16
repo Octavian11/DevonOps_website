@@ -380,7 +380,7 @@ function SectionTitle({ children, sub }) {
   );
 }
 
-// Standardized two-button vertical layout
+// Standardized two-button horizontal layout
 function ButtonPair({
   primaryText = "15-Minute Fit Check",
   primaryAction,
@@ -393,19 +393,18 @@ function ButtonPair({
   return (
     <div style={{
       display: "flex",
-      flexDirection: "column",  // VERTICAL stacking
+      flexDirection: "row",  // HORIZONTAL side-by-side
       gap: "12px",
-      alignItems: centered ? "center" : "stretch",
-      maxWidth: centered ? "320px" : "100%",
-      margin: centered ? "0 auto" : "0"
+      justifyContent: centered ? "center" : "flex-start",
+      flexWrap: "wrap"
     }}>
-      {/* Primary Gold Button */}
+      {/* Primary Navy Button */}
       {primaryLink ? (
         <a href={primaryLink} target="_blank" rel="noopener noreferrer"
            style={{
-             display: "block",
-             padding: "14px 24px",
-             background: COLORS.gold,
+             display: "inline-block",
+             padding: "14px 28px",
+             background: COLORS.navy,
              color: "white",
              borderRadius: "6px",
              textDecoration: "none",
@@ -414,18 +413,19 @@ function ButtonPair({
              fontWeight: 600,
              textAlign: "center",
              transition: "all 0.2s",
-             border: "none"
+             border: "none",
+             whiteSpace: "nowrap"
            }}
-           onMouseEnter={e => { e.target.style.background = "#A07D2E"; }}
-           onMouseLeave={e => { e.target.style.background = COLORS.gold; }}>
+           onMouseEnter={e => { e.target.style.background = "#0F1829"; }}
+           onMouseLeave={e => { e.target.style.background = COLORS.navy; }}>
           {primaryText}
         </a>
       ) : (
         <button onClick={primaryAction}
            style={{
-             display: "block",
-             padding: "14px 24px",
-             background: COLORS.gold,
+             display: "inline-block",
+             padding: "14px 28px",
+             background: COLORS.navy,
              color: "white",
              borderRadius: "6px",
              fontFamily: FONTS.body,
@@ -434,10 +434,11 @@ function ButtonPair({
              textAlign: "center",
              transition: "all 0.2s",
              border: "none",
-             cursor: "pointer"
+             cursor: "pointer",
+             whiteSpace: "nowrap"
            }}
-           onMouseEnter={e => { e.target.style.background = "#A07D2E"; }}
-           onMouseLeave={e => { e.target.style.background = COLORS.gold; }}>
+           onMouseEnter={e => { e.target.style.background = "#0F1829"; }}
+           onMouseLeave={e => { e.target.style.background = COLORS.navy; }}>
           {primaryText}
         </button>
       )}
@@ -447,9 +448,9 @@ function ButtonPair({
         secondaryLink ? (
           <a href={secondaryLink} target="_blank" rel="noopener noreferrer"
              style={{
-               display: "block",
-               padding: "14px 24px",
-               background: "transparent",
+               display: "inline-block",
+               padding: "14px 28px",
+               background: "white",
                color: COLORS.navy,
                borderRadius: "6px",
                textDecoration: "none",
@@ -458,18 +459,19 @@ function ButtonPair({
                fontWeight: 600,
                textAlign: "center",
                border: `2px solid ${COLORS.navy}`,
-               transition: "all 0.2s"
+               transition: "all 0.2s",
+               whiteSpace: "nowrap"
              }}
              onMouseEnter={e => { e.target.style.background = `${COLORS.navy}08`; }}
-             onMouseLeave={e => { e.target.style.background = "transparent"; }}>
+             onMouseLeave={e => { e.target.style.background = "white"; }}>
             {secondaryText}
           </a>
         ) : (
           <button onClick={secondaryAction}
              style={{
-               display: "block",
-               padding: "14px 24px",
-               background: "transparent",
+               display: "inline-block",
+               padding: "14px 28px",
+               background: "white",
                color: COLORS.navy,
                borderRadius: "6px",
                fontFamily: FONTS.body,
@@ -478,10 +480,11 @@ function ButtonPair({
                textAlign: "center",
                border: `2px solid ${COLORS.navy}`,
                transition: "all 0.2s",
-               cursor: "pointer"
+               cursor: "pointer",
+               whiteSpace: "nowrap"
              }}
              onMouseEnter={e => { e.target.style.background = `${COLORS.navy}08`; }}
-             onMouseLeave={e => { e.target.style.background = "transparent"; }}>
+             onMouseLeave={e => { e.target.style.background = "white"; }}>
             {secondaryText}
           </button>
         )
