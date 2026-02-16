@@ -501,6 +501,91 @@ function Card({ children, style: extraStyle }) {
   );
 }
 
+// ─── MICRO-PROOF STRIP ──────────────────────────────────────
+function MicroProofStrip() {
+  const proofItems = [
+    { icon: "✓", text: "Severity-rated findings", link: SAMPLE_SCORECARD_PDF },
+    { icon: "✓", text: "IC-ready memo format", link: SAMPLE_SCORECARD_PDF },
+    { icon: "✓", text: "100-day stabilization plan", link: SAMPLE_100DAY_PDF },
+  ];
+
+  return (
+    <div style={{
+      background: `linear-gradient(135deg, ${COLORS.navy}08 0%, ${COLORS.gold}08 100%)`,
+      border: `1px solid ${COLORS.border}`,
+      borderRadius: "6px",
+      padding: "16px 24px",
+      marginBottom: "24px",
+      display: "flex",
+      gap: "32px",
+      flexWrap: "wrap",
+      justifyContent: "center",
+      alignItems: "center"
+    }}>
+      {proofItems.map((item, idx) => (
+        <a
+          key={idx}
+          href={item.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            textDecoration: "none",
+            color: COLORS.navy,
+            fontFamily: FONTS.body,
+            fontSize: "0.95rem",
+            fontWeight: 600,
+            transition: "all 0.2s",
+            padding: "4px 8px",
+            borderRadius: "4px"
+          }}
+          onMouseEnter={e => {
+            e.target.style.background = `${COLORS.navy}08`;
+            e.target.style.transform = "translateY(-1px)";
+          }}
+          onMouseLeave={e => {
+            e.target.style.background = "transparent";
+            e.target.style.transform = "translateY(0)";
+          }}
+        >
+          <span style={{ color: COLORS.gold, fontSize: "1.1rem" }}>{item.icon}</span>
+          <span>{item.text}</span>
+        </a>
+      ))}
+    </div>
+  );
+}
+
+// ─── EARLY CTA ──────────────────────────────────────────────
+function EarlyCTA({ setPage }) {
+  return (
+    <Card style={{
+      background: `${COLORS.navy}05`,
+      textAlign: "center",
+      padding: "24px",
+      marginBottom: "24px"
+    }}>
+      <p style={{
+        fontFamily: FONTS.body,
+        fontSize: "1rem",
+        color: COLORS.charcoal,
+        marginBottom: "16px",
+        lineHeight: 1.6
+      }}>
+        Recognizing these patterns in a target or portfolio company?
+      </p>
+      <ButtonPair
+        primaryText="15-Minute Fit Check"
+        secondaryText="Email me instead"
+        secondaryLink={mailtoHref("Devonshire Ops – Fit Check request", "Hi Hassan,\n\nI reviewed the operational levers and would like to discuss fit.\n\nContext:\n- Company / deal stage:\n- Primary concern:\n- Timeline:\n\nBest,\n")}
+        centered={true}
+      />
+    </Card>
+  );
+}
+
 // ─── NAVIGATION ─────────────────────────────────────────────
 function Nav({ page, setPage }) {
   const items = page === "levers"
@@ -1000,19 +1085,13 @@ function LeverExplorer({ setPage }) {
 
   return (
     <div className="fade-in">
+      {/* HOOK: Hero */}
       <HeroBlockWithNav setPage={setPage} />
-      <ProofStrip />
-      <ChooseSituation setPage={setPage} />
-      <DealImplications />
-      <First14Days />
-      <OfferCards setPage={setPage} />
-      <MiniCases />
-      <FAQBlock />
-      <HowItWorks />
 
+      {/* PROBLEM: Lever Explorer */}
       <div style={{ marginBottom: "28px" }}>
         <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.4rem", fontWeight: 700, color: COLORS.navy, marginBottom: "12px" }}>
-          Operational Friction Lever Explorer
+          20 Operational Levers PE Funds Should Check
         </h2>
         <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "720px" }}>
           {LEVERS.length} operational friction points across 6 domains — with severity ratings, symptoms, and PE impact analysis. The levers show <em>what</em> is broken and <em>why</em> it matters. The remediation playbooks — the <em>how</em> — are delivered in the engagement.
@@ -1108,15 +1187,47 @@ function LeverExplorer({ setPage }) {
         </div>
       ))}
 
-      {/* Bottom CTA */}
+      {/* Bottom CTA within lever section removed - will add at end */}
+
+      {/* PROOF: Micro-proof strip */}
+      <MicroProofStrip />
+
+      {/* SOLUTION: Segmentation */}
+      <ChooseSituation setPage={setPage} />
+
+      {/* Early CTA */}
+      <EarlyCTA setPage={setPage} />
+
+      {/* SOLUTION: Services & Pricing */}
+      <OfferCards setPage={setPage} />
+
+      {/* PROOF: PDF samples */}
+      <ProofStrip />
+
+      {/* PROOF: Deal implications (PE-native language) */}
+      <DealImplications />
+
+      {/* PROOF: Case examples */}
+      <MiniCases />
+
+      {/* TRUST: Process */}
+      <HowItWorks />
+
+      {/* TRUST: Timeline */}
+      <First14Days />
+
+      {/* TRUST: FAQ */}
+      <FAQBlock />
+
+      {/* ACTION: Final CTA */}
       <Card style={{ textAlign: "center", marginTop: "24px", background: `${COLORS.navy}05`, padding: "28px" }}>
         <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, marginBottom: "20px" }}>
-          Recognizing these patterns in a target or portfolio company?
+          Not sure where to start? Let's assess fit and scope the right engagement.
         </p>
         <ButtonPair
           primaryText="15-Minute Fit Check"
-          secondaryText="View Services & Pricing"
-          secondaryAction={() => setPage("services")}
+          secondaryText="Email me instead"
+          secondaryLink={mailtoHref("Devonshire Ops – Fit Check request", "Hi Hassan,\n\nI reviewed the operational levers and would like to discuss fit.\n\nContext:\n- Company / deal stage:\n- Primary concern:\n- Timeline:\n\nBest,\n")}
           centered={true}
         />
       </Card>
@@ -1240,8 +1351,15 @@ function ScorerPage() {
               </div>
 
               <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "10px", alignItems: "center" }}>
-                <div style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.bodyMuted, maxWidth: "360px" }}>
-                  Translate this score into diligence asks or a first-30-day stabilization priority list.
+                {/* Trust line */}
+                <div style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.bodyMuted, maxWidth: "360px", fontStyle: "italic", marginBottom: "8px", textAlign: "center" }}>
+                  Scores reflect observed evidence prompts, not self-assessment
+                </div>
+
+                <div style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, maxWidth: "360px", marginBottom: "8px" }}>
+                  {rating === "stable"
+                    ? "Maintain your edge with ongoing governance support"
+                    : "Let's stabilize the foundation with a structured 100-day plan"}
                 </div>
 
                 <CTAButton text="15-Minute Fit Check" />
@@ -1920,29 +2038,33 @@ function ServicesPage({ setPage }) {
         </p>
       </div>
 
+      {/* SOLUTION: Pricing ladder (4 cards) */}
       <ServicesPricingLadder />
 
       <div id="ongoing" style={{ marginTop: "20px" }}>
         <ServicesRecommendedOngoingTight />
       </div>
 
+      {/* PROOF: Mini proof cue (reduces price shock) */}
       <ServicesSamplesRow />
       <NDAMicroBlock />
 
-      <div id="how-it-works" style={{ marginTop: "28px" }}>
-        <ServicesSteps />
+      {/* PROBLEM CONTEXT: Why this matters */}
+      <div id="why-friction" style={{ marginTop: "28px" }}>
+        <FrameworkWhyFrictionTight />
       </div>
 
       <div id="red-flags" style={{ marginTop: "28px" }}>
         <TypicalRedFlags />
       </div>
 
-      <div id="why-friction" style={{ marginTop: "28px" }}>
-        <FrameworkWhyFrictionTight />
-      </div>
-
+      {/* PROOF: Methodology */}
       <div id="rubric" style={{ marginTop: "28px" }}>
         <FrameworkRubricTable />
+      </div>
+
+      <div id="sequence" style={{ marginTop: "28px" }}>
+        <StabilizationSequence />
       </div>
 
       <div id="memo-samples" style={{ marginTop: "28px" }}>
@@ -1953,14 +2075,16 @@ function ServicesPage({ setPage }) {
         <WorkedExampleAccordion />
       </div>
 
-      <div id="sequence" style={{ marginTop: "28px" }}>
-        <StabilizationSequence />
+      {/* TRUST: Process */}
+      <div id="how-it-works" style={{ marginTop: "28px" }}>
+        <ServicesSteps />
       </div>
 
       <div id="faq" style={{ marginTop: "28px" }}>
         <FAQBlock />
       </div>
 
+      {/* ACTION: Lead capture & CTA */}
       <div id="lead-capture" style={{ marginTop: "28px" }}>
         <LeadCapture />
       </div>
@@ -2029,6 +2153,23 @@ function AboutPage() {
           ))}
         </div>
       </Card>
+
+      {/* Proof artifacts before CTA */}
+      <div style={{ marginBottom: "24px", padding: "16px", background: `${COLORS.navy}05`, border: `1px solid ${COLORS.border}`, borderRadius: "6px" }}>
+        <div style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.navy, fontWeight: 600, marginBottom: "10px" }}>
+          Sample deliverables:
+        </div>
+        <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+          <a href={SAMPLE_SCORECARD_PDF} target="_blank" rel="noopener noreferrer"
+            style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, color: COLORS.navy, textDecoration: "none", borderBottom: `2px solid ${COLORS.navy}` }}>
+            📄 Ops Diligence Scorecard (PDF)
+          </a>
+          <a href={SAMPLE_100DAY_PDF} target="_blank" rel="noopener noreferrer"
+            style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, color: COLORS.navy, textDecoration: "none", borderBottom: `2px solid ${COLORS.navy}` }}>
+            📄 100-Day Stabilization Plan (PDF)
+          </a>
+        </div>
+      </div>
 
       <div style={{ textAlign: "center", padding: "32px 0" }}>
         <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, marginBottom: "18px" }}>
