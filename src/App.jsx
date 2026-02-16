@@ -501,6 +501,353 @@ function Card({ children, style: extraStyle }) {
   );
 }
 
+// ─── TIMELINE-RAIL COMPONENT ────────────────────────────────
+// Vertical timeline with progressive steps using brand colors
+function TimelineRail({ items, compact = false }) {
+  return (
+    <div style={{ position: "relative", paddingLeft: compact ? "40px" : "60px" }}>
+      {/* Vertical timeline line */}
+      <div style={{
+        position: "absolute",
+        left: compact ? "15px" : "23px",
+        top: "12px",
+        bottom: "12px",
+        width: "2px",
+        background: COLORS.border,
+        zIndex: 0
+      }} />
+
+      {items.map((item, i) => {
+        const isLast = i === items.length - 1;
+        const isActive = item.active;
+        const isCompleted = item.completed;
+
+        // Node color logic: completed = steel, active = gold, pending = border
+        let nodeColor = COLORS.border;
+        let nodeBorder = COLORS.border;
+        let cardGlow = "none";
+
+        if (isCompleted) {
+          nodeColor = COLORS.steel;
+          nodeBorder = COLORS.steel;
+        } else if (isActive) {
+          nodeColor = COLORS.gold;
+          nodeBorder = COLORS.gold;
+          cardGlow = `0 0 0 3px rgba(184, 134, 11, 0.15)`;
+        } else {
+          nodeColor = COLORS.white;
+          nodeBorder = COLORS.border;
+        }
+
+        return (
+          <div key={i} style={{ position: "relative", marginBottom: isLast ? "0" : (compact ? "24px" : "32px") }}>
+            {/* Timeline node */}
+            <div style={{
+              position: "absolute",
+              left: compact ? "-32px" : "-46px",
+              top: "12px",
+              width: compact ? "16px" : "18px",
+              height: compact ? "16px" : "18px",
+              borderRadius: "50%",
+              background: nodeColor,
+              border: `3px solid ${nodeBorder}`,
+              boxShadow: isActive ? `0 0 0 4px rgba(184, 134, 11, 0.1)` : "none",
+              zIndex: 1
+            }} />
+
+            {/* Content card */}
+            <div style={{
+              background: COLORS.white,
+              border: `1px solid ${COLORS.border}`,
+              borderRadius: "8px",
+              padding: compact ? "16px" : "20px",
+              boxShadow: `0 2px 8px rgba(20, 33, 61, 0.08), ${cardGlow}`,
+              transition: "all 0.3s ease"
+            }}>
+              {/* Header row with title and meta */}
+              {(item.title || item.meta) && (
+                <div style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "baseline",
+                  marginBottom: item.description ? "8px" : "0",
+                  gap: "12px",
+                  flexWrap: "wrap"
+                }}>
+                  {item.title && (
+                    <h3 style={{
+                      fontFamily: FONTS.heading,
+                      fontSize: compact ? "1rem" : "1.1rem",
+                      color: COLORS.navy,
+                      margin: 0,
+                      flex: "1 1 auto"
+                    }}>
+                      {item.title}
+                    </h3>
+                  )}
+                  {item.meta && (
+                    <span style={{
+                      fontFamily: FONTS.body,
+                      fontSize: "0.9rem",
+                      color: isActive ? COLORS.gold : COLORS.steel,
+                      fontWeight: 600,
+                      flexShrink: 0
+                    }}>
+                      {item.meta}
+                    </span>
+                  )}
+                </div>
+              )}
+
+              {/* Description */}
+              {item.description && (
+                <p style={{
+                  fontFamily: FONTS.body,
+                  fontSize: "1rem",
+                  color: COLORS.charcoal,
+                  lineHeight: 1.65,
+                  margin: item.items ? "0 0 12px 0" : "0"
+                }}>
+                  {item.description}
+                </p>
+              )}
+
+              {/* Bullet list */}
+              {item.items && item.items.length > 0 && (
+                <ul style={{
+                  paddingLeft: "20px",
+                  margin: item.deliverable ? "0 0 12px 0" : "0"
+                }}>
+                  {item.items.map((subItem, j) => (
+                    <li key={j} style={{
+                      fontFamily: FONTS.body,
+                      fontSize: "0.95rem",
+                      color: COLORS.charcoal,
+                      lineHeight: 1.65,
+                      marginBottom: "4px"
+                    }}>
+                      {subItem}
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {/* Deliverable badge */}
+              {item.deliverable && (
+                <div style={{
+                  padding: "10px 14px",
+                  background: COLORS.offWhite,
+                  borderRadius: "6px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  marginTop: "12px"
+                }}>
+                  <span style={{
+                    fontFamily: FONTS.body,
+                    fontSize: "0.75rem",
+                    color: COLORS.navy,
+                    letterSpacing: "0.5px",
+                    textTransform: "uppercase",
+                    fontWeight: 700,
+                    flexShrink: 0
+                  }}>
+                    Deliverable
+                  </span>
+                  <span style={{
+                    fontFamily: FONTS.body,
+                    fontSize: "0.95rem",
+                    color: COLORS.charcoal,
+                    fontWeight: 500
+                  }}>
+                    {item.deliverable}
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ─── SPLIT-CONTRAST COMPONENT ───────────────────────────────
+// Left/right split showing problem vs solution, before vs after
+function SplitContrast({ leftSide, rightSide, variant = "default" }) {
+  // variant: "default", "vertical" (for mobile-first stacking)
+
+  return (
+    <div style={{
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gap: "0",
+      borderRadius: "8px",
+      overflow: "hidden",
+      border: `1px solid ${COLORS.border}`,
+      minHeight: "300px",
+      "@media (max-width: 768px)": {
+        gridTemplateColumns: "1fr"
+      }
+    }}>
+      {/* LEFT SIDE - Problem/Risk (Navy background) */}
+      <div style={{
+        background: COLORS.navy,
+        color: COLORS.offWhite,
+        padding: "32px",
+        display: "flex",
+        flexDirection: "column",
+        position: "relative"
+      }}>
+        {/* Title */}
+        {leftSide.title && (
+          <h3 style={{
+            fontFamily: FONTS.heading,
+            fontSize: "1.3rem",
+            color: COLORS.gold,
+            margin: "0 0 16px 0",
+            letterSpacing: "0.5px"
+          }}>
+            {leftSide.title}
+          </h3>
+        )}
+
+        {/* Description */}
+        {leftSide.description && (
+          <p style={{
+            fontFamily: FONTS.body,
+            fontSize: "1rem",
+            color: COLORS.offWhite,
+            lineHeight: 1.7,
+            marginBottom: leftSide.items ? "20px" : "0",
+            opacity: 0.95
+          }}>
+            {leftSide.description}
+          </p>
+        )}
+
+        {/* Items list */}
+        {leftSide.items && leftSide.items.length > 0 && (
+          <ul style={{
+            paddingLeft: "20px",
+            margin: "0",
+            flex: "1"
+          }}>
+            {leftSide.items.map((item, i) => (
+              <li key={i} style={{
+                fontFamily: FONTS.body,
+                fontSize: "0.95rem",
+                color: COLORS.offWhite,
+                lineHeight: 1.7,
+                marginBottom: "12px",
+                opacity: 0.9
+              }}>
+                {typeof item === "string" ? item : (
+                  <>
+                    <strong style={{ color: COLORS.gold }}>{item.title}:</strong> {item.body}
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {/* Diagonal accent line */}
+        <div style={{
+          position: "absolute",
+          right: "-1px",
+          top: "0",
+          bottom: "0",
+          width: "4px",
+          background: `linear-gradient(180deg, ${COLORS.gold} 0%, ${COLORS.steel} 100%)`,
+          zIndex: 1
+        }} />
+      </div>
+
+      {/* RIGHT SIDE - Solution/Opportunity (Light background) */}
+      <div style={{
+        background: COLORS.offWhite,
+        color: COLORS.charcoal,
+        padding: "32px",
+        display: "flex",
+        flexDirection: "column"
+      }}>
+        {/* Title */}
+        {rightSide.title && (
+          <h3 style={{
+            fontFamily: FONTS.heading,
+            fontSize: "1.3rem",
+            color: COLORS.navy,
+            margin: "0 0 16px 0",
+            letterSpacing: "0.5px"
+          }}>
+            {rightSide.title}
+          </h3>
+        )}
+
+        {/* Description */}
+        {rightSide.description && (
+          <p style={{
+            fontFamily: FONTS.body,
+            fontSize: "1rem",
+            color: COLORS.charcoal,
+            lineHeight: 1.7,
+            marginBottom: rightSide.items ? "20px" : "0"
+          }}>
+            {rightSide.description}
+          </p>
+        )}
+
+        {/* Items list */}
+        {rightSide.items && rightSide.items.length > 0 && (
+          <ul style={{
+            paddingLeft: "20px",
+            margin: "0",
+            flex: "1"
+          }}>
+            {rightSide.items.map((item, i) => (
+              <li key={i} style={{
+                fontFamily: FONTS.body,
+                fontSize: "0.95rem",
+                color: COLORS.charcoal,
+                lineHeight: 1.7,
+                marginBottom: "12px"
+              }}>
+                {typeof item === "string" ? item : (
+                  <>
+                    <strong style={{ color: COLORS.gold }}>{item.title}:</strong> {item.body}
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {/* Success badge/callout */}
+        {rightSide.highlight && (
+          <div style={{
+            marginTop: "auto",
+            padding: "12px 16px",
+            background: COLORS.white,
+            border: `2px solid ${COLORS.gold}`,
+            borderRadius: "6px"
+          }}>
+            <p style={{
+              fontFamily: FONTS.body,
+              fontSize: "0.9rem",
+              color: COLORS.navy,
+              fontWeight: 600,
+              margin: 0
+            }}>
+              {rightSide.highlight}
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 // ─── STANDARDIZED SECTION COMPONENT ─────────────────────────
 // Every content block uses this for visual consistency
 function Section({
@@ -910,25 +1257,29 @@ function OfferCards({ setPage }) {
 
 // ─── HOW IT WORKS ───────────────────────────────────────────
 function HowItWorks() {
-  const stepTitle = { fontFamily: FONTS.heading, fontSize: "1.05rem", color: COLORS.navy, margin: 0, marginBottom: "6px" };
-  const p = { fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, margin: 0 };
+  const timelineItems = [
+    {
+      title: "1) Baseline",
+      meta: "Week 1",
+      description: "We request what exists: incident history, change/release artifacts, vendor list/contracts, KPI packs, org/RACI, audit evidence folders, and escalation/on-call.",
+      completed: true
+    },
+    {
+      title: "2) Diagnose",
+      meta: "Weeks 1–3",
+      description: "You receive a decision-useful output: severity-rated findings, PE impact framing, and a prioritized Day-1 critical path.",
+      active: true
+    },
+    {
+      title: "3) Stabilize",
+      meta: "Day 1–100",
+      description: "Post-close, we install the governance baseline: incident command, change control, KPI cadence, vendor governance, and board-ready reporting."
+    }
+  ];
 
   return (
     <Section title="How It Works" noCTA>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "20px" }}>
-        <div>
-          <h3 style={stepTitle}>1) Baseline (Week 1)</h3>
-          <p style={p}>We request what exists: incident history, change/release artifacts, vendor list/contracts, KPI packs, org/RACI, audit evidence folders, and escalation/on-call.</p>
-        </div>
-        <div>
-          <h3 style={stepTitle}>2) Diagnose (Weeks 1–3)</h3>
-          <p style={p}>You receive a decision-useful output: severity-rated findings, PE impact framing, and a prioritized Day-1 critical path.</p>
-        </div>
-        <div>
-          <h3 style={stepTitle}>3) Stabilize (Day 1–100)</h3>
-          <p style={p}>Post-close, we install the governance baseline: incident command, change control, KPI cadence, vendor governance, and board-ready reporting.</p>
-        </div>
-      </div>
+      <TimelineRail items={timelineItems} compact />
     </Section>
   );
 }
@@ -995,30 +1346,82 @@ function ChooseSituation({ setPage }) {
 
 // ─── DEAL IMPLICATIONS ──────────────────────────────────────
 function DealImplications() {
+  const leftSide = {
+    title: "Risks We Surface",
+    description: "Operational risks that belong in the IC memo and impact value creation:",
+    items: [
+      "Operational fragility that threatens EBITDA and customer retention",
+      "Vendor concentration risk and change-of-control clauses",
+      "Key-person dependency and 'tribal knowledge' failure modes",
+      "Incident/change patterns that predict outages and SLA misses"
+    ]
+  };
+
+  const rightSide = {
+    title: "Value We Unlock",
+    description: "Turn operational risk into a value creation advantage:",
+    items: [
+      "Severity-rated findings that inform hold pricing and deal structure",
+      "Day-1 critical path that prevents EBITDA erosion in first 100 days",
+      "Board-ready governance that builds credibility with LPs",
+      "Exit-ready operational narrative that protects multiples in diligence"
+    ],
+    highlight: "Operational clarity → better hold outcomes"
+  };
+
   return (
     <Section title="Deal Implications We Surface" noCTA>
-      <ul style={{ margin: 0, paddingLeft: "18px", fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
-        <li>Operational fragility that belongs in the IC memo and value creation plan (severity-rated).</li>
-        <li>Vendor concentration risk and change-of-control clauses that become material post-close constraints.</li>
-        <li>Key-person dependency and "tribal knowledge" failure modes that block scaling and reporting.</li>
-        <li>Incident/change patterns that predict outages, missed SLAs, and board-level credibility risk.</li>
-      </ul>
+      <SplitContrast leftSide={leftSide} rightSide={rightSide} />
     </Section>
   );
 }
 
 // ─── FIRST 14 DAYS ──────────────────────────────────────────
 function First14Days() {
+  const timelineItems = [
+    {
+      title: "Day 1-3: Install Incident Command",
+      meta: "Days 1-3",
+      description: "Stop new damage from accumulating. Establish ownership, severity classification, and escalation protocols.",
+      items: [
+        "Define severity levels (Critical/High/Medium/Low)",
+        "Designate incident commanders for each severity tier",
+        "Set escalation thresholds to management and board",
+        "Implement postmortem discipline for Sev-1/Sev-2 incidents"
+      ],
+      active: true
+    },
+    {
+      title: "Day 4-7: Install Change Control",
+      meta: "Days 4-7",
+      description: "Prevent uncontrolled changes from creating new incidents. Establish CAB-lite process with risk classification.",
+      items: [
+        "CAB-lite charter with approval gates",
+        "Risk classification for all changes",
+        "Rollback discipline and testing requirements",
+        "Change-incident correlation tracking"
+      ]
+    },
+    {
+      title: "Day 8-14: Define KPI Baseline & Cadence",
+      meta: "Days 8-14",
+      description: "You can't improve what you don't measure. Establish baseline metrics and start weekly operating reviews.",
+      items: [
+        "Define core KPI set (MTTR, change success rate, incident volume)",
+        "Baseline current performance",
+        "Launch weekly operating review meetings",
+        "Create board-ready reporting template"
+      ],
+      deliverable: "Day 14: Operating baseline memo + first weekly KPI dashboard"
+    }
+  ];
+
   return (
     <Section title="The First 14 Days Post-Close" noCTA>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "16px" }}>
-        The Day-1 critical path is simple: stop new damage, then start measuring.
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "24px" }}>
+        The Day-1 critical path is simple: <strong>stop new damage, then start measuring</strong>.
       </p>
-      <ul style={{ margin: 0, paddingLeft: "18px", fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
-        <li>Install incident command: ownership, severity model, escalation thresholds, and postmortem discipline.</li>
-        <li>Install change control: CAB-lite, risk classification, rollback discipline, and change-incident correlation.</li>
-        <li>Define the KPI set, baseline it, and start weekly operating reviews (board-ready reporting starts here).</li>
-      </ul>
+      <TimelineRail items={timelineItems} />
     </Section>
   );
 }
@@ -1603,23 +2006,37 @@ function ServicesSamplesRow() {
 
 // Framework Why Friction Tight
 function FrameworkWhyFrictionTight() {
+  const leftSide = {
+    title: "Operational Friction",
+    description: "Unmanaged operational risk compounds under PE ownership:",
+    items: [
+      "Leverage amplifies friction: disruption becomes covenant risk",
+      "Hold periods create urgency: months spent stabilizing compress the value creation window",
+      "Exit narratives rely on operational credibility: unresolved friction becomes a multiple discount",
+      "Recurring incidents erode EBITDA through rework and customer churn",
+      "Key-person dependency blocks scaling and threatens continuity"
+    ]
+  };
+
+  const rightSide = {
+    title: "Operational Clarity",
+    description: "Systematic governance unlocks value creation:",
+    items: [
+      "Incident command + postmortem discipline → MTTR reduction and recurrence prevention",
+      "Change governance → lower failure rates and faster feature velocity",
+      "KPI cadence → board-ready reporting and credible value creation narratives",
+      "Vendor governance → concentration risk managed and renewal leverage captured",
+      "Compliance cadence → audit-ready by default, exit diligence frictionless"
+    ],
+    highlight: "Friction diagnosed early → value creation accelerated"
+  };
+
   return (
     <Section title="Operational Friction Matters in PE" noCTA>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "860px", marginBottom: "20px" }}>
-        This is the evaluation method used in the Ops Diligence Report and 100-Day Stabilization Plan: diagnose friction, then prioritize interventions by
-        EBITDA impact, execution risk, and time to proof.
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "860px", marginBottom: "24px" }}>
+        This is the evaluation method used in the Ops Diligence Report and 100-Day Stabilization Plan: <strong>diagnose friction, then prioritize interventions by EBITDA impact, execution risk, and time to proof</strong>.
       </p>
-
-      <div style={{ border: `1px solid ${COLORS.border}`, borderRadius: "6px", padding: "16px", background: "#FBFBFC" }}>
-        <div style={{ fontFamily: FONTS.heading, fontSize: "1.15rem", fontWeight: 900, color: COLORS.navy, marginBottom: "10px" }}>
-          Three reasons it shows up in outcomes
-        </div>
-        <ul style={{ margin: 0, paddingLeft: "18px", fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7 }}>
-          <li><strong>Leverage amplifies friction:</strong> disruption becomes covenant risk.</li>
-          <li><strong>Hold periods create urgency:</strong> months spent stabilizing compress the value creation window.</li>
-          <li><strong>Exit narratives rely on operational credibility:</strong> unresolved friction becomes a multiple discount.</li>
-        </ul>
-      </div>
+      <SplitContrast leftSide={leftSide} rightSide={rightSide} />
     </Section>
   );
 }
@@ -1671,10 +2088,45 @@ function FrameworkRubricTable() {
 
 // Stabilization Sequence
 function StabilizationSequence() {
-  const phases = [
-    { phase: "Phase 1: Visibility", days: "Days 1–14", desc: "You can't fix what you can't see. Establish baseline visibility into what's actually happening — not what management says is happening.", items: ["Incident volume, severity, MTTR, recurrence rate", "Change frequency, failure rate, rollback frequency", "Vendor inventory, contract terms, concentration exposure", "Current compliance posture vs. stated posture"], deliverable: "Baseline assessment memo + operational risk heatmap" },
-    { phase: "Phase 2: Control", days: "Days 15–45", desc: "Install the minimum governance gates that prevent new damage from accumulating while you address existing debt.", items: ["Incident command structure with severity classification", "Change control process with risk classification", "Escalation paths with defined thresholds", "Access review and vendor oversight cadence"], deliverable: "CAB charter + severity policy + escalation matrix" },
-    { phase: "Phase 3: Cadence", days: "Days 45–100", desc: "Governance installed ad hoc decays without rhythm. Build the operating cadence that makes stability self-sustaining.", items: ["Weekly operating review with defined KPIs and thresholds", "Monthly board-ready reporting package", "Quarterly vendor scorecards and control testing", "Postmortem → recurrence prevention → backlog loop"], deliverable: "Board ops dashboard + first QBR pack + audit evidence index" },
+  const timelineItems = [
+    {
+      title: "Phase 1: Visibility",
+      meta: "Days 1–14",
+      description: "You can't fix what you can't see. Establish baseline visibility into what's actually happening — not what management says is happening.",
+      items: [
+        "Incident volume, severity, MTTR, recurrence rate",
+        "Change frequency, failure rate, rollback frequency",
+        "Vendor inventory, contract terms, concentration exposure",
+        "Current compliance posture vs. stated posture"
+      ],
+      deliverable: "Baseline assessment memo + operational risk heatmap",
+      completed: true
+    },
+    {
+      title: "Phase 2: Control",
+      meta: "Days 15–45",
+      description: "Install the minimum governance gates that prevent new damage from accumulating while you address existing debt.",
+      items: [
+        "Incident command structure with severity classification",
+        "Change control process with risk classification",
+        "Escalation paths with defined thresholds",
+        "Access review and vendor oversight cadence"
+      ],
+      deliverable: "CAB charter + severity policy + escalation matrix",
+      active: true
+    },
+    {
+      title: "Phase 3: Cadence",
+      meta: "Days 45–100",
+      description: "Governance installed ad hoc decays without rhythm. Build the operating cadence that makes stability self-sustaining.",
+      items: [
+        "Weekly operating review with defined KPIs and thresholds",
+        "Monthly board-ready reporting package",
+        "Quarterly vendor scorecards and control testing",
+        "Postmortem → recurrence prevention → backlog loop"
+      ],
+      deliverable: "Board ops dashboard + first QBR pack + audit evidence index"
+    }
   ];
 
   return (
@@ -1682,30 +2134,13 @@ function StabilizationSequence() {
       <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.5rem", color: COLORS.navy, marginTop: 0 }}>
         The stabilization sequence
       </h2>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
-        Operational stabilization follows a consistent three-phase sequence: Visibility → Control → Cadence.
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "24px" }}>
+        Operational stabilization follows a consistent three-phase sequence: <strong>Visibility → Control → Cadence</strong>.
       </p>
 
-      <div style={{ marginTop: "14px" }}>
-        {phases.map((p, i) => (
-          <Card key={i} style={{ borderLeft: `4px solid ${[COLORS.steel, COLORS.navy, COLORS.gold][i]}`, marginBottom: "12px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "8px" }}>
-              <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy }}>{p.phase}</h3>
-              <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, fontWeight: 600 }}>{p.days}</span>
-            </div>
-            <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "10px" }}>{p.desc}</p>
-            <ul style={{ paddingLeft: "20px", marginBottom: "10px" }}>
-              {p.items.map((item, j) => <li key={j} style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "2px" }}>{item}</li>)}
-            </ul>
-            <div style={{ padding: "8px 12px", background: COLORS.offWhite, borderRadius: "4px", display: "flex", alignItems: "center", gap: "8px" }}>
-              <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.navy, letterSpacing: "0.5px", textTransform: "uppercase", flexShrink: 0, fontWeight: 600 }}>Deliverable</span>
-              <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, fontWeight: 500 }}>{p.deliverable}</span>
-            </div>
-          </Card>
-        ))}
-      </div>
+      <TimelineRail items={timelineItems} />
 
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginTop: "14px" }}>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginTop: "24px" }}>
         After Day 100, the Control Tower Retainer maintains the cadence and prevents drift-back.
       </p>
     </Card>
@@ -1740,10 +2175,24 @@ function ServicesPricingLadder() {
 
 // Services Steps
 function ServicesSteps() {
-  const steps = [
-    { step: "1", title: "Fit Check", desc: "15-minute call. Assess the situation, confirm scope, and determine fit.", icon: "📞" },
-    { step: "2", title: "Scoping + Data Request", desc: "Targeted data request. Fixed-fee proposal with timeline within 48 hours.", icon: "📋" },
-    { step: "3", title: "Deliverable", desc: "Risk-rated findings memo or phased stabilization plan. Board-ready from day one.", icon: "📊" },
+  const timelineItems = [
+    {
+      title: "Step 1: Fit Check",
+      meta: "15 minutes",
+      description: "15-minute call. Assess the situation, confirm scope, and determine fit.",
+      completed: true
+    },
+    {
+      title: "Step 2: Scoping + Data Request",
+      meta: "48 hours",
+      description: "Targeted data request. Fixed-fee proposal with timeline within 48 hours.",
+      active: true
+    },
+    {
+      title: "Step 3: Deliverable",
+      meta: "2-3 weeks",
+      description: "Risk-rated findings memo or phased stabilization plan. Board-ready from day one."
+    }
   ];
 
   return (
@@ -1751,19 +2200,7 @@ function ServicesSteps() {
       <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.5rem", color: COLORS.navy, marginTop: 0, marginBottom: "14px" }}>
         How it works
       </h2>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0", border: `1px solid ${COLORS.border}`, borderRadius: "6px", overflow: "hidden" }}>
-        {steps.map((item, i) => (
-          <div key={i} style={{ padding: "20px", background: COLORS.white, borderRight: i < 2 ? `1px solid ${COLORS.border}` : "none", position: "relative" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
-              <span style={{ fontSize: "1rem" }}>{item.icon}</span>
-              <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.navy, letterSpacing: "0.5px", fontWeight: 600 }}>STEP {item.step}</span>
-            </div>
-            <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "6px" }}>{item.title}</h4>
-            <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.55 }}>{item.desc}</p>
-            {i < 2 && <span style={{ position: "absolute", right: "-8px", top: "50%", transform: "translateY(-50%)", fontSize: "0.9rem", color: COLORS.steel, zIndex: 1, background: COLORS.white, padding: "2px" }}>→</span>}
-          </div>
-        ))}
-      </div>
+      <TimelineRail items={timelineItems} compact />
     </Card>
   );
 }
@@ -1867,27 +2304,37 @@ function NDAMicroBlock() {
 
 // Typical Red Flags
 function TypicalRedFlags() {
-  const items = [
-    { title: "Hidden EBITDA drag", body: "Recurring incidents, rework, and unmanaged change inflate labor and vendor spend." },
-    { title: "Day-1 governance gaps", body: "No incident command, no change control, no KPI cadence → risk compounds under new ownership." },
-    { title: "Vendor concentration + renewal risk", body: "Single-vendor dependencies, auto-renew traps, and missing exit plans create holdback/TSA exposure." },
-    { title: "Audit/compliance fragility", body: "Evidence scattered, controls inconsistent, access reviews ad hoc → diligence and exit readiness risk." },
-    { title: "Key-person dependency", body: "Tribal knowledge and fragile staffing model → continuity risk and slower integration." },
-  ];
+  const leftSide = {
+    title: "Red Flags We Surface",
+    description: "Operational fragility that threatens deal value:",
+    items: [
+      { title: "Hidden EBITDA drag", body: "Recurring incidents, rework, and unmanaged change inflate labor and vendor spend" },
+      { title: "Day-1 governance gaps", body: "No incident command, no change control, no KPI cadence → risk compounds under new ownership" },
+      { title: "Vendor concentration", body: "Single-vendor dependencies, auto-renew traps, and missing exit plans create holdback/TSA exposure" },
+      { title: "Audit fragility", body: "Evidence scattered, controls inconsistent → diligence and exit readiness risk" },
+      { title: "Key-person dependency", body: "Tribal knowledge and fragile staffing → continuity risk and slower integration" }
+    ]
+  };
+
+  const rightSide = {
+    title: "Interventions We Install",
+    description: "Systematic fixes that prevent recurrence:",
+    items: [
+      { title: "Incident command", body: "Severity classification, escalation paths, postmortem discipline → MTTR reduction" },
+      { title: "Change governance", body: "CAB-lite process, risk classification, rollback discipline → change failure rate drops" },
+      { title: "Vendor governance", body: "Contract mapping, renewal calendar, SLA monitoring → concentration risk managed" },
+      { title: "Compliance cadence", body: "Evidence index, control testing, access reviews → audit-ready by default" },
+      { title: "Knowledge capture", body: "Runbooks, RACI, cross-training → key-person risk mitigated" }
+    ],
+    highlight: "Day-1 governance → sustainable value creation"
+  };
 
   return (
     <Card style={{ marginTop: "18px" }}>
-      <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.navy, marginBottom: "6px" }}>
+      <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.3rem", color: COLORS.navy, marginBottom: "16px" }}>
         Typical red flags we surface (mapped to IC implications)
       </h3>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "12px", marginTop: "12px" }}>
-        {items.map((it, idx) => (
-          <div key={idx} style={{ border: `1px solid ${COLORS.border}`, borderRadius: "8px", padding: "12px 12px", background: COLORS.white }}>
-            <div style={{ fontFamily: FONTS.heading, fontSize: "0.98rem", color: COLORS.navy, marginBottom: "4px" }}>{it.title}</div>
-            <div style={{ fontFamily: FONTS.body, fontSize: "0.92rem", color: COLORS.charcoal, lineHeight: 1.5 }}>{it.body}</div>
-          </div>
-        ))}
-      </div>
+      <SplitContrast leftSide={leftSide} rightSide={rightSide} />
     </Card>
   );
 }
