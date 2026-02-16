@@ -501,6 +501,67 @@ function Card({ children, style: extraStyle }) {
   );
 }
 
+// ─── STANDARDIZED SECTION COMPONENT ─────────────────────────
+// Every content block uses this for visual consistency
+function Section({
+  title,
+  subtitle,
+  children,
+  primaryCTA,
+  secondaryCTA,
+  noCTA,
+  centered,
+  background,
+  noPadding,
+  id
+}) {
+  const containerStyle = {
+    background: background || COLORS.white,
+    border: `1px solid ${COLORS.border}`,
+    borderRadius: "8px",
+    padding: noPadding ? "0" : "32px",
+    marginBottom: "24px",
+    boxShadow: "0 1px 3px rgba(0,0,0,0.06)"
+  };
+
+  const bodyTextStyle = {
+    fontFamily: FONTS.body,
+    fontSize: "1rem",
+    color: COLORS.charcoal,
+    lineHeight: 1.7
+  };
+
+  return (
+    <div style={containerStyle} id={id}>
+      {/* Standardized heading */}
+      {title && <SectionTitle>{title}</SectionTitle>}
+      {subtitle && (
+        <p style={{ ...bodyTextStyle, marginTop: "-16px", marginBottom: "20px", color: COLORS.bodyMuted }}>
+          {subtitle}
+        </p>
+      )}
+
+      {/* Content area (cards, lists, tables, custom components) */}
+      <div style={{ marginBottom: (primaryCTA || secondaryCTA) && !noCTA ? "24px" : "0" }}>
+        {children}
+      </div>
+
+      {/* Standardized CTA buttons */}
+      {!noCTA && (primaryCTA || secondaryCTA) && (
+        <ButtonPair
+          primaryText={primaryCTA?.text}
+          primaryLink={primaryCTA?.link}
+          primaryAction={primaryCTA?.action}
+          secondaryText={secondaryCTA?.text}
+          secondaryLink={secondaryCTA?.link}
+          secondaryAction={secondaryCTA?.action}
+          centered={centered}
+        />
+      )}
+    </div>
+  );
+}
+
 // ─── MICRO-PROOF STRIP ──────────────────────────────────────
 function MicroProofStrip() {
   const proofItems = [
@@ -561,28 +622,26 @@ function MicroProofStrip() {
 // ─── EARLY CTA ──────────────────────────────────────────────
 function EarlyCTA({ setPage }) {
   return (
-    <Card style={{
-      background: `${COLORS.navy}05`,
-      textAlign: "center",
-      padding: "24px",
-      marginBottom: "24px"
-    }}>
+    <Section
+      primaryCTA={{ text: "15-Minute Fit Check", link: CALENDLY }}
+      secondaryCTA={{
+        text: "Email me instead",
+        link: mailtoHref("Devonshire Ops – Fit Check request", "Hi Hassan,\n\nI reviewed the operational levers and would like to discuss fit.\n\nContext:\n- Company / deal stage:\n- Primary concern:\n- Timeline:\n\nBest,\n")
+      }}
+      centered={true}
+      background={`${COLORS.navy}05`}
+    >
       <p style={{
         fontFamily: FONTS.body,
         fontSize: "1rem",
         color: COLORS.charcoal,
-        marginBottom: "16px",
-        lineHeight: 1.6
+        lineHeight: 1.7,
+        textAlign: "center",
+        margin: 0
       }}>
         Recognizing these patterns in a target or portfolio company?
       </p>
-      <ButtonPair
-        primaryText="15-Minute Fit Check"
-        secondaryText="Email me instead"
-        secondaryLink={mailtoHref("Devonshire Ops – Fit Check request", "Hi Hassan,\n\nI reviewed the operational levers and would like to discuss fit.\n\nContext:\n- Company / deal stage:\n- Primary concern:\n- Timeline:\n\nBest,\n")}
-        centered={true}
-      />
-    </Card>
+    </Section>
   );
 }
 
@@ -762,23 +821,20 @@ function DomainLegend() {
 // ─── PROOF STRIP ────────────────────────────────────────────
 function ProofStrip() {
   return (
-    <Card style={{ border: `1px solid ${COLORS.border}`, marginBottom: "18px" }}>
-      <SectionTitle sub>Want the red-flag memo format?</SectionTitle>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "10px" }}>
+    <Section
+      title="Want the red-flag memo format?"
+      primaryCTA={{ text: "View Sample Scorecard (PDF)", link: SAMPLE_SCORECARD_PDF }}
+      secondaryCTA={{ text: "View 100-Day Plan (PDF)", link: SAMPLE_100DAY_PDF }}
+      centered={true}
+    >
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "12px" }}>
         See the exact structure of the Ops Diligence Scorecard: severity-rated findings, PE impact, and a stabilization priority matrix.
       </p>
-      <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.bodyMuted, marginBottom: "24px" }}>
+      <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.bodyMuted, marginBottom: "0" }}>
         Samples are anonymized/fictional and provided for format demonstration only.
       </p>
-      <ButtonPair
-        primaryText="View Sample Scorecard (PDF)"
-        primaryLink={SAMPLE_SCORECARD_PDF}
-        secondaryText="View 100-Day Plan (PDF)"
-        secondaryLink={SAMPLE_100DAY_PDF}
-        centered={true}
-      />
       <SecondaryCaptureRow contextLabel="Ops diligence / stabilization" />
-    </Card>
+    </Section>
   );
 }
 
@@ -852,13 +908,11 @@ function OfferCards({ setPage }) {
 // ─── HOW IT WORKS ───────────────────────────────────────────
 function HowItWorks() {
   const stepTitle = { fontFamily: FONTS.heading, fontSize: "1.05rem", color: COLORS.navy, margin: 0, marginBottom: "6px" };
-  const p = { fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, margin: 0 };
+  const p = { fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, margin: 0 };
 
   return (
-    <Card style={{ marginBottom: "26px" }}>
-      <SectionTitle sub>How it works</SectionTitle>
-
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "14px" }}>
+    <Section title="How it works" noCTA>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "20px" }}>
         <div>
           <h3 style={stepTitle}>1) Baseline (Week 1)</h3>
           <p style={p}>We request what exists: incident history, change/release artifacts, vendor list/contracts, KPI packs, org/RACI, audit evidence folders, and escalation/on-call.</p>
@@ -872,7 +926,7 @@ function HowItWorks() {
           <p style={p}>Post-close, we install the governance baseline: incident command, change control, KPI cadence, vendor governance, and board-ready reporting.</p>
         </div>
       </div>
-    </Card>
+    </Section>
   );
 }
 
@@ -940,32 +994,30 @@ function ChooseSituation({ setPage }) {
 // ─── DEAL IMPLICATIONS ──────────────────────────────────────
 function DealImplications() {
   return (
-    <Card style={{ marginBottom: "22px" }}>
-      <SectionTitle sub>Deal implications we surface</SectionTitle>
-      <ul style={{ margin: 0, paddingLeft: "18px", fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65 }}>
+    <Section title="Deal implications we surface" noCTA>
+      <ul style={{ margin: 0, paddingLeft: "18px", fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
         <li>Operational fragility that belongs in the IC memo and value creation plan (severity-rated).</li>
         <li>Vendor concentration risk and change-of-control clauses that become material post-close constraints.</li>
         <li>Key-person dependency and "tribal knowledge" failure modes that block scaling and reporting.</li>
         <li>Incident/change patterns that predict outages, missed SLAs, and board-level credibility risk.</li>
       </ul>
-    </Card>
+    </Section>
   );
 }
 
 // ─── FIRST 14 DAYS ──────────────────────────────────────────
 function First14Days() {
   return (
-    <Card style={{ marginBottom: "22px" }}>
-      <SectionTitle sub>The first 14 days post-close</SectionTitle>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginTop: 0 }}>
+    <Section title="The first 14 days post-close" noCTA>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "16px" }}>
         The Day-1 critical path is simple: stop new damage, then start measuring.
       </p>
-      <ul style={{ margin: 0, paddingLeft: "18px", fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65 }}>
+      <ul style={{ margin: 0, paddingLeft: "18px", fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
         <li>Install incident command: ownership, severity model, escalation thresholds, and postmortem discipline.</li>
         <li>Install change control: CAB-lite, risk classification, rollback discipline, and change-incident correlation.</li>
         <li>Define the KPI set, baseline it, and start weekly operating reviews (board-ready reporting starts here).</li>
       </ul>
-    </Card>
+    </Section>
   );
 }
 
@@ -1020,12 +1072,10 @@ function MiniCases() {
 // ─── FAQ BLOCK ──────────────────────────────────────────────
 function FAQBlock() {
   const q = { fontFamily: FONTS.heading, fontSize: "1.05rem", color: COLORS.navy, margin: 0, marginBottom: "6px" };
-  const a = { fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, margin: 0, marginBottom: "14px" };
+  const a = { fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, margin: 0, marginBottom: "16px" };
 
   return (
-    <Card style={{ marginBottom: "26px" }}>
-      <SectionTitle sub>FAQ</SectionTitle>
-
+    <Section title="FAQ" noCTA>
       <div>
         <h3 style={q}>Do you replace the operating team?</h3>
         <p style={a}>No. I install the operating system—governance, cadence, and controls—while ownership stays internal.</p>
@@ -1041,7 +1091,7 @@ function FAQBlock() {
           If the company already has mature incident/change governance, a live KPI cadence, and low volatility, you likely don't need stabilization—only optimization.
         </p>
       </div>
-    </Card>
+    </Section>
   );
 }
 
@@ -1553,9 +1603,8 @@ function ServicesSamplesRow() {
 // Framework Why Friction Tight
 function FrameworkWhyFrictionTight() {
   return (
-    <Card>
-      <SectionTitle>Operational friction matters in PE</SectionTitle>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "860px" }}>
+    <Section title="Operational friction matters in PE" noCTA>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "860px", marginBottom: "20px" }}>
         This is the evaluation method used in the Ops Diligence Report and 100-Day Stabilization Plan: diagnose friction, then prioritize interventions by
         EBITDA impact, execution risk, and time to proof.
       </p>
@@ -1570,16 +1619,15 @@ function FrameworkWhyFrictionTight() {
           <li><strong>Exit narratives rely on operational credibility:</strong> unresolved friction becomes a multiple discount.</li>
         </ul>
       </div>
-    </Card>
+    </Section>
   );
 }
 
 // Framework Rubric Table
 function FrameworkRubricTable() {
   return (
-    <Card>
-      <SectionTitle>The Friction Evaluation Rubric</SectionTitle>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
+    <Section title="The Friction Evaluation Rubric" noCTA>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "20px" }}>
         Each lever is evaluated across six dimensions. The output is a prioritization logic you can use in diligence and in the first 100 days.
       </p>
 
@@ -1616,7 +1664,7 @@ function FrameworkRubricTable() {
         Levers scoring well on <em>EBITDA Impact + Time to Proof + Low Attention Load</em> are highest-priority quick wins.
         Strong <em>Exit Story Impact</em> with longer timelines are strategic investments.
       </p>
-    </Card>
+    </Section>
   );
 }
 
