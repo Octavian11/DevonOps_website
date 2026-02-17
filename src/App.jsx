@@ -1024,21 +1024,46 @@ function Nav({ page, setPage }) {
         { key: "about", label: "About" },
       ];
   return (
-    <nav style={{ position: "sticky", top: 0, zIndex: 100, background: COLORS.primary, borderBottom: `3px solid ${COLORS.gold}`, padding: "0 28px", display: "flex", alignItems: "center", justifyContent: "space-between", height: "76px", minHeight: "76px" }}>
+    <nav style={{
+      position: "sticky",
+      top: 0,
+      zIndex: 100,
+      background: COLORS.white,  // White background
+      borderBottom: `3px solid ${COLORS.gold}`,
+      padding: "0 28px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      height: "76px",
+      minHeight: "76px",
+      boxShadow: "0 2px 8px rgba(20, 33, 61, 0.08)"  // Subtle shadow for depth
+    }}>
       <div style={{ display: "flex", alignItems: "center", gap: "28px" }}>
         <img
-          src="/Devonshire_Operations_Logo_Exact_Transparent.png"
+          src="/Devonshire_Operations_Logo_Exact.svg"
           alt="Devonshire Operations"
           style={{ height: "60px", cursor: "pointer" }}
           onClick={() => setPage("levers")}
         />
-        <div style={{ width: "1px", height: "36px", background: "#334155" }} />
+        <div style={{ width: "1px", height: "36px", background: COLORS.border }} />
         <div style={{ display: "flex", gap: "4px" }}>
           {items.map(({ key, label }) => (
             <button key={key} onClick={() => setPage(key)}
-              style={{ background: page === key ? `${COLORS.gold}20` : "transparent", border: "none", padding: "10px 16px", borderRadius: "4px", color: page === key ? COLORS.gold : "#CBD5E0", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, cursor: "pointer", transition: "all 0.15s", letterSpacing: "0.3px" }}
-              onMouseEnter={e => { if (page !== key) e.target.style.color = "white"; }}
-              onMouseLeave={e => { if (page !== key) e.target.style.color = "#CBD5E0"; }}>
+              style={{
+                background: page === key ? `${COLORS.gold}20` : "transparent",
+                border: "none",
+                padding: "10px 16px",
+                borderRadius: "4px",
+                color: page === key ? COLORS.gold : COLORS.navy,  // Navy text, gold when active
+                fontFamily: FONTS.body,
+                fontSize: "1rem",
+                fontWeight: 600,
+                cursor: "pointer",
+                transition: "all 0.15s",
+                letterSpacing: "0.3px"
+              }}
+              onMouseEnter={e => { if (page !== key) e.target.style.color = COLORS.gold; }}
+              onMouseLeave={e => { if (page !== key) e.target.style.color = COLORS.navy; }}>
               {label}
             </button>
           ))}
