@@ -31,7 +31,7 @@ export default function App() {
 
   const pages = {
     levers: <LeverExplorer setPage={setPage} />,
-    services: <ServicesPage setPage={setPage} />,
+    services: <ServicesPage />,
     scorer: <ScorerPage />,
     about: <AboutPage />,
   };
