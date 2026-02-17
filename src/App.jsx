@@ -2049,11 +2049,11 @@ function ServicesSamplesRow() {
 
   return (
     <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "14px" }}>
-      <a href={PDF_OPS_DILIGENCE_SCORECARD} target="_blank" rel="noopener noreferrer" style={btn}>
-        📄 View Ops Diligence Scorecard (PDF)
+      <a href={SAMPLE_SCORECARD_PDF} target="_blank" rel="noopener noreferrer" style={btn}>
+        📄 Sample Ops Diligence Scorecard (PDF)
       </a>
-      <a href={PDF_100_DAY_STABILIZATION_PLAN} target="_blank" rel="noopener noreferrer" style={btn}>
-        📄 View 100-Day Stabilization Plan (PDF)
+      <a href={SAMPLE_100DAY_PDF} target="_blank" rel="noopener noreferrer" style={btn}>
+        📄 Sample 100-Day Stabilization Plan (PDF)
       </a>
     </div>
   );
@@ -2716,16 +2716,7 @@ function AboutPage() {
 
       {/* Sample Deliverables */}
       <Section noCTA title="Sample Deliverables">
-        <div style={{ display: "flex", gap: SPACING.sm, flexWrap: "wrap" }}>
-          <a href={SAMPLE_SCORECARD_PDF} target="_blank" rel="noopener noreferrer"
-            style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, color: COLORS.navy, textDecoration: "none", borderBottom: `2px solid ${COLORS.navy}` }}>
-            📄 Ops Diligence Scorecard (PDF)
-          </a>
-          <a href={SAMPLE_100DAY_PDF} target="_blank" rel="noopener noreferrer"
-            style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, color: COLORS.navy, textDecoration: "none", borderBottom: `2px solid ${COLORS.navy}` }}>
-            📄 100-Day Stabilization Plan (PDF)
-          </a>
-        </div>
+        <ServicesSamplesRow />
       </Section>
 
       {/* Bottom CTA */}
