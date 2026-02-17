@@ -1215,7 +1215,6 @@ function OfferCards({ setPage }) {
       <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginBottom: "24px" }}>
         <div style={box}>
           <SectionTitle sub>Ops Diligence Report (Pre-Close)</SectionTitle>
-           <div style=>Starting at $15,000 · 2–3 weeks</div>
           <div style={tag}>Starting at $15,000 · 2–3 weeks</div>
           <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
             <li style={li}>Risk-rated red flags with severity + PE impact</li>
