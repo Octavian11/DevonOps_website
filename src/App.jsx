@@ -1042,7 +1042,7 @@ function Nav({ page, setPage }) {
         <img
           src="/Devonshire_Operations_Logo_Exact.svg"
           alt="Devonshire Operations"
-          style={{ height: "60px", cursor: "pointer" }}
+          style={{ height: "90px", cursor: "pointer" }}
           onClick={() => setPage("levers")}
         />
         <div style={{ width: "1px", height: "36px", background: COLORS.border }} />
@@ -1955,21 +1955,18 @@ function ServicesMethodJumpBar() {
     fontFamily: FONTS.body,
     fontSize: "0.95rem",
     fontWeight: 800,
-    color: COLORS.navy,
+    color: COLORS.white,  // White text
     textDecoration: "none",
     padding: "10px 12px",
     borderRadius: "6px",
-    border: `1px solid ${COLORS.border}`,
-    background: COLORS.white,
+    border: `1px solid ${COLORS.navy}`,
+    background: COLORS.navy,  // Navy background
   };
 
   const wrap = { display: "flex", gap: "10px", flexWrap: "wrap", marginBottom: "18px" };
 
   return (
     <div style={wrap}>
-      <a href="#pre-close" style={linkStyle}>Pre-Close</a>
-      <a href="#bundle" style={linkStyle}>Bundle</a>
-      <a href="#post-close" style={linkStyle}>Post-Close</a>
       <a href="#ongoing" style={linkStyle}>Ongoing</a>
       <a href="#how-it-works" style={linkStyle}>How it works</a>
       <a href="#rubric" style={linkStyle}>Rubric</a>
@@ -2613,14 +2610,13 @@ function ServicesPage({ setPage }) {
       <ServicesMethodJumpBar />
       <TrafficSelector />
 
-      <div id="top">
-        <h1 style={{ fontFamily: FONTS.heading, fontSize: "2.2rem", color: COLORS.navy, marginBottom: "12px" }}>
-          Services
-        </h1>
-        <p style={{ fontFamily: FONTS.body, fontSize: "1.1rem", color: COLORS.charcoal, lineHeight: 1.7, marginTop: 0, marginBottom: "22px", maxWidth: "860px" }}>
-          Operational support for PE funds and portfolio companies — from pre-close diligence through post-close stabilization to ongoing governance.
-        </p>
-      </div>
+      <Section
+        title="Services"
+        subtitle="Operational support for PE funds and portfolio companies — from pre-close diligence through post-close stabilization to ongoing governance."
+        type="windowWithCards"
+        noCTA
+        id="top"
+      />
 
       {/* SOLUTION: Pricing ladder (4 cards) */}
       <ServicesPricingLadder />
@@ -2633,18 +2629,18 @@ function ServicesPage({ setPage }) {
       <ServicesSamplesRow />
       <NDAMicroBlock />
 
-      {/* PROBLEM CONTEXT: Why this matters */}
-      <div id="why-friction" style={{ marginTop: "28px" }}>
-        <FrameworkWhyFrictionTight />
+      {/* PROOF: Methodology */}
+      <div id="rubric" style={{ marginTop: "28px" }}>
+        <FrameworkRubricTable />
       </div>
 
       <div id="red-flags" style={{ marginTop: "28px" }}>
         <TypicalRedFlags />
       </div>
 
-      {/* PROOF: Methodology */}
-      <div id="rubric" style={{ marginTop: "28px" }}>
-        <FrameworkRubricTable />
+      {/* PROBLEM CONTEXT: Why this matters */}
+      <div id="why-friction" style={{ marginTop: "28px" }}>
+        <FrameworkWhyFrictionTight />
       </div>
 
       <div id="sequence" style={{ marginTop: "28px" }}>
