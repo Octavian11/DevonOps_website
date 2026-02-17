@@ -350,7 +350,7 @@ const globalCSS = `
 function SeverityBadge({ severity }) {
   const s = SEVERITY_STYLE[severity];
   return (
-    <span style={{ display: "inline-block", padding: "3px 10px", borderRadius: "3px", fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 500, letterSpacing: "0.5px", textTransform: "uppercase", color: s.text, background: s.bg, border: `1px solid ${s.border}` }}>
+    <span style={{ display: "inline-block", padding: "4px 12px", borderRadius: RADIUS.sm, fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase", color: s.text, background: s.bg, border: `1px solid ${s.border}` }}>
       {severity}
     </span>
   );
@@ -358,7 +358,7 @@ function SeverityBadge({ severity }) {
 
 function TimingBadge({ timing }) {
   return (
-    <span style={{ display: "inline-block", padding: "3px 10px", borderRadius: "3px", fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 500, letterSpacing: "0.5px", color: "white", background: TIMING_COLORS[timing] || COLORS.ongoing }}>
+    <span style={{ display: "inline-block", padding: "4px 12px", borderRadius: RADIUS.sm, fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase", color: "white", background: TIMING_COLORS[timing] || COLORS.ongoing }}>
       {timing}
     </span>
   );
@@ -367,7 +367,7 @@ function TimingBadge({ timing }) {
 function DomainTag({ domain }) {
   const d = DOMAINS[domain];
   return (
-    <span style={{ display: "inline-block", padding: "3px 8px", borderRadius: "3px", fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 500, color: d.color, background: `${d.color}15`, border: `1px solid ${d.color}30` }}>
+    <span style={{ display: "inline-block", padding: "4px 10px", borderRadius: RADIUS.sm, fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase", color: d.color, background: `${d.color}15`, border: `1px solid ${d.color}30` }}>
       {d.short}
     </span>
   );
@@ -1600,7 +1600,7 @@ function LeverExplorer({ setPage }) {
     return true;
   });
 
-  const selectStyle = { padding: "10px 14px", border: `1px solid ${COLORS.border}`, borderRadius: "4px", fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, background: "white", cursor: "pointer", minWidth: "160px" };
+  const selectStyle = { padding: "10px 14px", border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, background: COLORS.white, cursor: "pointer", minWidth: "160px", boxShadow: SHADOWS.xs };
 
   return (
     <div className="fade-in">
@@ -1689,15 +1689,15 @@ function LeverExplorer({ setPage }) {
           </div>
           {/* Mid-page CTA after 5th lever */}
           {idx === 4 && filtered.length > 5 && (
-            <div style={{ margin: "12px 0 16px", padding: "16px 24px", background: `linear-gradient(135deg, ${COLORS.navy}08 0%, ${COLORS.gold}08 100%)`, border: `1px solid ${COLORS.border}`, borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
-              <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, margin: 0 }}>
-                <strong style={{ color: COLORS.navy }}>Want the red-flag memo format?</strong> See exactly what the Ops Diligence Report delivers.
+            <div style={{ margin: "12px 0 16px", padding: "20px 28px", background: COLORS.navy, borderRadius: RADIUS.md, boxShadow: SHADOWS.md, display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
+              <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.offWhite, margin: 0, lineHeight: 1.55 }}>
+                <strong style={{ color: COLORS.gold }}>Want the red-flag memo format?</strong> See exactly what the Ops Diligence Report delivers.
               </p>
               <div style={{ display: "flex", gap: "10px", flexShrink: 0 }}>
-                <button onClick={() => setPage("services")} style={{ padding: "7px 18px", background: COLORS.navy, color: "white", border: "none", borderRadius: "4px", fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 600, cursor: "pointer" }}>
+                <button onClick={() => setPage("services")} style={{ padding: "8px 18px", background: "transparent", color: COLORS.offWhite, border: `1px solid ${COLORS.offWhite}60`, borderRadius: RADIUS.sm, fontFamily: FONTS.body, fontSize: "0.875rem", fontWeight: 600, cursor: "pointer" }}>
                   View Services & Pricing
                 </button>
-                <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ padding: "7px 18px", background: COLORS.gold, color: "white", border: "none", borderRadius: "4px", fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 600, cursor: "pointer", textDecoration: "none" }}>
+                <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ padding: "8px 18px", background: COLORS.gold, color: COLORS.white, border: "none", borderRadius: RADIUS.sm, fontFamily: FONTS.body, fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", textDecoration: "none" }}>
                   15-Minute Fit Check
                 </a>
               </div>
@@ -2645,11 +2645,6 @@ function ServicesPage({ setPage }) {
         <FAQBlock />
       </div>
 
-      {/* ACTION: Lead capture & CTA */}
-      <div id="lead-capture" style={{ marginTop: "28px" }}>
-        <LeadCapture />
-      </div>
-
       <div id="fit-check" style={{ marginTop: "28px" }}>
         <FitCheckCTA />
       </div>
@@ -2728,6 +2723,73 @@ function AboutPage() {
           <CTAButton text="15-Minute Fit Check" />
         </div>
       </Section>
+    </div>
+  );
+}
+
+// ─── FOOTER LEAD CAPTURE ────────────────────────────────────
+function FooterLeadCapture() {
+  const [email, setEmail] = useState("");
+  const [situation, setSituation] = useState("Evaluating a target");
+  const [status, setStatus] = useState({ state: "idle", msg: "" });
+
+  const inputStyle = {
+    width: "100%",
+    padding: "8px 10px",
+    borderRadius: RADIUS.sm,
+    border: `1px solid ${COLORS.steel}`,
+    fontFamily: FONTS.body,
+    fontSize: "0.875rem",
+    background: `${COLORS.white}10`,
+    color: COLORS.offWhite,
+    boxSizing: "border-box",
+  };
+
+  const submit = async (e) => {
+    e.preventDefault();
+    if (!email || !email.includes("@")) {
+      setStatus({ state: "error", msg: "Enter a valid email." });
+      return;
+    }
+    setStatus({ state: "loading", msg: "Sending…" });
+    try {
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, situation, source: "footer" }),
+      });
+      if (!res.ok) throw new Error("bad_status");
+      setStatus({ state: "ok", msg: "Received. We'll follow up by email." });
+      setEmail("");
+    } catch {
+      setStatus({ state: "error", msg: "Could not submit. Email us directly." });
+    }
+  };
+
+  return (
+    <div>
+      <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.gold, marginBottom: "16px", letterSpacing: "0.5px" }}>
+        Not ready to book?
+      </h3>
+      <p style={{ fontFamily: FONTS.body, fontSize: "0.875rem", color: `${COLORS.offWhite}B0`, lineHeight: 1.55, marginBottom: "14px" }}>
+        Share your situation and I'll reply with fit and next steps.
+      </p>
+      <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+        <select value={situation} onChange={e => setSituation(e.target.value)} style={inputStyle}>
+          <option>Evaluating a target</option>
+          <option>First 100 days post-close</option>
+          <option>Mid-hold optimization</option>
+        </select>
+        <input value={email} onChange={e => setEmail(e.target.value)} placeholder="you@fund.com" style={inputStyle} />
+        <button type="submit" style={{ padding: "8px 14px", background: COLORS.gold, color: COLORS.white, border: "none", borderRadius: RADIUS.sm, fontFamily: FONTS.body, fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", textAlign: "left" }}>
+          Send →
+        </button>
+        {status.state !== "idle" && (
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: status.state === "ok" ? "#68D391" : status.state === "loading" ? COLORS.offWhite : "#FC8181", margin: 0 }}>
+            {status.msg}
+          </p>
+        )}
+      </form>
     </div>
   );
 }
@@ -2944,6 +3006,9 @@ function Footer({ setPage }) {
             </a>
           </div>
         </div>
+
+        {/* Email form */}
+        <FooterLeadCapture />
       </div>
 
       {/* Copyright & Legal */}
