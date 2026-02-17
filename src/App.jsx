@@ -442,8 +442,7 @@ function ButtonPair({
              border: "none",
              whiteSpace: "nowrap",
              flex: "1 1 auto",
-             minWidth: "180px",
-             maxWidth: "280px"
+             minWidth: "180px"
            }}
            onMouseEnter={e => { e.target.style.background = "#0F1829"; }}
            onMouseLeave={e => { e.target.style.background = COLORS.navy; }}>
@@ -466,8 +465,7 @@ function ButtonPair({
              cursor: "pointer",
              whiteSpace: "nowrap",
              flex: "1 1 auto",
-             minWidth: "180px",
-             maxWidth: "280px"
+             minWidth: "180px"
            }}
            onMouseEnter={e => { e.target.style.background = "#0F1829"; }}
            onMouseLeave={e => { e.target.style.background = COLORS.navy; }}>
@@ -494,8 +492,7 @@ function ButtonPair({
                transition: "all 0.2s",
                whiteSpace: "nowrap",
                flex: "1 1 auto",
-               minWidth: "180px",
-               maxWidth: "280px"
+               minWidth: "180px"
              }}
              onMouseEnter={e => { e.target.style.background = `${COLORS.navy}08`; }}
              onMouseLeave={e => { e.target.style.background = "white"; }}>
@@ -518,8 +515,7 @@ function ButtonPair({
                cursor: "pointer",
                whiteSpace: "nowrap",
                flex: "1 1 auto",
-               minWidth: "180px",
-               maxWidth: "280px"
+               minWidth: "180px"
              }}
              onMouseEnter={e => { e.target.style.background = `${COLORS.navy}08`; }}
              onMouseLeave={e => { e.target.style.background = "white"; }}>
@@ -1376,23 +1372,6 @@ function ChooseSituation({ setPage }) {
     highlight: "Governance installed → value creation unlocked"
   };
 
-  // Shared button style for equal formatting
-  const buttonStyle = {
-    fontFamily: FONTS.body,
-    fontSize: "1rem",
-    fontWeight: 600,
-    color: COLORS.navy,
-    background: COLORS.white,
-    border: `2px solid ${COLORS.navy}`,
-    borderRadius: "6px",
-    padding: "14px 32px",
-    cursor: "pointer",
-    transition: "all 0.2s ease",
-    flex: "1 1 240px",
-    maxWidth: "300px",
-    textAlign: "center"
-  };
-
   return (
     <Section title="Choose Your Situation" noCTA>
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "820px", marginBottom: "24px" }}>
@@ -1401,43 +1380,15 @@ function ChooseSituation({ setPage }) {
 
       <SplitContrast leftSide={leftSide} rightSide={rightSide} />
 
-      <div style={{ display: "flex", gap: "16px", marginTop: "24px", justifyContent: "center", flexWrap: "wrap" }}>
-        <button
-          onClick={() => setPage("scorer")}
-          style={buttonStyle}
-          onMouseEnter={e => {
-            e.target.style.background = COLORS.navy;
-            e.target.style.color = COLORS.white;
-          }}
-          onMouseLeave={e => {
-            e.target.style.background = COLORS.white;
-            e.target.style.color = COLORS.navy;
-          }}
-        >
-          Use the Scorer
-        </button>
-        <a
-          href={SAMPLE_100DAY_PDF}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            ...buttonStyle,
-            textDecoration: "none",
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center"
-          }}
-          onMouseEnter={e => {
-            e.target.style.background = COLORS.navy;
-            e.target.style.color = COLORS.white;
-          }}
-          onMouseLeave={e => {
-            e.target.style.background = COLORS.white;
-            e.target.style.color = COLORS.navy;
-          }}
-        >
-          View 100-Day Plan (PDF)
-        </a>
+      <div style={{ marginTop: "24px" }}>
+        <ButtonPair
+          primaryText="Use the Scorer"
+          primaryLink={null}
+          primaryAction={() => setPage("scorer")}
+          secondaryText="View 100-Day Plan (PDF)"
+          secondaryLink={SAMPLE_100DAY_PDF}
+          centered={true}
+        />
       </div>
     </Section>
   );
