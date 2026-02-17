@@ -414,7 +414,10 @@ function ButtonPair({
              textAlign: "center",
              transition: "all 0.2s",
              border: "none",
-             whiteSpace: "nowrap"
+             whiteSpace: "nowrap",
+             flex: "1 1 auto",
+             minWidth: "180px",
+             maxWidth: "280px"
            }}
            onMouseEnter={e => { e.target.style.background = "#0F1829"; }}
            onMouseLeave={e => { e.target.style.background = COLORS.navy; }}>
@@ -435,7 +438,10 @@ function ButtonPair({
              transition: "all 0.2s",
              border: "none",
              cursor: "pointer",
-             whiteSpace: "nowrap"
+             whiteSpace: "nowrap",
+             flex: "1 1 auto",
+             minWidth: "180px",
+             maxWidth: "280px"
            }}
            onMouseEnter={e => { e.target.style.background = "#0F1829"; }}
            onMouseLeave={e => { e.target.style.background = COLORS.navy; }}>
@@ -449,7 +455,7 @@ function ButtonPair({
           <a href={secondaryLink} target="_blank" rel="noopener noreferrer"
              style={{
                display: "inline-block",
-               padding: "14px 28px",
+               padding: "12px 26px",  // Reduced by 2px to account for 2px border
                background: "white",
                color: COLORS.navy,
                borderRadius: "6px",
@@ -460,7 +466,10 @@ function ButtonPair({
                textAlign: "center",
                border: `2px solid ${COLORS.navy}`,
                transition: "all 0.2s",
-               whiteSpace: "nowrap"
+               whiteSpace: "nowrap",
+               flex: "1 1 auto",
+               minWidth: "180px",
+               maxWidth: "280px"
              }}
              onMouseEnter={e => { e.target.style.background = `${COLORS.navy}08`; }}
              onMouseLeave={e => { e.target.style.background = "white"; }}>
@@ -470,7 +479,7 @@ function ButtonPair({
           <button onClick={secondaryAction}
              style={{
                display: "inline-block",
-               padding: "14px 28px",
+               padding: "12px 26px",  // Reduced by 2px to account for 2px border
                background: "white",
                color: COLORS.navy,
                borderRadius: "6px",
@@ -481,7 +490,10 @@ function ButtonPair({
                border: `2px solid ${COLORS.navy}`,
                transition: "all 0.2s",
                cursor: "pointer",
-               whiteSpace: "nowrap"
+               whiteSpace: "nowrap",
+               flex: "1 1 auto",
+               minWidth: "180px",
+               maxWidth: "280px"
              }}
              onMouseEnter={e => { e.target.style.background = `${COLORS.navy}08`; }}
              onMouseLeave={e => { e.target.style.background = "white"; }}>
@@ -1203,6 +1215,13 @@ function OfferCards({ setPage }) {
     minWidth: "260px",
   };
 
+  // Gold border for recommended card
+  const boxGold = {
+    ...box,
+    border: `2px solid ${COLORS.gold}`,  // Gold border for recommended
+    boxShadow: "0 3px 8px rgba(184, 134, 11, 0.15), 0 1px 3px rgba(184, 134, 11, 0.1)",  // Gold shadow
+  };
+
   const tag = { fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.gold, fontWeight: 600, marginBottom: "10px" };
   const li = { marginBottom: "8px", lineHeight: 1.55 };
 
@@ -1223,7 +1242,7 @@ function OfferCards({ setPage }) {
           </ul>
         </div>
 
-        <div style={box}>
+        <div style={boxGold}>
           <SectionTitle sub>Bundle (Recommended)</SectionTitle>
           <div style={tag}>$25,000–$35,000 · diligence + 100 days</div>
           <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
