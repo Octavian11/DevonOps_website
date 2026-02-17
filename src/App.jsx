@@ -2215,7 +2215,7 @@ function StabilizationSequence() {
   ];
 
   return (
-    <Card>
+    <Section noCTA>
       <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.5rem", color: COLORS.navy, marginTop: 0 }}>
         The stabilization sequence
       </h2>
@@ -2228,7 +2228,7 @@ function StabilizationSequence() {
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginTop: "24px" }}>
         After Day 100, the Control Tower Retainer maintains the cadence and prevents drift-back.
       </p>
-    </Card>
+    </Section>
   );
 }
 
@@ -2281,12 +2281,12 @@ function ServicesSteps() {
   ];
 
   return (
-    <Card>
+    <Section noCTA>
       <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.5rem", color: COLORS.navy, marginTop: 0, marginBottom: "14px" }}>
         How it works
       </h2>
       <TimelineRail items={timelineItems} compact />
-    </Card>
+    </Section>
   );
 }
 
@@ -2415,12 +2415,12 @@ function TypicalRedFlags() {
   };
 
   return (
-    <Card style={{ marginTop: "18px" }}>
+    <Section noCTA style={{ marginTop: "18px" }}>
       <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.3rem", color: COLORS.navy, marginBottom: "16px" }}>
         Typical red flags we surface (mapped to IC implications)
       </h3>
       <SplitContrast leftSide={leftSide} rightSide={rightSide} />
-    </Card>
+    </Section>
   );
 }
 
@@ -2450,7 +2450,7 @@ function MemoSampleScreenshots() {
   ];
 
   return (
-    <Card style={{ marginTop: "18px", background: `${COLORS.navy}03` }}>
+    <Section noCTA style={{ marginTop: "18px", background: `${COLORS.navy}03` }}>
       <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.navy, marginBottom: "6px" }}>
         Sample deliverable excerpts (anonymized)
       </h3>
@@ -2468,7 +2468,7 @@ function MemoSampleScreenshots() {
           </div>
         ))}
       </div>
-    </Card>
+    </Section>
   );
 }
 
