@@ -378,7 +378,7 @@ function MemoSampleScreenshots() {
 
 export default function ServicesPage() {
   return (
-    <div style={{ maxWidth: "980px", margin: "0 auto", padding: "48px 24px" }}>
+    <div>
       <ServicesMethodJumpBar />
       <ServicesPricingLadder />
       <ServicesSamplesRow />

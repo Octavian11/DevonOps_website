@@ -46,8 +46,8 @@ export function CTAButton({ text, small, variant, style: extraStyle }) {
   return (
     <a href={CALENDLY} target="_blank" rel="noopener noreferrer"
       style={{ display: "inline-block", padding: small ? "10px 22px" : "12px 28px", background: bg, color, fontFamily: FONTS.body, fontSize: small ? "0.9rem" : "1rem", fontWeight: 600, borderRadius: RADIUS.sm, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border, ...extraStyle }}
-      onMouseEnter={e => { e.target.style.background = hoverBg; }}
-      onMouseLeave={e => { e.target.style.background = bg; }}>
+      onMouseEnter={e => { e.currentTarget.style.background = hoverBg; }}
+      onMouseLeave={e => { e.currentTarget.style.background = bg; }}>
       {text || "15-Minute Fit Check"}
     </a>
   );
@@ -84,15 +84,15 @@ export function ButtonPair({
       {primaryLink ? (
         <a href={primaryLink} target="_blank" rel="noopener noreferrer"
            style={{ display: "inline-block", padding: "14px 28px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, textDecoration: "none", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", transition: "all 0.2s", border: "none", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "180px" }}
-           onMouseEnter={e => { e.target.style.background = "#0F1829"; }}
-           onMouseLeave={e => { e.target.style.background = COLORS.navy; }}>
+           onMouseEnter={e => { e.currentTarget.style.background = "#0F1829"; }}
+           onMouseLeave={e => { e.currentTarget.style.background = COLORS.navy; }}>
           {primaryText}
         </a>
       ) : (
         <button onClick={primaryAction}
            style={{ display: "inline-block", padding: "14px 28px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", transition: "all 0.2s", border: "none", cursor: "pointer", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "180px" }}
-           onMouseEnter={e => { e.target.style.background = "#0F1829"; }}
-           onMouseLeave={e => { e.target.style.background = COLORS.navy; }}>
+           onMouseEnter={e => { e.currentTarget.style.background = "#0F1829"; }}
+           onMouseLeave={e => { e.currentTarget.style.background = COLORS.navy; }}>
           {primaryText}
         </button>
       )}
@@ -101,15 +101,15 @@ export function ButtonPair({
         secondaryLink ? (
           <a href={secondaryLink} target="_blank" rel="noopener noreferrer"
              style={{ display: "inline-block", padding: "12px 26px", background: "white", color: COLORS.navy, borderRadius: RADIUS.md, textDecoration: "none", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", border: `2px solid ${COLORS.navy}`, transition: "all 0.2s", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "180px" }}
-             onMouseEnter={e => { e.target.style.background = `${COLORS.navy}08`; }}
-             onMouseLeave={e => { e.target.style.background = "white"; }}>
+             onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.navy}08`; }}
+             onMouseLeave={e => { e.currentTarget.style.background = "white"; }}>
             {secondaryText}
           </a>
         ) : (
           <button onClick={secondaryAction}
              style={{ display: "inline-block", padding: "12px 26px", background: "white", color: COLORS.navy, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", border: `2px solid ${COLORS.navy}`, transition: "all 0.2s", cursor: "pointer", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "180px" }}
-             onMouseEnter={e => { e.target.style.background = `${COLORS.navy}08`; }}
-             onMouseLeave={e => { e.target.style.background = "white"; }}>
+             onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.navy}08`; }}
+             onMouseLeave={e => { e.currentTarget.style.background = "white"; }}>
             {secondaryText}
           </button>
         )
@@ -155,7 +155,7 @@ export function TimelineRail({ items, compact = false }) {
           <div key={i} style={{ position: "relative", marginBottom: isLast ? "0" : (compact ? "24px" : SPACING.lg) }}>
             <div style={{ position: "absolute", left: compact ? "-32px" : "-46px", top: "12px", width: compact ? "16px" : "18px", height: compact ? "16px" : "18px", borderRadius: "50%", background: nodeColor, border: `3px solid ${nodeBorder}`, boxShadow: isActive ? `0 0 0 4px rgba(184, 134, 11, 0.1)` : "none", zIndex: 1 }} />
 
-            <div style={{ background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.lg, padding: compact ? "16px" : SPACING.md, boxShadow: `${SHADOWS.sm}, ${cardGlow}`, transition: "all 0.3s ease" }}>
+            <div style={{ background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.lg, padding: compact ? "16px" : SPACING.md, boxShadow: cardGlow !== "none" ? `${SHADOWS.sm}, ${cardGlow}` : SHADOWS.sm, transition: "all 0.3s ease" }}>
               {(item.title || item.meta) && (
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: item.description ? "8px" : "0", gap: SPACING.sm, flexWrap: "wrap" }}>
                   {item.title && (
@@ -380,8 +380,8 @@ export function Nav({ page, setPage }) {
           {items.map(({ key, label }) => (
             <button key={key} onClick={() => setPage(key)}
               style={{ background: page === key ? `${COLORS.gold}20` : "transparent", border: "none", padding: "10px 16px", borderRadius: "4px", color: page === key ? COLORS.gold : COLORS.navy, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, cursor: "pointer", transition: "all 0.15s", letterSpacing: "0.3px" }}
-              onMouseEnter={e => { if (page !== key) e.target.style.color = COLORS.gold; }}
-              onMouseLeave={e => { if (page !== key) e.target.style.color = COLORS.navy; }}>
+              onMouseEnter={e => { if (page !== key) e.currentTarget.style.color = COLORS.gold; }}
+              onMouseLeave={e => { if (page !== key) e.currentTarget.style.color = COLORS.navy; }}>
               {label}
             </button>
           ))}
@@ -421,7 +421,7 @@ function FooterLeadCapture() {
     const body = encodeURIComponent(
       `Hi Hassan,\n\nMy situation: ${situation}\nMy email: ${email}\n\nLooking forward to connecting.\n`
     );
-    window.open(`mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`);
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
     setStatus({ state: "ok", msg: "Opening your email client…" });
     setEmail("");
   };
@@ -463,15 +463,15 @@ export function Footer({ setPage }) {
           <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.gold, marginBottom: "16px", letterSpacing: "0.5px" }}>Contact</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
             <a href={`mailto:${CONTACT_EMAIL}`} style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.offWhite, textDecoration: "none", transition: "color 0.2s" }}
-              onMouseEnter={e => e.target.style.color = COLORS.gold} onMouseLeave={e => e.target.style.color = COLORS.offWhite}>
+              onMouseEnter={e => e.currentTarget.style.color = COLORS.gold} onMouseLeave={e => e.currentTarget.style.color = COLORS.offWhite}>
               {CONTACT_EMAIL}
             </a>
             <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.offWhite, textDecoration: "none", transition: "color 0.2s" }}
-              onMouseEnter={e => e.target.style.color = COLORS.gold} onMouseLeave={e => e.target.style.color = COLORS.offWhite}>
+              onMouseEnter={e => e.currentTarget.style.color = COLORS.gold} onMouseLeave={e => e.currentTarget.style.color = COLORS.offWhite}>
               LinkedIn →
             </a>
             <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.gold, textDecoration: "none", fontWeight: 600, transition: "opacity 0.2s" }}
-              onMouseEnter={e => e.target.style.opacity = "0.8"} onMouseLeave={e => e.target.style.opacity = "1"}>
+              onMouseEnter={e => e.currentTarget.style.opacity = "0.8"} onMouseLeave={e => e.currentTarget.style.opacity = "1"}>
               15-Minute Fit Check →
             </a>
           </div>
@@ -489,8 +489,8 @@ export function Footer({ setPage }) {
             ].map(({ key, label }) => (
               <button key={key} onClick={() => setPage(key)}
                 style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.offWhite, background: "none", border: "none", padding: 0, textAlign: "left", cursor: "pointer", transition: "color 0.2s" }}
-                onMouseEnter={e => e.target.style.color = COLORS.gold}
-                onMouseLeave={e => e.target.style.color = COLORS.offWhite}>
+                onMouseEnter={e => e.currentTarget.style.color = COLORS.gold}
+                onMouseLeave={e => e.currentTarget.style.color = COLORS.offWhite}>
                 {label}
               </button>
             ))}
@@ -502,11 +502,11 @@ export function Footer({ setPage }) {
           <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.gold, marginBottom: "16px", letterSpacing: "0.5px" }}>Resources</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
             <a href={SAMPLE_SCORECARD_PDF} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.offWhite, textDecoration: "none", transition: "color 0.2s" }}
-              onMouseEnter={e => e.target.style.color = COLORS.gold} onMouseLeave={e => e.target.style.color = COLORS.offWhite}>
+              onMouseEnter={e => e.currentTarget.style.color = COLORS.gold} onMouseLeave={e => e.currentTarget.style.color = COLORS.offWhite}>
               Ops Diligence Scorecard (PDF)
             </a>
             <a href={SAMPLE_100DAY_PDF} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.offWhite, textDecoration: "none", transition: "color 0.2s" }}
-              onMouseEnter={e => e.target.style.color = COLORS.gold} onMouseLeave={e => e.target.style.color = COLORS.offWhite}>
+              onMouseEnter={e => e.currentTarget.style.color = COLORS.gold} onMouseLeave={e => e.currentTarget.style.color = COLORS.offWhite}>
               100-Day Stabilization Plan (PDF)
             </a>
           </div>

@@ -316,6 +316,9 @@ export const globalCSS = `
     .split-contrast { grid-template-columns: 1fr; }
   }
 
+  /* Sticky nav offset: prevent anchor targets from hiding behind the 76px nav */
+  [id] { scroll-margin-top: 90px; }
+
   @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes slideDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
   .fade-in { animation: fadeIn 0.3s ease-out forwards; }

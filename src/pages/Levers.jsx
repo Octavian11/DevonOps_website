@@ -14,7 +14,7 @@ import {
 
 function HeroBlockWithNav({ setPage }) {
   return (
-    <div style={{ background: `linear-gradient(135deg, ${COLORS.heroGradientStart} 0%, ${COLORS.heroGradientEnd} 100%)`, margin: "-40px -24px 32px", padding: "48px 40px 44px", position: "relative", overflow: "hidden" }}>
+    <div style={{ background: `linear-gradient(135deg, ${COLORS.heroGradientStart} 0%, ${COLORS.heroGradientEnd} 100%)`, margin: "-40px -32px 32px", padding: "48px 40px 44px", position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0, opacity: 0.02, backgroundImage: "repeating-linear-gradient(0deg, white 0px, white 1px, transparent 1px, transparent 40px), repeating-linear-gradient(90deg, white 0px, white 1px, transparent 1px, transparent 40px)" }} />
       <div style={{ position: "relative", maxWidth: "720px" }}>
         <div style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.gold, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "16px" }}>
@@ -41,14 +41,14 @@ function HeroBlockWithNav({ setPage }) {
         <div style={{ display: "flex", gap: SPACING.sm, flexWrap: "wrap" }}>
           <a href={CALENDLY} target="_blank" rel="noopener noreferrer"
             style={{ display: "inline-block", padding: "12px 28px", background: COLORS.gold, color: "white", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.sm, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: "none" }}
-            onMouseEnter={e => { e.target.style.background = "#A07D2E"; }}
-            onMouseLeave={e => { e.target.style.background = COLORS.gold; }}>
+            onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; }}>
             15-Minute Fit Check
           </a>
           <button onClick={() => setPage("services")}
             style={{ display: "inline-block", padding: "12px 28px", background: "transparent", color: COLORS.gold, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.sm, letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: `2px solid ${COLORS.gold}` }}
-            onMouseEnter={e => { e.target.style.background = `${COLORS.gold}15`; }}
-            onMouseLeave={e => { e.target.style.background = "transparent"; }}>
+            onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.gold}15`; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}>
             View Services & Pricing
           </button>
         </div>
@@ -105,8 +105,8 @@ function MicroProofStrip() {
       {proofItems.map((item, idx) => (
         <a key={idx} href={item.link} target="_blank" rel="noopener noreferrer"
           style={{ display: "flex", alignItems: "center", gap: "8px", textDecoration: "none", color: COLORS.navy, fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, transition: "all 0.2s", padding: "4px 8px", borderRadius: RADIUS.sm }}
-          onMouseEnter={e => { e.target.style.background = `${COLORS.navy}08`; e.target.style.transform = "translateY(-1px)"; }}
-          onMouseLeave={e => { e.target.style.background = "transparent"; e.target.style.transform = "translateY(0)"; }}>
+          onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.navy}08`; e.currentTarget.style.transform = "translateY(-1px)"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.transform = "translateY(0)"; }}>
           <span style={{ color: COLORS.gold, fontSize: "1.1rem" }}>{item.icon}</span>
           <span>{item.text}</span>
         </a>
@@ -272,11 +272,10 @@ function ChooseSituation({ setPage }) {
       <SplitContrast leftSide={leftSide} rightSide={rightSide} />
       <div style={{ marginTop: "24px" }}>
         <ButtonPair
-          primaryText="Use the Scorer"
-          primaryLink={null}
-          primaryAction={() => setPage("scorer")}
-          secondaryText="View 100-Day Plan (PDF)"
-          secondaryLink={SAMPLE_100DAY_PDF}
+          primaryText="15-Minute Fit Check"
+          secondaryText="Use the Ops Scorer"
+          secondaryLink={null}
+          secondaryAction={() => setPage("scorer")}
           centered={true}
         />
       </div>
