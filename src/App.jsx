@@ -2661,40 +2661,40 @@ function ServicesPage({ setPage }) {
 function AboutPage() {
   return (
     <div className="fade-in" style={{ maxWidth: "700px" }}>
-      <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 700, color: COLORS.navy, marginBottom: "32px" }}>About</h1>
+      <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 700, color: COLORS.navy, marginBottom: SPACING.lg }}>About</h1>
 
-      <SectionTitle sub>What I Do</SectionTitle>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "14px" }}>
-        I help PE funds and portfolio companies eliminate the operational friction that erodes EBITDA, extends hold periods, and creates risk that surfaces too late. From pre-close diligence through post-close stabilization to ongoing governance — I install the operating discipline that makes value creation plans actually executable.
-      </p>
-      <div style={{ padding: "14px 18px", background: `${COLORS.navy}06`, border: `1px solid ${COLORS.border}`, borderRadius: "6px", marginBottom: "20px" }}>
-        <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.navy, lineHeight: 1.6, margin: 0 }}>
-          <strong>Best fit:</strong> Lower-middle-market PE funds, independent sponsors, and family offices doing control deals where operational risk can break the value creation plan.
+      {/* What I Do */}
+      <Section noCTA title="What I Do">
+        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "14px" }}>
+          I help PE funds and portfolio companies eliminate the operational friction that erodes EBITDA, extends hold periods, and creates risk that surfaces too late. From pre-close diligence through post-close stabilization to ongoing governance — I install the operating discipline that makes value creation plans actually executable.
         </p>
-      </div>
-      {/* Above-fold CTA */}
-      <div style={{ marginBottom: "32px" }}>
-        <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", padding: "10px 24px", background: COLORS.gold, color: "white", fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, borderRadius: "4px", textDecoration: "none", transition: "all 0.2s", cursor: "pointer" }}
-          onMouseEnter={e => { e.target.style.background = "#A07D2E"; }}
-          onMouseLeave={e => { e.target.style.background = COLORS.gold; }}>
-          15-Minute Fit Check
-        </a>
-      </div>
+        <div style={{ padding: "14px 18px", background: `${COLORS.navy}06`, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, marginBottom: SPACING.md }}>
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.navy, lineHeight: 1.6, margin: 0 }}>
+            <strong>Best fit:</strong> Lower-middle-market PE funds, independent sponsors, and family offices doing control deals where operational risk can break the value creation plan.
+          </p>
+        </div>
+        <CTAButton text="15-Minute Fit Check" />
+      </Section>
 
-      <SectionTitle sub>How I Work</SectionTitle>
-      <div style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "24px" }}>
-        <p style={{ marginBottom: "12px" }}>For funds evaluating targets, I run an <strong>Ops Diligence Report</strong> that surfaces the friction points standard diligence misses — and delivers a risk-rated findings memo to the investment committee.</p>
-        <p style={{ marginBottom: "12px" }}>Post-close, I execute a <strong>100-Day Stabilization Plan</strong>: install incident governance, change control, vendor oversight, KPI cadence, and board-ready reporting. Fast. Structured. Measurable from Day 1.</p>
-        <p>For ongoing operational governance, I run a <strong>Control Tower Retainer</strong> — the weekly operating rhythm, escalation support, and compliance cadence that keeps the portfolio company from drifting back.</p>
-      </div>
+      {/* How I Work */}
+      <Section noCTA title="How I Work">
+        <div style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
+          <p style={{ marginBottom: SPACING.sm }}>For funds evaluating targets, I run an <strong>Ops Diligence Report</strong> that surfaces the friction points standard diligence misses — and delivers a risk-rated findings memo to the investment committee.</p>
+          <p style={{ marginBottom: SPACING.sm }}>Post-close, I execute a <strong>100-Day Stabilization Plan</strong>: install incident governance, change control, vendor oversight, KPI cadence, and board-ready reporting. Fast. Structured. Measurable from Day 1.</p>
+          <p style={{ margin: 0 }}>For ongoing operational governance, I run a <strong>Control Tower Retainer</strong> — the weekly operating rhythm, escalation support, and compliance cadence that keeps the portfolio company from drifting back.</p>
+        </div>
+      </Section>
 
-      <SectionTitle sub>Who I Am</SectionTitle>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "24px" }}>
-        Hassan Tariq. 15+ years in platform operations across JP Morgan, Barclays, Bank of America, and Lazard — managing global trading operations, multi-billion dollar platform transformations, and operational risk at institutional scale. I'm currently completing my Executive MBA at Columbia Business School ('26), where I've sharpened a PE operator lens on the operational risks that derail value creation in the first 100 days.
-      </p>
+      {/* Who I Am */}
+      <Section noCTA title="Who I Am">
+        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, margin: 0 }}>
+          Hassan Tariq. 15+ years in platform operations across JP Morgan, Barclays, Bank of America, and Lazard — managing global trading operations, multi-billion dollar platform transformations, and operational risk at institutional scale. I'm currently completing my Executive MBA at Columbia Business School ('26), where I've sharpened a PE operator lens on the operational risks that derail value creation in the first 100 days.
+        </p>
+      </Section>
 
+      {/* Representative Outcomes */}
       <Section title="Representative Outcomes" noCTA type="windowWithCards">
-        <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "20px", padding: "12px 16px", background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: "6px" }}>
+        <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: SPACING.md, padding: "12px 16px", background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md }}>
           <strong>Note:</strong> Representative outcomes from prior institutional operating roles — not client engagements. All results from managing trading platforms with $10B+ in assets under management. Ranges vary by baseline and scope. Details and references available on request.
         </p>
         <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
@@ -2706,31 +2706,17 @@ function AboutPage() {
             { metric: "~67%", label: "Incident volume reduction" },
             { metric: "~17%", label: "Compliance error reduction" },
           ].map((item, i) => (
-            <div
-              key={i}
-              style={{
-                border: `1px solid ${COLORS.steel}`,
-                borderRadius: "6px",
-                padding: "18px",
-                background: COLORS.white,
-                boxShadow: "0 3px 8px rgba(67, 97, 125, 0.12), 0 1px 3px rgba(67, 97, 125, 0.08)",
-                flex: "1 1 260px",
-                minWidth: "260px",
-              }}
-            >
-              <div style={{ fontFamily: FONTS.body, fontSize: "1.3rem", fontWeight: 700, color: COLORS.gold, marginBottom: "8px" }}>{item.metric}</div>
+            <div key={i} style={{ border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, padding: "18px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 200px", minWidth: "200px" }}>
+              <div style={{ fontFamily: FONTS.body, fontSize: "1.3rem", fontWeight: 700, color: COLORS.gold, marginBottom: SPACING.xs }}>{item.metric}</div>
               <div style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.5 }}>{item.label}</div>
             </div>
           ))}
         </div>
       </Section>
 
-      {/* Proof artifacts before CTA */}
-      <div style={{ marginBottom: "24px", padding: "16px", background: `${COLORS.navy}05`, border: `1px solid ${COLORS.border}`, borderRadius: "6px" }}>
-        <div style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.navy, fontWeight: 600, marginBottom: "10px" }}>
-          Sample deliverables:
-        </div>
-        <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+      {/* Sample Deliverables */}
+      <Section noCTA title="Sample Deliverables">
+        <div style={{ display: "flex", gap: SPACING.sm, flexWrap: "wrap" }}>
           <a href={SAMPLE_SCORECARD_PDF} target="_blank" rel="noopener noreferrer"
             style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, color: COLORS.navy, textDecoration: "none", borderBottom: `2px solid ${COLORS.navy}` }}>
             📄 Ops Diligence Scorecard (PDF)
@@ -2740,8 +2726,9 @@ function AboutPage() {
             📄 100-Day Stabilization Plan (PDF)
           </a>
         </div>
-      </div>
+      </Section>
 
+      {/* Bottom CTA */}
       <Section noCTA background={`${COLORS.navy}05`}>
         <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, marginBottom: "18px", textAlign: "center" }}>
           15 minutes. We'll assess the portfolio company's situation and scope the right engagement.
