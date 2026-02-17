@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from "recharts";
 
 // ─── CONSTANTS ──────────────────────────────────────────────
@@ -235,6 +236,16 @@ const SCORER_DIMS = [
     high: "Comprehensive runbooks, RACI matrix, onboarding playbooks, service catalog, operational readiness reviews" },
 ];
 
+// Recommended action per dimension, used by the dynamic scorer results
+const DIM_RECS = {
+  incident: { days: "Days 1–14", action: "install incident command: severity model, designated commander, escalation thresholds, and postmortem discipline" },
+  change:   { days: "Days 1–14", action: "install change control: CAB-lite charter, risk classification, rollback discipline, and change-incident correlation tracking" },
+  vendor:   { days: "Days 1–30", action: "run vendor inventory, map concentration risk, build renewal calendar, and assign vendor owners" },
+  audit:    { days: "Days 15–45", action: "build evidence index, map SOC 2 controls to operating procedures, and begin quarterly access reviews" },
+  kpi:      { days: "Days 1–30", action: "define core KPI set, baseline current performance, and launch weekly operating reviews with board-ready reporting" },
+  process:  { days: "Days 15–60", action: "document critical runbooks, map RACI, identify key-person risks, and begin cross-training program" },
+};
+
 const CONTEXT_OPTIONS = [
   { key: "pre", label: "Evaluating a target (pre-close diligence)" },
   { key: "post", label: "First 100 days post-close" },
@@ -302,6 +313,12 @@ const globalCSS = `
   @media (max-width: 768px) {
     html { font-size: 18px; }
     :root { --maxcopy: 60ch; }
+  }
+
+  /* SplitContrast responsive: stacks on mobile */
+  .split-contrast { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 768px) {
+    .split-contrast { grid-template-columns: 1fr; }
   }
 
   @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
@@ -712,17 +729,13 @@ function SplitContrast({ leftSide, rightSide, variant = "default" }) {
   // variant: "default", "vertical" (for mobile-first stacking)
 
   return (
-    <div style={{
+    <div className="split-contrast" style={{
       display: "grid",
-      gridTemplateColumns: "1fr 1fr",
       gap: "0",
       borderRadius: RADIUS.lg,
       overflow: "hidden",
       border: `1px solid ${COLORS.border}`,
       minHeight: "300px",
-      "@media (max-width: 768px)": {
-        gridTemplateColumns: "1fr"
-      }
     }}>
       {/* LEFT SIDE - Problem/Risk (Navy background) */}
       <div style={{
@@ -1033,18 +1046,12 @@ function EarlyCTA({ setPage }) {
 
 // ─── NAVIGATION ─────────────────────────────────────────────
 function Nav({ page, setPage }) {
-  const items = page === "levers"
-    ? [
-        { key: "levers", label: "Levers" },
-        { key: "scorer", label: "Scorer" },
-        { key: "services", label: "Services" },
-      ]
-    : [
-        { key: "levers", label: "Levers" },
-        { key: "services", label: "Services & Method" },
-        { key: "scorer", label: "Scorer" },
-        { key: "about", label: "About" },
-      ];
+  const items = [
+    { key: "levers", label: "Levers" },
+    { key: "services", label: "Services & Method" },
+    { key: "scorer", label: "Scorer" },
+    { key: "about", label: "About" },
+  ];
   return (
     <nav style={{
       position: "sticky",
@@ -1155,21 +1162,16 @@ function HeroBlockWithNav({ setPage }) {
           Portfolio Operations · Pre-Close Diligence · Post-Close Stabilization
         </div>
         <h1 style={{ fontFamily: FONTS.heading, fontSize: "2.4rem", fontWeight: 700, color: "white", lineHeight: 1.2, marginBottom: "18px" }}>
-          Pre-close red flags — and a first-100-days stabilization baseline — for operationally fragile businesses.
+          Operational red flags that standard diligence misses — and the governance baseline for the first 100 days.
         </h1>
         <p style={{ fontFamily: FONTS.body, fontSize: "1.02rem", color: "rgba(255,255,255,0.92)", lineHeight: 1.65, marginBottom: "22px" }}>
-          I help PE deal teams and operating partners risk-rate operational instability in diligence and then stand up incident command, change governance, and KPI cadence in the first 100 days.
+          15+ years running "cannot go down" trading operations across JP Morgan, Barclays, Bank of America, and Lazard — building incident command, change governance, and KPI control towers across multi-manager platforms managing $10B+ in assets.
         </p>
         <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "26px" }}>
           {[
-            "Pain: Vendor dependency, key-person risk, and incident/change patterns are under-examined—or assessed by generalists.",
-            "Pain: Post-close, board reporting demands KPIs and governance before the company has an operating cadence to produce them.",
-            "Pain: Operational fragility becomes a hidden tax on EBITDA and a weak exit narrative.",
-            "Deliverable: Ops Diligence Report — risk-rated findings memo for the IC (2–3 weeks).",
-            "Deliverable: 100-Day Stabilization Plan — Visibility → Control → Cadence across incident, change, KPIs, vendor, and audit readiness.",
-            "Deliverable: Control Tower Retainer — weekly operating rhythm that prevents drift-back.",
-            'Credibility: 15+ years building "cannot-fail" operating systems across top-tier financial services environments.',
-            "Note: IC = investment committee.",
+            "Ops Diligence Report: risk-rated findings memo for the IC (investment committee). 2–3 weeks.",
+            "100-Day Stabilization Plan: incident command, change control, KPIs, vendor governance, board reporting.",
+            "For PE funds, operating partners, and independent sponsors evaluating or managing portfolio companies.",
           ].map((text, i) => (
             <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "12px" }}>
               <span style={{ color: COLORS.gold, fontSize: "0.95rem", lineHeight: "28px", flexShrink: 0 }}>→</span>
@@ -1767,6 +1769,7 @@ function ScorerPage() {
 
   const chartData = SCORER_DIMS.map(d => ({ subject: d.short, score: scores[d.key], fullMark: 5 }));
   const lowDims = SCORER_DIMS.filter(d => scores[d.key] <= 2);
+  const midDims = SCORER_DIMS.filter(d => scores[d.key] === 3);
 
   return (
     <div className="fade-in" style={{ maxWidth: "800px" }}>
@@ -1872,13 +1875,25 @@ function ScorerPage() {
             </Card>
           )}
 
-          {/* Recommended Next Steps */}
+          {/* Recommended Next Steps — dynamic based on scores */}
           <Section noCTA title="Recommended Next Steps">
-            <ul style={{ margin: 0, paddingLeft: "20px", fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
-              <li style={{ marginBottom: SPACING.xs }}>Days 1–14: install incident ownership, severity model, and escalation thresholds</li>
-              <li style={{ marginBottom: SPACING.xs }}>Days 1–14: install change control (risk classification, CAB-lite, rollback discipline)</li>
-              <li>Days 1–30: define KPI set, baseline it, and begin weekly operating reviews</li>
-            </ul>
+            {lowDims.length === 0 && midDims.length === 0 ? (
+              <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, margin: 0 }}>
+                Your operational posture is strong across all dimensions. Focus on maintaining cadence and ensuring durability through exit preparation.
+              </p>
+            ) : (
+              <ul style={{ margin: 0, paddingLeft: "20px", fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
+                {[...lowDims, ...midDims].slice(0, 4).map((dim, i) => {
+                  const rec = DIM_RECS[dim.key];
+                  const isLast = i === Math.min(lowDims.length + midDims.length, 4) - 1;
+                  return (
+                    <li key={dim.key} style={{ marginBottom: isLast ? 0 : SPACING.xs }}>
+                      <strong>{rec.days}:</strong> {rec.action}
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
           </Section>
 
           {/* Standardized CTA block */}
@@ -2745,25 +2760,19 @@ function FooterLeadCapture() {
     boxSizing: "border-box",
   };
 
-  const submit = async (e) => {
+  const submit = (e) => {
     e.preventDefault();
     if (!email || !email.includes("@")) {
       setStatus({ state: "error", msg: "Enter a valid email." });
       return;
     }
-    setStatus({ state: "loading", msg: "Sending…" });
-    try {
-      const res = await fetch("/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, situation, source: "footer" }),
-      });
-      if (!res.ok) throw new Error("bad_status");
-      setStatus({ state: "ok", msg: "Received. We'll follow up by email." });
-      setEmail("");
-    } catch {
-      setStatus({ state: "error", msg: "Could not submit. Email us directly." });
-    }
+    const subject = encodeURIComponent("Devonshire Ops – Fit Check");
+    const body = encodeURIComponent(
+      `Hi Hassan,\n\nMy situation: ${situation}\nMy email: ${email}\n\nLooking forward to connecting.\n`
+    );
+    window.open(`mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`);
+    setStatus({ state: "ok", msg: "Opening your email client…" });
+    setEmail("");
   };
 
   return (
@@ -3048,8 +3057,19 @@ function Footer({ setPage }) {
 }
 
 // ─── MAIN APP ───────────────────────────────────────────────
+const VALID_PAGES = ["levers", "services", "scorer", "about"];
+
 export default function App() {
-  const [page, setPage] = useState("levers");
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Derive page key from URL: /pe/services → "services", /pe/ → "levers"
+  const pathSegment = location.pathname.replace(/^\/pe\/?/, "") || "levers";
+  const page = VALID_PAGES.includes(pathSegment) ? pathSegment : "levers";
+
+  const setPage = (p) => {
+    navigate(p === "levers" ? "/pe/" : `/pe/${p}`);
+  };
 
   useEffect(() => {
     const style = document.createElement("style");
@@ -3058,7 +3078,7 @@ export default function App() {
     return () => { document.head.removeChild(style); };
   }, []);
 
-  useEffect(() => { window.scrollTo(0, 0); }, [page]);
+  useEffect(() => { window.scrollTo(0, 0); }, [location.pathname]);
 
   const pages = {
     levers: <LeverExplorer setPage={setPage} />,
