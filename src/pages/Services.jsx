@@ -13,20 +13,31 @@ import {
 
 function ServicesMethodJumpBar() {
   const linkStyle = {
-    fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 800,
-    color: COLORS.white, textDecoration: "none",
-    padding: "10px 12px", borderRadius: "6px",
-    border: `1px solid ${COLORS.navy}`, background: COLORS.navy,
+    fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 700,
+    color: COLORS.navy, textDecoration: "none",
+    padding: "8px 14px", borderRadius: RADIUS.md,
+    border: `1px solid ${COLORS.steel}`, background: COLORS.white,
+    transition: "all 0.15s",
   };
 
+  const links = [
+    { href: "#ongoing", label: "Ongoing" },
+    { href: "#how-it-works", label: "How it works" },
+    { href: "#rubric", label: "Rubric" },
+    { href: "#sequence", label: "100-Day sequence" },
+    { href: "#faq", label: "FAQ" },
+    { href: "#fit-check", label: "Fit Check" },
+  ];
+
   return (
-    <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginBottom: "18px" }}>
-      <a href="#ongoing" style={linkStyle}>Ongoing</a>
-      <a href="#how-it-works" style={linkStyle}>How it works</a>
-      <a href="#rubric" style={linkStyle}>Rubric</a>
-      <a href="#sequence" style={linkStyle}>100-Day sequence</a>
-      <a href="#faq" style={linkStyle}>FAQ</a>
-      <a href="#fit-check" style={linkStyle}>Fit Check</a>
+    <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: SPACING.md }}>
+      {links.map(({ href, label }) => (
+        <a key={href} href={href} style={linkStyle}
+          onMouseEnter={e => { e.currentTarget.style.background = COLORS.navy; e.currentTarget.style.color = COLORS.white; e.currentTarget.style.borderColor = COLORS.navy; }}
+          onMouseLeave={e => { e.currentTarget.style.background = COLORS.white; e.currentTarget.style.color = COLORS.navy; e.currentTarget.style.borderColor = COLORS.steel; }}>
+          {label}
+        </a>
+      ))}
     </div>
   );
 }
@@ -37,7 +48,7 @@ function Accordion({ title, children, defaultOpen = false }) {
   const [open, setOpen] = useState(defaultOpen);
 
   return (
-    <Card>
+    <Card style={{ borderLeft: `3px solid ${COLORS.gold}` }}>
       <button onClick={() => setOpen(!open)}
         style={{ width: "100%", textAlign: "left", background: "transparent", border: "none", padding: "0", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px" }}>
         <div>
@@ -379,6 +390,12 @@ function MemoSampleScreenshots() {
 export default function ServicesPage() {
   return (
     <div>
+      <div style={{ marginBottom: SPACING.lg }}>
+        <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 700, color: COLORS.navy, marginBottom: SPACING.sm }}>Services & Method</h1>
+        <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "720px", marginBottom: 0 }}>
+          Operational support for PE funds and portfolio companies — from pre-close diligence through post-close stabilization to ongoing governance. Fixed fees, board-ready deliverables, measurable from Day 1.
+        </p>
+      </div>
       <ServicesMethodJumpBar />
       <ServicesPricingLadder />
       <ServicesSamplesRow />

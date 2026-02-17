@@ -40,12 +40,12 @@ export function DomainTag({ domain }) {
 export function CTAButton({ text, small, variant, style: extraStyle }) {
   const isPrimary = variant !== "secondary";
   const bg = isPrimary ? COLORS.gold : "transparent";
-  const color = isPrimary ? "white" : COLORS.gold;
-  const border = isPrimary ? "none" : `2px solid ${COLORS.gold}`;
+  const color = isPrimary ? "white" : COLORS.goldDark;
+  const border = isPrimary ? "none" : `2px solid ${COLORS.goldDark}`;
   const hoverBg = isPrimary ? "#A07D2E" : `${COLORS.gold}15`;
   return (
     <a href={CALENDLY} target="_blank" rel="noopener noreferrer"
-      style={{ display: "inline-block", padding: small ? "10px 22px" : "12px 28px", background: bg, color, fontFamily: FONTS.body, fontSize: small ? "0.9rem" : "1rem", fontWeight: 600, borderRadius: RADIUS.sm, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border, ...extraStyle }}
+      style={{ display: "inline-block", padding: small ? "10px 22px" : "12px 28px", background: bg, color, fontFamily: FONTS.body, fontSize: small ? "0.9rem" : "1rem", fontWeight: 600, borderRadius: RADIUS.md, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border, ...extraStyle }}
       onMouseEnter={e => { e.currentTarget.style.background = hoverBg; }}
       onMouseLeave={e => { e.currentTarget.style.background = bg; }}>
       {text || "15-Minute Fit Check"}
@@ -276,7 +276,7 @@ export function Section({ title, subtitle, children, primaryCTA, secondaryCTA, n
   const defaultBackground = isWindowWithCards ? COLORS.offWhite : COLORS.white;
 
   return (
-    <div style={{ background: background || defaultBackground, border: `2px solid ${COLORS.steel}`, borderRadius: RADIUS.lg, padding: noPadding ? "0" : SPACING.lg, marginBottom: "24px", boxShadow: SHADOWS.md }} id={id}>
+    <div style={{ background: background || defaultBackground, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.lg, padding: noPadding ? "0" : SPACING.lg, marginBottom: SPACING.md, boxShadow: SHADOWS.sm }} id={id}>
       {title && <SectionTitle>{title}</SectionTitle>}
       {subtitle && (
         <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.bodyMuted, lineHeight: 1.7, marginTop: "-16px", marginBottom: "20px" }}>
@@ -309,8 +309,8 @@ export function FAQBlock() {
   const a = { fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, margin: 0, marginBottom: "16px" };
 
   return (
-    <Section title="FAQ" noCTA>
-      <div>
+    <Section title="FAQ" noCTA background={`${COLORS.navy}04`}>
+      <div style={{ borderTop: `2px solid ${COLORS.gold}30`, paddingTop: SPACING.md }}>
         <h3 style={q}>Do you replace the operating team?</h3>
         <p style={a}>No. I install the operating system—governance, cadence, and controls—while ownership stays internal.</p>
 
@@ -482,8 +482,8 @@ export function Footer({ setPage }) {
           <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.gold, marginBottom: "16px", letterSpacing: "0.5px" }}>Navigation</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
             {[
-              { key: "levers", label: "Levers" },
-              { key: "services", label: "Services" },
+              { key: "levers", label: "Ops Friction Levers" },
+              { key: "services", label: "Services & Method" },
               { key: "about", label: "About" },
               { key: "scorer", label: "Ops Friction Scorer" },
             ].map(({ key, label }) => (

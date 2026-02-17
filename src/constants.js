@@ -27,6 +27,7 @@ export const COLORS = {
   navy: "#14213D",
   steel: "#43617D",
   gold: "#B8860B",
+  goldDark: "#7B5C07",
   offWhite: "#FCFCFC",
   charcoal: "#0A0A0A",
   border: "#E2E8F0",
@@ -298,7 +299,8 @@ export const globalCSS = `
     letter-spacing: 0.2px;
   }
 
-  p { max-width: var(--maxcopy); }
+  main p { max-width: var(--maxcopy); }
+  td p, th p, nav p, footer p, .no-max-width p { max-width: none; }
 
   ::selection { background: ${COLORS.primary}; color: white; }
   ::-webkit-scrollbar { width: 6px; }
