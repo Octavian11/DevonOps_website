@@ -380,7 +380,7 @@ function CTAButton({ text, small, variant, style: extraStyle }) {
   const border = isPrimary ? "none" : `2px solid ${COLORS.gold}`;
   const hoverBg = isPrimary ? "#A07D2E" : `${COLORS.gold}15`;
   return (
-    <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", padding: small ? "10px 22px" : "12px 28px", background: bg, color, fontFamily: FONTS.body, fontSize: small ? "0.9rem" : "1rem", fontWeight: 600, borderRadius: "4px", textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border, ...extraStyle }}
+    <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", padding: small ? "10px 22px" : "12px 28px", background: bg, color, fontFamily: FONTS.body, fontSize: small ? "0.9rem" : "1rem", fontWeight: 600, borderRadius: RADIUS.sm, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border, ...extraStyle }}
       onMouseEnter={e => { e.target.style.background = hoverBg; }}
       onMouseLeave={e => { e.target.style.background = bg; }}>
       {text || "15-Minute Fit Check"}
@@ -391,7 +391,7 @@ function CTAButton({ text, small, variant, style: extraStyle }) {
 // Standardized section heading - consistent across all pages
 function SectionTitle({ children, sub }) {
   return (
-    <div style={{ marginBottom: sub ? "16px" : "32px" }}>
+    <div style={{ marginBottom: sub ? "16px" : SPACING.lg }}>
       <h2 style={{
         fontFamily: FONTS.heading,
         fontSize: sub ? "1.25rem" : "1.75rem",  // Standardized: 1.75rem for main, 1.25rem for sub
@@ -420,7 +420,7 @@ function ButtonPair({
     <div style={{
       display: "flex",
       flexDirection: "row",  // HORIZONTAL side-by-side
-      gap: "12px",
+      gap: SPACING.sm,
       justifyContent: centered ? "center" : "flex-start",
       flexWrap: "wrap"
     }}>
@@ -432,7 +432,7 @@ function ButtonPair({
              padding: "14px 28px",
              background: COLORS.navy,
              color: "white",
-             borderRadius: "6px",
+             borderRadius: RADIUS.md,
              textDecoration: "none",
              fontFamily: FONTS.body,
              fontSize: "1rem",
@@ -456,7 +456,7 @@ function ButtonPair({
              padding: "14px 28px",
              background: COLORS.navy,
              color: "white",
-             borderRadius: "6px",
+             borderRadius: RADIUS.md,
              fontFamily: FONTS.body,
              fontSize: "1rem",
              fontWeight: 600,
@@ -484,7 +484,7 @@ function ButtonPair({
                padding: "12px 26px",  // Reduced by 2px to account for 2px border
                background: "white",
                color: COLORS.navy,
-               borderRadius: "6px",
+               borderRadius: RADIUS.md,
                textDecoration: "none",
                fontFamily: FONTS.body,
                fontSize: "1rem",
@@ -508,7 +508,7 @@ function ButtonPair({
                padding: "12px 26px",  // Reduced by 2px to account for 2px border
                background: "white",
                color: COLORS.navy,
-               borderRadius: "6px",
+               borderRadius: RADIUS.md,
                fontFamily: FONTS.body,
                fontSize: "1rem",
                fontWeight: 600,
@@ -578,7 +578,7 @@ function TimelineRail({ items, compact = false }) {
         }
 
         return (
-          <div key={i} style={{ position: "relative", marginBottom: isLast ? "0" : (compact ? "24px" : "32px") }}>
+          <div key={i} style={{ position: "relative", marginBottom: isLast ? "0" : (compact ? "24px" : SPACING.lg) }}>
             {/* Timeline node */}
             <div style={{
               position: "absolute",
@@ -597,9 +597,9 @@ function TimelineRail({ items, compact = false }) {
             <div style={{
               background: COLORS.white,
               border: `1px solid ${COLORS.border}`,
-              borderRadius: "8px",
-              padding: compact ? "16px" : "20px",
-              boxShadow: `0 2px 8px rgba(20, 33, 61, 0.08), ${cardGlow}`,
+              borderRadius: RADIUS.lg,
+              padding: compact ? "16px" : SPACING.md,
+              boxShadow: `${SHADOWS.sm}, ${cardGlow}`,
               transition: "all 0.3s ease"
             }}>
               {/* Header row with title and meta */}
@@ -609,7 +609,7 @@ function TimelineRail({ items, compact = false }) {
                   justifyContent: "space-between",
                   alignItems: "baseline",
                   marginBottom: item.description ? "8px" : "0",
-                  gap: "12px",
+                  gap: SPACING.sm,
                   flexWrap: "wrap"
                 }}>
                   {item.title && (
@@ -720,7 +720,7 @@ function SplitContrast({ leftSide, rightSide, variant = "default" }) {
       display: "grid",
       gridTemplateColumns: "1fr 1fr",
       gap: "0",
-      borderRadius: "8px",
+      borderRadius: RADIUS.lg,
       overflow: "hidden",
       border: `1px solid ${COLORS.border}`,
       minHeight: "300px",
@@ -732,7 +732,7 @@ function SplitContrast({ leftSide, rightSide, variant = "default" }) {
       <div style={{
         background: COLORS.navy,
         color: COLORS.offWhite,
-        padding: "32px",
+        padding: SPACING.lg,
         display: "flex",
         flexDirection: "column",
         position: "relative"
@@ -806,7 +806,7 @@ function SplitContrast({ leftSide, rightSide, variant = "default" }) {
       <div style={{
         background: COLORS.offWhite,
         color: COLORS.charcoal,
-        padding: "32px",
+        padding: SPACING.lg,
         display: "flex",
         flexDirection: "column"
       }}>
@@ -868,7 +868,7 @@ function SplitContrast({ leftSide, rightSide, variant = "default" }) {
             padding: "12px 16px",
             background: COLORS.white,
             border: `2px solid ${COLORS.gold}`,
-            borderRadius: "6px"
+            borderRadius: RADIUS.md
           }}>
             <p style={{
               fontFamily: FONTS.body,
@@ -964,11 +964,11 @@ function MicroProofStrip() {
     <div style={{
       background: `linear-gradient(135deg, ${COLORS.navy}08 0%, ${COLORS.gold}08 100%)`,
       border: `1px solid ${COLORS.border}`,
-      borderRadius: "6px",
+      borderRadius: RADIUS.md,
       padding: "16px 24px",
       marginBottom: "24px",
       display: "flex",
-      gap: "32px",
+      gap: SPACING.lg,
       flexWrap: "wrap",
       justifyContent: "center",
       alignItems: "center"
@@ -990,7 +990,7 @@ function MicroProofStrip() {
             fontWeight: 600,
             transition: "all 0.2s",
             padding: "4px 8px",
-            borderRadius: "4px"
+            borderRadius: RADIUS.sm
           }}
           onMouseEnter={e => {
             e.target.style.background = `${COLORS.navy}08`;
@@ -1183,13 +1183,13 @@ function HeroBlockWithNav({ setPage }) {
             </div>
           ))}
         </div>
-        <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-          <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", padding: "12px 28px", background: COLORS.gold, color: "white", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: "4px", textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: "none" }}
+        <div style={{ display: "flex", gap: SPACING.sm, flexWrap: "wrap" }}>
+          <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", padding: "12px 28px", background: COLORS.gold, color: "white", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.sm, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: "none" }}
             onMouseEnter={e => { e.target.style.background = "#A07D2E"; }}
             onMouseLeave={e => { e.target.style.background = COLORS.gold; }}>
             15-Minute Fit Check
           </a>
-          <button onClick={() => setPage("services")} style={{ display: "inline-block", padding: "12px 28px", background: "transparent", color: COLORS.gold, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: "4px", textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: `2px solid ${COLORS.gold}` }}
+          <button onClick={() => setPage("services")} style={{ display: "inline-block", padding: "12px 28px", background: "transparent", color: COLORS.gold, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.sm, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: `2px solid ${COLORS.gold}` }}
             onMouseEnter={e => { e.target.style.background = `${COLORS.gold}15`; }}
             onMouseLeave={e => { e.target.style.background = "transparent"; }}>
             View Services & Pricing
@@ -1257,11 +1257,11 @@ function ProofStrip() {
 function OfferCards({ setPage }) {
   // Card styling for window-with-cards type
   const box = {
-    border: `1px solid ${COLORS.steel}`,  // Steel border for visibility
-    borderRadius: "6px",
+    border: `1px solid ${COLORS.steel}`,
+    borderRadius: RADIUS.md,
     padding: "18px",
     background: COLORS.white,
-    boxShadow: "0 3px 8px rgba(67, 97, 125, 0.12), 0 1px 3px rgba(67, 97, 125, 0.08)",  // Visible 3D effect
+    boxShadow: SHADOWS.sm,
     flex: "1 1 260px",
     minWidth: "260px",
   };
@@ -1269,8 +1269,8 @@ function OfferCards({ setPage }) {
   // Gold border for recommended card
   const boxGold = {
     ...box,
-    border: `2px solid ${COLORS.gold}`,  // Gold border for recommended
-    boxShadow: "0 3px 8px rgba(184, 134, 11, 0.15), 0 1px 3px rgba(184, 134, 11, 0.1)",  // Gold shadow
+    border: `2px solid ${COLORS.gold}`,
+    boxShadow: SHADOWS.md,  // Elevated shadow to visually distinguish the recommended tier
   };
 
   const tag = { fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.gold, fontWeight: 600, marginBottom: "10px" };
@@ -1529,10 +1529,10 @@ function First14Days() {
 function MiniCases() {
   const box = {
     border: `1px solid ${COLORS.steel}`,
-    borderRadius: "6px",
+    borderRadius: RADIUS.md,
     padding: "18px",
     background: COLORS.white,
-    boxShadow: "0 3px 8px rgba(67, 97, 125, 0.12), 0 1px 3px rgba(67, 97, 125, 0.08)",
+    boxShadow: SHADOWS.sm,
     flex: "1 1 260px",
     minWidth: "260px",
   };
