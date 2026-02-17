@@ -60,6 +60,32 @@ const FONTS = {
   body: "Georgia, 'Times New Roman', serif",
 };
 
+// ─── DESIGN SYSTEM TOKENS ───────────────────────────────────
+const SPACING = {
+  xs: "8px",   // Tags, inline badges, tight gaps
+  sm: "12px",  // Button pairs, form fields, small padding
+  md: "20px",  // Card internal spacing, section gaps
+  lg: "32px",  // Section padding, major gaps
+  xl: "48px",  // Page section dividers
+  xxl: "64px"  // Hero sections, page breaks
+};
+
+const SHADOWS = {
+  none: "none",
+  xs: "0 1px 2px rgba(67, 97, 125, 0.05)",
+  sm: "0 1px 3px rgba(67, 97, 125, 0.1)",
+  md: "0 4px 12px rgba(67, 97, 125, 0.15)",
+  lg: "0 6px 20px rgba(67, 97, 125, 0.18)",
+  xl: "0 10px 30px rgba(67, 97, 125, 0.22)"
+};
+
+const RADIUS = {
+  sm: "4px",   // Badges, small buttons
+  md: "6px",   // Secondary buttons, inputs, callouts
+  lg: "8px",   // Cards, Sections, primary containers
+  xl: "12px"   // Hero blocks, large containers
+};
+
 const SEVERITY_STYLE = {
   Critical: { bg: COLORS.criticalBg, text: COLORS.criticalText, border: COLORS.criticalBorder },
   High: { bg: COLORS.highBg, text: COLORS.highText, border: COLORS.highBorder },
@@ -507,7 +533,7 @@ function ButtonPair({
 
 function Card({ children, style: extraStyle }) {
   return (
-    <div style={{ background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: "8px", padding: "28px", marginBottom: "20px", boxShadow: "0 1px 3px rgba(0,0,0,0.06)", ...extraStyle }}>
+    <div style={{ background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.lg, padding: "28px", marginBottom: SPACING.md, boxShadow: SHADOWS.sm, ...extraStyle }}>
       {children}
     </div>
   );
@@ -881,11 +907,11 @@ function Section({
 
   const containerStyle = {
     background: background || defaultBackground,
-    border: `2px solid ${COLORS.steel}`,  // Steel Grey brand color - VISIBLE
-    borderRadius: "8px",
-    padding: noPadding ? "0" : "32px",
+    border: `2px solid ${COLORS.steel}`,
+    borderRadius: RADIUS.lg,
+    padding: noPadding ? "0" : SPACING.lg,
     marginBottom: "24px",
-    boxShadow: "0 4px 12px rgba(67, 97, 125, 0.15)"  // Steel shadow - VISIBLE
+    boxShadow: SHADOWS.md
   };
 
   const bodyTextStyle = {
@@ -1762,8 +1788,8 @@ function LeverExplorer({ setPage }) {
       <FAQBlock />
 
       {/* ACTION: Final CTA */}
-      <Card style={{ textAlign: "center", marginTop: "24px", background: `${COLORS.navy}05`, padding: "28px" }}>
-        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, marginBottom: "20px" }}>
+      <Section noCTA background={`${COLORS.navy}05`}>
+        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, marginBottom: "20px", textAlign: "center" }}>
           Not sure where to start? Let's assess fit and scope the right engagement.
         </p>
         <ButtonPair
@@ -1772,7 +1798,7 @@ function LeverExplorer({ setPage }) {
           secondaryLink={mailtoHref("Devonshire Ops – Fit Check request", "Hi Hassan,\n\nI reviewed the operational levers and would like to discuss fit.\n\nContext:\n- Company / deal stage:\n- Primary concern:\n- Timeline:\n\nBest,\n")}
           centered={true}
         />
-      </Card>
+      </Section>
     </div>
   );
 }
@@ -2215,10 +2241,7 @@ function StabilizationSequence() {
   ];
 
   return (
-    <Section noCTA>
-      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.5rem", color: COLORS.navy, marginTop: 0 }}>
-        The stabilization sequence
-      </h2>
+    <Section noCTA title="The stabilization sequence">
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "24px" }}>
         Operational stabilization follows a consistent three-phase sequence: <strong>Visibility → Control → Cadence</strong>.
       </p>
@@ -2281,10 +2304,7 @@ function ServicesSteps() {
   ];
 
   return (
-    <Section noCTA>
-      <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.5rem", color: COLORS.navy, marginTop: 0, marginBottom: "14px" }}>
-        How it works
-      </h2>
+    <Section noCTA title="How it works">
       <TimelineRail items={timelineItems} compact />
     </Section>
   );
@@ -2293,7 +2313,7 @@ function ServicesSteps() {
 // Services Recommended Ongoing Tight
 function ServicesRecommendedOngoingTight() {
   return (
-    <Card style={{ marginTop: "14px", background: "#FBF7EE", border: `1px solid ${COLORS.border}` }}>
+    <Card style={{ marginTop: "14px", background: COLORS.offWhite, border: `1px solid ${COLORS.border}` }}>
       <div style={{ fontFamily: FONTS.body, fontSize: "1.02rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
         <p style={{ marginTop: 0 }}>
           <strong>Recommended:</strong> Choose the bundle if you expect to close — diligence findings feed directly into Day-1 priorities with no re-learning.
@@ -2313,8 +2333,8 @@ function FitCheckCTA() {
     "Hi Hassan,\n\nI reviewed the Services & Method page and would like to discuss fit.\n\nContext:\n- Company / deal stage:\n- Primary concern (incidents, change, vendor risk, KPI cadence, audit posture):\n- Timeline:\n\nBest,\n";
 
   return (
-    <Card style={{ textAlign: "center" }}>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "820px", margin: "0 auto 20px" }}>
+    <Section noCTA background={`${COLORS.navy}05`}>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "820px", margin: "0 auto 20px", textAlign: "center" }}>
         Not sure where to start? Book a 15-minute fit check. We'll assess the situation, identify the highest-priority friction points, and scope the right engagement.
       </p>
       <ButtonPair
@@ -2323,7 +2343,7 @@ function FitCheckCTA() {
         secondaryLink={mailtoHref(subject, body)}
         centered={true}
       />
-    </Card>
+    </Section>
   );
 }
 
@@ -2415,10 +2435,8 @@ function TypicalRedFlags() {
   };
 
   return (
-    <Section noCTA style={{ marginTop: "18px" }}>
-      <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.3rem", color: COLORS.navy, marginBottom: "16px" }}>
-        Typical red flags we surface (mapped to IC implications)
-      </h3>
+    <Section noCTA>
+      <SectionTitle sub>Typical red flags we surface (mapped to IC implications)</SectionTitle>
       <SplitContrast leftSide={leftSide} rightSide={rightSide} />
     </Section>
   );
@@ -2450,10 +2468,8 @@ function MemoSampleScreenshots() {
   ];
 
   return (
-    <Section noCTA style={{ marginTop: "18px", background: `${COLORS.navy}03` }}>
-      <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.navy, marginBottom: "6px" }}>
-        Sample deliverable excerpts (anonymized)
-      </h3>
+    <Section noCTA background={`${COLORS.navy}03`}>
+      <SectionTitle sub>Sample deliverable excerpts (anonymized)</SectionTitle>
       <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.55, marginBottom: "14px" }}>
         Real format, clipped for readability. Full deliverables are severity-rated and IC-ready.
       </p>
@@ -2761,12 +2777,14 @@ function AboutPage() {
         </div>
       </div>
 
-      <div style={{ textAlign: "center", padding: "32px 0" }}>
-        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, marginBottom: "18px" }}>
+      <Section noCTA background={`${COLORS.navy}05`}>
+        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, marginBottom: "18px", textAlign: "center" }}>
           15 minutes. We'll assess the portfolio company's situation and scope the right engagement.
         </p>
-        <CTAButton text="15-Minute Fit Check" />
-      </div>
+        <div style={{ textAlign: "center" }}>
+          <CTAButton text="15-Minute Fit Check" />
+        </div>
+      </Section>
     </div>
   );
 }
