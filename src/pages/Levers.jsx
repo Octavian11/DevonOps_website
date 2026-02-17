@@ -400,9 +400,7 @@ export default function LeverExplorer({ setPage }) {
       <HeroBlockWithNav setPage={setPage} />
 
       <div style={{ marginBottom: "28px" }}>
-        <h2 style={{ fontFamily: FONTS.heading, fontSize: "1.4rem", fontWeight: 700, color: COLORS.navy, marginBottom: "12px" }}>
-          20 Operational Levers PE Funds Should Check
-        </h2>
+        <SectionTitle>20 Operational Levers PE Funds Should Check</SectionTitle>
         <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "720px" }}>
           {LEVERS.length} operational friction points across 6 domains — with severity ratings, symptoms, and PE impact analysis. The levers show <em>what</em> is broken and <em>why</em> it matters. The remediation playbooks — the <em>how</em> — are delivered in the engagement.
         </p>
