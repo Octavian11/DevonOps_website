@@ -1756,7 +1756,7 @@ function LeverExplorer({ setPage }) {
 
 // ─── SCORER PAGE ────────────────────────────────────────────
 function ScorerPage() {
-  const [context, setContext] = useState(null);
+  const [context, setContext] = useState(CONTEXT_OPTIONS[0].key);
   const [scores, setScores] = useState({ incident: 3, change: 3, vendor: 3, audit: 3, kpi: 3, process: 3 });
   const [showResults, setShowResults] = useState(false);
 
@@ -1849,63 +1849,16 @@ function ScorerPage() {
               <div style={{ width: "100px", height: "100px", borderRadius: "50%", border: `4px solid ${ratingColor}`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "14px" }}>
                 <span style={{ fontFamily: FONTS.body, fontSize: "1.6rem", fontWeight: 700, color: ratingColor }}>{avg.toFixed(1)}</span>
               </div>
-
               <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 700, color: ratingColor, letterSpacing: "1px", marginBottom: "10px" }}>
                 {ratingLabel}
               </span>
-
-              <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px", maxWidth: "360px" }}>
+              <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0, maxWidth: "360px" }}>
                 {CONTEXT_CALLOUTS[rating][context]}
               </p>
-
-              <div style={{ textAlign: "left", width: "100%", maxWidth: "360px", marginBottom: "14px" }}>
-                <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 800, color: COLORS.navy, marginBottom: "8px" }}>
-                  Recommended next steps
-                </div>
-                <ul style={{ margin: 0, paddingLeft: "18px", fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.55 }}>
-                  <li>Days 1–14: install incident ownership + severity model + escalation thresholds</li>
-                  <li>Days 1–14: install change control (risk classification, CAB-lite, rollback discipline)</li>
-                  <li>Days 1–30: define KPI set, baseline it, and begin weekly operating reviews</li>
-                </ul>
-              </div>
-
-              <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "10px", alignItems: "center" }}>
-                {/* Trust line */}
-                <div style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.bodyMuted, maxWidth: "360px", fontStyle: "italic", marginBottom: "8px", textAlign: "center" }}>
-                  Scores reflect observed evidence prompts, not self-assessment
-                </div>
-
-                <div style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, maxWidth: "360px", marginBottom: "8px" }}>
-                  {rating === "stable"
-                    ? "Maintain your edge with ongoing governance support"
-                    : "Let's stabilize the foundation with a structured 100-day plan"}
-                </div>
-
-                <CTAButton text="15-Minute Fit Check" />
-
-                <a
-                  href={mailtoHref(
-                    `Devonshire Ops – Scorer result (${avg.toFixed(1)} / ${ratingLabel})`,
-                    `Hi Hassan,\n\nI completed the Portfolio Stability Readiness Scorer.\n\nSituation: ${context}\nScore: ${avg.toFixed(1)} (${ratingLabel})\n\nTop concerns:\n- \n- \n- \n\nCan you send a memo-format readout / next steps?\n\nBest,\n`
-                  )}
-                  style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 700, color: COLORS.navy, textDecoration: "none", borderBottom: `2px solid ${COLORS.navy}` }}
-                >
-                  Email me this assessment
-                </a>
-
-                <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", justifyContent: "center" }}>
-                  <a href={SAMPLE_SCORECARD_PDF} target="_blank" rel="noopener noreferrer"
-                    style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 700, color: COLORS.navy, textDecoration: "none", borderBottom: `2px solid ${COLORS.navy}` }}>
-                    View sample memo format
-                  </a>
-                  <a href={SAMPLE_100DAY_PDF} target="_blank" rel="noopener noreferrer"
-                    style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 700, color: COLORS.navy, textDecoration: "none", borderBottom: `2px solid ${COLORS.navy}` }}>
-                    View 100-day plan format
-                  </a>
-                </div>
-              </div>
             </Card>
           </div>
+
+          {/* Critical Gaps */}
           {lowDims.length > 0 && (
             <Card style={{ borderLeft: `4px solid ${COLORS.critical}`, marginBottom: "24px" }}>
               <h4 style={{ fontFamily: FONTS.heading, fontSize: "0.95rem", color: COLORS.critical, marginBottom: "12px" }}>Critical Gaps Identified</h4>
@@ -1918,6 +1871,46 @@ function ScorerPage() {
               ))}
             </Card>
           )}
+
+          {/* Recommended Next Steps */}
+          <Section noCTA title="Recommended Next Steps">
+            <ul style={{ margin: 0, paddingLeft: "20px", fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
+              <li style={{ marginBottom: SPACING.xs }}>Days 1–14: install incident ownership, severity model, and escalation thresholds</li>
+              <li style={{ marginBottom: SPACING.xs }}>Days 1–14: install change control (risk classification, CAB-lite, rollback discipline)</li>
+              <li>Days 1–30: define KPI set, baseline it, and begin weekly operating reviews</li>
+            </ul>
+          </Section>
+
+          {/* Standardized CTA block */}
+          <Section noCTA background={`${COLORS.navy}05`}>
+            <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, textAlign: "center", marginBottom: SPACING.md }}>
+              {rating === "stable"
+                ? "Maintain your edge with ongoing governance support."
+                : "Let's stabilize the foundation with a structured 100-day plan."}
+            </p>
+            <ButtonPair
+              primaryText="15-Minute Fit Check"
+              secondaryText="Email me this assessment"
+              secondaryLink={mailtoHref(
+                `Devonshire Ops – Scorer result (${avg.toFixed(1)} / ${ratingLabel})`,
+                `Hi Hassan,\n\nI completed the Portfolio Stability Readiness Scorer.\n\nSituation: ${context}\nScore: ${avg.toFixed(1)} (${ratingLabel})\n\nTop concerns:\n- \n- \n- \n\nCan you send a memo-format readout / next steps?\n\nBest,\n`
+              )}
+              centered={true}
+            />
+            <div style={{ display: "flex", gap: SPACING.sm, flexWrap: "wrap", justifyContent: "center", marginTop: SPACING.md }}>
+              <p style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.bodyMuted, fontStyle: "italic", margin: 0, width: "100%", textAlign: "center" }}>
+                Scores reflect observed evidence prompts, not self-assessment.
+              </p>
+              <a href={SAMPLE_SCORECARD_PDF} target="_blank" rel="noopener noreferrer"
+                style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, color: COLORS.navy, textDecoration: "none", borderBottom: `1px solid ${COLORS.navy}` }}>
+                View sample memo format
+              </a>
+              <a href={SAMPLE_100DAY_PDF} target="_blank" rel="noopener noreferrer"
+                style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, color: COLORS.navy, textDecoration: "none", borderBottom: `1px solid ${COLORS.navy}` }}>
+                View 100-day plan format
+              </a>
+            </div>
+          </Section>
         </div>
       )}
     </div>
@@ -2206,7 +2199,7 @@ function StabilizationSequence() {
   );
 }
 
-// Services Pricing Ladder
+// Services Pricing Ladder — unified windowWithCards section
 function ServicesPricingLadder() {
   const items = [
     { id: "pre-close", label: "Pre-Close", name: "Ops Diligence Report", price: "$15K+", time: "2–3 weeks", desc: "Standalone assessment" },
@@ -2214,12 +2207,37 @@ function ServicesPricingLadder() {
     { id: "post-close", label: "Post-Close Only", name: "100-Day Stabilization", price: "$30–$40K", time: "100 days", desc: "No prior diligence" },
   ];
 
+  const box = {
+    border: `1px solid ${COLORS.steel}`,
+    borderRadius: RADIUS.md,
+    padding: "18px",
+    background: COLORS.white,
+    boxShadow: SHADOWS.sm,
+    flex: "1 1 220px",
+    minWidth: "220px",
+    position: "relative",
+  };
+
+  const boxGold = {
+    ...box,
+    border: `2px solid ${COLORS.gold}`,
+    boxShadow: SHADOWS.md,
+  };
+
   return (
-    <Card style={{ marginBottom: "32px", background: `${COLORS.navy}05` }}>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px" }}>
+    <Section
+      title="Services & Pricing"
+      subtitle="Operational support for PE funds and portfolio companies — from pre-close diligence through post-close stabilization to ongoing governance."
+      type="windowWithCards"
+      noCTA
+      id="top"
+    >
+      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginBottom: SPACING.md }}>
         {items.map((item, i) => (
-          <div key={i} id={item.id} style={{ padding: "16px", background: COLORS.white, borderRadius: "4px", border: `1px solid ${i === 1 ? COLORS.gold : COLORS.border}`, position: "relative" }}>
-            {i === 1 && <div style={{ position: "absolute", top: "-1px", left: 0, right: 0, height: "3px", background: COLORS.gold, borderRadius: "4px 4px 0 0" }} />}
+          <div key={i} id={item.id} style={i === 1 ? boxGold : box}>
+            {i === 1 && (
+              <div style={{ position: "absolute", top: "-1px", left: 0, right: 0, height: "3px", background: COLORS.gold, borderRadius: `${RADIUS.md} ${RADIUS.md} 0 0` }} />
+            )}
             <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.navy, letterSpacing: "0.5px", textTransform: "uppercase", fontWeight: 600 }}>{item.label}</span>
             <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, fontWeight: 700, margin: "8px 0 4px" }}>{item.name}</div>
             <div style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, fontWeight: 700, marginBottom: "4px" }}>{item.price}</div>
@@ -2228,7 +2246,16 @@ function ServicesPricingLadder() {
           </div>
         ))}
       </div>
-    </Card>
+
+      <div style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, padding: "14px 18px", background: `${COLORS.navy}05`, borderRadius: RADIUS.md, border: `1px solid ${COLORS.border}`, marginBottom: SPACING.md }} id="ongoing">
+        <p style={{ margin: "0 0 8px 0" }}>
+          <strong>Recommended:</strong> Choose the bundle if you expect to close — diligence findings feed directly into Day-1 priorities with no re-learning.
+        </p>
+        <p style={{ margin: 0 }}>
+          <strong>Ongoing:</strong> Transition to the Control Tower Retainer to maintain cadence and prevent drift-back.
+        </p>
+      </div>
+    </Section>
   );
 }
 
@@ -2387,7 +2414,7 @@ function TypicalRedFlags() {
 
   return (
     <Section noCTA>
-      <SectionTitle sub>Typical red flags we surface (mapped to IC implications)</SectionTitle>
+      <SectionTitle sub>Typical Red Flags We Surface (Mapped to IC Implications)</SectionTitle>
       <SplitContrast leftSide={leftSide} rightSide={rightSide} />
     </Section>
   );
@@ -2420,7 +2447,7 @@ function MemoSampleScreenshots() {
 
   return (
     <Section noCTA background={`${COLORS.navy}03`}>
-      <SectionTitle sub>Sample deliverable excerpts (anonymized)</SectionTitle>
+      <SectionTitle sub>Sample Deliverable Excerpts (Anonymized)</SectionTitle>
       <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.55, marginBottom: "14px" }}>
         Real format, clipped for readability. Full deliverables are severity-rated and IC-ready.
       </p>
@@ -2575,22 +2602,9 @@ function ServicesPage({ setPage }) {
   return (
     <div style={{ maxWidth: "980px", margin: "0 auto", padding: "48px 24px" }}>
       <ServicesMethodJumpBar />
-      <TrafficSelector />
 
-      <Section
-        title="Services"
-        subtitle="Operational support for PE funds and portfolio companies — from pre-close diligence through post-close stabilization to ongoing governance."
-        type="windowWithCards"
-        noCTA
-        id="top"
-      />
-
-      {/* SOLUTION: Pricing ladder (4 cards) */}
+      {/* SOLUTION: Pricing ladder — unified windowWithCards section */}
       <ServicesPricingLadder />
-
-      <div id="ongoing" style={{ marginTop: "20px" }}>
-        <ServicesRecommendedOngoingTight />
-      </div>
 
       {/* PROOF: Mini proof cue (reduces price shock) */}
       <ServicesSamplesRow />
