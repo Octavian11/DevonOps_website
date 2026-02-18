@@ -373,7 +373,7 @@ export function Nav({ page, setPage }) {
       <nav style={{ position: "sticky", top: 0, zIndex: 100, background: COLORS.white, borderBottom: `3px solid ${COLORS.gold}`, padding: "0 28px", display: "flex", alignItems: "center", justifyContent: "space-between", height: "76px", minHeight: "76px", boxShadow: "0 2px 8px rgba(20, 33, 61, 0.08)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <img
-            src="/Devonshire_Operations_Logo_Exact.svg"
+            src="/Devonshire_Operations_Logo_Exact-cropped.svg"
             alt="Devonshire Operations"
             style={{ height: "64px", cursor: "pointer" }}
             onClick={() => handleNav("levers")}
