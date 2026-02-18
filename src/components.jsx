@@ -375,7 +375,7 @@ export function Nav({ page, setPage }) {
           <img
             src="/Devonshire_Operations_Logo_Exact.svg"
             alt="Devonshire Operations"
-            style={{ height: "52px", cursor: "pointer" }}
+            style={{ height: "64px", cursor: "pointer" }}
             onClick={() => handleNav("levers")}
           />
           <div style={{ width: "1px", height: "36px", background: COLORS.border }} className="nav-links" />
