@@ -318,6 +318,46 @@ export const globalCSS = `
     .split-contrast { grid-template-columns: 1fr; }
   }
 
+  /* ── Main container: responsive horizontal padding ─────────── */
+  .main-container { padding-left: 32px; padding-right: 32px; }
+  @media (max-width: 768px) {
+    .main-container { padding-left: 16px; padding-right: 16px; }
+  }
+
+  /* ── Hero block: edge-to-edge bleed matching main padding ───── */
+  .hero-block { margin-left: -32px; margin-right: -32px; }
+  @media (max-width: 768px) {
+    .hero-block { margin-left: -16px; margin-right: -16px; }
+  }
+
+  /* ── Mobile nav ─────────────────────────────────────────────── */
+  .nav-hamburger { display: none; }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-cta   { display: none; }
+    .nav-hamburger {
+      display: flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px;
+      background: transparent; border: none; cursor: pointer;
+      color: ${COLORS.navy}; flex-shrink: 0;
+    }
+    .nav-mobile-menu {
+      position: fixed; top: 76px; left: 0; right: 0; z-index: 99;
+      background: ${COLORS.white}; border-bottom: 3px solid ${COLORS.gold};
+      box-shadow: 0 4px 16px rgba(20, 33, 61, 0.14);
+      display: flex; flex-direction: column; padding: 12px 16px 16px; gap: 4px;
+      animation: slideDown 0.18s ease-out forwards;
+    }
+    .nav-mobile-item {
+      background: transparent; border: none; width: 100%;
+      text-align: left; padding: 12px 12px; border-radius: 4px;
+      cursor: pointer; transition: all 0.15s;
+    }
+  }
+
+  /* ── Touch targets ──────────────────────────────────────────── */
+  button { min-height: 44px; }
+
   /* Sticky nav offset: prevent anchor targets from hiding behind the 76px nav */
   [id] { scroll-margin-top: 90px; }
 

@@ -155,7 +155,7 @@ function FrameworkRubricTable() {
       </p>
 
       <div style={{ marginTop: "14px", overflowX: "auto" }}>
-        <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: FONTS.body, fontSize: "0.8rem" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: FONTS.body, fontSize: "0.85rem" }}>
           <thead>
             <tr style={{ borderBottom: `2px solid ${COLORS.navy}` }}>
               {["Criterion", "What It Tests", "Scoring", "Action Trigger"].map(h => (
@@ -238,7 +238,7 @@ function ServicesPricingLadder() {
     { id: "post-close", label: "Post-Close Only", name: "100-Day Stabilization", price: "$30–$40K", time: "100 days", desc: "No prior diligence" },
   ];
 
-  const box = { border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, padding: "18px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 220px", minWidth: "220px", position: "relative" };
+  const box = { border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, padding: "18px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 220px", minWidth: "min(220px, 100%)", position: "relative" };
   const boxGold = { ...box, border: `2px solid ${COLORS.gold}`, boxShadow: SHADOWS.md };
 
   return (
