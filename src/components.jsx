@@ -360,35 +360,56 @@ export function ServicesSamplesRow() {
 // ─── NAVIGATION ──────────────────────────────────────────────
 
 export function Nav({ page, setPage }) {
+  const [menuOpen, setMenuOpen] = useState(false);
   const items = [
     { key: "levers", label: "Levers" },
     { key: "services", label: "Services & Method" },
     { key: "scorer", label: "Scorer" },
     { key: "about", label: "About" },
   ];
+  const handleNav = (key) => { setPage(key); setMenuOpen(false); };
   return (
-    <nav style={{ position: "sticky", top: 0, zIndex: 100, background: COLORS.white, borderBottom: `3px solid ${COLORS.gold}`, padding: "0 28px", display: "flex", alignItems: "center", justifyContent: "space-between", height: "76px", minHeight: "76px", boxShadow: "0 2px 8px rgba(20, 33, 61, 0.08)" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: "28px" }}>
-        <img
-          src="/Devonshire_Operations_Logo_Exact.svg"
-          alt="Devonshire Operations"
-          style={{ height: "90px", cursor: "pointer" }}
-          onClick={() => setPage("levers")}
-        />
-        <div style={{ width: "1px", height: "36px", background: COLORS.border }} />
-        <div style={{ display: "flex", gap: "4px" }}>
+    <>
+      <nav style={{ position: "sticky", top: 0, zIndex: 100, background: COLORS.white, borderBottom: `3px solid ${COLORS.gold}`, padding: "0 28px", display: "flex", alignItems: "center", justifyContent: "space-between", height: "76px", minHeight: "76px", boxShadow: "0 2px 8px rgba(20, 33, 61, 0.08)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+          <img
+            src="/Devonshire_Operations_Logo_Exact.svg"
+            alt="Devonshire Operations"
+            style={{ height: "52px", cursor: "pointer" }}
+            onClick={() => handleNav("levers")}
+          />
+          <div style={{ width: "1px", height: "36px", background: COLORS.border }} className="nav-links" />
+          <div className="nav-links" style={{ display: "flex", gap: "4px" }}>
+            {items.map(({ key, label }) => (
+              <button key={key} onClick={() => handleNav(key)}
+                style={{ background: page === key ? `${COLORS.gold}20` : "transparent", border: "none", padding: "10px 16px", borderRadius: "4px", color: page === key ? COLORS.gold : COLORS.navy, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, cursor: "pointer", transition: "all 0.15s", letterSpacing: "0.3px" }}
+                onMouseEnter={e => { if (page !== key) e.currentTarget.style.color = COLORS.gold; }}
+                onMouseLeave={e => { if (page !== key) e.currentTarget.style.color = COLORS.navy; }}>
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="nav-cta"><CTAButton text="15-Minute Fit Check" /></div>
+        <button className="nav-hamburger" onClick={() => setMenuOpen(o => !o)} aria-label="Toggle menu">
+          {menuOpen
+            ? <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><line x1="4" y1="4" x2="18" y2="18" stroke={COLORS.navy} strokeWidth="2" strokeLinecap="round"/><line x1="18" y1="4" x2="4" y2="18" stroke={COLORS.navy} strokeWidth="2" strokeLinecap="round"/></svg>
+            : <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect y="4" width="22" height="2" rx="1" fill={COLORS.navy}/><rect y="10" width="22" height="2" rx="1" fill={COLORS.navy}/><rect y="16" width="22" height="2" rx="1" fill={COLORS.navy}/></svg>
+          }
+        </button>
+      </nav>
+      {menuOpen && (
+        <div className="nav-mobile-menu">
           {items.map(({ key, label }) => (
-            <button key={key} onClick={() => setPage(key)}
-              style={{ background: page === key ? `${COLORS.gold}20` : "transparent", border: "none", padding: "10px 16px", borderRadius: "4px", color: page === key ? COLORS.gold : COLORS.navy, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, cursor: "pointer", transition: "all 0.15s", letterSpacing: "0.3px" }}
-              onMouseEnter={e => { if (page !== key) e.currentTarget.style.color = COLORS.gold; }}
-              onMouseLeave={e => { if (page !== key) e.currentTarget.style.color = COLORS.navy; }}>
+            <button key={key} className="nav-mobile-item" onClick={() => handleNav(key)}
+              style={{ color: page === key ? COLORS.gold : COLORS.navy, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, letterSpacing: "0.3px", background: page === key ? `${COLORS.gold}12` : "transparent" }}>
               {label}
             </button>
           ))}
+          <div style={{ marginTop: "8px" }}><CTAButton text="15-Minute Fit Check" /></div>
         </div>
-      </div>
-      <CTAButton text="15-Minute Fit Check" />
-    </nav>
+      )}
+    </>
   );
 }
 

@@ -39,7 +39,7 @@ export default function App() {
   return (
     <div style={{ minHeight: "100vh", background: COLORS.offWhite, fontFamily: FONTS.body }}>
       <Nav page={page} setPage={setPage} />
-      <main style={{ maxWidth: "960px", margin: "0 auto", padding: "40px 32px 80px" }}>
+      <main className="main-container" style={{ maxWidth: "960px", margin: "0 auto", paddingTop: "40px", paddingBottom: "80px" }}>
         {pages[page]}
       </main>
       <Footer setPage={setPage} />
