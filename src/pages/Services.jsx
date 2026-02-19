@@ -234,7 +234,7 @@ function StabilizationSequence() {
 function ServicesPricingLadder() {
   const items = [
     { id: "pre-close", label: "Pre-Close", name: "Ops Diligence Report", price: "$15K+", time: "2–3 weeks", desc: "Standalone assessment" },
-    { id: "bundle", label: "Full Lifecycle Bundle", name: "Diligence + 100-Day Plan", price: "$25–$35K", time: "2–3 weeks + 100 days", desc: "Recommended — seamless transition" },
+    { id: "bundle", label: "Bundle (Recommended): Diligence → VCP → Execution", name: "Diligence + Value Creation Plan + 100-Day Execution", price: "$25–$35K", time: "2–3 weeks + 100 days", desc: "Diligence findings roll directly into the VCP — no re-learning, no gap between discovery and execution" },
     { id: "post-close", label: "Post-Close Only", name: "100-Day Stabilization", price: "$30–$40K", time: "100 days", desc: "No prior diligence" },
   ];
 
@@ -245,6 +245,9 @@ function ServicesPricingLadder() {
     <Section title="Services & Pricing"
       subtitle="Operational support for PE funds and portfolio companies — from pre-close diligence through post-close stabilization to ongoing governance."
       type="windowWithCards" noCTA id="top">
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "20px", fontStyle: "italic" }}>
+        Diligence without execution is a risk report. Execution without diligence is change without a plan.
+      </p>
       <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginBottom: SPACING.md }}>
         {items.map((item, i) => (
           <div key={i} id={item.id} style={i === 1 ? boxGold : box}>
@@ -277,8 +280,9 @@ function ServicesPricingLadder() {
 function ServicesSteps() {
   const timelineItems = [
     { title: "Step 1: Fit Check", meta: "15 minutes", description: "15-minute call. Assess the situation, confirm scope, and determine fit.", completed: true },
-    { title: "Step 2: Scoping + Data Request", meta: "48 hours", description: "Targeted data request. Fixed-fee proposal with timeline within 48 hours.", active: true },
-    { title: "Step 3: Deliverable", meta: "2-3 weeks", description: "Risk-rated findings memo or phased stabilization plan. Board-ready from day one." }
+    { title: "Step 2: Scoping + Data Request", meta: "48 hours", description: "Targeted data request. Fixed-fee proposal with timeline within 48 hours.", completed: true },
+    { title: "Step 3: Diligence Deliverable", meta: "2–3 weeks", description: "Risk-rated findings memo — severity-rated, PE impact framed, IC-ready. This becomes the foundation of the Value Creation Plan.", active: true },
+    { title: "Step 4: Value Creation Plan + 100-Day Execution", meta: "Days 1–100", description: "Diligence findings roll directly into the VCP. The VCP defines what to fix, in what order, with what accountability. We execute against it for 100 days — incident command, change control, KPI cadence, board-ready reporting.", deliverable: "VCP document + 100-day execution tracker + board reporting cadence" }
   ];
 
   return (
@@ -392,9 +396,16 @@ export default function ServicesPage() {
     <div>
       <div style={{ marginBottom: SPACING.lg }}>
         <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 700, color: COLORS.navy, marginBottom: SPACING.sm }}>Services & Method</h1>
-        <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "720px", marginBottom: 0 }}>
+        <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "720px", marginBottom: "14px" }}>
           Operational support for PE funds and portfolio companies — from pre-close diligence through post-close stabilization to ongoing governance. Fixed fees, board-ready deliverables, measurable from Day 1.
         </p>
+        {/* McKinsey GPMR 2026 — LP selection criterion stat */}
+        <div style={{ padding: "12px 16px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.md} ${RADIUS.md} 0`, maxWidth: "720px" }}>
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, margin: 0, lineHeight: 1.6 }}>
+            <strong>53% of LPs now rank a GP's value creation strategy as a top-five criterion in manager selection</strong> — up to #3, above sector expertise. Operational execution is no longer a back-office function. It's a fund-level differentiator.
+          </p>
+          <span style={{ fontFamily: FONTS.body, fontSize: "0.78rem", color: COLORS.bodyMuted, letterSpacing: "0.4px", textTransform: "uppercase", display: "block", marginTop: "6px" }}>McKinsey Global Private Markets Review 2026</span>
+        </div>
       </div>
       <ServicesMethodJumpBar />
       <ServicesPricingLadder />

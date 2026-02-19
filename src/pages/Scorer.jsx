@@ -1,12 +1,138 @@
 import { useState } from "react";
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from "recharts";
 import {
-  COLORS, FONTS, SPACING,
+  COLORS, FONTS, SPACING, RADIUS,
   CALENDLY, SAMPLE_SCORECARD_PDF, SAMPLE_100DAY_PDF,
+  FORMSPREE_URL,
   SCORER_DIMS, DIM_RECS, CONTEXT_OPTIONS, CONTEXT_CALLOUTS,
   mailtoHref,
 } from "../constants.js";
 import { SectionTitle, ButtonPair, Card, Section } from "../components.jsx";
+
+// ─── EMAIL CAPTURE FORM ───────────────────────────────────────
+
+function ScorerEmailCapture({ rating, score, context }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState("idle"); // idle | loading | success | error
+
+  const inputStyle = {
+    width: "100%",
+    padding: "10px 12px",
+    borderRadius: RADIUS.sm,
+    border: `1px solid ${COLORS.border}`,
+    fontFamily: FONTS.body,
+    fontSize: "0.95rem",
+    color: COLORS.charcoal,
+    background: COLORS.white,
+    boxSizing: "border-box",
+    outline: "none",
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!email || !email.includes("@")) {
+      setStatus("error");
+      return;
+    }
+    // Open PDFs immediately before the async call to avoid popup blockers
+    window.open(SAMPLE_SCORECARD_PDF, "_blank", "noopener,noreferrer");
+
+    setStatus("loading");
+
+    try {
+      const res = await fetch(FORMSPREE_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: name || "(not provided)",
+          email,
+          scorer_rating: rating,
+          scorer_score: score,
+          scorer_context: context,
+        }),
+      });
+      if (res.ok) {
+        setStatus("success");
+        setName("");
+        setEmail("");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  if (status === "success") {
+    return (
+      <Card style={{ borderLeft: `4px solid ${COLORS.stable}`, marginBottom: "24px" }}>
+        <p style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.stable, margin: "0 0 6px 0" }}>Report sent.</p>
+        <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, margin: 0, lineHeight: 1.6 }}>
+          Your sample scorecard is downloading. Hassan will follow up with context specific to your situation.
+        </p>
+        <div style={{ marginTop: "14px", display: "flex", gap: "12px", flexWrap: "wrap" }}>
+          <a href={SAMPLE_SCORECARD_PDF} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, color: COLORS.navy, textDecoration: "none", borderBottom: `1px solid ${COLORS.navy}` }}>
+            Sample Ops Diligence Scorecard — IC-ready, severity-rated (PDF)
+          </a>
+          <a href={SAMPLE_100DAY_PDF} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, color: COLORS.navy, textDecoration: "none", borderBottom: `1px solid ${COLORS.navy}` }}>
+            Sample 100-Day Stabilization Plan — Visibility → Control → Cadence (PDF)
+          </a>
+        </div>
+      </Card>
+    );
+  }
+
+  return (
+    <Card style={{ borderLeft: `4px solid ${COLORS.gold}`, marginBottom: "24px" }}>
+      <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.navy, margin: "0 0 6px 0" }}>
+        Download Your Ops Assessment Report
+      </h3>
+      <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, margin: "0 0 6px 0" }}>
+        Get a formatted PDF of your assessment with prioritized recommendations. See what your IC-ready deliverable looks like.
+      </p>
+      <div style={{ marginBottom: "14px", display: "flex", gap: "12px", flexWrap: "wrap" }}>
+        <a href={SAMPLE_SCORECARD_PDF} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.bodyMuted, textDecoration: "none", borderBottom: `1px solid ${COLORS.border}` }}>
+          Sample Scorecard (PDF)
+        </a>
+        <a href={SAMPLE_100DAY_PDF} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.bodyMuted, textDecoration: "none", borderBottom: `1px solid ${COLORS.border}` }}>
+          Sample 100-Day Plan (PDF)
+        </a>
+      </div>
+      <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+        <input
+          type="text"
+          placeholder="Your name (optional)"
+          value={name}
+          onChange={e => setName(e.target.value)}
+          style={inputStyle}
+        />
+        <input
+          type="email"
+          placeholder="your@fund.com"
+          value={email}
+          onChange={e => { setEmail(e.target.value); if (status === "error") setStatus("idle"); }}
+          required
+          style={{ ...inputStyle, borderColor: status === "error" ? COLORS.critical : COLORS.border }}
+        />
+        {status === "error" && (
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.critical, margin: 0 }}>
+            Please enter a valid email address.
+          </p>
+        )}
+        <button
+          type="submit"
+          disabled={status === "loading"}
+          style={{ padding: "10px 20px", background: status === "loading" ? COLORS.bodyMuted : COLORS.navy, color: "white", border: "none", borderRadius: RADIUS.sm, fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, cursor: status === "loading" ? "default" : "pointer", textAlign: "left", transition: "background 0.2s" }}>
+          {status === "loading" ? "Sending…" : "Send My Report →"}
+        </button>
+        <p style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.bodyMuted, margin: 0 }}>
+          No spam. Your email is used only to follow up on this assessment.
+        </p>
+      </form>
+    </Card>
+  );
+}
 
 export default function ScorerPage() {
   const [context, setContext] = useState(CONTEXT_OPTIONS[0].key);
@@ -140,34 +266,22 @@ export default function ScorerPage() {
             )}
           </Section>
 
+          <ScorerEmailCapture rating={ratingLabel} score={avg.toFixed(1)} context={context} />
+
           <Section noCTA background={`${COLORS.navy}05`}>
             <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, textAlign: "center", marginBottom: SPACING.md }}>
               {rating === "stable"
                 ? "Maintain your edge with ongoing governance support."
-                : "Let's stabilize the foundation with a structured 100-day plan."}
+                : "Ready to convert these gaps into a Value Creation Plan?"}
             </p>
             <ButtonPair
               primaryText="15-Minute Fit Check"
-              secondaryText="Email me this assessment"
-              secondaryLink={mailtoHref(
-                `Devonshire Ops – Scorer result (${avg.toFixed(1)} / ${ratingLabel})`,
-                `Hi Hassan,\n\nI completed the Portfolio Stability Readiness Scorer.\n\nSituation: ${context}\nScore: ${avg.toFixed(1)} (${ratingLabel})\n\nTop concerns:\n- \n- \n- \n\nCan you send a memo-format readout / next steps?\n\nBest,\n`
-              )}
+              secondaryLink={CALENDLY}
               centered={true}
             />
-            <div style={{ display: "flex", gap: SPACING.sm, flexWrap: "wrap", justifyContent: "center", marginTop: SPACING.md }}>
-              <p style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.bodyMuted, fontStyle: "italic", margin: 0, width: "100%", textAlign: "center" }}>
-                Scores reflect observed evidence prompts, not self-assessment.
-              </p>
-              <a href={SAMPLE_SCORECARD_PDF} target="_blank" rel="noopener noreferrer"
-                style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, color: COLORS.navy, textDecoration: "none", borderBottom: `1px solid ${COLORS.navy}` }}>
-                View sample memo format
-              </a>
-              <a href={SAMPLE_100DAY_PDF} target="_blank" rel="noopener noreferrer"
-                style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, color: COLORS.navy, textDecoration: "none", borderBottom: `1px solid ${COLORS.navy}` }}>
-                View 100-day plan format
-              </a>
-            </div>
+            <p style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.bodyMuted, fontStyle: "italic", margin: `${SPACING.md} 0 0 0`, textAlign: "center" }}>
+              Scores reflect observed evidence prompts, not self-assessment.
+            </p>
           </Section>
         </div>
       )}
