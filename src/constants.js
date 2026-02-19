@@ -366,8 +366,36 @@ export const globalCSS = `
 
   @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes slideDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
   .fade-in { animation: fadeIn 0.3s ease-out forwards; }
   .lever-expand { animation: fadeIn 0.2s ease-out forwards; }
+  .scorer-sticky-bar { animation: slideUp 0.25s ease-out forwards; }
+
+  /* ── Hero mobile responsive ────────────────────────────────────── */
+  @media (max-width: 600px) {
+    .hero-headline { font-size: 1.85rem !important; line-height: 1.25 !important; }
+    .hero-subheadline { font-size: 0.92rem !important; }
+    .hero-ctas { flex-direction: column; }
+    .hero-ctas a,
+    .hero-ctas button {
+      display: block !important;
+      width: 100% !important;
+      text-align: center !important;
+      box-sizing: border-box;
+    }
+  }
+
+  /* ── Lever row: badge wrap on narrow screens ────────────────────── */
+  @media (max-width: 480px) {
+    .lever-row { flex-wrap: wrap; }
+    .lever-badges { flex-shrink: 1 !important; flex-wrap: wrap; }
+  }
+
+  /* ── Sticky bar: stack on mobile ────────────────────────────────── */
+  @media (max-width: 600px) {
+    .scorer-sticky-bar { flex-direction: column; align-items: flex-start; gap: 10px; padding: 14px 16px; }
+    .scorer-sticky-bar > div { width: 100%; justify-content: flex-start; }
+  }
 
   input[type="range"].scorer-range {
     -webkit-appearance: none;

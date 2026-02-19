@@ -26,6 +26,9 @@ export default function AboutPage() {
             <strong>Best fit:</strong> Lower-middle-market PE funds, independent sponsors, and family offices doing control deals where operational risk can break the value creation plan.
           </p>
         </div>
+        <p style={{ fontFamily: FONTS.heading, fontSize: "1.05rem", color: COLORS.gold, fontStyle: "italic", marginBottom: SPACING.md }}>
+          Find the gaps. Build the plan. Deliver the alpha.
+        </p>
         <CTAButton text="15-Minute Fit Check" />
       </Section>
 

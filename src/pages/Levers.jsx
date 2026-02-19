@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   COLORS, FONTS, SPACING, SHADOWS, RADIUS,
   CALENDLY, SAMPLE_SCORECARD_PDF, SAMPLE_100DAY_PDF,
@@ -20,10 +20,10 @@ function HeroBlockWithNav({ setPage }) {
         <div style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.gold, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "16px" }}>
           Ops Diligence · Value Creation Plans · Post-Close Governance
         </div>
-        <h1 style={{ fontFamily: FONTS.heading, fontSize: "2.4rem", fontWeight: 700, color: "white", lineHeight: 1.2, marginBottom: "18px" }}>
+        <h1 className="hero-headline" style={{ fontFamily: FONTS.heading, fontSize: "2.4rem", fontWeight: 700, color: "white", lineHeight: 1.2, marginBottom: "18px" }}>
           Operational gaps are your biggest value creation lever. We find them before close and convert them into alpha.
         </h1>
-        <p style={{ fontFamily: FONTS.body, fontSize: "1.02rem", color: "rgba(255,255,255,0.92)", lineHeight: 1.65, marginBottom: "22px" }}>
+        <p className="hero-subheadline" style={{ fontFamily: FONTS.body, fontSize: "1.02rem", color: "rgba(255,255,255,0.92)", lineHeight: 1.65, marginBottom: "22px" }}>
           15+ years at JPM, Barclays, BofA, Lazard. $10B+ in assets. I surface the operational friction PE funds miss — and build the Value Creation Plan that converts it into EBITDA improvement in 100 days.
         </p>
 
@@ -37,7 +37,7 @@ function HeroBlockWithNav({ setPage }) {
           </span>
         </div>
 
-        <div style={{ display: "flex", gap: SPACING.sm, flexWrap: "wrap" }}>
+        <div className="hero-ctas" style={{ display: "flex", gap: SPACING.sm, flexWrap: "wrap" }}>
           <button onClick={() => setPage("scorer")}
             style={{ display: "inline-block", padding: "12px 28px", background: COLORS.gold, color: "white", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.sm, letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: "none" }}
             onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; }}
@@ -300,7 +300,8 @@ function DealImplications() {
   };
 
   return (
-    <Section title="Deal Implications We Surface" noCTA>
+    <Section title="Where Operational Gaps Show Up in Your Deal" noCTA
+      subtitle="These are the risk vectors that compress your return — and the value creation levers that reverse them.">
       <SplitContrast leftSide={leftSide} rightSide={rightSide} />
     </Section>
   );
@@ -343,33 +344,45 @@ function First14Days() {
 
 function MiniCases() {
   const box = { border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, padding: "18px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 260px", minWidth: "min(260px, 100%)" };
+  const fieldLabel = { fontFamily: FONTS.body, fontSize: "0.75rem", fontWeight: 700, color: COLORS.navy, letterSpacing: "0.6px", textTransform: "uppercase", display: "block", marginBottom: "4px" };
+  const fieldVal = { fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, lineHeight: 1.6, margin: "0 0 14px 0" };
+  const valueCreated = { fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0, padding: "10px 12px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0` };
 
   return (
     <Section title="Proof in the Format PE Expects" noCTA type="windowWithCards">
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "820px", marginBottom: "20px" }}>
-        Example outcomes (anonymized). The point: <strong>install visibility, control, and cadence—then keep it durable</strong>.
+        Example outcomes (anonymized). The point: <strong>find the gaps, build the Value Creation Plan, deliver measurable improvement</strong>.
       </p>
 
       <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
         <div style={box}>
           <SectionTitle sub>Incident instability</SectionTitle>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, lineHeight: 1.6, margin: "0 0 8px 0" }}><strong>Situation:</strong> Recurring incidents with unclear ownership and inconsistent escalation.</p>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, lineHeight: 1.6, margin: "0 0 8px 0" }}><strong>Delivered:</strong> Severity model, incident command roles, escalation paths, postmortem discipline.</p>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0 }}><strong>Result:</strong> Faster containment, fewer repeat incidents, clearer executive visibility.</p>
+          <span style={fieldLabel}>Gap Identified</span>
+          <p style={fieldVal}>Recurring incidents with unclear ownership, no severity classification, and no postmortem discipline. Same failures repeating every 4–6 weeks.</p>
+          <span style={fieldLabel}>VCP Intervention</span>
+          <p style={fieldVal}>Severity model, incident command roles, escalation thresholds, mandatory postmortem cadence.</p>
+          <span style={fieldLabel}>Value Created</span>
+          <p style={valueCreated}>~67% incident volume reduction and ~31% MTTR improvement within the hold period. Executive time recaptured from firefighting. Board reporting shifted from reactive crisis updates to weekly structured reviews.</p>
         </div>
 
         <div style={box}>
           <SectionTitle sub>Change-driven outages</SectionTitle>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, lineHeight: 1.6, margin: "0 0 8px 0" }}><strong>Situation:</strong> Releases correlated with incidents; no consistent controls.</p>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, lineHeight: 1.6, margin: "0 0 8px 0" }}><strong>Delivered:</strong> CAB-lite, risk classification, rollback readiness, change-incident correlation tracking.</p>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0 }}><strong>Result:</strong> Reduced change failure rate and improved release confidence.</p>
+          <span style={fieldLabel}>Gap Identified</span>
+          <p style={fieldVal}>Uncontrolled deployments correlated with production incidents. No change calendar, no risk classification, no rollback documentation.</p>
+          <span style={fieldLabel}>VCP Intervention</span>
+          <p style={fieldVal}>CAB-lite charter, risk classification framework, rollback discipline, change-incident correlation tracking.</p>
+          <span style={fieldLabel}>Value Created</span>
+          <p style={valueCreated}>~60% reduction in critical outages over 8 months. Uptime improved ~94% → 99%. Change-incident correlation visible in board reporting within 30 days of installation.</p>
         </div>
 
         <div style={box}>
           <SectionTitle sub>Board reporting / KPI ambiguity</SectionTitle>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, lineHeight: 1.6, margin: "0 0 8px 0" }}><strong>Situation:</strong> KPIs undefined or ad hoc; board reporting inconsistent and lagging.</p>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, lineHeight: 1.6, margin: "0 0 8px 0" }}><strong>Delivered:</strong> KPI library + thresholds, weekly cadence, executive dashboard, board-ready pack structure.</p>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0 }}><strong>Result:</strong> Predictable operating rhythm and faster issue detection.</p>
+          <span style={fieldLabel}>Gap Identified</span>
+          <p style={fieldVal}>No defined KPIs. Board received verbal, anecdotal operational updates. No baseline, no targets, no way to demonstrate or measure improvement.</p>
+          <span style={fieldLabel}>VCP Intervention</span>
+          <p style={fieldVal}>KPI library + thresholds defined, weekly operating review installed, executive dashboard built, board-ready reporting pack structured.</p>
+          <span style={fieldLabel}>Value Created</span>
+          <p style={valueCreated}>Predictable weekly operating rhythm established. Issues surfaced proactively through cadence, not reactively through crisis. Board gained real-time visibility into operational health — direct input to exit narrative.</p>
         </div>
       </div>
     </Section>
@@ -384,6 +397,28 @@ export default function LeverExplorer({ setPage }) {
   const [timingFilter, setTimingFilter] = useState("All");
   const [severityFilter, setSeverityFilter] = useState("All");
   const [expanded, setExpanded] = useState(null);
+
+  // ── Scroll-depth sticky bar ──────────────────────────────────
+  const [showStickyBar, setShowStickyBar] = useState(false);
+  const [stickyDismissed, setStickyDismissed] = useState(() => {
+    try { return sessionStorage.getItem("scorerBarDismissed") === "true"; } catch { return false; }
+  });
+
+  useEffect(() => {
+    if (stickyDismissed) return;
+    const handleScroll = () => {
+      const scrolled = window.scrollY / Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      setShowStickyBar(scrolled > 0.7);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [stickyDismissed]);
+
+  const handleStickyDismiss = () => {
+    setShowStickyBar(false);
+    setStickyDismissed(true);
+    try { sessionStorage.setItem("scorerBarDismissed", "true"); } catch {}
+  };
 
   const filtered = LEVERS.filter(l => {
     if (domainFilter !== "All" && l.domain !== domainFilter) return false;
@@ -448,7 +483,7 @@ export default function LeverExplorer({ setPage }) {
         <div key={lever.id}>
           <div style={{ background: COLORS.white, border: `1px solid ${expanded === lever.id ? COLORS.steel : COLORS.border}`, borderRadius: "6px", marginBottom: "8px", transition: "all 0.15s", cursor: "pointer" }}
             onClick={() => setExpanded(expanded === lever.id ? null : lever.id)}>
-            <div style={{ padding: "16px 22px", display: "flex", alignItems: "center", gap: "14px" }}>
+            <div className="lever-row" style={{ padding: "16px 22px", display: "flex", alignItems: "center", gap: "14px" }}>
               <span style={{ fontFamily: FONTS.body, fontSize: "1.3rem", color: COLORS.navy, width: "20px", flexShrink: 0 }}>
                 {expanded === lever.id ? "▾" : "▸"}
               </span>
@@ -456,7 +491,7 @@ export default function LeverExplorer({ setPage }) {
               <span style={{ fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 500, color: COLORS.charcoal, flex: 1 }}>
                 {lever.name}
               </span>
-              <div style={{ display: "flex", gap: "8px", flexShrink: 0 }}>
+              <div className="lever-badges" style={{ display: "flex", gap: "8px", flexShrink: 0 }}>
                 <SeverityBadge severity={lever.severity} />
                 <TimingBadge timing={lever.timing} />
               </div>
@@ -526,6 +561,28 @@ export default function LeverExplorer({ setPage }) {
           centered={true}
         />
       </Section>
+
+      {/* ── Scroll-depth sticky bar ── */}
+      {showStickyBar && !stickyDismissed && (
+        <div className="scorer-sticky-bar" style={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 200, background: COLORS.navy, borderTop: `3px solid ${COLORS.gold}`, padding: "14px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px", boxShadow: "0 -4px 20px rgba(20,33,61,0.25)" }}>
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.offWhite, margin: 0, lineHeight: 1.5 }}>
+            <strong style={{ color: COLORS.gold }}>Before you go —</strong> run the free Ops Scorer. Takes 2 minutes, produces a prioritized assessment.
+          </p>
+          <div style={{ display: "flex", gap: "10px", alignItems: "center", flexShrink: 0 }}>
+            <button
+              onClick={() => { handleStickyDismiss(); setPage("scorer"); }}
+              style={{ padding: "9px 18px", background: COLORS.gold, color: "white", border: "none", borderRadius: RADIUS.sm, fontFamily: FONTS.body, fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap" }}>
+              Run the Ops Scorer →
+            </button>
+            <button
+              onClick={handleStickyDismiss}
+              aria-label="Dismiss"
+              style={{ padding: "9px 13px", background: "transparent", border: `1px solid ${COLORS.offWhite}40`, borderRadius: RADIUS.sm, color: COLORS.offWhite, fontFamily: FONTS.body, fontSize: "1rem", cursor: "pointer", lineHeight: 1 }}>
+              ×
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

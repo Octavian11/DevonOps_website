@@ -321,9 +321,18 @@ export function FAQBlock() {
         <p style={a}>NDA-friendly by default. Minimal data handling; formats can be anonymized.</p>
 
         <h3 style={q}>When are you not a fit?</h3>
-        <p style={{ ...a, marginBottom: 0 }}>
+        <p style={a}>
           If the company already has mature incident/change governance, a live KPI cadence, and low volatility, you likely don't need stabilization—only optimization.
         </p>
+
+        <h3 style={q}>What is a Value Creation Plan (VCP) and what does it include?</h3>
+        <p style={a}>A VCP is the named operational deliverable from the diligence phase — not a slide deck. It defines which gaps to fix, in what sequence, with what accountability structure, and what measurable outcomes to expect in 100 days. It's the document that converts diligence findings into operating results. The VCP is what prevents the post-close "now what?" problem.</p>
+
+        <h3 style={q}>Why should we hire you instead of a Big 4 firm?</h3>
+        <p style={a}>Big 4 firms deliver audit-grade frameworks. I deliver practitioner-grade execution. I've been the operator — incident command at 2am, vendor governance under regulatory scrutiny, KPI cadences built from zero. If you need a framework, hire a Big 4 firm. If you need someone who installs the operating system in 100 days and hands it off running, let's talk.</p>
+
+        <h3 style={q}>Why should we hire you instead of building an in-house operating team?</h3>
+        <p style={{ ...a, marginBottom: 0 }}>Build in-house — eventually. I'm the bridge. I install the infrastructure, cadence, and playbook in 100 days. Your in-house team inherits a system that works, instead of building one from scratch while also running the business. GP operating teams have doubled since 2021 (McKinsey GPMR 2026). I'm the on-demand version for funds that aren't there yet.</p>
       </div>
     </Section>
   );
@@ -539,9 +548,14 @@ export function Footer({ setPage }) {
 
       {/* Copyright */}
       <div style={{ maxWidth: "1200px", margin: "32px auto 0", padding: "24px 24px 0 24px", borderTop: `1px solid ${COLORS.steel}40`, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "16px" }}>
-        <p style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.offWhite, opacity: 0.7, margin: 0 }}>
-          © {new Date().getFullYear()} Devonshire Ops. All rights reserved.
-        </p>
+        <div>
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.offWhite, opacity: 0.7, margin: "0 0 4px 0" }}>
+            © {new Date().getFullYear()} Devonshire Ops. All rights reserved.
+          </p>
+          <p style={{ fontFamily: FONTS.heading, fontSize: "0.9rem", color: COLORS.gold, opacity: 0.85, margin: 0, fontStyle: "italic" }}>
+            Find the gaps. Build the plan. Deliver the alpha.
+          </p>
+        </div>
         <p style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.offWhite, opacity: 0.7, margin: 0 }}>
           NDA-friendly. Minimal data handling. Anonymized formats accepted.
         </p>
