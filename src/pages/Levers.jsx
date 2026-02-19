@@ -14,43 +14,42 @@ import {
 
 function HeroBlockWithNav({ setPage }) {
   return (
-    <div className="hero-block" style={{ background: `linear-gradient(135deg, ${COLORS.heroGradientStart} 0%, ${COLORS.heroGradientEnd} 100%)`, marginTop: "-40px", marginBottom: "32px", padding: "48px 40px 44px", position: "relative", overflow: "hidden" }}>
+    <div className="hero-block" style={{ background: `linear-gradient(135deg, ${COLORS.heroGradientStart} 0%, ${COLORS.heroGradientEnd} 100%)`, marginTop: "-40px", marginBottom: "0", padding: "48px 40px 44px", position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0, opacity: 0.02, backgroundImage: "repeating-linear-gradient(0deg, white 0px, white 1px, transparent 1px, transparent 40px), repeating-linear-gradient(90deg, white 0px, white 1px, transparent 1px, transparent 40px)" }} />
       <div style={{ position: "relative", maxWidth: "720px" }}>
         <div style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.gold, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "16px" }}>
-          Portfolio Operations · Pre-Close Diligence · Post-Close Stabilization
+          Ops Diligence · Value Creation Plans · Post-Close Governance
         </div>
         <h1 style={{ fontFamily: FONTS.heading, fontSize: "2.4rem", fontWeight: 700, color: "white", lineHeight: 1.2, marginBottom: "18px" }}>
-          Operational red flags that standard diligence misses — and the governance baseline for the first 100 days.
+          Operational gaps are your biggest value creation lever. We find them before close and convert them into alpha.
         </h1>
         <p style={{ fontFamily: FONTS.body, fontSize: "1.02rem", color: "rgba(255,255,255,0.92)", lineHeight: 1.65, marginBottom: "22px" }}>
-          15+ years running "cannot go down" trading operations across JP Morgan, Barclays, Bank of America, and Lazard — building incident command, change governance, and KPI control towers across multi-manager platforms managing $10B+ in assets.
+          15+ years at JPM, Barclays, BofA, Lazard. $10B+ in assets. I surface the operational friction PE funds miss — and build the Value Creation Plan that converts it into EBITDA improvement in 100 days.
         </p>
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "26px" }}>
-          {[
-            "Ops Diligence Report: risk-rated findings memo for the IC (investment committee). 2–3 weeks.",
-            "100-Day Stabilization Plan: incident command, change control, KPIs, vendor governance, board reporting.",
-            "For PE funds, operating partners, and independent sponsors evaluating or managing portfolio companies.",
-          ].map((text, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "12px" }}>
-              <span style={{ color: COLORS.gold, fontSize: "0.95rem", lineHeight: "28px", flexShrink: 0 }}>→</span>
-              <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: "rgba(255,255,255,0.95)", lineHeight: 1.6 }}>{text}</span>
-            </div>
-          ))}
+
+        {/* McKinsey GPMR 2026 data anchor */}
+        <div style={{ borderLeft: `3px solid ${COLORS.gold}`, paddingLeft: "16px", marginBottom: "28px" }}>
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.88rem", color: "rgba(255,255,255,0.78)", lineHeight: 1.6, margin: "0 0 5px 0", fontStyle: "italic" }}>
+            "Leverage and multiple expansion drove 59% of PE returns from 2010–2022. That era is compressing. Operational value creation is the primary remaining lever."
+          </p>
+          <span style={{ fontFamily: FONTS.body, fontSize: "0.75rem", color: COLORS.gold, letterSpacing: "0.6px", textTransform: "uppercase", fontWeight: 600 }}>
+            McKinsey Global Private Markets Review 2026
+          </span>
         </div>
+
         <div style={{ display: "flex", gap: SPACING.sm, flexWrap: "wrap" }}>
-          <a href={CALENDLY} target="_blank" rel="noopener noreferrer"
-            style={{ display: "inline-block", padding: "12px 28px", background: COLORS.gold, color: "white", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.sm, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: "none" }}
+          <button onClick={() => setPage("scorer")}
+            style={{ display: "inline-block", padding: "12px 28px", background: COLORS.gold, color: "white", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.sm, letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: "none" }}
             onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; }}
             onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; }}>
-            15-Minute Fit Check
-          </a>
-          <button onClick={() => setPage("services")}
-            style={{ display: "inline-block", padding: "12px 28px", background: "transparent", color: COLORS.gold, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.sm, letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: `2px solid ${COLORS.gold}` }}
+            Run the Ops Scorer →
+          </button>
+          <a href={CALENDLY} target="_blank" rel="noopener noreferrer"
+            style={{ display: "inline-block", padding: "12px 28px", background: "transparent", color: COLORS.gold, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.sm, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: `2px solid ${COLORS.gold}` }}
             onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.gold}15`; }}
             onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}>
-            View Services & Pricing
-          </button>
+            Book a 15-Min Fit Check
+          </a>
         </div>
       </div>
     </div>
@@ -140,13 +139,13 @@ function SecondaryCaptureRow({ contextLabel, bodyExtra }) {
 function ProofStrip() {
   return (
     <Section
-      title="Want the Red-Flag Memo Format?"
-      primaryCTA={{ text: "View Sample Scorecard (PDF)", link: SAMPLE_SCORECARD_PDF }}
-      secondaryCTA={{ text: "View 100-Day Plan (PDF)", link: SAMPLE_100DAY_PDF }}
+      title="See What the Deliverables Actually Look Like"
+      primaryCTA={{ text: "Sample Ops Diligence Scorecard — IC-ready, severity-rated (PDF)", link: SAMPLE_SCORECARD_PDF }}
+      secondaryCTA={{ text: "Sample 100-Day Stabilization Plan — Visibility → Control → Cadence (PDF)", link: SAMPLE_100DAY_PDF }}
       centered={true}
     >
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "12px" }}>
-        See the exact structure of the Ops Diligence Scorecard: severity-rated findings, PE impact, and a stabilization priority matrix.
+        These are the exact formats delivered to investment committees. See what your IC diligence memo and 100-day operating plan should look like — severity-rated, PE-impact framed, board-ready from Day 1.
       </p>
       <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.bodyMuted, marginBottom: "0" }}>
         Samples are anonymized/fictional and provided for format demonstration only.
@@ -158,19 +157,16 @@ function ProofStrip() {
 
 // ─── EARLY CTA ───────────────────────────────────────────────
 
-function EarlyCTA() {
+function EarlyCTA({ setPage }) {
   return (
     <Section
-      primaryCTA={{ text: "15-Minute Fit Check", link: CALENDLY }}
-      secondaryCTA={{
-        text: "Email me instead",
-        link: mailtoHref("Devonshire Ops – Fit Check request", "Hi Hassan,\n\nI reviewed the operational levers and would like to discuss fit.\n\nContext:\n- Company / deal stage:\n- Primary concern:\n- Timeline:\n\nBest,\n")
-      }}
+      primaryCTA={{ text: "Run the Ops Scorer →", action: () => setPage("scorer") }}
+      secondaryCTA={{ text: "Book a Fit Check", link: CALENDLY }}
       centered={true}
       background={`${COLORS.navy}05`}
     >
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, textAlign: "center", margin: 0 }}>
-        Recognizing these patterns in a target or portfolio company?
+        Want to see which operational gaps exist in your next deal?
       </p>
     </Section>
   );
@@ -186,6 +182,9 @@ function OfferCards({ setPage }) {
 
   return (
     <Section title="Services & Pricing (Fast Orientation)" type="windowWithCards" noCTA>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "6px", maxWidth: "760px", fontStyle: "italic" }}>
+        Diligence without execution is a risk report. Execution without diligence is change without a plan.
+      </p>
       <p style={{ fontFamily: FONTS.body, fontSize: "1.02rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "24px", maxWidth: "760px" }}>
         Choose the track that matches your deal lifecycle. Each deliverable is designed to be <strong>decision-useful for PE: severity-rated findings, PE impact, and a pragmatic Day-1 critical path</strong>.
       </p>
@@ -202,12 +201,12 @@ function OfferCards({ setPage }) {
         </div>
 
         <div style={boxGold}>
-          <SectionTitle sub>Bundle (Recommended)</SectionTitle>
+          <SectionTitle sub>Bundle (Recommended): Diligence → VCP → Execution</SectionTitle>
           <div style={tag}>$25,000–$35,000 · diligence + 100 days</div>
           <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
-            <li style={li}>Diligence findings roll straight into execution</li>
-            <li style={li}>Day-1 critical path + phased stabilization plan</li>
-            <li style={li}>Clear ownership + cadence for the first 100 days</li>
+            <li style={li}>Diligence findings roll directly into the Value Creation Plan — no re-learning, no gap between discovery and execution</li>
+            <li style={li}>Day-1 critical path + phased 100-day execution</li>
+            <li style={li}>Clear ownership + cadence from close to value</li>
           </ul>
         </div>
 
@@ -237,8 +236,9 @@ function OfferCards({ setPage }) {
 function HowItWorks() {
   const timelineItems = [
     { title: "1) Baseline", meta: "Week 1", description: "We request what exists: incident history, change/release artifacts, vendor list/contracts, KPI packs, org/RACI, audit evidence folders, and escalation/on-call.", completed: true },
-    { title: "2) Diagnose", meta: "Weeks 1–3", description: "You receive a decision-useful output: severity-rated findings, PE impact framing, and a prioritized Day-1 critical path.", active: true },
-    { title: "3) Stabilize", meta: "Day 1–100", description: "Post-close, we install the governance baseline: incident command, change control, KPI cadence, vendor governance, and board-ready reporting." }
+    { title: "2) Diagnose", meta: "Weeks 1–3", description: "You receive a decision-useful output: severity-rated findings, PE impact framing, and a prioritized Day-1 critical path.", completed: true },
+    { title: "3) Value Creation Plan", meta: "At close", description: "Diligence findings roll directly into the Value Creation Plan (VCP). The VCP defines which gaps to fix, in what order, with what accountability — so Day 1 post-close has a clear operating mandate.", active: true },
+    { title: "4) Execute + Govern", meta: "Days 1–100", description: "Post-close, we execute the VCP: install incident command, change control, KPI cadence, vendor governance, and board-ready reporting. The plan and the execution are the same engagement." }
   ];
 
   return (
@@ -398,12 +398,20 @@ export default function LeverExplorer({ setPage }) {
   return (
     <div className="fade-in">
       <HeroBlockWithNav setPage={setPage} />
+      <MicroProofStrip />
 
       <div style={{ marginBottom: "28px" }}>
-        <SectionTitle>20 Operational Levers PE Funds Should Check</SectionTitle>
+        <SectionTitle>20 Operational Value Creation Levers Hidden in Your Next Deal</SectionTitle>
         <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "720px" }}>
           {LEVERS.length} operational friction points across 6 domains — with severity ratings, symptoms, and PE impact analysis. The levers show <em>what</em> is broken and <em>why</em> it matters. The remediation playbooks — the <em>how</em> — are delivered in the engagement.
         </p>
+        {/* McKinsey GPMR 2026 — aging portfolio urgency stat */}
+        <div style={{ marginTop: "18px", padding: "14px 18px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0`, maxWidth: "720px" }}>
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.92rem", color: COLORS.charcoal, margin: 0, lineHeight: 1.6 }}>
+            <strong>16,000+ PE-backed companies are currently held 4+ years — 52% of total PE inventory, the highest on record.</strong> With median hold periods now at 6.6 years, the window for operational value creation is finite. Funds that identify and close these gaps early capture disproportionate returns.
+          </p>
+          <span style={{ fontFamily: FONTS.body, fontSize: "0.78rem", color: COLORS.bodyMuted, letterSpacing: "0.4px", textTransform: "uppercase", display: "block", marginTop: "6px" }}>McKinsey Global Private Markets Review 2026</span>
+        </div>
       </div>
 
       <DomainLegend />
@@ -478,14 +486,14 @@ export default function LeverExplorer({ setPage }) {
           {idx === 4 && filtered.length > 5 && (
             <div style={{ margin: "12px 0 16px", padding: "20px 28px", background: COLORS.navy, borderRadius: RADIUS.md, boxShadow: "0 4px 12px rgba(67, 97, 125, 0.15)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
               <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.offWhite, margin: 0, lineHeight: 1.55 }}>
-                <strong style={{ color: COLORS.gold }}>Want the red-flag memo format?</strong> See exactly what the Ops Diligence Report delivers.
+                <strong style={{ color: COLORS.gold }}>Not sure which of these apply to your deal?</strong> Run the Ops Scorer — free, 2 minutes, produces a prioritized assessment.
               </p>
               <div style={{ display: "flex", gap: "10px", flexShrink: 0 }}>
-                <button onClick={() => setPage("services")} style={{ padding: "8px 18px", background: "transparent", color: COLORS.offWhite, border: `1px solid ${COLORS.offWhite}60`, borderRadius: RADIUS.sm, fontFamily: FONTS.body, fontSize: "0.875rem", fontWeight: 600, cursor: "pointer" }}>
-                  View Services & Pricing
+                <button onClick={() => setPage("scorer")} style={{ padding: "8px 18px", background: COLORS.gold, color: COLORS.white, border: "none", borderRadius: RADIUS.sm, fontFamily: FONTS.body, fontSize: "0.875rem", fontWeight: 600, cursor: "pointer" }}>
+                  Run the Ops Scorer →
                 </button>
-                <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ padding: "8px 18px", background: COLORS.gold, color: COLORS.white, border: "none", borderRadius: RADIUS.sm, fontFamily: FONTS.body, fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", textDecoration: "none" }}>
-                  15-Minute Fit Check
+                <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ padding: "8px 18px", background: "transparent", color: COLORS.offWhite, border: `1px solid ${COLORS.offWhite}60`, borderRadius: RADIUS.sm, fontFamily: FONTS.body, fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", textDecoration: "none" }}>
+                  Book a Fit Check
                 </a>
               </div>
             </div>
@@ -493,9 +501,8 @@ export default function LeverExplorer({ setPage }) {
         </div>
       ))}
 
-      <MicroProofStrip />
       <ChooseSituation setPage={setPage} />
-      <EarlyCTA />
+      <EarlyCTA setPage={setPage} />
       <OfferCards setPage={setPage} />
       <ProofStrip />
       <DealImplications />
@@ -505,13 +512,17 @@ export default function LeverExplorer({ setPage }) {
       <FAQBlock />
 
       <Section noCTA background={`${COLORS.navy}05`}>
+        <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.bodyMuted, textAlign: "center", marginBottom: "8px", fontStyle: "italic" }}>
+          ~67% incident volume reduction · ~31% MTTR improvement · $2M+ annual vendor savings — representative outcomes from prior institutional operating roles
+        </p>
         <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, marginBottom: "20px", textAlign: "center" }}>
           Not sure where to start? Let's assess fit and scope the right engagement.
         </p>
         <ButtonPair
-          primaryText="15-Minute Fit Check"
-          secondaryText="Email me instead"
-          secondaryLink={mailtoHref("Devonshire Ops – Fit Check request", "Hi Hassan,\n\nI reviewed the operational levers and would like to discuss fit.\n\nContext:\n- Company / deal stage:\n- Primary concern:\n- Timeline:\n\nBest,\n")}
+          primaryText="Run the Ops Scorer →"
+          primaryAction={() => setPage("scorer")}
+          secondaryText="Book a Fit Check"
+          secondaryLink={CALENDLY}
           centered={true}
         />
       </Section>

@@ -506,7 +506,7 @@ export function Footer({ setPage }) {
               { key: "levers", label: "Ops Friction Levers" },
               { key: "services", label: "Services & Method" },
               { key: "about", label: "About" },
-              { key: "scorer", label: "Ops Friction Scorer" },
+              { key: "scorer", label: "Ops Scorer (Free Tool)" },
             ].map(({ key, label }) => (
               <button key={key} onClick={() => setPage(key)}
                 style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.offWhite, background: "none", border: "none", padding: 0, textAlign: "left", cursor: "pointer", transition: "color 0.2s" }}

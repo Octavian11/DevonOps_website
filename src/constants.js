@@ -9,6 +9,9 @@ export const SAMPLE_100DAY_PDF = "/sample-100-day-stabilization-plan.pdf";
 export const PDF_SCORECARD = "/pdfs/ops-diligence-scorecard.pdf";
 export const PDF_100DAY = "/pdfs/100-day-stabilization-plan.pdf";
 export const NDA_NOTE = "NDA-friendly. Minimal data handling. Anonymized formats accepted.";
+// FormSpree endpoint for Scorer email capture — replace YOUR_FORM_ID with your actual Formspree form ID
+// Sign up at formspree.io, create a form, and paste the ID here (e.g. "xpwqvnab")
+export const FORMSPREE_URL = "https://formspree.io/f/YOUR_FORM_ID";
 
 export function mailtoHref(subject, body) {
   return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
