@@ -614,10 +614,10 @@ export default function LeverExplorer({ setPage }) {
       <FAQBlock />
 
       <Section noCTA background={`${COLORS.navy}05`}>
-        <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.bodyMuted, textAlign: "center", marginBottom: "8px", fontStyle: "italic", margin: "0 auto", marginBottom: "8px" }}>
+        <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.bodyMuted, textAlign: "center", fontStyle: "italic", margin: "0 auto 8px" }}>
           ~67% incident volume reduction · ~31% MTTR improvement · $2M+ annual vendor savings — representative outcomes from prior institutional operating roles
         </p>
-        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, marginBottom: "20px", textAlign: "center", margin: "0 auto", marginBottom: "20px" }}>
+        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, textAlign: "center", margin: "0 auto 20px" }}>
           Not sure where to start? Let's assess fit and scope the right engagement.
         </p>
         <ButtonPair
