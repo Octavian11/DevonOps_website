@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from "recharts";
 import {
-  COLORS, FONTS, SPACING, RADIUS,
+  COLORS, FONTS, SPACING, SHADOWS, RADIUS,
   CALENDLY, SAMPLE_SCORECARD_PDF, SAMPLE_100DAY_PDF,
   FORMSPREE_URL,
   SCORER_DIMS, DIM_RECS, CONTEXT_OPTIONS, CONTEXT_CALLOUTS,
