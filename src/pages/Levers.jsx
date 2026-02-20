@@ -41,23 +41,23 @@ function HeroBlockWithNav({ setPage }) {
         </div>
 
         <div className="hero-ctas" style={{ display: "flex", gap: SPACING.sm, flexWrap: "wrap", alignItems: "flex-start" }}>
-          <button onClick={() => setPage("scorer")}
-            style={{ display: "inline-block", padding: "12px 28px", background: COLORS.gold, color: "white", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.sm, letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: "none" }}
-            onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; }}
-            onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; }}>
-            Run the Ops Scorer →
-          </button>
           <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
             <a href={CALENDLY} target="_blank" rel="noopener noreferrer"
-              style={{ display: "inline-block", padding: "12px 28px", background: "transparent", color: COLORS.gold, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.sm, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: `2px solid ${COLORS.gold}` }}
-              onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.gold}15`; }}
-              onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}>
+              style={{ display: "inline-block", padding: "12px 28px", background: COLORS.gold, color: "white", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.md, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: "none" }}
+              onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; }}>
               Book a 15-Min Fit Check
             </a>
             <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: "rgba(255,255,255,0.95)", textAlign: "center" }}>
               Currently accepting 1–2 new engagements
             </span>
           </div>
+          <button onClick={() => setPage("scorer")}
+            style={{ display: "inline-block", padding: "12px 28px", background: "transparent", color: COLORS.gold, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.md, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: `2px solid ${COLORS.gold}` }}
+            onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.gold}15`; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}>
+            Run the Ops Scorer →
+          </button>
         </div>
       </div>
     </div>
@@ -230,7 +230,7 @@ function EarlyCTA({ setPage }) {
       centered={true}
       background={`${COLORS.navy}05`}
     >
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, textAlign: "center", margin: 0 }}>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, textAlign: "center", margin: "0 auto" }}>
         Want to see which operational gaps exist in your next deal?
       </p>
     </Section>
@@ -548,7 +548,7 @@ export default function LeverExplorer({ setPage }) {
 
       {filtered.map((lever, idx) => (
         <div key={lever.id}>
-          <div style={{ background: COLORS.white, border: `1px solid ${expanded === lever.id ? COLORS.steel : COLORS.border}`, borderRadius: "6px", marginBottom: "8px", transition: "all 0.15s", cursor: "pointer" }}
+          <div style={{ background: COLORS.white, border: `1px solid ${expanded === lever.id ? COLORS.steel : COLORS.border}`, borderRadius: RADIUS.md, marginBottom: "8px", transition: "all 0.15s", cursor: "pointer" }}
             onClick={() => setExpanded(expanded === lever.id ? null : lever.id)}>
             <div className="lever-row" style={{ padding: "16px 22px", display: "flex", alignItems: "center", gap: "14px" }}>
               <span style={{ fontFamily: FONTS.body, fontSize: "1.3rem", color: COLORS.navy, width: "20px", flexShrink: 0 }}>
@@ -614,10 +614,10 @@ export default function LeverExplorer({ setPage }) {
       <FAQBlock />
 
       <Section noCTA background={`${COLORS.navy}05`}>
-        <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.bodyMuted, textAlign: "center", marginBottom: "8px", fontStyle: "italic" }}>
+        <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.bodyMuted, textAlign: "center", marginBottom: "8px", fontStyle: "italic", margin: "0 auto", marginBottom: "8px" }}>
           ~67% incident volume reduction · ~31% MTTR improvement · $2M+ annual vendor savings — representative outcomes from prior institutional operating roles
         </p>
-        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, marginBottom: "20px", textAlign: "center" }}>
+        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, marginBottom: "20px", textAlign: "center", margin: "0 auto", marginBottom: "20px" }}>
           Not sure where to start? Let's assess fit and scope the right engagement.
         </p>
         <ButtonPair

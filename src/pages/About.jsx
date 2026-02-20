@@ -6,7 +6,7 @@ import { CTAButton, ButtonPair, Section, ServicesSamplesRow } from "../component
 
 export default function AboutPage() {
   return (
-    <div className="fade-in" style={{ maxWidth: "700px" }}>
+    <div className="fade-in">
       <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 700, color: COLORS.navy, marginBottom: SPACING.lg }}>About</h1>
 
       {/* Who I Am */}

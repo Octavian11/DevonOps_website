@@ -162,7 +162,7 @@ export default function ScorerPage() {
         <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "12px" }}>What's your situation?</h3>
         <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
           {CONTEXT_OPTIONS.map(opt => (
-            <label key={opt.key} style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", padding: "8px 12px", borderRadius: "4px", background: context === opt.key ? `${COLORS.navy}08` : "transparent", border: `1px solid ${context === opt.key ? COLORS.steel : "transparent"}` }}>
+            <label key={opt.key} style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", padding: "8px 12px", borderRadius: RADIUS.sm, background: context === opt.key ? `${COLORS.navy}08` : "transparent", border: `1px solid ${context === opt.key ? COLORS.steel : "transparent"}` }}>
               <input type="radio" name="context" checked={context === opt.key} onChange={() => setContext(opt.key)} style={{ accentColor: COLORS.navy }} />
               <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal }}>{opt.label}</span>
             </label>
@@ -173,7 +173,7 @@ export default function ScorerPage() {
       {/* Two-Column Layout: Sliders (Left) + View Results & Assessment (Right) */}
       <div style={{ display: "flex", gap: "24px", alignItems: "flex-start", marginBottom: "24px" }}>
         {/* Left Panel: outer container with sticky heading + scrollable cards */}
-        <div style={{ flex: "1 1 500px", display: "flex", flexDirection: "column", border: `2px solid ${COLORS.steel}`, borderRadius: RADIUS.lg, overflow: "hidden", boxShadow: SHADOWS.sm }}>
+        <div style={{ flex: "1 1 440px", display: "flex", flexDirection: "column", border: `2px solid ${COLORS.steel}`, borderRadius: RADIUS.lg, overflow: "hidden", boxShadow: SHADOWS.sm }}>
           {/* Fixed heading — always visible */}
           <div style={{ padding: "16px 20px 12px", borderBottom: `1px solid ${COLORS.border}`, background: COLORS.white }}>
             <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, margin: 0 }}>Score all 6 Dimensions (1–5)</h3>
@@ -206,12 +206,12 @@ export default function ScorerPage() {
         </div>
 
         {/* Right Panel: View Results Button & Assessment Results */}
-        <div style={{ flex: "0 0 420px", minWidth: "320px", position: "sticky", top: "100px" }}>
+        <div style={{ flex: "0 0 360px", minWidth: "280px", position: "sticky", top: "100px" }}>
           {!showResults && (
             <Card>
               <div style={{ textAlign: "center" }}>
                 <button onClick={() => setShowResults(true)}
-                  style={{ padding: "12px 32px", background: COLORS.navy, color: "white", border: "none", borderRadius: "4px", fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, cursor: "pointer", letterSpacing: "0.3px", width: "100%" }}>
+                  style={{ padding: "12px 32px", background: COLORS.navy, color: "white", border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, cursor: "pointer", letterSpacing: "0.3px", width: "100%" }}>
                   View Results
                 </button>
               </div>
@@ -286,7 +286,7 @@ export default function ScorerPage() {
           <ScorerEmailCapture rating={ratingLabel} score={avg.toFixed(1)} context={context} />
 
           <Section noCTA background={`${COLORS.navy}05`}>
-            <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, textAlign: "center", marginBottom: SPACING.md }}>
+            <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, textAlign: "center", marginBottom: SPACING.md, margin: "0 auto", marginBottom: SPACING.md }}>
               {rating === "stable"
                 ? "Maintain your edge with ongoing governance support."
                 : "Ready to convert these gaps into a Value Creation Plan?"}

@@ -21,10 +21,10 @@ function ServicesMethodJumpBar() {
   };
 
   const links = [
-    { href: "#ongoing", label: "Ongoing" },
-    { href: "#how-it-works", label: "How it works" },
+    { href: "#top", label: "Pricing" },
     { href: "#rubric", label: "Rubric" },
-    { href: "#sequence", label: "100-Day sequence" },
+    { href: "#sequence", label: "100-Day Sequence" },
+    { href: "#how-it-works", label: "How It Works" },
     { href: "#faq", label: "FAQ" },
     { href: "#fit-check", label: "Fit Check" },
   ];
@@ -52,10 +52,10 @@ function Accordion({ title, children, defaultOpen = false }) {
       <button onClick={() => setOpen(!open)}
         style={{ width: "100%", textAlign: "left", background: "transparent", border: "none", padding: "0", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px" }}>
         <div>
-          <div style={{ fontFamily: FONTS.heading, fontSize: "1.25rem", fontWeight: 800, color: COLORS.navy }}>{title}</div>
+          <div style={{ fontFamily: FONTS.heading, fontSize: "1.25rem", fontWeight: 700, color: COLORS.navy }}>{title}</div>
           <div style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.bodyMuted, marginTop: "6px" }}>Click to {open ? "collapse" : "expand"}.</div>
         </div>
-        <div style={{ fontFamily: FONTS.body, fontSize: "1.25rem", fontWeight: 900, color: COLORS.navy }}>{open ? "−" : "+"}</div>
+        <div style={{ fontFamily: FONTS.body, fontSize: "1.25rem", fontWeight: 700, color: COLORS.navy }}>{open ? "−" : "+"}</div>
       </button>
       {open && <div style={{ marginTop: "16px" }}>{children}</div>}
     </Card>
@@ -66,9 +66,9 @@ function Accordion({ title, children, defaultOpen = false }) {
 
 function MiniMetric({ label, value, valueColor }) {
   return (
-    <div style={{ border: `1px solid ${COLORS.border}`, borderRadius: "6px", padding: "12px", background: COLORS.white }}>
-      <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 900, color: COLORS.bodyMuted, marginBottom: "6px" }}>{label}</div>
-      <div style={{ fontFamily: FONTS.heading, fontSize: "1.25rem", fontWeight: 900, color: valueColor || COLORS.navy }}>{value}</div>
+    <div style={{ border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "12px", background: COLORS.white }}>
+      <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, color: COLORS.bodyMuted, marginBottom: "6px" }}>{label}</div>
+      <div style={{ fontFamily: FONTS.heading, fontSize: "1.25rem", fontWeight: 700, color: valueColor || COLORS.navy }}>{value}</div>
     </div>
   );
 }
@@ -97,8 +97,8 @@ function WorkedExampleAccordion() {
       </div>
 
       <div style={{ marginTop: "16px", display: "flex", gap: "10px", flexWrap: "wrap" }}>
-        <button onClick={() => window.location.hash = "#offers"}
-          style={{ padding: "12px 18px", background: COLORS.navy, color: "white", borderRadius: "4px", border: "none", fontFamily: FONTS.body, fontWeight: 800, cursor: "pointer" }}>
+        <button onClick={() => window.location.hash = "#top"}
+          style={{ padding: "12px 18px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, border: "none", fontFamily: FONTS.body, fontWeight: 700, cursor: "pointer" }}>
           See offers & pricing
         </button>
         <CTAButton text="15-Minute Fit Check" showAvailability={true} />
@@ -310,17 +310,10 @@ function FitCheckCTA() {
         centered={true}
         showAvailability={true}
       />
+      <div style={{ marginTop: "16px", padding: "10px 12px", borderRadius: RADIUS.md, border: `1px solid ${COLORS.border}`, background: `${COLORS.navy}03`, fontFamily: FONTS.body, fontSize: "0.92rem", color: COLORS.charcoal, lineHeight: 1.45, maxWidth: "820px", margin: "16px auto 0" }}>
+        NDA-friendly. We can sign an NDA before receiving sensitive materials; initial triage can be done with high-level facts only.
+      </div>
     </Section>
-  );
-}
-
-// ─── NDA MICRO BLOCK ─────────────────────────────────────────
-
-function NDAMicroBlock() {
-  return (
-    <div style={{ marginTop: "10px", padding: "10px 12px", borderRadius: "6px", border: `1px solid ${COLORS.border}`, background: `${COLORS.navy}03`, fontFamily: FONTS.body, fontSize: "0.92rem", color: COLORS.charcoal, lineHeight: 1.45 }}>
-      NDA-friendly. We can sign an NDA before receiving sensitive materials; initial triage can be done with high-level facts only.
-    </div>
   );
 }
 
@@ -411,7 +404,6 @@ export default function ServicesPage() {
       <ServicesMethodJumpBar />
       <ServicesPricingLadder />
       <ServicesSamplesRow />
-      <NDAMicroBlock />
 
       <div id="rubric" style={{ marginTop: "28px" }}>
         <FrameworkRubricTable />

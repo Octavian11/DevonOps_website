@@ -27,7 +27,16 @@ export default function App() {
     return () => { document.head.removeChild(style); };
   }, []);
 
-  useEffect(() => { window.scrollTo(0, 0); }, [location.pathname]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const titles = {
+      levers: "Operational Value Creation Levers — Devonshire Ops",
+      services: "Services & Method — Devonshire Ops",
+      scorer: "Ops Scorer — Devonshire Ops",
+      about: "About — Devonshire Ops"
+    };
+    document.title = titles[page] || "Devonshire Ops";
+  }, [location.pathname, page]);
 
   const pages = {
     levers: <LeverExplorer setPage={setPage} />,
