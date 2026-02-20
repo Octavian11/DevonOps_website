@@ -123,7 +123,7 @@ function ScorerEmailCapture({ rating, score, context }) {
         <button
           type="submit"
           disabled={status === "loading"}
-          style={{ padding: "10px 20px", background: status === "loading" ? COLORS.bodyMuted : COLORS.navy, color: "white", border: "none", borderRadius: RADIUS.sm, fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, cursor: status === "loading" ? "default" : "pointer", textAlign: "left", transition: "background 0.2s" }}>
+          style={{ padding: "14px 28px", background: status === "loading" ? COLORS.bodyMuted : COLORS.navy, color: "white", border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, cursor: status === "loading" ? "default" : "pointer", textAlign: "left", transition: "background 0.2s" }}>
           {status === "loading" ? "Sending…" : "Send My Report →"}
         </button>
         <p style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.bodyMuted, margin: 0 }}>
@@ -170,55 +170,129 @@ export default function ScorerPage() {
         </div>
       </Card>
 
-      {/* Two-Column Layout: Sliders (Left) + View Results & Assessment (Right) */}
-      <div style={{ display: "flex", gap: "24px", alignItems: "flex-start", marginBottom: "24px" }}>
-        {/* Left Panel: outer container with sticky heading + scrollable cards */}
-        <div style={{ flex: "1 1 440px", display: "flex", flexDirection: "column", border: `2px solid ${COLORS.steel}`, borderRadius: RADIUS.lg, overflow: "hidden", boxShadow: SHADOWS.sm }}>
-          {/* Fixed heading — always visible */}
-          <div style={{ padding: "16px 20px 12px", borderBottom: `1px solid ${COLORS.border}`, background: COLORS.white }}>
-            <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, margin: 0 }}>Score all 6 Dimensions (1–5)</h3>
-          </div>
-          {/* Scrollable slider cards */}
-          <div style={{ overflowY: "auto", maxHeight: "calc(100vh - 380px)", padding: "16px" }}>
-            {SCORER_DIMS.map((dim, index) => (
-              <Card key={dim.key} style={{ marginBottom: "12px" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "12px" }}>
-                  <h4 style={{ fontFamily: FONTS.heading, fontSize: "0.95rem", color: COLORS.navy }}>{index + 1}. {dim.label}</h4>
-                  <span style={{ fontFamily: FONTS.body, fontSize: "1.2rem", fontWeight: 700, color: scores[dim.key] <= 2 ? COLORS.critical : scores[dim.key] <= 3 ? COLORS.atRisk : COLORS.stable }}>
-                    {scores[dim.key]}
-                  </span>
-                </div>
-                <input
-                  type="range"
-                  className="scorer-range"
-                  min={1} max={5} step={1}
-                  value={scores[dim.key]}
-                  onChange={e => setScores({ ...scores, [dim.key]: parseInt(e.target.value) })}
-                  style={{ width: "100%", background: `linear-gradient(to right, ${COLORS.steel} 0%, ${COLORS.steel} ${((scores[dim.key] - 1) / 4) * 100}%, ${COLORS.border} ${((scores[dim.key] - 1) / 4) * 100}%, ${COLORS.border} 100%)` }}
-                />
-                <div style={{ display: "flex", justifyContent: "space-between", marginTop: "10px", gap: "12px" }}>
-                  <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, maxWidth: "42%", lineHeight: 1.4 }}>{dim.low}</span>
-                  <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, maxWidth: "42%", textAlign: "right", lineHeight: 1.4 }}>{dim.high}</span>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
+      {/* Score All 6 Dimensions */}
+      <div style={{ marginBottom: "28px" }}>
+        <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.navy, marginBottom: "18px" }}>Score all 6 dimensions (1–5)</h3>
+        <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.bodyMuted, marginBottom: "20px", lineHeight: 1.6 }}>
+          Slide each bar to rate your portfolio company's operational maturity. 1 = significant gaps, 5 = well-governed.
+        </p>
 
-        {/* Right Panel: View Results Button & Assessment Results */}
-        <div style={{ flex: "0 0 360px", minWidth: "280px", position: "sticky", top: "100px" }}>
-          {!showResults && (
-            <Card>
-              <div style={{ textAlign: "center" }}>
-                <button onClick={() => setShowResults(true)}
-                  style={{ padding: "12px 32px", background: COLORS.navy, color: "white", border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, cursor: "pointer", letterSpacing: "0.3px", width: "100%" }}>
-                  View Results
-                </button>
+        {SCORER_DIMS.map((dim, index) => (
+          <Card key={dim.key} style={{ marginBottom: "14px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "12px" }}>
+              <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, margin: 0 }}>{index + 1}. {dim.label}</h4>
+              <span style={{ fontFamily: FONTS.body, fontSize: "1.3rem", fontWeight: 700, color: scores[dim.key] <= 2 ? COLORS.critical : scores[dim.key] <= 3 ? COLORS.atRisk : COLORS.stable }}>
+                {scores[dim.key]}
+              </span>
+            </div>
+            <input
+              type="range"
+              className="scorer-range"
+              min={1} max={5} step={1}
+              value={scores[dim.key]}
+              onChange={e => setScores({ ...scores, [dim.key]: parseInt(e.target.value) })}
+              style={{ width: "100%", background: `linear-gradient(to right, ${COLORS.steel} 0%, ${COLORS.steel} ${((scores[dim.key] - 1) / 4) * 100}%, ${COLORS.border} ${((scores[dim.key] - 1) / 4) * 100}%, ${COLORS.border} 100%)` }}
+            />
+            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "10px", gap: "12px" }}>
+              <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, maxWidth: "45%", lineHeight: 1.4 }}>{dim.low}</span>
+              <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, maxWidth: "45%", textAlign: "right", lineHeight: 1.4 }}>{dim.high}</span>
+            </div>
+          </Card>
+        ))}
+      </div>
+
+      {/* View Results Button */}
+      {!showResults && (
+        <div style={{ textAlign: "center", marginBottom: "28px" }}>
+          <button onClick={() => setShowResults(true)}
+            style={{ padding: "14px 28px", background: COLORS.navy, color: "white", border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, cursor: "pointer", letterSpacing: "0.3px", transition: "background 0.2s" }}
+            onMouseEnter={e => { e.currentTarget.style.background = "#0F1829"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = COLORS.navy; }}>
+            View Results →
+          </button>
+        </div>
+      )}
+
+      {/* Results Section */}
+      {showResults && (
+        <div className="fade-in">
+          <Card style={{ borderLeft: `4px solid ${ratingColor}`, marginBottom: "24px" }}>
+            <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.2rem", color: COLORS.navy, marginBottom: "20px" }}>Assessment Results</h3>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: "24px" }}>
+              <div style={{ width: "100px", height: "100px", borderRadius: "50%", border: `4px solid ${ratingColor}`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "14px" }}>
+                <span style={{ fontFamily: FONTS.body, fontSize: "1.7rem", fontWeight: 700, color: ratingColor }}>{avg.toFixed(1)}</span>
               </div>
+              <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 700, color: ratingColor, letterSpacing: "1.2px", marginBottom: "10px" }}>
+                {ratingLabel}
+              </span>
+              <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, margin: 0, maxWidth: "600px" }}>
+                {CONTEXT_CALLOUTS[rating][context]}
+              </p>
+            </div>
+
+            <ResponsiveContainer width="100%" height={240}>
+              <RadarChart data={chartData} cx="50%" cy="50%" outerRadius="65%">
+                <PolarGrid stroke={COLORS.border} />
+                <PolarAngleAxis dataKey="subject" tick={{ fontSize: 11, fontFamily: FONTS.body, fill: COLORS.charcoal }} />
+                <PolarRadiusAxis angle={90} domain={[0, 5]} tick={{ fontSize: 10, fill: COLORS.charcoal }} />
+                <Radar name="Score" dataKey="score" stroke={COLORS.navy} fill={COLORS.navy} fillOpacity={0.4} strokeWidth={2} dot={{ r: 3, fill: COLORS.navy }} />
+              </RadarChart>
+            </ResponsiveContainer>
+          </Card>
+
+          {lowDims.length > 0 && (
+            <Card style={{ borderLeft: `4px solid ${COLORS.critical}`, marginBottom: "24px" }}>
+              <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.critical, marginBottom: "14px" }}>Critical Gaps</h4>
+              {lowDims.map(dim => (
+                <div key={dim.key} style={{ marginBottom: "10px", paddingBottom: "10px", borderBottom: `1px solid ${COLORS.border}` }}>
+                  <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, color: COLORS.charcoal }}>{dim.label}</span>
+                  <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.critical, marginLeft: "8px" }}>({scores[dim.key]}/5)</span>
+                </div>
+              ))}
             </Card>
           )}
 
-          {showResults && (
+          <Section noCTA title="Recommended Next Steps">
+            {lowDims.length === 0 && midDims.length === 0 ? (
+              <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, margin: 0 }}>
+                Your operational posture is strong across all dimensions. Focus on maintaining cadence and ensuring durability through exit preparation.
+              </p>
+            ) : (
+              <ul style={{ margin: 0, paddingLeft: "20px", fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
+                {[...lowDims, ...midDims].slice(0, 4).map((dim, i) => {
+                  const rec = DIM_RECS[dim.key];
+                  const isLast = i === Math.min(lowDims.length + midDims.length, 4) - 1;
+                  return (
+                    <li key={dim.key} style={{ marginBottom: isLast ? 0 : SPACING.xs }}>
+                      <strong>{rec.days}:</strong> {rec.action}
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </Section>
+
+          <ScorerEmailCapture rating={ratingLabel} score={avg.toFixed(1)} context={context} />
+
+          <Section noCTA background={`${COLORS.navy}05`}>
+            <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, textAlign: "center", marginBottom: SPACING.md, margin: "0 auto", marginBottom: SPACING.md }}>
+              {rating === "stable"
+                ? "Maintain your edge with ongoing governance support."
+                : "Ready to convert these gaps into a Value Creation Plan?"}
+            </p>
+            <ButtonPair
+              primaryText="15-Minute Fit Check"
+              secondaryText="View Services"
+              secondaryAction={() => window.location.hash = "#/services"}
+              centered={true}
+              showAvailability={true}
+            />
+          </Section>
+        </div>
+      )}
+    </div>
+  );
+}
             <div className="fade-in">
               <Card style={{ borderLeft: `4px solid ${ratingColor}` }}>
                 <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.navy, marginBottom: "16px" }}>Assessment Results</h3>
