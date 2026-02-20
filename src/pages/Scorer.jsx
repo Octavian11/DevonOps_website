@@ -278,6 +278,7 @@ export default function ScorerPage() {
               primaryText="15-Minute Fit Check"
               secondaryLink={CALENDLY}
               centered={true}
+              showAvailability={true}
             />
             <p style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.bodyMuted, fontStyle: "italic", margin: `${SPACING.md} 0 0 0`, textAlign: "center" }}>
               Scores reflect observed evidence prompts, not self-assessment.

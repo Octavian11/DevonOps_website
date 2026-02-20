@@ -101,7 +101,7 @@ function WorkedExampleAccordion() {
           style={{ padding: "12px 18px", background: COLORS.navy, color: "white", borderRadius: "4px", border: "none", fontFamily: FONTS.body, fontWeight: 800, cursor: "pointer" }}>
           See offers & pricing
         </button>
-        <CTAButton text="15-Minute Fit Check" />
+        <CTAButton text="15-Minute Fit Check" showAvailability={true} />
       </div>
     </Accordion>
   );
@@ -233,9 +233,9 @@ function StabilizationSequence() {
 
 function ServicesPricingLadder() {
   const items = [
-    { id: "pre-close", label: "Pre-Close", name: "Ops Diligence Report", price: "$15K+", time: "2–3 weeks", desc: "Standalone assessment" },
+    { id: "post-close", label: "100-Day Stabilization", name: "100-Day Stabilization", price: "$30–$40K", time: "100 days", desc: "Most funds start here. Install incident command, change control, KPI cadence, and board-ready reporting from Day 1." },
+    { id: "ongoing", label: "Control Tower Retainer", name: "Control Tower Retainer", price: "$7.5K+/month", time: "Ongoing", desc: "After the 100-day baseline is installed, the Control Tower Retainer keeps governance on track through exit." },
     { id: "bundle", label: "Bundle (Recommended): Diligence → VCP → Execution", name: "Diligence + Value Creation Plan + 100-Day Execution", price: "$25–$35K", time: "2–3 weeks + 100 days", desc: "Diligence findings roll directly into the VCP — no re-learning, no gap between discovery and execution" },
-    { id: "post-close", label: "Post-Close Only", name: "100-Day Stabilization", price: "$30–$40K", time: "100 days", desc: "No prior diligence" },
   ];
 
   const box = { border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, padding: "18px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 220px", minWidth: "min(220px, 100%)", position: "relative" };
@@ -250,8 +250,8 @@ function ServicesPricingLadder() {
       </p>
       <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginBottom: SPACING.md }}>
         {items.map((item, i) => (
-          <div key={i} id={item.id} style={i === 1 ? boxGold : box}>
-            {i === 1 && (
+          <div key={i} id={item.id} style={i === 2 ? boxGold : box}>
+            {i === 2 && (
               <div style={{ position: "absolute", top: "-1px", left: 0, right: 0, height: "3px", background: COLORS.gold, borderRadius: `${RADIUS.md} ${RADIUS.md} 0 0` }} />
             )}
             <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.navy, letterSpacing: "0.5px", textTransform: "uppercase", fontWeight: 600 }}>{item.label}</span>
@@ -263,12 +263,12 @@ function ServicesPricingLadder() {
         ))}
       </div>
 
-      <div style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, padding: "14px 18px", background: `${COLORS.navy}05`, borderRadius: RADIUS.md, border: `1px solid ${COLORS.border}`, marginBottom: SPACING.md }} id="ongoing">
+      <div style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, padding: "14px 18px", background: `${COLORS.navy}05`, borderRadius: RADIUS.md, border: `1px solid ${COLORS.border}`, marginBottom: SPACING.md }}>
         <p style={{ margin: "0 0 8px 0" }}>
-          <strong>Recommended:</strong> Choose the bundle if you expect to close — diligence findings feed directly into Day-1 priorities with no re-learning.
+          <strong>Pre-close option:</strong> Add an Ops Diligence Report ($15K, 2–3 weeks) before signing to surface red flags for the IC.
         </p>
         <p style={{ margin: 0 }}>
-          <strong>Ongoing:</strong> Transition to the Control Tower Retainer to maintain cadence and prevent drift-back.
+          <strong>Recommended:</strong> Choose the bundle if you expect to close — diligence findings feed directly into Day-1 priorities with no re-learning.
         </p>
       </div>
     </Section>
@@ -308,6 +308,7 @@ function FitCheckCTA() {
         secondaryText="Email me instead"
         secondaryLink={mailtoHref(subject, body)}
         centered={true}
+        showAvailability={true}
       />
     </Section>
   );
