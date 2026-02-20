@@ -127,14 +127,9 @@ function MicroProofStrip() {
 function TriggerScenarios({ setPage }) {
   const scenarios = [
     {
-      title: "Pre-close: recurring outages flagged in DD",
-      description: "Diligence uncovered incident patterns, but no one can explain root cause. You need a severity-rated assessment for the IC.",
+      title: "Pre-close diligence or Day 1 post-close",
+      description: "Diligence uncovered incident patterns with unclear root cause, or new ownership needs a stabilization baseline fast. You need severity-rated findings for the IC and a Day-1 critical path.",
       action: "scorer"
-    },
-    {
-      title: "Day 1: governance is missing or broken",
-      description: "No incident command, no change control, no KPI cadence. New ownership needs a stabilization baseline fast.",
-      action: "services"
     },
     {
       title: "Mid-hold: operational drift is blocking value creation",
@@ -161,7 +156,7 @@ function TriggerScenarios({ setPage }) {
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "20px" }}>
         These are the scenarios where operational friction becomes urgent — and where early intervention creates disproportionate value.
       </p>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "16px" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "16px" }}>
         {scenarios.map((scenario, i) => (
           <div key={i} style={{ border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "18px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
             <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "10px", lineHeight: 1.3 }}>
@@ -172,7 +167,7 @@ function TriggerScenarios({ setPage }) {
             </p>
             <button
               onClick={() => handleAction(scenario.action)}
-              style={{ alignSelf: "flex-start", padding: "8px 16px", background: COLORS.navy, color: "white", border: "none", borderRadius: RADIUS.sm, fontFamily: FONTS.body, fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", transition: "background 0.2s" }}
+              style={{ alignSelf: "flex-start", padding: "10px 18px", background: COLORS.navy, color: "white", border: "none", borderRadius: RADIUS.sm, fontFamily: FONTS.body, fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", transition: "background 0.2s", whiteSpace: "nowrap" }}
               onMouseEnter={e => { e.currentTarget.style.background = "#0F1829"; }}
               onMouseLeave={e => { e.currentTarget.style.background = COLORS.navy; }}>
               {scenario.action === "scorer" ? "Run the Ops Scorer →" : scenario.action === "services" ? "View Services →" : "Book a Fit Check →"}

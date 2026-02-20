@@ -12,7 +12,7 @@ import {
 export function SeverityBadge({ severity }) {
   const s = SEVERITY_STYLE[severity];
   return (
-    <span style={{ display: "inline-block", padding: "4px 12px", borderRadius: RADIUS.sm, fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase", color: s.text, background: s.bg, border: `1px solid ${s.border}` }}>
+    <span style={{ display: "inline-block", padding: "5px 12px", borderRadius: RADIUS.sm, fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 700, letterSpacing: "0.05em", textTransform: "uppercase", color: s.text, background: s.bg, border: `1px solid ${s.border}`, lineHeight: 1 }}>
       {severity}
     </span>
   );
@@ -20,7 +20,7 @@ export function SeverityBadge({ severity }) {
 
 export function TimingBadge({ timing }) {
   return (
-    <span style={{ display: "inline-block", padding: "4px 12px", borderRadius: RADIUS.sm, fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase", color: "white", background: TIMING_COLORS[timing] || COLORS.ongoing }}>
+    <span style={{ display: "inline-block", padding: "5px 12px", borderRadius: RADIUS.sm, fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 700, letterSpacing: "0.05em", textTransform: "uppercase", color: "white", background: TIMING_COLORS[timing] || COLORS.ongoing, lineHeight: 1 }}>
       {timing}
     </span>
   );
