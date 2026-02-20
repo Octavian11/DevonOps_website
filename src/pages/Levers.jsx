@@ -23,8 +23,11 @@ function HeroBlockWithNav({ setPage }) {
         <h1 className="hero-headline" style={{ fontFamily: FONTS.heading, fontSize: "2.4rem", fontWeight: 700, color: "white", lineHeight: 1.2, marginBottom: "18px" }}>
           Operational gaps are your biggest value creation lever. We find them before close and convert them into alpha.
         </h1>
-        <p className="hero-subheadline" style={{ fontFamily: FONTS.body, fontSize: "1.02rem", color: "rgba(255,255,255,0.92)", lineHeight: 1.65, marginBottom: "22px" }}>
+        <p className="hero-subheadline" style={{ fontFamily: FONTS.body, fontSize: "1.02rem", color: "rgba(255,255,255,0.92)", lineHeight: 1.65, marginBottom: "14px" }}>
           15+ years at JPM, Barclays, BofA, Lazard. $10B+ in assets. I surface the operational friction PE funds miss — and build the Value Creation Plan that converts it into EBITDA improvement in 100 days.
+        </p>
+        <p className="hero-subheadline" style={{ fontFamily: FONTS.body, fontSize: "0.92rem", color: "rgba(255,255,255,0.85)", lineHeight: 1.6, marginBottom: "22px", fontStyle: "italic" }}>
+          Engagements start within 2 weeks of signing. First deliverables hit the board in 30 days.
         </p>
 
         {/* McKinsey GPMR 2026 data anchor */}
@@ -37,19 +40,24 @@ function HeroBlockWithNav({ setPage }) {
           </span>
         </div>
 
-        <div className="hero-ctas" style={{ display: "flex", gap: SPACING.sm, flexWrap: "wrap" }}>
+        <div className="hero-ctas" style={{ display: "flex", gap: SPACING.sm, flexWrap: "wrap", alignItems: "flex-start" }}>
           <button onClick={() => setPage("scorer")}
             style={{ display: "inline-block", padding: "12px 28px", background: COLORS.gold, color: "white", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.sm, letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: "none" }}
             onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; }}
             onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; }}>
             Run the Ops Scorer →
           </button>
-          <a href={CALENDLY} target="_blank" rel="noopener noreferrer"
-            style={{ display: "inline-block", padding: "12px 28px", background: "transparent", color: COLORS.gold, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.sm, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: `2px solid ${COLORS.gold}` }}
-            onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.gold}15`; }}
-            onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}>
-            Book a 15-Min Fit Check
-          </a>
+          <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+            <a href={CALENDLY} target="_blank" rel="noopener noreferrer"
+              style={{ display: "inline-block", padding: "12px 28px", background: "transparent", color: COLORS.gold, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.sm, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: `2px solid ${COLORS.gold}` }}
+              onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.gold}15`; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}>
+              Book a 15-Min Fit Check
+            </a>
+            <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: "rgba(255,255,255,0.75)", fontStyle: "italic", textAlign: "center" }}>
+              Currently accepting 1–2 new engagements
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -111,6 +119,68 @@ function MicroProofStrip() {
         </a>
       ))}
     </div>
+  );
+}
+
+// ─── TRIGGER SCENARIOS ───────────────────────────────────────
+
+function TriggerScenarios({ setPage }) {
+  const scenarios = [
+    {
+      title: "Pre-close: recurring outages flagged in DD",
+      description: "Diligence uncovered incident patterns, but no one can explain root cause. You need a severity-rated assessment for the IC.",
+      action: "scorer"
+    },
+    {
+      title: "Day 1: governance is missing or broken",
+      description: "No incident command, no change control, no KPI cadence. New ownership needs a stabilization baseline fast.",
+      action: "services"
+    },
+    {
+      title: "Mid-hold: operational drift is blocking value creation",
+      description: "EBITDA improvement initiatives keep stalling due to operational fragility. The board wants visibility and a plan.",
+      action: "calendly"
+    },
+    {
+      title: "Exit prep: operational risk surfacing in buyer DD",
+      description: "Buyers are asking about incident history, vendor concentration, and compliance posture. You need audit-ready evidence.",
+      action: "calendly"
+    }
+  ];
+
+  const handleAction = (action) => {
+    if (action === "scorer" || action === "services") {
+      setPage(action);
+    } else if (action === "calendly") {
+      window.open(CALENDLY, "_blank", "noopener,noreferrer");
+    }
+  };
+
+  return (
+    <Section title="Common Situations Where Funds Engage Us" noCTA>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "20px" }}>
+        These are the scenarios where operational friction becomes urgent — and where early intervention creates disproportionate value.
+      </p>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "16px" }}>
+        {scenarios.map((scenario, i) => (
+          <div key={i} style={{ border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "18px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
+            <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "10px", lineHeight: 1.3 }}>
+              {scenario.title}
+            </h4>
+            <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "14px", flex: "1" }}>
+              {scenario.description}
+            </p>
+            <button
+              onClick={() => handleAction(scenario.action)}
+              style={{ alignSelf: "flex-start", padding: "8px 16px", background: COLORS.navy, color: "white", border: "none", borderRadius: RADIUS.sm, fontFamily: FONTS.body, fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", transition: "background 0.2s" }}
+              onMouseEnter={e => { e.currentTarget.style.background = "#0F1829"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = COLORS.navy; }}>
+              {scenario.action === "scorer" ? "Run the Ops Scorer →" : scenario.action === "services" ? "View Services →" : "Book a Fit Check →"}
+            </button>
+          </div>
+        ))}
+      </div>
+    </Section>
   );
 }
 
@@ -226,6 +296,7 @@ function OfferCards({ setPage }) {
         secondaryText="View Full Services & Details"
         secondaryAction={() => setPage("services")}
         centered={true}
+        showAvailability={true}
       />
     </Section>
   );
@@ -434,6 +505,7 @@ export default function LeverExplorer({ setPage }) {
     <div className="fade-in">
       <HeroBlockWithNav setPage={setPage} />
       <MicroProofStrip />
+      <TriggerScenarios setPage={setPage} />
 
       <div style={{ marginBottom: "28px" }}>
         <SectionTitle>20 Operational Value Creation Levers Hidden in Your Next Deal</SectionTitle>
@@ -559,6 +631,7 @@ export default function LeverExplorer({ setPage }) {
           secondaryText="Book a Fit Check"
           secondaryLink={CALENDLY}
           centered={true}
+          showAvailability={true}
         />
       </Section>
 

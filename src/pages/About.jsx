@@ -29,7 +29,7 @@ export default function AboutPage() {
         <p style={{ fontFamily: FONTS.heading, fontSize: "1.05rem", color: COLORS.gold, fontStyle: "italic", marginBottom: SPACING.md }}>
           Find the gaps. Build the plan. Deliver the alpha.
         </p>
-        <CTAButton text="15-Minute Fit Check" />
+        <CTAButton text="15-Minute Fit Check" showAvailability={true} />
       </Section>
 
       {/* How I Work */}
@@ -88,9 +88,11 @@ export default function AboutPage() {
         <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, marginBottom: "18px", textAlign: "center" }}>
           15 minutes. We'll assess the portfolio company's situation and scope the right engagement.
         </p>
-        <div style={{ textAlign: "center" }}>
-          <CTAButton text="15-Minute Fit Check" />
-        </div>
+        <ButtonPair
+          primaryText="15-Minute Fit Check"
+          centered={true}
+          showAvailability={true}
+        />
       </Section>
     </div>
   );

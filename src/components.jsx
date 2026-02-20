@@ -37,19 +37,26 @@ export function DomainTag({ domain }) {
 
 // ─── BUTTONS ─────────────────────────────────────────────────
 
-export function CTAButton({ text, small, variant, style: extraStyle }) {
+export function CTAButton({ text, small, variant, style: extraStyle, showAvailability }) {
   const isPrimary = variant !== "secondary";
   const bg = isPrimary ? COLORS.gold : "transparent";
   const color = isPrimary ? "white" : COLORS.goldDark;
   const border = isPrimary ? "none" : `2px solid ${COLORS.goldDark}`;
   const hoverBg = isPrimary ? "#A07D2E" : `${COLORS.gold}15`;
   return (
-    <a href={CALENDLY} target="_blank" rel="noopener noreferrer"
-      style={{ display: "inline-block", padding: small ? "10px 22px" : "12px 28px", background: bg, color, fontFamily: FONTS.body, fontSize: small ? "0.9rem" : "1rem", fontWeight: 600, borderRadius: RADIUS.md, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border, ...extraStyle }}
-      onMouseEnter={e => { e.currentTarget.style.background = hoverBg; }}
-      onMouseLeave={e => { e.currentTarget.style.background = bg; }}>
-      {text || "15-Minute Fit Check"}
-    </a>
+    <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+      <a href={CALENDLY} target="_blank" rel="noopener noreferrer"
+        style={{ display: "inline-block", padding: small ? "10px 22px" : "12px 28px", background: bg, color, fontFamily: FONTS.body, fontSize: small ? "0.9rem" : "1rem", fontWeight: 600, borderRadius: RADIUS.md, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border, ...extraStyle }}
+        onMouseEnter={e => { e.currentTarget.style.background = hoverBg; }}
+        onMouseLeave={e => { e.currentTarget.style.background = bg; }}>
+        {text || "15-Minute Fit Check"}
+      </a>
+      {showAvailability && (
+        <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.bodyMuted, fontStyle: "italic" }}>
+          Currently accepting 1–2 new engagements
+        </span>
+      )}
+    </div>
   );
 }
 
@@ -77,42 +84,50 @@ export function ButtonPair({
   secondaryAction,
   primaryLink = CALENDLY,
   secondaryLink,
-  centered = false
+  centered = false,
+  showAvailability = false
 }) {
   return (
-    <div style={{ display: "flex", flexDirection: "row", gap: SPACING.sm, justifyContent: centered ? "center" : "flex-start", flexWrap: "wrap" }}>
-      {primaryLink ? (
-        <a href={primaryLink} target="_blank" rel="noopener noreferrer"
-           style={{ display: "inline-block", padding: "14px 28px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, textDecoration: "none", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", transition: "all 0.2s", border: "none", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "180px" }}
-           onMouseEnter={e => { e.currentTarget.style.background = "#0F1829"; }}
-           onMouseLeave={e => { e.currentTarget.style.background = COLORS.navy; }}>
-          {primaryText}
-        </a>
-      ) : (
-        <button onClick={primaryAction}
-           style={{ display: "inline-block", padding: "14px 28px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", transition: "all 0.2s", border: "none", cursor: "pointer", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "180px" }}
-           onMouseEnter={e => { e.currentTarget.style.background = "#0F1829"; }}
-           onMouseLeave={e => { e.currentTarget.style.background = COLORS.navy; }}>
-          {primaryText}
-        </button>
-      )}
-
-      {(secondaryText || secondaryAction || secondaryLink) && (
-        secondaryLink ? (
-          <a href={secondaryLink} target="_blank" rel="noopener noreferrer"
-             style={{ display: "inline-block", padding: "12px 26px", background: "white", color: COLORS.navy, borderRadius: RADIUS.md, textDecoration: "none", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", border: `2px solid ${COLORS.navy}`, transition: "all 0.2s", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "180px" }}
-             onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.navy}08`; }}
-             onMouseLeave={e => { e.currentTarget.style.background = "white"; }}>
-            {secondaryText}
+    <div style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: centered ? "center" : "flex-start" }}>
+      <div style={{ display: "flex", flexDirection: "row", gap: SPACING.sm, justifyContent: centered ? "center" : "flex-start", flexWrap: "wrap" }}>
+        {primaryLink ? (
+          <a href={primaryLink} target="_blank" rel="noopener noreferrer"
+             style={{ display: "inline-block", padding: "14px 28px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, textDecoration: "none", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", transition: "all 0.2s", border: "none", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "180px" }}
+             onMouseEnter={e => { e.currentTarget.style.background = "#0F1829"; }}
+             onMouseLeave={e => { e.currentTarget.style.background = COLORS.navy; }}>
+            {primaryText}
           </a>
         ) : (
-          <button onClick={secondaryAction}
-             style={{ display: "inline-block", padding: "12px 26px", background: "white", color: COLORS.navy, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", border: `2px solid ${COLORS.navy}`, transition: "all 0.2s", cursor: "pointer", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "180px" }}
-             onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.navy}08`; }}
-             onMouseLeave={e => { e.currentTarget.style.background = "white"; }}>
-            {secondaryText}
+          <button onClick={primaryAction}
+             style={{ display: "inline-block", padding: "14px 28px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", transition: "all 0.2s", border: "none", cursor: "pointer", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "180px" }}
+             onMouseEnter={e => { e.currentTarget.style.background = "#0F1829"; }}
+             onMouseLeave={e => { e.currentTarget.style.background = COLORS.navy; }}>
+            {primaryText}
           </button>
-        )
+        )}
+
+        {(secondaryText || secondaryAction || secondaryLink) && (
+          secondaryLink ? (
+            <a href={secondaryLink} target="_blank" rel="noopener noreferrer"
+               style={{ display: "inline-block", padding: "12px 26px", background: "white", color: COLORS.navy, borderRadius: RADIUS.md, textDecoration: "none", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", border: `2px solid ${COLORS.navy}`, transition: "all 0.2s", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "180px" }}
+               onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.navy}08`; }}
+               onMouseLeave={e => { e.currentTarget.style.background = "white"; }}>
+              {secondaryText}
+            </a>
+          ) : (
+            <button onClick={secondaryAction}
+               style={{ display: "inline-block", padding: "12px 26px", background: "white", color: COLORS.navy, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", border: `2px solid ${COLORS.navy}`, transition: "all 0.2s", cursor: "pointer", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "180px" }}
+               onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.navy}08`; }}
+               onMouseLeave={e => { e.currentTarget.style.background = "white"; }}>
+              {secondaryText}
+            </button>
+          )
+        )}
+      </div>
+      {showAvailability && (
+        <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.bodyMuted, fontStyle: "italic" }}>
+          Currently accepting 1–2 new engagements
+        </span>
       )}
     </div>
   );
@@ -373,7 +388,7 @@ export function Nav({ page, setPage }) {
   const items = [
     { key: "levers", label: "Levers" },
     { key: "services", label: "Services & Method" },
-    { key: "scorer", label: "Scorer" },
+    { key: "scorer", label: "Ops Scorer" },
     { key: "about", label: "About" },
   ];
   const handleNav = (key) => { setPage(key); setMenuOpen(false); };
@@ -399,7 +414,7 @@ export function Nav({ page, setPage }) {
             ))}
           </div>
         </div>
-        <div className="nav-cta"><CTAButton text="15-Minute Fit Check" /></div>
+        <div className="nav-cta"><CTAButton text="15-Minute Fit Check" showAvailability={true} /></div>
         <button className="nav-hamburger" onClick={() => setMenuOpen(o => !o)} aria-label="Toggle menu">
           {menuOpen
             ? <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><line x1="4" y1="4" x2="18" y2="18" stroke={COLORS.navy} strokeWidth="2" strokeLinecap="round"/><line x1="18" y1="4" x2="4" y2="18" stroke={COLORS.navy} strokeWidth="2" strokeLinecap="round"/></svg>
