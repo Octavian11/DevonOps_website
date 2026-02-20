@@ -149,28 +149,17 @@ export default function ScorerPage() {
   const midDims = SCORER_DIMS.filter(d => scores[d.key] === 3);
 
   return (
-    <div className="fade-in" style={{ maxWidth: "800px" }}>
+    <div className="fade-in">
       <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.7rem", fontWeight: 700, color: COLORS.navy, marginBottom: "14px" }}>
         Portfolio Stability Readiness Scorer
       </h1>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "36px" }}>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "24px" }}>
         Assess a portfolio company's operational stability across 6 dimensions. Identify where friction is highest and which interventions would create the most value.
       </p>
 
-      <Card>
-        <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "12px" }}>What's your situation?</h3>
-        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-          {CONTEXT_OPTIONS.map(opt => (
-            <label key={opt.key} style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", padding: "8px 12px", borderRadius: "4px", background: context === opt.key ? `${COLORS.navy}08` : "transparent", border: `1px solid ${context === opt.key ? COLORS.steel : "transparent"}` }}>
-              <input type="radio" name="context" checked={context === opt.key} onChange={() => setContext(opt.key)} style={{ accentColor: COLORS.navy }} />
-              <span style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal }}>{opt.label}</span>
-            </label>
-          ))}
-        </div>
-      </Card>
-
-      {context && (
-        <div style={{ marginTop: "24px" }}>
+      <div style={{ display: "flex", gap: "24px", alignItems: "flex-start" }}>
+        {/* Left Panel: Sliders */}
+        <div style={{ flex: "1 1 500px", maxHeight: "calc(100vh - 200px)", overflowY: "auto", paddingRight: "12px" }}>
           <SectionTitle sub>Score Each Dimension (1–5)</SectionTitle>
           {SCORER_DIMS.map(dim => (
             <Card key={dim.key} style={{ marginBottom: "12px" }}>
@@ -194,98 +183,109 @@ export default function ScorerPage() {
               </div>
             </Card>
           ))}
+        </div>
 
-          {!showResults && (
-            <div style={{ textAlign: "center", marginTop: "24px" }}>
-              <button onClick={() => setShowResults(true)}
-                style={{ padding: "12px 36px", background: COLORS.navy, color: "white", border: "none", borderRadius: "4px", fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, cursor: "pointer", letterSpacing: "0.3px" }}>
-                View Results
-              </button>
+        {/* Right Panel: Context & Results */}
+        <div style={{ flex: "0 0 420px", minWidth: "320px", position: "sticky", top: "100px" }}>
+          <Card>
+            <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "12px" }}>What's your situation?</h3>
+            <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "16px" }}>
+              {CONTEXT_OPTIONS.map(opt => (
+                <label key={opt.key} style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", padding: "8px 12px", borderRadius: "4px", background: context === opt.key ? `${COLORS.navy}08` : "transparent", border: `1px solid ${context === opt.key ? COLORS.steel : "transparent"}` }}>
+                  <input type="radio" name="context" checked={context === opt.key} onChange={() => setContext(opt.key)} style={{ accentColor: COLORS.navy }} />
+                  <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal }}>{opt.label}</span>
+                </label>
+              ))}
+            </div>
+
+            {!showResults && (
+              <div style={{ textAlign: "center", marginTop: "16px" }}>
+                <button onClick={() => setShowResults(true)}
+                  style={{ padding: "12px 32px", background: COLORS.navy, color: "white", border: "none", borderRadius: "4px", fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, cursor: "pointer", letterSpacing: "0.3px", width: "100%" }}>
+                  View Results
+                </button>
+              </div>
+            )}
+          </Card>
+
+          {showResults && (
+            <div className="fade-in" style={{ marginTop: "16px" }}>
+              <Card style={{ borderLeft: `4px solid ${ratingColor}` }}>
+                <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.navy, marginBottom: "16px" }}>Assessment Results</h3>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: "20px" }}>
+                  <div style={{ width: "90px", height: "90px", borderRadius: "50%", border: `4px solid ${ratingColor}`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "12px" }}>
+                    <span style={{ fontFamily: FONTS.body, fontSize: "1.5rem", fontWeight: 700, color: ratingColor }}>{avg.toFixed(1)}</span>
+                  </div>
+                  <span style={{ fontFamily: FONTS.body, fontSize: "0.85rem", fontWeight: 700, color: ratingColor, letterSpacing: "1px", marginBottom: "8px" }}>
+                    {ratingLabel}
+                  </span>
+                  <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0 }}>
+                    {CONTEXT_CALLOUTS[rating][context]}
+                  </p>
+                </div>
+
+                <ResponsiveContainer width="100%" height={220}>
+                  <RadarChart data={chartData} cx="50%" cy="50%" outerRadius="65%">
+                    <PolarGrid stroke={COLORS.border} />
+                    <PolarAngleAxis dataKey="subject" tick={{ fontSize: 11, fontFamily: FONTS.body, fill: COLORS.charcoal }} />
+                    <PolarRadiusAxis angle={90} domain={[0, 5]} tick={{ fontSize: 10, fill: COLORS.charcoal }} />
+                    <Radar name="Score" dataKey="score" stroke={COLORS.navy} fill={COLORS.navy} fillOpacity={0.4} strokeWidth={2} dot={{ r: 3, fill: COLORS.navy }} />
+                  </RadarChart>
+                </ResponsiveContainer>
+              </Card>
+
+              {lowDims.length > 0 && (
+                <Card style={{ borderLeft: `4px solid ${COLORS.critical}`, marginTop: "16px" }}>
+                  <h4 style={{ fontFamily: FONTS.heading, fontSize: "0.95rem", color: COLORS.critical, marginBottom: "12px" }}>Critical Gaps</h4>
+                  {lowDims.map(dim => (
+                    <div key={dim.key} style={{ marginBottom: "8px", paddingBottom: "8px", borderBottom: `1px solid ${COLORS.border}` }}>
+                      <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, color: COLORS.charcoal }}>{dim.label}</span>
+                      <span style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.critical, marginLeft: "8px" }}>({scores[dim.key]}/5)</span>
+                    </div>
+                  ))}
+                </Card>
+              )}
+
+              <Card style={{ marginTop: "16px" }}>
+                <h4 style={{ fontFamily: FONTS.heading, fontSize: "0.95rem", color: COLORS.navy, marginBottom: "12px" }}>Recommended Next Steps</h4>
+                {lowDims.length === 0 && midDims.length === 0 ? (
+                  <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0 }}>
+                    Strong operational posture. Focus on maintaining cadence through exit.
+                  </p>
+                ) : (
+                  <ul style={{ margin: 0, paddingLeft: "20px", fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6 }}>
+                    {[...lowDims, ...midDims].slice(0, 3).map((dim, i) => {
+                      const rec = DIM_RECS[dim.key];
+                      return (
+                        <li key={dim.key} style={{ marginBottom: i === Math.min(lowDims.length + midDims.length, 3) - 1 ? 0 : "8px" }}>
+                          <strong>{rec.days}:</strong> {rec.action}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </Card>
+
+              <ScorerEmailCapture rating={ratingLabel} score={avg.toFixed(1)} context={context} />
+
+              <Card style={{ background: `${COLORS.navy}05`, marginTop: "16px" }}>
+                <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, textAlign: "center", marginBottom: SPACING.sm }}>
+                  {rating === "stable"
+                    ? "Maintain your edge with ongoing governance."
+                    : "Ready to convert these gaps into a Value Creation Plan?"}
+                </p>
+                <ButtonPair
+                  primaryText="15-Minute Fit Check"
+                  secondaryText="View Services"
+                  secondaryAction={() => window.location.hash = "#/services"}
+                  centered={true}
+                  showAvailability={true}
+                />
+              </Card>
             </div>
           )}
         </div>
-      )}
-
-      {showResults && (
-        <div className="fade-in" style={{ marginTop: "32px" }}>
-          <SectionTitle>Assessment Results</SectionTitle>
-          <div style={{ display: "flex", gap: "24px", flexWrap: "wrap", marginBottom: "24px" }}>
-            <Card style={{ flex: "1 1 340px", minHeight: "320px" }}>
-              <ResponsiveContainer width="100%" height={300}>
-                <RadarChart data={chartData} cx="50%" cy="50%" outerRadius="70%">
-                  <PolarGrid stroke={COLORS.border} />
-                  <PolarAngleAxis dataKey="subject" tick={{ fontSize: 12, fontFamily: FONTS.body, fill: COLORS.charcoal }} />
-                  <PolarRadiusAxis angle={90} domain={[0, 5]} tick={{ fontSize: 11, fill: COLORS.charcoal }} />
-                  <Radar name="Score" dataKey="score" stroke={COLORS.navy} fill={COLORS.navy} fillOpacity={0.4} strokeWidth={2} dot={{ r: 4, fill: COLORS.navy }} />
-                </RadarChart>
-              </ResponsiveContainer>
-            </Card>
-            <Card style={{ flex: "1 1 320px", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
-              <div style={{ width: "100px", height: "100px", borderRadius: "50%", border: `4px solid ${ratingColor}`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "14px" }}>
-                <span style={{ fontFamily: FONTS.body, fontSize: "1.6rem", fontWeight: 700, color: ratingColor }}>{avg.toFixed(1)}</span>
-              </div>
-              <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 700, color: ratingColor, letterSpacing: "1px", marginBottom: "10px" }}>
-                {ratingLabel}
-              </span>
-              <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0, maxWidth: "360px" }}>
-                {CONTEXT_CALLOUTS[rating][context]}
-              </p>
-            </Card>
-          </div>
-
-          {lowDims.length > 0 && (
-            <Card style={{ borderLeft: `4px solid ${COLORS.critical}`, marginBottom: "24px" }}>
-              <h4 style={{ fontFamily: FONTS.heading, fontSize: "0.95rem", color: COLORS.critical, marginBottom: "12px" }}>Critical Gaps Identified</h4>
-              {lowDims.map(dim => (
-                <div key={dim.key} style={{ marginBottom: "8px", paddingBottom: "8px", borderBottom: `1px solid ${COLORS.border}` }}>
-                  <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, color: COLORS.charcoal }}>{dim.label}</span>
-                  <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.critical, marginLeft: "8px" }}>Score: {scores[dim.key]}/5</span>
-                  <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, marginTop: "4px" }}>Current state: {dim.low}</p>
-                </div>
-              ))}
-            </Card>
-          )}
-
-          <Section noCTA title="Recommended Next Steps">
-            {lowDims.length === 0 && midDims.length === 0 ? (
-              <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, margin: 0 }}>
-                Your operational posture is strong across all dimensions. Focus on maintaining cadence and ensuring durability through exit preparation.
-              </p>
-            ) : (
-              <ul style={{ margin: 0, paddingLeft: "20px", fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
-                {[...lowDims, ...midDims].slice(0, 4).map((dim, i) => {
-                  const rec = DIM_RECS[dim.key];
-                  const isLast = i === Math.min(lowDims.length + midDims.length, 4) - 1;
-                  return (
-                    <li key={dim.key} style={{ marginBottom: isLast ? 0 : SPACING.xs }}>
-                      <strong>{rec.days}:</strong> {rec.action}
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
-          </Section>
-
-          <ScorerEmailCapture rating={ratingLabel} score={avg.toFixed(1)} context={context} />
-
-          <Section noCTA background={`${COLORS.navy}05`}>
-            <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, textAlign: "center", marginBottom: SPACING.md }}>
-              {rating === "stable"
-                ? "Maintain your edge with ongoing governance support."
-                : "Ready to convert these gaps into a Value Creation Plan?"}
-            </p>
-            <ButtonPair
-              primaryText="15-Minute Fit Check"
-              secondaryLink={CALENDLY}
-              centered={true}
-              showAvailability={true}
-            />
-            <p style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.bodyMuted, fontStyle: "italic", margin: `${SPACING.md} 0 0 0`, textAlign: "center" }}>
-              Scores reflect observed evidence prompts, not self-assessment.
-            </p>
-          </Section>
-        </div>
-      )}
+      </div>
     </div>
   );
 }
