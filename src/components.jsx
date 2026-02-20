@@ -52,7 +52,7 @@ export function CTAButton({ text, small, variant, style: extraStyle, showAvailab
         {text || "15-Minute Fit Check"}
       </a>
       {showAvailability && (
-        <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.bodyMuted, fontStyle: "italic" }}>
+        <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.charcoal }}>
           Currently accepting 1–2 new engagements
         </span>
       )}
@@ -125,7 +125,7 @@ export function ButtonPair({
         )}
       </div>
       {showAvailability && (
-        <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.bodyMuted, fontStyle: "italic" }}>
+        <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.charcoal }}>
           Currently accepting 1–2 new engagements
         </span>
       )}

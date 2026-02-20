@@ -54,7 +54,7 @@ function HeroBlockWithNav({ setPage }) {
               onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}>
               Book a 15-Min Fit Check
             </a>
-            <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: "rgba(255,255,255,0.75)", fontStyle: "italic", textAlign: "center" }}>
+            <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: "rgba(255,255,255,0.95)", textAlign: "center" }}>
               Currently accepting 1–2 new engagements
             </span>
           </div>
