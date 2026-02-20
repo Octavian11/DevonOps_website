@@ -151,23 +151,23 @@ function TriggerScenarios({ setPage }) {
     }
   };
 
+  const box = { border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, padding: "18px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 260px", minWidth: "min(260px, 100%)", display: "flex", flexDirection: "column" };
+
   return (
-    <Section title="Common Situations Where Funds Engage Us" noCTA>
+    <Section title="Common Situations Where Funds Engage Us" noCTA type="windowWithCards">
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "20px" }}>
         These are the scenarios where operational friction becomes urgent — and where early intervention creates disproportionate value.
       </p>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "16px" }}>
+      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
         {scenarios.map((scenario, i) => (
-          <div key={i} style={{ border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "18px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
-            <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "10px", lineHeight: 1.3 }}>
-              {scenario.title}
-            </h4>
-            <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "14px", flex: "1" }}>
+          <div key={i} style={box}>
+            <SectionTitle sub>{scenario.title}</SectionTitle>
+            <p style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "16px", flex: "1" }}>
               {scenario.description}
             </p>
             <button
               onClick={() => handleAction(scenario.action)}
-              style={{ alignSelf: "flex-start", padding: "10px 18px", background: COLORS.navy, color: "white", border: "none", borderRadius: RADIUS.sm, fontFamily: FONTS.body, fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", transition: "background 0.2s", whiteSpace: "nowrap" }}
+              style={{ alignSelf: "flex-start", padding: "10px 20px", background: COLORS.navy, color: "white", border: "none", borderRadius: RADIUS.sm, fontFamily: FONTS.body, fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", transition: "background 0.2s", whiteSpace: "nowrap" }}
               onMouseEnter={e => { e.currentTarget.style.background = "#0F1829"; }}
               onMouseLeave={e => { e.currentTarget.style.background = COLORS.navy; }}>
               {scenario.action === "scorer" ? "Run the Ops Scorer →" : scenario.action === "services" ? "View Services →" : "Book a Fit Check →"}
