@@ -1,17 +1,12 @@
 // ─── CONSTANTS ──────────────────────────────────────────────
 export const CALENDLY = "https://calendly.com/hassantariq1/15-minute-triage-call-hassan-tariq";
-export const PDF_OPS_DILIGENCE_SCORECARD = "/pdfs/ops-diligence-scorecard.pdf";
-export const PDF_100_DAY_STABILIZATION_PLAN = "/pdfs/100-day-stabilization-plan.pdf";
 export const CONTACT_EMAIL = "hassan@devonshireops.com";
 export const LINKEDIN_URL = "https://www.linkedin.com/in/hassantar/";
 export const SAMPLE_SCORECARD_PDF = "/sample-ops-diligence-scorecard.pdf";
 export const SAMPLE_100DAY_PDF = "/sample-100-day-stabilization-plan.pdf";
-export const PDF_SCORECARD = "/pdfs/ops-diligence-scorecard.pdf";
-export const PDF_100DAY = "/pdfs/100-day-stabilization-plan.pdf";
 export const NDA_NOTE = "NDA-friendly. Minimal data handling. Anonymized formats accepted.";
-// FormSpree endpoint for Scorer email capture — replace YOUR_FORM_ID with your actual Formspree form ID
-// Sign up at formspree.io, create a form, and paste the ID here (e.g. "xpwqvnab")
-export const FORMSPREE_URL = "https://formspree.io/f/YOUR_FORM_ID";
+// FormSpree endpoint for Scorer email capture
+export const FORMSPREE_URL = "https://formspree.io/f/xvzbbyrj";
 
 export function mailtoHref(subject, body) {
   return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;

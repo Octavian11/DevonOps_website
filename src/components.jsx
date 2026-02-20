@@ -125,7 +125,7 @@ export function ButtonPair({
         )}
       </div>
       {showAvailability && (
-        <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.charcoal }}>
+        <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.bodyMuted }}>
           Currently accepting 1–2 new engagements
         </span>
       )}
@@ -357,13 +357,13 @@ export function FAQBlock() {
 export function ServicesSamplesRow() {
   const btn = {
     padding: "12px 16px",
-    borderRadius: "6px",
+    borderRadius: RADIUS.md,
     border: `1px solid ${COLORS.border}`,
     background: COLORS.white,
     color: COLORS.navy,
     textDecoration: "none",
     fontFamily: FONTS.body,
-    fontWeight: 900,
+    fontWeight: 600,
     display: "flex",
     alignItems: "center",
     gap: "10px",
@@ -372,10 +372,10 @@ export function ServicesSamplesRow() {
   return (
     <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "14px" }}>
       <a href={SAMPLE_SCORECARD_PDF} target="_blank" rel="noopener noreferrer" style={btn}>
-        📄 Sample Ops Diligence Scorecard (PDF)
+        Sample Ops Diligence Scorecard (PDF)
       </a>
       <a href={SAMPLE_100DAY_PDF} target="_blank" rel="noopener noreferrer" style={btn}>
-        📄 Sample 100-Day Stabilization Plan (PDF)
+        Sample 100-Day Stabilization Plan (PDF)
       </a>
     </div>
   );
@@ -406,7 +406,7 @@ export function Nav({ page, setPage }) {
           <div className="nav-links" style={{ display: "flex", gap: "4px" }}>
             {items.map(({ key, label }) => (
               <button key={key} onClick={() => handleNav(key)}
-                style={{ background: page === key ? `${COLORS.gold}20` : "transparent", border: "none", padding: "10px 16px", borderRadius: "4px", color: page === key ? COLORS.gold : COLORS.navy, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, cursor: "pointer", transition: "all 0.15s", letterSpacing: "0.3px" }}
+                style={{ background: page === key ? `${COLORS.gold}35` : "transparent", border: "none", padding: "10px 16px", borderRadius: RADIUS.sm, color: page === key ? COLORS.gold : COLORS.navy, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: page === key ? 700 : 600, cursor: "pointer", transition: "all 0.15s", letterSpacing: "0.3px", borderBottom: page === key ? `2px solid ${COLORS.gold}` : "2px solid transparent" }}
                 onMouseEnter={e => { if (page !== key) e.currentTarget.style.color = COLORS.gold; }}
                 onMouseLeave={e => { if (page !== key) e.currentTarget.style.color = COLORS.navy; }}>
                 {label}
@@ -460,6 +460,7 @@ function FooterLeadCapture() {
     e.preventDefault();
     if (!email || !email.includes("@")) {
       setStatus({ state: "error", msg: "Enter a valid email." });
+      setTimeout(() => setStatus({ state: "idle", msg: "" }), 4000);
       return;
     }
     const subject = encodeURIComponent("Devonshire Ops – Fit Check");
@@ -469,6 +470,7 @@ function FooterLeadCapture() {
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
     setStatus({ state: "ok", msg: "Opening your email client…" });
     setEmail("");
+    setTimeout(() => setStatus({ state: "idle", msg: "" }), 4000);
   };
 
   return (
@@ -486,7 +488,7 @@ function FooterLeadCapture() {
           <option>Mid-hold optimization</option>
         </select>
         <input value={email} onChange={e => setEmail(e.target.value)} placeholder="you@fund.com" style={inputStyle} />
-        <button type="submit" style={{ padding: "8px 14px", background: COLORS.gold, color: COLORS.white, border: "none", borderRadius: RADIUS.sm, fontFamily: FONTS.body, fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", textAlign: "left" }}>
+        <button type="submit" style={{ padding: "8px 14px", background: COLORS.gold, color: COLORS.white, border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", textAlign: "center" }}>
           Send →
         </button>
         {status.state !== "idle" && (
@@ -515,10 +517,15 @@ export function Footer({ setPage }) {
               onMouseEnter={e => e.currentTarget.style.color = COLORS.gold} onMouseLeave={e => e.currentTarget.style.color = COLORS.offWhite}>
               LinkedIn →
             </a>
-            <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.gold, textDecoration: "none", fontWeight: 600, transition: "opacity 0.2s" }}
-              onMouseEnter={e => e.currentTarget.style.opacity = "0.8"} onMouseLeave={e => e.currentTarget.style.opacity = "1"}>
-              15-Minute Fit Check →
-            </a>
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+              <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.gold, textDecoration: "none", fontWeight: 600, transition: "opacity 0.2s" }}
+                onMouseEnter={e => e.currentTarget.style.opacity = "0.8"} onMouseLeave={e => e.currentTarget.style.opacity = "1"}>
+                15-Minute Fit Check →
+              </a>
+              <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.bodyMuted }}>
+                Currently accepting 1–2 new engagements
+              </span>
+            </div>
           </div>
         </div>
 
