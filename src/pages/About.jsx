@@ -2,7 +2,7 @@ import {
   COLORS, FONTS, SPACING, SHADOWS, RADIUS,
   CALENDLY,
 } from "../constants.js";
-import { CTAButton, Section, ServicesSamplesRow } from "../components.jsx";
+import { CTAButton, ButtonPair, Section, ServicesSamplesRow } from "../components.jsx";
 
 export default function AboutPage() {
   return (
