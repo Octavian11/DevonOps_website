@@ -43,7 +43,7 @@ function HeroBlockWithNav({ setPage }) {
         <div className="hero-ctas" style={{ display: "flex", gap: SPACING.sm, flexWrap: "wrap", alignItems: "flex-start" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
             <a href={CALENDLY} target="_blank" rel="noopener noreferrer"
-              style={{ display: "inline-block", padding: "12px 28px", background: COLORS.gold, color: "white", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.md, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: "none" }}
+              style={{ display: "inline-block", padding: "14px 28px", background: COLORS.gold, color: "white", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.md, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: "none" }}
               onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; }}
               onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; }}>
               Book a 15-Min Fit Check
@@ -53,7 +53,7 @@ function HeroBlockWithNav({ setPage }) {
             </span>
           </div>
           <button onClick={() => setPage("scorer")}
-            style={{ display: "inline-block", padding: "12px 28px", background: "transparent", color: COLORS.gold, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.md, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: `2px solid ${COLORS.gold}` }}
+            style={{ display: "inline-block", padding: "12px 26px", background: "transparent", color: COLORS.gold, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.md, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: `2px solid ${COLORS.gold}` }}
             onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.gold}15`; }}
             onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}>
             Run the Ops Scorer →
@@ -167,7 +167,7 @@ function TriggerScenarios({ setPage }) {
             </p>
             <button
               onClick={() => handleAction(scenario.action)}
-              style={{ alignSelf: "flex-start", padding: "10px 20px", background: COLORS.navy, color: "white", border: "none", borderRadius: RADIUS.sm, fontFamily: FONTS.body, fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", transition: "background 0.2s", whiteSpace: "nowrap" }}
+              style={{ alignSelf: "flex-start", padding: "10px 20px", background: COLORS.navy, color: "white", border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer", transition: "background 0.2s", whiteSpace: "nowrap" }}
               onMouseEnter={e => { e.currentTarget.style.background = "#0F1829"; }}
               onMouseLeave={e => { e.currentTarget.style.background = COLORS.navy; }}>
               {scenario.action === "scorer" ? "Run the Ops Scorer →" : scenario.action === "services" ? "View Services →" : "Book a Fit Check →"}
@@ -577,8 +577,8 @@ export default function LeverExplorer({ setPage }) {
                   <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "8px" }}>What Good Looks Like</h4>
                   <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.whatGood}</p>
                   <div style={{ display: "flex", gap: "16px", paddingTop: "8px", borderTop: `1px solid ${COLORS.border}` }}>
-                    <button onClick={() => setPage("scorer")} style={{ background: "none", border: "none", fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.navy, cursor: "pointer", textDecoration: "underline" }}>→ Assess your readiness</button>
-                    <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.gold, textDecoration: "underline" }}>→ 15-Minute Fit Check</a>
+                    <button onClick={() => setPage("scorer")} style={{ background: "none", border: "none", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, cursor: "pointer", textDecoration: "underline", padding: 0 }}>→ Assess your readiness</button>
+                    <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.gold, textDecoration: "underline" }}>→ 15-Minute Fit Check</a>
                   </div>
                 </div>
               </div>
@@ -591,10 +591,10 @@ export default function LeverExplorer({ setPage }) {
                 <strong style={{ color: COLORS.gold }}>Not sure which of these apply to your deal?</strong> Run the Ops Scorer — free, 2 minutes, produces a prioritized assessment.
               </p>
               <div style={{ display: "flex", gap: "10px", flexShrink: 0 }}>
-                <button onClick={() => setPage("scorer")} style={{ padding: "8px 18px", background: COLORS.gold, color: COLORS.white, border: "none", borderRadius: RADIUS.sm, fontFamily: FONTS.body, fontSize: "0.875rem", fontWeight: 600, cursor: "pointer" }}>
+                <button onClick={() => setPage("scorer")} style={{ padding: "10px 20px", background: COLORS.gold, color: COLORS.white, border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer" }}>
                   Run the Ops Scorer →
                 </button>
-                <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ padding: "8px 18px", background: "transparent", color: COLORS.offWhite, border: `1px solid ${COLORS.offWhite}60`, borderRadius: RADIUS.sm, fontFamily: FONTS.body, fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", textDecoration: "none" }}>
+                <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ padding: "10px 20px", background: "transparent", color: COLORS.offWhite, border: `1px solid ${COLORS.offWhite}60`, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer", textDecoration: "none", display: "inline-block" }}>
                   Book a Fit Check
                 </a>
               </div>
@@ -614,10 +614,10 @@ export default function LeverExplorer({ setPage }) {
       <FAQBlock />
 
       <Section noCTA background={`${COLORS.navy}05`}>
-        <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.bodyMuted, textAlign: "center", marginBottom: "8px", fontStyle: "italic", margin: "0 auto", marginBottom: "8px" }}>
+        <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.bodyMuted, textAlign: "center", fontStyle: "italic", margin: "0 auto 8px" }}>
           ~67% incident volume reduction · ~31% MTTR improvement · $2M+ annual vendor savings — representative outcomes from prior institutional operating roles
         </p>
-        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, marginBottom: "20px", textAlign: "center", margin: "0 auto", marginBottom: "20px" }}>
+        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, textAlign: "center", margin: "0 auto 20px" }}>
           Not sure where to start? Let's assess fit and scope the right engagement.
         </p>
         <ButtonPair
@@ -639,13 +639,13 @@ export default function LeverExplorer({ setPage }) {
           <div style={{ display: "flex", gap: "10px", alignItems: "center", flexShrink: 0 }}>
             <button
               onClick={() => { handleStickyDismiss(); setPage("scorer"); }}
-              style={{ padding: "9px 18px", background: COLORS.gold, color: "white", border: "none", borderRadius: RADIUS.sm, fontFamily: FONTS.body, fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap" }}>
+              style={{ padding: "10px 20px", background: COLORS.gold, color: "white", border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap" }}>
               Run the Ops Scorer →
             </button>
             <button
               onClick={handleStickyDismiss}
               aria-label="Dismiss"
-              style={{ padding: "9px 13px", background: "transparent", border: `1px solid ${COLORS.offWhite}40`, borderRadius: RADIUS.sm, color: COLORS.offWhite, fontFamily: FONTS.body, fontSize: "1rem", cursor: "pointer", lineHeight: 1 }}>
+              style={{ padding: "10px 14px", background: "transparent", border: `1px solid ${COLORS.offWhite}40`, borderRadius: RADIUS.md, color: COLORS.offWhite, fontFamily: FONTS.body, fontSize: "1rem", cursor: "pointer", lineHeight: 1 }}>
               ×
             </button>
           </div>

@@ -98,10 +98,10 @@ function WorkedExampleAccordion() {
 
       <div style={{ marginTop: "16px", display: "flex", gap: "10px", flexWrap: "wrap" }}>
         <button onClick={() => window.location.hash = "#top"}
-          style={{ padding: "12px 18px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, border: "none", fontFamily: FONTS.body, fontWeight: 700, cursor: "pointer" }}>
+          style={{ padding: "10px 20px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, border: "none", fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer" }}>
           See offers & pricing
         </button>
-        <CTAButton text="15-Minute Fit Check" showAvailability={true} />
+        <CTAButton text="15-Minute Fit Check" showAvailability={true} small />
       </div>
     </Accordion>
   );

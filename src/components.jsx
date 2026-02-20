@@ -4,6 +4,7 @@ import {
   SEVERITY_STYLE, TIMING_COLORS, DOMAINS,
   CALENDLY, CONTACT_EMAIL, LINKEDIN_URL,
   SAMPLE_SCORECARD_PDF, SAMPLE_100DAY_PDF,
+  FORMSPREE_URL,
   mailtoHref,
 } from "./constants.js";
 
@@ -46,7 +47,7 @@ export function CTAButton({ text, small, variant, style: extraStyle, showAvailab
   return (
     <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
       <a href={CALENDLY} target="_blank" rel="noopener noreferrer"
-        style={{ display: "inline-block", padding: small ? "10px 22px" : "12px 28px", background: bg, color, fontFamily: FONTS.body, fontSize: small ? "0.9rem" : "1rem", fontWeight: 600, borderRadius: RADIUS.md, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border, ...extraStyle }}
+        style={{ display: "inline-block", padding: small ? "10px 20px" : "14px 28px", background: bg, color, fontFamily: FONTS.body, fontSize: small ? "0.9rem" : "1rem", fontWeight: 600, borderRadius: RADIUS.md, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border, ...extraStyle }}
         onMouseEnter={e => { e.currentTarget.style.background = hoverBg; }}
         onMouseLeave={e => { e.currentTarget.style.background = bg; }}>
         {text || "15-Minute Fit Check"}
@@ -456,21 +457,39 @@ function FooterLeadCapture() {
     boxSizing: "border-box",
   };
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     if (!email || !email.includes("@")) {
       setStatus({ state: "error", msg: "Enter a valid email." });
       setTimeout(() => setStatus({ state: "idle", msg: "" }), 4000);
       return;
     }
-    const subject = encodeURIComponent("Devonshire Ops – Fit Check");
-    const body = encodeURIComponent(
-      `Hi Hassan,\n\nMy situation: ${situation}\nMy email: ${email}\n\nLooking forward to connecting.\n`
-    );
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-    setStatus({ state: "ok", msg: "Opening your email client…" });
-    setEmail("");
-    setTimeout(() => setStatus({ state: "idle", msg: "" }), 4000);
+
+    setStatus({ state: "loading", msg: "Sending…" });
+
+    try {
+      const res = await fetch(FORMSPREE_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          email,
+          situation,
+          source: "footer_lead_capture"
+        }),
+      });
+      if (res.ok) {
+        setStatus({ state: "ok", msg: "Thanks! We'll be in touch soon." });
+        setEmail("");
+        setSituation("Evaluating a target");
+        setTimeout(() => setStatus({ state: "idle", msg: "" }), 5000);
+      } else {
+        setStatus({ state: "error", msg: "Something went wrong. Please try again." });
+        setTimeout(() => setStatus({ state: "idle", msg: "" }), 4000);
+      }
+    } catch {
+      setStatus({ state: "error", msg: "Something went wrong. Please try again." });
+      setTimeout(() => setStatus({ state: "idle", msg: "" }), 4000);
+    }
   };
 
   return (
@@ -488,8 +507,8 @@ function FooterLeadCapture() {
           <option>Mid-hold optimization</option>
         </select>
         <input value={email} onChange={e => setEmail(e.target.value)} placeholder="you@fund.com" style={inputStyle} />
-        <button type="submit" style={{ padding: "8px 14px", background: COLORS.gold, color: COLORS.white, border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", textAlign: "center" }}>
-          Send →
+        <button type="submit" disabled={status.state === "loading"} style={{ padding: "10px 20px", background: status.state === "loading" ? COLORS.bodyMuted : COLORS.gold, color: COLORS.white, border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: status.state === "loading" ? "default" : "pointer", textAlign: "center" }}>
+          {status.state === "loading" ? "Sending…" : "Send →"}
         </button>
         {status.state !== "idle" && (
           <p style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: status.state === "ok" ? "#68D391" : status.state === "loading" ? COLORS.offWhite : "#FC8181", margin: 0 }}>
