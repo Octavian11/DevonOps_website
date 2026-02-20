@@ -157,9 +157,23 @@ export default function ScorerPage() {
         Assess a portfolio company's operational stability across 6 dimensions. Identify where friction is highest and which interventions would create the most value.
       </p>
 
-      <div style={{ display: "flex", gap: "24px", alignItems: "flex-start" }}>
+      {/* What's your situation - Full Width */}
+      <Card style={{ marginBottom: "24px" }}>
+        <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "12px" }}>What's your situation?</h3>
+        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+          {CONTEXT_OPTIONS.map(opt => (
+            <label key={opt.key} style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", padding: "8px 12px", borderRadius: "4px", background: context === opt.key ? `${COLORS.navy}08` : "transparent", border: `1px solid ${context === opt.key ? COLORS.steel : "transparent"}` }}>
+              <input type="radio" name="context" checked={context === opt.key} onChange={() => setContext(opt.key)} style={{ accentColor: COLORS.navy }} />
+              <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal }}>{opt.label}</span>
+            </label>
+          ))}
+        </div>
+      </Card>
+
+      {/* Two-Column Layout: Sliders (Left) + View Results & Assessment (Right) */}
+      <div style={{ display: "flex", gap: "24px", alignItems: "flex-start", marginBottom: "24px" }}>
         {/* Left Panel: Sliders */}
-        <div style={{ flex: "1 1 500px", maxHeight: "calc(100vh - 200px)", overflowY: "auto", paddingRight: "12px" }}>
+        <div style={{ flex: "1 1 500px", maxHeight: "calc(100vh - 300px)", overflowY: "auto", paddingRight: "12px" }}>
           <SectionTitle sub>Score Each Dimension (1–5)</SectionTitle>
           {SCORER_DIMS.map(dim => (
             <Card key={dim.key} style={{ marginBottom: "12px" }}>
@@ -185,31 +199,21 @@ export default function ScorerPage() {
           ))}
         </div>
 
-        {/* Right Panel: Context & Results */}
+        {/* Right Panel: View Results Button & Assessment Results */}
         <div style={{ flex: "0 0 420px", minWidth: "320px", position: "sticky", top: "100px" }}>
-          <Card>
-            <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "12px" }}>What's your situation?</h3>
-            <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "16px" }}>
-              {CONTEXT_OPTIONS.map(opt => (
-                <label key={opt.key} style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", padding: "8px 12px", borderRadius: "4px", background: context === opt.key ? `${COLORS.navy}08` : "transparent", border: `1px solid ${context === opt.key ? COLORS.steel : "transparent"}` }}>
-                  <input type="radio" name="context" checked={context === opt.key} onChange={() => setContext(opt.key)} style={{ accentColor: COLORS.navy }} />
-                  <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal }}>{opt.label}</span>
-                </label>
-              ))}
-            </div>
-
-            {!showResults && (
-              <div style={{ textAlign: "center", marginTop: "16px" }}>
+          {!showResults && (
+            <Card>
+              <div style={{ textAlign: "center" }}>
                 <button onClick={() => setShowResults(true)}
                   style={{ padding: "12px 32px", background: COLORS.navy, color: "white", border: "none", borderRadius: "4px", fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, cursor: "pointer", letterSpacing: "0.3px", width: "100%" }}>
                   View Results
                 </button>
               </div>
-            )}
-          </Card>
+            </Card>
+          )}
 
           {showResults && (
-            <div className="fade-in" style={{ marginTop: "16px" }}>
+            <div className="fade-in">
               <Card style={{ borderLeft: `4px solid ${ratingColor}` }}>
                 <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.navy, marginBottom: "16px" }}>Assessment Results</h3>
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: "20px" }}>
@@ -245,47 +249,55 @@ export default function ScorerPage() {
                   ))}
                 </Card>
               )}
-
-              <Card style={{ marginTop: "16px" }}>
-                <h4 style={{ fontFamily: FONTS.heading, fontSize: "0.95rem", color: COLORS.navy, marginBottom: "12px" }}>Recommended Next Steps</h4>
-                {lowDims.length === 0 && midDims.length === 0 ? (
-                  <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0 }}>
-                    Strong operational posture. Focus on maintaining cadence through exit.
-                  </p>
-                ) : (
-                  <ul style={{ margin: 0, paddingLeft: "20px", fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6 }}>
-                    {[...lowDims, ...midDims].slice(0, 3).map((dim, i) => {
-                      const rec = DIM_RECS[dim.key];
-                      return (
-                        <li key={dim.key} style={{ marginBottom: i === Math.min(lowDims.length + midDims.length, 3) - 1 ? 0 : "8px" }}>
-                          <strong>{rec.days}:</strong> {rec.action}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                )}
-              </Card>
-
-              <ScorerEmailCapture rating={ratingLabel} score={avg.toFixed(1)} context={context} />
-
-              <Card style={{ background: `${COLORS.navy}05`, marginTop: "16px" }}>
-                <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, textAlign: "center", marginBottom: SPACING.sm }}>
-                  {rating === "stable"
-                    ? "Maintain your edge with ongoing governance."
-                    : "Ready to convert these gaps into a Value Creation Plan?"}
-                </p>
-                <ButtonPair
-                  primaryText="15-Minute Fit Check"
-                  secondaryText="View Services"
-                  secondaryAction={() => window.location.hash = "#/services"}
-                  centered={true}
-                  showAvailability={true}
-                />
-              </Card>
             </div>
           )}
         </div>
       </div>
+
+      {/* Full-Width Sections Below Two-Column Layout */}
+      {showResults && (
+        <div className="fade-in">
+          <Section noCTA title="Recommended Next Steps">
+            {lowDims.length === 0 && midDims.length === 0 ? (
+              <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, margin: 0 }}>
+                Your operational posture is strong across all dimensions. Focus on maintaining cadence and ensuring durability through exit preparation.
+              </p>
+            ) : (
+              <ul style={{ margin: 0, paddingLeft: "20px", fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
+                {[...lowDims, ...midDims].slice(0, 4).map((dim, i) => {
+                  const rec = DIM_RECS[dim.key];
+                  const isLast = i === Math.min(lowDims.length + midDims.length, 4) - 1;
+                  return (
+                    <li key={dim.key} style={{ marginBottom: isLast ? 0 : SPACING.xs }}>
+                      <strong>{rec.days}:</strong> {rec.action}
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </Section>
+
+          <ScorerEmailCapture rating={ratingLabel} score={avg.toFixed(1)} context={context} />
+
+          <Section noCTA background={`${COLORS.navy}05`}>
+            <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, textAlign: "center", marginBottom: SPACING.md }}>
+              {rating === "stable"
+                ? "Maintain your edge with ongoing governance support."
+                : "Ready to convert these gaps into a Value Creation Plan?"}
+            </p>
+            <ButtonPair
+              primaryText="15-Minute Fit Check"
+              secondaryText="View Services"
+              secondaryAction={() => window.location.hash = "#/services"}
+              centered={true}
+              showAvailability={true}
+            />
+            <p style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.bodyMuted, fontStyle: "italic", margin: `${SPACING.md} 0 0 0`, textAlign: "center" }}>
+              Scores reflect observed evidence prompts, not self-assessment.
+            </p>
+          </Section>
+        </div>
+      )}
     </div>
   );
 }
