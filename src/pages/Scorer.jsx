@@ -172,31 +172,37 @@ export default function ScorerPage() {
 
       {/* Two-Column Layout: Sliders (Left) + View Results & Assessment (Right) */}
       <div style={{ display: "flex", gap: "24px", alignItems: "flex-start", marginBottom: "24px" }}>
-        {/* Left Panel: Sliders */}
-        <div style={{ flex: "1 1 500px", maxHeight: "calc(100vh - 300px)", overflowY: "auto", paddingRight: "12px" }}>
-          <SectionTitle sub>Score Each Dimension (1–5)</SectionTitle>
-          {SCORER_DIMS.map(dim => (
-            <Card key={dim.key} style={{ marginBottom: "12px" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "12px" }}>
-                <h4 style={{ fontFamily: FONTS.heading, fontSize: "0.95rem", color: COLORS.navy }}>{dim.label}</h4>
-                <span style={{ fontFamily: FONTS.body, fontSize: "1.2rem", fontWeight: 700, color: scores[dim.key] <= 2 ? COLORS.critical : scores[dim.key] <= 3 ? COLORS.atRisk : COLORS.stable }}>
-                  {scores[dim.key]}
-                </span>
-              </div>
-              <input
-                type="range"
-                className="scorer-range"
-                min={1} max={5} step={1}
-                value={scores[dim.key]}
-                onChange={e => setScores({ ...scores, [dim.key]: parseInt(e.target.value) })}
-                style={{ width: "100%", background: `linear-gradient(to right, ${COLORS.steel} 0%, ${COLORS.steel} ${((scores[dim.key] - 1) / 4) * 100}%, ${COLORS.border} ${((scores[dim.key] - 1) / 4) * 100}%, ${COLORS.border} 100%)` }}
-              />
-              <div style={{ display: "flex", justifyContent: "space-between", marginTop: "10px", gap: "12px" }}>
-                <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, maxWidth: "42%", lineHeight: 1.4 }}>{dim.low}</span>
-                <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, maxWidth: "42%", textAlign: "right", lineHeight: 1.4 }}>{dim.high}</span>
-              </div>
-            </Card>
-          ))}
+        {/* Left Panel: outer container with sticky heading + scrollable cards */}
+        <div style={{ flex: "1 1 500px", display: "flex", flexDirection: "column", border: `2px solid ${COLORS.steel}`, borderRadius: RADIUS.lg, overflow: "hidden", boxShadow: SHADOWS.sm }}>
+          {/* Fixed heading — always visible */}
+          <div style={{ padding: "16px 20px 12px", borderBottom: `1px solid ${COLORS.border}`, background: COLORS.white }}>
+            <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, margin: 0 }}>Score all 6 Dimensions (1–5)</h3>
+          </div>
+          {/* Scrollable slider cards */}
+          <div style={{ overflowY: "auto", maxHeight: "calc(100vh - 380px)", padding: "16px" }}>
+            {SCORER_DIMS.map((dim, index) => (
+              <Card key={dim.key} style={{ marginBottom: "12px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "12px" }}>
+                  <h4 style={{ fontFamily: FONTS.heading, fontSize: "0.95rem", color: COLORS.navy }}>{index + 1}. {dim.label}</h4>
+                  <span style={{ fontFamily: FONTS.body, fontSize: "1.2rem", fontWeight: 700, color: scores[dim.key] <= 2 ? COLORS.critical : scores[dim.key] <= 3 ? COLORS.atRisk : COLORS.stable }}>
+                    {scores[dim.key]}
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  className="scorer-range"
+                  min={1} max={5} step={1}
+                  value={scores[dim.key]}
+                  onChange={e => setScores({ ...scores, [dim.key]: parseInt(e.target.value) })}
+                  style={{ width: "100%", background: `linear-gradient(to right, ${COLORS.steel} 0%, ${COLORS.steel} ${((scores[dim.key] - 1) / 4) * 100}%, ${COLORS.border} ${((scores[dim.key] - 1) / 4) * 100}%, ${COLORS.border} 100%)` }}
+                />
+                <div style={{ display: "flex", justifyContent: "space-between", marginTop: "10px", gap: "12px" }}>
+                  <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, maxWidth: "42%", lineHeight: 1.4 }}>{dim.low}</span>
+                  <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, maxWidth: "42%", textAlign: "right", lineHeight: 1.4 }}>{dim.high}</span>
+                </div>
+              </Card>
+            ))}
+          </div>
         </div>
 
         {/* Right Panel: View Results Button & Assessment Results */}
@@ -292,9 +298,6 @@ export default function ScorerPage() {
               centered={true}
               showAvailability={true}
             />
-            <p style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.bodyMuted, fontStyle: "italic", margin: `${SPACING.md} 0 0 0`, textAlign: "center" }}>
-              Scores reflect observed evidence prompts, not self-assessment.
-            </p>
           </Section>
         </div>
       )}
