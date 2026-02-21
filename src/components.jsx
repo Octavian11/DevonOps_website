@@ -507,9 +507,9 @@ export function ServicesSamplesRow() {
 export function Nav({ page, setPage }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const items = [
-    { key: "levers", label: "Levers" },
-    { key: "services", label: "Services & Method" },
-    { key: "scorer", label: "Ops Scorer" },
+    { key: "levers", label: "Friction Levers" },
+    { key: "services", label: "Services" },
+    { key: "scorer", label: "Free Scorer" },
     { key: "about", label: "About" },
   ];
   const handleNav = (key) => { setPage(key); setMenuOpen(false); };
@@ -661,7 +661,7 @@ export function Footer({ setPage }) {
                 onMouseEnter={e => e.currentTarget.style.opacity = "0.8"} onMouseLeave={e => e.currentTarget.style.opacity = "1"}>
                 15-Minute Fit Check →
               </a>
-              <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.bodyMuted }}>
+              <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.offWhite }}>
                 Currently accepting 1–2 new engagements
               </span>
             </div>

@@ -233,12 +233,36 @@ export const SCORER_DIMS = [
 
 // Recommended action per dimension, used by the dynamic scorer results
 export const DIM_RECS = {
-  incident: { days: "Days 1–14", action: "install incident command: severity model, designated commander, escalation thresholds, and postmortem discipline" },
-  change:   { days: "Days 1–14", action: "install change control: CAB-lite charter, risk classification, rollback discipline, and change-incident correlation tracking" },
-  vendor:   { days: "Days 1–30", action: "run vendor inventory, map concentration risk, build renewal calendar, and assign vendor owners" },
-  audit:    { days: "Days 15–45", action: "build evidence index, map SOC 2 controls to operating procedures, and begin quarterly access reviews" },
-  kpi:      { days: "Days 1–30", action: "define core KPI set, baseline current performance, and launch weekly operating reviews with board-ready reporting" },
-  process:  { days: "Days 15–60", action: "document critical runbooks, map RACI, identify key-person risks, and begin cross-training program" },
+  incident: {
+    days: "Days 1–14",
+    action: "Install incident command: severity model, designated commander, escalation thresholds, and postmortem discipline.",
+    impact: "Unstructured outages compound into EBITDA drag — management time diverted, client trust eroded, root causes unresolved. The same incidents recur until governance stops them. Postmortem discipline alone typically cuts Sev-1 recurrence by more than half.",
+  },
+  change: {
+    days: "Days 1–14",
+    action: "Install change control: CAB-lite charter, risk classification, rollback discipline, and change-incident correlation tracking.",
+    impact: "Uncontrolled deployments are the leading cause of production incidents. Without change governance, you cannot see the correlation between releases and outages — which means you cannot stop it. Every unreviewed deployment is a potential revenue-impacting event.",
+  },
+  vendor: {
+    days: "Days 1–30",
+    action: "Run vendor inventory, map concentration risk, build renewal calendar, and assign vendor owners.",
+    impact: "Vendor rationalization is one of the first PE value creation levers — and it requires an inventory to pull. Undiscovered change-of-control clauses and auto-renewals create post-close cost exposure. Concentration risk that isn't mapped isn't mitigated.",
+  },
+  audit: {
+    days: "Days 15–45",
+    action: "Build evidence index, map SOC 2 controls to operating procedures, and begin quarterly access reviews.",
+    impact: "Scrambling to reconstruct evidence costs 3–5× more than maintaining it continuously. SOC 2 exceptions signal governance immaturity to institutional clients and exit diligence teams. Controls that exist on paper but not in practice are a liability, not an asset.",
+  },
+  kpi: {
+    days: "Days 1–30",
+    action: "Define core KPI set, baseline current performance, and launch weekly operating reviews with board-ready reporting.",
+    impact: "Without a measurement framework, you cannot prove EBITDA improvement or build the data narrative for exit. The operating cadence is the primary mechanism through which the board maintains governance — its absence means problems compound silently.",
+  },
+  process: {
+    days: "Days 15–60",
+    action: "Document critical runbooks, map RACI, identify key-person risks, and begin cross-training program.",
+    impact: "Tribal knowledge is the most dangerous pre-close risk. If key people leave post-acquisition — which happens frequently — undocumented knowledge leaves with them. Rebuilding from zero is 10× more expensive than documenting proactively.",
+  },
 };
 
 export const CONTEXT_OPTIONS = [

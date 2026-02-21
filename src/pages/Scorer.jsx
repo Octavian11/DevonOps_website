@@ -254,21 +254,46 @@ export default function ScorerPage() {
 
           <Section noCTA title="Recommended Next Steps">
             {lowDims.length === 0 && midDims.length === 0 ? (
-              <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, margin: 0 }}>
-                Your operational posture is strong across all dimensions. Focus on maintaining cadence and ensuring durability through exit preparation.
-              </p>
+              <div>
+                <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "14px" }}>
+                  Your operational posture is strong across all dimensions. At this stage, the priority is durability: ensuring governance holds under management transitions, deal activity, or scale.
+                </p>
+                <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, margin: 0 }}>
+                  The highest-value intervention now is hardening for exit — converting your current operational strength into a demonstrable competitive advantage in buyer diligence. Strong operations that aren't documented and tracked don't survive deal scrutiny.
+                </p>
+              </div>
             ) : (
-              <ul style={{ margin: 0, paddingLeft: "20px", fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
-                {[...lowDims, ...midDims].slice(0, 4).map((dim, i) => {
-                  const rec = DIM_RECS[dim.key];
-                  const isLast = i === Math.min(lowDims.length + midDims.length, 4) - 1;
-                  return (
-                    <li key={dim.key} style={{ marginBottom: isLast ? 0 : SPACING.xs }}>
-                      <strong>{rec.days}:</strong> {rec.action}
-                    </li>
-                  );
-                })}
-              </ul>
+              <div>
+                <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "20px" }}>
+                  {{
+                    pre: "These gaps should inform your deal terms and Day-1 critical path. If the target is worth pursuing, the items below are what to address in the first 30–90 days — sequenced by impact.",
+                    post: "You're in the critical window. Each week these remain unaddressed compounds the remediation cost and erodes management bandwidth. Here's the priority sequence:",
+                    mid: "Operational drift doesn't reverse on its own. These are the highest-ROI interventions before exit preparation begins — each is a defined deliverable, not a recommendation.",
+                  }[context]}
+                </p>
+                <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                  {[...lowDims, ...midDims].slice(0, 4).map((dim, i) => {
+                    const rec = DIM_RECS[dim.key];
+                    const isGap = scores[dim.key] <= 2;
+                    return (
+                      <div key={dim.key} style={{ paddingLeft: "16px", borderLeft: `3px solid ${isGap ? COLORS.critical : COLORS.atRisk}` }}>
+                        <p style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, margin: "0 0 4px 0" }}>
+                          {dim.label} — <span style={{ fontWeight: 400, color: COLORS.bodyMuted }}>{rec.days}</span>
+                        </p>
+                        <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.65, margin: "0 0 6px 0" }}>
+                          {rec.impact}
+                        </p>
+                        <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.65, margin: 0 }}>
+                          <strong>What gets done:</strong> {rec.action}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+                <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.7, marginTop: "24px", marginBottom: 0, paddingTop: "20px", borderTop: `1px solid ${COLORS.border}` }}>
+                  Each of these is a defined deliverable — not a slide recommendation. The <strong>100-Day Stabilization Plan</strong> covers all of them, sequenced, tracked, and board-ready from Day 1.
+                </p>
+              </div>
             )}
           </Section>
 
