@@ -354,30 +354,150 @@ export function FAQBlock() {
   );
 }
 
-// ServicesSamplesRow used by ServicesPage and AboutPage
-export function ServicesSamplesRow() {
-  const btn = {
-    padding: "12px 16px",
-    borderRadius: RADIUS.md,
-    border: `1px solid ${COLORS.border}`,
-    background: COLORS.white,
-    color: COLORS.navy,
-    textDecoration: "none",
-    fontFamily: FONTS.body,
-    fontWeight: 600,
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
+// ─── LEAD MAGNET LINK ────────────────────────────────────────
+// Gated PDF download component — captures email before providing PDF access
+
+export function LeadMagnetLink({ pdfUrl, children, variant = "link", style: extraStyle }) {
+  const [state, setState] = useState("initial"); // initial | form | loading | success | error
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    setState("form");
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!email || !email.includes("@")) {
+      setErrorMsg("Please enter a valid email.");
+      setTimeout(() => setErrorMsg(""), 4000);
+      return;
+    }
+
+    setState("loading");
+
+    try {
+      const res = await fetch(FORMSPREE_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          pdfRequested: pdfUrl,
+          source: "lead_magnet_gate"
+        }),
+      });
+
+      if (res.ok) {
+        setState("success");
+      } else {
+        setState("error");
+        setErrorMsg("Something went wrong. Please try again.");
+        setTimeout(() => { setState("form"); setErrorMsg(""); }, 4000);
+      }
+    } catch {
+      setState("error");
+      setErrorMsg("Something went wrong. Please try again.");
+      setTimeout(() => { setState("form"); setErrorMsg(""); }, 4000);
+    }
+  };
+
+  // ── Variant styles ───────────────────────────────────────────
+  const linkStyle = {
+    link: { fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 700, color: COLORS.navy, textDecoration: "none", borderBottom: `2px solid ${COLORS.navy}`, cursor: "pointer", transition: "all 0.2s" },
+    button: { display: "inline-block", padding: "14px 28px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, textDecoration: "none", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", transition: "all 0.2s", border: "none", cursor: "pointer", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "180px" },
+    "inline-button": { padding: "12px 16px", borderRadius: RADIUS.md, border: `1px solid ${COLORS.border}`, background: COLORS.white, color: COLORS.navy, textDecoration: "none", fontFamily: FONTS.body, fontWeight: 600, display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", transition: "all 0.2s" },
+    "footer-link": { fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.offWhite, textDecoration: "none", transition: "color 0.2s", cursor: "pointer" },
+    "micro-proof": { display: "flex", alignItems: "center", gap: "8px", textDecoration: "none", color: COLORS.navy, fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, transition: "all 0.2s", padding: "4px 8px", borderRadius: RADIUS.sm, cursor: "pointer" }
+  }[variant] || linkStyle.link;
+
+  // ── Initial state: clickable link/button ─────────────────────
+  if (state === "initial") {
+    return (
+      <span onClick={handleClick} style={{ ...linkStyle, ...extraStyle }}>
+        {children}
+      </span>
+    );
+  }
+
+  // ── Form state: email capture ────────────────────────────────
+  if (state === "form" || state === "loading" || state === "error") {
+    return (
+      <div style={{ padding: "16px 20px", background: COLORS.offWhite, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, marginTop: "8px", marginBottom: "8px" }}>
+        <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, marginBottom: "12px", fontWeight: 600 }}>
+          Enter your email to download: <strong>{children}</strong>
+        </p>
+        <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          <input
+            type="text"
+            value={name}
+            onChange={e => setName(e.target.value)}
+            placeholder="Your name"
+            style={{ padding: "8px 10px", borderRadius: RADIUS.sm, border: `1px solid ${COLORS.steel}`, fontFamily: FONTS.body, fontSize: "0.9rem", background: COLORS.white }}
+          />
+          <input
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            placeholder="you@fund.com"
+            required
+            style={{ padding: "8px 10px", borderRadius: RADIUS.sm, border: `1px solid ${COLORS.steel}`, fontFamily: FONTS.body, fontSize: "0.9rem", background: COLORS.white }}
+          />
+          <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+            <button
+              type="submit"
+              disabled={state === "loading"}
+              style={{ padding: "10px 20px", background: state === "loading" ? COLORS.bodyMuted : COLORS.gold, color: COLORS.white, border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: state === "loading" ? "default" : "pointer" }}>
+              {state === "loading" ? "Sending…" : "Send Me the PDF →"}
+            </button>
+            <button
+              type="button"
+              onClick={() => setState("initial")}
+              style={{ padding: "10px 14px", background: "transparent", border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, cursor: "pointer" }}>
+              Cancel
+            </button>
+          </div>
+          {errorMsg && (
+            <p style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: "#FC8181", margin: 0 }}>
+              {errorMsg}
+            </p>
+          )}
+        </form>
+      </div>
+    );
+  }
+
+  // ── Success state: download link ─────────────────────────────
+  if (state === "success") {
+    return (
+      <div style={{ padding: "16px 20px", background: `${COLORS.gold}15`, border: `1px solid ${COLORS.gold}`, borderRadius: RADIUS.md, marginTop: "8px", marginBottom: "8px" }}>
+        <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, marginBottom: "12px" }}>
+          ✓ Thanks! Your download is ready:
+        </p>
+        <a href={pdfUrl} target="_blank" rel="noopener noreferrer"
+          style={{ fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, textDecoration: "underline" }}>
+          Download {children} →
+        </a>
+      </div>
+    );
+  }
+
+  return null;
+}
+
+// ServicesSamplesRow used by ServicesPage and AboutPage
+export function ServicesSamplesRow() {
   return (
     <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "14px" }}>
-      <a href={SAMPLE_SCORECARD_PDF} target="_blank" rel="noopener noreferrer" style={btn}>
+      <LeadMagnetLink pdfUrl={SAMPLE_SCORECARD_PDF} variant="inline-button">
         Sample Ops Diligence Scorecard (PDF)
-      </a>
-      <a href={SAMPLE_100DAY_PDF} target="_blank" rel="noopener noreferrer" style={btn}>
+      </LeadMagnetLink>
+      <LeadMagnetLink pdfUrl={SAMPLE_100DAY_PDF} variant="inline-button">
         Sample 100-Day Stabilization Plan (PDF)
-      </a>
+      </LeadMagnetLink>
     </div>
   );
 }
@@ -415,7 +535,7 @@ export function Nav({ page, setPage }) {
             ))}
           </div>
         </div>
-        <div className="nav-cta"><CTAButton text="15-Minute Fit Check" showAvailability={true} /></div>
+        <div className="nav-cta"><CTAButton text="15-Minute Fit Check" /></div>
         <button className="nav-hamburger" onClick={() => setMenuOpen(o => !o)} aria-label="Toggle menu">
           {menuOpen
             ? <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><line x1="4" y1="4" x2="18" y2="18" stroke={COLORS.navy} strokeWidth="2" strokeLinecap="round"/><line x1="18" y1="4" x2="4" y2="18" stroke={COLORS.navy} strokeWidth="2" strokeLinecap="round"/></svg>
@@ -572,14 +692,12 @@ export function Footer({ setPage }) {
         <div>
           <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.gold, marginBottom: "16px", letterSpacing: "0.5px" }}>Resources</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            <a href={SAMPLE_SCORECARD_PDF} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.offWhite, textDecoration: "none", transition: "color 0.2s" }}
-              onMouseEnter={e => e.currentTarget.style.color = COLORS.gold} onMouseLeave={e => e.currentTarget.style.color = COLORS.offWhite}>
+            <LeadMagnetLink pdfUrl={SAMPLE_SCORECARD_PDF} variant="footer-link">
               Ops Diligence Scorecard (PDF)
-            </a>
-            <a href={SAMPLE_100DAY_PDF} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.offWhite, textDecoration: "none", transition: "color 0.2s" }}
-              onMouseEnter={e => e.currentTarget.style.color = COLORS.gold} onMouseLeave={e => e.currentTarget.style.color = COLORS.offWhite}>
+            </LeadMagnetLink>
+            <LeadMagnetLink pdfUrl={SAMPLE_100DAY_PDF} variant="footer-link">
               100-Day Stabilization Plan (PDF)
-            </a>
+            </LeadMagnetLink>
           </div>
         </div>
 

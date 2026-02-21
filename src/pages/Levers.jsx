@@ -8,6 +8,7 @@ import {
   SeverityBadge, TimingBadge, DomainTag,
   CTAButton, SectionTitle, ButtonPair, Section,
   TimelineRail, SplitContrast, FAQBlock,
+  LeadMagnetLink,
 } from "../components.jsx";
 
 // ─── HERO BLOCK WITH NAV ─────────────────────────────────────
@@ -102,21 +103,20 @@ function DomainLegend() {
 
 function MicroProofStrip() {
   const proofItems = [
-    { icon: "✓", text: "Severity-rated findings", link: SAMPLE_SCORECARD_PDF },
-    { icon: "✓", text: "IC-ready memo format", link: SAMPLE_SCORECARD_PDF },
-    { icon: "✓", text: "100-day stabilization plan", link: SAMPLE_100DAY_PDF },
+    { icon: "✓", text: "Severity-rated findings", pdf: SAMPLE_SCORECARD_PDF },
+    { icon: "✓", text: "IC-ready memo format", pdf: SAMPLE_SCORECARD_PDF },
+    { icon: "✓", text: "100-day stabilization plan", pdf: SAMPLE_100DAY_PDF },
   ];
 
   return (
     <div style={{ background: `linear-gradient(135deg, ${COLORS.navy}08 0%, ${COLORS.gold}08 100%)`, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "16px 24px", marginBottom: "24px", display: "flex", gap: SPACING.lg, flexWrap: "wrap", justifyContent: "center", alignItems: "center" }}>
       {proofItems.map((item, idx) => (
-        <a key={idx} href={item.link} target="_blank" rel="noopener noreferrer"
-          style={{ display: "flex", alignItems: "center", gap: "8px", textDecoration: "none", color: COLORS.navy, fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, transition: "all 0.2s", padding: "4px 8px", borderRadius: RADIUS.sm }}
-          onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.navy}08`; e.currentTarget.style.transform = "translateY(-1px)"; }}
-          onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.transform = "translateY(0)"; }}>
+        <div key={idx} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
           <span style={{ color: COLORS.gold, fontSize: "1.1rem" }}>{item.icon}</span>
-          <span>{item.text}</span>
-        </a>
+          <LeadMagnetLink pdfUrl={item.pdf} variant="micro-proof">
+            {item.text}
+          </LeadMagnetLink>
+        </div>
       ))}
     </div>
   );
@@ -187,10 +187,9 @@ function SecondaryCaptureRow({ contextLabel, bodyExtra }) {
 
   return (
     <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "center", marginTop: "10px" }}>
-      <a href={SAMPLE_SCORECARD_PDF} target="_blank" rel="noopener noreferrer"
-        style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 700, color: COLORS.navy, textDecoration: "none", borderBottom: `2px solid ${COLORS.navy}` }}>
+      <LeadMagnetLink pdfUrl={SAMPLE_SCORECARD_PDF} variant="link">
         View sample memo format
-      </a>
+      </LeadMagnetLink>
       <a href={mailtoHref(subject, body)}
         style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 700, color: COLORS.navy, textDecoration: "none", borderBottom: `2px solid ${COLORS.navy}` }}>
         Email for examples
@@ -203,18 +202,21 @@ function SecondaryCaptureRow({ contextLabel, bodyExtra }) {
 
 function ProofStrip() {
   return (
-    <Section
-      title="See What the Deliverables Actually Look Like"
-      primaryCTA={{ text: "Sample Ops Diligence Scorecard — IC-ready, severity-rated (PDF)", link: SAMPLE_SCORECARD_PDF }}
-      secondaryCTA={{ text: "Sample 100-Day Stabilization Plan — Visibility → Control → Cadence (PDF)", link: SAMPLE_100DAY_PDF }}
-      centered={true}
-    >
+    <Section title="See What the Deliverables Actually Look Like" noCTA centered>
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "12px" }}>
         These are the exact formats delivered to investment committees. See what your IC diligence memo and 100-day operating plan should look like — severity-rated, PE-impact framed, board-ready from Day 1.
       </p>
-      <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.bodyMuted, marginBottom: "0" }}>
+      <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.bodyMuted, marginBottom: "16px" }}>
         Samples are anonymized/fictional and provided for format demonstration only.
       </p>
+      <div style={{ display: "flex", flexDirection: "row", gap: SPACING.sm, justifyContent: "center", flexWrap: "wrap", marginBottom: "12px" }}>
+        <LeadMagnetLink pdfUrl={SAMPLE_SCORECARD_PDF} variant="button">
+          Sample Ops Diligence Scorecard — IC-ready, severity-rated (PDF)
+        </LeadMagnetLink>
+        <LeadMagnetLink pdfUrl={SAMPLE_100DAY_PDF} variant="button">
+          Sample 100-Day Stabilization Plan — Visibility → Control → Cadence (PDF)
+        </LeadMagnetLink>
+      </div>
       <SecondaryCaptureRow contextLabel="Ops diligence / stabilization" />
     </Section>
   );
