@@ -535,7 +535,7 @@ export function Nav({ page, setPage }) {
             ))}
           </div>
         </div>
-        <div className="nav-cta"><CTAButton text="15-Minute Fit Check" showAvailability={true} /></div>
+        <div className="nav-cta"><CTAButton text="15-Minute Fit Check" /></div>
         <button className="nav-hamburger" onClick={() => setMenuOpen(o => !o)} aria-label="Toggle menu">
           {menuOpen
             ? <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><line x1="4" y1="4" x2="18" y2="18" stroke={COLORS.navy} strokeWidth="2" strokeLinecap="round"/><line x1="18" y1="4" x2="4" y2="18" stroke={COLORS.navy} strokeWidth="2" strokeLinecap="round"/></svg>
