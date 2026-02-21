@@ -524,7 +524,7 @@ export default function LeverExplorer({ setPage }) {
         Filter by timing (Pre-Close vs. First 100 Days), domain, or severity. Open any lever for symptoms and PE impact analysis.
       </p>
 
-      <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "24px", alignItems: "center" }}>
+      <div className="lever-filters" style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "24px", alignItems: "center" }}>
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search levers..." style={{ ...selectStyle, minWidth: "220px", flex: "1 1 220px" }} />
         <select value={domainFilter} onChange={e => setDomainFilter(e.target.value)} style={selectStyle}>
           <option value="All">All Domains</option>

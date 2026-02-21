@@ -340,16 +340,30 @@ export const globalCSS = `
     .split-contrast { grid-template-columns: 1fr; }
   }
 
-  /* ── Main container: responsive horizontal padding ─────────── */
+  /* ── Main container: responsive padding ─────────────────────── */
   .main-container { padding-left: 32px; padding-right: 32px; }
   @media (max-width: 768px) {
-    .main-container { padding-left: 16px; padding-right: 16px; }
+    .main-container { padding-left: 16px; padding-right: 16px; padding-top: 24px !important; padding-bottom: 48px !important; }
+  }
+  @media (max-width: 480px) {
+    html { font-size: 16px; }
+    .main-container { padding-left: 12px; padding-right: 12px; padding-top: 20px !important; padding-bottom: 40px !important; }
   }
 
   /* ── Hero block: edge-to-edge bleed matching main padding ───── */
   .hero-block { margin-left: -32px; margin-right: -32px; }
   @media (max-width: 768px) {
-    .hero-block { margin-left: -16px; margin-right: -16px; }
+    .hero-block { margin-left: -16px; margin-right: -16px; padding-left: 24px !important; padding-right: 24px !important; }
+  }
+  @media (max-width: 480px) {
+    .hero-block { margin-left: -12px; margin-right: -12px; padding-left: 16px !important; padding-right: 16px !important; }
+    .hero-headline { font-size: 1.4rem !important; }
+  }
+
+  /* ── Filter controls: full-width column on mobile ────────── */
+  @media (max-width: 600px) {
+    .lever-filters { flex-direction: column !important; align-items: stretch !important; }
+    .lever-filters input, .lever-filters select { min-width: 0 !important; flex: none !important; width: 100%; box-sizing: border-box; }
   }
 
   /* ── Mobile nav ─────────────────────────────────────────────── */
