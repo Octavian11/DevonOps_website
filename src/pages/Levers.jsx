@@ -307,40 +307,40 @@ function MiniCases() {
   const valueCreated = { fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0, padding: "10px 12px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0` };
 
   return (
-    <Section title="Proof in the Format PE Expects" noCTA type="windowWithCards">
+    <Section title="Representative Outcomes" noCTA type="windowWithCards">
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "820px", marginBottom: "20px" }}>
-        Example outcomes (anonymized). The point: <strong>find the gaps, build the Value Creation Plan, deliver measurable improvement</strong>.
+        Anonymized engagement outcomes. Gap → intervention → result.
       </p>
 
       <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
         <div style={box}>
           <SectionTitle sub>Incident instability</SectionTitle>
-          <span style={fieldLabel}>Gap Identified</span>
-          <p style={fieldVal}>Recurring incidents with unclear ownership, no severity classification, and no postmortem discipline. Same failures repeating every 4–6 weeks.</p>
-          <span style={fieldLabel}>VCP Intervention</span>
-          <p style={fieldVal}>Severity model, incident command roles, escalation thresholds, mandatory postmortem cadence.</p>
-          <span style={fieldLabel}>Value Created</span>
-          <p style={valueCreated}>~67% incident volume reduction and ~31% MTTR improvement within the hold period. Executive time recaptured from firefighting. Board reporting shifted from reactive crisis updates to weekly structured reviews.</p>
+          <span style={fieldLabel}>GAP</span>
+          <p style={fieldVal}>Same failures recurring every 4–6 weeks. No severity model, no ownership, no postmortems.</p>
+          <span style={fieldLabel}>FIX</span>
+          <p style={fieldVal}>Severity model, incident command, escalation paths, postmortem cadence.</p>
+          <span style={fieldLabel}>RESULT</span>
+          <p style={valueCreated}>~67% incident reduction. ~31% faster resolution. Board reporting shifted from crisis-driven to weekly structured reviews.</p>
         </div>
 
         <div style={box}>
           <SectionTitle sub>Change-driven outages</SectionTitle>
-          <span style={fieldLabel}>Gap Identified</span>
-          <p style={fieldVal}>Uncontrolled deployments correlated with production incidents. No change calendar, no risk classification, no rollback documentation.</p>
-          <span style={fieldLabel}>VCP Intervention</span>
-          <p style={fieldVal}>CAB-lite charter, risk classification framework, rollback discipline, change-incident correlation tracking.</p>
-          <span style={fieldLabel}>Value Created</span>
-          <p style={valueCreated}>~60% reduction in critical outages over 8 months. Uptime improved ~94% → 99%. Change-incident correlation visible in board reporting within 30 days of installation.</p>
+          <span style={fieldLabel}>GAP</span>
+          <p style={fieldVal}>Deployments causing outages. No change calendar, no risk classification, no rollback plans.</p>
+          <span style={fieldLabel}>FIX</span>
+          <p style={fieldVal}>CAB-lite process, risk classification, rollback discipline, change-incident correlation.</p>
+          <span style={fieldLabel}>RESULT</span>
+          <p style={valueCreated}>~60% fewer critical outages. Uptime: 94% → 99%. Change-incident correlation visible to the board within 30 days.</p>
         </div>
 
         <div style={box}>
           <SectionTitle sub>Board reporting / KPI ambiguity</SectionTitle>
-          <span style={fieldLabel}>Gap Identified</span>
-          <p style={fieldVal}>No defined KPIs. Board received verbal, anecdotal operational updates. No baseline, no targets, no way to demonstrate or measure improvement.</p>
-          <span style={fieldLabel}>VCP Intervention</span>
-          <p style={fieldVal}>KPI library + thresholds defined, weekly operating review installed, executive dashboard built, board-ready reporting pack structured.</p>
-          <span style={fieldLabel}>Value Created</span>
-          <p style={valueCreated}>Predictable weekly operating rhythm established. Issues surfaced proactively through cadence, not reactively through crisis. Board gained real-time visibility into operational health — direct input to exit narrative.</p>
+          <span style={fieldLabel}>GAP</span>
+          <p style={fieldVal}>No KPIs. Board updates were verbal and anecdotal. No baselines, no targets, no measurement.</p>
+          <span style={fieldLabel}>FIX</span>
+          <p style={fieldVal}>KPI library, weekly operating review, executive dashboard, board-ready reporting pack.</p>
+          <span style={fieldLabel}>RESULT</span>
+          <p style={valueCreated}>Weekly operating rhythm installed. Issues surfaced through cadence, not crisis. Board gained real-time ops visibility — direct input to exit narrative.</p>
         </div>
       </div>
     </Section>
