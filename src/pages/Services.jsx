@@ -217,7 +217,7 @@ function StabilizationSequence() {
   ];
 
   return (
-    <Section noCTA title="The stabilization sequence">
+    <Section noCTA title="The Stabilization Sequence">
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "24px" }}>
         Operational stabilization follows a consistent three-phase sequence: <strong>Visibility → Control → Cadence</strong>.
       </p>
@@ -300,8 +300,7 @@ function TypicalRedFlags() {
   };
 
   return (
-    <Section noCTA>
-      <SectionTitle sub>Typical Red Flags We Surface (Mapped to IC Implications)</SectionTitle>
+    <Section noCTA title="Typical Red Flags We Surface">
       <SplitContrast leftSide={leftSide} rightSide={rightSide} />
     </Section>
   );
@@ -318,8 +317,7 @@ function MemoSampleScreenshots() {
   ];
 
   return (
-    <Section noCTA background={`${COLORS.navy}03`}>
-      <SectionTitle sub>Sample Deliverable Excerpts (Anonymized)</SectionTitle>
+    <Section noCTA background={`${COLORS.navy}03`} title="Sample Deliverable Excerpts (Anonymized)">
       <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.55, marginBottom: "14px" }}>
         Real format, clipped for readability. Full deliverables are severity-rated and IC-ready.
       </p>
@@ -343,7 +341,7 @@ export default function ServicesPage() {
   return (
     <div>
       <div style={{ marginBottom: SPACING.lg }}>
-        <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 700, color: COLORS.navy, marginBottom: SPACING.sm }}>Services & Method</h1>
+        <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 700, color: COLORS.navy, marginBottom: SPACING.sm }}>Framework</h1>
         <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "720px", marginBottom: "14px" }}>
           Operational support for PE funds and portfolio companies — from pre-close diligence through post-close stabilization to ongoing governance. Fixed fees, board-ready deliverables, measurable from Day 1.
         </p>

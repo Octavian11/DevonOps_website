@@ -496,7 +496,6 @@ export default function LeverExplorer({ setPage }) {
       ))}
 
       <ChooseSituation setPage={setPage} />
-      <EarlyCTA setPage={setPage} />
       <OfferCards setPage={setPage} />
       <ProofStrip />
       <DealImplications />
