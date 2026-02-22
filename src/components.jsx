@@ -64,7 +64,7 @@ export function CTAButton({ text, small, variant, style: extraStyle, showAvailab
 export function SectionTitle({ children, sub }) {
   return (
     <div style={{ marginBottom: sub ? "16px" : SPACING.lg }}>
-      <h2 style={{
+      <h2 className="section-title" style={{
         fontFamily: FONTS.heading,
         fontSize: sub ? "1.25rem" : "1.75rem",
         fontWeight: 700,
@@ -93,14 +93,14 @@ export function ButtonPair({
       <div style={{ display: "flex", flexDirection: "row", gap: SPACING.sm, justifyContent: centered ? "center" : "flex-start", flexWrap: "wrap" }}>
         {primaryLink ? (
           <a href={primaryLink} target="_blank" rel="noopener noreferrer"
-             style={{ display: "inline-block", padding: "14px 28px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, textDecoration: "none", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", transition: "all 0.2s", border: "none", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "180px" }}
+             style={{ display: "inline-block", padding: "14px 28px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, textDecoration: "none", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", transition: "all 0.2s", border: "none", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "min(180px, 100%)" }}
              onMouseEnter={e => { e.currentTarget.style.background = "#0F1829"; }}
              onMouseLeave={e => { e.currentTarget.style.background = COLORS.navy; }}>
             {primaryText}
           </a>
         ) : (
           <button onClick={primaryAction}
-             style={{ display: "inline-block", padding: "14px 28px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", transition: "all 0.2s", border: "none", cursor: "pointer", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "180px" }}
+             style={{ display: "inline-block", padding: "14px 28px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", transition: "all 0.2s", border: "none", cursor: "pointer", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "min(180px, 100%)" }}
              onMouseEnter={e => { e.currentTarget.style.background = "#0F1829"; }}
              onMouseLeave={e => { e.currentTarget.style.background = COLORS.navy; }}>
             {primaryText}
@@ -110,14 +110,14 @@ export function ButtonPair({
         {(secondaryText || secondaryAction || secondaryLink) && (
           secondaryLink ? (
             <a href={secondaryLink} target="_blank" rel="noopener noreferrer"
-               style={{ display: "inline-block", padding: "12px 26px", background: "white", color: COLORS.navy, borderRadius: RADIUS.md, textDecoration: "none", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", border: `2px solid ${COLORS.navy}`, transition: "all 0.2s", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "180px" }}
+               style={{ display: "inline-block", padding: "12px 26px", background: "white", color: COLORS.navy, borderRadius: RADIUS.md, textDecoration: "none", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", border: `2px solid ${COLORS.navy}`, transition: "all 0.2s", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "min(180px, 100%)" }}
                onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.navy}08`; }}
                onMouseLeave={e => { e.currentTarget.style.background = "white"; }}>
               {secondaryText}
             </a>
           ) : (
             <button onClick={secondaryAction}
-               style={{ display: "inline-block", padding: "12px 26px", background: "white", color: COLORS.navy, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", border: `2px solid ${COLORS.navy}`, transition: "all 0.2s", cursor: "pointer", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "180px" }}
+               style={{ display: "inline-block", padding: "12px 26px", background: "white", color: COLORS.navy, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", border: `2px solid ${COLORS.navy}`, transition: "all 0.2s", cursor: "pointer", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "min(180px, 100%)" }}
                onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.navy}08`; }}
                onMouseLeave={e => { e.currentTarget.style.background = "white"; }}>
               {secondaryText}
@@ -136,7 +136,7 @@ export function ButtonPair({
 
 export function Card({ children, style: extraStyle }) {
   return (
-    <div style={{ background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.lg, padding: "28px", marginBottom: SPACING.md, boxShadow: SHADOWS.sm, ...extraStyle }}>
+    <div className="card-inner" style={{ background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.lg, padding: "28px", marginBottom: SPACING.md, boxShadow: SHADOWS.sm, ...extraStyle }}>
       {children}
     </div>
   );
@@ -408,7 +408,7 @@ export function LeadMagnetLink({ pdfUrl, children, variant = "link", style: extr
   // ── Variant styles ───────────────────────────────────────────
   const linkStyle = {
     link: { fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 700, color: COLORS.navy, textDecoration: "none", borderBottom: `2px solid ${COLORS.navy}`, cursor: "pointer", transition: "all 0.2s" },
-    button: { display: "inline-block", padding: "14px 28px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, textDecoration: "none", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", transition: "all 0.2s", border: "none", cursor: "pointer", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "180px" },
+    button: { display: "inline-block", padding: "14px 28px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, textDecoration: "none", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", transition: "all 0.2s", border: "none", cursor: "pointer", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "min(180px, 100%)" },
     "inline-button": { padding: "12px 16px", borderRadius: RADIUS.md, border: `1px solid ${COLORS.border}`, background: COLORS.white, color: COLORS.navy, textDecoration: "none", fontFamily: FONTS.body, fontWeight: 600, display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", transition: "all 0.2s" },
     "footer-link": { fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.offWhite, textDecoration: "none", transition: "color 0.2s", cursor: "pointer" },
     "micro-proof": { display: "flex", alignItems: "center", gap: "8px", textDecoration: "none", color: COLORS.navy, fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, transition: "all 0.2s", padding: "4px 8px", borderRadius: RADIUS.sm, cursor: "pointer" }
@@ -507,7 +507,7 @@ export function ServicesSamplesRow() {
 // ─── OFFER CARDS (SHARED SERVICES PRICING) ──────────────────
 
 export function OfferCards({ setPage }) {
-  const box = { border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, padding: "18px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 260px", minWidth: "min(260px, 100%)" };
+  const box = { border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, padding: "18px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 260px", minWidth: "min(220px, 100%)" };
   const boxGold = { ...box, border: `2px solid ${COLORS.gold}`, boxShadow: SHADOWS.md };
   const tag = { fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.gold, fontWeight: 600, marginBottom: "10px" };
   const li = { marginBottom: "8px", lineHeight: 1.55 };
@@ -579,12 +579,12 @@ export function Nav({ page, setPage }) {
   const handleNav = (key) => { setPage(key); setMenuOpen(false); };
   return (
     <>
-      <nav style={{ position: "sticky", top: 0, zIndex: 100, background: COLORS.white, borderBottom: `3px solid ${COLORS.gold}`, padding: "0 28px", display: "flex", alignItems: "center", justifyContent: "space-between", height: "76px", minHeight: "76px", boxShadow: "0 2px 8px rgba(20, 33, 61, 0.08)" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+      <nav style={{ position: "sticky", top: 0, zIndex: 100, background: COLORS.white, borderBottom: `3px solid ${COLORS.gold}`, padding: "0 clamp(12px, 3.5vw, 28px)", display: "flex", alignItems: "center", justifyContent: "space-between", height: "76px", minHeight: "76px", boxShadow: "0 2px 8px rgba(20, 33, 61, 0.08)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "16px", minWidth: 0 }}>
           <img
             src="/Devonshire_Operations_Logo_Exact-cropped1.svg"
             alt="Devonshire Operations"
-            style={{ height: "64px", cursor: "pointer" }}
+            style={{ height: "64px", maxWidth: "100%", cursor: "pointer" }}
             onClick={() => handleNav("levers")}
           />
           <div style={{ width: "1px", height: "36px", background: COLORS.border }} className="nav-links" />
