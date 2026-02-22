@@ -6,7 +6,7 @@ import {
 } from "../constants.js";
 import {
   CTAButton, SectionTitle, ButtonPair, Card, Section,
-  TimelineRail, SplitContrast, FAQBlock, ServicesSamplesRow,
+  TimelineRail, SplitContrast, FAQBlock, ServicesSamplesRow, OfferCards,
 } from "../components.jsx";
 
 // ─── JUMP BAR ────────────────────────────────────────────────
@@ -229,52 +229,6 @@ function StabilizationSequence() {
   );
 }
 
-// ─── SERVICES PRICING LADDER ─────────────────────────────────
-
-function ServicesPricingLadder() {
-  const items = [
-    { id: "post-close", label: "100-Day Stabilization", name: "100-Day Stabilization", price: "$30–$40K", time: "100 days", desc: "Most funds start here. Install incident command, change control, KPI cadence, and board-ready reporting from Day 1." },
-    { id: "ongoing", label: "Control Tower Retainer", name: "Control Tower Retainer", price: "$7.5K+/month", time: "Ongoing", desc: "After the 100-day baseline is installed, the Control Tower Retainer keeps governance on track through exit." },
-    { id: "bundle", label: "Bundle (Recommended): Diligence → VCP → Execution", name: "Diligence + Value Creation Plan + 100-Day Execution", price: "$25–$35K", time: "2–3 weeks + 100 days", desc: "Diligence findings roll directly into the VCP — no re-learning, no gap between discovery and execution" },
-  ];
-
-  const box = { border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, padding: "18px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 220px", minWidth: "min(220px, 100%)", position: "relative" };
-  const boxGold = { ...box, border: `2px solid ${COLORS.gold}`, boxShadow: SHADOWS.md };
-
-  return (
-    <Section title="Services & Pricing"
-      subtitle="Operational support for PE funds and portfolio companies — from pre-close diligence through post-close stabilization to ongoing governance."
-      type="windowWithCards" noCTA id="top">
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "20px", fontStyle: "italic" }}>
-        Diligence without execution is a risk report. Execution without diligence is change without a plan.
-      </p>
-      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginBottom: SPACING.md }}>
-        {items.map((item, i) => (
-          <div key={i} id={item.id} style={i === 2 ? boxGold : box}>
-            {i === 2 && (
-              <div style={{ position: "absolute", top: "-1px", left: 0, right: 0, height: "3px", background: COLORS.gold, borderRadius: `${RADIUS.md} ${RADIUS.md} 0 0` }} />
-            )}
-            <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.navy, letterSpacing: "0.5px", textTransform: "uppercase", fontWeight: 600 }}>{item.label}</span>
-            <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, fontWeight: 700, margin: "8px 0 4px" }}>{item.name}</div>
-            <div style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, fontWeight: 700, marginBottom: "4px" }}>{item.price}</div>
-            <div style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal }}>{item.time}</div>
-            <div style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, marginTop: "4px", fontStyle: "italic" }}>{item.desc}</div>
-          </div>
-        ))}
-      </div>
-
-      <div style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, padding: "14px 18px", background: `${COLORS.navy}05`, borderRadius: RADIUS.md, border: `1px solid ${COLORS.border}`, marginBottom: SPACING.md }}>
-        <p style={{ margin: "0 0 8px 0" }}>
-          <strong>Pre-close option:</strong> Add an Ops Diligence Report ($15K, 2–3 weeks) before signing to surface red flags for the IC.
-        </p>
-        <p style={{ margin: 0 }}>
-          <strong>Recommended:</strong> Choose the bundle if you expect to close — diligence findings feed directly into Day-1 priorities with no re-learning.
-        </p>
-      </div>
-    </Section>
-  );
-}
-
 // ─── SERVICES STEPS ──────────────────────────────────────────
 
 function ServicesSteps() {
@@ -402,7 +356,7 @@ export default function ServicesPage() {
         </div>
       </div>
       <ServicesMethodJumpBar />
-      <ServicesPricingLadder />
+      <OfferCards />
       <ServicesSamplesRow />
 
       <div id="rubric" style={{ marginTop: "28px" }}>

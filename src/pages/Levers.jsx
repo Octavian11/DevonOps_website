@@ -8,7 +8,7 @@ import {
   SeverityBadge, TimingBadge, DomainTag,
   CTAButton, SectionTitle, ButtonPair, Section,
   TimelineRail, SplitContrast, FAQBlock,
-  LeadMagnetLink,
+  LeadMagnetLink, OfferCards,
 } from "../components.jsx";
 
 // ─── HERO BLOCK WITH NAV ─────────────────────────────────────
@@ -227,7 +227,7 @@ function ProofStrip() {
 function EarlyCTA({ setPage }) {
   return (
     <Section
-      primaryCTA={{ text: "Run the Ops Scorer →", action: () => setPage("scorer") }}
+      primaryCTA={{ text: "Run the Ops Scorer →", action: () => setPage("scorer"), link: null }}
       secondaryCTA={{ text: "Book a Fit Check", link: CALENDLY }}
       centered={true}
       background={`${COLORS.navy}05`}
@@ -235,83 +235,6 @@ function EarlyCTA({ setPage }) {
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, textAlign: "center", margin: "0 auto" }}>
         Want to see which operational gaps exist in your next deal?
       </p>
-    </Section>
-  );
-}
-
-// ─── OFFER CARDS ─────────────────────────────────────────────
-
-function OfferCards({ setPage }) {
-  const box = { border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, padding: "18px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 260px", minWidth: "min(260px, 100%)" };
-  const boxGold = { ...box, border: `2px solid ${COLORS.gold}`, boxShadow: SHADOWS.md };
-  const tag = { fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.gold, fontWeight: 600, marginBottom: "10px" };
-  const li = { marginBottom: "8px", lineHeight: 1.55 };
-
-  return (
-    <Section title="Services & Pricing (Fast Orientation)" type="windowWithCards" noCTA>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "6px", maxWidth: "760px", fontStyle: "italic" }}>
-        Diligence without execution is a risk report. Execution without diligence is change without a plan.
-      </p>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1.02rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "24px", maxWidth: "760px" }}>
-        Choose the track that matches your deal lifecycle. Each deliverable is designed to be <strong>decision-useful for PE: severity-rated findings, PE impact, and a pragmatic Day-1 critical path</strong>.
-      </p>
-
-      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginBottom: "24px" }}>
-        <div style={box}>
-          <SectionTitle sub>Ops Diligence Report (Pre-Close)</SectionTitle>
-          <div style={tag}>Starting at $15,000 · 2–3 weeks</div>
-          <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
-            <li style={li}>Risk-rated red flags with severity + PE impact</li>
-            <li style={li}>Evidence requests + diligence questions</li>
-            <li style={li}>IC-ready memo format</li>
-          </ul>
-        </div>
-
-        <div style={boxGold}>
-          <SectionTitle sub>Bundle (Recommended): Diligence → VCP → Execution</SectionTitle>
-          <div style={tag}>$25,000–$35,000 · diligence + 100 days</div>
-          <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
-            <li style={li}>Diligence findings roll directly into the Value Creation Plan — no re-learning, no gap between discovery and execution</li>
-            <li style={li}>Day-1 critical path + phased 100-day execution</li>
-            <li style={li}>Clear ownership + cadence from close to value</li>
-          </ul>
-        </div>
-
-        <div style={box}>
-          <SectionTitle sub>Control Tower Retainer (Ongoing)</SectionTitle>
-          <div style={tag}>Starting at $7,500/month · ongoing</div>
-          <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
-            <li style={li}>Weekly operating review + board-ready KPI pack</li>
-            <li style={li}>Incident + change governance discipline</li>
-            <li style={li}>Vendor controls + audit readiness cadence</li>
-          </ul>
-        </div>
-      </div>
-
-      <ButtonPair
-        primaryText="15-Minute Fit Check"
-        secondaryText="View Full Services & Details"
-        secondaryAction={() => setPage("services")}
-        centered={true}
-        showAvailability={true}
-      />
-    </Section>
-  );
-}
-
-// ─── HOW IT WORKS ────────────────────────────────────────────
-
-function HowItWorks() {
-  const timelineItems = [
-    { title: "1) Baseline", meta: "Week 1", description: "We request what exists: incident history, change/release artifacts, vendor list/contracts, KPI packs, org/RACI, audit evidence folders, and escalation/on-call.", completed: true },
-    { title: "2) Diagnose", meta: "Weeks 1–3", description: "You receive a decision-useful output: severity-rated findings, PE impact framing, and a prioritized Day-1 critical path.", completed: true },
-    { title: "3) Value Creation Plan", meta: "At close", description: "Diligence findings roll directly into the Value Creation Plan (VCP). The VCP defines which gaps to fix, in what order, with what accountability — so Day 1 post-close has a clear operating mandate.", active: true },
-    { title: "4) Execute + Govern", meta: "Days 1–100", description: "Post-close, we execute the VCP: install incident command, change control, KPI cadence, vendor governance, and board-ready reporting. The plan and the execution are the same engagement." }
-  ];
-
-  return (
-    <Section title="How It Works" noCTA>
-      <TimelineRail items={timelineItems} compact />
     </Section>
   );
 }
@@ -371,39 +294,6 @@ function DealImplications() {
     <Section title="Where Operational Gaps Show Up in Your Deal" noCTA
       subtitle="These are the risk vectors that compress your return — and the value creation levers that reverse them.">
       <SplitContrast leftSide={leftSide} rightSide={rightSide} />
-    </Section>
-  );
-}
-
-// ─── FIRST 14 DAYS ───────────────────────────────────────────
-
-function First14Days() {
-  const timelineItems = [
-    {
-      title: "Day 1-3: Install Incident Command", meta: "Days 1-3",
-      description: "Stop new damage from accumulating. Establish ownership, severity classification, and escalation protocols.",
-      items: ["Define severity levels (Critical/High/Medium/Low)", "Designate incident commanders for each severity tier", "Set escalation thresholds to management and board", "Implement postmortem discipline for Sev-1/Sev-2 incidents"],
-      active: true
-    },
-    {
-      title: "Day 4-7: Install Change Control", meta: "Days 4-7",
-      description: "Prevent uncontrolled changes from creating new incidents. Establish CAB-lite process with risk classification.",
-      items: ["CAB-lite charter with approval gates", "Risk classification for all changes", "Rollback discipline and testing requirements", "Change-incident correlation tracking"]
-    },
-    {
-      title: "Day 8-14: Define KPI Baseline & Cadence", meta: "Days 8-14",
-      description: "You can't improve what you don't measure. Establish baseline metrics and start weekly operating reviews.",
-      items: ["Define core KPI set (MTTR, change success rate, incident volume)", "Baseline current performance", "Launch weekly operating review meetings", "Create board-ready reporting template"],
-      deliverable: "Day 14: Operating baseline memo + first weekly KPI dashboard"
-    }
-  ];
-
-  return (
-    <Section title="The First 14 Days Post-Close" noCTA>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "24px" }}>
-        The Day-1 critical path is simple: <strong>stop new damage, then start measuring</strong>.
-      </p>
-      <TimelineRail items={timelineItems} />
     </Section>
   );
 }
@@ -611,8 +501,6 @@ export default function LeverExplorer({ setPage }) {
       <ProofStrip />
       <DealImplications />
       <MiniCases />
-      <HowItWorks />
-      <First14Days />
       <FAQBlock />
 
       <Section noCTA background={`${COLORS.navy}05`}>
@@ -624,6 +512,7 @@ export default function LeverExplorer({ setPage }) {
         </p>
         <ButtonPair
           primaryText="Run the Ops Scorer →"
+          primaryLink={null}
           primaryAction={() => setPage("scorer")}
           secondaryText="Book a Fit Check"
           secondaryLink={CALENDLY}
