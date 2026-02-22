@@ -305,10 +305,10 @@ export function Section({ title, subtitle, children, primaryCTA, secondaryCTA, n
       {!noCTA && (primaryCTA || secondaryCTA) && (
         <ButtonPair
           primaryText={primaryCTA?.text}
-          primaryLink={primaryCTA?.link}
+          primaryLink={primaryCTA?.link ?? null}
           primaryAction={primaryCTA?.action}
           secondaryText={secondaryCTA?.text}
-          secondaryLink={secondaryCTA?.link}
+          secondaryLink={secondaryCTA?.link ?? null}
           secondaryAction={secondaryCTA?.action}
           centered={centered}
         />
@@ -504,6 +504,59 @@ export function ServicesSamplesRow() {
 
 // ─── NAVIGATION ──────────────────────────────────────────────
 
+// ─── OFFER CARDS (SHARED SERVICES PRICING) ──────────────────
+
+export function OfferCards({ setPage }) {
+  const box = { border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, padding: "18px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 260px", minWidth: "min(260px, 100%)" };
+  const boxGold = { ...box, border: `2px solid ${COLORS.gold}`, boxShadow: SHADOWS.md };
+  const tag = { fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.gold, fontWeight: 600, marginBottom: "10px" };
+  const li = { marginBottom: "8px", lineHeight: 1.55 };
+
+  return (
+    <Section title="Services & Pricing" type="windowWithCards" noCTA>
+      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginBottom: "24px" }}>
+        <div style={box}>
+          <SectionTitle sub>Ops Diligence Report (Pre-Close)</SectionTitle>
+          <div style={tag}>Starting at $15,000 · 2–3 weeks</div>
+          <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
+            <li style={li}>Risk-rated red flags with severity + PE impact</li>
+            <li style={li}>Evidence requests + diligence questions</li>
+            <li style={li}>IC-ready memo format</li>
+          </ul>
+        </div>
+
+        <div style={boxGold}>
+          <SectionTitle sub>Bundle (Recommended): Diligence → VCP → Execution</SectionTitle>
+          <div style={tag}>$25,000–$35,000 · diligence + 100 days</div>
+          <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
+            <li style={li}>Diligence findings roll directly into the Value Creation Plan — no re-learning, no gap between discovery and execution</li>
+            <li style={li}>Day-1 critical path + phased 100-day execution</li>
+            <li style={li}>Clear ownership + cadence from close to value</li>
+          </ul>
+        </div>
+
+        <div style={box}>
+          <SectionTitle sub>Control Tower Retainer (Ongoing)</SectionTitle>
+          <div style={tag}>Starting at $7,500/month · ongoing</div>
+          <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
+            <li style={li}>Weekly operating review + board-ready KPI pack</li>
+            <li style={li}>Incident + change governance discipline</li>
+            <li style={li}>Vendor controls + audit readiness cadence</li>
+          </ul>
+        </div>
+      </div>
+
+      <ButtonPair
+        primaryText="15-Minute Fit Check"
+        secondaryText={setPage ? "View Full Services & Details" : undefined}
+        secondaryAction={setPage ? () => setPage("services") : undefined}
+        centered={true}
+        showAvailability={true}
+      />
+    </Section>
+  );
+}
+
 export function Nav({ page, setPage }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const items = [
@@ -673,10 +726,10 @@ export function Footer({ setPage }) {
           <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.gold, marginBottom: "16px", letterSpacing: "0.5px" }}>Navigation</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
             {[
-              { key: "levers", label: "Ops Friction Levers" },
-              { key: "services", label: "Services & Method" },
+              { key: "levers", label: "Operational Gaps" },
+              { key: "services", label: "Services" },
+              { key: "scorer", label: "Score Your Deal" },
               { key: "about", label: "About" },
-              { key: "scorer", label: "Ops Scorer (Free Tool)" },
             ].map(({ key, label }) => (
               <button key={key} onClick={() => setPage(key)}
                 style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.offWhite, background: "none", border: "none", padding: 0, textAlign: "left", cursor: "pointer", transition: "color 0.2s" }}
