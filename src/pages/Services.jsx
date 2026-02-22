@@ -112,13 +112,13 @@ function WorkedExampleAccordion() {
 function FrameworkWhyFrictionTight() {
   const leftSide = {
     title: "Operational Friction",
-    description: "Unmanaged operational risk compounds under PE ownership:",
+    description: "Unmanaged ops risk compounds under leverage:",
     items: [
-      "Leverage amplifies friction: disruption becomes covenant risk",
-      "Hold periods create urgency: months spent stabilizing compress the value creation window",
-      "Exit narratives rely on operational credibility: unresolved friction becomes a multiple discount",
-      "Recurring incidents erode EBITDA through rework and customer churn",
-      "Key-person dependency blocks scaling and threatens continuity"
+      "Disruption becomes covenant risk",
+      "Months spent stabilizing compress the value creation window",
+      "Unresolved friction becomes a multiple discount at exit",
+      "Recurring incidents erode EBITDA through rework and churn",
+      "Key-person dependency blocks scaling"
     ]
   };
 
@@ -126,19 +126,19 @@ function FrameworkWhyFrictionTight() {
     title: "Operational Clarity",
     description: "Systematic governance unlocks value creation:",
     items: [
-      "Incident command + postmortem discipline → MTTR reduction and recurrence prevention",
-      "Change governance → lower failure rates and faster feature velocity",
-      "KPI cadence → board-ready reporting and credible value creation narratives",
-      "Vendor governance → concentration risk managed and renewal leverage captured",
-      "Compliance cadence → audit-ready by default, exit diligence frictionless"
+      "Incident command → faster resolution, fewer repeat failures",
+      "Change governance → fewer outages, faster releases",
+      "KPI cadence → board-ready reporting from Day 1",
+      "Vendor governance → concentration risk managed, renewal leverage captured",
+      "Compliance cadence → audit-ready by default"
     ],
     highlight: "Friction diagnosed early → value creation accelerated"
   };
 
   return (
-    <Section title="Operational Friction Matters in PE" noCTA>
+    <Section title="Why Operational Friction Compounds Under PE Ownership" noCTA>
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "860px", marginBottom: "24px" }}>
-        This is the evaluation method used in the Ops Diligence Report and 100-Day Stabilization Plan: <strong>diagnose friction, then prioritize interventions by EBITDA impact, execution risk, and time to proof</strong>.
+        Our method: diagnose friction, prioritize by EBITDA impact and time to proof.
       </p>
       <SplitContrast leftSide={leftSide} rightSide={rightSide} />
     </Section>
