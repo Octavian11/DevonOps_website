@@ -301,6 +301,7 @@ export const globalCSS = `
     --text: #1F2937;
     --muted: #6B7280;
     --maxcopy: 70ch;
+    --nav-h: 76px;
   }
 
   body {
@@ -378,7 +379,7 @@ export const globalCSS = `
       color: ${COLORS.navy}; flex-shrink: 0;
     }
     .nav-mobile-menu {
-      position: fixed; top: 76px; left: 0; right: 0; z-index: 99;
+      position: fixed; top: var(--nav-h); left: 0; right: 0; z-index: 99;
       background: ${COLORS.white}; border-bottom: 3px solid ${COLORS.gold};
       box-shadow: 0 4px 16px rgba(20, 33, 61, 0.14);
       display: flex; flex-direction: column; padding: 12px 16px 16px; gap: 4px;
@@ -422,6 +423,21 @@ export const globalCSS = `
   @media (max-width: 480px) {
     .lever-row { flex-wrap: wrap; }
     .lever-badges { flex-shrink: 1 !important; flex-wrap: wrap; }
+  }
+
+  /* ── Section title: reduce font size on small phones ───────────── */
+  @media (max-width: 480px) {
+    .section-title { font-size: 1.4rem !important; }
+  }
+
+  /* ── Card: reduce padding on small phones ───────────────────────── */
+  @media (max-width: 480px) {
+    .card-inner { padding: 16px !important; }
+  }
+
+  /* ── Lever expand detail: reduce left indent on narrow phones ───── */
+  @media (max-width: 480px) {
+    .lever-expand-detail { padding-left: 22px !important; }
   }
 
   /* ── Sticky bar: stack on mobile ────────────────────────────────── */

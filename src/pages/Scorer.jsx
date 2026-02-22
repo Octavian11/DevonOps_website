@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from "recharts";
 import {
   COLORS, FONTS, SPACING, SHADOWS, RADIUS,
@@ -138,6 +138,12 @@ export default function ScorerPage() {
   const [context, setContext] = useState(CONTEXT_OPTIONS[0].key);
   const [scores, setScores] = useState({ incident: 3, change: 3, vendor: 3, audit: 3, kpi: 3, process: 3 });
   const [showResults, setShowResults] = useState(false);
+  const [chartH, setChartH] = useState(window.innerWidth < 500 ? 280 : 240);
+  useEffect(() => {
+    const update = () => setChartH(window.innerWidth < 500 ? 280 : 240);
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
 
   const avg = Object.values(scores).reduce((a, b) => a + b, 0) / 6;
   const rating = avg >= 4 ? "stable" : avg >= 2.5 ? "atRisk" : "critical";
@@ -230,8 +236,8 @@ export default function ScorerPage() {
               </p>
             </div>
 
-            <ResponsiveContainer width="100%" height={240}>
-              <RadarChart data={chartData} cx="50%" cy="50%" outerRadius="65%">
+            <ResponsiveContainer width="100%" height={chartH}>
+              <RadarChart data={chartData} cx="50%" cy="50%" outerRadius="55%">
                 <PolarGrid stroke={COLORS.border} />
                 <PolarAngleAxis dataKey="subject" tick={{ fontSize: 11, fontFamily: FONTS.body, fill: COLORS.charcoal }} />
                 <PolarRadiusAxis angle={90} domain={[0, 5]} tick={{ fontSize: 10, fill: COLORS.charcoal }} />
