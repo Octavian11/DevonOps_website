@@ -546,6 +546,17 @@ export function OfferCards({ setPage }) {
         </div>
       </div>
 
+      {!setPage && (
+        <div style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, padding: "14px 18px", background: `${COLORS.navy}05`, borderRadius: RADIUS.md, border: `1px solid ${COLORS.border}`, marginBottom: SPACING.md }}>
+          <p style={{ margin: "0 0 8px 0" }}>
+            <strong>Pre-close option:</strong> Add an Ops Diligence Report ($15K, 2–3 weeks) before signing to surface red flags for the IC.
+          </p>
+          <p style={{ margin: 0 }}>
+            <strong>Recommended:</strong> Choose the bundle if you expect to close — diligence findings feed directly into Day-1 priorities with no re-learning.
+          </p>
+        </div>
+      )}
+
       <ButtonPair
         primaryText="15-Minute Fit Check"
         secondaryText={setPage ? "View Full Services & Details" : undefined}
