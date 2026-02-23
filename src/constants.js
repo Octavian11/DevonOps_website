@@ -371,8 +371,8 @@ export const globalCSS = `
   .nav-hamburger { display: none; }
   .nav-current-page { display: none; }
   @media (max-width: 768px) {
-    .nav-links { display: none; }
-    .nav-cta   { display: none; }
+    .nav-links { display: none !important; }
+    .nav-cta   { display: none !important; }
     .nav-logo  { height: 46px !important; }
     .nav-hamburger {
       display: flex; align-items: center; justify-content: center;
