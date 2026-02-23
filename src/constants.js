@@ -369,14 +369,25 @@ export const globalCSS = `
 
   /* ── Mobile nav ─────────────────────────────────────────────── */
   .nav-hamburger { display: none; }
+  .nav-current-page { display: none; }
   @media (max-width: 768px) {
     .nav-links { display: none; }
     .nav-cta   { display: none; }
+    .nav-logo  { height: 46px !important; }
     .nav-hamburger {
       display: flex; align-items: center; justify-content: center;
       width: 44px; height: 44px;
       background: transparent; border: none; cursor: pointer;
       color: ${COLORS.navy}; flex-shrink: 0;
+    }
+    .nav-current-page {
+      display: block;
+      position: absolute; left: 50%; transform: translateX(-50%);
+      font-family: ${FONTS.body}; font-size: 0.82rem; font-weight: 700;
+      color: ${COLORS.navy}; letter-spacing: 0.4px; text-transform: uppercase;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      max-width: calc(100% - 240px);
+      pointer-events: none;
     }
     .nav-mobile-menu {
       position: fixed; top: var(--nav-h); left: 0; right: 0; z-index: 99;

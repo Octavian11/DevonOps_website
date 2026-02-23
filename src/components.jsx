@@ -584,6 +584,7 @@ export function Nav({ page, setPage }) {
           <img
             src="/Devonshire_Operations_Logo_Exact-cropped1.svg"
             alt="Devonshire Operations"
+            className="nav-logo"
             style={{ height: "64px", maxWidth: "100%", cursor: "pointer" }}
             onClick={() => handleNav("levers")}
           />
@@ -599,6 +600,9 @@ export function Nav({ page, setPage }) {
             ))}
           </div>
         </div>
+        <span className="nav-current-page">
+          {items.find(i => i.key === page)?.label ?? ""}
+        </span>
         <div className="nav-cta"><CTAButton text="15-Minute Fit Check" /></div>
         <button className="nav-hamburger" onClick={() => setMenuOpen(o => !o)} aria-label="Toggle menu">
           {menuOpen
