@@ -138,9 +138,10 @@ export default function ScorerPage() {
   const [context, setContext] = useState(CONTEXT_OPTIONS[0].key);
   const [scores, setScores] = useState({ incident: 3, change: 3, vendor: 3, audit: 3, kpi: 3, process: 3 });
   const [showResults, setShowResults] = useState(false);
-  const [chartH, setChartH] = useState(window.innerWidth < 500 ? 280 : 240);
+  const getChartH = () => window.innerWidth < 360 ? 200 : window.innerWidth < 500 ? 260 : 240;
+  const [chartH, setChartH] = useState(getChartH);
   useEffect(() => {
-    const update = () => setChartH(window.innerWidth < 500 ? 280 : 240);
+    const update = () => setChartH(getChartH());
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
   }, []);

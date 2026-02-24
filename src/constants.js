@@ -312,7 +312,10 @@ export const globalCSS = `
     color: var(--text);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    max-width: 100vw;
   }
+  html { overflow-x: hidden; }
 
   main, #root { font-size: inherit; }
 
@@ -373,20 +376,31 @@ export const globalCSS = `
   @media (max-width: 768px) {
     .nav-links { display: none !important; }
     .nav-cta   { display: none !important; }
-    .nav-logo  { height: 46px !important; }
+    /* Shrink logo to 38 px on mobile — keeps aspect ratio ~4:1 → ~152 px wide */
+    .nav-logo  { height: 38px !important; }
+    /* Logo column: never shrink so the page label always has room to centre */
+    .nav-logo-col { flex-shrink: 0 !important; }
     .nav-hamburger {
       display: flex; align-items: center; justify-content: center;
-      width: 44px; height: 44px;
+      width: 44px; height: 44px; flex-shrink: 0;
       background: transparent; border: none; cursor: pointer;
-      color: ${COLORS.navy}; flex-shrink: 0;
+      color: ${COLORS.navy};
     }
+    /*
+     * Page-label: was position:absolute which caused it to collide with the
+     * logo.  Now it is a flex item (flex:1) that fills the gap between the
+     * logo column and the hamburger and centres its text there.
+     */
     .nav-current-page {
-      display: block;
-      position: absolute; left: 50%; transform: translateX(-50%);
-      font-family: ${FONTS.body}; font-size: 0.82rem; font-weight: 700;
+      display: flex;
+      flex: 1 1 auto;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      padding: 0 6px;
+      font-family: ${FONTS.body}; font-size: 0.78rem; font-weight: 700;
       color: ${COLORS.navy}; letter-spacing: 0.4px; text-transform: uppercase;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-      max-width: calc(100% - 240px);
+      white-space: nowrap; text-overflow: ellipsis;
       pointer-events: none;
     }
     .nav-mobile-menu {
@@ -398,13 +412,19 @@ export const globalCSS = `
     }
     .nav-mobile-item {
       background: transparent; border: none; width: 100%;
-      text-align: left; padding: 12px 12px; border-radius: 4px;
+      text-align: left; padding: 14px 12px; border-radius: 4px;
       cursor: pointer; transition: all 0.15s;
     }
   }
 
   /* ── Touch targets ──────────────────────────────────────────── */
   button { min-height: 44px; }
+  input[type="text"],
+  input[type="email"],
+  input[type="search"],
+  select { min-height: 44px; box-sizing: border-box; }
+  /* Active feedback for touch devices (hover doesn't fire on touch) */
+  button:active, a:active { opacity: 0.75; }
 
   /* Sticky nav offset: prevent anchor targets from hiding behind the 76px nav */
   [id] { scroll-margin-top: 90px; }
@@ -455,6 +475,33 @@ export const globalCSS = `
   @media (max-width: 600px) {
     .scorer-sticky-bar { flex-direction: column; align-items: flex-start; gap: 10px; padding: 14px 16px; }
     .scorer-sticky-bar > div { width: 100%; justify-content: flex-start; }
+  }
+
+  /* ── Hero: reduce top/bottom padding on small screens ──────────── */
+  @media (max-width: 480px) {
+    .hero-block { padding-top: 28px !important; padding-bottom: 24px !important; }
+  }
+
+  /* ── Table cells: prevent horizontal overflow on small phones ───── */
+  @media (max-width: 600px) {
+    table { width: 100%; }
+    table th, table td {
+      word-break: break-word;
+      hyphens: auto;
+      padding: 6px 8px !important;
+      font-size: 0.78rem !important;
+    }
+  }
+
+  /* ── 360 px breakpoint (Galaxy S-series & similar) ─────────────── */
+  @media (max-width: 360px) {
+    html { font-size: 14px; }
+    .section-title { font-size: 1.1rem !important; }
+    .card-inner { padding: 12px !important; }
+    .nav-logo { height: 30px !important; }
+    .nav-current-page { font-size: 0.72rem; }
+    ::-webkit-scrollbar { width: 3px; }
+    .main-container { padding-left: 10px; padding-right: 10px; }
   }
 
   input[type="range"].scorer-range {
