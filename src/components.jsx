@@ -21,7 +21,7 @@ export function SeverityBadge({ severity }) {
 
 export function TimingBadge({ timing }) {
   return (
-    <span style={{ display: "inline-block", padding: "5px 12px", borderRadius: RADIUS.sm, fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 700, letterSpacing: "0.05em", textTransform: "uppercase", color: "white", background: TIMING_COLORS[timing] || COLORS.ongoing, lineHeight: 1, minWidth: "145px", textAlign: "center" }}>
+    <span style={{ display: "inline-block", padding: "5px 12px", borderRadius: RADIUS.sm, fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 700, letterSpacing: "0.05em", textTransform: "uppercase", color: "white", background: TIMING_COLORS[timing] || COLORS.ongoing, lineHeight: 1, minWidth: "auto", textAlign: "center" }}>
       {timing}
     </span>
   );
@@ -225,7 +225,7 @@ export function TimelineRail({ items, compact = false }) {
 
 export function SplitContrast({ leftSide, rightSide }) {
   return (
-    <div className="split-contrast" style={{ display: "grid", gap: "0", borderRadius: RADIUS.lg, overflow: "hidden", border: `1px solid ${COLORS.border}`, minHeight: "300px" }}>
+    <div className="split-contrast" style={{ display: "grid", gap: "0", borderRadius: RADIUS.lg, overflow: "hidden", border: `1px solid ${COLORS.border}` }}>
       <div style={{ background: COLORS.navy, color: COLORS.offWhite, padding: SPACING.lg, display: "flex", flexDirection: "column", position: "relative" }}>
         {leftSide.title && (
           <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.3rem", color: COLORS.gold, margin: "0 0 16px 0", letterSpacing: "0.5px" }}>
@@ -411,7 +411,7 @@ export function LeadMagnetLink({ pdfUrl, children, variant = "link", style: extr
     button: { display: "inline-block", padding: "14px 28px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, textDecoration: "none", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", transition: "all 0.2s", border: "none", cursor: "pointer", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "min(180px, 100%)" },
     "inline-button": { padding: "12px 16px", borderRadius: RADIUS.md, border: `1px solid ${COLORS.border}`, background: COLORS.white, color: COLORS.navy, textDecoration: "none", fontFamily: FONTS.body, fontWeight: 600, display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", transition: "all 0.2s" },
     "footer-link": { fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.offWhite, textDecoration: "none", transition: "color 0.2s", cursor: "pointer" },
-    "micro-proof": { display: "flex", alignItems: "center", gap: "8px", textDecoration: "none", color: COLORS.navy, fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, transition: "all 0.2s", padding: "4px 8px", borderRadius: RADIUS.sm, cursor: "pointer" }
+    "micro-proof": { display: "flex", alignItems: "center", gap: "8px", textDecoration: "none", color: COLORS.navy, fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, transition: "all 0.2s", padding: "8px 10px", borderRadius: RADIUS.sm, cursor: "pointer" }
   }[variant] || linkStyle.link;
 
   // ── Initial state: clickable link/button ─────────────────────
@@ -436,7 +436,7 @@ export function LeadMagnetLink({ pdfUrl, children, variant = "link", style: extr
             value={name}
             onChange={e => setName(e.target.value)}
             placeholder="Your name"
-            style={{ padding: "8px 10px", borderRadius: RADIUS.sm, border: `1px solid ${COLORS.steel}`, fontFamily: FONTS.body, fontSize: "0.9rem", background: COLORS.white }}
+            style={{ padding: "11px 12px", borderRadius: RADIUS.sm, border: `1px solid ${COLORS.steel}`, fontFamily: FONTS.body, fontSize: "0.9rem", background: COLORS.white, width: "100%", boxSizing: "border-box" }}
           />
           <input
             type="email"
@@ -444,7 +444,7 @@ export function LeadMagnetLink({ pdfUrl, children, variant = "link", style: extr
             onChange={e => setEmail(e.target.value)}
             placeholder="you@fund.com"
             required
-            style={{ padding: "8px 10px", borderRadius: RADIUS.sm, border: `1px solid ${COLORS.steel}`, fontFamily: FONTS.body, fontSize: "0.9rem", background: COLORS.white }}
+            style={{ padding: "11px 12px", borderRadius: RADIUS.sm, border: `1px solid ${COLORS.steel}`, fontFamily: FONTS.body, fontSize: "0.9rem", background: COLORS.white, width: "100%", boxSizing: "border-box" }}
           />
           <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
             <button
@@ -580,7 +580,7 @@ export function Nav({ page, setPage }) {
   return (
     <>
       <nav style={{ position: "sticky", top: 0, zIndex: 100, background: COLORS.white, borderBottom: `3px solid ${COLORS.gold}`, padding: "0 clamp(12px, 3.5vw, 28px)", display: "flex", alignItems: "center", justifyContent: "space-between", height: "76px", minHeight: "76px", boxShadow: "0 2px 8px rgba(20, 33, 61, 0.08)" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "16px", minWidth: 0 }}>
+        <div className="nav-logo-col" style={{ display: "flex", alignItems: "center", gap: "16px", minWidth: 0 }}>
           <img
             src="/Devonshire_Operations_Logo_Exact-cropped1.svg"
             alt="Devonshire Operations"
@@ -711,7 +711,7 @@ function FooterLeadCapture() {
 export function Footer({ setPage }) {
   return (
     <footer style={{ marginTop: "60px", padding: "40px 0 32px 0", borderTop: `2px solid ${COLORS.steel}`, background: COLORS.navy }}>
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "32px" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(200px, 100%), 1fr))", gap: "32px" }}>
         {/* Contact */}
         <div>
           <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.gold, marginBottom: "16px", letterSpacing: "0.5px" }}>Contact</h3>

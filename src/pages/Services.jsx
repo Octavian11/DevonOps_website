@@ -78,7 +78,7 @@ function MiniMetric({ label, value, valueColor }) {
 function WorkedExampleAccordion() {
   return (
     <Accordion title='Worked example: "No Change Advisory Board or Change Control Process"' defaultOpen={false}>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "12px" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(180px, 100%), 1fr))", gap: "12px" }}>
         <MiniMetric label="EBITDA Impact" value="Direct" valueColor="#8B1E1E" />
         <MiniMetric label="Time to Proof" value="< 30 days" valueColor="#1F6F3A" />
         <MiniMetric label="Execution Certainty" value="High" valueColor="#1F6F3A" />
