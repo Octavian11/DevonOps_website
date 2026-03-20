@@ -204,6 +204,52 @@ function LeversTeaserSection({ setPage }) {
   );
 }
 
+// ─── COST OF INACTION ────────────────────────────────────────
+
+function CostOfInaction() {
+  const scenarios = [
+    {
+      title: "No incident governance post-close",
+      what: "A production failure in month 2 has no severity classification, no escalation path, and no owner. Resolution takes 3 days. Board emergency call. SLA breach letter follows.",
+      consequence: "EBITDA drag from rework and churn. LP questions about management quality — in month 2 of the hold.",
+    },
+    {
+      title: "No change control → value creation stalls",
+      what: "40% of incidents trace to recent deployments. Releases freeze as the team tries to stabilize. Every VCP initiative requiring a technology change gets deferred.",
+      consequence: "Value creation execution delayed 60–90 days. The operational narrative that supports your exit thesis doesn't exist yet.",
+    },
+    {
+      title: "No KPI cadence → board flying blind",
+      what: "Six months post-close, board updates are still verbal and anecdotal. No baselines, no targets, no operating rhythm. Exit prep begins with no operational track record to show.",
+      consequence: "Multiple risk at exit. Buyer diligence surfaces what the seller should have already fixed — and prices it in.",
+    },
+  ];
+
+  return (
+    <Section title="The Cost of Not Acting" noCTA>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "820px", marginBottom: "20px" }}>
+        Operational gaps don't stay static under PE ownership. Leverage amplifies friction. These are the scenarios that play out when diligence misses them — and post-close stabilization doesn't happen.
+      </p>
+      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+        {scenarios.map((s, i) => (
+          <div key={i} style={{ border: `1px solid #FEB2B2`, borderLeft: `3px solid #C53030`, borderRadius: RADIUS.md, padding: "18px", background: "#FFF5F5", flex: "1 1 260px", minWidth: "min(220px, 100%)", display: "flex", flexDirection: "column", gap: "12px" }}>
+            <div style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", fontWeight: 700, color: "#9B2C2C" }}>
+              {s.title}
+            </div>
+            <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: "#4A2020", lineHeight: 1.6, margin: 0, flex: 1 }}>
+              {s.what}
+            </p>
+            <div style={{ padding: "10px 12px", background: "white", border: `1px solid #FEB2B2`, borderRadius: RADIUS.sm }}>
+              <span style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, color: "#C53030", letterSpacing: "0.7px", textTransform: "uppercase", display: "block", marginBottom: "4px" }}>PE Consequence</span>
+              <p style={{ fontFamily: FONTS.body, fontSize: "0.92rem", color: "#4A2020", lineHeight: 1.55, margin: 0 }}>{s.consequence}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
 // ─── CHOOSE SITUATION ────────────────────────────────────────
 
 function ChooseSituation({ setPage }) {
@@ -288,6 +334,45 @@ function MiniCases() {
   );
 }
 
+// ─── COMPACT ABOUT BIO ───────────────────────────────────────
+
+function CompactAboutBio({ setPage }) {
+  const metrics = [
+    { value: "~67%", label: "incident reduction" },
+    { value: "$2M+", label: "annual savings" },
+    { value: "94→99%", label: "uptime" },
+  ];
+
+  return (
+    <Section noCTA background={`${COLORS.navy}04`}>
+      <div style={{ display: "flex", gap: "20px", alignItems: "flex-start", flexWrap: "wrap" }}>
+        <div style={{ flexShrink: 0, width: "64px", height: "64px", borderRadius: "50%", background: COLORS.navy, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <span style={{ fontFamily: FONTS.heading, fontSize: "1.4rem", fontWeight: 700, color: COLORS.gold, lineHeight: 1 }}>HT</span>
+        </div>
+        <div style={{ flex: "1 1 280px" }}>
+          <div style={{ fontFamily: FONTS.heading, fontSize: "1.2rem", fontWeight: 700, color: COLORS.navy, marginBottom: "4px" }}>Hassan Tariq</div>
+          <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", color: COLORS.steel, lineHeight: 1.5, marginBottom: "14px" }}>
+            15+ years platform ops · JPMorgan · Barclays · Bank of America · Lazard<br />Columbia Executive MBA '26
+          </div>
+          <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", marginBottom: "16px" }}>
+            {metrics.map((m, i) => (
+              <div key={i}>
+                <div style={{ fontFamily: FONTS.body, fontSize: "1.1rem", fontWeight: 700, color: COLORS.gold }}>{m.value}</div>
+                <div style={{ fontFamily: FONTS.body, fontSize: "0.78rem", color: COLORS.steel }}>{m.label}</div>
+              </div>
+            ))}
+          </div>
+          <button
+            onClick={() => setPage("about")}
+            style={{ background: "none", border: "none", padding: 0, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, color: COLORS.navy, cursor: "pointer", textDecoration: "underline", textUnderlineOffset: "3px" }}>
+            Read full credentials →
+          </button>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
 // ─── LEVER EXPLORER PAGE ─────────────────────────────────────
 
 export default function LeverExplorer({ setPage }) {
@@ -319,9 +404,11 @@ export default function LeverExplorer({ setPage }) {
       <MicroProofStrip />
       <BuyerSegmentCards setPage={setPage} />
       <LeversTeaserSection setPage={setPage} />
+      <CostOfInaction />
       <ChooseSituation setPage={setPage} />
       <OfferCards setPage={setPage} />
       <MiniCases />
+      <CompactAboutBio setPage={setPage} />
       <FAQBlock />
 
       <Section noCTA background={`${COLORS.navy}05`}>
