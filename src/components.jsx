@@ -54,7 +54,7 @@ export function CTAButton({ text, small, variant, style: extraStyle, showAvailab
       </a>
       {showAvailability && (
         <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.navy }}>
-          Currently accepting 1–2 new engagements
+          Engagements typically book 2–3 weeks out
         </span>
       )}
     </div>
@@ -125,11 +125,6 @@ export function ButtonPair({
           )
         )}
       </div>
-      {showAvailability && (
-        <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.navy }}>
-          Currently accepting 1–2 new engagements
-        </span>
-      )}
     </div>
   );
 }
@@ -730,7 +725,7 @@ export function Footer({ setPage }) {
                 15-Minute Fit Check →
               </a>
               <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.offWhite }}>
-                Currently accepting 1–2 new engagements
+                Q2 availability is limited.
               </span>
             </div>
           </div>
@@ -780,7 +775,7 @@ export function Footer({ setPage }) {
             © {new Date().getFullYear()} Devonshire Ops. All rights reserved.
           </p>
           <p style={{ fontFamily: FONTS.heading, fontSize: "0.9rem", color: COLORS.gold, opacity: 0.85, margin: 0, fontStyle: "italic" }}>
-            Find the gaps. Build the plan. Deliver the alpha.
+            Find the gaps. Build the plan. Create the value.
           </p>
         </div>
         <p style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.offWhite, opacity: 0.7, margin: 0 }}>

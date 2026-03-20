@@ -27,7 +27,7 @@ export default function AboutPage() {
           </p>
         </div>
         <p style={{ fontFamily: FONTS.heading, fontSize: "1.05rem", color: COLORS.gold, fontStyle: "italic", marginBottom: SPACING.md }}>
-          Find the gaps. Build the plan. Deliver the alpha.
+          Find the gaps. Build the plan. Create the value.
         </p>
         <CTAButton text="15-Minute Fit Check" showAvailability={true} />
       </Section>
@@ -86,7 +86,7 @@ export default function AboutPage() {
       {/* Bottom CTA */}
       <Section noCTA background={`${COLORS.navy}05`}>
         <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, marginBottom: "18px", textAlign: "center" }}>
-          15 minutes. We'll assess the portfolio company's situation and scope the right engagement.
+          15 minutes. I'll assess the situation and scope the right engagement.
         </p>
         <ButtonPair
           primaryText="15-Minute Fit Check"

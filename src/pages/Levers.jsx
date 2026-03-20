@@ -22,24 +22,11 @@ function HeroBlockWithNav({ setPage }) {
           Ops Diligence · Value Creation Plans · Post-Close Governance
         </div>
         <h1 className="hero-headline" style={{ fontFamily: FONTS.heading, fontSize: "2.4rem", fontWeight: 700, color: "white", lineHeight: 1.2, marginBottom: "18px" }}>
-          Operational gaps are your biggest value creation lever. We find them before close and convert them into alpha.
+          Your deal team handles the financials. Who's stress-testing the operations?
         </h1>
-        <p className="hero-subheadline" style={{ fontFamily: FONTS.body, fontSize: "1.02rem", color: "rgba(255,255,255,0.92)", lineHeight: 1.65, marginBottom: "14px" }}>
-          15+ years at JPM, Barclays, BofA, Lazard. $10B+ in assets. I surface the operational friction PE funds miss — and build the Value Creation Plan that converts it into EBITDA improvement in 100 days.
+        <p className="hero-subheadline" style={{ fontFamily: FONTS.body, fontSize: "1.02rem", color: "rgba(255,255,255,0.92)", lineHeight: 1.65, marginBottom: "22px" }}>
+          Pre-close ops diligence and 100-day post-close execution for PE funds, independent sponsors, and family offices. I find what financial DD misses — and build the plan that turns it into EBITDA improvement in 100 days.
         </p>
-        <p className="hero-subheadline" style={{ fontFamily: FONTS.body, fontSize: "0.92rem", color: "rgba(255,255,255,0.85)", lineHeight: 1.6, marginBottom: "22px", fontStyle: "italic" }}>
-          Engagements start within 2 weeks of signing. First deliverables hit the board in 30 days.
-        </p>
-
-        {/* McKinsey GPMR 2026 data anchor */}
-        <div style={{ borderLeft: `3px solid ${COLORS.gold}`, paddingLeft: "16px", marginBottom: "28px" }}>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.88rem", color: "rgba(255,255,255,0.78)", lineHeight: 1.6, margin: "0 0 5px 0", fontStyle: "italic" }}>
-            "Leverage and multiple expansion drove 59% of PE returns from 2010–2022. That era is compressing. Operational value creation is the primary remaining lever."
-          </p>
-          <span style={{ fontFamily: FONTS.body, fontSize: "0.75rem", color: COLORS.gold, letterSpacing: "0.6px", textTransform: "uppercase", fontWeight: 600 }}>
-            McKinsey Global Private Markets Review 2026
-          </span>
-        </div>
 
         <div className="hero-ctas" style={{ display: "flex", gap: SPACING.sm, flexWrap: "wrap", alignItems: "flex-start" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
@@ -52,6 +39,7 @@ function HeroBlockWithNav({ setPage }) {
             <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: "rgba(255,255,255,0.95)", textAlign: "center" }}>
               Currently accepting 1–2 new engagements
             </span>
+
           </div>
           <button onClick={() => setPage("scorer")}
             style={{ display: "inline-block", padding: "12px 26px", background: "transparent", color: COLORS.gold, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.md, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: `2px solid ${COLORS.gold}` }}
