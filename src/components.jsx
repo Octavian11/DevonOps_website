@@ -343,7 +343,16 @@ export function FAQBlock() {
         <p style={a}>Big 4 firms deliver audit-grade frameworks. I deliver practitioner-grade execution. I've been the operator — incident command at 2am, vendor governance under regulatory scrutiny, KPI cadences built from zero. If you need a framework, hire a Big 4 firm. If you need someone who installs the operating system in 100 days and hands it off running, let's talk.</p>
 
         <h3 style={q}>Why should we hire you instead of building an in-house operating team?</h3>
-        <p style={{ ...a, marginBottom: 0 }}>Build in-house — eventually. I'm the bridge. I install the infrastructure, cadence, and playbook in 100 days. Your in-house team inherits a system that works, instead of building one from scratch while also running the business. GP operating teams have doubled since 2021 (McKinsey GPMR 2026). I'm the on-demand version for funds that aren't there yet.</p>
+        <p style={a}>Build in-house — eventually. I'm the bridge. I install the infrastructure, cadence, and playbook in 100 days. Your in-house team inherits a system that works, instead of building one from scratch while also running the business. GP operating teams have doubled since 2021 (McKinsey GPMR 2026). I'm the on-demand version for funds that aren't there yet.</p>
+
+        <h3 style={q}>How long does a pre-close diligence engagement take?</h3>
+        <p style={a}>2–3 weeks from data receipt to findings memo, assuming standard artifact availability (incident history, change logs, vendor contracts, org chart, compliance evidence). Expedited timelines are possible for deals in exclusivity — discuss during the fit check.</p>
+
+        <h3 style={q}>What if we're still in LOI or haven't entered exclusivity yet?</h3>
+        <p style={a}>Earlier is better. A light-touch ops review before exclusivity can shape the diligence scope and, in some cases, inform the structure of the deal itself. Even limited access produces useful signals — incident volume patterns and change frequency are often visible without full document access.</p>
+
+        <h3 style={q}>Do you work with family offices?</h3>
+        <p style={{ ...a, marginBottom: 0 }}>Yes, specifically on the Control Tower Retainer for longer holds. Family offices buying from founders often inherit zero institutional process — the gap between what's described in diligence and what's actually operating is widest in these deals. I install the governance baseline and operating cadence that prevents drift over a 5–7+ year hold.</p>
       </div>
     </Section>
   );

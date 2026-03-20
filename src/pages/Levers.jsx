@@ -329,6 +329,16 @@ function MiniCases() {
           <span style={fieldLabel}>RESULT</span>
           <p style={valueCreated}>Weekly operating rhythm installed. Issues surfaced through cadence, not crisis. Board gained real-time ops visibility — direct input to exit narrative.</p>
         </div>
+
+        <div style={box}>
+          <SectionTitle sub>Vendor concentration risk</SectionTitle>
+          <span style={fieldLabel}>GAP</span>
+          <p style={fieldVal}>Single vendor covering 80%+ of critical infrastructure. Auto-renewing contracts, no SLA tracking, change-of-control clause missed in diligence.</p>
+          <span style={fieldLabel}>FIX</span>
+          <p style={fieldVal}>Full vendor mapping, contract consolidation, renewal calendar, SLA monitoring, concentration reduction plan.</p>
+          <span style={fieldLabel}>RESULT</span>
+          <p style={valueCreated}>$2M+ annual savings via renegotiation. Concentration reduced: 1 vendor → 3. Exit plan documented for top 5 vendors — turned a diligence liability into a hold narrative.</p>
+        </div>
       </div>
     </Section>
   );

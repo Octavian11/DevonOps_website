@@ -9,9 +9,25 @@ import {
 } from "../constants.js";
 import { SectionTitle, ButtonPair, Card, Section } from "../components.jsx";
 
+// ─── BUYER TYPE OPTIONS ───────────────────────────────────────
+
+const BUYER_TYPES = [
+  { key: "is",    label: "Independent Sponsor" },
+  { key: "pe",    label: "LMM PE Fund" },
+  { key: "fo",    label: "Family Office" },
+  { key: "other", label: "Not sure" },
+];
+
+const BUYER_TYPE_FRAMING = {
+  is:    "As an independent sponsor, diligence gaps affect IC credibility and LP confidence. These findings translate directly into how you frame deal risk to your capital partner.",
+  pe:    "For a PE fund, post-close stabilization risk is the primary threat to Year 1 EBITDA. These gaps predict which levers will stall and which will compound.",
+  fo:    "For a family office with a longer hold horizon, these gaps compound over time. Operational drift is the #1 silent value leak — and the hardest to diagnose without a structured framework.",
+  other: null,
+};
+
 // ─── EMAIL CAPTURE FORM ───────────────────────────────────────
 
-function ScorerEmailCapture({ rating, score, context }) {
+function ScorerEmailCapture({ rating, score, context, buyerType }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("idle"); // idle | loading | success | error
@@ -35,9 +51,7 @@ function ScorerEmailCapture({ rating, score, context }) {
       setStatus("error");
       return;
     }
-    // Open PDFs immediately before the async call to avoid popup blockers
     window.open(SAMPLE_SCORECARD_PDF, "_blank", "noopener,noreferrer");
-
     setStatus("loading");
 
     try {
@@ -50,6 +64,7 @@ function ScorerEmailCapture({ rating, score, context }) {
           scorer_rating: rating,
           scorer_score: score,
           scorer_context: context,
+          scorer_buyer_type: buyerType || "(not specified)",
         }),
       });
       if (res.ok) {
@@ -123,7 +138,7 @@ function ScorerEmailCapture({ rating, score, context }) {
         <button
           type="submit"
           disabled={status === "loading"}
-          style={{ padding: "14px 28px", background: status === "loading" ? COLORS.bodyMuted : COLORS.navy, color: "white", border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, cursor: status === "loading" ? "default" : "pointer", textAlign: "left", transition: "background 0.2s" }}>
+          style={{ padding: "14px 28px", background: status === "loading" ? COLORS.bodyMuted : COLORS.gold, color: "white", border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, cursor: status === "loading" ? "default" : "pointer", textAlign: "left", transition: "background 0.2s" }}>
           {status === "loading" ? "Sending…" : "Send My Report →"}
         </button>
         <p style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.bodyMuted, margin: 0 }}>
@@ -135,9 +150,12 @@ function ScorerEmailCapture({ rating, score, context }) {
 }
 
 export default function ScorerPage() {
+  const [buyerType, setBuyerType] = useState("");
   const [context, setContext] = useState(CONTEXT_OPTIONS[0].key);
   const [scores, setScores] = useState({ incident: 3, change: 3, vendor: 3, audit: 3, kpi: 3, process: 3 });
+  const [unknowns, setUnknowns] = useState({});
   const [showResults, setShowResults] = useState(false);
+
   const getChartH = () => window.innerWidth < 360 ? 200 : window.innerWidth < 500 ? 260 : 240;
   const [chartH, setChartH] = useState(getChartH);
   useEffect(() => {
@@ -146,14 +164,23 @@ export default function ScorerPage() {
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  const avg = Object.values(scores).reduce((a, b) => a + b, 0) / 6;
+  const knownDims = SCORER_DIMS.filter(d => !unknowns[d.key]);
+  const unknownDims = SCORER_DIMS.filter(d => unknowns[d.key]);
+  const avg = knownDims.length > 0
+    ? knownDims.reduce((sum, d) => sum + scores[d.key], 0) / knownDims.length
+    : 3;
+
   const rating = avg >= 4 ? "stable" : avg >= 2.5 ? "atRisk" : "critical";
   const ratingLabel = { stable: "STABLE", atRisk: "AT RISK", critical: "CRITICAL" }[rating];
   const ratingColor = { stable: COLORS.stable, atRisk: COLORS.atRisk, critical: COLORS.critical }[rating];
 
-  const chartData = SCORER_DIMS.map(d => ({ subject: d.short, score: scores[d.key], fullMark: 5 }));
-  const lowDims = SCORER_DIMS.filter(d => scores[d.key] <= 2);
-  const midDims = SCORER_DIMS.filter(d => scores[d.key] === 3);
+  const chartData = SCORER_DIMS.map(d => ({ subject: d.short, score: unknowns[d.key] ? 0 : scores[d.key], fullMark: 5 }));
+  const lowDims = knownDims.filter(d => scores[d.key] <= 2);
+  const midDims = knownDims.filter(d => scores[d.key] === 3);
+
+  const toggleUnknown = (key, checked) => {
+    setUnknowns(prev => ({ ...prev, [key]: checked }));
+  };
 
   return (
     <div className="fade-in">
@@ -164,7 +191,33 @@ export default function ScorerPage() {
         Assess a portfolio company's operational stability across 6 dimensions. Identify where friction is highest and which interventions would create the most value.
       </p>
 
-      {/* What's your situation - Full Width */}
+      {/* Who's using this? */}
+      <Card style={{ marginBottom: "24px" }}>
+        <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "14px" }}>Who's using this scorer?</h3>
+        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+          {BUYER_TYPES.map(type => (
+            <button
+              key={type.key}
+              onClick={() => setBuyerType(prev => prev === type.key ? "" : type.key)}
+              style={{
+                padding: "10px 18px",
+                borderRadius: RADIUS.md,
+                border: `2px solid ${buyerType === type.key ? COLORS.gold : COLORS.border}`,
+                background: buyerType === type.key ? `${COLORS.gold}12` : COLORS.white,
+                fontFamily: FONTS.body,
+                fontSize: "0.9rem",
+                fontWeight: 600,
+                color: buyerType === type.key ? "#8B6A00" : COLORS.charcoal,
+                cursor: "pointer",
+                transition: "all 0.15s",
+              }}>
+              {type.label}
+            </button>
+          ))}
+        </div>
+      </Card>
+
+      {/* What's your situation */}
       <Card style={{ marginBottom: "24px" }}>
         <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "12px" }}>What's your situation?</h3>
         <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
@@ -181,40 +234,55 @@ export default function ScorerPage() {
       <div style={{ marginBottom: "28px" }}>
         <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.navy, marginBottom: "18px" }}>Score all 6 dimensions (1–5)</h3>
         <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.bodyMuted, marginBottom: "20px", lineHeight: 1.6 }}>
-          Slide each bar to rate your portfolio company's operational maturity. 1 = significant gaps, 5 = well-governed.
+          Slide each bar to rate your portfolio company's operational maturity. 1 = significant gaps, 5 = well-governed. Check "Not assessed" if you genuinely don't have visibility into a dimension.
         </p>
 
-        {SCORER_DIMS.map((dim, index) => (
-          <Card key={dim.key} style={{ marginBottom: "14px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "12px" }}>
-              <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, margin: 0 }}>{index + 1}. {dim.label}</h4>
-              <span style={{ fontFamily: FONTS.body, fontSize: "1.3rem", fontWeight: 700, color: scores[dim.key] <= 2 ? COLORS.critical : scores[dim.key] <= 3 ? COLORS.atRisk : COLORS.stable }}>
-                {scores[dim.key]}
-              </span>
-            </div>
-            <input
-              type="range"
-              className="scorer-range"
-              min={1} max={5} step={1}
-              value={scores[dim.key]}
-              onChange={e => setScores({ ...scores, [dim.key]: parseInt(e.target.value) })}
-              style={{ width: "100%", background: `linear-gradient(to right, ${COLORS.steel} 0%, ${COLORS.steel} ${((scores[dim.key] - 1) / 4) * 100}%, ${COLORS.border} ${((scores[dim.key] - 1) / 4) * 100}%, ${COLORS.border} 100%)` }}
-            />
-            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "10px", gap: "12px" }}>
-              <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, maxWidth: "45%", lineHeight: 1.4 }}>{dim.low}</span>
-              <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, maxWidth: "45%", textAlign: "right", lineHeight: 1.4 }}>{dim.high}</span>
-            </div>
-          </Card>
-        ))}
+        {SCORER_DIMS.map((dim, index) => {
+          const isUnknown = !!unknowns[dim.key];
+          return (
+            <Card key={dim.key} style={{ marginBottom: "14px", opacity: isUnknown ? 0.6 : 1, transition: "opacity 0.2s" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "12px" }}>
+                <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, margin: 0 }}>{index + 1}. {dim.label}</h4>
+                <span style={{ fontFamily: FONTS.body, fontSize: "1.3rem", fontWeight: 700, color: isUnknown ? COLORS.bodyMuted : scores[dim.key] <= 2 ? COLORS.critical : scores[dim.key] <= 3 ? COLORS.atRisk : COLORS.stable }}>
+                  {isUnknown ? "—" : scores[dim.key]}
+                </span>
+              </div>
+              <input
+                type="range"
+                className="scorer-range"
+                min={1} max={5} step={1}
+                value={scores[dim.key]}
+                disabled={isUnknown}
+                onChange={e => setScores({ ...scores, [dim.key]: parseInt(e.target.value) })}
+                style={{ width: "100%", background: isUnknown ? `${COLORS.border}` : `linear-gradient(to right, ${COLORS.steel} 0%, ${COLORS.steel} ${((scores[dim.key] - 1) / 4) * 100}%, ${COLORS.border} ${((scores[dim.key] - 1) / 4) * 100}%, ${COLORS.border} 100%)`, cursor: isUnknown ? "not-allowed" : "pointer" }}
+              />
+              <div style={{ display: "flex", justifyContent: "space-between", marginTop: "10px", gap: "12px" }}>
+                <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, maxWidth: "45%", lineHeight: 1.4 }}>{dim.low}</span>
+                <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, maxWidth: "45%", textAlign: "right", lineHeight: 1.4 }}>{dim.high}</span>
+              </div>
+              <label style={{ display: "flex", alignItems: "center", gap: "6px", marginTop: "10px", cursor: "pointer", width: "fit-content" }}>
+                <input
+                  type="checkbox"
+                  checked={isUnknown}
+                  onChange={e => toggleUnknown(dim.key, e.target.checked)}
+                  style={{ accentColor: COLORS.steel, cursor: "pointer" }}
+                />
+                <span style={{ fontFamily: FONTS.body, fontSize: "0.82rem", color: COLORS.bodyMuted }}>
+                  Not assessed / don't know
+                </span>
+              </label>
+            </Card>
+          );
+        })}
       </div>
 
       {/* View Results Button */}
       {!showResults && (
         <div style={{ textAlign: "center", marginBottom: "28px" }}>
           <button onClick={() => setShowResults(true)}
-            style={{ padding: "14px 28px", background: COLORS.navy, color: "white", border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, cursor: "pointer", letterSpacing: "0.3px", transition: "background 0.2s" }}
-            onMouseEnter={e => { e.currentTarget.style.background = "#0F1829"; }}
-            onMouseLeave={e => { e.currentTarget.style.background = COLORS.navy; }}>
+            style={{ padding: "14px 28px", background: COLORS.gold, color: "white", border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, cursor: "pointer", letterSpacing: "0.3px", transition: "background 0.2s" }}
+            onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; }}>
             View Results →
           </button>
         </div>
@@ -225,16 +293,37 @@ export default function ScorerPage() {
         <div className="fade-in">
           <Card style={{ borderLeft: `4px solid ${ratingColor}`, marginBottom: "24px" }}>
             <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.2rem", color: COLORS.navy, marginBottom: "20px" }}>Assessment Results</h3>
+
+            {/* Buyer type badge */}
+            {buyerType && BUYER_TYPES.find(t => t.key === buyerType) && (
+              <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "4px 12px", borderRadius: RADIUS.sm, background: `${COLORS.gold}12`, border: `1px solid ${COLORS.gold}40`, marginBottom: "16px" }}>
+                <span style={{ fontFamily: FONTS.body, fontSize: "0.78rem", fontWeight: 700, color: "#8B6A00", textTransform: "uppercase", letterSpacing: "0.6px" }}>
+                  Scored as: {BUYER_TYPES.find(t => t.key === buyerType)?.label}
+                </span>
+              </div>
+            )}
+
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: "24px" }}>
               <div style={{ width: "100px", height: "100px", borderRadius: "50%", border: `4px solid ${ratingColor}`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "14px" }}>
                 <span style={{ fontFamily: FONTS.body, fontSize: "1.7rem", fontWeight: 700, color: ratingColor }}>{avg.toFixed(1)}</span>
               </div>
               <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 700, color: ratingColor, letterSpacing: "1.2px", marginBottom: "10px" }}>
                 {ratingLabel}
+                {unknownDims.length > 0 && (
+                  <span style={{ fontWeight: 400, color: COLORS.bodyMuted, letterSpacing: 0, fontSize: "0.85rem" }}>
+                    {" "}({knownDims.length} of 6 dimensions scored)
+                  </span>
+                )}
               </span>
               <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, margin: 0, maxWidth: "600px" }}>
                 {CONTEXT_CALLOUTS[rating][context]}
               </p>
+              {/* Buyer type framing */}
+              {buyerType && BUYER_TYPE_FRAMING[buyerType] && (
+                <p style={{ fontFamily: FONTS.body, fontSize: "0.93rem", color: COLORS.steel, lineHeight: 1.6, margin: "12px 0 0", maxWidth: "600px", fontStyle: "italic" }}>
+                  {BUYER_TYPE_FRAMING[buyerType]}
+                </p>
+              )}
             </div>
 
             <ResponsiveContainer width="100%" height={chartH}>
@@ -246,6 +335,21 @@ export default function ScorerPage() {
               </RadarChart>
             </ResponsiveContainer>
           </Card>
+
+          {/* Not assessed dimensions */}
+          {unknownDims.length > 0 && (
+            <Card style={{ borderLeft: `4px solid ${COLORS.steel}`, marginBottom: "24px" }}>
+              <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.steel, marginBottom: "10px" }}>Not Yet Assessed — Flag for Diligence</h4>
+              {unknownDims.map(dim => (
+                <div key={dim.key} style={{ marginBottom: "8px", paddingBottom: "8px", borderBottom: `1px solid ${COLORS.border}` }}>
+                  <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, color: COLORS.charcoal }}>{dim.label}</span>
+                </div>
+              ))}
+              <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.6, margin: "10px 0 0" }}>
+                Treat unassessed dimensions as potential gaps. In a pre-close context, include them in your diligence evidence requests — absence of data is itself a signal.
+              </p>
+            </Card>
+          )}
 
           {lowDims.length > 0 && (
             <Card style={{ borderLeft: `4px solid ${COLORS.critical}`, marginBottom: "24px" }}>
@@ -304,7 +408,7 @@ export default function ScorerPage() {
             )}
           </Section>
 
-          <ScorerEmailCapture rating={ratingLabel} score={avg.toFixed(1)} context={context} />
+          <ScorerEmailCapture rating={ratingLabel} score={avg.toFixed(1)} context={context} buyerType={buyerType} />
 
           <Section noCTA background={`${COLORS.navy}05`}>
             <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, textAlign: "center", margin: `0 auto ${SPACING.md}` }}>
