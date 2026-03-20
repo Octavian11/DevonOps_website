@@ -54,7 +54,7 @@ export function CTAButton({ text, small, variant, style: extraStyle, showAvailab
       </a>
       {showAvailability && (
         <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.navy }}>
-          Currently accepting 1–2 new engagements
+          Engagements typically book 2–3 weeks out
         </span>
       )}
     </div>
@@ -93,16 +93,16 @@ export function ButtonPair({
       <div style={{ display: "flex", flexDirection: "row", gap: SPACING.sm, justifyContent: centered ? "center" : "flex-start", flexWrap: "wrap" }}>
         {primaryLink ? (
           <a href={primaryLink} target="_blank" rel="noopener noreferrer"
-             style={{ display: "inline-block", padding: "14px 28px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, textDecoration: "none", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", transition: "all 0.2s", border: "none", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "min(180px, 100%)" }}
-             onMouseEnter={e => { e.currentTarget.style.background = "#0F1829"; }}
-             onMouseLeave={e => { e.currentTarget.style.background = COLORS.navy; }}>
+             style={{ display: "inline-block", padding: "14px 28px", background: COLORS.gold, color: "white", borderRadius: RADIUS.md, textDecoration: "none", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", transition: "all 0.2s", border: "none", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "min(180px, 100%)" }}
+             onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; }}
+             onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; }}>
             {primaryText}
           </a>
         ) : (
           <button onClick={primaryAction}
-             style={{ display: "inline-block", padding: "14px 28px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", transition: "all 0.2s", border: "none", cursor: "pointer", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "min(180px, 100%)" }}
-             onMouseEnter={e => { e.currentTarget.style.background = "#0F1829"; }}
-             onMouseLeave={e => { e.currentTarget.style.background = COLORS.navy; }}>
+             style={{ display: "inline-block", padding: "14px 28px", background: COLORS.gold, color: "white", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", transition: "all 0.2s", border: "none", cursor: "pointer", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "min(180px, 100%)" }}
+             onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; }}
+             onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; }}>
             {primaryText}
           </button>
         )}
@@ -125,11 +125,6 @@ export function ButtonPair({
           )
         )}
       </div>
-      {showAvailability && (
-        <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.navy }}>
-          Currently accepting 1–2 new engagements
-        </span>
-      )}
     </div>
   );
 }
@@ -511,11 +506,13 @@ export function OfferCards({ setPage }) {
   const boxGold = { ...box, border: `2px solid ${COLORS.gold}`, boxShadow: SHADOWS.md };
   const tag = { fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.gold, fontWeight: 600, marginBottom: "10px" };
   const li = { marginBottom: "8px", lineHeight: 1.55 };
+  const segLabel = { fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "10px", display: "block" };
 
   return (
     <Section title="Services & Pricing" type="windowWithCards" noCTA>
       <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginBottom: "24px" }}>
         <div style={box}>
+          <span style={segLabel}>Independent Sponsors · Pre-Close</span>
           <SectionTitle sub>Ops Diligence Report (Pre-Close)</SectionTitle>
           <div style={tag}>Starting at $15,000 · 2–3 weeks</div>
           <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
@@ -526,6 +523,7 @@ export function OfferCards({ setPage }) {
         </div>
 
         <div style={boxGold}>
+          <span style={{ ...segLabel, color: COLORS.gold }}>LMM PE Funds · Recommended</span>
           <SectionTitle sub>Bundle (Recommended): Diligence → VCP → Execution</SectionTitle>
           <div style={tag}>$25,000–$35,000 · diligence + 100 days</div>
           <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
@@ -536,6 +534,7 @@ export function OfferCards({ setPage }) {
         </div>
 
         <div style={box}>
+          <span style={segLabel}>Family Offices · Ongoing Hold</span>
           <SectionTitle sub>Control Tower Retainer (Ongoing)</SectionTitle>
           <div style={tag}>Starting at $7,500/month · ongoing</div>
           <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
@@ -730,7 +729,7 @@ export function Footer({ setPage }) {
                 15-Minute Fit Check →
               </a>
               <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.offWhite }}>
-                Currently accepting 1–2 new engagements
+                Q2 availability is limited.
               </span>
             </div>
           </div>
@@ -780,7 +779,7 @@ export function Footer({ setPage }) {
             © {new Date().getFullYear()} Devonshire Ops. All rights reserved.
           </p>
           <p style={{ fontFamily: FONTS.heading, fontSize: "0.9rem", color: COLORS.gold, opacity: 0.85, margin: 0, fontStyle: "italic" }}>
-            Find the gaps. Build the plan. Deliver the alpha.
+            Find the gaps. Build the plan. Create the value.
           </p>
         </div>
         <p style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.offWhite, opacity: 0.7, margin: 0 }}>

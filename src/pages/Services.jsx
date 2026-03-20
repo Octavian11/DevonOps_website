@@ -138,7 +138,7 @@ function FrameworkWhyFrictionTight() {
   return (
     <Section title="Why Operational Friction Compounds Under PE Ownership" noCTA>
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "860px", marginBottom: "24px" }}>
-        Our method: diagnose friction, prioritize by EBITDA impact and time to proof.
+        My method: diagnose friction, prioritize by EBITDA impact and time to proof.
       </p>
       <SplitContrast leftSide={leftSide} rightSide={rightSide} />
     </Section>
@@ -166,10 +166,10 @@ function FrameworkRubricTable() {
           <tbody>
             {[
               ["EBITDA Impact", "Directly erode earnings or margin?", "Direct / Indirect / Minimal", "Direct → flag in IC memo, quantify drag"],
-              ["Time to Proof", "How quickly can we show improvement?", "< 30 / 30–90 / 90+ days", "< 30 days → Day-1 quick win candidate"],
+              ["Time to Proof", "How quickly does improvement appear?", "< 30 / 30–90 / 90+ days", "< 30 days → Day-1 quick win candidate"],
               ["Execution Certainty", "How proven is the playbook?", "High / Medium / Low", "High → include in 100-day plan scope"],
               ["Exit Story Impact", "Improve risk profile for next buyer?", "Strengthens / Neutral / None", "Strengthens → prioritize for exit prep"],
-              ["Reversibility", "Can we course-correct if it fails?", "Easily / Partially / One-way", "One-way → requires board approval"],
+              ["Reversibility", "Can this be reversed if needed?", "Easily / Partially / One-way", "One-way → requires board approval"],
               ["Attention Load", "Management bandwidth required?", "Low / Medium / High", "High → defer early in hold period"],
             ].map(([c, w, s, a], i) => (
               <tr key={i} style={{ borderBottom: `1px solid ${COLORS.border}` }}>
@@ -236,7 +236,7 @@ function ServicesSteps() {
     { title: "Step 1: Fit Check", meta: "15 minutes", description: "15-minute call. Assess the situation, confirm scope, and determine fit.", completed: true },
     { title: "Step 2: Scoping + Data Request", meta: "48 hours", description: "Targeted data request. Fixed-fee proposal with timeline within 48 hours.", completed: true },
     { title: "Step 3: Diligence Deliverable", meta: "2–3 weeks", description: "Risk-rated findings memo — severity-rated, PE impact framed, IC-ready. This becomes the foundation of the Value Creation Plan.", active: true },
-    { title: "Step 4: Value Creation Plan + 100-Day Execution", meta: "Days 1–100", description: "Diligence findings roll directly into the VCP. The VCP defines what to fix, in what order, with what accountability. We execute against it for 100 days — incident command, change control, KPI cadence, board-ready reporting.", deliverable: "VCP document + 100-day execution tracker + board reporting cadence" }
+    { title: "Step 4: Value Creation Plan + 100-Day Execution", meta: "Days 1–100", description: "Diligence findings roll directly into the VCP. The VCP defines what to fix, in what order, with what accountability. I execute against it for 100 days — incident command, change control, KPI cadence, board-ready reporting.", deliverable: "VCP document + 100-day execution tracker + board reporting cadence" }
   ];
 
   return (
@@ -255,7 +255,7 @@ function FitCheckCTA() {
   return (
     <Section noCTA background={`${COLORS.navy}05`}>
       <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "820px", margin: "0 auto 20px", textAlign: "center" }}>
-        Not sure where to start? Book a 15-minute fit check. We'll assess the situation, identify the highest-priority friction points, and scope the right engagement.
+        Not sure where to start? Book a 15-minute fit check. I'll assess the situation, identify the highest-priority friction points, and scope the right engagement.
       </p>
       <ButtonPair
         primaryText="15-Minute Fit Check"
@@ -265,7 +265,7 @@ function FitCheckCTA() {
         showAvailability={true}
       />
       <div style={{ marginTop: "16px", padding: "10px 12px", borderRadius: RADIUS.md, border: `1px solid ${COLORS.border}`, background: `${COLORS.navy}03`, fontFamily: FONTS.body, fontSize: "0.92rem", color: COLORS.charcoal, lineHeight: 1.45, maxWidth: "820px", margin: "16px auto 0" }}>
-        NDA-friendly. We can sign an NDA before receiving sensitive materials; initial triage can be done with high-level facts only.
+        NDA-friendly. I can sign an NDA before receiving sensitive materials; initial triage can be done with high-level facts only.
       </div>
     </Section>
   );
@@ -275,7 +275,7 @@ function FitCheckCTA() {
 
 function TypicalRedFlags() {
   const leftSide = {
-    title: "Red Flags We Surface",
+    title: "Red Flags I Surface",
     description: "Operational fragility that threatens deal value:",
     items: [
       { title: "Hidden EBITDA drag", body: "Recurring incidents, rework, and unmanaged change inflate labor and vendor spend" },
@@ -287,7 +287,7 @@ function TypicalRedFlags() {
   };
 
   const rightSide = {
-    title: "Interventions We Install",
+    title: "Interventions I Install",
     description: "Systematic fixes that prevent recurrence:",
     items: [
       { title: "Incident command", body: "Severity classification, escalation paths, postmortem discipline → MTTR reduction" },
@@ -300,7 +300,7 @@ function TypicalRedFlags() {
   };
 
   return (
-    <Section noCTA title="Typical Red Flags We Surface">
+    <Section noCTA title="Typical Red Flags I Surface">
       <SplitContrast leftSide={leftSide} rightSide={rightSide} />
     </Section>
   );
