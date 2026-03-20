@@ -110,55 +110,91 @@ function MicroProofStrip() {
   );
 }
 
-// ─── TRIGGER SCENARIOS ───────────────────────────────────────
+// ─── BUYER SEGMENT CARDS ─────────────────────────────────────
 
-function TriggerScenarios({ setPage }) {
-  const scenarios = [
+function BuyerSegmentCards({ setPage }) {
+  const segments = [
     {
-      title: "Pre-close diligence or Day 1 post-close",
-      description: "Diligence uncovered incident patterns with unclear root cause, or new ownership needs a stabilization baseline fast. You need severity-rated findings for the IC and a Day-1 critical path.",
-      action: "scorer"
+      code: "IS",
+      title: "Independent Sponsors",
+      pain: "Smaller deal teams mean no dedicated ops function. Diligence gaps surface post-close — after price is locked.",
+      items: [
+        "IC-credible ops findings without Big 4 cost",
+        "LP-ready evidence that you stress-tested operations",
+        "Day-1 critical path if you close",
+      ],
+      action: "scorer",
+      cta: "Score Your Deal →",
+      accentColor: COLORS.steel,
     },
     {
-      title: "Mid-hold: operational drift is blocking value creation",
-      description: "EBITDA improvement initiatives keep stalling due to operational fragility. The board wants visibility and a plan.",
-      action: "calendly"
+      code: "PE",
+      title: "LMM PE Funds",
+      pain: "Portfolio companies rarely have institutional ops infrastructure. Post-close stabilization risk is the #1 EBITDA threat in Year 1.",
+      items: [
+        "100-day governance installation from Day 1",
+        "Board-ready ops reporting LPs can trust",
+        "IC memo — severity-rated, PE impact framed",
+      ],
+      action: "calendly",
+      cta: "Book a Fit Check →",
+      accentColor: COLORS.navy,
     },
     {
-      title: "Exit prep: operational risk surfacing in buyer DD",
-      description: "Buyers are asking about incident history, vendor concentration, and compliance posture. You need audit-ready evidence.",
-      action: "calendly"
-    }
+      code: "FO",
+      title: "Family Offices",
+      pain: "Longer holds amplify operational drift. Buying from founders means zero institutional process — and no specialist ops bench.",
+      items: [
+        "Ongoing Control Tower — visibility into what's actually happening",
+        "Governance that scales without adding headcount",
+        "Vendor controls and compliance cadence built for long holds",
+      ],
+      action: "calendly",
+      cta: "Book a Fit Check →",
+      accentColor: COLORS.gold,
+    },
   ];
 
   const handleAction = (action) => {
-    if (action === "scorer" || action === "services") {
-      setPage(action);
-    } else if (action === "calendly") {
+    if (action === "scorer") {
+      setPage("scorer");
+    } else {
       window.open(CALENDLY, "_blank", "noopener,noreferrer");
     }
   };
 
-  const box = { border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, padding: "18px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 260px", minWidth: "min(220px, 100%)", display: "flex", flexDirection: "column" };
-
   return (
-    <Section title="Common Situations Where Funds Engage Us" noCTA type="windowWithCards">
+    <Section title="Who This Is Built For" noCTA type="windowWithCards">
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "20px" }}>
-        These are the scenarios where operational friction becomes urgent — and where early intervention creates disproportionate value.
+        Three buyer types, three distinct problems. Each gets a tailored diligence depth and post-close playbook.
       </p>
       <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
-        {scenarios.map((scenario, i) => (
-          <div key={i} style={box}>
-            <SectionTitle sub>{scenario.title}</SectionTitle>
-            <p style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "16px", flex: "1" }}>
-              {scenario.description}
+        {segments.map((seg, i) => (
+          <div key={i} style={{ border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${seg.accentColor}`, borderRadius: RADIUS.md, padding: "20px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 260px", minWidth: "min(220px, 100%)", display: "flex", flexDirection: "column" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
+              <span style={{ display: "inline-block", padding: "4px 10px", borderRadius: RADIUS.sm, fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase", color: seg.accentColor, background: `${seg.accentColor}15`, border: `1px solid ${seg.accentColor}30` }}>
+                {seg.code}
+              </span>
+              <span style={{ fontFamily: FONTS.heading, fontSize: "1.2rem", fontWeight: 700, color: COLORS.navy }}>
+                {seg.title}
+              </span>
+            </div>
+            <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "14px", fontStyle: "italic" }}>
+              {seg.pain}
             </p>
+            <ul style={{ paddingLeft: "18px", margin: "0 0 16px 0", flex: "1" }}>
+              {seg.items.map((item, j) => (
+                <li key={j} style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>
+                  {item}
+                </li>
+              ))}
+            </ul>
             <button
-              onClick={() => handleAction(scenario.action)}
-              style={{ alignSelf: "flex-start", padding: "10px 20px", background: COLORS.navy, color: "white", border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer", transition: "background 0.2s", whiteSpace: "nowrap" }}
-              onMouseEnter={e => { e.currentTarget.style.background = "#0F1829"; }}
-              onMouseLeave={e => { e.currentTarget.style.background = COLORS.navy; }}>
-              {scenario.action === "scorer" ? "Run the Ops Scorer →" : scenario.action === "services" ? "View Services →" : "Book a Fit Check →"}
+              onClick={() => handleAction(seg.action)}
+              style={{ alignSelf: "flex-start", padding: "10px 20px", background: seg.action === "scorer" ? COLORS.navy : COLORS.gold, color: "white", border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer", transition: "opacity 0.2s", whiteSpace: "nowrap" }}
+              onMouseEnter={e => { e.currentTarget.style.opacity = "0.85"; }}
+              onMouseLeave={e => { e.currentTarget.style.opacity = "1"; }}>
+              {seg.cta}
             </button>
           </div>
         ))}
@@ -215,8 +251,8 @@ function ProofStrip() {
 function EarlyCTA({ setPage }) {
   return (
     <Section
-      primaryCTA={{ text: "Run the Ops Scorer →", action: () => setPage("scorer"), link: null }}
-      secondaryCTA={{ text: "Book a Fit Check", link: CALENDLY }}
+      primaryCTA={{ text: "Book a Fit Check", link: CALENDLY }}
+      secondaryCTA={{ text: "Run the Ops Scorer →", action: () => setPage("scorer"), link: null }}
       centered={true}
       background={`${COLORS.navy}05`}
     >
@@ -380,7 +416,7 @@ export default function LeverExplorer({ setPage }) {
     <div className="fade-in">
       <HeroBlockWithNav setPage={setPage} />
       <MicroProofStrip />
-      <TriggerScenarios setPage={setPage} />
+      <BuyerSegmentCards setPage={setPage} />
 
       <div style={{ marginBottom: "28px" }}>
         <SectionTitle>20 Operational Value Creation Levers Hidden in Your Next Deal</SectionTitle>
@@ -498,11 +534,11 @@ export default function LeverExplorer({ setPage }) {
           Not sure where to start? Let's assess fit and scope the right engagement.
         </p>
         <ButtonPair
-          primaryText="Run the Ops Scorer →"
-          primaryLink={null}
-          primaryAction={() => setPage("scorer")}
-          secondaryText="Book a Fit Check"
-          secondaryLink={CALENDLY}
+          primaryText="Book a Fit Check"
+          primaryLink={CALENDLY}
+          secondaryText="Run the Ops Scorer →"
+          secondaryLink={null}
+          secondaryAction={() => setPage("scorer")}
           centered={true}
           showAvailability={true}
         />
