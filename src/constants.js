@@ -474,7 +474,8 @@ export const globalCSS = `
   /* ── Sticky bar: stack on mobile ────────────────────────────────── */
   @media (max-width: 600px) {
     .scorer-sticky-bar { flex-direction: column; align-items: flex-start; gap: 10px; padding: 14px 16px; }
-    .scorer-sticky-bar > div { width: 100%; justify-content: flex-start; }
+    .sticky-bar-ctas { width: 100%; flex-wrap: wrap; flex-shrink: unset !important; }
+    .sticky-bar-ctas a, .sticky-bar-ctas button:not([aria-label="Dismiss"]) { flex: 1 1 0; text-align: center; justify-content: center; }
   }
 
   /* ── Hero: reduce top/bottom padding on small screens ──────────── */

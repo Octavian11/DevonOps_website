@@ -423,8 +423,23 @@ function LeverExplorerSection({ setPage }) {
         Showing {filtered.length} of {LEVERS.length} levers
       </p>
 
-      {filtered.map((lever, idx) => (
+      {filtered.map((lever, idx) => {
+        const showGroupHeader = domainFilter === "All" && (idx === 0 || filtered[idx - 1].domain !== lever.domain);
+        const domainInfo = DOMAINS[lever.domain];
+        const domainCount = domainFilter === "All" ? filtered.filter(l => l.domain === lever.domain).length : null;
+        return (
         <div key={lever.id}>
+          {showGroupHeader && (
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", margin: `${idx === 0 ? "0" : "24px"} 0 10px` }}>
+              <span style={{ fontFamily: FONTS.body, fontSize: "0.75rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.8px", color: domainInfo?.color || COLORS.steel, background: `${domainInfo?.color || COLORS.steel}15`, padding: "4px 10px", borderRadius: "4px" }}>
+                {domainInfo?.name || lever.domain}
+              </span>
+              <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.bodyMuted }}>
+                {domainCount} lever{domainCount !== 1 ? "s" : ""}
+              </span>
+              <div style={{ flex: 1, height: "1px", background: COLORS.border }} />
+            </div>
+          )}
           <div style={{ background: COLORS.white, border: `1px solid ${expanded === lever.id ? COLORS.steel : COLORS.border}`, borderRadius: RADIUS.md, marginBottom: "8px", transition: "all 0.15s", cursor: "pointer" }}
             onClick={() => setExpanded(expanded === lever.id ? null : lever.id)}>
             <div className="lever-row" style={{ padding: "16px 22px", display: "flex", alignItems: "center", gap: "14px" }}>
@@ -478,7 +493,8 @@ function LeverExplorerSection({ setPage }) {
             </div>
           )}
         </div>
-      ))}
+        );
+      })}
     </Section>
   );
 }

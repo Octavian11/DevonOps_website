@@ -396,7 +396,8 @@ export default function LeverExplorer({ setPage }) {
     if (stickyDismissed) return;
     const handleScroll = () => {
       const scrolled = window.scrollY / Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-      setShowStickyBar(scrolled > 0.7);
+      const threshold = window.innerWidth <= 600 ? 0.5 : 0.65;
+      setShowStickyBar(scrolled > threshold);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -443,13 +444,21 @@ export default function LeverExplorer({ setPage }) {
       {showStickyBar && !stickyDismissed && (
         <div className="scorer-sticky-bar" style={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 200, background: COLORS.navy, borderTop: `3px solid ${COLORS.gold}`, padding: "14px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px", boxShadow: "0 -4px 20px rgba(20,33,61,0.25)" }}>
           <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.offWhite, margin: 0, lineHeight: 1.5 }}>
-            <strong style={{ color: COLORS.gold }}>Before you go —</strong> run the free Ops Scorer. Takes 2 minutes, produces a prioritized assessment.
+            <strong style={{ color: COLORS.gold }}>Ready to find the gaps?</strong> 15 minutes — I'll assess the situation and scope the right engagement.
           </p>
-          <div style={{ display: "flex", gap: "10px", alignItems: "center", flexShrink: 0 }}>
+          <div className="sticky-bar-ctas" style={{ display: "flex", gap: "10px", alignItems: "center", flexShrink: 0 }}>
+            <a
+              href={CALENDLY}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={handleStickyDismiss}
+              style={{ padding: "10px 20px", background: COLORS.gold, color: "white", border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap", textDecoration: "none", display: "inline-block" }}>
+              Book a Fit Check →
+            </a>
             <button
               onClick={() => { handleStickyDismiss(); setPage("scorer"); }}
-              style={{ padding: "10px 20px", background: COLORS.gold, color: "white", border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap" }}>
-              Run the Ops Scorer →
+              style={{ padding: "10px 18px", background: "transparent", border: `1px solid ${COLORS.offWhite}60`, borderRadius: RADIUS.md, color: COLORS.offWhite, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 500, cursor: "pointer", whiteSpace: "nowrap" }}>
+              Run Ops Scorer →
             </button>
             <button
               onClick={handleStickyDismiss}

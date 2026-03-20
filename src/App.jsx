@@ -6,8 +6,9 @@ import LeverExplorer from "./pages/Levers.jsx";
 import ServicesPage from "./pages/Services.jsx";
 import ScorerPage from "./pages/Scorer.jsx";
 import AboutPage from "./pages/About.jsx";
+import ResourcesPage from "./pages/Resources.jsx";
 
-const VALID_PAGES = ["levers", "services", "scorer", "about"];
+const VALID_PAGES = ["levers", "services", "scorer", "about", "resources"];
 
 export default function App() {
   const navigate = useNavigate();
@@ -33,7 +34,8 @@ export default function App() {
       levers: "Operational Value Creation Levers — Devonshire Ops",
       services: "Services & Method — Devonshire Ops",
       scorer: "Ops Scorer — Devonshire Ops",
-      about: "About — Devonshire Ops"
+      about: "About — Devonshire Ops",
+      resources: "Resources — Devonshire Ops"
     };
     document.title = titles[page] || "Devonshire Ops";
   }, [location.pathname, page]);
@@ -43,6 +45,7 @@ export default function App() {
     services: <ServicesPage setPage={setPage} />,
     scorer: <ScorerPage />,
     about: <AboutPage />,
+    resources: <ResourcesPage setPage={setPage} />,
   };
 
   return (

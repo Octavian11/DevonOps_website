@@ -583,6 +583,7 @@ export function Nav({ page, setPage }) {
     { key: "services", label: "Services" },
     { key: "scorer", label: "Score Your Deal" },
     { key: "about", label: "About" },
+    { key: "resources", label: "Resources" },
   ];
   const handleNav = (key) => { setPage(key); setMenuOpen(false); };
   return (
@@ -753,6 +754,7 @@ export function Footer({ setPage }) {
               { key: "services", label: "Services" },
               { key: "scorer", label: "Score Your Deal" },
               { key: "about", label: "About" },
+              { key: "resources", label: "Resources" },
             ].map(({ key, label }) => (
               <button key={key} onClick={() => setPage(key)}
                 style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.offWhite, background: "none", border: "none", padding: 0, textAlign: "left", cursor: "pointer", transition: "color 0.2s" }}
