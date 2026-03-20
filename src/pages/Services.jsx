@@ -2,11 +2,13 @@ import { useState } from "react";
 import {
   COLORS, FONTS, SPACING, SHADOWS, RADIUS,
   CALENDLY, SAMPLE_SCORECARD_PDF, SAMPLE_100DAY_PDF,
+  LEVERS, DOMAINS,
   mailtoHref,
 } from "../constants.js";
 import {
   CTAButton, SectionTitle, ButtonPair, Card, Section,
   TimelineRail, SplitContrast, FAQBlock, ServicesSamplesRow, OfferCards,
+  SeverityBadge, TimingBadge, DomainTag,
 } from "../components.jsx";
 
 // ─── JUMP BAR ────────────────────────────────────────────────
@@ -22,6 +24,7 @@ function ServicesMethodJumpBar() {
 
   const links = [
     { href: "#top", label: "Pricing" },
+    { href: "#lever-explorer", label: "20 Levers" },
     { href: "#rubric", label: "Rubric" },
     { href: "#sequence", label: "100-Day Sequence" },
     { href: "#how-it-works", label: "How It Works" },
@@ -335,9 +338,154 @@ function MemoSampleScreenshots() {
   );
 }
 
+// ─── DOMAIN LEGEND ───────────────────────────────────────────
+
+function DomainLegend() {
+  const [open, setOpen] = useState(true);
+  return (
+    <div style={{ marginBottom: "20px" }}>
+      <button onClick={() => setOpen(!open)} style={{ background: "none", border: "none", cursor: "pointer", fontFamily: FONTS.body, fontSize: "1.1rem", color: COLORS.navy, display: "flex", alignItems: "center", gap: "8px", padding: "6px 0" }}>
+        <span style={{ fontSize: "1.4rem" }}>{open ? "▾" : "▸"}</span>
+        <span>Domain codes legend</span>
+        <div style={{ display: "inline-flex", gap: "6px", marginLeft: "8px" }}>
+          {Object.entries(DOMAINS).map(([k, v]) => (
+            <span key={k} style={{ display: "inline-block", padding: "2px 6px", borderRadius: "2px", fontSize: "0.75rem", fontFamily: FONTS.body, color: v.color, background: `${v.color}10` }}>{v.short}</span>
+          ))}
+        </div>
+      </button>
+      {open && (
+        <div className="fade-in" style={{ marginTop: "10px", padding: "16px 20px", background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: "6px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "12px" }}>
+            {Object.entries(DOMAINS).map(([k, v]) => (
+              <div key={k} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
+                <span style={{ display: "inline-block", padding: "3px 8px", borderRadius: "3px", fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 500, color: v.color, background: `${v.color}15`, border: `1px solid ${v.color}30`, flexShrink: 0, marginTop: "2px" }}>{v.short}</span>
+                <div>
+                  <span style={{ fontFamily: FONTS.body, fontSize: "1.05rem", fontWeight: 600, color: COLORS.charcoal }}>{v.name}</span>
+                  <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, marginTop: "2px", lineHeight: 1.5 }}>{v.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── LEVER EXPLORER SECTION ──────────────────────────────────
+
+function LeverExplorerSection({ setPage }) {
+  const [search, setSearch] = useState("");
+  const [domainFilter, setDomainFilter] = useState("All");
+  const [timingFilter, setTimingFilter] = useState("All");
+  const [severityFilter, setSeverityFilter] = useState("All");
+  const [expanded, setExpanded] = useState(null);
+
+  const filtered = LEVERS.filter(l => {
+    if (domainFilter !== "All" && l.domain !== domainFilter) return false;
+    if (timingFilter !== "All" && l.timing !== timingFilter) return false;
+    if (severityFilter !== "All" && l.severity !== severityFilter) return false;
+    if (search && !l.name.toLowerCase().includes(search.toLowerCase()) && !l.definition.toLowerCase().includes(search.toLowerCase())) return false;
+    return true;
+  });
+
+  const selectStyle = { padding: "10px 14px", border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, background: COLORS.white, cursor: "pointer", minWidth: "160px", boxShadow: "0 1px 2px rgba(67, 97, 125, 0.05)" };
+
+  return (
+    <Section title="20 Operational Value Creation Levers" noCTA id="lever-explorer">
+      <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "720px", marginBottom: "20px" }}>
+        {LEVERS.length} operational friction points across 6 domains — severity-rated, PE impact framed. Filter by timing, domain, or severity. Open any lever for symptoms and PE impact analysis.
+      </p>
+
+      <DomainLegend />
+
+      <div className="lever-filters" style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "24px", alignItems: "center" }}>
+        <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search levers..." style={{ ...selectStyle, minWidth: "220px", flex: "1 1 220px" }} />
+        <select value={domainFilter} onChange={e => setDomainFilter(e.target.value)} style={selectStyle}>
+          <option value="All">All Domains</option>
+          {Object.entries(DOMAINS).map(([k, v]) => <option key={k} value={k}>{v.name}</option>)}
+        </select>
+        <select value={timingFilter} onChange={e => setTimingFilter(e.target.value)} style={selectStyle}>
+          <option value="All">All Timing</option>
+          <option value="Pre-Close Red Flag">Pre-Close Red Flag</option>
+          <option value="First 100 Days">First 100 Days</option>
+          <option value="Ongoing Hold">Ongoing Hold</option>
+        </select>
+        <select value={severityFilter} onChange={e => setSeverityFilter(e.target.value)} style={selectStyle}>
+          <option value="All">All Severity</option>
+          <option value="Critical">Critical</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+        </select>
+      </div>
+
+      <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, marginBottom: "18px" }}>
+        Showing {filtered.length} of {LEVERS.length} levers
+      </p>
+
+      {filtered.map((lever, idx) => (
+        <div key={lever.id}>
+          <div style={{ background: COLORS.white, border: `1px solid ${expanded === lever.id ? COLORS.steel : COLORS.border}`, borderRadius: RADIUS.md, marginBottom: "8px", transition: "all 0.15s", cursor: "pointer" }}
+            onClick={() => setExpanded(expanded === lever.id ? null : lever.id)}>
+            <div className="lever-row" style={{ padding: "16px 22px", display: "flex", alignItems: "center", gap: "14px" }}>
+              <span style={{ fontFamily: FONTS.body, fontSize: "1.3rem", color: COLORS.navy, width: "20px", flexShrink: 0 }}>
+                {expanded === lever.id ? "▾" : "▸"}
+              </span>
+              <DomainTag domain={lever.domain} />
+              <span style={{ fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 500, color: COLORS.charcoal, flex: 1 }}>
+                {lever.name}
+              </span>
+              <div className="lever-badges" style={{ display: "flex", gap: "8px", flexShrink: 0 }}>
+                <SeverityBadge severity={lever.severity} />
+                <TimingBadge timing={lever.timing} />
+              </div>
+            </div>
+            {expanded === lever.id && (
+              <div className="lever-expand lever-expand-detail" style={{ padding: "0 22px 22px 52px", borderTop: `1px solid ${COLORS.border}` }} onClick={e => e.stopPropagation()}>
+                <div style={{ paddingTop: "18px" }}>
+                  <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "8px" }}>Definition</h4>
+                  <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.definition}</p>
+                  <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "8px" }}>Symptoms</h4>
+                  <ul style={{ paddingLeft: "22px", marginBottom: "18px" }}>
+                    {lever.symptoms.map((s, i) => <li key={i} style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "6px" }}>{s}</li>)}
+                  </ul>
+                  <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "8px" }}>PE Impact</h4>
+                  <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.peImpact}</p>
+                  <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "8px" }}>What Good Looks Like</h4>
+                  <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.whatGood}</p>
+                  <div style={{ display: "flex", gap: "16px", paddingTop: "8px", borderTop: `1px solid ${COLORS.border}` }}>
+                    <button onClick={() => setPage("scorer")} style={{ background: "none", border: "none", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, cursor: "pointer", textDecoration: "underline", padding: 0 }}>→ Assess your readiness</button>
+                    <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.gold, textDecoration: "underline" }}>→ 15-Minute Fit Check</a>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {idx === 4 && filtered.length > 5 && (
+            <div style={{ margin: "12px 0 16px", padding: "20px 28px", background: COLORS.navy, borderRadius: RADIUS.md, boxShadow: "0 4px 12px rgba(67, 97, 125, 0.15)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
+              <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.offWhite, margin: 0, lineHeight: 1.55 }}>
+                <strong style={{ color: COLORS.gold }}>Not sure which of these apply to your deal?</strong> Run the Ops Scorer — free, 2 minutes, produces a prioritized assessment.
+              </p>
+              <div style={{ display: "flex", gap: "10px", flexShrink: 0 }}>
+                <button onClick={() => setPage("scorer")} style={{ padding: "10px 20px", background: COLORS.gold, color: COLORS.white, border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer" }}>
+                  Run the Ops Scorer →
+                </button>
+                <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ padding: "10px 20px", background: "transparent", color: COLORS.offWhite, border: `1px solid ${COLORS.offWhite}60`, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer", textDecoration: "none", display: "inline-block" }}>
+                  Book a Fit Check
+                </a>
+              </div>
+            </div>
+          )}
+        </div>
+      ))}
+    </Section>
+  );
+}
+
 // ─── SERVICES PAGE ───────────────────────────────────────────
 
-export default function ServicesPage() {
+export default function ServicesPage({ setPage }) {
   return (
     <div>
       <div style={{ marginBottom: SPACING.lg }}>
@@ -356,6 +504,10 @@ export default function ServicesPage() {
       <ServicesMethodJumpBar />
       <OfferCards />
       <ServicesSamplesRow />
+
+      <div style={{ marginTop: "28px" }}>
+        <LeverExplorerSection setPage={setPage} />
+      </div>
 
       <div id="rubric" style={{ marginTop: "28px" }}>
         <FrameworkRubricTable />
