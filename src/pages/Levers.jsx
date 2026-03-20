@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import {
   COLORS, FONTS, SPACING, SHADOWS, RADIUS,
   CALENDLY, SAMPLE_SCORECARD_PDF, SAMPLE_100DAY_PDF,
-  LEVERS, DOMAINS, mailtoHref,
+  LEVERS, DOMAINS,
 } from "../constants.js";
 import {
-  SeverityBadge, TimingBadge, DomainTag,
+  DomainTag,
   CTAButton, SectionTitle, ButtonPair, Section,
-  TimelineRail, SplitContrast, FAQBlock,
+  SplitContrast, FAQBlock,
   LeadMagnetLink, OfferCards,
 } from "../components.jsx";
 
@@ -39,7 +39,6 @@ function HeroBlockWithNav({ setPage }) {
             <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: "rgba(255,255,255,0.95)", textAlign: "center" }}>
               Currently accepting 1–2 new engagements
             </span>
-
           </div>
           <button onClick={() => setPage("scorer")}
             style={{ display: "inline-block", padding: "12px 26px", background: "transparent", color: COLORS.gold, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.md, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: `2px solid ${COLORS.gold}` }}
@@ -49,40 +48,6 @@ function HeroBlockWithNav({ setPage }) {
           </button>
         </div>
       </div>
-    </div>
-  );
-}
-
-// ─── DOMAIN LEGEND ───────────────────────────────────────────
-
-function DomainLegend() {
-  const [open, setOpen] = useState(true);
-  return (
-    <div style={{ marginBottom: "20px" }}>
-      <button onClick={() => setOpen(!open)} style={{ background: "none", border: "none", cursor: "pointer", fontFamily: FONTS.body, fontSize: "1.1rem", color: COLORS.navy, display: "flex", alignItems: "center", gap: "8px", padding: "6px 0" }}>
-        <span style={{ fontSize: "1.4rem" }}>{open ? "▾" : "▸"}</span>
-        <span>Domain codes legend</span>
-        <div style={{ display: "inline-flex", gap: "6px", marginLeft: "8px" }}>
-          {Object.entries(DOMAINS).map(([k, v]) => (
-            <span key={k} style={{ display: "inline-block", padding: "2px 6px", borderRadius: "2px", fontSize: "0.75rem", fontFamily: FONTS.body, color: v.color, background: `${v.color}10` }}>{v.short}</span>
-          ))}
-        </div>
-      </button>
-      {open && (
-        <div className="fade-in" style={{ marginTop: "10px", padding: "16px 20px", background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: "6px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "12px" }}>
-            {Object.entries(DOMAINS).map(([k, v]) => (
-              <div key={k} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
-                <span style={{ display: "inline-block", padding: "3px 8px", borderRadius: "3px", fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 500, color: v.color, background: `${v.color}15`, border: `1px solid ${v.color}30`, flexShrink: 0, marginTop: "2px" }}>{v.short}</span>
-                <div>
-                  <span style={{ fontFamily: FONTS.body, fontSize: "1.05rem", fontWeight: 600, color: COLORS.charcoal }}>{v.name}</span>
-                  <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, marginTop: "2px", lineHeight: 1.5 }}>{v.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 }
@@ -203,62 +168,84 @@ function BuyerSegmentCards({ setPage }) {
   );
 }
 
-// ─── SECONDARY CAPTURE ROW ───────────────────────────────────
+// ─── LEVERS TEASER SECTION ───────────────────────────────────
 
-function SecondaryCaptureRow({ contextLabel, bodyExtra }) {
-  const subject = `Devonshire Ops – ${contextLabel} (request)`;
-  const body = `Hi Hassan,\n\nI reviewed Devonshire Operations and would like the memo format / examples.\n\nContext:\n${bodyExtra || "- (add a sentence about the deal/portco)"}\n\nBest,\n`;
-
+function LeversTeaserSection({ setPage }) {
   return (
-    <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "center", marginTop: "10px" }}>
-      <LeadMagnetLink pdfUrl={SAMPLE_SCORECARD_PDF} variant="link">
-        View sample memo format
-      </LeadMagnetLink>
-      <a href={mailtoHref(subject, body)}
-        style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 700, color: COLORS.navy, textDecoration: "none", borderBottom: `2px solid ${COLORS.navy}` }}>
-        Email for examples
-      </a>
+    <div style={{ marginBottom: "28px" }}>
+      <SectionTitle>20 Operational Value Creation Levers</SectionTitle>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "720px" }}>
+        {LEVERS.length} operational friction points across 6 domains — severity-rated, PE impact framed. Browse the full interactive lever explorer on the Services page.
+      </p>
+
+      <div style={{ marginTop: "18px", padding: "14px 18px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0`, maxWidth: "720px" }}>
+        <p style={{ fontFamily: FONTS.body, fontSize: "0.92rem", color: COLORS.charcoal, margin: 0, lineHeight: 1.6 }}>
+          <strong>16,000+ PE-backed companies are currently held 4+ years — 52% of total PE inventory, the highest on record.</strong> With median hold periods now at 6.6 years, the window for operational value creation is finite. Funds that identify and close these gaps early capture disproportionate returns.
+        </p>
+        <span style={{ fontFamily: FONTS.body, fontSize: "0.78rem", color: COLORS.bodyMuted, letterSpacing: "0.4px", textTransform: "uppercase", display: "block", marginTop: "6px" }}>McKinsey Global Private Markets Review 2026</span>
+      </div>
+
+      <div style={{ marginTop: "16px", display: "flex", gap: "8px", flexWrap: "wrap" }}>
+        {Object.entries(DOMAINS).map(([k]) => (
+          <DomainTag key={k} domain={k} />
+        ))}
+      </div>
+
+      <div style={{ marginTop: "18px" }}>
+        <ButtonPair
+          primaryText="Book a Fit Check"
+          primaryLink={CALENDLY}
+          secondaryText="Browse All 20 Levers →"
+          secondaryAction={() => setPage("services")}
+          secondaryLink={null}
+        />
+      </div>
     </div>
   );
 }
 
-// ─── PROOF STRIP ─────────────────────────────────────────────
+// ─── COST OF INACTION ────────────────────────────────────────
 
-function ProofStrip() {
+function CostOfInaction() {
+  const scenarios = [
+    {
+      title: "No incident governance post-close",
+      what: "A production failure in month 2 has no severity classification, no escalation path, and no owner. Resolution takes 3 days. Board emergency call. SLA breach letter follows.",
+      consequence: "EBITDA drag from rework and churn. LP questions about management quality — in month 2 of the hold.",
+    },
+    {
+      title: "No change control → value creation stalls",
+      what: "40% of incidents trace to recent deployments. Releases freeze as the team tries to stabilize. Every VCP initiative requiring a technology change gets deferred.",
+      consequence: "Value creation execution delayed 60–90 days. The operational narrative that supports your exit thesis doesn't exist yet.",
+    },
+    {
+      title: "No KPI cadence → board flying blind",
+      what: "Six months post-close, board updates are still verbal and anecdotal. No baselines, no targets, no operating rhythm. Exit prep begins with no operational track record to show.",
+      consequence: "Multiple risk at exit. Buyer diligence surfaces what the seller should have already fixed — and prices it in.",
+    },
+  ];
+
   return (
-    <Section title="See What the Deliverables Actually Look Like" noCTA centered>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "12px" }}>
-        These are the exact formats delivered to investment committees. See what your IC diligence memo and 100-day operating plan should look like — severity-rated, PE-impact framed, board-ready from Day 1.
+    <Section title="The Cost of Not Acting" noCTA>
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "820px", marginBottom: "20px" }}>
+        Operational gaps don't stay static under PE ownership. Leverage amplifies friction. These are the scenarios that play out when diligence misses them — and post-close stabilization doesn't happen.
       </p>
-      <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.bodyMuted, marginBottom: "16px" }}>
-        Samples are anonymized/fictional and provided for format demonstration only.
-      </p>
-      <div style={{ display: "flex", flexDirection: "row", gap: SPACING.sm, justifyContent: "center", flexWrap: "wrap", marginBottom: "12px" }}>
-        <LeadMagnetLink pdfUrl={SAMPLE_SCORECARD_PDF} variant="button">
-          Sample Ops Diligence Scorecard — IC-ready, severity-rated (PDF)
-        </LeadMagnetLink>
-        <LeadMagnetLink pdfUrl={SAMPLE_100DAY_PDF} variant="button">
-          Sample 100-Day Stabilization Plan — Visibility → Control → Cadence (PDF)
-        </LeadMagnetLink>
+      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+        {scenarios.map((s, i) => (
+          <div key={i} style={{ border: `1px solid #FEB2B2`, borderLeft: `3px solid #C53030`, borderRadius: RADIUS.md, padding: "18px", background: "#FFF5F5", flex: "1 1 260px", minWidth: "min(220px, 100%)", display: "flex", flexDirection: "column", gap: "12px" }}>
+            <div style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", fontWeight: 700, color: "#9B2C2C" }}>
+              {s.title}
+            </div>
+            <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: "#4A2020", lineHeight: 1.6, margin: 0, flex: 1 }}>
+              {s.what}
+            </p>
+            <div style={{ padding: "10px 12px", background: "white", border: `1px solid #FEB2B2`, borderRadius: RADIUS.sm }}>
+              <span style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, color: "#C53030", letterSpacing: "0.7px", textTransform: "uppercase", display: "block", marginBottom: "4px" }}>PE Consequence</span>
+              <p style={{ fontFamily: FONTS.body, fontSize: "0.92rem", color: "#4A2020", lineHeight: 1.55, margin: 0 }}>{s.consequence}</p>
+            </div>
+          </div>
+        ))}
       </div>
-      <SecondaryCaptureRow contextLabel="Ops diligence / stabilization" />
-    </Section>
-  );
-}
-
-// ─── EARLY CTA ───────────────────────────────────────────────
-
-function EarlyCTA({ setPage }) {
-  return (
-    <Section
-      primaryCTA={{ text: "Book a Fit Check", link: CALENDLY }}
-      secondaryCTA={{ text: "Run the Ops Scorer →", action: () => setPage("scorer"), link: null }}
-      centered={true}
-      background={`${COLORS.navy}05`}
-    >
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, textAlign: "center", margin: "0 auto" }}>
-        Want to see which operational gaps exist in your next deal?
-      </p>
     </Section>
   );
 }
@@ -294,30 +281,6 @@ function ChooseSituation({ setPage }) {
           centered={true}
         />
       </div>
-    </Section>
-  );
-}
-
-// ─── DEAL IMPLICATIONS ───────────────────────────────────────
-
-function DealImplications() {
-  const leftSide = {
-    title: "Risks We Surface",
-    description: "Operational risks that belong in the IC memo and impact value creation:",
-    items: ["Operational fragility that threatens EBITDA and customer retention", "Vendor concentration risk and change-of-control clauses", "Key-person dependency and 'tribal knowledge' failure modes", "Incident/change patterns that predict outages and SLA misses"]
-  };
-
-  const rightSide = {
-    title: "Value We Unlock",
-    description: "Turn operational risk into a value creation advantage:",
-    items: ["Severity-rated findings that inform hold pricing and deal structure", "Day-1 critical path that prevents EBITDA erosion in first 100 days", "Board-ready governance that builds credibility with LPs", "Exit-ready operational narrative that protects multiples in diligence"],
-    highlight: "Operational clarity → better hold outcomes"
-  };
-
-  return (
-    <Section title="Where Operational Gaps Show Up in Your Deal" noCTA
-      subtitle="These are the risk vectors that compress your return — and the value creation levers that reverse them.">
-      <SplitContrast leftSide={leftSide} rightSide={rightSide} />
     </Section>
   );
 }
@@ -371,15 +334,48 @@ function MiniCases() {
   );
 }
 
+// ─── COMPACT ABOUT BIO ───────────────────────────────────────
+
+function CompactAboutBio({ setPage }) {
+  const metrics = [
+    { value: "~67%", label: "incident reduction" },
+    { value: "$2M+", label: "annual savings" },
+    { value: "94→99%", label: "uptime" },
+  ];
+
+  return (
+    <Section noCTA background={`${COLORS.navy}04`}>
+      <div style={{ display: "flex", gap: "20px", alignItems: "flex-start", flexWrap: "wrap" }}>
+        <div style={{ flexShrink: 0, width: "64px", height: "64px", borderRadius: "50%", background: COLORS.navy, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <span style={{ fontFamily: FONTS.heading, fontSize: "1.4rem", fontWeight: 700, color: COLORS.gold, lineHeight: 1 }}>HT</span>
+        </div>
+        <div style={{ flex: "1 1 280px" }}>
+          <div style={{ fontFamily: FONTS.heading, fontSize: "1.2rem", fontWeight: 700, color: COLORS.navy, marginBottom: "4px" }}>Hassan Tariq</div>
+          <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", color: COLORS.steel, lineHeight: 1.5, marginBottom: "14px" }}>
+            15+ years platform ops · JPMorgan · Barclays · Bank of America · Lazard<br />Columbia Executive MBA '26
+          </div>
+          <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", marginBottom: "16px" }}>
+            {metrics.map((m, i) => (
+              <div key={i}>
+                <div style={{ fontFamily: FONTS.body, fontSize: "1.1rem", fontWeight: 700, color: COLORS.gold }}>{m.value}</div>
+                <div style={{ fontFamily: FONTS.body, fontSize: "0.78rem", color: COLORS.steel }}>{m.label}</div>
+              </div>
+            ))}
+          </div>
+          <button
+            onClick={() => setPage("about")}
+            style={{ background: "none", border: "none", padding: 0, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, color: COLORS.navy, cursor: "pointer", textDecoration: "underline", textUnderlineOffset: "3px" }}>
+            Read full credentials →
+          </button>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
 // ─── LEVER EXPLORER PAGE ─────────────────────────────────────
 
 export default function LeverExplorer({ setPage }) {
-  const [search, setSearch] = useState("");
-  const [domainFilter, setDomainFilter] = useState("All");
-  const [timingFilter, setTimingFilter] = useState("All");
-  const [severityFilter, setSeverityFilter] = useState("All");
-  const [expanded, setExpanded] = useState(null);
-
   // ── Scroll-depth sticky bar ──────────────────────────────────
   const [showStickyBar, setShowStickyBar] = useState(false);
   const [stickyDismissed, setStickyDismissed] = useState(() => {
@@ -402,128 +398,17 @@ export default function LeverExplorer({ setPage }) {
     try { sessionStorage.setItem("scorerBarDismissed", "true"); } catch {}
   };
 
-  const filtered = LEVERS.filter(l => {
-    if (domainFilter !== "All" && l.domain !== domainFilter) return false;
-    if (timingFilter !== "All" && l.timing !== timingFilter) return false;
-    if (severityFilter !== "All" && l.severity !== severityFilter) return false;
-    if (search && !l.name.toLowerCase().includes(search.toLowerCase()) && !l.definition.toLowerCase().includes(search.toLowerCase())) return false;
-    return true;
-  });
-
-  const selectStyle = { padding: "10px 14px", border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, background: COLORS.white, cursor: "pointer", minWidth: "160px", boxShadow: "0 1px 2px rgba(67, 97, 125, 0.05)" };
-
   return (
     <div className="fade-in">
       <HeroBlockWithNav setPage={setPage} />
       <MicroProofStrip />
       <BuyerSegmentCards setPage={setPage} />
-
-      <div style={{ marginBottom: "28px" }}>
-        <SectionTitle>20 Operational Value Creation Levers Hidden in Your Next Deal</SectionTitle>
-        <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "720px" }}>
-          {LEVERS.length} operational friction points across 6 domains — with severity ratings, symptoms, and PE impact analysis. The levers show <em>what</em> is broken and <em>why</em> it matters. The remediation playbooks — the <em>how</em> — are delivered in the engagement.
-        </p>
-        {/* McKinsey GPMR 2026 — aging portfolio urgency stat */}
-        <div style={{ marginTop: "18px", padding: "14px 18px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0`, maxWidth: "720px" }}>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.92rem", color: COLORS.charcoal, margin: 0, lineHeight: 1.6 }}>
-            <strong>16,000+ PE-backed companies are currently held 4+ years — 52% of total PE inventory, the highest on record.</strong> With median hold periods now at 6.6 years, the window for operational value creation is finite. Funds that identify and close these gaps early capture disproportionate returns.
-          </p>
-          <span style={{ fontFamily: FONTS.body, fontSize: "0.78rem", color: COLORS.bodyMuted, letterSpacing: "0.4px", textTransform: "uppercase", display: "block", marginTop: "6px" }}>McKinsey Global Private Markets Review 2026</span>
-        </div>
-      </div>
-
-      <DomainLegend />
-
-      <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, marginBottom: "14px", fontStyle: "italic" }}>
-        Filter by timing (Pre-Close vs. First 100 Days), domain, or severity. Open any lever for symptoms and PE impact analysis.
-      </p>
-
-      <div className="lever-filters" style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "24px", alignItems: "center" }}>
-        <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search levers..." style={{ ...selectStyle, minWidth: "220px", flex: "1 1 220px" }} />
-        <select value={domainFilter} onChange={e => setDomainFilter(e.target.value)} style={selectStyle}>
-          <option value="All">All Domains</option>
-          {Object.entries(DOMAINS).map(([k, v]) => <option key={k} value={k}>{v.name}</option>)}
-        </select>
-        <select value={timingFilter} onChange={e => setTimingFilter(e.target.value)} style={selectStyle}>
-          <option value="All">All Timing</option>
-          <option value="Pre-Close Red Flag">Pre-Close Red Flag</option>
-          <option value="First 100 Days">First 100 Days</option>
-          <option value="Ongoing Hold">Ongoing Hold</option>
-        </select>
-        <select value={severityFilter} onChange={e => setSeverityFilter(e.target.value)} style={selectStyle}>
-          <option value="All">All Severity</option>
-          <option value="Critical">Critical</option>
-          <option value="High">High</option>
-          <option value="Medium">Medium</option>
-        </select>
-      </div>
-
-      <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, marginBottom: "18px" }}>
-        Showing {filtered.length} of {LEVERS.length} levers
-      </p>
-
-      {filtered.map((lever, idx) => (
-        <div key={lever.id}>
-          <div style={{ background: COLORS.white, border: `1px solid ${expanded === lever.id ? COLORS.steel : COLORS.border}`, borderRadius: RADIUS.md, marginBottom: "8px", transition: "all 0.15s", cursor: "pointer" }}
-            onClick={() => setExpanded(expanded === lever.id ? null : lever.id)}>
-            <div className="lever-row" style={{ padding: "16px 22px", display: "flex", alignItems: "center", gap: "14px" }}>
-              <span style={{ fontFamily: FONTS.body, fontSize: "1.3rem", color: COLORS.navy, width: "20px", flexShrink: 0 }}>
-                {expanded === lever.id ? "▾" : "▸"}
-              </span>
-              <DomainTag domain={lever.domain} />
-              <span style={{ fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 500, color: COLORS.charcoal, flex: 1 }}>
-                {lever.name}
-              </span>
-              <div className="lever-badges" style={{ display: "flex", gap: "8px", flexShrink: 0 }}>
-                <SeverityBadge severity={lever.severity} />
-                <TimingBadge timing={lever.timing} />
-              </div>
-            </div>
-            {expanded === lever.id && (
-              <div className="lever-expand lever-expand-detail" style={{ padding: "0 22px 22px 52px", borderTop: `1px solid ${COLORS.border}` }} onClick={e => e.stopPropagation()}>
-                <div style={{ paddingTop: "18px" }}>
-                  <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "8px" }}>Definition</h4>
-                  <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.definition}</p>
-                  <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "8px" }}>Symptoms</h4>
-                  <ul style={{ paddingLeft: "22px", marginBottom: "18px" }}>
-                    {lever.symptoms.map((s, i) => <li key={i} style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "6px" }}>{s}</li>)}
-                  </ul>
-                  <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "8px" }}>PE Impact</h4>
-                  <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.peImpact}</p>
-                  <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "8px" }}>What Good Looks Like</h4>
-                  <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.whatGood}</p>
-                  <div style={{ display: "flex", gap: "16px", paddingTop: "8px", borderTop: `1px solid ${COLORS.border}` }}>
-                    <button onClick={() => setPage("scorer")} style={{ background: "none", border: "none", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, cursor: "pointer", textDecoration: "underline", padding: 0 }}>→ Assess your readiness</button>
-                    <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.gold, textDecoration: "underline" }}>→ 15-Minute Fit Check</a>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {idx === 4 && filtered.length > 5 && (
-            <div style={{ margin: "12px 0 16px", padding: "20px 28px", background: COLORS.navy, borderRadius: RADIUS.md, boxShadow: "0 4px 12px rgba(67, 97, 125, 0.15)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
-              <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.offWhite, margin: 0, lineHeight: 1.55 }}>
-                <strong style={{ color: COLORS.gold }}>Not sure which of these apply to your deal?</strong> Run the Ops Scorer — free, 2 minutes, produces a prioritized assessment.
-              </p>
-              <div style={{ display: "flex", gap: "10px", flexShrink: 0 }}>
-                <button onClick={() => setPage("scorer")} style={{ padding: "10px 20px", background: COLORS.gold, color: COLORS.white, border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer" }}>
-                  Run the Ops Scorer →
-                </button>
-                <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ padding: "10px 20px", background: "transparent", color: COLORS.offWhite, border: `1px solid ${COLORS.offWhite}60`, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer", textDecoration: "none", display: "inline-block" }}>
-                  Book a Fit Check
-                </a>
-              </div>
-            </div>
-          )}
-        </div>
-      ))}
-
+      <LeversTeaserSection setPage={setPage} />
+      <CostOfInaction />
       <ChooseSituation setPage={setPage} />
       <OfferCards setPage={setPage} />
-      <ProofStrip />
-      <DealImplications />
       <MiniCases />
+      <CompactAboutBio setPage={setPage} />
       <FAQBlock />
 
       <Section noCTA background={`${COLORS.navy}05`}>
