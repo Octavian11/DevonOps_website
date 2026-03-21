@@ -586,16 +586,30 @@ export function OfferCards({ setPage }) {
 }
 
 export function TestimonialBlock() {
+  const cardStyle = { border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "22px 24px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 300px", minWidth: "min(260px, 100%)" };
+  const contextLabel = { fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "10px", display: "block" };
+  const cardTitle = { fontFamily: FONTS.heading, fontSize: "1.1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" };
+  const body = { fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.65, margin: "0 0 14px" };
+  const result = { fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0, padding: "10px 12px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0` };
   return (
-    <Section title="What Others Say" noCTA>
-      <div style={{ maxWidth: "680px", margin: "0 auto", padding: "24px 28px", background: COLORS.white, borderLeft: `4px solid ${COLORS.gold}`, borderRadius: RADIUS.md, boxShadow: SHADOWS.sm }}>
-        <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.75, margin: "0 0 18px", fontStyle: "italic" }}>
-          "[Placeholder quote — e.g., from Columbia professor, mentor, or former colleague about Hassan's operational rigor and PE-grade thinking]"
-        </p>
-        <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", fontWeight: 700, color: COLORS.navy }}>
-          [Name, Title, Institution/Company]
+    <Section title="Institutional Track Record" noCTA>
+      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginBottom: "14px" }}>
+        <div style={cardStyle}>
+          <span style={contextLabel}>Platform Stabilization · Multi-strategy hedge fund, ~$10B AUM</span>
+          <div style={cardTitle}>Platform Stabilization & Reliability</div>
+          <p style={body}>Inherited a platform with 4 critical outages in 12 months, 94% availability, and a deteriorating NPS score. Built a 10-person global ops team, installed incident command with severity classification and postmortem discipline, and stood up a KPI cadence across 18 metrics.</p>
+          <div style={result}>Zero critical outages for 18 consecutive months. Availability: 94% → 99.2%. MTTR reduced 31%. NPS improved +22 points. Supported ~50% AUM growth with ~12% headcount increase.</div>
+        </div>
+        <div style={cardStyle}>
+          <span style={contextLabel}>Vendor Optimization · Global asset manager, ~$40M vendor program</span>
+          <div style={cardTitle}>Vendor Optimization & Cost Control</div>
+          <p style={body}>Vendor costs growing 22% annually, outpacing business growth. 15 fragmented providers, no utilization visibility, no governance. Built spend transparency, ran utilization analytics, consolidated 15 vendors to 8 strategic partners, and installed scorecard governance with QBRs.</p>
+          <div style={result}>&gt;$2M annual run-rate reduction. 10–15% licensing savings via right-sizing. Cost per $1B AUM reduced ~28%. Payback &lt;6 months.</div>
         </div>
       </div>
+      <p style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.bodyMuted, lineHeight: 1.5, margin: 0 }}>
+        Identifiers withheld. Metrics are representative and sanitized for confidentiality. Details and references available on request.
+      </p>
     </Section>
   );
 }
