@@ -184,7 +184,7 @@ function LeversTeaserSection({ setPage }) {
         {LEVERS.length} operational friction points across 6 domains — severity-rated, PE impact framed. Browse the full interactive lever explorer on the Services page.
       </p>
 
-      <div style={{ marginTop: "18px", padding: "14px 18px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0`, maxWidth: "720px" }}>
+      <div style={{ marginTop: "18px", padding: "14px 32px", background: `${COLORS.gold}0D`, borderTop: `3px solid ${COLORS.gold}`, borderBottom: `1px solid ${COLORS.gold}40`, marginLeft: "-32px", marginRight: "-32px", marginBottom: "4px" }}>
         <p style={{ fontFamily: FONTS.body, fontSize: "0.92rem", color: COLORS.charcoal, margin: 0, lineHeight: 1.6 }}>
           <strong>16,000+ PE-backed companies are currently held 4+ years — 52% of total PE inventory, the highest on record.</strong> With median hold periods now at 6.6 years, the window for operational value creation is finite. Funds that identify and close these gaps early capture disproportionate returns.
         </p>
