@@ -380,6 +380,7 @@ function LeverExplorerSection({ setPage }) {
   const [timingFilter, setTimingFilter] = useState("All");
   const [severityFilter, setSeverityFilter] = useState("All");
   const [expanded, setExpanded] = useState(null);
+  const [showAll, setShowAll] = useState(false);
 
   const filtered = LEVERS.filter(l => {
     if (domainFilter !== "All" && l.domain !== domainFilter) return false;
@@ -389,12 +390,21 @@ function LeverExplorerSection({ setPage }) {
     return true;
   });
 
+  const hasActiveFilter = search || domainFilter !== "All" || timingFilter !== "All" || severityFilter !== "All";
+  const visible = hasActiveFilter ? filtered : (showAll ? filtered : filtered.filter(l => l.common));
+
   const selectStyle = { padding: "10px 14px", border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, background: COLORS.white, cursor: "pointer", minWidth: "160px", boxShadow: "0 1px 2px rgba(67, 97, 125, 0.05)" };
 
   return (
     <Section title="20 Operational Value Creation Levers" noCTA id="lever-explorer">
+      <style>{`
+        @media (max-width: 540px) {
+          .lever-filters input { width: 100% !important; flex: 1 1 100% !important; }
+          .lever-filters select { flex: 1 1 calc(50% - 6px) !important; min-width: 120px !important; }
+        }
+      `}</style>
       <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "720px", marginBottom: "20px" }}>
-        {LEVERS.length} operational friction points across 6 domains — severity-rated, PE impact framed. Filter by timing, domain, or severity. Open any lever for symptoms and PE impact analysis.
+        {LEVERS.length} operational friction points across 6 domains — severity-rated, PE impact framed. {!showAll && !hasActiveFilter ? "Showing the 6 most common gaps. Use filters above or expand to see all 20." : "Filter by timing, domain, or severity. Open any lever for symptoms and PE impact analysis."}
       </p>
 
       <DomainLegend />
@@ -420,11 +430,11 @@ function LeverExplorerSection({ setPage }) {
       </div>
 
       <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, marginBottom: "18px" }}>
-        Showing {filtered.length} of {LEVERS.length} levers
+        Showing {visible.length} of {LEVERS.length} levers
       </p>
 
-      {filtered.map((lever, idx) => {
-        const showGroupHeader = domainFilter === "All" && (idx === 0 || filtered[idx - 1].domain !== lever.domain);
+      {visible.map((lever, idx) => {
+        const showGroupHeader = domainFilter === "All" && (idx === 0 || visible[idx - 1].domain !== lever.domain);
         const domainInfo = DOMAINS[lever.domain];
         const domainCount = domainFilter === "All" ? filtered.filter(l => l.domain === lever.domain).length : null;
         return (
@@ -477,7 +487,7 @@ function LeverExplorerSection({ setPage }) {
             )}
           </div>
 
-          {idx === 4 && filtered.length > 5 && (
+          {idx === 4 && visible.length > 5 && (
             <div style={{ margin: "12px 0 16px", padding: "20px 28px", background: COLORS.navy, borderRadius: RADIUS.md, boxShadow: "0 4px 12px rgba(67, 97, 125, 0.15)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
               <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.offWhite, margin: 0, lineHeight: 1.55 }}>
                 <strong style={{ color: COLORS.gold }}>Not sure which of these apply to your deal?</strong> Run the Ops Scorer — free, 2 minutes, produces a prioritized assessment.
@@ -495,6 +505,14 @@ function LeverExplorerSection({ setPage }) {
         </div>
         );
       })}
+
+      {!showAll && !hasActiveFilter && (
+        <div style={{ textAlign: "center", marginTop: "24px" }}>
+          <button onClick={() => setShowAll(true)} style={{ padding: "12px 28px", background: "transparent", border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.navy, cursor: "pointer", fontWeight: 500 }}>
+            Show all {LEVERS.length} levers ↓
+          </button>
+        </div>
+      )}
     </Section>
   );
 }

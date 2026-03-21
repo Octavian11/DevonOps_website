@@ -8,7 +8,7 @@ import {
   DomainTag,
   CTAButton, SectionTitle, ButtonPair, Section,
   SplitContrast, FAQBlock,
-  LeadMagnetLink, OfferCards,
+  LeadMagnetLink, OfferCards, TestimonialBlock,
 } from "../components.jsx";
 
 // ─── HERO BLOCK WITH NAV ─────────────────────────────────────
@@ -420,6 +420,7 @@ export default function LeverExplorer({ setPage }) {
       <OfferCards setPage={setPage} />
       <MiniCases />
       <CompactAboutBio setPage={setPage} />
+      <TestimonialBlock />
       <FAQBlock />
 
       <Section noCTA background={`${COLORS.navy}05`}>

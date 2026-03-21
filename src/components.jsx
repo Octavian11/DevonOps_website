@@ -345,6 +345,12 @@ export function FAQBlock() {
         <h3 style={q}>Why should we hire you instead of building an in-house operating team?</h3>
         <p style={a}>Build in-house — eventually. I'm the bridge. I install the infrastructure, cadence, and playbook in 100 days. Your in-house team inherits a system that works, instead of building one from scratch while also running the business. GP operating teams have doubled since 2021 (McKinsey GPMR 2026). I'm the on-demand version for funds that aren't there yet.</p>
 
+        <h3 style={q}>Why should we trust a solo practitioner?</h3>
+        <p style={a}>Because you're hiring the practitioner who did this at scale—not a firm that staffs a junior associate on your $15K engagement. At JPM, Barclays, and Lazard, I built and ran the systems I'm now helping you install. The credential is mine, not a logo's. And at this price point, every dollar goes to senior-level execution, not overhead.</p>
+
+        <h3 style={q}>What industries do you cover?</h3>
+        <p style={a}>The 20 levers apply to any operationally complex business. Whether the portfolio company is a fintech platform or a regional services company, the same governance gaps—incident management, vendor concentration, key-person risk, and KPI cadence—drive the same value erosion.</p>
+
         <h3 style={q}>How long does a pre-close diligence engagement take?</h3>
         <p style={a}>2–3 weeks from data receipt to findings memo, assuming standard artifact availability (incident history, change logs, vendor contracts, org chart, compliance evidence). Expedited timelines are possible for deals in exclusivity — discuss during the fit check.</p>
 
@@ -529,6 +535,9 @@ export function OfferCards({ setPage }) {
             <li style={li}>Evidence requests + diligence questions</li>
             <li style={li}>IC-ready memo format</li>
           </ul>
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.82rem", color: COLORS.steel, lineHeight: 1.5, marginTop: "14px", paddingTop: "12px", borderTop: `1px solid ${COLORS.border}`, marginBottom: 0 }}>
+            Choose this if you want to know what's broken but plan to fix it yourself.
+          </p>
         </div>
 
         <div style={boxGold}>
@@ -572,6 +581,21 @@ export function OfferCards({ setPage }) {
         centered={true}
         showAvailability={true}
       />
+    </Section>
+  );
+}
+
+export function TestimonialBlock() {
+  return (
+    <Section title="What Others Say" noCTA>
+      <div style={{ maxWidth: "680px", margin: "0 auto", padding: "24px 28px", background: COLORS.white, borderLeft: `4px solid ${COLORS.gold}`, borderRadius: RADIUS.md, boxShadow: SHADOWS.sm }}>
+        <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.75, margin: "0 0 18px", fontStyle: "italic" }}>
+          "[Placeholder quote — e.g., from Columbia professor, mentor, or former colleague about Hassan's operational rigor and PE-grade thinking]"
+        </p>
+        <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", fontWeight: 700, color: COLORS.navy }}>
+          [Name, Title, Institution/Company]
+        </div>
+      </div>
     </Section>
   );
 }
@@ -675,7 +699,7 @@ function FooterLeadCapture() {
         }),
       });
       if (res.ok) {
-        setStatus({ state: "ok", msg: "Thanks! We'll be in touch soon." });
+        setStatus({ state: "ok", msg: "Thanks! I'll be in touch soon." });
         setEmail("");
         setSituation("Evaluating a target");
         setTimeout(() => setStatus({ state: "idle", msg: "" }), 5000);
