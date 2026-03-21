@@ -337,7 +337,22 @@ export default function ScorerPage() {
           </Card>
 
           {/* Not assessed dimensions */}
-          {unknownDims.length > 0 && (
+          {unknownDims.length >= 3 ? (
+            <Card style={{ borderLeft: `4px solid ${COLORS.critical}`, marginBottom: "24px", background: "#FFF5F5" }}>
+              <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.critical, marginBottom: "10px" }}>
+                {unknownDims.length} Dimensions Unassessed — This Is Itself a Finding
+              </h4>
+              <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "14px" }}>
+                You marked {unknownDims.length} dimensions as unknown — that's a red flag in itself. Lack of operational visibility is the #1 pattern I see in pre-close diligence.
+              </p>
+              <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, marginBottom: "8px", fontWeight: 600 }}>Unassessed dimensions:</p>
+              {unknownDims.map(dim => (
+                <div key={dim.key} style={{ marginBottom: "8px", paddingBottom: "8px", borderBottom: `1px solid ${COLORS.border}` }}>
+                  <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, color: COLORS.charcoal }}>{dim.label}</span>
+                </div>
+              ))}
+            </Card>
+          ) : unknownDims.length > 0 ? (
             <Card style={{ borderLeft: `4px solid ${COLORS.steel}`, marginBottom: "24px" }}>
               <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.steel, marginBottom: "10px" }}>Not Yet Assessed — Flag for Diligence</h4>
               {unknownDims.map(dim => (
@@ -349,7 +364,7 @@ export default function ScorerPage() {
                 Treat unassessed dimensions as potential gaps. In a pre-close context, include them in your diligence evidence requests — absence of data is itself a signal.
               </p>
             </Card>
-          )}
+          ) : null}
 
           {lowDims.length > 0 && (
             <Card style={{ borderLeft: `4px solid ${COLORS.critical}`, marginBottom: "24px" }}>

@@ -46,7 +46,7 @@ export default function ComingSoonPage() {
           lineHeight: 1.65,
           marginBottom: "28px",
         }}>
-          We're building something useful here. Check back soon — or go back to the main site now.
+          I'm building something useful here. Check back soon — or go back to the main site now.
         </p>
         <a href="/pe/" style={{
           display: "inline-block",

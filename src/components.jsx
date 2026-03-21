@@ -345,6 +345,12 @@ export function FAQBlock() {
         <h3 style={q}>Why should we hire you instead of building an in-house operating team?</h3>
         <p style={a}>Build in-house — eventually. I'm the bridge. I install the infrastructure, cadence, and playbook in 100 days. Your in-house team inherits a system that works, instead of building one from scratch while also running the business. GP operating teams have doubled since 2021 (McKinsey GPMR 2026). I'm the on-demand version for funds that aren't there yet.</p>
 
+        <h3 style={q}>Why should we trust a solo practitioner?</h3>
+        <p style={a}>Because you're hiring the practitioner who did this at scale—not a firm that staffs a junior associate on your $15K engagement. At JPM, Barclays, and Lazard, I built and ran the systems I'm now helping you install. The credential is mine, not a logo's. And at this price point, every dollar goes to senior-level execution, not overhead.</p>
+
+        <h3 style={q}>What industries do you cover?</h3>
+        <p style={a}>The 20 levers apply to any operationally complex business. Whether the portfolio company is a fintech platform or a regional services company, the same governance gaps—incident management, vendor concentration, key-person risk, and KPI cadence—drive the same value erosion.</p>
+
         <h3 style={q}>How long does a pre-close diligence engagement take?</h3>
         <p style={a}>2–3 weeks from data receipt to findings memo, assuming standard artifact availability (incident history, change logs, vendor contracts, org chart, compliance evidence). Expedited timelines are possible for deals in exclusivity — discuss during the fit check.</p>
 
@@ -529,6 +535,9 @@ export function OfferCards({ setPage }) {
             <li style={li}>Evidence requests + diligence questions</li>
             <li style={li}>IC-ready memo format</li>
           </ul>
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.82rem", color: COLORS.steel, lineHeight: 1.5, marginTop: "14px", paddingTop: "12px", borderTop: `1px solid ${COLORS.border}`, marginBottom: 0 }}>
+            Choose this if you want to know what's broken but plan to fix it yourself.
+          </p>
         </div>
 
         <div style={boxGold}>
@@ -572,6 +581,35 @@ export function OfferCards({ setPage }) {
         centered={true}
         showAvailability={true}
       />
+    </Section>
+  );
+}
+
+export function TestimonialBlock() {
+  const cardStyle = { border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "22px 24px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 300px", minWidth: "min(260px, 100%)" };
+  const contextLabel = { fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "10px", display: "block" };
+  const cardTitle = { fontFamily: FONTS.heading, fontSize: "1.1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" };
+  const body = { fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.65, margin: "0 0 14px" };
+  const result = { fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0, padding: "10px 12px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0` };
+  return (
+    <Section title="Institutional Track Record" noCTA>
+      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginBottom: "14px" }}>
+        <div style={cardStyle}>
+          <span style={contextLabel}>Platform Stabilization · Multi-strategy hedge fund, ~$10B AUM</span>
+          <div style={cardTitle}>Platform Stabilization & Reliability</div>
+          <p style={body}>Inherited a platform with 4 critical outages in 12 months, 94% availability, and a deteriorating NPS score. Built a 10-person global ops team, installed incident command with severity classification and postmortem discipline, and stood up a KPI cadence across 18 metrics.</p>
+          <div style={result}>Zero critical outages for 18 consecutive months. Availability: 94% → 99.2%. MTTR reduced 31%. NPS improved +22 points. Supported ~50% AUM growth with ~12% headcount increase.</div>
+        </div>
+        <div style={cardStyle}>
+          <span style={contextLabel}>Vendor Optimization · Global asset manager, ~$40M vendor program</span>
+          <div style={cardTitle}>Vendor Optimization & Cost Control</div>
+          <p style={body}>Vendor costs growing 22% annually, outpacing business growth. 15 fragmented providers, no utilization visibility, no governance. Built spend transparency, ran utilization analytics, consolidated 15 vendors to 8 strategic partners, and installed scorecard governance with QBRs.</p>
+          <div style={result}>&gt;$2M annual run-rate reduction. 10–15% licensing savings via right-sizing. Cost per $1B AUM reduced ~28%. Payback &lt;6 months.</div>
+        </div>
+      </div>
+      <p style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.bodyMuted, lineHeight: 1.5, margin: 0 }}>
+        Identifiers withheld. Metrics are representative and sanitized for confidentiality. Details and references available on request.
+      </p>
     </Section>
   );
 }
@@ -675,7 +713,7 @@ function FooterLeadCapture() {
         }),
       });
       if (res.ok) {
-        setStatus({ state: "ok", msg: "Thanks! We'll be in touch soon." });
+        setStatus({ state: "ok", msg: "Thanks! I'll be in touch soon." });
         setEmail("");
         setSituation("Evaluating a target");
         setTimeout(() => setStatus({ state: "idle", msg: "" }), 5000);
