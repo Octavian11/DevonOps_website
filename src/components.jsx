@@ -30,7 +30,7 @@ export function TimingBadge({ timing }) {
 export function DomainTag({ domain }) {
   const d = DOMAINS[domain];
   return (
-    <span style={{ display: "inline-block", padding: "4px 10px", borderRadius: RADIUS.sm, fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase", color: d.color, background: `${d.color}15`, border: `1px solid ${d.color}30` }}>
+    <span style={{ display: "inline-block", padding: "4px 10px", borderRadius: RADIUS.sm, fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase", color: COLORS.steel, background: `${COLORS.steel}12`, border: `1px solid ${COLORS.steel}25` }}>
       {d.short}
     </span>
   );
@@ -66,7 +66,7 @@ export function SectionTitle({ children, sub }) {
     <div style={{ marginBottom: sub ? "16px" : SPACING.lg }}>
       <h2 className="section-title" style={{
         fontFamily: FONTS.heading,
-        fontSize: sub ? "1.25rem" : "1.75rem",
+        fontSize: sub ? "1rem" : "1.4rem",
         fontWeight: 700,
         color: COLORS.navy,
         lineHeight: 1.3,
@@ -79,7 +79,7 @@ export function SectionTitle({ children, sub }) {
 }
 
 export function ButtonPair({
-  primaryText = "15-Minute Fit Check",
+  primaryText = "Book a Fit Check",
   primaryAction,
   secondaryText,
   secondaryAction,
@@ -88,19 +88,21 @@ export function ButtonPair({
   centered = false,
   showAvailability = false
 }) {
+  const primaryStyle = { display: "inline-block", padding: "12px 24px", background: COLORS.gold, color: "white", borderRadius: RADIUS.md, textDecoration: "none", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", transition: "all 0.2s", border: "none", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "min(180px, 100%)", cursor: "pointer" };
+  const secondaryStyle = { display: "inline-block", padding: "12px 24px", background: "transparent", color: COLORS.navy, borderRadius: RADIUS.md, textDecoration: "none", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", border: `1px solid ${COLORS.navy}`, transition: "all 0.2s", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "min(180px, 100%)", cursor: "pointer" };
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: centered ? "center" : "flex-start" }}>
       <div style={{ display: "flex", flexDirection: "row", gap: SPACING.sm, justifyContent: centered ? "center" : "flex-start", flexWrap: "wrap" }}>
         {primaryLink ? (
           <a href={primaryLink} target="_blank" rel="noopener noreferrer"
-             style={{ display: "inline-block", padding: "14px 28px", background: COLORS.gold, color: "white", borderRadius: RADIUS.md, textDecoration: "none", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", transition: "all 0.2s", border: "none", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "min(180px, 100%)" }}
+             style={primaryStyle}
              onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; }}
              onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; }}>
             {primaryText}
           </a>
         ) : (
           <button onClick={primaryAction}
-             style={{ display: "inline-block", padding: "14px 28px", background: COLORS.gold, color: "white", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", transition: "all 0.2s", border: "none", cursor: "pointer", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "min(180px, 100%)" }}
+             style={primaryStyle}
              onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; }}
              onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; }}>
             {primaryText}
@@ -110,16 +112,16 @@ export function ButtonPair({
         {(secondaryText || secondaryAction || secondaryLink) && (
           secondaryLink ? (
             <a href={secondaryLink} target="_blank" rel="noopener noreferrer"
-               style={{ display: "inline-block", padding: "12px 26px", background: "white", color: COLORS.navy, borderRadius: RADIUS.md, textDecoration: "none", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", border: `2px solid ${COLORS.navy}`, transition: "all 0.2s", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "min(180px, 100%)" }}
+               style={secondaryStyle}
                onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.navy}08`; }}
-               onMouseLeave={e => { e.currentTarget.style.background = "white"; }}>
+               onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}>
               {secondaryText}
             </a>
           ) : (
             <button onClick={secondaryAction}
-               style={{ display: "inline-block", padding: "12px 26px", background: "white", color: COLORS.navy, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", border: `2px solid ${COLORS.navy}`, transition: "all 0.2s", cursor: "pointer", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "min(180px, 100%)" }}
+               style={secondaryStyle}
                onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.navy}08`; }}
-               onMouseLeave={e => { e.currentTarget.style.background = "white"; }}>
+               onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}>
               {secondaryText}
             </button>
           )
@@ -287,7 +289,7 @@ export function Section({ title, subtitle, children, primaryCTA, secondaryCTA, n
   const defaultBackground = isWindowWithCards ? COLORS.offWhite : COLORS.white;
 
   return (
-    <div style={{ background: background || defaultBackground, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.lg, padding: noPadding ? "0" : SPACING.lg, marginBottom: SPACING.md, boxShadow: SHADOWS.sm }} id={id}>
+    <div style={{ background: background || defaultBackground, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.lg, padding: noPadding ? "0" : "40px 32px", marginBottom: "24px", boxShadow: SHADOWS.sm }} id={id}>
       {title && <SectionTitle>{title}</SectionTitle>}
       {subtitle && (
         <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.bodyMuted, lineHeight: 1.7, marginTop: "-16px", marginBottom: "20px" }}>
@@ -316,49 +318,45 @@ export function Section({ title, subtitle, children, primaryCTA, secondaryCTA, n
 // FAQBlock used by both LeverExplorer and ServicesPage
 
 export function FAQBlock() {
-  const q = { fontFamily: FONTS.heading, fontSize: "1.05rem", color: COLORS.navy, margin: 0, marginBottom: "6px" };
-  const a = { fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, margin: 0, marginBottom: "16px" };
+  const [open, setOpen] = useState(null);
+  const toggle = (i) => setOpen(open === i ? null : i);
+
+  const faqs = [
+    { q: "Do you replace the operating team?", a: "No. I install the operating system—governance, cadence, and controls—while ownership stays internal." },
+    { q: "What do you need from us?", a: "A lightweight artifact pull (incident/change history, vendor list/contracts, KPIs, org/RACI, audit evidence folders) plus targeted stakeholder access." },
+    { q: "How do you handle confidentiality?", a: "NDA-friendly by default. Minimal data handling; formats can be anonymized." },
+    { q: "When are you not a fit?", a: "If the company already has mature incident/change governance, a live KPI cadence, and low volatility, you likely don't need stabilization—only optimization." },
+    { q: "What is a Value Creation Plan (VCP) and what does it include?", a: "A VCP is the named operational deliverable from the diligence phase — not a slide deck. It defines which gaps to fix, in what sequence, with what accountability structure, and what measurable outcomes to expect in 100 days. It's the document that converts diligence findings into operating results. The VCP is what prevents the post-close \"now what?\" problem." },
+    { q: "Why should we hire you instead of a Big 4 firm?", a: "Big 4 firms deliver audit-grade frameworks. I deliver practitioner-grade execution. I've been the operator — incident command at 2am, vendor governance under regulatory scrutiny, KPI cadences built from zero. If you need a framework, hire a Big 4 firm. If you need someone who installs the operating system in 100 days and hands it off running, let's talk." },
+    { q: "Why should we hire you instead of building an in-house operating team?", a: "Build in-house — eventually. I'm the bridge. I install the infrastructure, cadence, and playbook in 100 days. Your in-house team inherits a system that works, instead of building one from scratch while also running the business. GP operating teams have doubled since 2021 (McKinsey GPMR 2026). I'm the on-demand version for funds that aren't there yet." },
+    { q: "Why should we trust a solo practitioner?", a: "Because you're hiring the practitioner who did this at scale—not a firm that staffs a junior associate on your $15K engagement. At JPM, Barclays, and Lazard, I built and ran the systems I'm now helping you install. The credential is mine, not a logo's. And at this price point, every dollar goes to senior-level execution, not overhead." },
+    { q: "What industries do you cover?", a: "The 20 levers apply to any operationally complex business. Whether the portfolio company is a fintech platform or a regional services company, the same governance gaps—incident management, vendor concentration, key-person risk, and KPI cadence—drive the same value erosion." },
+    { q: "How long does a pre-close diligence engagement take?", a: "2–3 weeks from data receipt to findings memo, assuming standard artifact availability (incident history, change logs, vendor contracts, org chart, compliance evidence). Expedited timelines are possible for deals in exclusivity — discuss during the fit check." },
+    { q: "What if we're still in LOI or haven't entered exclusivity yet?", a: "Earlier is better. A light-touch ops review before exclusivity can shape the diligence scope and, in some cases, inform the structure of the deal itself. Even limited access produces useful signals — incident volume patterns and change frequency are often visible without full document access." },
+    { q: "Do you work with family offices?", a: "Yes, specifically on the Control Tower Retainer for longer holds. Family offices buying from founders often inherit zero institutional process — the gap between what's described in diligence and what's actually operating is widest in these deals. I install the governance baseline and operating cadence that prevents drift over a 5–7+ year hold." },
+  ];
+
+  const q = { fontFamily: FONTS.heading, fontSize: "1.05rem", color: COLORS.navy, margin: 0, flex: 1 };
+  const a = { fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, margin: 0, paddingBottom: "14px" };
 
   return (
     <Section title="FAQ" noCTA background={`${COLORS.navy}04`}>
       <div style={{ borderTop: `2px solid ${COLORS.gold}30`, paddingTop: SPACING.md }}>
-        <h3 style={q}>Do you replace the operating team?</h3>
-        <p style={a}>No. I install the operating system—governance, cadence, and controls—while ownership stays internal.</p>
-
-        <h3 style={q}>What do you need from us?</h3>
-        <p style={a}>A lightweight artifact pull (incident/change history, vendor list/contracts, KPIs, org/RACI, audit evidence folders) plus targeted stakeholder access.</p>
-
-        <h3 style={q}>How do you handle confidentiality?</h3>
-        <p style={a}>NDA-friendly by default. Minimal data handling; formats can be anonymized.</p>
-
-        <h3 style={q}>When are you not a fit?</h3>
-        <p style={a}>
-          If the company already has mature incident/change governance, a live KPI cadence, and low volatility, you likely don't need stabilization—only optimization.
-        </p>
-
-        <h3 style={q}>What is a Value Creation Plan (VCP) and what does it include?</h3>
-        <p style={a}>A VCP is the named operational deliverable from the diligence phase — not a slide deck. It defines which gaps to fix, in what sequence, with what accountability structure, and what measurable outcomes to expect in 100 days. It's the document that converts diligence findings into operating results. The VCP is what prevents the post-close "now what?" problem.</p>
-
-        <h3 style={q}>Why should we hire you instead of a Big 4 firm?</h3>
-        <p style={a}>Big 4 firms deliver audit-grade frameworks. I deliver practitioner-grade execution. I've been the operator — incident command at 2am, vendor governance under regulatory scrutiny, KPI cadences built from zero. If you need a framework, hire a Big 4 firm. If you need someone who installs the operating system in 100 days and hands it off running, let's talk.</p>
-
-        <h3 style={q}>Why should we hire you instead of building an in-house operating team?</h3>
-        <p style={a}>Build in-house — eventually. I'm the bridge. I install the infrastructure, cadence, and playbook in 100 days. Your in-house team inherits a system that works, instead of building one from scratch while also running the business. GP operating teams have doubled since 2021 (McKinsey GPMR 2026). I'm the on-demand version for funds that aren't there yet.</p>
-
-        <h3 style={q}>Why should we trust a solo practitioner?</h3>
-        <p style={a}>Because you're hiring the practitioner who did this at scale—not a firm that staffs a junior associate on your $15K engagement. At JPM, Barclays, and Lazard, I built and ran the systems I'm now helping you install. The credential is mine, not a logo's. And at this price point, every dollar goes to senior-level execution, not overhead.</p>
-
-        <h3 style={q}>What industries do you cover?</h3>
-        <p style={a}>The 20 levers apply to any operationally complex business. Whether the portfolio company is a fintech platform or a regional services company, the same governance gaps—incident management, vendor concentration, key-person risk, and KPI cadence—drive the same value erosion.</p>
-
-        <h3 style={q}>How long does a pre-close diligence engagement take?</h3>
-        <p style={a}>2–3 weeks from data receipt to findings memo, assuming standard artifact availability (incident history, change logs, vendor contracts, org chart, compliance evidence). Expedited timelines are possible for deals in exclusivity — discuss during the fit check.</p>
-
-        <h3 style={q}>What if we're still in LOI or haven't entered exclusivity yet?</h3>
-        <p style={a}>Earlier is better. A light-touch ops review before exclusivity can shape the diligence scope and, in some cases, inform the structure of the deal itself. Even limited access produces useful signals — incident volume patterns and change frequency are often visible without full document access.</p>
-
-        <h3 style={q}>Do you work with family offices?</h3>
-        <p style={{ ...a, marginBottom: 0 }}>Yes, specifically on the Control Tower Retainer for longer holds. Family offices buying from founders often inherit zero institutional process — the gap between what's described in diligence and what's actually operating is widest in these deals. I install the governance baseline and operating cadence that prevents drift over a 5–7+ year hold.</p>
+        {faqs.map((item, i) => (
+          <div key={i} style={{ borderBottom: `1px solid ${COLORS.border}` }}>
+            <button
+              onClick={() => toggle(i)}
+              style={{ width: "100%", textAlign: "left", background: "none", border: "none", padding: "14px 0", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <h3 style={q}>{item.q}</h3>
+              <span style={{ color: COLORS.steel, fontSize: "1rem", marginLeft: "12px", flexShrink: 0 }}>
+                {open === i ? "▾" : "▸"}
+              </span>
+            </button>
+            {open === i && (
+              <p style={a}>{item.a}</p>
+            )}
+          </div>
+        ))}
       </div>
     </Section>
   );
@@ -517,7 +515,7 @@ export function ServicesSamplesRow() {
 // ─── OFFER CARDS (SHARED SERVICES PRICING) ──────────────────
 
 export function OfferCards({ setPage }) {
-  const box = { border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, padding: "18px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 260px", minWidth: "min(220px, 100%)" };
+  const box = { border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 260px", minWidth: "min(220px, 100%)", display: "flex", flexDirection: "column" };
   const boxGold = { ...box, border: `2px solid ${COLORS.gold}`, boxShadow: SHADOWS.md };
   const tag = { fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.gold, fontWeight: 600, marginBottom: "10px" };
   const li = { marginBottom: "8px", lineHeight: 1.55 };
@@ -575,7 +573,7 @@ export function OfferCards({ setPage }) {
       )}
 
       <ButtonPair
-        primaryText="15-Minute Fit Check"
+        primaryText="Book a Fit Check"
         secondaryText={setPage ? "View Full Services & Details" : undefined}
         secondaryAction={setPage ? () => setPage("services") : undefined}
         centered={true}
@@ -639,7 +637,7 @@ export function Nav({ page, setPage }) {
           <div className="nav-links" style={{ display: "flex", gap: "4px" }}>
             {items.map(({ key, label }) => (
               <button key={key} onClick={() => handleNav(key)}
-                style={{ background: page === key ? `${COLORS.gold}35` : "transparent", border: "none", padding: "10px 16px", borderRadius: RADIUS.sm, color: page === key ? COLORS.gold : COLORS.navy, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: page === key ? 700 : 600, cursor: "pointer", transition: "all 0.15s", letterSpacing: "0.3px", borderBottom: page === key ? `2px solid ${COLORS.gold}` : "2px solid transparent" }}
+                style={{ background: "transparent", border: "none", padding: "10px 16px", borderRadius: RADIUS.sm, color: COLORS.navy, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: page === key ? 700 : 500, cursor: "pointer", transition: "all 0.15s", letterSpacing: "0.3px", borderBottom: page === key ? `2px solid ${COLORS.gold}` : "2px solid transparent" }}
                 onMouseEnter={e => { if (page !== key) e.currentTarget.style.color = COLORS.gold; }}
                 onMouseLeave={e => { if (page !== key) e.currentTarget.style.color = COLORS.navy; }}>
                 {label}

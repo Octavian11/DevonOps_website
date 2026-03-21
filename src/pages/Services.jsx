@@ -348,8 +348,8 @@ function DomainLegend() {
         <span style={{ fontSize: "1.4rem" }}>{open ? "▾" : "▸"}</span>
         <span>Domain codes legend</span>
         <div style={{ display: "inline-flex", gap: "6px", marginLeft: "8px" }}>
-          {Object.entries(DOMAINS).map(([k, v]) => (
-            <span key={k} style={{ display: "inline-block", padding: "2px 6px", borderRadius: "2px", fontSize: "0.75rem", fontFamily: FONTS.body, color: v.color, background: `${v.color}10` }}>{v.short}</span>
+          {Object.entries(DOMAINS).map(([k]) => (
+            <span key={k} style={{ display: "inline-block", padding: "2px 6px", borderRadius: "2px", fontSize: "0.75rem", fontFamily: FONTS.body, color: COLORS.steel, background: `${COLORS.steel}12` }}>{DOMAINS[k].short}</span>
           ))}
         </div>
       </button>
@@ -358,7 +358,7 @@ function DomainLegend() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "12px" }}>
             {Object.entries(DOMAINS).map(([k, v]) => (
               <div key={k} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
-                <span style={{ display: "inline-block", padding: "3px 8px", borderRadius: "3px", fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 500, color: v.color, background: `${v.color}15`, border: `1px solid ${v.color}30`, flexShrink: 0, marginTop: "2px" }}>{v.short}</span>
+                <span style={{ display: "inline-block", padding: "3px 8px", borderRadius: "3px", fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 500, color: COLORS.steel, background: `${COLORS.steel}12`, border: `1px solid ${COLORS.steel}25`, flexShrink: 0, marginTop: "2px" }}>{v.short}</span>
                 <div>
                   <span style={{ fontFamily: FONTS.body, fontSize: "1.05rem", fontWeight: 600, color: COLORS.charcoal }}>{v.name}</span>
                   <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, marginTop: "2px", lineHeight: 1.5 }}>{v.desc}</p>

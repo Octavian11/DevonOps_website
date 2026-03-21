@@ -325,8 +325,9 @@ export const globalCSS = `
     letter-spacing: 0.2px;
   }
 
-  main p { max-width: var(--maxcopy); }
-  td p, th p, nav p, footer p, .no-max-width p { max-width: none; }
+  main p { max-width: var(--maxcopy); font-size: 17px; }
+  main li { font-size: 17px; }
+  td p, th p, nav p, footer p, .no-max-width p { max-width: none; font-size: inherit; }
 
   ::selection { background: ${COLORS.primary}; color: white; }
   ::-webkit-scrollbar { width: 6px; }
