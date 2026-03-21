@@ -178,7 +178,7 @@ function BuyerSegmentCards({ setPage }) {
 
 function LeversTeaserSection({ setPage }) {
   return (
-    <div style={{ marginBottom: "28px" }}>
+    <Section noCTA>
       <SectionTitle>20 Operational Value Creation Levers</SectionTitle>
       <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "720px" }}>
         {LEVERS.length} operational friction points across 6 domains — severity-rated, PE impact framed. Browse the full interactive lever explorer on the Services page.
@@ -206,7 +206,7 @@ function LeversTeaserSection({ setPage }) {
           secondaryLink={null}
         />
       </div>
-    </div>
+    </Section>
   );
 }
 
