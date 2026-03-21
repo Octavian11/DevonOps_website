@@ -584,62 +584,33 @@ function LeverExplorerSection({ setPage }) {
 export default function ServicesPage({ setPage }) {
   return (
     <div>
-      <div style={{ marginBottom: SPACING.lg }}>
+      <Section noCTA>
         <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 700, color: COLORS.navy, marginBottom: SPACING.sm }}>Framework</h1>
         <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "720px", marginBottom: "14px" }}>
           Operational support for PE funds and portfolio companies — from pre-close diligence through post-close stabilization to ongoing governance. Fixed fees, board-ready deliverables, measurable from Day 1.
         </p>
-        {/* McKinsey GPMR 2026 — LP selection criterion stat */}
-        <div style={{ padding: "12px 16px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.md} ${RADIUS.md} 0`, maxWidth: "720px" }}>
+        <div style={{ padding: "12px 16px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.md} ${RADIUS.md} 0`, maxWidth: "720px", marginBottom: "16px" }}>
           <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, margin: 0, lineHeight: 1.6 }}>
             <strong>53% of LPs now rank a GP's value creation strategy as a top-five criterion in manager selection</strong> — up to #3, above sector expertise. Operational execution is no longer a back-office function. It's a fund-level differentiator.
           </p>
           <span style={{ fontFamily: FONTS.body, fontSize: "0.78rem", color: COLORS.bodyMuted, letterSpacing: "0.4px", textTransform: "uppercase", display: "block", marginTop: "6px" }}>McKinsey Global Private Markets Review 2026</span>
         </div>
-      </div>
+        <ServicesSamplesRow />
+      </Section>
       <ServicesMethodJumpBar />
       <OfferCards />
-      <ServicesSamplesRow />
 
-      <div style={{ marginTop: "28px" }}>
-        <LeverExplorerSection setPage={setPage} />
-      </div>
+      <LeverExplorerSection setPage={setPage} />
 
-      <div id="rubric" style={{ marginTop: "28px" }}>
-        <FrameworkRubricTable />
-      </div>
-
-      <div id="red-flags" style={{ marginTop: "28px" }}>
-        <TypicalRedFlags />
-      </div>
-
-      <div id="why-friction" style={{ marginTop: "28px" }}>
-        <FrameworkWhyFrictionTight />
-      </div>
-
-      <div id="sequence" style={{ marginTop: "28px" }}>
-        <StabilizationSequence />
-      </div>
-
-      <div id="memo-samples" style={{ marginTop: "28px" }}>
-        <MemoSampleScreenshots />
-      </div>
-
-      <div id="worked-example" style={{ marginTop: "28px" }}>
-        <WorkedExampleAccordion />
-      </div>
-
-      <div id="how-it-works" style={{ marginTop: "28px" }}>
-        <ServicesSteps />
-      </div>
-
-      <div id="faq" style={{ marginTop: "28px" }}>
-        <FAQBlock />
-      </div>
-
-      <div id="fit-check" style={{ marginTop: "28px" }}>
-        <FitCheckCTA />
-      </div>
+      <div id="rubric"><FrameworkRubricTable /></div>
+      <div id="red-flags"><TypicalRedFlags /></div>
+      <div id="why-friction"><FrameworkWhyFrictionTight /></div>
+      <div id="sequence"><StabilizationSequence /></div>
+      <div id="memo-samples"><MemoSampleScreenshots /></div>
+      <div id="worked-example"><WorkedExampleAccordion /></div>
+      <div id="how-it-works"><ServicesSteps /></div>
+      <div id="faq"><FAQBlock /></div>
+      <div id="fit-check"><FitCheckCTA /></div>
     </div>
   );
 }
