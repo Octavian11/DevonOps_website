@@ -143,7 +143,29 @@ function FrameworkWhyFrictionTight() {
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "860px", marginBottom: "24px" }}>
         My method: diagnose friction, prioritize by EBITDA impact and time to proof.
       </p>
-      <SplitContrast leftSide={leftSide} rightSide={rightSide} />
+      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+        <div style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `4px solid ${COLORS.critical}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
+          <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{leftSide.title}</div>
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{leftSide.description}</p>
+          <ul style={{ paddingLeft: "18px", margin: 0 }}>
+            {leftSide.items.map((item, i) => (
+              <li key={i} style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `4px solid ${COLORS.gold}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
+          <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{rightSide.title}</div>
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{rightSide.description}</p>
+          <ul style={{ paddingLeft: "18px", margin: 0 }}>
+            {rightSide.items.map((item, i) => (
+              <li key={i} style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>{item}</li>
+            ))}
+          </ul>
+          <div style={{ marginTop: "auto", paddingTop: "12px", borderTop: `1px solid ${COLORS.border}`, fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.gold, fontWeight: 600 }}>
+            {rightSide.highlight}
+          </div>
+        </div>
+      </div>
     </Section>
   );
 }
@@ -151,44 +173,51 @@ function FrameworkWhyFrictionTight() {
 // ─── FRAMEWORK RUBRIC TABLE ──────────────────────────────────
 
 function FrameworkRubricTable() {
+  const [open, setOpen] = useState(false);
   return (
     <Section title="The Friction Evaluation Rubric" noCTA>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "20px" }}>
-        Each lever is evaluated across six dimensions. The output is a prioritization logic you can use in diligence and in the first 100 days.
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "12px" }}>
+        Each lever is evaluated across six dimensions — EBITDA impact, time to proof, execution certainty, exit story impact, reversibility, and attention load.
       </p>
+      <button
+        onClick={() => setOpen(!open)}
+        style={{ background: "transparent", border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "8px 16px", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, fontWeight: 600, cursor: "pointer", marginBottom: "16px" }}>
+        {open ? "Hide rubric ▾" : "Show rubric ▸"}
+      </button>
 
-      <div style={{ marginTop: "14px", overflowX: "auto" }}>
-        <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: FONTS.body, fontSize: "0.85rem" }}>
-          <thead>
-            <tr style={{ borderBottom: `2px solid ${COLORS.navy}` }}>
-              {["Criterion", "What It Tests", "Scoring", "Action Trigger"].map(h => (
-                <th key={h} style={{ textAlign: "left", padding: "8px 10px", fontWeight: 600, color: COLORS.navy, fontSize: "0.9rem", letterSpacing: "0.3px" }}>{h}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {[
-              ["EBITDA Impact", "Directly erode earnings or margin?", "Direct / Indirect / Minimal", "Direct → flag in IC memo, quantify drag"],
-              ["Time to Proof", "How quickly does improvement appear?", "< 30 / 30–90 / 90+ days", "< 30 days → Day-1 quick win candidate"],
-              ["Execution Certainty", "How proven is the playbook?", "High / Medium / Low", "High → include in 100-day plan scope"],
-              ["Exit Story Impact", "Improve risk profile for next buyer?", "Strengthens / Neutral / None", "Strengthens → prioritize for exit prep"],
-              ["Reversibility", "Can this be reversed if needed?", "Easily / Partially / One-way", "One-way → requires board approval"],
-              ["Attention Load", "Management bandwidth required?", "Low / Medium / High", "High → defer early in hold period"],
-            ].map(([c, w, s, a], i) => (
-              <tr key={i} style={{ borderBottom: `1px solid ${COLORS.border}` }}>
-                <td style={{ padding: "8px 10px", fontWeight: 600, color: COLORS.charcoal, whiteSpace: "nowrap", fontSize: "0.9rem" }}>{c}</td>
-                <td style={{ padding: "8px 10px", color: COLORS.charcoal, fontSize: "0.9rem" }}>{w}</td>
-                <td style={{ padding: "8px 10px", fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.charcoal }}>{s}</td>
-                <td style={{ padding: "8px 10px", fontSize: "0.85rem", color: COLORS.navy, fontWeight: 500 }}>{a}</td>
+      {open && <>
+        <div style={{ overflowX: "auto" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: FONTS.body, fontSize: "0.85rem" }}>
+            <thead>
+              <tr style={{ borderBottom: `2px solid ${COLORS.navy}` }}>
+                {["Criterion", "What It Tests", "Scoring", "Action Trigger"].map(h => (
+                  <th key={h} style={{ textAlign: "left", padding: "8px 10px", fontWeight: 600, color: COLORS.navy, fontSize: "0.9rem", letterSpacing: "0.3px" }}>{h}</th>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginTop: "14px" }}>
-        Levers scoring well on <em>EBITDA Impact + Time to Proof + Low Attention Load</em> are highest-priority quick wins. Strong <em>Exit Story Impact</em> with longer timelines are strategic investments.
-      </p>
+            </thead>
+            <tbody>
+              {[
+                ["EBITDA Impact", "Directly erode earnings or margin?", "Direct / Indirect / Minimal", "Direct → flag in IC memo, quantify drag"],
+                ["Time to Proof", "How quickly does improvement appear?", "< 30 / 30–90 / 90+ days", "< 30 days → Day-1 quick win candidate"],
+                ["Execution Certainty", "How proven is the playbook?", "High / Medium / Low", "High → include in 100-day plan scope"],
+                ["Exit Story Impact", "Improve risk profile for next buyer?", "Strengthens / Neutral / None", "Strengthens → prioritize for exit prep"],
+                ["Reversibility", "Can this be reversed if needed?", "Easily / Partially / One-way", "One-way → requires board approval"],
+                ["Attention Load", "Management bandwidth required?", "Low / Medium / High", "High → defer early in hold period"],
+              ].map(([c, w, s, a], i) => (
+                <tr key={i} style={{ borderBottom: `1px solid ${COLORS.border}` }}>
+                  <td style={{ padding: "8px 10px", fontWeight: 600, color: COLORS.charcoal, whiteSpace: "nowrap", fontSize: "0.9rem" }}>{c}</td>
+                  <td style={{ padding: "8px 10px", color: COLORS.charcoal, fontSize: "0.9rem" }}>{w}</td>
+                  <td style={{ padding: "8px 10px", fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.charcoal }}>{s}</td>
+                  <td style={{ padding: "8px 10px", fontSize: "0.85rem", color: COLORS.navy, fontWeight: 500 }}>{a}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginTop: "14px" }}>
+          Levers scoring well on <em>EBITDA Impact + Time to Proof + Low Attention Load</em> are highest-priority quick wins. Strong <em>Exit Story Impact</em> with longer timelines are strategic investments.
+        </p>
+      </>}
     </Section>
   );
 }
@@ -304,7 +333,31 @@ function TypicalRedFlags() {
 
   return (
     <Section noCTA title="Typical Red Flags I Surface">
-      <SplitContrast leftSide={leftSide} rightSide={rightSide} />
+      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+        <div style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `4px solid ${COLORS.critical}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
+          <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{leftSide.title}</div>
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "14px" }}>{leftSide.description}</p>
+          {leftSide.items.map((item, i) => (
+            <div key={i} style={{ marginBottom: "10px" }}>
+              <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 700, color: COLORS.navy, marginBottom: "2px" }}>{item.title}</div>
+              <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.55 }}>{item.body}</div>
+            </div>
+          ))}
+        </div>
+        <div style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `4px solid ${COLORS.gold}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
+          <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{rightSide.title}</div>
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "14px" }}>{rightSide.description}</p>
+          {rightSide.items.map((item, i) => (
+            <div key={i} style={{ marginBottom: "10px" }}>
+              <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 700, color: COLORS.navy, marginBottom: "2px" }}>{item.title}</div>
+              <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.55 }}>{item.body}</div>
+            </div>
+          ))}
+          <div style={{ marginTop: "auto", paddingTop: "12px", borderTop: `1px solid ${COLORS.border}`, fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.gold, fontWeight: 600 }}>
+            {rightSide.highlight}
+          </div>
+        </div>
+      </div>
     </Section>
   );
 }
@@ -312,6 +365,7 @@ function TypicalRedFlags() {
 // ─── MEMO SAMPLE SCREENSHOTS ─────────────────────────────────
 
 function MemoSampleScreenshots() {
+  const [open, setOpen] = useState(false);
   const samples = [
     { src: "/memo-samples/ops-dd-exec-summary.png", alt: "Ops Diligence Scorecard executive summary excerpt", caption: "Ops Diligence Scorecard — Executive Summary (overall rating + deal implications)" },
     { src: "/memo-samples/domain-scores-1.png", alt: "Operational risk summary table excerpt (top)", caption: "Operational Risk Summary — domain ratings (excerpt 1 of 2)" },
@@ -321,19 +375,27 @@ function MemoSampleScreenshots() {
 
   return (
     <Section noCTA background={`${COLORS.navy}03`} title="Sample Deliverable Excerpts (Anonymized)">
-      <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.55, marginBottom: "14px" }}>
-        Real format, clipped for readability. Full deliverables are severity-rated and IC-ready.
+      <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.55, marginBottom: "12px" }}>
+        Real format, anonymized for readability — severity-rated, IC-ready.
       </p>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(260px, 100%), 1fr))", gap: "14px" }}>
-        {samples.map((s, i) => (
-          <div key={i} style={{ border: `1px solid ${COLORS.border}`, borderRadius: "8px", overflow: "hidden", background: COLORS.white }}>
-            <img src={s.src} alt={s.alt} loading="lazy" style={{ width: "100%", height: "auto", display: "block" }} />
-            <div style={{ padding: "10px 12px", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.4 }}>
-              {s.caption}
+      <button
+        onClick={() => setOpen(!open)}
+        style={{ background: "transparent", border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "8px 16px", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, fontWeight: 600, cursor: "pointer", marginBottom: "16px" }}>
+        {open ? "Hide sample excerpts ▾" : "Show sample excerpts ▸"}
+      </button>
+
+      {open && (
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(260px, 100%), 1fr))", gap: "14px" }}>
+          {samples.map((s, i) => (
+            <div key={i} style={{ border: `1px solid ${COLORS.border}`, borderRadius: "8px", overflow: "hidden", background: COLORS.white }}>
+              <img src={s.src} alt={s.alt} loading="lazy" style={{ width: "100%", height: "auto", display: "block" }} />
+              <div style={{ padding: "10px 12px", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.4 }}>
+                {s.caption}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </Section>
   );
 }
@@ -348,8 +410,8 @@ function DomainLegend() {
         <span style={{ fontSize: "1.4rem" }}>{open ? "▾" : "▸"}</span>
         <span>Domain codes legend</span>
         <div style={{ display: "inline-flex", gap: "6px", marginLeft: "8px" }}>
-          {Object.entries(DOMAINS).map(([k, v]) => (
-            <span key={k} style={{ display: "inline-block", padding: "2px 6px", borderRadius: "2px", fontSize: "0.75rem", fontFamily: FONTS.body, color: v.color, background: `${v.color}10` }}>{v.short}</span>
+          {Object.entries(DOMAINS).map(([k]) => (
+            <span key={k} style={{ display: "inline-block", padding: "2px 6px", borderRadius: "2px", fontSize: "0.75rem", fontFamily: FONTS.body, color: COLORS.steel, background: `${COLORS.steel}12` }}>{DOMAINS[k].short}</span>
           ))}
         </div>
       </button>
@@ -358,7 +420,7 @@ function DomainLegend() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "12px" }}>
             {Object.entries(DOMAINS).map(([k, v]) => (
               <div key={k} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
-                <span style={{ display: "inline-block", padding: "3px 8px", borderRadius: "3px", fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 500, color: v.color, background: `${v.color}15`, border: `1px solid ${v.color}30`, flexShrink: 0, marginTop: "2px" }}>{v.short}</span>
+                <span style={{ display: "inline-block", padding: "3px 8px", borderRadius: "3px", fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 500, color: COLORS.steel, background: `${COLORS.steel}12`, border: `1px solid ${COLORS.steel}25`, flexShrink: 0, marginTop: "2px" }}>{v.short}</span>
                 <div>
                   <span style={{ fontFamily: FONTS.body, fontSize: "1.05rem", fontWeight: 600, color: COLORS.charcoal }}>{v.name}</span>
                   <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, marginTop: "2px", lineHeight: 1.5 }}>{v.desc}</p>

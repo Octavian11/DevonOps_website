@@ -34,7 +34,7 @@ function HeroBlockWithNav({ setPage }) {
               style={{ display: "inline-block", padding: "14px 28px", background: COLORS.gold, color: "white", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.md, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: "none" }}
               onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; }}
               onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; }}>
-              Book a 15-Min Fit Check
+              Book a Fit Check
             </a>
             <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: "rgba(255,255,255,0.95)", textAlign: "center" }}>
               Currently accepting 1–2 new engagements
@@ -62,7 +62,7 @@ function MicroProofStrip() {
   ];
 
   return (
-    <div style={{ background: `linear-gradient(135deg, ${COLORS.navy}08 0%, ${COLORS.gold}08 100%)`, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "16px 24px", marginBottom: "24px", display: "flex", gap: SPACING.lg, flexWrap: "wrap", justifyContent: "center", alignItems: "center" }}>
+    <div style={{ background: `linear-gradient(135deg, ${COLORS.navy}08 0%, ${COLORS.gold}08 100%)`, padding: "16px 32px", marginLeft: "-32px", marginRight: "-32px", marginBottom: "24px", display: "flex", gap: SPACING.lg, flexWrap: "wrap", justifyContent: "center", alignItems: "center" }}>
       {proofItems.map((item, idx) => (
         <div key={idx} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
           <span style={{ color: COLORS.gold, fontSize: "1.1rem" }}>{item.icon}</span>
@@ -104,7 +104,7 @@ function BuyerSegmentCards({ setPage }) {
       ],
       proof: ">$2M in annual savings from a $40M vendor program in under 6 months. Same gaps exist at portfolio scale — I find them in 100 days.",
       action: "calendly",
-      cta: "Book a Fit Check →",
+      cta: "Book a Fit Check",
       accentColor: COLORS.navy,
     },
     {
@@ -118,7 +118,7 @@ function BuyerSegmentCards({ setPage }) {
       ],
       proof: "I was the operator before I was the advisor — incident command, vendor governance, KPI cadence at a $10B platform.",
       action: "calendly",
-      cta: "Book a Fit Check →",
+      cta: "Book a Fit Check",
       accentColor: COLORS.gold,
     },
   ];
@@ -138,7 +138,7 @@ function BuyerSegmentCards({ setPage }) {
       </p>
       <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
         {segments.map((seg, i) => (
-          <div key={i} style={{ border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${seg.accentColor}`, borderRadius: RADIUS.md, padding: "20px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 260px", minWidth: "min(220px, 100%)", display: "flex", flexDirection: "column" }}>
+          <div key={i} style={{ border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${seg.accentColor}`, borderRadius: RADIUS.md, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 260px", minWidth: "min(220px, 100%)", display: "flex", flexDirection: "column" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
               <span style={{ display: "inline-block", padding: "4px 10px", borderRadius: RADIUS.sm, fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase", color: seg.accentColor, background: `${seg.accentColor}15`, border: `1px solid ${seg.accentColor}30` }}>
                 {seg.code}
@@ -160,10 +160,9 @@ function BuyerSegmentCards({ setPage }) {
             <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.55, margin: "0 0 16px", padding: "10px 12px", background: `${COLORS.navy}05`, borderRadius: RADIUS.sm, borderLeft: `2px solid ${seg.accentColor}` }}>
               {seg.proof}
             </p>
-            <div style={{ flex: "1" }} />
             <button
               onClick={() => handleAction(seg.action)}
-              style={{ alignSelf: "flex-start", padding: "10px 20px", background: seg.action === "scorer" ? COLORS.navy : COLORS.gold, color: "white", border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer", transition: "opacity 0.2s", whiteSpace: "nowrap" }}
+              style={{ alignSelf: "flex-start", marginTop: "auto", padding: "10px 20px", background: seg.action === "scorer" ? "transparent" : COLORS.gold, color: seg.action === "scorer" ? COLORS.navy : "white", border: seg.action === "scorer" ? `1px solid ${COLORS.navy}` : "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer", transition: "opacity 0.2s", whiteSpace: "nowrap" }}
               onMouseEnter={e => { e.currentTarget.style.opacity = "0.85"; }}
               onMouseLeave={e => { e.currentTarget.style.opacity = "1"; }}>
               {seg.cta}
@@ -185,7 +184,7 @@ function LeversTeaserSection({ setPage }) {
         {LEVERS.length} operational friction points across 6 domains — severity-rated, PE impact framed. Browse the full interactive lever explorer on the Services page.
       </p>
 
-      <div style={{ marginTop: "18px", padding: "14px 18px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0`, maxWidth: "720px" }}>
+      <div style={{ marginTop: "18px", padding: "14px 32px", background: `${COLORS.gold}0D`, borderTop: `3px solid ${COLORS.gold}`, borderBottom: `1px solid ${COLORS.gold}40`, marginLeft: "-32px", marginRight: "-32px", marginBottom: "4px" }}>
         <p style={{ fontFamily: FONTS.body, fontSize: "0.92rem", color: COLORS.charcoal, margin: 0, lineHeight: 1.6 }}>
           <strong>16,000+ PE-backed companies are currently held 4+ years — 52% of total PE inventory, the highest on record.</strong> With median hold periods now at 6.6 years, the window for operational value creation is finite. Funds that identify and close these gaps early capture disproportionate returns.
         </p>
@@ -239,16 +238,19 @@ function CostOfInaction() {
       </p>
       <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
         {scenarios.map((s, i) => (
-          <div key={i} style={{ border: `1px solid #FEB2B2`, borderLeft: `3px solid #C53030`, borderRadius: RADIUS.md, padding: "18px", background: "#FFF5F5", flex: "1 1 260px", minWidth: "min(220px, 100%)", display: "flex", flexDirection: "column", gap: "12px" }}>
-            <div style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", fontWeight: 700, color: "#9B2C2C" }}>
-              {s.title}
+          <div key={i} style={{ border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "24px", background: COLORS.white, flex: "1 1 260px", minWidth: "min(220px, 100%)", display: "flex", flexDirection: "column", gap: "12px" }}>
+            <div style={{ display: "flex", alignItems: "flex-start", gap: "8px", marginBottom: "4px" }}>
+              <span style={{ color: COLORS.critical, fontSize: "1rem", flexShrink: 0, marginTop: "2px" }}>⚠</span>
+              <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy }}>
+                {s.title}
+              </div>
             </div>
-            <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: "#4A2020", lineHeight: 1.6, margin: 0, flex: 1 }}>
+            <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0, flex: 1 }}>
               {s.what}
             </p>
-            <div style={{ padding: "10px 12px", background: "white", border: `1px solid #FEB2B2`, borderRadius: RADIUS.sm }}>
-              <span style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, color: "#C53030", letterSpacing: "0.7px", textTransform: "uppercase", display: "block", marginBottom: "4px" }}>PE Consequence</span>
-              <p style={{ fontFamily: FONTS.body, fontSize: "0.92rem", color: "#4A2020", lineHeight: 1.55, margin: 0 }}>{s.consequence}</p>
+            <div style={{ padding: "10px 12px", background: `${COLORS.navy}05`, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.sm }}>
+              <span style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, color: COLORS.critical, letterSpacing: "0.7px", textTransform: "uppercase", display: "block", marginBottom: "4px" }}>PE Consequence</span>
+              <p style={{ fontFamily: FONTS.body, fontSize: "0.92rem", color: COLORS.charcoal, lineHeight: 1.55, margin: 0 }}>{s.consequence}</p>
             </div>
           </div>
         ))}
@@ -278,11 +280,33 @@ function ChooseSituation({ setPage }) {
       <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "820px", marginBottom: "24px" }}>
         Pick the track that matches where you are in the lifecycle. Both paths deliver <strong>risk-rated findings, PE impact framing, and a clear Day-1 critical path</strong>.
       </p>
-      <SplitContrast leftSide={leftSide} rightSide={rightSide} />
-      <div style={{ marginTop: "24px" }}>
+      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginBottom: "24px" }}>
+        <div style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `4px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
+          <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{leftSide.title}</div>
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{leftSide.description}</p>
+          <ul style={{ paddingLeft: "18px", margin: 0 }}>
+            {leftSide.items.map((item, i) => (
+              <li key={i} style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `4px solid ${COLORS.steel}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
+          <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{rightSide.title}</div>
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{rightSide.description}</p>
+          <ul style={{ paddingLeft: "18px", margin: 0 }}>
+            {rightSide.items.map((item, i) => (
+              <li key={i} style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>{item}</li>
+            ))}
+          </ul>
+          <div style={{ marginTop: "auto", paddingTop: "12px", borderTop: `1px solid ${COLORS.border}`, fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.gold, fontWeight: 600 }}>
+            {rightSide.highlight}
+          </div>
+        </div>
+      </div>
+      <div style={{ marginTop: "0" }}>
         <ButtonPair
-          primaryText="15-Minute Fit Check"
-          secondaryText="Use the Ops Scorer"
+          primaryText="Book a Fit Check"
+          secondaryText="Score Your Deal →"
           secondaryLink={null}
           secondaryAction={() => setPage("scorer")}
           centered={true}
@@ -295,18 +319,24 @@ function ChooseSituation({ setPage }) {
 // ─── MINI CASES ──────────────────────────────────────────────
 
 function MiniCases() {
-  const box = { border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, padding: "18px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 260px", minWidth: "min(220px, 100%)" };
+  const [expanded, setExpanded] = useState(false);
+  const box = { border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 260px", minWidth: "min(220px, 100%)", display: "flex", flexDirection: "column" };
   const fieldLabel = { fontFamily: FONTS.body, fontSize: "0.75rem", fontWeight: 700, color: COLORS.navy, letterSpacing: "0.6px", textTransform: "uppercase", display: "block", marginBottom: "4px" };
   const fieldVal = { fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, lineHeight: 1.6, margin: "0 0 14px 0" };
   const valueCreated = { fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0, padding: "10px 12px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0` };
 
   return (
     <Section title="Representative Outcomes" noCTA type="windowWithCards">
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "820px", marginBottom: "20px" }}>
-        Anonymized engagement outcomes. Gap → intervention → result.
+      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "820px", marginBottom: "12px" }}>
+        Anonymized engagement outcomes from $10B+ institutional operating roles. Gap → intervention → result.
       </p>
+      <button
+        onClick={() => setExpanded(!expanded)}
+        style={{ background: "transparent", border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "8px 16px", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, fontWeight: 600, cursor: "pointer", marginBottom: "16px" }}>
+        {expanded ? "Hide outcomes ▾" : "Show outcomes ▸"}
+      </button>
 
-      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+      {expanded && <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
         <div style={box}>
           <SectionTitle sub>Incident instability</SectionTitle>
           <span style={fieldLabel}>GAP</span>
@@ -346,7 +376,7 @@ function MiniCases() {
           <span style={fieldLabel}>RESULT</span>
           <p style={valueCreated}>$2M+ annual savings via renegotiation. Concentration reduced: 1 vendor → 3. Exit plan documented for top 5 vendors — turned a diligence liability into a hold narrative.</p>
         </div>
-      </div>
+      </div>}
     </Section>
   );
 }
