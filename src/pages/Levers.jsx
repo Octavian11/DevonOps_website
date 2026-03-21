@@ -88,7 +88,7 @@ function BuyerSegmentCards({ setPage }) {
         "LP-ready evidence that you stress-tested operations",
         "Day-1 critical path if you close",
       ],
-      proof: "At a $10B multi-strategy fund, I inherited a platform with 4 critical outages in a year and turned it into zero outages for 18 straight months — using the same governance system I now deploy for sponsors: incident command, change control, KPI cadence, and a 100-day stabilization plan. Your portfolio company is smaller, so the playbook installs faster.",
+      proof: "Zero critical outages for 18 straight months at a $10B fund — same playbook, faster install for your deal.",
       action: "scorer",
       cta: "Score Your Deal →",
       accentColor: COLORS.steel,
@@ -102,7 +102,7 @@ function BuyerSegmentCards({ setPage }) {
         "Board-ready ops reporting LPs can trust",
         "IC memo — severity-rated, PE impact framed",
       ],
-      proof: "I've managed vendor programs at institutional scale — $40M in annual spend across 15 providers. Consolidated them to 8 strategic partners and pulled out >$2M in annual savings in under 6 months. For your portfolio companies, the vendor landscape is smaller but the same gaps exist: no inventory, no scorecards, auto-renew traps, and concentration risk nobody's mapped. I find that money in the first 100 days.",
+      proof: ">$2M in annual savings from a $40M vendor program in under 6 months. Same gaps exist at portfolio scale — I find them in 100 days.",
       action: "calendly",
       cta: "Book a Fit Check →",
       accentColor: COLORS.navy,
@@ -116,7 +116,7 @@ function BuyerSegmentCards({ setPage }) {
         "Governance that scales without adding headcount",
         "Vendor controls and compliance cadence built for long holds",
       ],
-      proof: "Before advising on operational diligence, I was the operator — running incident command at 2am, rebuilding vendor governance under regulatory scrutiny, building the KPI cadence that gave boards real-time visibility into a $10B platform. I've seen what happens when operations aren't governed: recurring failures, invisible cost creep, and key-person risk nobody discovers until it's too late.",
+      proof: "I was the operator before I was the advisor — incident command, vendor governance, KPI cadence at a $10B platform.",
       action: "calendly",
       cta: "Book a Fit Check →",
       accentColor: COLORS.gold,
@@ -157,9 +157,10 @@ function BuyerSegmentCards({ setPage }) {
                 </li>
               ))}
             </ul>
-            <p style={{ fontFamily: FONTS.body, fontSize: "0.82rem", color: COLORS.bodyMuted, lineHeight: 1.6, margin: "0 0 16px", padding: "10px 12px", background: `${COLORS.navy}04`, borderRadius: RADIUS.sm, borderLeft: `2px solid ${seg.accentColor}40`, fontStyle: "italic", flex: "1" }}>
+            <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.55, margin: "0 0 16px", padding: "10px 12px", background: `${COLORS.navy}05`, borderRadius: RADIUS.sm, borderLeft: `2px solid ${seg.accentColor}` }}>
               {seg.proof}
             </p>
+            <div style={{ flex: "1" }} />
             <button
               onClick={() => handleAction(seg.action)}
               style={{ alignSelf: "flex-start", padding: "10px 20px", background: seg.action === "scorer" ? COLORS.navy : COLORS.gold, color: "white", border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer", transition: "opacity 0.2s", whiteSpace: "nowrap" }}
