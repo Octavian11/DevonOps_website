@@ -203,11 +203,11 @@ function LeversTeaserSection({ setPage }) {
         />
       </div>
 
-      <div style={{ fontFamily: "Georgia, serif", fontSize: "14px", color: "#6B7280", fontStyle: "italic", borderLeft: `3px solid ${COLORS.gold}`, paddingLeft: "16px", marginTop: "24px" }}>
-        <p style={{ margin: 0, lineHeight: 1.6 }}>
+      <div style={{ padding: "12px 16px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.md} ${RADIUS.md} 0`, maxWidth: "960px", marginTop: "24px" }}>
+        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, margin: 0, lineHeight: 1.6 }}>
           <strong>16,000+ PE-backed companies are currently held 4+ years — 52% of total PE inventory, the highest on record.</strong> With median hold periods now at 6.6 years, the window for operational value creation is finite. Funds that identify and close these gaps early capture disproportionate returns.
         </p>
-        <span style={{ fontSize: "12px", display: "block", marginTop: "6px" }}>McKinsey Global Private Markets Review 2026</span>
+        <span style={{ fontFamily: FONTS.body, fontSize: "0.78rem", color: COLORS.bodyMuted, letterSpacing: "0.4px", textTransform: "uppercase", display: "block", marginTop: "6px" }}>McKinsey Global Private Markets Review 2026</span>
       </div>
     </Section>
   );
