@@ -104,7 +104,7 @@ function WorkedExampleAccordion() {
           style={{ padding: "10px 20px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, border: "none", fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer" }}>
           See offers & pricing
         </button>
-        <CTAButton text="Book a Fit Check" showAvailability={true} small />
+        <CTAButton text="Book a Fit Check" showAvailability={true} />
       </div>
     </Accordion>
   );
@@ -565,13 +565,13 @@ function LeverExplorerSection({ setPage }) {
               <p style={{ fontFamily: FONTS.body, color: COLORS.offWhite, margin: 0, lineHeight: 1.55 }}>
                 <strong style={{ color: COLORS.gold }}>Not sure which of these apply to your deal?</strong> Score Your Deal — free, 2 minutes, produces a prioritized assessment.
               </p>
-              <div style={{ display: "flex", gap: "10px", flexShrink: 0 }}>
-                <button onClick={() => setPage("scorer")} style={{ padding: "10px 20px", background: COLORS.gold, color: COLORS.white, border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer" }}>
-                  Score Your Deal →
-                </button>
-                <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ padding: "10px 20px", background: "transparent", color: COLORS.offWhite, border: `1px solid ${COLORS.offWhite}60`, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer", textDecoration: "none", display: "inline-block" }}>
+              <div style={{ display: "flex", gap: "16px", flexShrink: 0 }}>
+                <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: "none", borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}>
                   Book a Fit Check
                 </a>
+                <button onClick={() => setPage("scorer")} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.gold, fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: `1.5px solid ${COLORS.gold}`, borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}>
+                  Score Your Deal →
+                </button>
               </div>
             </div>
           )}

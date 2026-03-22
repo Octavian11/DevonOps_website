@@ -28,10 +28,10 @@ function HeroBlockWithNav({ setPage }) {
           Pre-close ops diligence and 100-day post-close execution for PE funds, independent sponsors, and family offices. I find what financial DD misses — and build the plan that turns it into EBITDA improvement in 100 days.
         </p>
 
-        <div className="hero-ctas" style={{ display: "flex", gap: SPACING.sm, flexWrap: "wrap", alignItems: "flex-start" }}>
+        <div className="hero-ctas" style={{ display: "flex", gap: "16px", flexWrap: "wrap", alignItems: "flex-start" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
             <a href={CALENDLY} target="_blank" rel="noopener noreferrer"
-              style={{ display: "inline-block", padding: "14px 28px", background: COLORS.gold, color: "white", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.md, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: "none" }}
+              style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: "none", borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}
               onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; }}
               onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; }}>
               Book a Fit Check
@@ -41,7 +41,7 @@ function HeroBlockWithNav({ setPage }) {
             </span>
           </div>
           <button onClick={() => setPage("scorer")}
-            style={{ display: "inline-block", padding: "12px 26px", background: "transparent", color: COLORS.gold, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.md, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: `2px solid ${COLORS.gold}` }}
+            style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.gold, fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: `1.5px solid ${COLORS.gold}`, borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}
             onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.gold}15`; }}
             onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}>
             Score Your Deal →
@@ -136,9 +136,9 @@ function BuyerSegmentCards({ setPage }) {
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "20px" }}>
         Three buyer types, three distinct problems. Each gets a tailored diligence depth and post-close playbook.
       </p>
-      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+      <div style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap" }}>
         {segments.map((seg, i) => (
-          <div key={i} style={{ border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${seg.accentColor}`, borderRadius: RADIUS.md, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 260px", minWidth: "min(220px, 100%)", display: "flex", flexDirection: "column" }}>
+          <div key={i} style={{ border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${seg.accentColor}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 260px", minWidth: "min(220px, 100%)", display: "flex", flexDirection: "column" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
               <span style={{ display: "inline-block", padding: "4px 10px", borderRadius: RADIUS.sm, fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase", color: seg.accentColor, background: `${seg.accentColor}15`, border: `1px solid ${seg.accentColor}30` }}>
                 {seg.code}
@@ -160,13 +160,15 @@ function BuyerSegmentCards({ setPage }) {
             <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.55, margin: "0 0 16px", padding: "10px 12px", background: `${COLORS.navy}05`, borderRadius: RADIUS.sm, borderLeft: `2px solid ${seg.accentColor}` }}>
               {seg.proof}
             </p>
-            <button
-              onClick={() => handleAction(seg.action)}
-              style={{ alignSelf: "flex-start", marginTop: "auto", padding: "10px 20px", background: seg.action === "scorer" ? "transparent" : COLORS.gold, color: seg.action === "scorer" ? COLORS.navy : "white", border: seg.action === "scorer" ? `1px solid ${COLORS.navy}` : "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer", transition: "opacity 0.2s", whiteSpace: "nowrap" }}
-              onMouseEnter={e => { e.currentTarget.style.opacity = "0.85"; }}
-              onMouseLeave={e => { e.currentTarget.style.opacity = "1"; }}>
-              {seg.cta}
-            </button>
+            <div style={{ marginTop: "auto", paddingTop: "16px" }}>
+              <button
+                onClick={() => handleAction(seg.action)}
+                style={seg.action === "scorer" ? { display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.navy, fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: `1.5px solid ${COLORS.navy}`, borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" } : { display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: "none", borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}
+                onMouseEnter={e => { e.currentTarget.style.opacity = "0.85"; }}
+                onMouseLeave={e => { e.currentTarget.style.opacity = "1"; }}>
+                {seg.cta}
+              </button>
+            </div>
           </div>
         ))}
       </div>
@@ -181,15 +183,9 @@ function LeversTeaserSection({ setPage }) {
     <Section noCTA>
       <SectionTitle>20 Operational Value Creation Levers</SectionTitle>
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "960px" }}>
-        {LEVERS.length} operational friction points across 6 domains — severity-rated, PE impact framed. Browse the full interactive lever explorer on the Services page.
+        {LEVERS.length} operational friction points across 6 domains — severity-rated, PE impact framed. Browse the full interactive lever explorer on the{" "}
+        <a href="#" onClick={(e) => { e.preventDefault(); setPage("services"); }} style={{ color: COLORS.gold, textDecoration: "underline", fontWeight: 600 }}>Services page</a>.
       </p>
-
-      <div style={{ marginTop: "18px", padding: "14px 32px", background: `${COLORS.gold}0D`, borderTop: `3px solid ${COLORS.gold}`, borderBottom: `1px solid ${COLORS.gold}40`, width: "100vw", marginLeft: "calc(-50vw + 50%)", marginBottom: "4px" }}>
-        <p style={{ fontFamily: FONTS.body, fontSize: "0.92rem", color: COLORS.charcoal, margin: 0, lineHeight: 1.6 }}>
-          <strong>16,000+ PE-backed companies are currently held 4+ years — 52% of total PE inventory, the highest on record.</strong> With median hold periods now at 6.6 years, the window for operational value creation is finite. Funds that identify and close these gaps early capture disproportionate returns.
-        </p>
-        <span style={{ fontFamily: FONTS.body, fontSize: "0.78rem", color: COLORS.bodyMuted, letterSpacing: "0.4px", textTransform: "uppercase", display: "block", marginTop: "6px" }}>McKinsey Global Private Markets Review 2026</span>
-      </div>
 
       <div style={{ marginTop: "16px", display: "flex", gap: "8px", flexWrap: "wrap" }}>
         {Object.entries(DOMAINS).map(([k]) => (
@@ -205,6 +201,13 @@ function LeversTeaserSection({ setPage }) {
           secondaryAction={() => setPage("scorer")}
           secondaryLink={null}
         />
+      </div>
+
+      <div style={{ fontFamily: "Georgia, serif", fontSize: "14px", color: "#6B7280", fontStyle: "italic", borderLeft: `3px solid ${COLORS.gold}`, paddingLeft: "16px", marginTop: "24px" }}>
+        <p style={{ margin: 0, lineHeight: 1.6 }}>
+          <strong>16,000+ PE-backed companies are currently held 4+ years — 52% of total PE inventory, the highest on record.</strong> With median hold periods now at 6.6 years, the window for operational value creation is finite. Funds that identify and close these gaps early capture disproportionate returns.
+        </p>
+        <span style={{ fontSize: "12px", display: "block", marginTop: "6px" }}>McKinsey Global Private Markets Review 2026</span>
       </div>
     </Section>
   );
@@ -236,9 +239,9 @@ function CostOfInaction() {
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "20px" }}>
         Operational gaps don't stay static under PE ownership. Leverage amplifies friction. These are the scenarios that play out when diligence misses them — and post-close stabilization doesn't happen.
       </p>
-      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+      <div style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap" }}>
         {scenarios.map((s, i) => (
-          <div key={i} style={{ border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "24px", background: COLORS.white, flex: "1 1 260px", minWidth: "min(220px, 100%)", display: "flex", flexDirection: "column", gap: "12px" }}>
+          <div key={i} style={{ border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.costRed}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, flex: "1 1 260px", minWidth: "min(220px, 100%)", display: "flex", flexDirection: "column", gap: "12px" }}>
             <div style={{ display: "flex", alignItems: "flex-start", gap: "8px", marginBottom: "4px" }}>
               <span style={{ color: COLORS.critical, fontSize: "1rem", flexShrink: 0, marginTop: "2px" }}>⚠</span>
               <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy }}>
@@ -280,40 +283,37 @@ function ChooseSituation({ setPage }) {
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "24px" }}>
         Pick the track that matches where you are in the lifecycle. Both paths deliver <strong>risk-rated findings, PE impact framing, and a clear Day-1 critical path</strong>.
       </p>
-      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginBottom: "24px" }}>
-        <div style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `4px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
+      <div style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap" }}>
+        <div style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
           <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{leftSide.title}</div>
           <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{leftSide.description}</p>
-          <ul style={{ paddingLeft: "18px", margin: 0 }}>
+          <ul style={{ paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
             {leftSide.items.map((item, i) => (
               <li key={i} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>{item}</li>
             ))}
           </ul>
-          <div style={{ marginTop: "auto", paddingTop: "12px", borderTop: `1px solid ${COLORS.border}`, fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, fontWeight: 600 }}>
-            Findings surfaced early → price and terms protected
+          <div style={{ marginTop: "auto", paddingTop: "16px" }}>
+            <button onClick={() => setPage("scorer")}
+              style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.navy, fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: `1.5px solid ${COLORS.navy}`, borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap" }}>
+              Score Your Deal →
+            </button>
           </div>
         </div>
-        <div style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `4px solid ${COLORS.steel}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
+        <div style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
           <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{rightSide.title}</div>
           <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{rightSide.description}</p>
-          <ul style={{ paddingLeft: "18px", margin: 0 }}>
+          <ul style={{ paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
             {rightSide.items.map((item, i) => (
               <li key={i} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>{item}</li>
             ))}
           </ul>
-          <div style={{ marginTop: "auto", paddingTop: "12px", borderTop: `1px solid ${COLORS.border}`, fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.gold, fontWeight: 600 }}>
-            {rightSide.highlight}
+          <div style={{ marginTop: "auto", paddingTop: "16px" }}>
+            <a href={CALENDLY} target="_blank" rel="noopener noreferrer"
+              style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: "none", borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap" }}>
+              Book a Fit Check
+            </a>
           </div>
         </div>
-      </div>
-      <div style={{ marginTop: "0" }}>
-        <ButtonPair
-          primaryText="Book a Fit Check"
-          secondaryText="Score Your Deal →"
-          secondaryLink={null}
-          secondaryAction={() => setPage("scorer")}
-          centered={true}
-        />
       </div>
     </Section>
   );
@@ -323,10 +323,10 @@ function ChooseSituation({ setPage }) {
 
 function MiniCases() {
   const [expanded, setExpanded] = useState(false);
-  const box = { border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 260px", minWidth: "min(220px, 100%)", display: "flex", flexDirection: "column" };
+  const box = { border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.gold}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" };
   const fieldLabel = { fontFamily: FONTS.body, fontSize: "0.75rem", fontWeight: 700, color: COLORS.navy, letterSpacing: "0.6px", textTransform: "uppercase", display: "block", marginBottom: "4px" };
-  const fieldVal = { fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, lineHeight: 1.6, margin: "0 0 14px 0" };
-  const valueCreated = { fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0, padding: "10px 12px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0` };
+  const fieldVal = { fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, margin: "0 0 14px 0" };
+  const valueCreated = { fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, margin: 0, padding: "10px 12px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0` };
 
   return (
     <Section title="Representative Outcomes" noCTA type="windowWithCards">
@@ -339,7 +339,7 @@ function MiniCases() {
         {expanded ? "Hide outcomes ▾" : "Show 4 representative outcomes (gap → fix → result) ▸"}
       </button>
 
-      {expanded && <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+      {expanded && <div className="mini-cases-grid">
         <div style={box}>
           <SectionTitle sub>Incident instability</SectionTitle>
           <span style={fieldLabel}>GAP</span>
@@ -487,18 +487,18 @@ export default function LeverExplorer({ setPage }) {
           <p style={{ fontFamily: FONTS.body, color: COLORS.offWhite, margin: 0, lineHeight: 1.5 }}>
             <strong style={{ color: COLORS.gold }}>Ready to find the gaps?</strong> 15 minutes — I'll assess the situation and scope the right engagement.
           </p>
-          <div className="sticky-bar-ctas" style={{ display: "flex", gap: "10px", alignItems: "center", flexShrink: 0 }}>
+          <div className="sticky-bar-ctas" style={{ display: "flex", gap: "16px", alignItems: "center", flexShrink: 0 }}>
             <a
               href={CALENDLY}
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleStickyDismiss}
-              style={{ padding: "10px 20px", background: COLORS.gold, color: "white", border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap", textDecoration: "none", display: "inline-block" }}>
+              style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: "none", borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}>
               Book a Fit Check
             </a>
             <button
               onClick={() => { handleStickyDismiss(); setPage("scorer"); }}
-              style={{ padding: "10px 18px", background: "transparent", border: `1px solid ${COLORS.offWhite}60`, borderRadius: RADIUS.md, color: COLORS.offWhite, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 500, cursor: "pointer", whiteSpace: "nowrap" }}>
+              style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.gold, fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: `1.5px solid ${COLORS.gold}`, borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}>
               Score Your Deal →
             </button>
             <button

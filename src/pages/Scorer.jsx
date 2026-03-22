@@ -233,7 +233,7 @@ export default function ScorerPage() {
       {/* Score All 6 Dimensions */}
       <div style={{ marginBottom: "28px" }}>
         <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.navy, marginBottom: "18px" }}>Score all 6 dimensions (1–5)</h3>
-        <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.bodyMuted, marginBottom: "20px", lineHeight: 1.6 }}>
+        <p style={{ fontFamily: FONTS.body, color: COLORS.bodyMuted, marginBottom: "20px", lineHeight: 1.6 }}>
           Slide each bar to rate your portfolio company's operational maturity. 1 = significant gaps, 5 = well-governed. Check "Not assessed" if you genuinely don't have visibility into a dimension.
         </p>
 
@@ -403,7 +403,7 @@ export default function ScorerPage() {
                     const isGap = scores[dim.key] <= 2;
                     return (
                       <div key={dim.key} style={{ paddingLeft: "16px", borderLeft: `3px solid ${isGap ? COLORS.critical : COLORS.atRisk}` }}>
-                        <p style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, margin: "0 0 4px 0" }}>
+                        <p style={{ fontFamily: FONTS.heading, fontWeight: 700, color: COLORS.navy, margin: "0 0 4px 0" }}>
                           {dim.label} — <span style={{ fontWeight: 400, color: COLORS.bodyMuted }}>{rec.days}</span>
                         </p>
                         <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.65, margin: "0 0 6px 0" }}>

@@ -47,6 +47,7 @@ export const COLORS = {
   stable: "#276749",
   atRisk: "#C05621",
   critical: "#9B2C2C",
+  costRed: "#C53030",
   heroGradientStart: "#14213D",
   heroGradientEnd: "#0F1A2E",
 };
@@ -343,6 +344,12 @@ export const globalCSS = `
   .split-contrast { grid-template-columns: 1fr 1fr; }
   @media (max-width: 768px) {
     .split-contrast { grid-template-columns: 1fr; }
+  }
+
+  /* MiniCases 2x2 grid: stacks on mobile */
+  .mini-cases-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 768px) {
+    .mini-cases-grid { grid-template-columns: 1fr; }
   }
 
   /* ── Main container: responsive padding ─────────────────────── */

@@ -38,18 +38,17 @@ export function DomainTag({ domain }) {
 
 // ─── BUTTONS ─────────────────────────────────────────────────
 
-export function CTAButton({ text, small, variant, style: extraStyle, showAvailability }) {
+export function CTAButton({ text, variant, style: extraStyle, showAvailability }) {
   const isPrimary = variant !== "secondary";
-  const bg = isPrimary ? COLORS.gold : "transparent";
-  const color = isPrimary ? "white" : COLORS.goldDark;
-  const border = isPrimary ? "none" : `2px solid ${COLORS.goldDark}`;
-  const hoverBg = isPrimary ? "#A07D2E" : `${COLORS.gold}15`;
+  const btnStyle = isPrimary ? PRIMARY_BTN : SECONDARY_BTN;
+  const hoverBg = isPrimary ? "#A07D2E" : `${COLORS.navy}08`;
+  const restoreBg = isPrimary ? COLORS.gold : "transparent";
   return (
     <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
       <a href={CALENDLY} target="_blank" rel="noopener noreferrer"
-        style={{ display: "inline-block", padding: small ? "10px 20px" : "14px 28px", background: bg, color, fontFamily: FONTS.body, fontSize: small ? "0.9rem" : "1rem", fontWeight: 600, borderRadius: RADIUS.md, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border, ...extraStyle }}
+        style={{ ...btnStyle, ...extraStyle }}
         onMouseEnter={e => { e.currentTarget.style.background = hoverBg; }}
-        onMouseLeave={e => { e.currentTarget.style.background = bg; }}>
+        onMouseLeave={e => { e.currentTarget.style.background = restoreBg; }}>
         {text || "Book a Fit Check"}
       </a>
       {showAvailability && (
@@ -78,6 +77,9 @@ export function SectionTitle({ children, sub }) {
   );
 }
 
+export const PRIMARY_BTN = { display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: "none", borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" };
+export const SECONDARY_BTN = { display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.navy, fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: `1.5px solid ${COLORS.navy}`, borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" };
+
 export function ButtonPair({
   primaryText = "Book a Fit Check",
   primaryAction,
@@ -85,24 +87,21 @@ export function ButtonPair({
   secondaryAction,
   primaryLink = CALENDLY,
   secondaryLink,
-  centered = false,
   showAvailability = false
 }) {
-  const primaryStyle = { display: "inline-block", padding: "12px 24px", background: COLORS.gold, color: "white", borderRadius: RADIUS.md, textDecoration: "none", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", transition: "all 0.2s", border: "none", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "min(180px, 100%)", cursor: "pointer" };
-  const secondaryStyle = { display: "inline-block", padding: "12px 24px", background: "transparent", color: COLORS.navy, borderRadius: RADIUS.md, textDecoration: "none", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", border: `1px solid ${COLORS.navy}`, transition: "all 0.2s", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "min(180px, 100%)", cursor: "pointer" };
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: centered ? "center" : "flex-start" }}>
-      <div style={{ display: "flex", flexDirection: "row", gap: SPACING.sm, justifyContent: centered ? "center" : "flex-start", flexWrap: "wrap" }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <div style={{ display: "flex", gap: "16px", justifyContent: "center", marginTop: "24px", flexWrap: "wrap" }}>
         {primaryLink ? (
           <a href={primaryLink} target="_blank" rel="noopener noreferrer"
-             style={primaryStyle}
+             style={PRIMARY_BTN}
              onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; }}
              onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; }}>
             {primaryText}
           </a>
         ) : (
           <button onClick={primaryAction}
-             style={primaryStyle}
+             style={PRIMARY_BTN}
              onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; }}
              onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; }}>
             {primaryText}
@@ -112,14 +111,14 @@ export function ButtonPair({
         {(secondaryText || secondaryAction || secondaryLink) && (
           secondaryLink ? (
             <a href={secondaryLink} target="_blank" rel="noopener noreferrer"
-               style={secondaryStyle}
+               style={SECONDARY_BTN}
                onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.navy}08`; }}
                onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}>
               {secondaryText}
             </a>
           ) : (
             <button onClick={secondaryAction}
-               style={secondaryStyle}
+               style={SECONDARY_BTN}
                onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.navy}08`; }}
                onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}>
               {secondaryText}
@@ -127,6 +126,11 @@ export function ButtonPair({
           )
         )}
       </div>
+      {showAvailability && (
+        <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.navy, marginTop: "8px" }}>
+          Engagements typically book 2–3 weeks out
+        </span>
+      )}
     </div>
   );
 }
@@ -515,20 +519,19 @@ export function ServicesSamplesRow() {
 // ─── OFFER CARDS (SHARED SERVICES PRICING) ──────────────────
 
 export function OfferCards({ setPage }) {
-  const box = { border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 260px", minWidth: "min(220px, 100%)", display: "flex", flexDirection: "column" };
-  const boxGold = { ...box, border: `2px solid ${COLORS.gold}`, boxShadow: SHADOWS.md };
+  const box = { border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 260px", minWidth: "min(220px, 100%)", display: "flex", flexDirection: "column" };
   const tag = { fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.gold, fontWeight: 600, marginBottom: "10px" };
   const li = { marginBottom: "8px", lineHeight: 1.55 };
   const segLabel = { fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "10px", display: "block" };
 
   return (
     <Section title="Services & Pricing" type="windowWithCards" noCTA>
-      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginBottom: "24px" }}>
-        <div style={box}>
+      <div style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap", marginBottom: "24px" }}>
+        <div style={{...box, borderTop: `3px solid ${COLORS.steel}`}}>
           <span style={segLabel}>Independent Sponsors · Pre-Close</span>
           <SectionTitle sub>Ops Diligence Report (Pre-Close)</SectionTitle>
           <div style={tag}>Starting at $15,000 · 2–3 weeks</div>
-          <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
+          <ul style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
             <li style={li}>Risk-rated red flags with severity + PE impact</li>
             <li style={li}>Evidence requests + diligence questions</li>
             <li style={li}>IC-ready memo format</li>
@@ -538,22 +541,22 @@ export function OfferCards({ setPage }) {
           </p>
         </div>
 
-        <div style={boxGold}>
+        <div style={{...box, borderTop: `3px solid ${COLORS.gold}`}}>
           <span style={{ ...segLabel, color: COLORS.gold }}>LMM PE Funds · Recommended</span>
           <SectionTitle sub>Bundle (Recommended): Diligence → VCP → Execution</SectionTitle>
           <div style={tag}>$25,000–$35,000 · diligence + 100 days</div>
-          <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
+          <ul style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
             <li style={li}>Diligence findings roll directly into the Value Creation Plan — no re-learning, no gap between discovery and execution</li>
             <li style={li}>Day-1 critical path + phased 100-day execution</li>
             <li style={li}>Clear ownership + cadence from close to value</li>
           </ul>
         </div>
 
-        <div style={box}>
+        <div style={{...box, borderTop: `3px solid ${COLORS.navy}`}}>
           <span style={segLabel}>Family Offices · Ongoing Hold</span>
           <SectionTitle sub>Control Tower Retainer (Ongoing)</SectionTitle>
           <div style={tag}>Starting at $7,500/month · ongoing</div>
-          <ul style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
+          <ul style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
             <li style={li}>Weekly operating review + board-ready KPI pack</li>
             <li style={li}>Incident + change governance discipline</li>
             <li style={li}>Vendor controls + audit readiness cadence</li>
