@@ -91,12 +91,12 @@ export const SEVERITY_STYLE = {
 export const TIMING_COLORS = { "Pre-Close Red Flag": COLORS.preClose, "First 100 Days": COLORS.first100, "Ongoing Hold": COLORS.ongoing };
 
 export const DOMAINS = {
-  IM: { name: "Things That Break Repeatedly", short: "IM", color: "#E53E3E", desc: "Recurring operational failures, severity classification, post-incident reviews, escalation" },
-  CG: { name: "Changes That Cause Failures", short: "CG", color: "#DD6B20", desc: "Operational change control, review processes, rollback capability, change-incident correlation" },
-  VP: { name: "Vendor Risk & Dependency", short: "VP", color: "#D69E2E", desc: "Contracts, concentration risk, scorecards, fourth-party visibility" },
-  AC: { name: "Things That Won't Survive Buyer DD", short: "AC", color: "#38A169", desc: "Evidence trails, compliance controls, access reviews, audit readiness" },
-  KO: { name: "Missing Metrics & Reporting Cadence", short: "KO", color: "#3182CE", desc: "Board reporting, operating reviews, KPIs, targets" },
-  OP: { name: "Things Nobody Owns", short: "OP", color: "#805AD5", desc: "Documented procedures, accountability, key-person risk, knowledge management" },
+  IM: { name: "Things That Break Repeatedly", short: "Incidents", color: "#E53E3E", desc: "Recurring operational failures, severity classification, post-incident reviews, escalation" },
+  CG: { name: "Changes That Cause Failures", short: "Change Control", color: "#DD6B20", desc: "Operational change control, review processes, rollback capability, change-incident correlation" },
+  VP: { name: "Vendor Risk & Dependency", short: "Vendors", color: "#D69E2E", desc: "Contracts, concentration risk, scorecards, fourth-party visibility" },
+  AC: { name: "Things That Won't Survive Buyer DD", short: "Compliance", color: "#38A169", desc: "Evidence trails, compliance controls, access reviews, audit readiness" },
+  KO: { name: "Missing Metrics & Reporting Cadence", short: "KPIs", color: "#3182CE", desc: "Board reporting, operating reviews, KPIs, targets" },
+  OP: { name: "Things Nobody Owns", short: "Process", color: "#805AD5", desc: "Documented procedures, accountability, key-person risk, knowledge management" },
 };
 
 // ─── 20 LEVERS (MVP) ───────────────────────────────────────

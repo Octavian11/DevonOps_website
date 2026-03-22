@@ -15,7 +15,7 @@ function ToolCard({ title, description, badge, badgeColor, ctaText, ctaAction, c
         </span>
       )}
       <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", fontWeight: 700, color: COLORS.navy, margin: 0 }}>{title}</h3>
-      <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.65, margin: 0, flex: 1 }}>{description}</p>
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, margin: 0, flex: 1 }}>{description}</p>
       {ctaHref ? (
         <a href={ctaHref} target="_blank" rel="noopener noreferrer"
           style={{ display: "inline-block", padding: "10px 20px", background: COLORS.gold, color: COLORS.white, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, textDecoration: "none", textAlign: "center", marginTop: "auto" }}>
@@ -68,7 +68,7 @@ export default function ResourcesPage({ setPage }) {
 
       {/* Interactive Tools */}
       <Section noCTA title="Interactive Tools">
-        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: SPACING.md }}>
+        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: SPACING.md }}>
           Two free tools to help you identify operational risk and explore the 20 value creation levers before your first conversation.
         </p>
         <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
@@ -77,7 +77,7 @@ export default function ResourcesPage({ setPage }) {
             badgeColor={COLORS.gold}
             title="Ops Scorer"
             description="Rate your deal across 8 operational dimensions — incident governance, change management, vendor risk, and more. Produces a prioritized assessment with buyer-type framing for IS, PE fund, or family office contexts."
-            ctaText="Run the Ops Scorer →"
+            ctaText="Score Your Deal →"
             ctaAction={() => setPage("scorer")}
           />
           <ToolCard
@@ -93,7 +93,7 @@ export default function ResourcesPage({ setPage }) {
 
       {/* Sample Deliverables */}
       <Section noCTA title="Sample Deliverables">
-        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: SPACING.md }}>
+        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: SPACING.md }}>
           Anonymized examples of the board-ready deliverables included in each engagement. Enter your email to download — no spam, no follow-up sequence.
         </p>
         <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
@@ -131,13 +131,13 @@ export default function ResourcesPage({ setPage }) {
 
       {/* Bottom CTA */}
       <Section noCTA background={`${COLORS.navy}05`}>
-        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, marginBottom: "18px", textAlign: "center" }}>
+        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, marginBottom: "18px", textAlign: "center" }}>
           15 minutes. I'll assess the situation and scope the right engagement.
         </p>
         <ButtonPair
           primaryText="Book a Fit Check"
           primaryLink={CALENDLY}
-          secondaryText="Run the Ops Scorer →"
+          secondaryText="Score Your Deal →"
           secondaryLink={null}
           secondaryAction={() => setPage("scorer")}
           centered={true}

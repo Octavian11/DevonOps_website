@@ -17,14 +17,14 @@ function HeroBlockWithNav({ setPage }) {
   return (
     <div className="hero-block" style={{ background: `linear-gradient(135deg, ${COLORS.heroGradientStart} 0%, ${COLORS.heroGradientEnd} 100%)`, marginTop: "-40px", marginBottom: "0", padding: "48px 40px 44px", position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0, opacity: 0.02, backgroundImage: "repeating-linear-gradient(0deg, white 0px, white 1px, transparent 1px, transparent 40px), repeating-linear-gradient(90deg, white 0px, white 1px, transparent 1px, transparent 40px)" }} />
-      <div style={{ position: "relative", maxWidth: "720px" }}>
+      <div style={{ position: "relative", maxWidth: "920px" }}>
         <div style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.gold, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "16px" }}>
           Ops Diligence · Value Creation Plans · Post-Close Governance
         </div>
         <h1 className="hero-headline" style={{ fontFamily: FONTS.heading, fontSize: "2.4rem", fontWeight: 700, color: "white", lineHeight: 1.2, marginBottom: "18px" }}>
           Your deal team handles the financials. Who's stress-testing the operations?
         </h1>
-        <p className="hero-subheadline" style={{ fontFamily: FONTS.body, fontSize: "1.02rem", color: "rgba(255,255,255,0.92)", lineHeight: 1.65, marginBottom: "22px" }}>
+        <p className="hero-subheadline" style={{ fontFamily: FONTS.body, color: "rgba(255,255,255,0.92)", lineHeight: 1.65, marginBottom: "22px" }}>
           Pre-close ops diligence and 100-day post-close execution for PE funds, independent sponsors, and family offices. I find what financial DD misses — and build the plan that turns it into EBITDA improvement in 100 days.
         </p>
 
@@ -44,7 +44,7 @@ function HeroBlockWithNav({ setPage }) {
             style={{ display: "inline-block", padding: "12px 26px", background: "transparent", color: COLORS.gold, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, borderRadius: RADIUS.md, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border: `2px solid ${COLORS.gold}` }}
             onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.gold}15`; }}
             onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}>
-            Run the Ops Scorer →
+            Score Your Deal →
           </button>
         </div>
       </div>
@@ -62,7 +62,7 @@ function MicroProofStrip() {
   ];
 
   return (
-    <div style={{ background: `linear-gradient(135deg, ${COLORS.navy}08 0%, ${COLORS.gold}08 100%)`, padding: "16px 32px", marginLeft: "-32px", marginRight: "-32px", marginBottom: "24px", display: "flex", gap: SPACING.lg, flexWrap: "wrap", justifyContent: "center", alignItems: "center" }}>
+    <div style={{ background: `linear-gradient(135deg, ${COLORS.navy}08 0%, ${COLORS.gold}08 100%)`, padding: "16px 32px", width: "100vw", marginLeft: "calc(-50vw + 50%)", marginBottom: "24px", display: "flex", gap: SPACING.lg, flexWrap: "wrap", justifyContent: "center", alignItems: "center" }}>
       {proofItems.map((item, idx) => (
         <div key={idx} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
           <span style={{ color: COLORS.gold, fontSize: "1.1rem" }}>{item.icon}</span>
@@ -133,7 +133,7 @@ function BuyerSegmentCards({ setPage }) {
 
   return (
     <Section title="Who This Is Built For" noCTA type="windowWithCards">
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "20px" }}>
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "20px" }}>
         Three buyer types, three distinct problems. Each gets a tailored diligence depth and post-close playbook.
       </p>
       <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
@@ -147,12 +147,12 @@ function BuyerSegmentCards({ setPage }) {
                 {seg.title}
               </span>
             </div>
-            <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "14px", fontStyle: "italic" }}>
+            <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "14px", fontStyle: "italic" }}>
               {seg.pain}
             </p>
             <ul style={{ paddingLeft: "18px", margin: "0 0 14px 0" }}>
               {seg.items.map((item, j) => (
-                <li key={j} style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>
+                <li key={j} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>
                   {item}
                 </li>
               ))}
@@ -180,11 +180,11 @@ function LeversTeaserSection({ setPage }) {
   return (
     <Section noCTA>
       <SectionTitle>20 Operational Value Creation Levers</SectionTitle>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "720px" }}>
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "960px" }}>
         {LEVERS.length} operational friction points across 6 domains — severity-rated, PE impact framed. Browse the full interactive lever explorer on the Services page.
       </p>
 
-      <div style={{ marginTop: "18px", padding: "14px 32px", background: `${COLORS.gold}0D`, borderTop: `3px solid ${COLORS.gold}`, borderBottom: `1px solid ${COLORS.gold}40`, marginLeft: "-32px", marginRight: "-32px", marginBottom: "4px" }}>
+      <div style={{ marginTop: "18px", padding: "14px 32px", background: `${COLORS.gold}0D`, borderTop: `3px solid ${COLORS.gold}`, borderBottom: `1px solid ${COLORS.gold}40`, width: "100vw", marginLeft: "calc(-50vw + 50%)", marginBottom: "4px" }}>
         <p style={{ fontFamily: FONTS.body, fontSize: "0.92rem", color: COLORS.charcoal, margin: 0, lineHeight: 1.6 }}>
           <strong>16,000+ PE-backed companies are currently held 4+ years — 52% of total PE inventory, the highest on record.</strong> With median hold periods now at 6.6 years, the window for operational value creation is finite. Funds that identify and close these gaps early capture disproportionate returns.
         </p>
@@ -201,8 +201,8 @@ function LeversTeaserSection({ setPage }) {
         <ButtonPair
           primaryText="Book a Fit Check"
           primaryLink={CALENDLY}
-          secondaryText="Browse All 20 Levers →"
-          secondaryAction={() => setPage("services")}
+          secondaryText="Score Your Deal →"
+          secondaryAction={() => setPage("scorer")}
           secondaryLink={null}
         />
       </div>
@@ -233,7 +233,7 @@ function CostOfInaction() {
 
   return (
     <Section title="The Cost of Not Acting" noCTA>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "820px", marginBottom: "20px" }}>
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "20px" }}>
         Operational gaps don't stay static under PE ownership. Leverage amplifies friction. These are the scenarios that play out when diligence misses them — and post-close stabilization doesn't happen.
       </p>
       <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
@@ -245,7 +245,7 @@ function CostOfInaction() {
                 {s.title}
               </div>
             </div>
-            <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0, flex: 1 }}>
+            <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, margin: 0, flex: 1 }}>
               {s.what}
             </p>
             <div style={{ padding: "10px 12px", background: `${COLORS.navy}05`, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.sm }}>
@@ -277,25 +277,28 @@ function ChooseSituation({ setPage }) {
 
   return (
     <Section title="Choose Your Situation" noCTA>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "820px", marginBottom: "24px" }}>
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "24px" }}>
         Pick the track that matches where you are in the lifecycle. Both paths deliver <strong>risk-rated findings, PE impact framing, and a clear Day-1 critical path</strong>.
       </p>
       <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginBottom: "24px" }}>
         <div style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `4px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
           <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{leftSide.title}</div>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{leftSide.description}</p>
+          <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{leftSide.description}</p>
           <ul style={{ paddingLeft: "18px", margin: 0 }}>
             {leftSide.items.map((item, i) => (
-              <li key={i} style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>{item}</li>
+              <li key={i} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>{item}</li>
             ))}
           </ul>
+          <div style={{ marginTop: "auto", paddingTop: "12px", borderTop: `1px solid ${COLORS.border}`, fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, fontWeight: 600 }}>
+            Findings surfaced early → price and terms protected
+          </div>
         </div>
         <div style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `4px solid ${COLORS.steel}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
           <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{rightSide.title}</div>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{rightSide.description}</p>
+          <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{rightSide.description}</p>
           <ul style={{ paddingLeft: "18px", margin: 0 }}>
             {rightSide.items.map((item, i) => (
-              <li key={i} style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>{item}</li>
+              <li key={i} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>{item}</li>
             ))}
           </ul>
           <div style={{ marginTop: "auto", paddingTop: "12px", borderTop: `1px solid ${COLORS.border}`, fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.gold, fontWeight: 600 }}>
@@ -327,13 +330,13 @@ function MiniCases() {
 
   return (
     <Section title="Representative Outcomes" noCTA type="windowWithCards">
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "820px", marginBottom: "12px" }}>
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "12px" }}>
         Anonymized engagement outcomes from $10B+ institutional operating roles. Gap → intervention → result.
       </p>
       <button
         onClick={() => setExpanded(!expanded)}
         style={{ background: "transparent", border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "8px 16px", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, fontWeight: 600, cursor: "pointer", marginBottom: "16px" }}>
-        {expanded ? "Hide outcomes ▾" : "Show outcomes ▸"}
+        {expanded ? "Hide outcomes ▾" : "Show 4 representative outcomes (gap → fix → result) ▸"}
       </button>
 
       {expanded && <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
@@ -464,13 +467,13 @@ export default function LeverExplorer({ setPage }) {
         <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.bodyMuted, textAlign: "center", fontStyle: "italic", margin: "0 auto 8px" }}>
           ~67% incident volume reduction · ~31% MTTR improvement · $2M+ annual vendor savings — representative outcomes from prior institutional operating roles
         </p>
-        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, textAlign: "center", margin: "0 auto 20px" }}>
+        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, textAlign: "center", margin: "0 auto 20px" }}>
           Not sure where to start? Let's assess fit and scope the right engagement.
         </p>
         <ButtonPair
           primaryText="Book a Fit Check"
           primaryLink={CALENDLY}
-          secondaryText="Run the Ops Scorer →"
+          secondaryText="Score Your Deal →"
           secondaryLink={null}
           secondaryAction={() => setPage("scorer")}
           centered={true}
@@ -481,7 +484,7 @@ export default function LeverExplorer({ setPage }) {
       {/* ── Scroll-depth sticky bar ── */}
       {showStickyBar && !stickyDismissed && (
         <div className="scorer-sticky-bar" style={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 200, background: COLORS.navy, borderTop: `3px solid ${COLORS.gold}`, padding: "14px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px", boxShadow: "0 -4px 20px rgba(20,33,61,0.25)" }}>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.offWhite, margin: 0, lineHeight: 1.5 }}>
+          <p style={{ fontFamily: FONTS.body, color: COLORS.offWhite, margin: 0, lineHeight: 1.5 }}>
             <strong style={{ color: COLORS.gold }}>Ready to find the gaps?</strong> 15 minutes — I'll assess the situation and scope the right engagement.
           </p>
           <div className="sticky-bar-ctas" style={{ display: "flex", gap: "10px", alignItems: "center", flexShrink: 0 }}>
@@ -491,12 +494,12 @@ export default function LeverExplorer({ setPage }) {
               rel="noopener noreferrer"
               onClick={handleStickyDismiss}
               style={{ padding: "10px 20px", background: COLORS.gold, color: "white", border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap", textDecoration: "none", display: "inline-block" }}>
-              Book a Fit Check →
+              Book a Fit Check
             </a>
             <button
               onClick={() => { handleStickyDismiss(); setPage("scorer"); }}
               style={{ padding: "10px 18px", background: "transparent", border: `1px solid ${COLORS.offWhite}60`, borderRadius: RADIUS.md, color: COLORS.offWhite, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 500, cursor: "pointer", whiteSpace: "nowrap" }}>
-              Run Ops Scorer →
+              Score Your Deal →
             </button>
             <button
               onClick={handleStickyDismiss}

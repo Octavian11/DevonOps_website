@@ -11,25 +11,25 @@ export default function AboutPage() {
 
       {/* Who I Am */}
       <Section noCTA title="Who I Am">
-        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, margin: 0 }}>
+        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, margin: 0 }}>
           Hassan Tariq. 15+ years in platform operations across JP Morgan, Barclays, Bank of America, and Lazard — managing global trading operations, multi-billion dollar platform transformations, and operational risk at institutional scale. I'm currently completing my Executive MBA at Columbia Business School ('26), where I've sharpened a PE operator lens on the operational risks that derail value creation in the first 100 days.
         </p>
       </Section>
 
       {/* What I Do */}
       <Section noCTA title="What I Do">
-        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "14px" }}>
+        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "14px" }}>
           I help PE funds and portfolio companies eliminate the operational friction that erodes EBITDA, extends hold periods, and creates risk that surfaces too late. From pre-close diligence through post-close stabilization to ongoing governance — I install the operating discipline that makes value creation plans actually executable.
         </p>
         <div style={{ padding: "14px 18px", background: `${COLORS.navy}06`, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, marginBottom: SPACING.md }}>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.navy, lineHeight: 1.6, margin: 0 }}>
+          <p style={{ fontFamily: FONTS.body, color: COLORS.navy, lineHeight: 1.6, margin: 0 }}>
             <strong>Best fit:</strong> Lower-middle-market PE funds, independent sponsors, and family offices doing control deals where operational risk can break the value creation plan.
           </p>
         </div>
-        <p style={{ fontFamily: FONTS.heading, fontSize: "1.05rem", color: COLORS.gold, fontStyle: "italic", marginBottom: SPACING.md }}>
+        <p style={{ fontFamily: FONTS.heading, color: COLORS.gold, fontStyle: "italic", marginBottom: SPACING.md }}>
           Find the gaps. Build the plan. Create the value.
         </p>
-        <CTAButton text="15-Minute Fit Check" showAvailability={true} />
+        <CTAButton text="Book a Fit Check" showAvailability={true} />
       </Section>
 
       {/* How I Work */}
@@ -68,11 +68,11 @@ export default function AboutPage() {
             Platform Stabilization & Reliability
           </div>
           <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Context</div>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "16px" }}>
+          <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "16px" }}>
             A multi-strategy hedge fund managing ~$10B in assets was scaling rapidly, but its operating cadence hadn't kept pace. The platform had suffered 4 critical outages in 12 months. Portfolio-weighted availability sat at ~94%. High-severity incidents averaged 6 hours to resolve. Leadership time was consumed by firefighting, and stakeholder satisfaction was declining — NPS had dropped from 45 to 38 over 18 months.
           </p>
           <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>What I Built</div>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "20px" }}>
+          <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "20px" }}>
             Hired and led a 10-person global operations team across New York, London, and Hong Kong in ~6 months. Reset incident management from the ground up: severity model, escalation paths, communications cadence, on-call ownership, and closed-loop postmortems. Standardized runbooks and introduced change discipline through a CAB-lite governance process. Built a KPI dashboard tracking 18 operational metrics with weekly review cadence, and established quarterly stakeholder reviews with 50+ portfolio management and trading desk stakeholders.
           </p>
           <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "12px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Measured Outcomes</div>
@@ -109,11 +109,11 @@ export default function AboutPage() {
             Vendor Optimization & Cost Control
           </div>
           <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Context</div>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "16px" }}>
+          <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "16px" }}>
             A global asset manager was running a ~$40M annual technology-and-operations vendor program where spend was growing ~22% annually — materially outpacing AUM and business growth. The vendor landscape was fragmented across 15 providers, creating redundancy and weak negotiating leverage. There was no visibility into utilization or value realization, and no structured governance to prevent cost creep.
           </p>
           <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>What I Built</div>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "20px" }}>
+          <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "20px" }}>
             Built a single source of truth for spend across the full $40M program and segmented it by business value and usage. Ran utilization analytics to right-size licensing and surface low-value or duplicative spend. Consolidated 15 providers down to 8 strategic partners, renegotiated terms across major market data and trading platform vendors, and introduced competitive tension through targeted RFP/RFQ processes. Installed ongoing vendor governance: scorecards, contract lifecycle discipline, and QBRs to sustain savings and performance.
           </p>
           <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "12px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Measured Outcomes</div>
@@ -149,11 +149,11 @@ export default function AboutPage() {
 
       {/* Bottom CTA */}
       <Section noCTA background={`${COLORS.navy}05`}>
-        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, marginBottom: "18px", textAlign: "center" }}>
+        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, marginBottom: "18px", textAlign: "center" }}>
           15 minutes. I'll assess the situation and scope the right engagement.
         </p>
         <ButtonPair
-          primaryText="15-Minute Fit Check"
+          primaryText="Book a Fit Check"
           centered={true}
           showAvailability={true}
         />

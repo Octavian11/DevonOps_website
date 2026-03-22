@@ -104,7 +104,7 @@ function WorkedExampleAccordion() {
           style={{ padding: "10px 20px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, border: "none", fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer" }}>
           See offers & pricing
         </button>
-        <CTAButton text="15-Minute Fit Check" showAvailability={true} small />
+        <CTAButton text="Book a Fit Check" showAvailability={true} small />
       </div>
     </Accordion>
   );
@@ -140,25 +140,25 @@ function FrameworkWhyFrictionTight() {
 
   return (
     <Section title="Why Operational Friction Compounds Under PE Ownership" noCTA>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "860px", marginBottom: "24px" }}>
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "24px" }}>
         My method: diagnose friction, prioritize by EBITDA impact and time to proof.
       </p>
       <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
         <div style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `4px solid ${COLORS.critical}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
           <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{leftSide.title}</div>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{leftSide.description}</p>
+          <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{leftSide.description}</p>
           <ul style={{ paddingLeft: "18px", margin: 0 }}>
             {leftSide.items.map((item, i) => (
-              <li key={i} style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>{item}</li>
+              <li key={i} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>{item}</li>
             ))}
           </ul>
         </div>
         <div style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `4px solid ${COLORS.gold}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
           <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{rightSide.title}</div>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{rightSide.description}</p>
+          <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{rightSide.description}</p>
           <ul style={{ paddingLeft: "18px", margin: 0 }}>
             {rightSide.items.map((item, i) => (
-              <li key={i} style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>{item}</li>
+              <li key={i} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>{item}</li>
             ))}
           </ul>
           <div style={{ marginTop: "auto", paddingTop: "12px", borderTop: `1px solid ${COLORS.border}`, fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.gold, fontWeight: 600 }}>
@@ -176,13 +176,13 @@ function FrameworkRubricTable() {
   const [open, setOpen] = useState(false);
   return (
     <Section title="The Friction Evaluation Rubric" noCTA>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "12px" }}>
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "12px" }}>
         Each lever is evaluated across six dimensions — EBITDA impact, time to proof, execution certainty, exit story impact, reversibility, and attention load.
       </p>
       <button
         onClick={() => setOpen(!open)}
         style={{ background: "transparent", border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "8px 16px", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, fontWeight: 600, cursor: "pointer", marginBottom: "16px" }}>
-        {open ? "Hide rubric ▾" : "Show rubric ▸"}
+        {open ? "Hide rubric ▾" : "Show scoring rubric — 6 evaluation criteria with action triggers ▸"}
       </button>
 
       {open && <>
@@ -214,7 +214,7 @@ function FrameworkRubricTable() {
             </tbody>
           </table>
         </div>
-        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginTop: "14px" }}>
+        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginTop: "14px" }}>
           Levers scoring well on <em>EBITDA Impact + Time to Proof + Low Attention Load</em> are highest-priority quick wins. Strong <em>Exit Story Impact</em> with longer timelines are strategic investments.
         </p>
       </>}
@@ -250,11 +250,11 @@ function StabilizationSequence() {
 
   return (
     <Section noCTA title="The Stabilization Sequence">
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "24px" }}>
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "24px" }}>
         Operational stabilization follows a consistent three-phase sequence: <strong>Visibility → Control → Cadence</strong>.
       </p>
       <TimelineRail items={timelineItems} />
-      <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginTop: "24px" }}>
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginTop: "24px" }}>
         After Day 100, the Control Tower Retainer maintains the cadence and prevents drift-back.
       </p>
     </Section>
@@ -264,16 +264,27 @@ function StabilizationSequence() {
 // ─── SERVICES STEPS ──────────────────────────────────────────
 
 function ServicesSteps() {
-  const timelineItems = [
-    { title: "Step 1: Fit Check", meta: "15 minutes", description: "15-minute call. Assess the situation, confirm scope, and determine fit.", completed: true },
-    { title: "Step 2: Scoping + Data Request", meta: "48 hours", description: "Targeted data request. Fixed-fee proposal with timeline within 48 hours.", completed: true },
-    { title: "Step 3: Diligence Deliverable", meta: "2–3 weeks", description: "Risk-rated findings memo — severity-rated, PE impact framed, IC-ready. This becomes the foundation of the Value Creation Plan.", active: true },
-    { title: "Step 4: Value Creation Plan + 100-Day Execution", meta: "Days 1–100", description: "Diligence findings roll directly into the VCP. The VCP defines what to fix, in what order, with what accountability. I execute against it for 100 days — incident command, change control, KPI cadence, board-ready reporting.", deliverable: "VCP document + 100-day execution tracker + board reporting cadence" }
+  const steps = [
+    { num: "1", title: "Fit Check", meta: "15 minutes", description: "15-minute call. Assess the situation, confirm scope, and determine fit." },
+    { num: "2", title: "Scoping + Data Request", meta: "48 hours", description: "Targeted data request. Fixed-fee proposal with timeline within 48 hours." },
+    { num: "3", title: "Diligence Deliverable", meta: "2–3 weeks", description: "Risk-rated findings memo — severity-rated, PE impact framed, IC-ready. This becomes the foundation of the Value Creation Plan." },
+    { num: "4", title: "Value Creation Plan + 100-Day Execution", meta: "Days 1–100", description: "Diligence findings roll directly into the VCP. I execute against it for 100 days — incident command, change control, KPI cadence, board-ready reporting." },
   ];
 
   return (
     <Section noCTA title="How it works">
-      <TimelineRail items={timelineItems} compact />
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(260px, 100%), 1fr))", gap: "16px" }}>
+        {steps.map((s) => (
+          <div key={s.num} style={{ border: `1px solid ${COLORS.border}`, borderTop: `4px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column", gap: "8px" }}>
+            <div style={{ display: "flex", alignItems: "baseline", gap: "10px" }}>
+              <span style={{ fontFamily: FONTS.body, fontSize: "1.4rem", fontWeight: 700, color: COLORS.gold, lineHeight: 1 }}>{s.num}</span>
+              <span style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy }}>{s.title}</span>
+            </div>
+            <div style={{ fontFamily: FONTS.body, fontSize: "0.78rem", fontWeight: 700, color: COLORS.steel, letterSpacing: "0.6px", textTransform: "uppercase" }}>{s.meta}</div>
+            <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, margin: 0 }}>{s.description}</p>
+          </div>
+        ))}
+      </div>
     </Section>
   );
 }
@@ -286,17 +297,17 @@ function FitCheckCTA() {
 
   return (
     <Section noCTA background={`${COLORS.navy}05`}>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "820px", margin: "0 auto 20px", textAlign: "center" }}>
-        Not sure where to start? Book a 15-minute fit check. I'll assess the situation, identify the highest-priority friction points, and scope the right engagement.
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", margin: "0 auto 20px", textAlign: "center" }}>
+        Not sure where to start? Book a Fit Check. I'll assess the situation, identify the highest-priority friction points, and scope the right engagement.
       </p>
       <ButtonPair
-        primaryText="15-Minute Fit Check"
+        primaryText="Book a Fit Check"
         secondaryText="Email me instead"
         secondaryLink={mailtoHref(subject, body)}
         centered={true}
         showAvailability={true}
       />
-      <div style={{ marginTop: "16px", padding: "10px 12px", borderRadius: RADIUS.md, border: `1px solid ${COLORS.border}`, background: `${COLORS.navy}03`, fontFamily: FONTS.body, fontSize: "0.92rem", color: COLORS.charcoal, lineHeight: 1.45, maxWidth: "820px", margin: "16px auto 0" }}>
+      <div style={{ marginTop: "16px", padding: "10px 12px", borderRadius: RADIUS.md, border: `1px solid ${COLORS.border}`, background: `${COLORS.navy}03`, fontFamily: FONTS.body, fontSize: "0.92rem", color: COLORS.charcoal, lineHeight: 1.45, maxWidth: "960px", margin: "16px auto 0" }}>
         NDA-friendly. I can sign an NDA before receiving sensitive materials; initial triage can be done with high-level facts only.
       </div>
     </Section>
@@ -336,7 +347,7 @@ function TypicalRedFlags() {
       <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
         <div style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `4px solid ${COLORS.critical}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
           <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{leftSide.title}</div>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "14px" }}>{leftSide.description}</p>
+          <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "14px" }}>{leftSide.description}</p>
           {leftSide.items.map((item, i) => (
             <div key={i} style={{ marginBottom: "10px" }}>
               <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 700, color: COLORS.navy, marginBottom: "2px" }}>{item.title}</div>
@@ -346,7 +357,7 @@ function TypicalRedFlags() {
         </div>
         <div style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `4px solid ${COLORS.gold}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
           <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{rightSide.title}</div>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "14px" }}>{rightSide.description}</p>
+          <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "14px" }}>{rightSide.description}</p>
           {rightSide.items.map((item, i) => (
             <div key={i} style={{ marginBottom: "10px" }}>
               <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 700, color: COLORS.navy, marginBottom: "2px" }}>{item.title}</div>
@@ -375,13 +386,13 @@ function MemoSampleScreenshots() {
 
   return (
     <Section noCTA background={`${COLORS.navy}03`} title="Sample Deliverable Excerpts (Anonymized)">
-      <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.55, marginBottom: "12px" }}>
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.55, marginBottom: "12px" }}>
         Real format, anonymized for readability — severity-rated, IC-ready.
       </p>
       <button
         onClick={() => setOpen(!open)}
         style={{ background: "transparent", border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "8px 16px", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, fontWeight: 600, cursor: "pointer", marginBottom: "16px" }}>
-        {open ? "Hide sample excerpts ▾" : "Show sample excerpts ▸"}
+        {open ? "Hide sample excerpts ▾" : "Show 4 anonymized deliverable excerpts (Scorecard + 100-Day Plan) ▸"}
       </button>
 
       {open && (
@@ -423,7 +434,7 @@ function DomainLegend() {
                 <span style={{ display: "inline-block", padding: "3px 8px", borderRadius: "3px", fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 500, color: COLORS.steel, background: `${COLORS.steel}12`, border: `1px solid ${COLORS.steel}25`, flexShrink: 0, marginTop: "2px" }}>{v.short}</span>
                 <div>
                   <span style={{ fontFamily: FONTS.body, fontSize: "1.05rem", fontWeight: 600, color: COLORS.charcoal }}>{v.name}</span>
-                  <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, marginTop: "2px", lineHeight: 1.5 }}>{v.desc}</p>
+                  <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, marginTop: "2px", lineHeight: 1.5 }}>{v.desc}</p>
                 </div>
               </div>
             ))}
@@ -465,7 +476,7 @@ function LeverExplorerSection({ setPage }) {
           .lever-filters select { flex: 1 1 calc(50% - 6px) !important; min-width: 120px !important; }
         }
       `}</style>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "720px", marginBottom: "20px" }}>
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "960px", marginBottom: "20px" }}>
         {LEVERS.length} operational friction points across 6 domains — severity-rated, PE impact framed. {!showAll && !hasActiveFilter ? "Showing the 6 most common gaps. Use filters above or expand to see all 20." : "Filter by timing, domain, or severity. Open any lever for symptoms and PE impact analysis."}
       </p>
 
@@ -491,7 +502,7 @@ function LeverExplorerSection({ setPage }) {
         </select>
       </div>
 
-      <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, marginBottom: "18px" }}>
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, marginBottom: "18px" }}>
         Showing {visible.length} of {LEVERS.length} levers
       </p>
 
@@ -531,18 +542,18 @@ function LeverExplorerSection({ setPage }) {
               <div className="lever-expand lever-expand-detail" style={{ padding: "0 22px 22px 52px", borderTop: `1px solid ${COLORS.border}` }} onClick={e => e.stopPropagation()}>
                 <div style={{ paddingTop: "18px" }}>
                   <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "8px" }}>Definition</h4>
-                  <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.definition}</p>
+                  <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.definition}</p>
                   <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "8px" }}>Symptoms</h4>
                   <ul style={{ paddingLeft: "22px", marginBottom: "18px" }}>
-                    {lever.symptoms.map((s, i) => <li key={i} style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "6px" }}>{s}</li>)}
+                    {lever.symptoms.map((s, i) => <li key={i} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "6px" }}>{s}</li>)}
                   </ul>
                   <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "8px" }}>PE Impact</h4>
-                  <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.peImpact}</p>
+                  <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.peImpact}</p>
                   <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "8px" }}>What Good Looks Like</h4>
-                  <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.whatGood}</p>
+                  <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.whatGood}</p>
                   <div style={{ display: "flex", gap: "16px", paddingTop: "8px", borderTop: `1px solid ${COLORS.border}` }}>
                     <button onClick={() => setPage("scorer")} style={{ background: "none", border: "none", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, cursor: "pointer", textDecoration: "underline", padding: 0 }}>→ Assess your readiness</button>
-                    <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.gold, textDecoration: "underline" }}>→ 15-Minute Fit Check</a>
+                    <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.gold, textDecoration: "underline" }}>Book a Fit Check</a>
                   </div>
                 </div>
               </div>
@@ -551,12 +562,12 @@ function LeverExplorerSection({ setPage }) {
 
           {idx === 4 && visible.length > 5 && (
             <div style={{ margin: "12px 0 16px", padding: "20px 28px", background: COLORS.navy, borderRadius: RADIUS.md, boxShadow: "0 4px 12px rgba(67, 97, 125, 0.15)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
-              <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.offWhite, margin: 0, lineHeight: 1.55 }}>
-                <strong style={{ color: COLORS.gold }}>Not sure which of these apply to your deal?</strong> Run the Ops Scorer — free, 2 minutes, produces a prioritized assessment.
+              <p style={{ fontFamily: FONTS.body, color: COLORS.offWhite, margin: 0, lineHeight: 1.55 }}>
+                <strong style={{ color: COLORS.gold }}>Not sure which of these apply to your deal?</strong> Score Your Deal — free, 2 minutes, produces a prioritized assessment.
               </p>
               <div style={{ display: "flex", gap: "10px", flexShrink: 0 }}>
                 <button onClick={() => setPage("scorer")} style={{ padding: "10px 20px", background: COLORS.gold, color: COLORS.white, border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer" }}>
-                  Run the Ops Scorer →
+                  Score Your Deal →
                 </button>
                 <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ padding: "10px 20px", background: "transparent", color: COLORS.offWhite, border: `1px solid ${COLORS.offWhite}60`, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer", textDecoration: "none", display: "inline-block" }}>
                   Book a Fit Check
@@ -586,10 +597,10 @@ export default function ServicesPage({ setPage }) {
     <div>
       <Section noCTA>
         <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 700, color: COLORS.navy, marginBottom: SPACING.sm }}>Framework</h1>
-        <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "720px", marginBottom: "14px" }}>
+        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "14px" }}>
           Operational support for PE funds and portfolio companies — from pre-close diligence through post-close stabilization to ongoing governance. Fixed fees, board-ready deliverables, measurable from Day 1.
         </p>
-        <div style={{ padding: "12px 16px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.md} ${RADIUS.md} 0`, maxWidth: "720px", marginBottom: "16px" }}>
+        <div style={{ padding: "12px 16px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.md} ${RADIUS.md} 0`, maxWidth: "960px", marginBottom: "16px" }}>
           <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, margin: 0, lineHeight: 1.6 }}>
             <strong>53% of LPs now rank a GP's value creation strategy as a top-five criterion in manager selection</strong> — up to #3, above sector expertise. Operational execution is no longer a back-office function. It's a fund-level differentiator.
           </p>
