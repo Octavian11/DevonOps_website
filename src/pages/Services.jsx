@@ -273,9 +273,9 @@ function ServicesSteps() {
 
   return (
     <Section noCTA title="How it works">
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(260px, 100%), 1fr))", gap: "16px" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
         {steps.map((s) => (
-          <div key={s.num} style={{ border: `1px solid ${COLORS.border}`, borderTop: `4px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column", gap: "8px" }}>
+          <div key={s.num} style={{ border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column", gap: "8px" }}>
             <div style={{ display: "flex", alignItems: "baseline", gap: "10px" }}>
               <span style={{ fontFamily: FONTS.body, fontSize: "1.4rem", fontWeight: 700, color: COLORS.gold, lineHeight: 1 }}>{s.num}</span>
               <span style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy }}>{s.title}</span>
@@ -428,7 +428,7 @@ function DomainLegend() {
       </button>
       {open && (
         <div className="fade-in" style={{ marginTop: "10px", padding: "16px 20px", background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: "6px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "12px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
             {Object.entries(DOMAINS).map(([k, v]) => (
               <div key={k} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
                 <span style={{ display: "inline-block", padding: "3px 8px", borderRadius: "3px", fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 500, color: COLORS.steel, background: `${COLORS.steel}12`, border: `1px solid ${COLORS.steel}25`, flexShrink: 0, marginTop: "2px" }}>{v.short}</span>
