@@ -50,7 +50,7 @@ export function CTAButton({ text, small, variant, style: extraStyle, showAvailab
         style={{ display: "inline-block", padding: small ? "10px 20px" : "14px 28px", background: bg, color, fontFamily: FONTS.body, fontSize: small ? "0.9rem" : "1rem", fontWeight: 600, borderRadius: RADIUS.md, textDecoration: "none", letterSpacing: "0.3px", transition: "all 0.2s", cursor: "pointer", border, ...extraStyle }}
         onMouseEnter={e => { e.currentTarget.style.background = hoverBg; }}
         onMouseLeave={e => { e.currentTarget.style.background = bg; }}>
-        {text || "15-Minute Fit Check"}
+        {text || "Book a Fit Check"}
       </a>
       {showAvailability && (
         <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.navy }}>
@@ -185,7 +185,7 @@ export function TimelineRail({ items, compact = false }) {
               )}
 
               {item.description && (
-                <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, margin: item.items ? "0 0 12px 0" : "0" }}>
+                <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, margin: item.items ? "0 0 12px 0" : "0" }}>
                   {item.description}
                 </p>
               )}
@@ -193,7 +193,7 @@ export function TimelineRail({ items, compact = false }) {
               {item.items && item.items.length > 0 && (
                 <ul style={{ paddingLeft: "20px", margin: item.deliverable ? "0 0 12px 0" : "0" }}>
                   {item.items.map((subItem, j) => (
-                    <li key={j} style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "4px" }}>
+                    <li key={j} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "4px" }}>
                       {subItem}
                     </li>
                   ))}
@@ -230,14 +230,14 @@ export function SplitContrast({ leftSide, rightSide }) {
           </h3>
         )}
         {leftSide.description && (
-          <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.offWhite, lineHeight: 1.7, marginBottom: leftSide.items ? "20px" : "0", opacity: 0.95 }}>
+          <p style={{ fontFamily: FONTS.body, color: COLORS.offWhite, lineHeight: 1.7, marginBottom: leftSide.items ? "20px" : "0", opacity: 0.95 }}>
             {leftSide.description}
           </p>
         )}
         {leftSide.items && leftSide.items.length > 0 && (
           <ul style={{ paddingLeft: "20px", margin: "0", flex: "1" }}>
             {leftSide.items.map((item, i) => (
-              <li key={i} style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.offWhite, lineHeight: 1.7, marginBottom: "12px", opacity: 0.9 }}>
+              <li key={i} style={{ fontFamily: FONTS.body, color: COLORS.offWhite, lineHeight: 1.7, marginBottom: "12px", opacity: 0.9 }}>
                 {typeof item === "string" ? item : (
                   <><strong style={{ color: COLORS.gold }}>{item.title}:</strong> {item.body}</>
                 )}
@@ -255,14 +255,14 @@ export function SplitContrast({ leftSide, rightSide }) {
           </h3>
         )}
         {rightSide.description && (
-          <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: rightSide.items ? "20px" : "0" }}>
+          <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: rightSide.items ? "20px" : "0" }}>
             {rightSide.description}
           </p>
         )}
         {rightSide.items && rightSide.items.length > 0 && (
           <ul style={{ paddingLeft: "20px", margin: "0", flex: "1" }}>
             {rightSide.items.map((item, i) => (
-              <li key={i} style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "12px" }}>
+              <li key={i} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "12px" }}>
                 {typeof item === "string" ? item : (
                   <><strong style={{ color: COLORS.gold }}>{item.title}:</strong> {item.body}</>
                 )}
@@ -292,7 +292,7 @@ export function Section({ title, subtitle, children, primaryCTA, secondaryCTA, n
     <div style={{ background: background || defaultBackground, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.lg, padding: noPadding ? "0" : "40px 32px", marginBottom: "24px", boxShadow: SHADOWS.sm }} id={id}>
       {title && <SectionTitle>{title}</SectionTitle>}
       {subtitle && (
-        <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.bodyMuted, lineHeight: 1.7, marginTop: "-16px", marginBottom: "20px" }}>
+        <p style={{ fontFamily: FONTS.body, color: COLORS.bodyMuted, lineHeight: 1.7, marginTop: "-16px", marginBottom: "20px" }}>
           {subtitle}
         </p>
       )}
@@ -337,7 +337,7 @@ export function FAQBlock() {
   ];
 
   const q = { fontFamily: FONTS.heading, fontSize: "1.05rem", color: COLORS.navy, margin: 0, flex: 1 };
-  const a = { fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, margin: 0, paddingBottom: "14px" };
+  const a = { fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, margin: 0, paddingBottom: "14px" };
 
   return (
     <Section title="FAQ" noCTA background={`${COLORS.navy}04`}>
@@ -435,7 +435,7 @@ export function LeadMagnetLink({ pdfUrl, children, variant = "link", style: extr
   if (state === "form" || state === "loading" || state === "error") {
     return (
       <div style={{ padding: "16px 20px", background: COLORS.offWhite, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, marginTop: "8px", marginBottom: "8px" }}>
-        <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, marginBottom: "12px", fontWeight: 600 }}>
+        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, marginBottom: "12px", fontWeight: 600 }}>
           Enter your email to download: <strong>{children}</strong>
         </p>
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -482,7 +482,7 @@ export function LeadMagnetLink({ pdfUrl, children, variant = "link", style: extr
   if (state === "success") {
     return (
       <div style={{ padding: "16px 20px", background: `${COLORS.gold}15`, border: `1px solid ${COLORS.gold}`, borderRadius: RADIUS.md, marginTop: "8px", marginBottom: "8px" }}>
-        <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, marginBottom: "12px" }}>
+        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, marginBottom: "12px" }}>
           ✓ Thanks! Your download is ready:
         </p>
         <a href={pdfUrl} target="_blank" rel="noopener noreferrer"
@@ -648,7 +648,7 @@ export function Nav({ page, setPage }) {
         <span className="nav-current-page">
           {items.find(i => i.key === page)?.label ?? ""}
         </span>
-        <div className="nav-cta"><CTAButton text="15-Minute Fit Check" /></div>
+        <div className="nav-cta"><CTAButton text="Book a Fit Check" /></div>
         <button className="nav-hamburger" onClick={() => setMenuOpen(o => !o)} aria-label="Toggle menu">
           {menuOpen
             ? <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><line x1="4" y1="4" x2="18" y2="18" stroke={COLORS.navy} strokeWidth="2" strokeLinecap="round"/><line x1="18" y1="4" x2="4" y2="18" stroke={COLORS.navy} strokeWidth="2" strokeLinecap="round"/></svg>
@@ -664,7 +664,7 @@ export function Nav({ page, setPage }) {
               {label}
             </button>
           ))}
-          <div style={{ marginTop: "8px" }}><CTAButton text="15-Minute Fit Check" /></div>
+          <div style={{ marginTop: "8px" }}><CTAButton text="Book a Fit Check" /></div>
         </div>
       )}
     </>
@@ -772,7 +772,7 @@ export function Footer({ setPage }) {
             <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
               <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.gold, textDecoration: "none", fontWeight: 600, transition: "opacity 0.2s" }}
                 onMouseEnter={e => e.currentTarget.style.opacity = "0.8"} onMouseLeave={e => e.currentTarget.style.opacity = "1"}>
-                15-Minute Fit Check →
+                Book a Fit Check
               </a>
               <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.offWhite }}>
                 Q2 availability is limited.

@@ -83,7 +83,7 @@ function ScorerEmailCapture({ rating, score, context, buyerType }) {
     return (
       <Card style={{ borderLeft: `4px solid ${COLORS.stable}`, marginBottom: "24px" }}>
         <p style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.stable, margin: "0 0 6px 0" }}>Report sent.</p>
-        <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, margin: 0, lineHeight: 1.6 }}>
+        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, margin: 0, lineHeight: 1.6 }}>
           Your sample scorecard is downloading. Hassan will follow up with context specific to your situation.
         </p>
         <div style={{ marginTop: "14px", display: "flex", gap: "12px", flexWrap: "wrap" }}>
@@ -103,7 +103,7 @@ function ScorerEmailCapture({ rating, score, context, buyerType }) {
       <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.navy, margin: "0 0 6px 0" }}>
         Download Your Ops Assessment Report
       </h3>
-      <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, margin: "0 0 6px 0" }}>
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, margin: "0 0 6px 0" }}>
         Get a formatted PDF of your assessment with prioritized recommendations. See what your IC-ready deliverable looks like.
       </p>
       <div style={{ marginBottom: "14px", display: "flex", gap: "12px", flexWrap: "wrap" }}>
@@ -187,7 +187,7 @@ export default function ScorerPage() {
       <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.7rem", fontWeight: 700, color: COLORS.navy, marginBottom: "14px" }}>
         Portfolio Stability Readiness Scorer
       </h1>
-      <p style={{ fontFamily: FONTS.body, fontSize: "1.05rem", color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "24px" }}>
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "24px" }}>
         Assess a portfolio company's operational stability across 6 dimensions. Identify where friction is highest and which interventions would create the most value.
       </p>
 
@@ -315,7 +315,7 @@ export default function ScorerPage() {
                   </span>
                 )}
               </span>
-              <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.65, margin: 0, maxWidth: "600px" }}>
+              <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, margin: 0, maxWidth: "600px" }}>
                 {CONTEXT_CALLOUTS[rating][context]}
               </p>
               {/* Buyer type framing */}
@@ -342,7 +342,7 @@ export default function ScorerPage() {
               <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.critical, marginBottom: "10px" }}>
                 {unknownDims.length} Dimensions Unassessed — This Is Itself a Finding
               </h4>
-              <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "14px" }}>
+              <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "14px" }}>
                 You marked {unknownDims.length} dimensions as unknown — that's a red flag in itself. Lack of operational visibility is the #1 pattern I see in pre-close diligence.
               </p>
               <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, marginBottom: "8px", fontWeight: 600 }}>Unassessed dimensions:</p>
@@ -381,16 +381,16 @@ export default function ScorerPage() {
           <Section noCTA title="Recommended Next Steps">
             {lowDims.length === 0 && midDims.length === 0 ? (
               <div>
-                <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "14px" }}>
+                <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "14px" }}>
                   Your operational posture is strong across all dimensions. At this stage, the priority is durability: ensuring governance holds under management transitions, deal activity, or scale.
                 </p>
-                <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, margin: 0 }}>
+                <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, margin: 0 }}>
                   The highest-value intervention now is hardening for exit — converting your current operational strength into a demonstrable competitive advantage in buyer diligence. Strong operations that aren't documented and tracked don't survive deal scrutiny.
                 </p>
               </div>
             ) : (
               <div>
-                <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "20px" }}>
+                <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "20px" }}>
                   {{
                     pre: "These gaps should inform your deal terms and Day-1 critical path. If the target is worth pursuing, the items below are what to address in the first 30–90 days — sequenced by impact.",
                     post: "You're in the critical window. Each week these remain unaddressed compounds the remediation cost and erodes management bandwidth. Here's the priority sequence:",
@@ -416,7 +416,7 @@ export default function ScorerPage() {
                     );
                   })}
                 </div>
-                <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.7, marginTop: "24px", marginBottom: 0, paddingTop: "20px", borderTop: `1px solid ${COLORS.border}` }}>
+                <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginTop: "24px", marginBottom: 0, paddingTop: "20px", borderTop: `1px solid ${COLORS.border}` }}>
                   Each of these is a defined deliverable — not a slide recommendation. The <strong>100-Day Stabilization Plan</strong> covers all of them, sequenced, tracked, and board-ready from Day 1.
                 </p>
               </div>
@@ -426,13 +426,13 @@ export default function ScorerPage() {
           <ScorerEmailCapture rating={ratingLabel} score={avg.toFixed(1)} context={context} buyerType={buyerType} />
 
           <Section noCTA background={`${COLORS.navy}05`}>
-            <p style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, textAlign: "center", margin: `0 auto ${SPACING.md}` }}>
+            <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, textAlign: "center", margin: `0 auto ${SPACING.md}` }}>
               {rating === "stable"
                 ? "Maintain your edge with ongoing governance support."
                 : "Ready to convert these gaps into a Value Creation Plan?"}
             </p>
             <ButtonPair
-              primaryText="15-Minute Fit Check"
+              primaryText="Book a Fit Check"
               secondaryText="View Services"
               secondaryAction={() => window.location.hash = "#/services"}
               centered={true}
