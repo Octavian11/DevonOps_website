@@ -430,11 +430,11 @@ function DomainLegend() {
         <div className="fade-in" style={{ marginTop: "10px", padding: "16px 20px", background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: "6px" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px 24px" }}>
             {Object.entries(DOMAINS).map(([k, v]) => (
-              <div key={k} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
-                <span style={{ display: "inline-block", padding: "3px 8px", borderRadius: "3px", fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 500, color: COLORS.steel, background: `${COLORS.steel}12`, border: `1px solid ${COLORS.steel}25`, flexShrink: 0, marginTop: "3px" }}>{v.short}</span>
+              <div key={k} style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "0 12px", alignItems: "start" }}>
+                <span style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "3px 8px", borderRadius: "3px", fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 500, color: COLORS.steel, background: `${COLORS.steel}12`, border: `1px solid ${COLORS.steel}25`, marginTop: "3px", textAlign: "center" }}>{v.short}</span>
                 <div>
-                  <span style={{ display: "block", fontFamily: FONTS.body, fontSize: "1.05rem", fontWeight: 600, color: COLORS.charcoal, marginBottom: "4px" }}>{v.name}</span>
-                  <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, margin: 0, lineHeight: 1.5, maxWidth: "none" }}>{v.desc}</p>
+                  <span style={{ display: "block", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "4px" }}>{v.name}</span>
+                  <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, margin: 0, lineHeight: 1.5, maxWidth: "none" }}>{v.desc}</p>
                 </div>
               </div>
             ))}
