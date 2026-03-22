@@ -542,7 +542,6 @@ export function OfferCards({ setPage }) {
         </div>
 
         <div style={{...box, borderTop: `3px solid ${COLORS.gold}`}}>
-          // <span style={{ ...segLabel, color: COLORS.gold }}>LMM PE Funds · Recommended</span>
           <SectionTitle sub>Bundle (Recommended): Diligence → VCP → Execution</SectionTitle>
           <div style={tag}>$25,000–$35,000 · diligence + 100 days</div>
           <ul style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
