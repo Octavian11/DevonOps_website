@@ -547,4 +547,119 @@ export const globalCSS = `
     border-radius: 5px;
     background: transparent;
   }
+
+  /* ══════════════════════════════════════════════════════════════
+     MOBILE UX REMEDIATION — spec: devonshire-mobile-ux-spec.html
+     Reference: 390×844 (iPhone 14) · All rules @ max-width 768px
+     ══════════════════════════════════════════════════════════════ */
+
+  /* Issue 01 — Remove sticky CTA bar on mobile */
+  @media (max-width: 768px) {
+    .scorer-sticky-bar { display: none !important; }
+  }
+
+  /* Issue 02 — Persona cards */
+  @media (max-width: 768px) {
+    .buyer-cards-wrapper { gap: 20px !important; }
+    .buyer-card { padding: 24px 20px 28px !important; border-radius: 12px !important; }
+    .proof-quote { margin-top: 16px !important; padding: 14px 16px !important; border-left-width: 3px !important; }
+  }
+
+  /* Issue 03 — Cost of inaction cards */
+  @media (max-width: 768px) {
+    .cost-cards-grid { gap: 16px !important; }
+    .cost-card { padding: 20px 20px 24px !important; border-radius: 12px !important; }
+    .pe-consequence { margin-top: 16px !important; padding: 16px !important; }
+  }
+
+  /* Issue 04 — Pricing cards */
+  @media (max-width: 768px) {
+    .pricing-grid { gap: 20px !important; }
+    .pricing-card { padding: 24px 20px 28px !important; border-radius: 12px !important; }
+    .pricing-card.recommended {
+      position: relative !important;
+      background: #FFFBF0 !important;
+      border: 2px solid ${COLORS.gold} !important;
+      padding: 32px 20px 28px !important;
+    }
+    .pricing-card.recommended::before {
+      content: 'Recommended';
+      position: absolute; top: -12px; left: 50%;
+      transform: translateX(-50%);
+      background: ${COLORS.gold}; color: #fff;
+      font-size: 11px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; padding: 4px 16px;
+      border-radius: 20px; white-space: nowrap;
+    }
+    .pricing-card .price { font-size: 22px !important; font-weight: 600 !important; }
+  }
+
+  /* Issue 05 — Category pills: horizontal scroll */
+  @media (max-width: 768px) {
+    .domain-pills-row {
+      flex-wrap: nowrap !important;
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 4px 20px !important;
+      margin: 16px -20px 0 !important;
+      mask-image: linear-gradient(to right, transparent 0, black 20px, black calc(100% - 24px), transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0, black 20px, black calc(100% - 24px), transparent 100%);
+    }
+    .domain-pills-row::-webkit-scrollbar { display: none; }
+    .domain-pills-row > span {
+      flex-shrink: 0 !important;
+      padding: 8px 16px !important;
+      min-height: 36px !important;
+      white-space: nowrap !important;
+      display: inline-flex !important;
+      align-items: center !important;
+    }
+  }
+
+  /* Issue 06 — Section wrappers: remove box borders on mobile */
+  @media (max-width: 768px) {
+    .section-wrapper {
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      padding: 32px 20px !important;
+      margin-bottom: 0 !important;
+    }
+    .section-wrapper.section-no-pad { padding: 0 !important; }
+    .section-wrapper + .section-wrapper::before {
+      content: '';
+      display: block;
+      width: 60%;
+      height: 1px;
+      background: #E8E6E0;
+      margin: 0 auto 28px;
+    }
+  }
+
+  /* Issue 07 — Nav: 56px height, hide page label */
+  @media (max-width: 768px) {
+    .site-nav { height: 56px !important; min-height: 56px !important; }
+    :root { --nav-h: 56px; }
+    .nav-current-page { display: none !important; }
+  }
+
+  /* Issue 08 — Track record */
+  @media (max-width: 768px) {
+    .track-result { padding: 16px !important; }
+    .confidentiality-note { font-size: 11px !important; color: #999 !important; }
+  }
+
+  /* Issue 09 — FAQ accordion touch targets */
+  @media (max-width: 768px) {
+    .faq-row { min-height: 52px !important; padding: 16px 0 !important; }
+    .expand-icon { font-size: 16px !important; min-width: 24px !important; text-align: center; }
+  }
+
+  /* Issue 10 — Footer 2×2 grid, form inputs */
+  @media (max-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 32px 20px !important; padding: 40px 20px !important; }
+    .footer-form input[type="email"] { height: 44px !important; font-size: 14px !important; padding: 0 12px !important; box-sizing: border-box !important; }
+    .footer-form button[type="submit"] { height: 48px !important; width: 100% !important; font-size: 14px !important; }
+  }
 `;

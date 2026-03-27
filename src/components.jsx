@@ -293,7 +293,7 @@ export function Section({ title, subtitle, children, primaryCTA, secondaryCTA, n
   const defaultBackground = isWindowWithCards ? COLORS.offWhite : COLORS.white;
 
   return (
-    <div style={{ background: background || defaultBackground, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.lg, padding: noPadding ? "0" : "40px 32px", marginBottom: "24px", boxShadow: SHADOWS.sm }} id={id}>
+    <div className={noPadding ? "section-wrapper section-no-pad" : "section-wrapper"} style={{ background: background || defaultBackground, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.lg, padding: noPadding ? "0" : "40px 32px", marginBottom: "24px", boxShadow: SHADOWS.sm }} id={id}>
       {title && <SectionTitle>{title}</SectionTitle>}
       {subtitle && (
         <p style={{ fontFamily: FONTS.body, color: COLORS.bodyMuted, lineHeight: 1.7, marginTop: "-16px", marginBottom: "20px" }}>
@@ -349,10 +349,11 @@ export function FAQBlock() {
         {faqs.map((item, i) => (
           <div key={i} style={{ borderBottom: `1px solid ${COLORS.border}` }}>
             <button
+              className="faq-row"
               onClick={() => toggle(i)}
               style={{ width: "100%", textAlign: "left", background: "none", border: "none", padding: "14px 0", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <h3 style={q}>{item.q}</h3>
-              <span style={{ color: COLORS.steel, fontSize: "1rem", marginLeft: "12px", flexShrink: 0 }}>
+              <span className="expand-icon" style={{ color: COLORS.steel, fontSize: "1rem", marginLeft: "12px", flexShrink: 0 }}>
                 {open === i ? "▾" : "▸"}
               </span>
             </button>
@@ -526,11 +527,11 @@ export function OfferCards({ setPage }) {
 
   return (
     <Section title="Services & Pricing" type="windowWithCards" noCTA>
-      <div style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap", marginBottom: "24px" }}>
-        <div style={{...box, borderTop: `3px solid ${COLORS.steel}`}}>
+      <div className="pricing-grid" style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap", marginBottom: "24px" }}>
+        <div className="pricing-card" style={{...box, borderTop: `3px solid ${COLORS.steel}`}}>
           <span style={segLabel}>Independent Sponsors · Pre-Close</span>
           <SectionTitle sub>Ops Diligence Report (Pre-Close)</SectionTitle>
-          <div style={tag}>Starting at $15,000 · 2–3 weeks</div>
+          <div className="price" style={tag}>Starting at $15,000 · 2–3 weeks</div>
           <ul style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
             <li style={li}>Risk-rated red flags with severity + PE impact</li>
             <li style={li}>Evidence requests + diligence questions</li>
@@ -541,9 +542,9 @@ export function OfferCards({ setPage }) {
           </p>
         </div>
 
-        <div style={{...box, borderTop: `3px solid ${COLORS.gold}`}}>
+        <div className="pricing-card recommended" style={{...box, borderTop: `3px solid ${COLORS.gold}`}}>
           <SectionTitle sub>Bundle (Recommended): Diligence → VCP → Execution</SectionTitle>
-          <div style={tag}>$25,000–$35,000 · diligence + 100 days</div>
+          <div className="price" style={tag}>$25,000–$35,000 · diligence + 100 days</div>
           <ul style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
             <li style={li}>Diligence findings roll directly into the Value Creation Plan — no re-learning, no gap between discovery and execution</li>
             <li style={li}>Day-1 critical path + phased 100-day execution</li>
@@ -551,10 +552,10 @@ export function OfferCards({ setPage }) {
           </ul>
         </div>
 
-        <div style={{...box, borderTop: `3px solid ${COLORS.navy}`}}>
+        <div className="pricing-card" style={{...box, borderTop: `3px solid ${COLORS.navy}`}}>
           <span style={segLabel}>Family Offices · Ongoing Hold</span>
           <SectionTitle sub>Control Tower Retainer (Ongoing)</SectionTitle>
-          <div style={tag}>Starting at $7,500/month · ongoing</div>
+          <div className="price" style={tag}>Starting at $7,500/month · ongoing</div>
           <ul style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
             <li style={li}>Weekly operating review + board-ready KPI pack</li>
             <li style={li}>Incident + change governance discipline</li>
@@ -598,16 +599,16 @@ export function TestimonialBlock() {
           <span style={contextLabel}>Platform Stabilization · Multi-strategy hedge fund, ~$10B AUM</span>
           <div style={cardTitle}>Platform Stabilization & Reliability</div>
           <p style={body}>Inherited a platform with 4 critical outages in 12 months, 94% availability, and a deteriorating NPS score. Built a 10-person global ops team, installed incident command with severity classification and postmortem discipline, and stood up a KPI cadence across 18 metrics.</p>
-          <div style={result}>Zero critical outages for 18 consecutive months. Availability: 94% → 99.2%. MTTR reduced 31%. NPS improved +22 points. Supported ~50% AUM growth with ~12% headcount increase.</div>
+          <div className="track-result" style={result}>Zero critical outages for 18 consecutive months. Availability: 94% → 99.2%. MTTR reduced 31%. NPS improved +22 points. Supported ~50% AUM growth with ~12% headcount increase.</div>
         </div>
         <div style={cardStyle}>
           <span style={contextLabel}>Vendor Optimization · Global asset manager, ~$40M vendor program</span>
           <div style={cardTitle}>Vendor Optimization & Cost Control</div>
           <p style={body}>Vendor costs growing 22% annually, outpacing business growth. 15 fragmented providers, no utilization visibility, no governance. Built spend transparency, ran utilization analytics, consolidated 15 vendors to 8 strategic partners, and installed scorecard governance with QBRs.</p>
-          <div style={result}>&gt;$2M annual run-rate reduction. 10–15% licensing savings via right-sizing. Cost per $1B AUM reduced ~28%. Payback &lt;6 months.</div>
+          <div className="track-result" style={result}>&gt;$2M annual run-rate reduction. 10–15% licensing savings via right-sizing. Cost per $1B AUM reduced ~28%. Payback &lt;6 months.</div>
         </div>
       </div>
-      <p style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.bodyMuted, lineHeight: 1.5, margin: 0 }}>
+      <p className="confidentiality-note" style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.bodyMuted, lineHeight: 1.5, margin: 0 }}>
         Identifiers withheld. Metrics are representative and sanitized for confidentiality. Details and references available on request.
       </p>
     </Section>
@@ -626,7 +627,7 @@ export function Nav({ page, setPage }) {
   const handleNav = (key) => { setPage(key); setMenuOpen(false); };
   return (
     <>
-      <nav style={{ position: "sticky", top: 0, zIndex: 100, background: COLORS.white, borderBottom: `3px solid ${COLORS.gold}`, padding: "0 clamp(12px, 3.5vw, 28px)", display: "flex", alignItems: "center", justifyContent: "space-between", height: "76px", minHeight: "76px", boxShadow: "0 2px 8px rgba(20, 33, 61, 0.08)" }}>
+      <nav className="site-nav" style={{ position: "sticky", top: 0, zIndex: 100, background: COLORS.white, borderBottom: `3px solid ${COLORS.gold}`, padding: "0 clamp(12px, 3.5vw, 28px)", display: "flex", alignItems: "center", justifyContent: "space-between", height: "76px", minHeight: "76px", boxShadow: "0 2px 8px rgba(20, 33, 61, 0.08)" }}>
         <div className="nav-logo-col" style={{ display: "flex", alignItems: "center", gap: "16px", minWidth: 0 }}>
           <img
             src="/Devonshire_Operations_Logo_Exact-cropped1.svg"
@@ -735,7 +736,7 @@ function FooterLeadCapture() {
       <p style={{ fontFamily: FONTS.body, fontSize: "0.875rem", color: `${COLORS.offWhite}B0`, lineHeight: 1.55, marginBottom: "14px" }}>
         Share your situation and I'll reply with fit and next steps.
       </p>
-      <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+      <form className="footer-form" onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
         <select value={situation} onChange={e => setSituation(e.target.value)} style={inputStyle}>
           <option>Evaluating a target</option>
           <option>First 100 days post-close</option>
@@ -758,7 +759,7 @@ function FooterLeadCapture() {
 export function Footer({ setPage }) {
   return (
     <footer style={{ marginTop: "60px", padding: "40px 0 32px 0", borderTop: `2px solid ${COLORS.steel}`, background: COLORS.navy }}>
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(200px, 100%), 1fr))", gap: "32px" }}>
+      <div className="footer-grid" style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(200px, 100%), 1fr))", gap: "32px" }}>
         {/* Contact */}
         <div>
           <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.gold, marginBottom: "16px", letterSpacing: "0.5px" }}>Contact</h3>

@@ -136,9 +136,9 @@ function BuyerSegmentCards({ setPage }) {
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "20px" }}>
         Three buyer types, three distinct problems. Each gets a tailored diligence depth and post-close playbook.
       </p>
-      <div style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap" }}>
+      <div className="buyer-cards-wrapper" style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap" }}>
         {segments.map((seg, i) => (
-          <div key={i} style={{ border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${seg.accentColor}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 260px", minWidth: "min(220px, 100%)", display: "flex", flexDirection: "column" }}>
+          <div key={i} className="buyer-card" style={{ border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${seg.accentColor}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 260px", minWidth: "min(220px, 100%)", display: "flex", flexDirection: "column" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
               <span style={{ display: "inline-block", padding: "4px 10px", borderRadius: RADIUS.sm, fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase", color: seg.accentColor, background: `${seg.accentColor}15`, border: `1px solid ${seg.accentColor}30` }}>
                 {seg.code}
@@ -157,7 +157,7 @@ function BuyerSegmentCards({ setPage }) {
                 </li>
               ))}
             </ul>
-            <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.55, margin: "0 0 16px", padding: "10px 12px", background: `${COLORS.navy}05`, borderRadius: RADIUS.sm, borderLeft: `2px solid ${seg.accentColor}` }}>
+            <p className="proof-quote" style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.55, margin: "0 0 16px", padding: "10px 12px", background: `${COLORS.navy}05`, borderRadius: RADIUS.sm, borderLeft: `2px solid ${seg.accentColor}` }}>
               {seg.proof}
             </p>
             <div style={{ marginTop: "auto", paddingTop: "16px" }}>
@@ -187,7 +187,7 @@ function LeversTeaserSection({ setPage }) {
         <a href="#" onClick={(e) => { e.preventDefault(); setPage("services"); }} style={{ color: COLORS.gold, textDecoration: "underline", fontWeight: 600 }}>Services page</a>.
       </p>
 
-      <div style={{ marginTop: "16px", display: "flex", gap: "8px", flexWrap: "wrap" }}>
+      <div className="domain-pills-row" style={{ marginTop: "16px", display: "flex", gap: "8px", flexWrap: "wrap" }}>
         {Object.entries(DOMAINS).map(([k]) => (
           <DomainTag key={k} domain={k} />
         ))}
@@ -239,9 +239,9 @@ function CostOfInaction() {
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "20px" }}>
         Operational gaps don't stay static under PE ownership. Leverage amplifies friction. These are the scenarios that play out when diligence misses them — and post-close stabilization doesn't happen.
       </p>
-      <div style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap" }}>
+      <div className="cost-cards-grid" style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap" }}>
         {scenarios.map((s, i) => (
-          <div key={i} style={{ border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.costRed}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, flex: "1 1 260px", minWidth: "min(220px, 100%)", display: "flex", flexDirection: "column", gap: "12px" }}>
+          <div key={i} className="cost-card" style={{ border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.costRed}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, flex: "1 1 260px", minWidth: "min(220px, 100%)", display: "flex", flexDirection: "column", gap: "12px" }}>
             <div style={{ display: "flex", alignItems: "flex-start", gap: "8px", marginBottom: "4px" }}>
               <span style={{ color: COLORS.critical, fontSize: "1rem", flexShrink: 0, marginTop: "2px" }}>⚠</span>
               <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy }}>
@@ -251,7 +251,7 @@ function CostOfInaction() {
             <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, margin: 0, flex: 1 }}>
               {s.what}
             </p>
-            <div style={{ padding: "10px 12px", background: `${COLORS.navy}05`, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.sm }}>
+            <div className="pe-consequence" style={{ padding: "10px 12px", background: `${COLORS.navy}05`, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.sm }}>
               <span style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, color: COLORS.critical, letterSpacing: "0.7px", textTransform: "uppercase", display: "block", marginBottom: "4px" }}>PE Consequence</span>
               <p style={{ fontFamily: FONTS.body, fontSize: "0.92rem", color: COLORS.charcoal, lineHeight: 1.55, margin: 0 }}>{s.consequence}</p>
             </div>
