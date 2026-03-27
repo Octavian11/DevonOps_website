@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobile UX Spec — devonshireops.com/pe</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600&display=swap');
+
+  :root {
+    --midnight: #1B2A4A;
+    --gold: #C8952E;
+    --steel: #5A7A9B;
+    --graphite: #3D3D3A;
+    --bg: #FAF9F6;
+    --surface: #F1F0EC;
+    --border: #D6D4CE;
+    --red-issue: #C0392B;
+    --green-fix: #1D9E75;
+    --blue-ref: #2E6DA4;
+    --amber-warn: #BA7517;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--graphite);
+    background: var(--bg);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    background: var(--midnight);
+    color: #fff;
+    padding: 80px 48px 64px;
+    text-align: center;
+  }
+  .cover-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(200,149,46,0.35);
+    padding: 6px 16px;
+    border-radius: 4px;
+    margin-bottom: 32px;
+  }
+  .cover h1 {
+    font-family: 'EB Garamond', serif;
+    font-size: 38px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .cover h1 em { font-style: italic; color: var(--gold); }
+  .cover .subtitle {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    max-width: 500px;
+    margin: 0 auto 32px;
+  }
+  .cover-meta {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ── SECTION HEADERS ── */
+  .section-num {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--midnight);
+    margin-bottom: 8px;
+  }
+  .section-lead {
+    font-size: 15px;
+    color: #6B6B65;
+    margin-bottom: 32px;
+    max-width: 640px;
+  }
+
+  section {
+    padding: 56px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  section:last-of-type { border-bottom: none; }
+
+  /* ── ISSUE CARDS ── */
+  .issue-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .issue-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+    border-radius: 10px 0 0 10px;
+  }
+  .issue-card.critical::before { background: var(--red-issue); }
+  .issue-card.moderate::before { background: var(--amber-warn); }
+  .issue-card.minor::before { background: var(--steel); }
+
+  .issue-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .severity-badge {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 4px;
+  }
+  .severity-badge.critical { background: #FCEAEA; color: var(--red-issue); }
+  .severity-badge.moderate { background: #FDF3E0; color: var(--amber-warn); }
+  .severity-badge.minor { background: #E8F0F7; color: var(--steel); }
+
+  .issue-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--midnight);
+  }
+
+  .issue-body p {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  /* ── SPEC TABLES ── */
+  .spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 13px;
+  }
+  .spec-table th {
+    text-align: left;
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #888;
+    padding: 8px 12px;
+    border-bottom: 2px solid var(--border);
+  }
+  .spec-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .spec-table tr:last-child td { border-bottom: none; }
+  .spec-table .prop { font-weight: 500; color: var(--midnight); white-space: nowrap; }
+  .val-current { color: var(--red-issue); font-family: 'DM Mono', monospace; font-size: 12px; }
+  .val-fix { color: var(--green-fix); font-weight: 600; font-family: 'DM Mono', monospace; font-size: 12px; }
+  .val-note { color: #888; font-size: 12px; }
+
+  /* ── CODE BLOCKS ── */
+  .css-block {
+    background: #1E1E2E;
+    color: #CDD6F4;
+    padding: 20px 24px;
+    border-radius: 8px;
+    font-family: 'DM Mono', 'Fira Code', monospace;
+    font-size: 12px;
+    line-height: 1.8;
+    overflow-x: auto;
+    margin: 16px 0;
+    white-space: pre;
+  }
+  .css-block .sel { color: #89B4FA; }
+  .css-block .prop { color: #CBA6F7; }
+  .css-block .val { color: #A6E3A1; }
+  .css-block .comment { color: #6C7086; font-style: italic; }
+  .css-block .num { color: #FAB387; }
+  .css-block .unit { color: #F9E2AF; }
+
+  /* ── BEFORE / AFTER ── */
+  .comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 20px 0;
+  }
+  .comparison-col {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .comparison-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    text-align: center;
+  }
+  .comparison-label.before { background: #FCEAEA; color: var(--red-issue); }
+  .comparison-label.after { background: #E1F5EE; color: var(--green-fix); }
+  .comparison-body {
+    padding: 16px;
+    font-size: 13px;
+  }
+
+  /* ── PHONE FRAME MOCKUP ── */
+  .phone-frame {
+    width: 280px;
+    margin: 24px auto;
+    background: #fff;
+    border-radius: 28px;
+    border: 3px solid #222;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  }
+  .phone-notch {
+    width: 80px;
+    height: 6px;
+    background: #222;
+    border-radius: 3px;
+    margin: 8px auto;
+  }
+  .phone-screen {
+    padding: 0;
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  /* ── MEASUREMENT ANNOTATIONS ── */
+  .measure {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--blue-ref);
+    background: #EDF4FC;
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+
+  /* ── SUMMARY BOX ── */
+  .summary-box {
+    background: var(--midnight);
+    color: #fff;
+    padding: 32px;
+    border-radius: 10px;
+    margin: 24px 0;
+  }
+  .summary-box h3 {
+    font-family: 'EB Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    color: var(--gold);
+  }
+  .summary-box ul {
+    list-style: none;
+    padding: 0;
+  }
+  .summary-box li {
+    font-size: 14px;
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+    color: rgba(255,255,255,0.8);
+  }
+  .summary-box li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+
+  /* ── UTILITY ── */
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-right: 6px;
+  }
+  .tag-css { background: #EDF4FC; color: var(--blue-ref); }
+  .tag-layout { background: #F0E8F7; color: #6B3FA0; }
+  .tag-ux { background: #FDF3E0; color: var(--amber-warn); }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 24px 0;
+  }
+
+  .callout {
+    background: #FFFBF0;
+    border-left: 3px solid var(--gold);
+    padding: 16px 20px;
+    font-size: 14px;
+    border-radius: 0 6px 6px 0;
+    margin: 20px 0;
+    color: #5A4E2F;
+  }
+
+  h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--midnight);
+    margin: 20px 0 8px;
+  }
+
+  .viewport-ref {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 20px;
+  }
+
+  .fix-list {
+    list-style: none;
+    padding: 0;
+  }
+  .fix-list li {
+    padding: 8px 0;
+    padding-left: 28px;
+    position: relative;
+    font-size: 14px;
+  }
+  .fix-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 4px;
+    color: var(--green-fix);
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════ COVER -->
+<div class="cover">
+  <div class="cover-badge">Implementation Spec</div>
+  <h1>Mobile UX <em>Remediation</em></h1>
+  <p class="subtitle">Pixel-level specifications for devonshireops.com/pe mobile experience — every measurement, every fix, production-ready for your coding agent.</p>
+  <div class="cover-meta">
+    <span>Reference viewport: 390 × 844 (iPhone 14)</span>
+    <span>March 27, 2026</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════════════ ISSUE 1 -->
+<section>
+  <div class="section-num">Issue 01</div>
+  <div class="section-title">Sticky CTA bar steals 15% of the viewport</div>
+  <div class="section-lead">The persistent bottom bar with "Book a Fit Check" + "Score Your Deal →" appears on scroll and never leaves. On a 390×844 screen the bar + safe area consume ~120px — 14.2% of usable viewport.</div>
+
+  <div class="issue-card critical">
+    <div class="issue-header">
+      <span class="severity-badge critical">Critical</span>
+      <span class="issue-title">Sticky bar dimensions & behavior</span>
+    </div>
+    <div class="issue-body">
+      <p>The bar currently renders as a fixed-position element at the bottom of the viewport. It contains a line of persuasive text ("Ready to find the gaps?"), two side-by-side CTA buttons, and a small dismiss "×" icon. On mobile, all this content wraps and stacks partially, creating visual clutter.</p>
+
+      <table class="spec-table">
+        <tr><th>Property</th><th>Current</th><th>Fix</th><th>Notes</th></tr>
+        <tr>
+          <td class="prop">Total bar height</td>
+          <td class="val-current">~120px</td>
+          <td class="val-fix">0px (remove)</td>
+          <td class="val-note">Kill the sticky bar entirely on mobile</td>
+        </tr>
+        <tr>
+          <td class="prop">Viewport consumed</td>
+          <td class="val-current">14.2%</td>
+          <td class="val-fix">0%</td>
+          <td class="val-note">Reclaimed for content</td>
+        </tr>
+        <tr>
+          <td class="prop">Trigger point</td>
+          <td class="val-current">~500px scroll</td>
+          <td class="val-fix">n/a</td>
+          <td class="val-note">Was appearing after hero section</td>
+        </tr>
+        <tr>
+          <td class="prop">Z-index</td>
+          <td class="val-current">999+</td>
+          <td class="val-fix">n/a</td>
+          <td class="val-note">Was overlapping footer content</td>
+        </tr>
+      </table>
+
+      <h4>Specification</h4>
+      <div class="css-block"><span class="comment">/* Hide sticky bar on viewports ≤ 768px */</span>
+<span class="sel">@media (max-width: 768px)</span> {
+  <span class="sel">.sticky-cta-bar,
+  [class*="sticky-bottom"],
+  [class*="fixed-cta"]</span> {
+    <span class="prop">display</span>: <span class="val">none</span> <span class="val">!important</span>;
+  }
+}</div>
+
+      <div class="callout">
+        <strong>Why remove instead of redesign?</strong> The page already has 6–7 inline CTA placements (hero, persona cards, levers section, pricing, pre-footer). The sticky bar is redundant — every scroll position is within 2 viewport-heights of a CTA. Removing it reclaims 120px on every screen, eliminates the footer overlap bug, and reduces "banner blindness" pressure.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ISSUE 2 -->
+<section>
+  <div class="section-num">Issue 02</div>
+  <div class="section-title">Persona cards: zero breathing room</div>
+  <div class="section-lead">The three buyer-type cards (Independent Sponsors, LMM PE Funds, Family Offices) stack vertically on mobile with insufficient internal padding and margins between them.</div>
+
+  <div class="issue-card critical">
+    <div class="issue-header">
+      <span class="severity-badge critical">Critical</span>
+      <span class="issue-title">Card padding & spacing (persona section)</span>
+    </div>
+    <div class="issue-body">
+
+      <table class="spec-table">
+        <tr><th>Property</th><th>Current</th><th>Fix</th><th>Notes</th></tr>
+        <tr>
+          <td class="prop">Card internal padding</td>
+          <td class="val-current">~20px all sides</td>
+          <td class="val-fix">24px 20px 28px</td>
+          <td class="val-note">Top/sides/bottom — more bottom for CTA breathing room</td>
+        </tr>
+        <tr>
+          <td class="prop">Gap between stacked cards</td>
+          <td class="val-current">~8px</td>
+          <td class="val-fix">20px</td>
+          <td class="val-note">Cards run together visually without this</td>
+        </tr>
+        <tr>
+          <td class="prop">Section outer padding (L/R)</td>
+          <td class="val-current">~16px</td>
+          <td class="val-fix">20px</td>
+          <td class="val-note">Content too close to screen edge</td>
+        </tr>
+        <tr>
+          <td class="prop">Card border-radius</td>
+          <td class="val-current">8px</td>
+          <td class="val-fix">12px</td>
+          <td class="val-note">Slightly rounder feels more modern on mobile</td>
+        </tr>
+        <tr>
+          <td class="prop">Top accent border width</td>
+          <td class="val-current">3px solid</td>
+          <td class="val-fix">3px solid</td>
+          <td class="val-note">Keep — this is effective segmentation</td>
+        </tr>
+        <tr>
+          <td class="prop">Italic proof quote block padding</td>
+          <td class="val-current">~12px left-border</td>
+          <td class="val-fix">16px padding, 3px left-border</td>
+          <td class="val-note">Blockquote feels cramped on narrow screens</td>
+        </tr>
+        <tr>
+          <td class="prop">CTA button bottom margin</td>
+          <td class="val-current">0px (flush to card edge)</td>
+          <td class="val-fix">4px</td>
+          <td class="val-note">Button shouldn't touch card border</td>
+        </tr>
+        <tr>
+          <td class="prop">Space: last bullet → proof quote</td>
+          <td class="val-current">~8px</td>
+          <td class="val-fix">16px</td>
+          <td class="val-note">Separate content zones within card</td>
+        </tr>
+      </table>
+
+      <h4>Specification</h4>
+      <div class="css-block"><span class="sel">@media (max-width: 768px)</span> {
+  <span class="comment">/* Persona card container */</span>
+  <span class="sel">.persona-cards-wrapper,
+  [class*="buyer-cards"]</span> {
+    <span class="prop">display</span>: <span class="val">flex</span>;
+    <span class="prop">flex-direction</span>: <span class="val">column</span>;
+    <span class="prop">gap</span>: <span class="num">20</span><span class="unit">px</span>;
+    <span class="prop">padding</span>: <span class="num">0</span> <span class="num">20</span><span class="unit">px</span>;
+  }
+
+  <span class="comment">/* Individual persona card */</span>
+  <span class="sel">.persona-card,
+  [class*="buyer-card"]</span> {
+    <span class="prop">padding</span>: <span class="num">24</span><span class="unit">px</span> <span class="num">20</span><span class="unit">px</span> <span class="num">28</span><span class="unit">px</span>;
+    <span class="prop">border-radius</span>: <span class="num">12</span><span class="unit">px</span>;
+  }
+
+  <span class="comment">/* Proof blockquote inside card */</span>
+  <span class="sel">.persona-card blockquote,
+  [class*="proof-quote"]</span> {
+    <span class="prop">margin-top</span>: <span class="num">16</span><span class="unit">px</span>;
+    <span class="prop">padding</span>: <span class="num">14</span><span class="unit">px</span> <span class="num">16</span><span class="unit">px</span>;
+    <span class="prop">border-left</span>: <span class="num">3</span><span class="unit">px</span> <span class="val">solid</span> <span class="val">var(--gold)</span>;
+  }
+
+  <span class="comment">/* CTA inside card */</span>
+  <span class="sel">.persona-card .cta-button</span> {
+    <span class="prop">margin-bottom</span>: <span class="num">4</span><span class="unit">px</span>;
+  }
+}</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ISSUE 3 -->
+<section>
+  <div class="section-num">Issue 03</div>
+  <div class="section-title">"Cost of Not Acting" cards: red borders crowd the screen</div>
+  <div class="section-lead">Three dashed-red-border cards with warning icons, scenario text, and "PE CONSEQUENCE" sub-blocks stack on mobile with dense internal content and no visual relief.</div>
+
+  <div class="issue-card moderate">
+    <div class="issue-header">
+      <span class="severity-badge moderate">Moderate</span>
+      <span class="issue-title">Risk cards density & spacing</span>
+    </div>
+    <div class="issue-body">
+
+      <table class="spec-table">
+        <tr><th>Property</th><th>Current</th><th>Fix</th><th>Notes</th></tr>
+        <tr>
+          <td class="prop">Card internal padding</td>
+          <td class="val-current">~16px</td>
+          <td class="val-fix">20px 20px 24px</td>
+          <td class="val-note">More room for the nested "PE Consequence" block</td>
+        </tr>
+        <tr>
+          <td class="prop">Gap between stacked cards</td>
+          <td class="val-current">~8px</td>
+          <td class="val-fix">16px</td>
+          <td class="val-note">Three red-bordered cards stacking with no separation</td>
+        </tr>
+        <tr>
+          <td class="prop">"PE CONSEQUENCE" sub-block padding</td>
+          <td class="val-current">~12px</td>
+          <td class="val-fix">16px</td>
+          <td class="val-note">Nested block feels cramped within already-tight card</td>
+        </tr>
+        <tr>
+          <td class="prop">"PE CONSEQUENCE" margin-top</td>
+          <td class="val-current">~8px</td>
+          <td class="val-fix">16px</td>
+          <td class="val-note">Separate scenario from consequence visually</td>
+        </tr>
+        <tr>
+          <td class="prop">Warning icon + heading alignment</td>
+          <td class="val-current">Inline, wrapping</td>
+          <td class="val-fix">Icon left-aligned, heading wraps naturally</td>
+          <td class="val-note">Long titles like "No change control → value creation stalls" wrap mid-icon</td>
+        </tr>
+        <tr>
+          <td class="prop">Dashed border width</td>
+          <td class="val-current">2px dashed red</td>
+          <td class="val-fix">1.5px dashed</td>
+          <td class="val-note">2px dashed feels heavy on small screen</td>
+        </tr>
+      </table>
+
+      <h4>Specification</h4>
+      <div class="css-block"><span class="sel">@media (max-width: 768px)</span> {
+  <span class="sel">.risk-card,
+  [class*="cost-card"]</span> {
+    <span class="prop">padding</span>: <span class="num">20</span><span class="unit">px</span> <span class="num">20</span><span class="unit">px</span> <span class="num">24</span><span class="unit">px</span>;
+    <span class="prop">border-width</span>: <span class="num">1.5</span><span class="unit">px</span>;
+    <span class="prop">border-radius</span>: <span class="num">12</span><span class="unit">px</span>;
+  }
+
+  <span class="comment">/* Stack risk cards with gap */</span>
+  <span class="sel">.risk-cards-grid</span> {
+    <span class="prop">gap</span>: <span class="num">16</span><span class="unit">px</span>;
+  }
+
+  <span class="comment">/* PE Consequence nested block */</span>
+  <span class="sel">.pe-consequence,
+  [class*="consequence"]</span> {
+    <span class="prop">margin-top</span>: <span class="num">16</span><span class="unit">px</span>;
+    <span class="prop">padding</span>: <span class="num">16</span><span class="unit">px</span>;
+  }
+
+  <span class="comment">/* Warning icon + title row */</span>
+  <span class="sel">.risk-card .card-heading</span> {
+    <span class="prop">display</span>: <span class="val">flex</span>;
+    <span class="prop">align-items</span>: <span class="val">flex-start</span>;
+    <span class="prop">gap</span>: <span class="num">10</span><span class="unit">px</span>;
+  }
+  <span class="sel">.risk-card .warning-icon</span> {
+    <span class="prop">flex-shrink</span>: <span class="num">0</span>;
+    <span class="prop">margin-top</span>: <span class="num">3</span><span class="unit">px</span>;
+  }
+}</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ISSUE 4 -->
+<section>
+  <div class="section-num">Issue 04</div>
+  <div class="section-title">Pricing cards lack visual hierarchy on mobile</div>
+  <div class="section-lead">The three pricing columns (Ops Diligence Report, Bundle, Control Tower Retainer) stack identically with no emphasis on the recommended middle option.</div>
+
+  <div class="issue-card moderate">
+    <div class="issue-header">
+      <span class="severity-badge moderate">Moderate</span>
+      <span class="issue-title">Pricing tier differentiation & spacing</span>
+    </div>
+    <div class="issue-body">
+
+      <table class="spec-table">
+        <tr><th>Property</th><th>Current</th><th>Fix</th><th>Notes</th></tr>
+        <tr>
+          <td class="prop">Recommended card visual weight</td>
+          <td class="val-current">Same as siblings</td>
+          <td class="val-fix">Elevated with background + thicker border</td>
+          <td class="val-note">Middle "Bundle" card should dominate</td>
+        </tr>
+        <tr>
+          <td class="prop">Recommended card background</td>
+          <td class="val-current">#fff (same as others)</td>
+          <td class="val-fix">#FFFBF0 (warm cream)</td>
+          <td class="val-note">Subtle warmth sets it apart without being loud</td>
+        </tr>
+        <tr>
+          <td class="prop">Recommended card border</td>
+          <td class="val-current">1px solid (gold top only)</td>
+          <td class="val-fix">2px solid var(--gold) all sides</td>
+          <td class="val-note">Full gold border creates containment emphasis</td>
+        </tr>
+        <tr>
+          <td class="prop">"Recommended" label</td>
+          <td class="val-current">Inline in title text</td>
+          <td class="val-fix">Floating badge above card</td>
+          <td class="val-note">Pill badge: gold bg, white text, positioned -12px top</td>
+        </tr>
+        <tr>
+          <td class="prop">Gap between pricing cards</td>
+          <td class="val-current">~8px</td>
+          <td class="val-fix">20px</td>
+          <td class="val-note">Same spacing system as persona cards</td>
+        </tr>
+        <tr>
+          <td class="prop">Price text size</td>
+          <td class="val-current">~18px</td>
+          <td class="val-fix">22px, font-weight 600</td>
+          <td class="val-note">Price should be most scannable element</td>
+        </tr>
+        <tr>
+          <td class="prop">Card padding</td>
+          <td class="val-current">~16px</td>
+          <td class="val-fix">24px 20px 28px</td>
+          <td class="val-note">Consistent with persona card system</td>
+        </tr>
+      </table>
+
+      <h4>Recommended card badge specification</h4>
+      <div class="css-block"><span class="sel">@media (max-width: 768px)</span> {
+  <span class="comment">/* Recommended pricing card */</span>
+  <span class="sel">.pricing-card.recommended</span> {
+    <span class="prop">position</span>: <span class="val">relative</span>;
+    <span class="prop">background</span>: <span class="val">#FFFBF0</span>;
+    <span class="prop">border</span>: <span class="num">2</span><span class="unit">px</span> <span class="val">solid</span> <span class="val">#C8952E</span>;
+    <span class="prop">border-radius</span>: <span class="num">12</span><span class="unit">px</span>;
+    <span class="prop">padding</span>: <span class="num">32</span><span class="unit">px</span> <span class="num">20</span><span class="unit">px</span> <span class="num">28</span><span class="unit">px</span>;
+  }
+
+  <span class="comment">/* Floating "Recommended" badge */</span>
+  <span class="sel">.pricing-card.recommended::before</span> {
+    <span class="prop">content</span>: <span class="val">'Recommended'</span>;
+    <span class="prop">position</span>: <span class="val">absolute</span>;
+    <span class="prop">top</span>: <span class="num">-12</span><span class="unit">px</span>;
+    <span class="prop">left</span>: <span class="num">50</span><span class="unit">%</span>;
+    <span class="prop">transform</span>: <span class="val">translateX(-50%)</span>;
+    <span class="prop">background</span>: <span class="val">#C8952E</span>;
+    <span class="prop">color</span>: <span class="val">#fff</span>;
+    <span class="prop">font-size</span>: <span class="num">11</span><span class="unit">px</span>;
+    <span class="prop">font-weight</span>: <span class="num">600</span>;
+    <span class="prop">letter-spacing</span>: <span class="num">1</span><span class="unit">px</span>;
+    <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+    <span class="prop">padding</span>: <span class="num">4</span><span class="unit">px</span> <span class="num">16</span><span class="unit">px</span>;
+    <span class="prop">border-radius</span>: <span class="num">20</span><span class="unit">px</span>;
+  }
+
+  <span class="comment">/* Non-recommended cards */</span>
+  <span class="sel">.pricing-card:not(.recommended)</span> {
+    <span class="prop">padding</span>: <span class="num">24</span><span class="unit">px</span> <span class="num">20</span><span class="unit">px</span> <span class="num">28</span><span class="unit">px</span>;
+    <span class="prop">border-radius</span>: <span class="num">12</span><span class="unit">px</span>;
+  }
+
+  <span class="comment">/* Price text emphasis */</span>
+  <span class="sel">.pricing-card .price</span> {
+    <span class="prop">font-size</span>: <span class="num">22</span><span class="unit">px</span>;
+    <span class="prop">font-weight</span>: <span class="num">600</span>;
+  }
+
+  <span class="comment">/* Pricing cards stack gap */</span>
+  <span class="sel">.pricing-grid</span> {
+    <span class="prop">gap</span>: <span class="num">20</span><span class="unit">px</span>;
+  }
+}</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ISSUE 5 -->
+<section>
+  <div class="section-num">Issue 05</div>
+  <div class="section-title">Category pill buttons wrap awkwardly</div>
+  <div class="section-lead">The horizontal row of filter pills (INCIDENTS, CHANGE CONTROL, VENDORS, COMPLIANCE, KPIS, PROCESS) in the "20 Operational Value Creation Levers" section doesn't handle narrow screens.</div>
+
+  <div class="issue-card moderate">
+    <div class="issue-header">
+      <span class="severity-badge moderate">Moderate</span>
+      <span class="issue-title">Pill button overflow behavior</span>
+    </div>
+    <div class="issue-body">
+
+      <table class="spec-table">
+        <tr><th>Property</th><th>Current</th><th>Fix</th><th>Notes</th></tr>
+        <tr>
+          <td class="prop">Container behavior</td>
+          <td class="val-current">flex-wrap: wrap</td>
+          <td class="val-fix">overflow-x: auto (horizontal scroll)</td>
+          <td class="val-note">Pills should scroll horizontally, not wrap to 2–3 rows</td>
+        </tr>
+        <tr>
+          <td class="prop">Scroll padding</td>
+          <td class="val-current">n/a</td>
+          <td class="val-fix">0 20px</td>
+          <td class="val-note">First and last pills should have breathing room</td>
+        </tr>
+        <tr>
+          <td class="prop">Scrollbar visibility</td>
+          <td class="val-current">n/a</td>
+          <td class="val-fix">hidden</td>
+          <td class="val-note">Hide scrollbar, let touch-scroll work naturally</td>
+        </tr>
+        <tr>
+          <td class="prop">Pill flex-shrink</td>
+          <td class="val-current">default (shrinks)</td>
+          <td class="val-fix">flex-shrink: 0</td>
+          <td class="val-note">Prevent pills from compressing text</td>
+        </tr>
+        <tr>
+          <td class="prop">Pill padding</td>
+          <td class="val-current">~8px 12px</td>
+          <td class="val-fix">8px 16px</td>
+          <td class="val-note">Slightly more generous tap targets</td>
+        </tr>
+        <tr>
+          <td class="prop">Pill min-height</td>
+          <td class="val-current">unset</td>
+          <td class="val-fix">36px</td>
+          <td class="val-note">Meets 44px tap target guideline when combined with gap</td>
+        </tr>
+        <tr>
+          <td class="prop">Fade hint (right edge)</td>
+          <td class="val-current">none</td>
+          <td class="val-fix">24px gradient mask</td>
+          <td class="val-note">Visual cue that more pills exist off-screen</td>
+        </tr>
+      </table>
+
+      <h4>Specification</h4>
+      <div class="css-block"><span class="sel">@media (max-width: 768px)</span> {
+  <span class="comment">/* Pill container → horizontal scroll */</span>
+  <span class="sel">.lever-pills,
+  [class*="category-pills"]</span> {
+    <span class="prop">display</span>: <span class="val">flex</span>;
+    <span class="prop">flex-wrap</span>: <span class="val">nowrap</span>;
+    <span class="prop">overflow-x</span>: <span class="val">auto</span>;
+    <span class="prop">-webkit-overflow-scrolling</span>: <span class="val">touch</span>;
+    <span class="prop">scrollbar-width</span>: <span class="val">none</span>;
+    <span class="prop">gap</span>: <span class="num">8</span><span class="unit">px</span>;
+    <span class="prop">padding</span>: <span class="num">0</span> <span class="num">20</span><span class="unit">px</span>;
+    <span class="prop">margin</span>: <span class="num">0</span> <span class="num">-20</span><span class="unit">px</span>; <span class="comment">/* bleed to edges */</span>
+    <span class="prop">mask-image</span>: <span class="val">linear-gradient(
+      to right,
+      transparent 0,
+      black 20px,
+      black calc(100% - 24px),
+      transparent 100%
+    )</span>;
+  }
+  <span class="sel">.lever-pills::-webkit-scrollbar</span> {
+    <span class="prop">display</span>: <span class="val">none</span>;
+  }
+
+  <span class="comment">/* Individual pill */</span>
+  <span class="sel">.lever-pill,
+  [class*="category-pill"]</span> {
+    <span class="prop">flex-shrink</span>: <span class="num">0</span>;
+    <span class="prop">padding</span>: <span class="num">8</span><span class="unit">px</span> <span class="num">16</span><span class="unit">px</span>;
+    <span class="prop">min-height</span>: <span class="num">36</span><span class="unit">px</span>;
+    <span class="prop">white-space</span>: <span class="val">nowrap</span>;
+  }
+}</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ISSUE 6 -->
+<section>
+  <div class="section-num">Issue 06</div>
+  <div class="section-title">Section container monotony — "box stack" fatigue</div>
+  <div class="section-lead">Every content section is wrapped in an identical light-gray bordered box with the same padding. On desktop this creates monotony; on mobile it compounds into a claustrophobic tunnel of sameness.</div>
+
+  <div class="issue-card moderate">
+    <div class="issue-header">
+      <span class="severity-badge moderate">Moderate</span>
+      <span class="issue-title">Section wrapper visual rhythm</span>
+    </div>
+    <div class="issue-body">
+
+      <table class="spec-table">
+        <tr><th>Property</th><th>Current</th><th>Fix</th><th>Notes</th></tr>
+        <tr>
+          <td class="prop">Section wrapper border</td>
+          <td class="val-current">1px solid #D6D4CE all sections</td>
+          <td class="val-fix">Remove borders on mobile</td>
+          <td class="val-note">Replace with spacing + subtle dividers</td>
+        </tr>
+        <tr>
+          <td class="prop">Section wrapper background</td>
+          <td class="val-current">#fff every section</td>
+          <td class="val-fix">Alternate transparent and #fff</td>
+          <td class="val-note">Creates visual rhythm without borders</td>
+        </tr>
+        <tr>
+          <td class="prop">Section wrapper border-radius</td>
+          <td class="val-current">8px</td>
+          <td class="val-fix">0 (remove on mobile)</td>
+          <td class="val-note">Full-width sections don't need rounded corners</td>
+        </tr>
+        <tr>
+          <td class="prop">Section wrapper margin</td>
+          <td class="val-current">~16px horizontal</td>
+          <td class="val-fix">0 (full-bleed on mobile)</td>
+          <td class="val-note">Let sections use full 390px width</td>
+        </tr>
+        <tr>
+          <td class="prop">Section internal padding</td>
+          <td class="val-current">~24px</td>
+          <td class="val-fix">32px 20px</td>
+          <td class="val-note">More vertical breathing, consistent horizontal</td>
+        </tr>
+        <tr>
+          <td class="prop">Section divider</td>
+          <td class="val-current">none (box borders create separation)</td>
+          <td class="val-fix">1px solid #E8E6E0, width 60%, centered</td>
+          <td class="val-note">Lighter touch than full borders</td>
+        </tr>
+      </table>
+
+      <h4>Specification</h4>
+      <div class="css-block"><span class="sel">@media (max-width: 768px)</span> {
+  <span class="comment">/* Kill box-wrapper pattern on mobile */</span>
+  <span class="sel">.section-wrapper,
+  [class*="content-card"]</span> {
+    <span class="prop">border</span>: <span class="val">none</span>;
+    <span class="prop">border-radius</span>: <span class="num">0</span>;
+    <span class="prop">margin-left</span>: <span class="num">0</span>;
+    <span class="prop">margin-right</span>: <span class="num">0</span>;
+    <span class="prop">padding</span>: <span class="num">32</span><span class="unit">px</span> <span class="num">20</span><span class="unit">px</span>;
+  }
+
+  <span class="comment">/* Add subtle divider between sections */</span>
+  <span class="sel">.section-wrapper + .section-wrapper::before</span> {
+    <span class="prop">content</span>: <span class="val">''</span>;
+    <span class="prop">display</span>: <span class="val">block</span>;
+    <span class="prop">width</span>: <span class="num">60</span><span class="unit">%</span>;
+    <span class="prop">height</span>: <span class="num">1</span><span class="unit">px</span>;
+    <span class="prop">background</span>: <span class="val">#E8E6E0</span>;
+    <span class="prop">margin</span>: <span class="num">0</span> <span class="val">auto</span> <span class="num">32</span><span class="unit">px</span>;
+  }
+
+  <span class="comment">/* Alternate subtle bg tint */</span>
+  <span class="sel">.section-wrapper:nth-child(even)</span> {
+    <span class="prop">background</span>: <span class="val">#F8F7F4</span>;
+  }
+}</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ISSUE 7 -->
+<section>
+  <div class="section-num">Issue 07</div>
+  <div class="section-title">Nav bar & hamburger menu tap targets</div>
+  <div class="section-lead">The mobile nav renders the "OPERATIONAL GAPS" active page label taking prominent space, with a hamburger icon that's adequately sized but the overall header height is generous for the content it shows.</div>
+
+  <div class="issue-card minor">
+    <div class="issue-header">
+      <span class="severity-badge minor">Minor</span>
+      <span class="issue-title">Mobile header optimization</span>
+    </div>
+    <div class="issue-body">
+
+      <table class="spec-table">
+        <tr><th>Property</th><th>Current</th><th>Fix</th><th>Notes</th></tr>
+        <tr>
+          <td class="prop">Header height</td>
+          <td class="val-current">~64px</td>
+          <td class="val-fix">56px</td>
+          <td class="val-note">Reclaim 8px without hurting usability</td>
+        </tr>
+        <tr>
+          <td class="prop">"OPERATIONAL GAPS" label</td>
+          <td class="val-current">Visible, ~14px uppercase</td>
+          <td class="val-fix">Hide on mobile</td>
+          <td class="val-note">Active page indicator isn't needed in mobile nav — user already knows where they are</td>
+        </tr>
+        <tr>
+          <td class="prop">Hamburger icon tap area</td>
+          <td class="val-current">~40×40px</td>
+          <td class="val-fix">44×44px</td>
+          <td class="val-note">Meet Apple HIG minimum tap target</td>
+        </tr>
+        <tr>
+          <td class="prop">Logo mark size</td>
+          <td class="val-current">Appropriate</td>
+          <td class="val-fix">Keep as-is</td>
+          <td class="val-note">The Devonshire D monogram + wordmark works well</td>
+        </tr>
+      </table>
+
+      <div class="css-block"><span class="sel">@media (max-width: 768px)</span> {
+  <span class="sel">.site-header</span> {
+    <span class="prop">height</span>: <span class="num">56</span><span class="unit">px</span>;
+  }
+
+  <span class="comment">/* Hide active page label on mobile */</span>
+  <span class="sel">.active-page-label,
+  [class*="current-page"]</span> {
+    <span class="prop">display</span>: <span class="val">none</span>;
+  }
+
+  <span class="comment">/* Ensure hamburger meets 44px tap target */</span>
+  <span class="sel">.hamburger-btn,
+  [class*="menu-toggle"]</span> {
+    <span class="prop">min-width</span>: <span class="num">44</span><span class="unit">px</span>;
+    <span class="prop">min-height</span>: <span class="num">44</span><span class="unit">px</span>;
+    <span class="prop">display</span>: <span class="val">flex</span>;
+    <span class="prop">align-items</span>: <span class="val">center</span>;
+    <span class="prop">justify-content</span>: <span class="val">center</span>;
+  }
+}</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ISSUE 8 -->
+<section>
+  <div class="section-num">Issue 08</div>
+  <div class="section-title">Track record cards & proof metrics spacing</div>
+  <div class="section-lead">The "Hassan Tariq" bio card with HT monogram and the two institutional track record vignettes stack tightly on mobile.</div>
+
+  <div class="issue-card minor">
+    <div class="issue-header">
+      <span class="severity-badge minor">Minor</span>
+      <span class="issue-title">Bio & track record card mobile layout</span>
+    </div>
+    <div class="issue-body">
+
+      <table class="spec-table">
+        <tr><th>Property</th><th>Current</th><th>Fix</th><th>Notes</th></tr>
+        <tr>
+          <td class="prop">Metric row (∼67%, $2M+, 94→99%)</td>
+          <td class="val-current">Horizontal, ~equal widths</td>
+          <td class="val-fix">Keep horizontal but reduce font to 24px</td>
+          <td class="val-note">At current size the numbers crowd on narrow screens</td>
+        </tr>
+        <tr>
+          <td class="prop">Metric label font</td>
+          <td class="val-current">~12px</td>
+          <td class="val-fix">11px</td>
+          <td class="val-note">Slight reduction prevents label wrapping</td>
+        </tr>
+        <tr>
+          <td class="prop">Track record card gap</td>
+          <td class="val-current">~8px</td>
+          <td class="val-fix">16px</td>
+          <td class="val-note">Separate the two vignettes</td>
+        </tr>
+        <tr>
+          <td class="prop">Result blockquote padding</td>
+          <td class="val-current">~12px</td>
+          <td class="val-fix">16px</td>
+          <td class="val-note">Consistent with other blockquote treatment</td>
+        </tr>
+        <tr>
+          <td class="prop">Confidentiality disclaimer font</td>
+          <td class="val-current">~12px</td>
+          <td class="val-fix">11px, color #999</td>
+          <td class="val-note">De-emphasize further — it's legal boilerplate</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ISSUE 9 -->
+<section>
+  <div class="section-num">Issue 09</div>
+  <div class="section-title">FAQ accordion touch targets</div>
+  <div class="section-lead">The FAQ section has ~10 expandable questions. Each row serves as a tap target to expand, but the hit area is sized for desktop clicks, not mobile thumbs.</div>
+
+  <div class="issue-card minor">
+    <div class="issue-header">
+      <span class="severity-badge minor">Minor</span>
+      <span class="issue-title">Accordion row sizing</span>
+    </div>
+    <div class="issue-body">
+
+      <table class="spec-table">
+        <tr><th>Property</th><th>Current</th><th>Fix</th><th>Notes</th></tr>
+        <tr>
+          <td class="prop">Row min-height</td>
+          <td class="val-current">~44px</td>
+          <td class="val-fix">52px</td>
+          <td class="val-note">More comfortable thumb target</td>
+        </tr>
+        <tr>
+          <td class="prop">Row padding</td>
+          <td class="val-current">~12px 0</td>
+          <td class="val-fix">16px 0</td>
+          <td class="val-note">More vertical space between questions</td>
+        </tr>
+        <tr>
+          <td class="prop">Expand arrow (▸) size</td>
+          <td class="val-current">~12px</td>
+          <td class="val-fix">16px</td>
+          <td class="val-note">More visible affordance</td>
+        </tr>
+        <tr>
+          <td class="prop">Question text size</td>
+          <td class="val-current">~15px bold</td>
+          <td class="val-fix">15px, font-weight 600</td>
+          <td class="val-note">Good as-is, just ensure consistent weight</td>
+        </tr>
+      </table>
+
+      <div class="css-block"><span class="sel">@media (max-width: 768px)</span> {
+  <span class="sel">.faq-row,
+  [class*="accordion-item"] summary,
+  details summary</span> {
+    <span class="prop">min-height</span>: <span class="num">52</span><span class="unit">px</span>;
+    <span class="prop">padding</span>: <span class="num">16</span><span class="unit">px</span> <span class="num">0</span>;
+    <span class="prop">display</span>: <span class="val">flex</span>;
+    <span class="prop">align-items</span>: <span class="val">center</span>;
+    <span class="prop">cursor</span>: <span class="val">pointer</span>;
+  }
+
+  <span class="sel">.faq-row .expand-icon</span> {
+    <span class="prop">font-size</span>: <span class="num">16</span><span class="unit">px</span>;
+    <span class="prop">min-width</span>: <span class="num">24</span><span class="unit">px</span>;
+    <span class="prop">text-align</span>: <span class="val">center</span>;
+  }
+}</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ISSUE 10 -->
+<section>
+  <div class="section-num">Issue 10</div>
+  <div class="section-title">Footer overlap with sticky bar + form usability</div>
+  <div class="section-lead">The footer's "Not ready to book?" email form has small input fields on mobile, and the sticky CTA bar overlaps the footer's own CTA section when scrolled to the bottom.</div>
+
+  <div class="issue-card minor">
+    <div class="issue-header">
+      <span class="severity-badge minor">Minor</span>
+      <span class="issue-title">Footer form & overlap fix</span>
+    </div>
+    <div class="issue-body">
+
+      <table class="spec-table">
+        <tr><th>Property</th><th>Current</th><th>Fix</th><th>Notes</th></tr>
+        <tr>
+          <td class="prop">Footer/sticky bar overlap</td>
+          <td class="val-current">Sticky bar overlays footer content</td>
+          <td class="val-fix">Resolved by Issue 01 (remove sticky bar)</td>
+          <td class="val-note">No additional work needed</td>
+        </tr>
+        <tr>
+          <td class="prop">Footer email input height</td>
+          <td class="val-current">~36px</td>
+          <td class="val-fix">44px</td>
+          <td class="val-note">Meet minimum touch target height</td>
+        </tr>
+        <tr>
+          <td class="prop">Footer "Send →" button height</td>
+          <td class="val-current">~40px</td>
+          <td class="val-fix">48px</td>
+          <td class="val-note">Comfortable tap area, matches input height visually</td>
+        </tr>
+        <tr>
+          <td class="prop">Footer columns layout</td>
+          <td class="val-current">4-column (wrapping)</td>
+          <td class="val-fix">2×2 grid on mobile</td>
+          <td class="val-note">Contact + Nav on row 1, Resources + Form on row 2</td>
+        </tr>
+        <tr>
+          <td class="prop">Footer padding</td>
+          <td class="val-current">~32px</td>
+          <td class="val-fix">40px 20px</td>
+          <td class="val-note">More vertical space in the footer</td>
+        </tr>
+      </table>
+
+      <div class="css-block"><span class="sel">@media (max-width: 768px)</span> {
+  <span class="sel">.footer-grid</span> {
+    <span class="prop">display</span>: <span class="val">grid</span>;
+    <span class="prop">grid-template-columns</span>: <span class="val">1fr 1fr</span>;
+    <span class="prop">gap</span>: <span class="num">32</span><span class="unit">px</span> <span class="num">20</span><span class="unit">px</span>;
+    <span class="prop">padding</span>: <span class="num">40</span><span class="unit">px</span> <span class="num">20</span><span class="unit">px</span>;
+  }
+
+  <span class="comment">/* Form input + button sizing */</span>
+  <span class="sel">.footer-form input[type="email"]</span> {
+    <span class="prop">height</span>: <span class="num">44</span><span class="unit">px</span>;
+    <span class="prop">font-size</span>: <span class="num">14</span><span class="unit">px</span>;
+    <span class="prop">padding</span>: <span class="num">0</span> <span class="num">12</span><span class="unit">px</span>;
+  }
+
+  <span class="sel">.footer-form button</span> {
+    <span class="prop">height</span>: <span class="num">48</span><span class="unit">px</span>;
+    <span class="prop">width</span>: <span class="num">100</span><span class="unit">%</span>;
+    <span class="prop">font-size</span>: <span class="num">14</span><span class="unit">px</span>;
+  }
+}</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ SUMMARY -->
+<section>
+  <div class="section-num">Implementation Summary</div>
+  <div class="section-title">Priority sequence for your coding agent</div>
+
+  <div class="summary-box">
+    <h3>Execute in this order</h3>
+    <ul>
+      <li><strong>Pass 1 — Structural (Issues 01, 06):</strong> Remove sticky bar, kill section-wrapper borders, switch to full-bleed + dividers. These are global CSS changes that affect every section downstream.</li>
+      <li><strong>Pass 2 — Card system (Issues 02, 03, 04):</strong> Apply consistent padding/gap/border-radius system across persona, risk, and pricing cards. The three card types should share a spacing vocabulary: 20px gap, 24px top padding, 28px bottom padding, 12px border-radius.</li>
+      <li><strong>Pass 3 — Interactive elements (Issues 05, 09):</strong> Horizontal scroll on pills, accordion row sizing. These are isolated component fixes.</li>
+      <li><strong>Pass 4 — Polish (Issues 07, 08, 10):</strong> Header height, metric font sizing, footer form inputs. Low-risk cosmetic adjustments.</li>
+    </ul>
+  </div>
+
+  <div class="callout">
+    <strong>Breakpoint strategy:</strong> All specs use <span class="measure">max-width: 768px</span> as the single mobile breakpoint. If your site uses a different breakpoint (e.g., 640px or 480px), substitute accordingly. The measurements assume a <span class="measure">390px</span> reference viewport (iPhone 14/15) but work across 360–428px range without additional adjustments.
+  </div>
+
+  <table class="spec-table" style="margin-top: 24px;">
+    <tr><th>Issue</th><th>Severity</th><th>LOE</th><th>Impact</th></tr>
+    <tr>
+      <td class="prop">01 — Sticky CTA bar</td>
+      <td><span class="severity-badge critical" style="font-size:9px;">Critical</span></td>
+      <td>15 min</td>
+      <td>Reclaims 14% viewport, fixes footer overlap</td>
+    </tr>
+    <tr>
+      <td class="prop">02 — Persona cards</td>
+      <td><span class="severity-badge critical" style="font-size:9px;">Critical</span></td>
+      <td>20 min</td>
+      <td>First content cards visitors see after hero</td>
+    </tr>
+    <tr>
+      <td class="prop">03 — Risk cards</td>
+      <td><span class="severity-badge moderate" style="font-size:9px;">Moderate</span></td>
+      <td>15 min</td>
+      <td>Key persuasion section reads as wall of text</td>
+    </tr>
+    <tr>
+      <td class="prop">04 — Pricing cards</td>
+      <td><span class="severity-badge moderate" style="font-size:9px;">Moderate</span></td>
+      <td>25 min</td>
+      <td>Conversion-critical — recommended tier must pop</td>
+    </tr>
+    <tr>
+      <td class="prop">05 — Category pills</td>
+      <td><span class="severity-badge moderate" style="font-size:9px;">Moderate</span></td>
+      <td>15 min</td>
+      <td>Awkward wrapping undermines interactive feature</td>
+    </tr>
+    <tr>
+      <td class="prop">06 — Section wrappers</td>
+      <td><span class="severity-badge moderate" style="font-size:9px;">Moderate</span></td>
+      <td>20 min</td>
+      <td>Global rhythm fix — changes feel of entire page</td>
+    </tr>
+    <tr>
+      <td class="prop">07 — Nav header</td>
+      <td><span class="severity-badge minor" style="font-size:9px;">Minor</span></td>
+      <td>10 min</td>
+      <td>Small viewport reclaim + cleaner header</td>
+    </tr>
+    <tr>
+      <td class="prop">08 — Track record</td>
+      <td><span class="severity-badge minor" style="font-size:9px;">Minor</span></td>
+      <td>10 min</td>
+      <td>Metric legibility on narrow screens</td>
+    </tr>
+    <tr>
+      <td class="prop">09 — FAQ accordion</td>
+      <td><span class="severity-badge minor" style="font-size:9px;">Minor</span></td>
+      <td>10 min</td>
+      <td>Touch usability for objection handling section</td>
+    </tr>
+    <tr>
+      <td class="prop">10 — Footer</td>
+      <td><span class="severity-badge minor" style="font-size:9px;">Minor</span></td>
+      <td>15 min</td>
+      <td>Form usability + layout cleanup</td>
+    </tr>
+  </table>
+
+  <p style="margin-top: 24px; font-size: 14px; color: #888;">Total estimated LOE: ~2.5 hours of CSS work. No HTML restructuring required — all fixes are achievable via a single mobile media query stylesheet.</p>
+</section>
+
+</div>
+
+<div style="background: var(--midnight); color: rgba(255,255,255,0.3); text-align: center; padding: 32px; font-size: 12px;">
+  Devonshire Ops — Mobile UX Spec — Prepared March 2026
+</div>
+
+</body>
+</html>
