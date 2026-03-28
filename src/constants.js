@@ -728,7 +728,7 @@ export const globalCSS = `
   }
 
   /* Item 07 — Endorsement quote */
-  .endorsement-section { background: #F0EDE6; padding: 48px 32px; border-top: 1px solid #E4E0D6; border-bottom: 1px solid #E4E0D6; }
+  .endorsement-section { background: #E8DFD0; padding: 48px 32px; border-top: 1px solid #D6CDBF; border-bottom: 1px solid #D6CDBF; }
   .endorsement-container { max-width: 640px; margin: 0 auto; text-align: center; }
   .endorsement-quote-mark {
     font-family: 'EB Garamond', Georgia, serif;
@@ -757,9 +757,9 @@ export const globalCSS = `
 
   /* Tinted background on ALL viewports */
   .section-tinted {
-    background: #F0EDE6 !important;
-    border-top: 1px solid #E4E0D6;
-    border-bottom: 1px solid #E4E0D6;
+    background: #E8DFD0 !important;
+    border-top: 1px solid #D6CDBF;
+    border-bottom: 1px solid #D6CDBF;
   }
 
   /* Desktop-only whitespace layout */
