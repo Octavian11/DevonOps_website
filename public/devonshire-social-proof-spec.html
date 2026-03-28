@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visual &amp; Social Proof Spec — devonshireops.com/pe</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600&family=DM+Mono&display=swap');
+
+  :root {
+    --midnight: #1B2A4A;
+    --gold: #C8952E;
+    --gold-light: #FFFBF0;
+    --steel: #5A7A9B;
+    --graphite: #3D3D3A;
+    --bg: #FAF9F6;
+    --surface: #F1F0EC;
+    --border: #D6D4CE;
+    --red-issue: #C0392B;
+    --green-fix: #1D9E75;
+    --blue-ref: #2E6DA4;
+    --amber-warn: #BA7517;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--graphite);
+    background: var(--bg);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .cover {
+    background: var(--midnight);
+    color: #fff;
+    padding: 80px 48px 64px;
+    text-align: center;
+  }
+  .cover-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(200,149,46,0.35);
+    padding: 6px 16px;
+    border-radius: 4px;
+    margin-bottom: 32px;
+  }
+  .cover h1 {
+    font-family: 'EB Garamond', serif;
+    font-size: 38px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .cover h1 em { font-style: italic; color: var(--gold); }
+  .cover .subtitle {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    max-width: 560px;
+    margin: 0 auto 32px;
+  }
+  .cover-meta {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.5px;
+  }
+
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .section-num {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--midnight);
+    margin-bottom: 8px;
+  }
+  .section-lead {
+    font-size: 15px;
+    color: #6B6B65;
+    margin-bottom: 32px;
+    max-width: 640px;
+  }
+
+  section {
+    padding: 56px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  section:last-of-type { border-bottom: none; }
+
+  .issue-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .issue-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+    border-radius: 10px 0 0 10px;
+  }
+  .issue-card.critical::before { background: var(--red-issue); }
+  .issue-card.high::before { background: var(--amber-warn); }
+  .issue-card.moderate::before { background: var(--steel); }
+
+  .issue-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .severity-badge {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 4px;
+  }
+  .severity-badge.critical { background: #FCEAEA; color: var(--red-issue); }
+  .severity-badge.high { background: #FDF3E0; color: var(--amber-warn); }
+  .severity-badge.moderate { background: #E8F0F7; color: var(--steel); }
+
+  .issue-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--midnight);
+  }
+
+  .issue-body p {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 13px;
+  }
+  .spec-table th {
+    text-align: left;
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #888;
+    padding: 8px 12px;
+    border-bottom: 2px solid var(--border);
+  }
+  .spec-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .spec-table tr:last-child td { border-bottom: none; }
+  .spec-table .prop { font-weight: 500; color: var(--midnight); white-space: nowrap; }
+
+  .css-block {
+    background: #1E1E2E;
+    color: #CDD6F4;
+    padding: 20px 24px;
+    border-radius: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    line-height: 1.8;
+    overflow-x: auto;
+    margin: 16px 0;
+    white-space: pre;
+  }
+  .css-block .sel { color: #89B4FA; }
+  .css-block .prop { color: #CBA6F7; }
+  .css-block .val { color: #A6E3A1; }
+  .css-block .comment { color: #6C7086; font-style: italic; }
+  .css-block .num { color: #FAB387; }
+  .css-block .unit { color: #F9E2AF; }
+  .css-block .str { color: #F38BA8; }
+  .css-block .tag { color: #89DCEB; }
+  .css-block .attr { color: #F9E2AF; }
+
+  .callout {
+    background: #FFFBF0;
+    border-left: 3px solid var(--gold);
+    padding: 16px 20px;
+    font-size: 14px;
+    border-radius: 0 6px 6px 0;
+    margin: 20px 0;
+    color: #5A4E2F;
+  }
+  .callout strong { color: #3D3000; }
+
+  .callout-blue {
+    background: #EDF4FC;
+    border-left: 3px solid var(--blue-ref);
+    padding: 16px 20px;
+    font-size: 14px;
+    border-radius: 0 6px 6px 0;
+    margin: 20px 0;
+    color: #1A3A5C;
+  }
+
+  h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--midnight);
+    margin: 24px 0 8px;
+  }
+
+  .asset-req {
+    background: #F8F7F4;
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 16px 0;
+  }
+  .asset-req h5 {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .asset-req ul {
+    list-style: none;
+    padding: 0;
+  }
+  .asset-req li {
+    font-size: 13px;
+    padding: 4px 0 4px 20px;
+    position: relative;
+  }
+  .asset-req li::before {
+    content: '▸';
+    position: absolute;
+    left: 4px;
+    color: var(--gold);
+  }
+
+  /* ── Visual mockup blocks ── */
+  .mockup-frame {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin: 20px 0;
+    position: relative;
+  }
+  .mockup-label {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background: var(--green-fix);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 10px;
+    border-radius: 3px;
+  }
+
+  /* Bio card mockup */
+  .bio-mockup {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 24px;
+    background: linear-gradient(135deg, #F0F4F8 0%, #F8F9FB 100%);
+    border-radius: 8px;
+    border: 1px solid #E4E7EC;
+  }
+  .bio-photo-placeholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--midnight);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-family: 'EB Garamond', serif;
+    font-size: 28px;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .bio-photo-placeholder .ring {
+    position: absolute;
+    inset: 2px;
+    border-radius: 50%;
+    border: 2px solid rgba(200,149,46,0.3);
+  }
+  .bio-info h3 {
+    font-family: 'EB Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--midnight);
+    margin-bottom: 4px;
+  }
+  .bio-info .creds {
+    font-size: 13px;
+    color: #6B6B65;
+    margin-bottom: 12px;
+  }
+  .logo-strip {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 12px 0 4px;
+    border-top: 1px solid #E4E7EC;
+  }
+  .logo-pill {
+    height: 20px;
+    padding: 0 10px;
+    background: #E0E0DC;
+    border-radius: 3px;
+    font-size: 9px;
+    font-weight: 600;
+    color: #888;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* Metrics strip mockup */
+  .metrics-strip {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    padding: 20px 0;
+    background: var(--midnight);
+    border-radius: 8px;
+    margin: 12px 0;
+  }
+  .metric-item {
+    text-align: center;
+  }
+  .metric-num {
+    font-family: 'EB Garamond', serif;
+    font-size: 28px;
+    color: var(--gold);
+    font-weight: 400;
+  }
+  .metric-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 2px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Summary */
+  .summary-box {
+    background: var(--midnight);
+    color: #fff;
+    padding: 32px;
+    border-radius: 10px;
+    margin: 24px 0;
+  }
+  .summary-box h3 {
+    font-family: 'EB Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    color: var(--gold);
+  }
+  .summary-box ul {
+    list-style: none;
+    padding: 0;
+  }
+  .summary-box li {
+    font-size: 14px;
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+    color: rgba(255,255,255,0.8);
+  }
+  .summary-box li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+
+  .measure {
+    display: inline;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--blue-ref);
+    background: #EDF4FC;
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+
+  .placement-diagram {
+    background: #F8F7F4;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 16px 0;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    color: #666;
+    line-height: 2;
+  }
+  .placement-diagram .new {
+    color: var(--green-fix);
+    font-weight: 600;
+  }
+  .placement-diagram .existing {
+    color: #999;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════ COVER -->
+<div class="cover">
+  <div class="cover-badge">Implementation Spec</div>
+  <h1>Visual &amp; Social <em>Proof</em></h1>
+  <p class="subtitle">Pixel-level specifications for adding credibility assets to devonshireops.com/pe — headshot, institution logos, proof metrics, endorsement quote, and section restructuring.</p>
+  <div class="cover-meta">
+    <span>7 implementation items</span>
+    <span>March 27, 2026</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════════════ CONTEXT -->
+<section>
+  <div class="section-num">Context</div>
+  <div class="section-title">Page section map with new element placements</div>
+  <div class="section-lead">Where each new proof element sits relative to existing sections. Items marked ★ are new additions.</div>
+
+  <div class="placement-diagram">
+    <span class="existing">┌─ NAV ─────────────────────────────────────────────────┐</span><br>
+    <span class="existing">│  HERO (headline + CTAs)                               │</span><br>
+    <span class="existing">│  CHECKMARK BAR (severity / IC-ready / 100-day)        │</span><br>
+    <span class="new">│  ★ PROOF METRICS STRIP (Item 04) — new section       │</span><br>
+    <span class="existing">│  WHO THIS IS BUILT FOR (3 persona cards)              │</span><br>
+    <span class="existing">│  20 OPERATIONAL VALUE CREATION LEVERS                 │</span><br>
+    <span class="existing">│  McKINSEY BLOCKQUOTE                                  │</span><br>
+    <span class="existing">│  THE COST OF NOT ACTING (3 risk cards)                │</span><br>
+    <span class="existing">│  CHOOSE YOUR SITUATION (2 path cards)                 │</span><br>
+    <span class="existing">│  SERVICES & PRICING (3 pricing cards)                 │</span><br>
+    <span class="existing">│  REPRESENTATIVE OUTCOMES                              │</span><br>
+    <span class="existing">│    └─ ★ Expand first 2 outcomes by default (Item 05)  │</span><br>
+    <span class="existing">│  HASSAN TARIQ BIO CARD                                │</span><br>
+    <span class="existing">│    └─ ★ Headshot replaces HT monogram (Item 01)       │</span><br>
+    <span class="existing">│    └─ ★ Institution logo strip added (Item 02)        │</span><br>
+    <span class="existing">│  INSTITUTIONAL TRACK RECORD (2 vignettes)             │</span><br>
+    <span class="existing">│    └─ ★ Confidentiality reframe (Item 06)             │</span><br>
+    <span class="new">│  ★ ENDORSEMENT QUOTE CARD (Item 07) — new section    │</span><br>
+    <span class="existing">│  FAQ                                                  │</span><br>
+    <span class="existing">│  FOOTER                                               │</span><br>
+    <span class="existing">└───────────────────────────────────────────────────────┘</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ITEM 01 -->
+<section>
+  <div class="section-num">Item 01</div>
+  <div class="section-title">Replace HT monogram with professional headshot</div>
+  <div class="section-lead">The bio card currently uses a dark circle with gold "HT" initials. Replace with a cropped professional photo.</div>
+
+  <div class="issue-card critical">
+    <div class="issue-header">
+      <span class="severity-badge critical">Critical</span>
+      <span class="issue-title">Headshot image swap</span>
+    </div>
+    <div class="issue-body">
+
+      <div class="asset-req">
+        <h5>Asset you provide</h5>
+        <ul>
+          <li>Professional headshot photo — minimum 400×400px, square crop, JPG or PNG</li>
+          <li>Subject: shoulders-up, business-casual, neutral or dark background preferred</li>
+          <li>File name: <span class="measure">hassan-tariq-headshot.jpg</span></li>
+          <li>Place in your site's image directory (e.g., <span class="measure">/images/</span> or <span class="measure">/assets/</span>)</li>
+        </ul>
+      </div>
+
+      <h4>Current state (what to find in the code)</h4>
+      <p>The bio card contains a circular element with text "HT" — likely a <code>&lt;div&gt;</code> with background color <span class="measure">#1B2A4A</span> and gold text, or an SVG/icon element. This element sits to the left of the "Hassan Tariq" heading.</p>
+
+      <h4>Target state</h4>
+      <table class="spec-table">
+        <tr><th>Property</th><th>Value</th><th>Notes</th></tr>
+        <tr>
+          <td class="prop">Element type</td>
+          <td><code>&lt;img&gt;</code> replaces the monogram <code>&lt;div&gt;</code></td>
+          <td>Keep the same position in the DOM</td>
+        </tr>
+        <tr>
+          <td class="prop">Width / Height</td>
+          <td><span class="measure">80px × 80px</span></td>
+          <td>Same dimensions as current HT monogram</td>
+        </tr>
+        <tr>
+          <td class="prop">Border-radius</td>
+          <td><span class="measure">50%</span></td>
+          <td>Circle crop</td>
+        </tr>
+        <tr>
+          <td class="prop">Object-fit</td>
+          <td><span class="measure">cover</span></td>
+          <td>Ensures no distortion regardless of source aspect ratio</td>
+        </tr>
+        <tr>
+          <td class="prop">Border</td>
+          <td><span class="measure">2.5px solid rgba(200,149,46,0.3)</span></td>
+          <td>Subtle gold ring to maintain brand continuity with old monogram</td>
+        </tr>
+        <tr>
+          <td class="prop">Alt text</td>
+          <td><code>"Hassan Tariq — Founder, Devonshire Operations"</code></td>
+          <td>Accessibility + SEO</td>
+        </tr>
+        <tr>
+          <td class="prop">Loading</td>
+          <td><span class="measure">lazy</span></td>
+          <td>Below-the-fold image, lazy load is appropriate</td>
+        </tr>
+        <tr>
+          <td class="prop">Mobile width / height</td>
+          <td><span class="measure">64px × 64px</span></td>
+          <td>Slightly smaller on viewports ≤ 768px</td>
+        </tr>
+      </table>
+
+      <h4>Implementation</h4>
+      <div class="css-block"><span class="comment">/* HTML — replace the monogram element */</span>
+<span class="tag">&lt;img</span>
+  <span class="attr">src</span>=<span class="str">"/images/hassan-tariq-headshot.jpg"</span>
+  <span class="attr">alt</span>=<span class="str">"Hassan Tariq — Founder, Devonshire Operations"</span>
+  <span class="attr">width</span>=<span class="str">"80"</span>
+  <span class="attr">height</span>=<span class="str">"80"</span>
+  <span class="attr">loading</span>=<span class="str">"lazy"</span>
+  <span class="attr">class</span>=<span class="str">"bio-headshot"</span>
+<span class="tag">/&gt;</span></div>
+
+      <div class="css-block"><span class="comment">/* CSS */</span>
+<span class="sel">.bio-headshot</span> {
+  <span class="prop">width</span>: <span class="num">80</span><span class="unit">px</span>;
+  <span class="prop">height</span>: <span class="num">80</span><span class="unit">px</span>;
+  <span class="prop">border-radius</span>: <span class="num">50</span><span class="unit">%</span>;
+  <span class="prop">object-fit</span>: <span class="val">cover</span>;
+  <span class="prop">border</span>: <span class="num">2.5</span><span class="unit">px</span> <span class="val">solid</span> <span class="val">rgba(200,149,46,0.3)</span>;
+  <span class="prop">flex-shrink</span>: <span class="num">0</span>;
+}
+
+<span class="sel">@media (max-width: 768px)</span> {
+  <span class="sel">.bio-headshot</span> {
+    <span class="prop">width</span>: <span class="num">64</span><span class="unit">px</span>;
+    <span class="prop">height</span>: <span class="num">64</span><span class="unit">px</span>;
+  }
+}</div>
+
+      <div class="callout">
+        <strong>Fallback:</strong> If the image fails to load, the <code>&lt;img&gt;</code> should have a background color of <span class="measure">#1B2A4A</span> so it degrades gracefully to a dark circle rather than a broken image icon. Add <code>background: #1B2A4A;</code> to the CSS above.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ITEM 02 -->
+<section>
+  <div class="section-num">Item 02</div>
+  <div class="section-title">Add institution logo strip below bio credentials</div>
+  <div class="section-lead">A horizontal row of grayscale logos for JPMorgan, Barclays, Bank of America, Lazard, and Columbia Business School, placed beneath the bio text line and above "Read full credentials →".</div>
+
+  <div class="issue-card critical">
+    <div class="issue-header">
+      <span class="severity-badge critical">Critical</span>
+      <span class="issue-title">Credential logo strip</span>
+    </div>
+    <div class="issue-body">
+
+      <div class="asset-req">
+        <h5>Assets you provide</h5>
+        <ul>
+          <li><span class="measure">logo-jpmorgan.svg</span> — JPMorgan wordmark, monochrome</li>
+          <li><span class="measure">logo-barclays.svg</span> — Barclays wordmark, monochrome</li>
+          <li><span class="measure">logo-bofa.svg</span> — Bank of America wordmark, monochrome</li>
+          <li><span class="measure">logo-lazard.svg</span> — Lazard wordmark, monochrome</li>
+          <li><span class="measure">logo-columbia.svg</span> — Columbia Business School crest or wordmark, monochrome</li>
+          <li>All SVGs should be single-color (black or dark gray) — CSS will desaturate and control opacity</li>
+          <li>Alternative: provide PNGs at 2× resolution (200px wide minimum) with transparent backgrounds</li>
+        </ul>
+      </div>
+
+      <h4>Placement</h4>
+      <p>The logo strip sits inside the existing bio card, between the "Columbia Executive MBA '26" text line and the "Read full credentials →" link. It is separated from the text above by a <span class="measure">1px solid #E4E7EC</span> divider line with <span class="measure">16px</span> margin-top and <span class="measure">12px</span> padding-top.</p>
+
+      <table class="spec-table">
+        <tr><th>Property</th><th>Value</th><th>Notes</th></tr>
+        <tr>
+          <td class="prop">Container display</td>
+          <td><span class="measure">flex</span></td>
+          <td>Horizontal row, vertically centered</td>
+        </tr>
+        <tr>
+          <td class="prop">Container align-items</td>
+          <td><span class="measure">center</span></td>
+          <td>Logos have different natural heights — center-align</td>
+        </tr>
+        <tr>
+          <td class="prop">Container gap</td>
+          <td><span class="measure">24px</span></td>
+          <td>Between logos</td>
+        </tr>
+        <tr>
+          <td class="prop">Container margin-top</td>
+          <td><span class="measure">16px</span></td>
+          <td>Below the credentials text</td>
+        </tr>
+        <tr>
+          <td class="prop">Container padding-top</td>
+          <td><span class="measure">12px</span></td>
+          <td>Below the divider line</td>
+        </tr>
+        <tr>
+          <td class="prop">Container border-top</td>
+          <td><span class="measure">1px solid #E4E7EC</span></td>
+          <td>Subtle divider separating text from logos</td>
+        </tr>
+        <tr>
+          <td class="prop">Individual logo height</td>
+          <td><span class="measure">18px</span></td>
+          <td>Constrain height, width auto</td>
+        </tr>
+        <tr>
+          <td class="prop">Logo opacity</td>
+          <td><span class="measure">0.45</span></td>
+          <td>Muted / understated — these are background credentials, not client logos</td>
+        </tr>
+        <tr>
+          <td class="prop">Logo filter</td>
+          <td><span class="measure">grayscale(100%)</span></td>
+          <td>Ensures monochrome even if source SVG has color</td>
+        </tr>
+        <tr>
+          <td class="prop">Logo hover opacity</td>
+          <td><span class="measure">0.7</span></td>
+          <td>Subtle lift on hover, 0.2s transition</td>
+        </tr>
+        <tr>
+          <td class="prop">Mobile logo height</td>
+          <td><span class="measure">14px</span></td>
+          <td>Slightly smaller on ≤ 768px</td>
+        </tr>
+        <tr>
+          <td class="prop">Mobile gap</td>
+          <td><span class="measure">16px</span></td>
+          <td>Tighter on mobile</td>
+        </tr>
+        <tr>
+          <td class="prop">Mobile overflow</td>
+          <td><span class="measure">overflow-x: auto</span></td>
+          <td>If 5 logos don't fit at 360px, allow horizontal scroll</td>
+        </tr>
+      </table>
+
+      <h4>Implementation</h4>
+      <div class="css-block"><span class="comment">/* HTML — insert between credentials text and "Read full credentials" link */</span>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"credential-logos"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="str">"/images/logo-jpmorgan.svg"</span> <span class="attr">alt</span>=<span class="str">"JPMorgan"</span> <span class="attr">height</span>=<span class="str">"18"</span> <span class="attr">loading</span>=<span class="str">"lazy"</span><span class="tag">/&gt;</span>
+  <span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="str">"/images/logo-barclays.svg"</span> <span class="attr">alt</span>=<span class="str">"Barclays"</span> <span class="attr">height</span>=<span class="str">"18"</span> <span class="attr">loading</span>=<span class="str">"lazy"</span><span class="tag">/&gt;</span>
+  <span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="str">"/images/logo-bofa.svg"</span> <span class="attr">alt</span>=<span class="str">"Bank of America"</span> <span class="attr">height</span>=<span class="str">"18"</span> <span class="attr">loading</span>=<span class="str">"lazy"</span><span class="tag">/&gt;</span>
+  <span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="str">"/images/logo-lazard.svg"</span> <span class="attr">alt</span>=<span class="str">"Lazard"</span> <span class="attr">height</span>=<span class="str">"18"</span> <span class="attr">loading</span>=<span class="str">"lazy"</span><span class="tag">/&gt;</span>
+  <span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="str">"/images/logo-columbia.svg"</span> <span class="attr">alt</span>=<span class="str">"Columbia Business School"</span> <span class="attr">height</span>=<span class="str">"18"</span> <span class="attr">loading</span>=<span class="str">"lazy"</span><span class="tag">/&gt;</span>
+<span class="tag">&lt;/div&gt;</span></div>
+
+      <div class="css-block"><span class="comment">/* CSS */</span>
+<span class="sel">.credential-logos</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>;
+  <span class="prop">gap</span>: <span class="num">24</span><span class="unit">px</span>;
+  <span class="prop">margin-top</span>: <span class="num">16</span><span class="unit">px</span>;
+  <span class="prop">padding-top</span>: <span class="num">12</span><span class="unit">px</span>;
+  <span class="prop">border-top</span>: <span class="num">1</span><span class="unit">px</span> <span class="val">solid</span> <span class="val">#E4E7EC</span>;
+}
+
+<span class="sel">.credential-logos img</span> {
+  <span class="prop">height</span>: <span class="num">18</span><span class="unit">px</span>;
+  <span class="prop">width</span>: <span class="val">auto</span>;
+  <span class="prop">opacity</span>: <span class="num">0.45</span>;
+  <span class="prop">filter</span>: <span class="val">grayscale(100%)</span>;
+  <span class="prop">transition</span>: <span class="val">opacity 0.2s ease</span>;
+  <span class="prop">flex-shrink</span>: <span class="num">0</span>;
+}
+
+<span class="sel">.credential-logos img:hover</span> {
+  <span class="prop">opacity</span>: <span class="num">0.7</span>;
+}
+
+<span class="sel">@media (max-width: 768px)</span> {
+  <span class="sel">.credential-logos</span> {
+    <span class="prop">gap</span>: <span class="num">16</span><span class="unit">px</span>;
+    <span class="prop">overflow-x</span>: <span class="val">auto</span>;
+    <span class="prop">scrollbar-width</span>: <span class="val">none</span>;
+    <span class="prop">-webkit-overflow-scrolling</span>: <span class="val">touch</span>;
+    <span class="prop">padding-bottom</span>: <span class="num">4</span><span class="unit">px</span>;
+  }
+  <span class="sel">.credential-logos::-webkit-scrollbar</span> {
+    <span class="prop">display</span>: <span class="val">none</span>;
+  }
+  <span class="sel">.credential-logos img</span> {
+    <span class="prop">height</span>: <span class="num">14</span><span class="unit">px</span>;
+  }
+}</div>
+
+      <div class="mockup-frame">
+        <span class="mockup-label">Visual reference</span>
+        <div class="bio-mockup">
+          <div class="bio-photo-placeholder">
+            <span style="font-size:11px;color:#999;z-index:1;">photo</span>
+            <div class="ring"></div>
+          </div>
+          <div class="bio-info">
+            <h3>Hassan Tariq</h3>
+            <div class="creds">15+ years platform ops · JPMorgan · Barclays · Bank of America · Lazard<br>Columbia Executive MBA '26</div>
+            <div class="logo-strip">
+              <div class="logo-pill">JPM</div>
+              <div class="logo-pill">BARC</div>
+              <div class="logo-pill">BofA</div>
+              <div class="logo-pill">LAZ</div>
+              <div class="logo-pill">CBS</div>
+            </div>
+          </div>
+        </div>
+        <p style="font-size:11px;color:#999;margin-top:12px;text-align:center;">↑ Illustrative layout — actual logos replace the gray pills above</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ITEM 03 -->
+<section>
+  <div class="section-num">Item 03</div>
+  <div class="section-title">Add "Institutional background" label above logo strip</div>
+  <div class="section-lead">A tiny contextual label that anchors what the logos represent.</div>
+
+  <div class="issue-card moderate">
+    <div class="issue-header">
+      <span class="severity-badge moderate">Minor</span>
+      <span class="issue-title">Label above logo strip</span>
+    </div>
+    <div class="issue-body">
+
+      <table class="spec-table">
+        <tr><th>Property</th><th>Value</th></tr>
+        <tr>
+          <td class="prop">Text content</td>
+          <td><code>Institutional background</code></td>
+        </tr>
+        <tr>
+          <td class="prop">Font size</td>
+          <td><span class="measure">10px</span></td>
+        </tr>
+        <tr>
+          <td class="prop">Font weight</td>
+          <td><span class="measure">600</span></td>
+        </tr>
+        <tr>
+          <td class="prop">Letter spacing</td>
+          <td><span class="measure">1.5px</span></td>
+        </tr>
+        <tr>
+          <td class="prop">Text transform</td>
+          <td><span class="measure">uppercase</span></td>
+        </tr>
+        <tr>
+          <td class="prop">Color</td>
+          <td><span class="measure">#A0A09A</span></td>
+        </tr>
+        <tr>
+          <td class="prop">Margin bottom</td>
+          <td><span class="measure">8px</span></td>
+        </tr>
+        <tr>
+          <td class="prop">Placement</td>
+          <td>First child inside <code>.credential-logos</code> container, before the images. Alternatively, a separate element placed between the divider line and the logo row.</td>
+        </tr>
+      </table>
+
+      <div class="css-block"><span class="comment">/* HTML — add as first element before the logo images */</span>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"credential-logos"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="str">"credential-label"</span><span class="tag">&gt;</span>Institutional background<span class="tag">&lt;/span&gt;</span>
+  <span class="comment">&lt;!-- logos follow --&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+
+<span class="comment">/* Alternatively, place it above .credential-logos as a standalone element */</span></div>
+
+      <div class="css-block"><span class="sel">.credential-label</span> {
+  <span class="prop">font-size</span>: <span class="num">10</span><span class="unit">px</span>;
+  <span class="prop">font-weight</span>: <span class="num">600</span>;
+  <span class="prop">letter-spacing</span>: <span class="num">1.5</span><span class="unit">px</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">color</span>: <span class="val">#A0A09A</span>;
+  <span class="prop">width</span>: <span class="num">100</span><span class="unit">%</span>;
+  <span class="prop">margin-bottom</span>: <span class="num">8</span><span class="unit">px</span>;
+  <span class="prop">flex-shrink</span>: <span class="num">0</span>;
+}
+
+<span class="comment">/* If label is inside the flex container, force it to its own row */</span>
+<span class="sel">.credential-logos</span> {
+  <span class="prop">flex-wrap</span>: <span class="val">wrap</span>; <span class="comment">/* label takes full row, logos next row */</span>
+}</div>
+
+      <div class="callout-blue">
+        <strong>Design decision for your coding agent:</strong> The label + logos can be structured two ways. Option A: label is a standalone element above the <code>.credential-logos</code> flex container (simpler). Option B: label is the first flex child with <code>width: 100%</code> forcing a wrap (more compact DOM). Either is fine — the visual result is identical.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ITEM 04 -->
+<section>
+  <div class="section-num">Item 04</div>
+  <div class="section-title">Add proof metrics strip below the hero checkmark bar</div>
+  <div class="section-lead">A compact dark-background strip showing 3 headline metrics (~67% incident reduction, $2M+ savings, 94→99% uptime) — positioned immediately below the existing checkmark bar and above "Who This Is Built For".</div>
+
+  <div class="issue-card critical">
+    <div class="issue-header">
+      <span class="severity-badge critical">Critical</span>
+      <span class="issue-title">New above-the-fold proof section</span>
+    </div>
+    <div class="issue-body">
+
+      <p>This is a new HTML section inserted between the checkmark bar and the "Who This Is Built For" section. No existing elements are modified.</p>
+
+      <h4>Visual reference</h4>
+      <div class="mockup-frame">
+        <span class="mockup-label">Target rendering</span>
+        <div class="metrics-strip">
+          <div class="metric-item">
+            <div class="metric-num">~67%</div>
+            <div class="metric-label">incident reduction</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-num">$2M+</div>
+            <div class="metric-label">annual savings</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-num">94→99%</div>
+            <div class="metric-label">uptime</div>
+          </div>
+        </div>
+      </div>
+
+      <table class="spec-table">
+        <tr><th>Property</th><th>Value</th><th>Notes</th></tr>
+        <tr>
+          <td class="prop">Container background</td>
+          <td><span class="measure">#1B2A4A</span> (var(--midnight))</td>
+          <td>Matches hero background, creates visual continuity</td>
+        </tr>
+        <tr>
+          <td class="prop">Container padding</td>
+          <td><span class="measure">28px 32px</span></td>
+          <td>Desktop</td>
+        </tr>
+        <tr>
+          <td class="prop">Container width</td>
+          <td><span class="measure">100%</span> full-bleed</td>
+          <td>Edge-to-edge like the hero, not inside a section wrapper</td>
+        </tr>
+        <tr>
+          <td class="prop">Layout</td>
+          <td><span class="measure">flex, justify-content: center, gap: 64px</span></td>
+          <td>Three metrics centered horizontally</td>
+        </tr>
+        <tr>
+          <td class="prop">Metric number font</td>
+          <td><span class="measure">EB Garamond, 32px, weight 400</span></td>
+          <td>Matches heading typography system</td>
+        </tr>
+        <tr>
+          <td class="prop">Metric number color</td>
+          <td><span class="measure">#C8952E</span> (var(--gold))</td>
+          <td>Gold for emphasis</td>
+        </tr>
+        <tr>
+          <td class="prop">Metric label font</td>
+          <td><span class="measure">body font, 11px, weight 400</span></td>
+          <td>Small and muted</td>
+        </tr>
+        <tr>
+          <td class="prop">Metric label color</td>
+          <td><span class="measure">rgba(255,255,255,0.45)</span></td>
+          <td>Subtle, secondary information</td>
+        </tr>
+        <tr>
+          <td class="prop">Metric label margin-top</td>
+          <td><span class="measure">4px</span></td>
+          <td>Tight to the number</td>
+        </tr>
+        <tr>
+          <td class="prop">Text align</td>
+          <td><span class="measure">center</span></td>
+          <td>Each metric block is center-aligned</td>
+        </tr>
+        <tr>
+          <td class="prop">Mobile padding</td>
+          <td><span class="measure">24px 20px</span></td>
+          <td>Tighter horizontal</td>
+        </tr>
+        <tr>
+          <td class="prop">Mobile gap</td>
+          <td><span class="measure">32px</span></td>
+          <td>Reduce gap so 3 metrics fit at 360px</td>
+        </tr>
+        <tr>
+          <td class="prop">Mobile number font-size</td>
+          <td><span class="measure">24px</span></td>
+          <td>Scale down for narrow screens</td>
+        </tr>
+        <tr>
+          <td class="prop">Bottom border</td>
+          <td><span class="measure">none</span></td>
+          <td>Clean transition to white section below</td>
+        </tr>
+      </table>
+
+      <h4>Implementation</h4>
+      <div class="css-block"><span class="comment">/* HTML — insert after the checkmark bar, before "Who This Is Built For" */</span>
+<span class="tag">&lt;section</span> <span class="attr">class</span>=<span class="str">"proof-metrics-strip"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"proof-metric"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"proof-metric-number"</span><span class="tag">&gt;</span>~67%<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"proof-metric-label"</span><span class="tag">&gt;</span>incident reduction<span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"proof-metric"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"proof-metric-number"</span><span class="tag">&gt;</span>$2M+<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"proof-metric-label"</span><span class="tag">&gt;</span>annual savings<span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"proof-metric"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"proof-metric-number"</span><span class="tag">&gt;</span>94→99%<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"proof-metric-label"</span><span class="tag">&gt;</span>uptime<span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/section&gt;</span></div>
+
+      <div class="css-block"><span class="sel">.proof-metrics-strip</span> {
+  <span class="prop">background</span>: <span class="val">#1B2A4A</span>;
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">justify-content</span>: <span class="val">center</span>;
+  <span class="prop">gap</span>: <span class="num">64</span><span class="unit">px</span>;
+  <span class="prop">padding</span>: <span class="num">28</span><span class="unit">px</span> <span class="num">32</span><span class="unit">px</span>;
+  <span class="prop">width</span>: <span class="num">100</span><span class="unit">%</span>;
+}
+
+<span class="sel">.proof-metric</span> {
+  <span class="prop">text-align</span>: <span class="val">center</span>;
+}
+
+<span class="sel">.proof-metric-number</span> {
+  <span class="prop">font-family</span>: <span class="val">'EB Garamond', serif</span>;
+  <span class="prop">font-size</span>: <span class="num">32</span><span class="unit">px</span>;
+  <span class="prop">font-weight</span>: <span class="num">400</span>;
+  <span class="prop">color</span>: <span class="val">#C8952E</span>;
+  <span class="prop">line-height</span>: <span class="num">1.1</span>;
+}
+
+<span class="sel">.proof-metric-label</span> {
+  <span class="prop">font-size</span>: <span class="num">11</span><span class="unit">px</span>;
+  <span class="prop">color</span>: <span class="val">rgba(255,255,255,0.45)</span>;
+  <span class="prop">margin-top</span>: <span class="num">4</span><span class="unit">px</span>;
+  <span class="prop">letter-spacing</span>: <span class="num">0.3</span><span class="unit">px</span>;
+}
+
+<span class="sel">@media (max-width: 768px)</span> {
+  <span class="sel">.proof-metrics-strip</span> {
+    <span class="prop">gap</span>: <span class="num">32</span><span class="unit">px</span>;
+    <span class="prop">padding</span>: <span class="num">24</span><span class="unit">px</span> <span class="num">20</span><span class="unit">px</span>;
+  }
+  <span class="sel">.proof-metric-number</span> {
+    <span class="prop">font-size</span>: <span class="num">24</span><span class="unit">px</span>;
+  }
+}</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ITEM 05 -->
+<section>
+  <div class="section-num">Item 05</div>
+  <div class="section-title">Expand first 2 representative outcomes by default</div>
+  <div class="section-lead">The "Representative Outcomes" section currently hides all 4 outcomes behind a toggle. Show the first 2 expanded on page load; keep the remaining 2 behind the toggle.</div>
+
+  <div class="issue-card high">
+    <div class="issue-header">
+      <span class="severity-badge high">High</span>
+      <span class="issue-title">Outcome visibility on load</span>
+    </div>
+    <div class="issue-body">
+
+      <p>The current toggle reads: <strong>"Show 4 representative outcomes (gap → fix → result) ▸"</strong>. After this change, 2 outcomes will be visible immediately, and the toggle text changes to reflect only the hidden remainder.</p>
+
+      <table class="spec-table">
+        <tr><th>Property</th><th>Current</th><th>Fix</th></tr>
+        <tr>
+          <td class="prop">Outcomes visible on load (desktop)</td>
+          <td>0 — all hidden behind toggle</td>
+          <td><span class="measure">2</span> — first two outcomes visible</td>
+        </tr>
+        <tr>
+          <td class="prop">Outcomes visible on load (mobile)</td>
+          <td>0</td>
+          <td><span class="measure">1</span> — first outcome visible, saves scroll depth</td>
+        </tr>
+        <tr>
+          <td class="prop">Toggle text (after change)</td>
+          <td>"Show 4 representative outcomes..."</td>
+          <td><span class="measure">"Show 2 more outcomes ▸"</span></td>
+        </tr>
+        <tr>
+          <td class="prop">Outcome card gap</td>
+          <td>n/a (were hidden)</td>
+          <td><span class="measure">16px</span> between visible outcome cards</td>
+        </tr>
+        <tr>
+          <td class="prop">Transition on toggle click</td>
+          <td>Instant show/hide</td>
+          <td><span class="measure">max-height transition, 0.3s ease</span></td>
+        </tr>
+      </table>
+
+      <h4>Implementation approach</h4>
+      <div class="css-block"><span class="comment">/* Structural change: split outcomes into two groups */</span>
+
+<span class="comment">/* Group 1: Always visible (first 2 outcomes) */</span>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"outcomes-visible"</span><span class="tag">&gt;</span>
+  <span class="comment">&lt;!-- Outcome 1: Platform Stabilization --&gt;</span>
+  <span class="comment">&lt;!-- Outcome 2: Vendor Optimization --&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+
+<span class="comment">/* Group 2: Hidden behind toggle (remaining 2) */</span>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"outcomes-hidden"</span> <span class="attr">id</span>=<span class="str">"more-outcomes"</span><span class="tag">&gt;</span>
+  <span class="comment">&lt;!-- Outcome 3 --&gt;</span>
+  <span class="comment">&lt;!-- Outcome 4 --&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+
+<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"outcomes-toggle"</span> <span class="attr">onclick</span>=<span class="str">"toggleOutcomes()"</span><span class="tag">&gt;</span>
+  Show 2 more outcomes ▸
+<span class="tag">&lt;/button&gt;</span></div>
+
+      <div class="css-block"><span class="sel">.outcomes-visible</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">flex-direction</span>: <span class="val">column</span>;
+  <span class="prop">gap</span>: <span class="num">16</span><span class="unit">px</span>;
+}
+
+<span class="sel">.outcomes-hidden</span> {
+  <span class="prop">max-height</span>: <span class="num">0</span>;
+  <span class="prop">overflow</span>: <span class="val">hidden</span>;
+  <span class="prop">transition</span>: <span class="val">max-height 0.3s ease</span>;
+}
+
+<span class="sel">.outcomes-hidden.expanded</span> {
+  <span class="prop">max-height</span>: <span class="num">2000</span><span class="unit">px</span>; <span class="comment">/* generous max to accommodate content */</span>
+}
+
+<span class="sel">.outcomes-toggle</span> {
+  <span class="prop">background</span>: <span class="val">none</span>;
+  <span class="prop">border</span>: <span class="num">1</span><span class="unit">px</span> <span class="val">solid</span> <span class="val">#D6D4CE</span>;
+  <span class="prop">border-radius</span>: <span class="num">8</span><span class="unit">px</span>;
+  <span class="prop">padding</span>: <span class="num">12</span><span class="unit">px</span> <span class="num">24</span><span class="unit">px</span>;
+  <span class="prop">font-size</span>: <span class="num">14</span><span class="unit">px</span>;
+  <span class="prop">font-weight</span>: <span class="num">600</span>;
+  <span class="prop">color</span>: <span class="val">#1B2A4A</span>;
+  <span class="prop">cursor</span>: <span class="val">pointer</span>;
+  <span class="prop">margin-top</span>: <span class="num">16</span><span class="unit">px</span>;
+  <span class="prop">transition</span>: <span class="val">border-color 0.2s</span>;
+}
+
+<span class="sel">.outcomes-toggle:hover</span> {
+  <span class="prop">border-color</span>: <span class="val">#C8952E</span>;
+}
+
+<span class="comment">/* Mobile: show only 1 outcome by default */</span>
+<span class="sel">@media (max-width: 768px)</span> {
+  <span class="sel">.outcomes-visible .outcome-card:nth-child(n+2)</span> {
+    <span class="prop">display</span>: <span class="val">none</span>;
+  }
+  <span class="comment">/* Move 2nd outcome into hidden group via JS, or use CSS-only approach above */</span>
+}</div>
+
+      <div class="callout">
+        <strong>JS for the toggle:</strong> <code>function toggleOutcomes() { document.getElementById('more-outcomes').classList.toggle('expanded'); }</code> — or adapt to whatever toggle/accordion pattern your site framework uses.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ITEM 06 -->
+<section>
+  <div class="section-num">Item 06</div>
+  <div class="section-title">Reframe confidentiality disclaimer as a trust signal</div>
+  <div class="section-lead">The current disclaimer reads like legal boilerplate. Reframe it as a deliberate practice principle so the absence of named clients feels intentional rather than suspicious.</div>
+
+  <div class="issue-card moderate">
+    <div class="issue-header">
+      <span class="severity-badge moderate">Minor</span>
+      <span class="issue-title">Confidentiality copy + visual treatment</span>
+    </div>
+    <div class="issue-body">
+
+      <h4>Current text</h4>
+      <p style="font-style:italic;color:#999;font-size:13px;padding:12px 16px;background:#F8F7F4;border-radius:6px;">"Identifiers withheld. Metrics are representative and sanitized for confidentiality. Details and references available on request."</p>
+
+      <h4>New text</h4>
+      <p style="font-size:13px;padding:12px 16px;background:#F0F4F8;border-left:3px solid #5A7A9B;border-radius:0 6px 6px 0;"><strong style="color:#1B2A4A;">All engagements are NDA-protected.</strong> <span style="color:#5A5A55;">Client identities and deal details remain confidential. Anonymized metrics and references are available on request.</span></p>
+
+      <table class="spec-table">
+        <tr><th>Property</th><th>Current</th><th>Fix</th></tr>
+        <tr>
+          <td class="prop">Text content</td>
+          <td>Legal boilerplate tone</td>
+          <td>See "New text" above — leads with the NDA as a feature</td>
+        </tr>
+        <tr>
+          <td class="prop">Visual treatment</td>
+          <td>Plain paragraph, small gray text</td>
+          <td>Left-border accent block (steel blue), slightly elevated</td>
+        </tr>
+        <tr>
+          <td class="prop">Border-left</td>
+          <td>none</td>
+          <td><span class="measure">3px solid #5A7A9B</span></td>
+        </tr>
+        <tr>
+          <td class="prop">Background</td>
+          <td>none</td>
+          <td><span class="measure">#F0F4F8</span></td>
+        </tr>
+        <tr>
+          <td class="prop">Padding</td>
+          <td>0</td>
+          <td><span class="measure">14px 16px</span></td>
+        </tr>
+        <tr>
+          <td class="prop">Border-radius</td>
+          <td>0</td>
+          <td><span class="measure">0 6px 6px 0</span></td>
+        </tr>
+        <tr>
+          <td class="prop">Font size</td>
+          <td>~12px</td>
+          <td><span class="measure">13px</span></td>
+        </tr>
+        <tr>
+          <td class="prop">"NDA-protected" styling</td>
+          <td>n/a</td>
+          <td><span class="measure">font-weight: 600, color: #1B2A4A</span></td>
+        </tr>
+        <tr>
+          <td class="prop">Remaining text color</td>
+          <td>#999</td>
+          <td><span class="measure">#6B6B65</span> — slightly darker for readability</td>
+        </tr>
+      </table>
+
+      <div class="css-block"><span class="sel">.confidentiality-note</span> {
+  <span class="prop">background</span>: <span class="val">#F0F4F8</span>;
+  <span class="prop">border-left</span>: <span class="num">3</span><span class="unit">px</span> <span class="val">solid</span> <span class="val">#5A7A9B</span>;
+  <span class="prop">border-radius</span>: <span class="num">0</span> <span class="num">6</span><span class="unit">px</span> <span class="num">6</span><span class="unit">px</span> <span class="num">0</span>;
+  <span class="prop">padding</span>: <span class="num">14</span><span class="unit">px</span> <span class="num">16</span><span class="unit">px</span>;
+  <span class="prop">font-size</span>: <span class="num">13</span><span class="unit">px</span>;
+  <span class="prop">color</span>: <span class="val">#6B6B65</span>;
+  <span class="prop">margin-top</span>: <span class="num">16</span><span class="unit">px</span>;
+}
+
+<span class="sel">.confidentiality-note strong</span> {
+  <span class="prop">color</span>: <span class="val">#1B2A4A</span>;
+  <span class="prop">font-weight</span>: <span class="num">600</span>;
+}</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ITEM 07 -->
+<section>
+  <div class="section-num">Item 07</div>
+  <div class="section-title">Add endorsement quote card</div>
+  <div class="section-lead">A single professional endorsement quote, placed as a new section between the Institutional Track Record and the FAQ. This is the only item that requires you to obtain content from another person.</div>
+
+  <div class="issue-card high">
+    <div class="issue-header">
+      <span class="severity-badge high">High</span>
+      <span class="issue-title">New endorsement section</span>
+    </div>
+    <div class="issue-body">
+
+      <div class="asset-req">
+        <h5>Content you provide</h5>
+        <ul>
+          <li>1–2 sentence endorsement quote from a colleague, former manager, or MBA peer</li>
+          <li>Person's name (or anonymized: "Senior Director, Platform Operations")</li>
+          <li>Person's title and company (or anonymized institutional descriptor)</li>
+          <li>Optional: small headshot of the endorser (48×48px, circle-cropped)</li>
+        </ul>
+      </div>
+
+      <div class="callout">
+        <strong>Placeholder content for initial build:</strong> Use the structure and styles below with placeholder text so the section is ready the moment you have the quote. The coding agent should build the component now; you swap the content later.
+      </div>
+
+      <h4>Placement</h4>
+      <p>New section inserted between the Institutional Track Record section and the FAQ section.</p>
+
+      <table class="spec-table">
+        <tr><th>Property</th><th>Value</th><th>Notes</th></tr>
+        <tr>
+          <td class="prop">Section background</td>
+          <td><span class="measure">#F8F7F4</span></td>
+          <td>Subtle warm tint — differentiates from white sections above/below</td>
+        </tr>
+        <tr>
+          <td class="prop">Section padding</td>
+          <td><span class="measure">48px 32px</span></td>
+          <td>Generous vertical breathing room</td>
+        </tr>
+        <tr>
+          <td class="prop">Quote container max-width</td>
+          <td><span class="measure">640px</span></td>
+          <td>Centered within section, narrower than full width</td>
+        </tr>
+        <tr>
+          <td class="prop">Quote container margin</td>
+          <td><span class="measure">0 auto</span></td>
+          <td>Center-aligned</td>
+        </tr>
+        <tr>
+          <td class="prop">Quote mark</td>
+          <td><span class="measure">EB Garamond, 64px, color #C8952E, opacity 0.3</span></td>
+          <td>Large decorative open-quote " before the text</td>
+        </tr>
+        <tr>
+          <td class="prop">Quote text font</td>
+          <td><span class="measure">EB Garamond italic, 20px, weight 400</span></td>
+          <td>Serif italic for testimonial warmth</td>
+        </tr>
+        <tr>
+          <td class="prop">Quote text color</td>
+          <td><span class="measure">#1B2A4A</span></td>
+          <td>Midnight for readability</td>
+        </tr>
+        <tr>
+          <td class="prop">Quote text line-height</td>
+          <td><span class="measure">1.6</span></td>
+          <td>Comfortable reading</td>
+        </tr>
+        <tr>
+          <td class="prop">Attribution margin-top</td>
+          <td><span class="measure">20px</span></td>
+          <td>Space between quote and attribution</td>
+        </tr>
+        <tr>
+          <td class="prop">Attribution name font</td>
+          <td><span class="measure">body font, 14px, weight 600</span></td>
+          <td>Bold name</td>
+        </tr>
+        <tr>
+          <td class="prop">Attribution name color</td>
+          <td><span class="measure">#1B2A4A</span></td>
+          <td>Midnight</td>
+        </tr>
+        <tr>
+          <td class="prop">Attribution title font</td>
+          <td><span class="measure">body font, 13px, weight 400</span></td>
+          <td>Regular weight</td>
+        </tr>
+        <tr>
+          <td class="prop">Attribution title color</td>
+          <td><span class="measure">#6B6B65</span></td>
+          <td>Muted</td>
+        </tr>
+        <tr>
+          <td class="prop">Attribution layout</td>
+          <td><span class="measure">flex, align-items: center, gap: 12px</span></td>
+          <td>If headshot is provided, it sits left of name/title</td>
+        </tr>
+        <tr>
+          <td class="prop">Endorser headshot (optional)</td>
+          <td><span class="measure">48×48px, border-radius: 50%, object-fit: cover</span></td>
+          <td>Omit if no photo available — name + title alone is fine</td>
+        </tr>
+        <tr>
+          <td class="prop">Mobile quote font-size</td>
+          <td><span class="measure">18px</span></td>
+          <td>Slightly smaller on narrow screens</td>
+        </tr>
+        <tr>
+          <td class="prop">Mobile section padding</td>
+          <td><span class="measure">40px 20px</span></td>
+          <td>Consistent with mobile spacing system</td>
+        </tr>
+      </table>
+
+      <h4>Implementation</h4>
+      <div class="css-block"><span class="comment">/* HTML — new section between Track Record and FAQ */</span>
+<span class="tag">&lt;section</span> <span class="attr">class</span>=<span class="str">"endorsement-section"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"endorsement-container"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"endorsement-quote-mark"</span><span class="tag">&gt;</span>"<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;blockquote</span> <span class="attr">class</span>=<span class="str">"endorsement-text"</span><span class="tag">&gt;</span>
+      Hassan brings a rare combination of institutional-grade
+      operational rigor and the practical urgency of someone
+      who has actually run the platform during a crisis.
+    <span class="tag">&lt;/blockquote&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"endorsement-attribution"</span><span class="tag">&gt;</span>
+      <span class="comment">&lt;!-- Optional: &lt;img src="endorser.jpg" class="endorser-photo" /&gt; --&gt;</span>
+      <span class="tag">&lt;div&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"endorser-name"</span><span class="tag">&gt;</span>Senior Director, Platform Operations<span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"endorser-title"</span><span class="tag">&gt;</span>Multi-Strategy Hedge Fund, ~$10B AUM<span class="tag">&lt;/div&gt;</span>
+      <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/section&gt;</span></div>
+
+      <div class="css-block"><span class="sel">.endorsement-section</span> {
+  <span class="prop">background</span>: <span class="val">#F8F7F4</span>;
+  <span class="prop">padding</span>: <span class="num">48</span><span class="unit">px</span> <span class="num">32</span><span class="unit">px</span>;
+}
+
+<span class="sel">.endorsement-container</span> {
+  <span class="prop">max-width</span>: <span class="num">640</span><span class="unit">px</span>;
+  <span class="prop">margin</span>: <span class="num">0</span> <span class="val">auto</span>;
+  <span class="prop">text-align</span>: <span class="val">center</span>;
+}
+
+<span class="sel">.endorsement-quote-mark</span> {
+  <span class="prop">font-family</span>: <span class="val">'EB Garamond', serif</span>;
+  <span class="prop">font-size</span>: <span class="num">64</span><span class="unit">px</span>;
+  <span class="prop">color</span>: <span class="val">#C8952E</span>;
+  <span class="prop">opacity</span>: <span class="num">0.3</span>;
+  <span class="prop">line-height</span>: <span class="num">0.5</span>;
+  <span class="prop">margin-bottom</span>: <span class="num">8</span><span class="unit">px</span>;
+}
+
+<span class="sel">.endorsement-text</span> {
+  <span class="prop">font-family</span>: <span class="val">'EB Garamond', serif</span>;
+  <span class="prop">font-style</span>: <span class="val">italic</span>;
+  <span class="prop">font-size</span>: <span class="num">20</span><span class="unit">px</span>;
+  <span class="prop">font-weight</span>: <span class="num">400</span>;
+  <span class="prop">color</span>: <span class="val">#1B2A4A</span>;
+  <span class="prop">line-height</span>: <span class="num">1.6</span>;
+  <span class="prop">margin</span>: <span class="num">0</span>;
+}
+
+<span class="sel">.endorsement-attribution</span> {
+  <span class="prop">display</span>: <span class="val">inline-flex</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>;
+  <span class="prop">gap</span>: <span class="num">12</span><span class="unit">px</span>;
+  <span class="prop">margin-top</span>: <span class="num">20</span><span class="unit">px</span>;
+}
+
+<span class="sel">.endorser-photo</span> {
+  <span class="prop">width</span>: <span class="num">48</span><span class="unit">px</span>;
+  <span class="prop">height</span>: <span class="num">48</span><span class="unit">px</span>;
+  <span class="prop">border-radius</span>: <span class="num">50</span><span class="unit">%</span>;
+  <span class="prop">object-fit</span>: <span class="val">cover</span>;
+}
+
+<span class="sel">.endorser-name</span> {
+  <span class="prop">font-size</span>: <span class="num">14</span><span class="unit">px</span>;
+  <span class="prop">font-weight</span>: <span class="num">600</span>;
+  <span class="prop">color</span>: <span class="val">#1B2A4A</span>;
+}
+
+<span class="sel">.endorser-title</span> {
+  <span class="prop">font-size</span>: <span class="num">13</span><span class="unit">px</span>;
+  <span class="prop">color</span>: <span class="val">#6B6B65</span>;
+  <span class="prop">margin-top</span>: <span class="num">2</span><span class="unit">px</span>;
+}
+
+<span class="sel">@media (max-width: 768px)</span> {
+  <span class="sel">.endorsement-section</span> {
+    <span class="prop">padding</span>: <span class="num">40</span><span class="unit">px</span> <span class="num">20</span><span class="unit">px</span>;
+  }
+  <span class="sel">.endorsement-text</span> {
+    <span class="prop">font-size</span>: <span class="num">18</span><span class="unit">px</span>;
+  }
+}</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ SUMMARY -->
+<section>
+  <div class="section-num">Implementation Summary</div>
+  <div class="section-title">Priority sequence &amp; asset dependencies</div>
+
+  <div class="summary-box">
+    <h3>Execute in this order</h3>
+    <ul>
+      <li><strong>Pass 1 — Code-only (Items 04, 05, 06):</strong> Proof metrics strip, expand outcomes, confidentiality reframe. No external assets needed — your coding agent can build these now with the exact specs above.</li>
+      <li><strong>Pass 2 — Needs your headshot (Item 01):</strong> Swap HT monogram for photo. You provide the image file, coding agent swaps the element. 10-minute job once the photo exists.</li>
+      <li><strong>Pass 3 — Needs logo SVGs (Items 02, 03):</strong> Institution logo strip + label. You provide 5 monochrome SVGs, coding agent builds the component. 20-minute job.</li>
+      <li><strong>Pass 4 — Needs endorsement content (Item 07):</strong> Quote card section. Coding agent can build the component shell now with placeholder text. You swap in real content once you have it.</li>
+    </ul>
+  </div>
+
+  <table class="spec-table" style="margin-top: 24px;">
+    <tr><th>Item</th><th>Severity</th><th>Coding LOE</th><th>Assets from you</th></tr>
+    <tr>
+      <td class="prop">01 — Headshot</td>
+      <td><span class="severity-badge critical" style="font-size:9px;">Critical</span></td>
+      <td>10 min</td>
+      <td>1 photo (400×400px min)</td>
+    </tr>
+    <tr>
+      <td class="prop">02 — Logo strip</td>
+      <td><span class="severity-badge critical" style="font-size:9px;">Critical</span></td>
+      <td>20 min</td>
+      <td>5 monochrome SVGs/PNGs</td>
+    </tr>
+    <tr>
+      <td class="prop">03 — Label</td>
+      <td><span class="severity-badge moderate" style="font-size:9px;">Minor</span></td>
+      <td>5 min</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td class="prop">04 — Proof metrics strip</td>
+      <td><span class="severity-badge critical" style="font-size:9px;">Critical</span></td>
+      <td>20 min</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td class="prop">05 — Expand outcomes</td>
+      <td><span class="severity-badge high" style="font-size:9px;">High</span></td>
+      <td>25 min</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td class="prop">06 — Confidentiality reframe</td>
+      <td><span class="severity-badge moderate" style="font-size:9px;">Minor</span></td>
+      <td>10 min</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td class="prop">07 — Endorsement quote</td>
+      <td><span class="severity-badge high" style="font-size:9px;">High</span></td>
+      <td>20 min</td>
+      <td>Quote text + attribution (can use placeholder initially)</td>
+    </tr>
+  </table>
+
+  <div class="callout" style="margin-top:24px;">
+    <strong>Total coding LOE:</strong> ~2 hours. Items 03, 04, 05, and 06 can be built and deployed immediately with zero asset dependencies. Items 01 and 02 ship the moment you provide the headshot and logo files. Item 07 ships with placeholder text and goes live the moment you provide the endorsement.
+  </div>
+</section>
+
+</div>
+
+<div style="background: var(--midnight); color: rgba(255,255,255,0.3); text-align: center; padding: 32px; font-size: 12px;">
+  Devonshire Ops — Visual &amp; Social Proof Spec — March 2026
+</div>
+
+</body>
+</html>
