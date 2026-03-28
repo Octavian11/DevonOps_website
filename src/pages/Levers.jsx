@@ -202,7 +202,7 @@ function BuyerSegmentCards({ setPage }) {
 
 function LeversTeaserSection({ setPage }) {
   return (
-    <Section noCTA>
+    <Section noCTA variant="tinted">
       <SectionTitle>20 Operational Value Creation Levers</SectionTitle>
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "960px" }}>
         {LEVERS.length} operational friction points across 6 domains — severity-rated, PE impact framed. Browse the full interactive lever explorer on the{" "}
@@ -247,8 +247,8 @@ function CostOfInaction() {
   ];
 
   return (
-    <Section title="The Cost of Not Acting" noCTA>
-      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "20px" }}>
+    <Section title="The Cost of Not Acting" noCTA variant="tinted">
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "32px" }}>
         Operational gaps don't stay static under PE ownership. Leverage amplifies friction. These are the scenarios that play out when diligence misses them — and post-close stabilization doesn't happen.
       </p>
       <div className="cost-cards-grid" style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap" }}>
@@ -339,8 +339,8 @@ function MiniCases() {
   const valueCreated = { fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, margin: 0, padding: "10px 12px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0` };
 
   return (
-    <Section title="Representative Outcomes" noCTA type="windowWithCards">
-      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "16px" }}>
+    <Section title="Representative Outcomes" noCTA variant="tinted">
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "32px" }}>
         Anonymized engagement outcomes from $10B+ institutional operating roles. Gap → intervention → result.
       </p>
 

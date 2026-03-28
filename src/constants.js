@@ -752,6 +752,39 @@ export const globalCSS = `
   }
 
   /* ══════════════════════════════════════════════════════════════
+     WHITESPACE — spec: devonshire-whitespace-spec.html
+     ══════════════════════════════════════════════════════════════ */
+
+  /* Tinted background on ALL viewports */
+  .section-tinted { background: #F8F7F4 !important; }
+
+  /* Desktop-only whitespace layout */
+  @media (min-width: 769px) {
+    /* Full-bleed tinted sections */
+    .section-tinted {
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      padding: 56px 32px;
+      border: none !important;
+      box-shadow: none !important;
+    }
+    /* Keep inner content centered at site max-width */
+    .section-tinted > * {
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    /* Contained + contained = 32px gap (bg change handles tinted transitions) */
+    .section-contained + .section-contained {
+      margin-top: 32px;
+    }
+    /* Extra breathing room after dark hero/metrics area */
+    .proof-metrics-strip + .section-contained {
+      margin-top: 40px;
+    }
+  }
+
+  /* ══════════════════════════════════════════════════════════════
      CTA HIERARCHY — spec: devonshire-cta-flow-spec.html
      ══════════════════════════════════════════════════════════════ */
 
