@@ -250,7 +250,7 @@ function StabilizationSequence() {
 
   return (
     <Section noCTA title="The Stabilization Sequence" variant="tinted">
-      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "24px" }}>
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "32px" }}>
         Operational stabilization follows a consistent three-phase sequence: <strong>Visibility → Control → Cadence</strong>.
       </p>
       <TimelineRail items={timelineItems} />
@@ -476,7 +476,7 @@ function LeverExplorerSection({ setPage }) {
           .lever-filters select { flex: 1 1 calc(50% - 6px) !important; min-width: 120px !important; }
         }
       `}</style>
-      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "960px", marginBottom: "20px" }}>
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "960px", marginBottom: "32px" }}>
         {LEVERS.length} operational friction points across 6 domains — severity-rated, PE impact framed. {!showAll && !hasActiveFilter ? "Showing the 6 most common gaps. Use filters above or expand to see all 20." : "Filter by timing, domain, or severity. Open any lever for symptoms and PE impact analysis."}
       </p>
 
