@@ -62,7 +62,7 @@ export function CTAButton({ text, variant, style: extraStyle, showAvailability }
 
 export function SectionTitle({ children, sub }) {
   return (
-    <div style={{ marginBottom: sub ? "16px" : SPACING.lg }}>
+    <div style={{ marginBottom: sub ? "16px" : "12px" }}>
       <h2 className="section-title" style={{
         fontFamily: FONTS.heading,
         fontSize: sub ? "1rem" : "1.4rem",
@@ -288,12 +288,30 @@ export function SplitContrast({ leftSide, rightSide }) {
 
 // ─── SECTION ─────────────────────────────────────────────────
 
-export function Section({ title, subtitle, children, primaryCTA, secondaryCTA, noCTA, centered, background, noPadding, type, id }) {
+export function Section({ title, subtitle, children, primaryCTA, secondaryCTA, noCTA, centered, background, noPadding, type, id, variant }) {
   const isWindowWithCards = type === "windowWithCards";
+  const isTinted = variant === "tinted";
   const defaultBackground = isWindowWithCards ? COLORS.offWhite : COLORS.white;
 
+  const classNames = [
+    "section-wrapper",
+    isTinted ? "section-tinted" : "section-contained",
+    noPadding ? "section-no-pad" : ""
+  ].filter(Boolean).join(" ");
+
+  const sectionStyle = isTinted
+    ? { background: "#F8F7F4", marginBottom: 0 }
+    : {
+        background: background || defaultBackground,
+        border: "1px solid #E4E2DC",
+        borderRadius: "12px",
+        padding: noPadding ? "0" : "48px 40px",
+        marginBottom: 0,
+        boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+      };
+
   return (
-    <div className={noPadding ? "section-wrapper section-no-pad" : "section-wrapper"} style={{ background: background || defaultBackground, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.lg, padding: noPadding ? "0" : "40px 32px", marginBottom: "24px", boxShadow: SHADOWS.sm }} id={id}>
+    <div className={classNames} style={sectionStyle} id={id}>
       {title && <SectionTitle>{title}</SectionTitle>}
       {subtitle && (
         <p style={{ fontFamily: FONTS.body, color: COLORS.bodyMuted, lineHeight: 1.7, marginTop: "-16px", marginBottom: "20px" }}>
