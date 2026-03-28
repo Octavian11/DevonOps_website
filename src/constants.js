@@ -346,12 +346,6 @@ export const globalCSS = `
     .split-contrast { grid-template-columns: 1fr; }
   }
 
-  /* MiniCases 2x2 grid: stacks on mobile */
-  .mini-cases-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  @media (max-width: 768px) {
-    .mini-cases-grid { grid-template-columns: 1fr; }
-  }
-
   /* ── Main container: responsive padding ─────────────────────── */
   .main-container { padding-left: 32px; padding-right: 32px; }
   @media (max-width: 768px) {
@@ -647,7 +641,6 @@ export const globalCSS = `
   /* Issue 08 — Track record */
   @media (max-width: 768px) {
     .track-result { padding: 16px !important; }
-    .confidentiality-note { font-size: 11px !important; color: #999 !important; }
   }
 
   /* Issue 09 — FAQ accordion touch targets */
@@ -661,5 +654,112 @@ export const globalCSS = `
     .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 32px 20px !important; padding: 40px 20px !important; }
     .footer-form input[type="email"] { height: 44px !important; font-size: 14px !important; padding: 0 12px !important; box-sizing: border-box !important; }
     .footer-form button[type="submit"] { height: 48px !important; width: 100% !important; font-size: 14px !important; }
+  }
+
+  /* ══════════════════════════════════════════════════════════════
+     SOCIAL PROOF — spec: devonshire-social-proof-spec.html
+     ══════════════════════════════════════════════════════════════ */
+
+  /* Item 04 — Proof metrics strip */
+  .proof-metrics-strip {
+    background: ${COLORS.navy};
+    display: flex; justify-content: center;
+    gap: 64px; padding: 28px 32px;
+    width: 100vw; margin-left: calc(-50vw + 50%);
+    margin-bottom: 24px;
+  }
+  .proof-metric { text-align: center; }
+  .proof-metric-number {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 32px; font-weight: 400; color: ${COLORS.gold}; line-height: 1.1;
+  }
+  .proof-metric-label {
+    font-size: 11px; color: rgba(255,255,255,0.45);
+    margin-top: 4px; letter-spacing: 0.3px;
+  }
+  @media (max-width: 768px) {
+    .proof-metrics-strip { gap: 32px; padding: 24px 20px; }
+    .proof-metric-number { font-size: 24px; }
+  }
+
+  /* Item 05 — Outcome cards */
+  .outcomes-visible { display: flex; flex-direction: column; gap: 16px; }
+  .outcomes-hidden { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .outcomes-hidden.expanded { max-height: 2000px; margin-top: 16px; }
+  @media (max-width: 768px) {
+    .outcomes-visible .outcome-card:nth-child(2) { display: none; }
+  }
+
+  /* Item 06 — Confidentiality note */
+  .confidentiality-note {
+    background: #F0F4F8;
+    border-left: 3px solid ${COLORS.steel};
+    border-radius: 0 6px 6px 0;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: #6B6B65;
+    margin-top: 16px;
+    font-family: ${FONTS.body};
+    line-height: 1.5;
+  }
+  .confidentiality-note strong { color: ${COLORS.navy}; font-weight: 600; }
+
+  /* Item 01 — Bio headshot */
+  .bio-headshot {
+    width: 80px; height: 80px;
+    border-radius: 50%; object-fit: cover;
+    border: 2.5px solid rgba(184,134,11,0.3);
+    flex-shrink: 0;
+    background: ${COLORS.navy};
+  }
+  @media (max-width: 768px) {
+    .bio-headshot { width: 64px; height: 64px; }
+  }
+
+  /* Items 02+03 — Credential logo strip */
+  .credential-logos {
+    display: flex; flex-wrap: wrap; align-items: center;
+    gap: 24px; margin-top: 16px; padding-top: 12px;
+    border-top: 1px solid #E4E7EC;
+    margin-bottom: 14px;
+  }
+  .credential-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase; color: #A0A09A;
+    width: 100%; flex-shrink: 0; margin-bottom: -8px;
+  }
+  .credential-logos img {
+    height: 18px; width: auto; opacity: 0.45;
+    filter: grayscale(100%); transition: opacity 0.2s ease; flex-shrink: 0;
+  }
+  .credential-logos img:hover { opacity: 0.7; }
+  @media (max-width: 768px) {
+    .credential-logos { gap: 16px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+    .credential-logos::-webkit-scrollbar { display: none; }
+    .credential-logos img { height: 14px; }
+  }
+
+  /* Item 07 — Endorsement quote */
+  .endorsement-section { background: #F8F7F4; padding: 48px 32px; }
+  .endorsement-container { max-width: 640px; margin: 0 auto; text-align: center; }
+  .endorsement-quote-mark {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 64px; color: ${COLORS.gold}; opacity: 0.3;
+    line-height: 0.5; margin-bottom: 8px;
+  }
+  .endorsement-text {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-style: italic; font-size: 20px; font-weight: 400;
+    color: ${COLORS.navy}; line-height: 1.6; margin: 0;
+  }
+  .endorsement-attribution {
+    display: inline-flex; align-items: center;
+    gap: 12px; margin-top: 20px;
+  }
+  .endorser-name { font-size: 14px; font-weight: 600; color: ${COLORS.navy}; }
+  .endorser-title { font-size: 13px; color: #6B6B65; margin-top: 2px; }
+  @media (max-width: 768px) {
+    .endorsement-section { padding: 40px 20px; }
+    .endorsement-text { font-size: 18px; }
   }
 `;

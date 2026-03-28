@@ -608,9 +608,9 @@ export function TestimonialBlock() {
           <div className="track-result" style={result}>&gt;$2M annual run-rate reduction. 10–15% licensing savings via right-sizing. Cost per $1B AUM reduced ~28%. Payback &lt;6 months.</div>
         </div>
       </div>
-      <p className="confidentiality-note" style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.bodyMuted, lineHeight: 1.5, margin: 0 }}>
-        Identifiers withheld. Metrics are representative and sanitized for confidentiality. Details and references available on request.
-      </p>
+      <div className="confidentiality-note">
+        <strong>All engagements are NDA-protected.</strong> Client identities and deal details remain confidential. Anonymized metrics and references are available on request.
+      </div>
     </Section>
   );
 }

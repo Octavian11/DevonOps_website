@@ -52,6 +52,26 @@ function HeroBlockWithNav({ setPage }) {
   );
 }
 
+// ─── PROOF METRICS STRIP (Item 04) ──────────────────────────
+
+function ProofMetricsStrip() {
+  const metrics = [
+    { value: "~67%", label: "incident reduction" },
+    { value: "$2M+", label: "annual savings" },
+    { value: "94→99%", label: "uptime" },
+  ];
+  return (
+    <div className="proof-metrics-strip">
+      {metrics.map((m, i) => (
+        <div key={i} className="proof-metric">
+          <div className="proof-metric-number">{m.value}</div>
+          <div className="proof-metric-label">{m.label}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // ─── MICRO PROOF STRIP ───────────────────────────────────────
 
 function MicroProofStrip() {
@@ -322,7 +342,7 @@ function ChooseSituation({ setPage }) {
 // ─── MINI CASES ──────────────────────────────────────────────
 
 function MiniCases() {
-  const [expanded, setExpanded] = useState(false);
+  const [moreExpanded, setMoreExpanded] = useState(false);
   const box = { border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.gold}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" };
   const fieldLabel = { fontFamily: FONTS.body, fontSize: "0.75rem", fontWeight: 700, color: COLORS.navy, letterSpacing: "0.6px", textTransform: "uppercase", display: "block", marginBottom: "4px" };
   const fieldVal = { fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, margin: "0 0 14px 0" };
@@ -330,17 +350,12 @@ function MiniCases() {
 
   return (
     <Section title="Representative Outcomes" noCTA type="windowWithCards">
-      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "12px" }}>
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "16px" }}>
         Anonymized engagement outcomes from $10B+ institutional operating roles. Gap → intervention → result.
       </p>
-      <button
-        onClick={() => setExpanded(!expanded)}
-        style={{ background: "transparent", border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "8px 16px", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, fontWeight: 600, cursor: "pointer", marginBottom: "16px" }}>
-        {expanded ? "Hide outcomes ▾" : "Show 4 representative outcomes (gap → fix → result) ▸"}
-      </button>
 
-      {expanded && <div className="mini-cases-grid">
-        <div style={box}>
+      <div className="outcomes-visible">
+        <div className="outcome-card" style={box}>
           <SectionTitle sub>Incident instability</SectionTitle>
           <span style={fieldLabel}>GAP</span>
           <p style={fieldVal}>Same failures recurring every 4–6 weeks. No severity model, no ownership, no postmortems.</p>
@@ -350,7 +365,7 @@ function MiniCases() {
           <p style={valueCreated}>~67% incident reduction. ~31% faster resolution. Board reporting shifted from crisis-driven to weekly structured reviews.</p>
         </div>
 
-        <div style={box}>
+        <div className="outcome-card" style={box}>
           <SectionTitle sub>Change-driven outages</SectionTitle>
           <span style={fieldLabel}>GAP</span>
           <p style={fieldVal}>Deployments causing outages. No change calendar, no risk classification, no rollback plans.</p>
@@ -359,8 +374,10 @@ function MiniCases() {
           <span style={fieldLabel}>RESULT</span>
           <p style={valueCreated}>~60% fewer critical outages. Uptime: 94% → 99%. Change-incident correlation visible to the board within 30 days.</p>
         </div>
+      </div>
 
-        <div style={box}>
+      <div className={`outcomes-hidden${moreExpanded ? " expanded" : ""}`}>
+        <div className="outcome-card" style={box}>
           <SectionTitle sub>Board reporting / KPI ambiguity</SectionTitle>
           <span style={fieldLabel}>GAP</span>
           <p style={fieldVal}>No KPIs. Board updates were verbal and anecdotal. No baselines, no targets, no measurement.</p>
@@ -370,7 +387,7 @@ function MiniCases() {
           <p style={valueCreated}>Weekly operating rhythm installed. Issues surfaced through cadence, not crisis. Board gained real-time ops visibility — direct input to exit narrative.</p>
         </div>
 
-        <div style={box}>
+        <div className="outcome-card" style={box}>
           <SectionTitle sub>Vendor concentration risk</SectionTitle>
           <span style={fieldLabel}>GAP</span>
           <p style={fieldVal}>Single vendor covering 80%+ of critical infrastructure. Auto-renewing contracts, no SLA tracking, change-of-control clause missed in diligence.</p>
@@ -379,7 +396,13 @@ function MiniCases() {
           <span style={fieldLabel}>RESULT</span>
           <p style={valueCreated}>$2M+ annual savings via renegotiation. Concentration reduced: 1 vendor → 3. Exit plan documented for top 5 vendors — turned a diligence liability into a hold narrative.</p>
         </div>
-      </div>}
+      </div>
+
+      <button
+        onClick={() => setMoreExpanded(!moreExpanded)}
+        style={{ background: "transparent", border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "8px 16px", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, fontWeight: 600, cursor: "pointer", marginTop: "16px" }}>
+        {moreExpanded ? "Hide ▾" : "Show 2 more outcomes ▸"}
+      </button>
     </Section>
   );
 }
@@ -396,13 +419,25 @@ function CompactAboutBio({ setPage }) {
   return (
     <Section noCTA background={`${COLORS.navy}04`}>
       <div style={{ display: "flex", gap: "20px", alignItems: "flex-start", flexWrap: "wrap" }}>
-        <div style={{ flexShrink: 0, width: "64px", height: "64px", borderRadius: "50%", background: COLORS.navy, display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <span style={{ fontFamily: FONTS.heading, fontSize: "1.4rem", fontWeight: 700, color: COLORS.gold, lineHeight: 1 }}>HT</span>
-        </div>
+        <img
+          src="/images/hassan-tariq-headshot.jpg"
+          alt="Hassan Tariq — Founder, Devonshire Operations"
+          width="80" height="80"
+          loading="lazy"
+          className="bio-headshot"
+        />
         <div style={{ flex: "1 1 280px" }}>
           <div style={{ fontFamily: FONTS.heading, fontSize: "1.2rem", fontWeight: 700, color: COLORS.navy, marginBottom: "4px" }}>Hassan Tariq</div>
           <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", color: COLORS.steel, lineHeight: 1.5, marginBottom: "14px" }}>
             15+ years platform ops · JPMorgan · Barclays · Bank of America · Lazard<br />Columbia Executive MBA '26
+          </div>
+          <div className="credential-logos">
+            <span className="credential-label">Institutional background</span>
+            <img src="/images/logo-jpmorgan.svg" alt="JPMorgan" height="18" loading="lazy" />
+            <img src="/images/logo-barclays.svg" alt="Barclays" height="18" loading="lazy" />
+            <img src="/images/logo-bofa.svg" alt="Bank of America" height="18" loading="lazy" />
+            <img src="/images/logo-lazard.svg" alt="Lazard" height="18" loading="lazy" />
+            <img src="/images/logo-columbia.svg" alt="Columbia Business School" height="18" loading="lazy" />
           </div>
           <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", marginBottom: "16px" }}>
             {metrics.map((m, i) => (
@@ -420,6 +455,27 @@ function CompactAboutBio({ setPage }) {
         </div>
       </div>
     </Section>
+  );
+}
+
+// ─── ENDORSEMENT QUOTE (Item 07) ────────────────────────────
+
+function EndorsementQuote() {
+  return (
+    <div className="endorsement-section">
+      <div className="endorsement-container">
+        <div className="endorsement-quote-mark">"</div>
+        <blockquote className="endorsement-text">
+          Hassan brings a rare combination of institutional-grade operational rigor and the practical urgency of someone who has actually run the platform during a crisis.
+        </blockquote>
+        <div className="endorsement-attribution">
+          <div>
+            <div className="endorser-name">Senior Director, Platform Operations</div>
+            <div className="endorser-title">Multi-Strategy Hedge Fund, ~$10B AUM</div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -453,6 +509,7 @@ export default function LeverExplorer({ setPage }) {
     <div className="fade-in">
       <HeroBlockWithNav setPage={setPage} />
       <MicroProofStrip />
+      <ProofMetricsStrip />
       <BuyerSegmentCards setPage={setPage} />
       <LeversTeaserSection setPage={setPage} />
       <CostOfInaction />
@@ -461,6 +518,7 @@ export default function LeverExplorer({ setPage }) {
       <MiniCases />
       <CompactAboutBio setPage={setPage} />
       <TestimonialBlock />
+      <EndorsementQuote />
       <FAQBlock />
 
       <Section noCTA background={`${COLORS.navy}05`}>
