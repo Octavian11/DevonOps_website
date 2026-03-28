@@ -67,7 +67,7 @@ export default function ResourcesPage({ setPage }) {
       <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 700, color: COLORS.navy, marginBottom: SPACING.lg }}>Resources</h1>
 
       {/* Interactive Tools */}
-      <Section noCTA title="Interactive Tools">
+      <Section noCTA title="Interactive Tools" variant="tinted">
         <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: SPACING.md }}>
           Two free tools to help you identify operational risk and explore the 20 value creation levers before your first conversation.
         </p>

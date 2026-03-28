@@ -339,7 +339,7 @@ export function Section({ title, subtitle, children, primaryCTA, secondaryCTA, n
 // ─── SHARED PAGE COMPONENTS ──────────────────────────────────
 // FAQBlock used by both LeverExplorer and ServicesPage
 
-export function FAQBlock() {
+export function FAQBlock({ variant }) {
   const [open, setOpen] = useState(null);
   const toggle = (i) => setOpen(open === i ? null : i);
 
@@ -362,7 +362,7 @@ export function FAQBlock() {
   const a = { fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, margin: 0, paddingBottom: "14px" };
 
   return (
-    <Section title="FAQ" noCTA background={`${COLORS.navy}04`}>
+    <Section title="FAQ" noCTA variant={variant} background={variant ? undefined : `${COLORS.navy}04`}>
       <div style={{ borderTop: `2px solid ${COLORS.gold}30`, paddingTop: SPACING.md }}>
         {faqs.map((item, i) => (
           <div key={i} style={{ borderBottom: `1px solid ${COLORS.border}` }}>

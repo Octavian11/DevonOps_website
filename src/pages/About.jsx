@@ -17,7 +17,7 @@ export default function AboutPage() {
       </Section>
 
       {/* What I Do */}
-      <Section noCTA title="What I Do">
+      <Section noCTA title="What I Do" variant="tinted">
         <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "14px" }}>
           I help PE funds and portfolio companies eliminate the operational friction that erodes EBITDA, extends hold periods, and creates risk that surfaces too late. From pre-close diligence through post-close stabilization to ongoing governance — I install the operating discipline that makes value creation plans actually executable.
         </p>
@@ -54,7 +54,7 @@ export default function AboutPage() {
       </Section>
 
       {/* Representative Outcomes */}
-      <Section title="Representative Outcomes" noCTA type="windowWithCards">
+      <Section title="Representative Outcomes" noCTA variant="tinted">
         <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.bodyMuted, lineHeight: 1.6, marginBottom: SPACING.md, padding: "10px 14px", background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md }}>
           Outcomes from prior institutional operating roles — not client engagements. Identifiers withheld. Metrics are representative and sanitized for confidentiality. Details and references available on request.
         </p>
@@ -143,7 +143,7 @@ export default function AboutPage() {
       </Section>
 
       {/* Sample Deliverables */}
-      <Section noCTA title="Sample Deliverables">
+      <Section noCTA title="Sample Deliverables" variant="tinted">
         <ServicesSamplesRow />
       </Section>
 
