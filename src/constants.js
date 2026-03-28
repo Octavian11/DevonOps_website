@@ -436,7 +436,6 @@ export const globalCSS = `
   @keyframes slideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
   .fade-in { animation: fadeIn 0.3s ease-out forwards; }
   .lever-expand { animation: fadeIn 0.2s ease-out forwards; }
-  .scorer-sticky-bar { animation: slideUp 0.25s ease-out forwards; }
 
   /* ── Hero mobile responsive ────────────────────────────────────── */
   @media (max-width: 600px) {
@@ -471,13 +470,6 @@ export const globalCSS = `
   /* ── Lever expand detail: reduce left indent on narrow phones ───── */
   @media (max-width: 480px) {
     .lever-expand-detail { padding-left: 22px !important; }
-  }
-
-  /* ── Sticky bar: stack on mobile ────────────────────────────────── */
-  @media (max-width: 600px) {
-    .scorer-sticky-bar { flex-direction: column; align-items: flex-start; gap: 10px; padding: 14px 16px; }
-    .sticky-bar-ctas { width: 100%; flex-wrap: wrap; flex-shrink: unset !important; }
-    .sticky-bar-ctas a, .sticky-bar-ctas button:not([aria-label="Dismiss"]) { flex: 1 1 0; text-align: center; justify-content: center; }
   }
 
   /* ── Hero: reduce top/bottom padding on small screens ──────────── */
@@ -547,10 +539,6 @@ export const globalCSS = `
      Reference: 390×844 (iPhone 14) · All rules @ max-width 768px
      ══════════════════════════════════════════════════════════════ */
 
-  /* Issue 01 — Remove sticky CTA bar on mobile */
-  @media (max-width: 768px) {
-    .scorer-sticky-bar { display: none !important; }
-  }
 
   /* Issue 02 — Persona cards */
   @media (max-width: 768px) {
@@ -761,5 +749,27 @@ export const globalCSS = `
   @media (max-width: 768px) {
     .endorsement-section { padding: 40px 20px; }
     .endorsement-text { font-size: 18px; }
+  }
+
+  /* ══════════════════════════════════════════════════════════════
+     CTA HIERARCHY — spec: devonshire-cta-flow-spec.html
+     ══════════════════════════════════════════════════════════════ */
+
+  /* Card text links (persona cards + path cards) */
+  .card-text-link {
+    display: inline-block;
+    font-size: 14px; font-weight: 600;
+    color: #14213D;
+    text-decoration: underline;
+    text-decoration-color: rgba(20,33,61,0.3);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s, color 0.2s;
+    margin-top: 16px;
+    padding: 0; background: none; border: none;
+    cursor: pointer; font-family: inherit;
+  }
+  .card-text-link:hover {
+    text-decoration-color: #B8860B;
+    color: #B8860B;
   }
 `;
