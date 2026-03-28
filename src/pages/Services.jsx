@@ -249,7 +249,7 @@ function StabilizationSequence() {
   ];
 
   return (
-    <Section noCTA title="The Stabilization Sequence">
+    <Section noCTA title="The Stabilization Sequence" variant="tinted">
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "24px" }}>
         Operational stabilization follows a consistent three-phase sequence: <strong>Visibility → Control → Cadence</strong>.
       </p>
@@ -469,7 +469,7 @@ function LeverExplorerSection({ setPage }) {
   const selectStyle = { padding: "10px 14px", border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, background: COLORS.white, cursor: "pointer", minWidth: "160px", boxShadow: "0 1px 2px rgba(67, 97, 125, 0.05)" };
 
   return (
-    <Section title="20 Operational Value Creation Levers" noCTA id="lever-explorer">
+    <Section title="20 Operational Value Creation Levers" noCTA variant="tinted" id="lever-explorer">
       <style>{`
         @media (max-width: 540px) {
           .lever-filters input { width: 100% !important; flex: 1 1 100% !important; }
@@ -620,7 +620,7 @@ export default function ServicesPage({ setPage }) {
       <div id="memo-samples"><MemoSampleScreenshots /></div>
       <div id="worked-example"><WorkedExampleAccordion /></div>
       <div id="how-it-works"><ServicesSteps /></div>
-      <div id="faq"><FAQBlock /></div>
+      <div id="faq"><FAQBlock variant="tinted" /></div>
       <div id="fit-check"><FitCheckCTA /></div>
     </div>
   );
