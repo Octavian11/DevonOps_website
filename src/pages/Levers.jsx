@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   COLORS, FONTS, SPACING, SHADOWS, RADIUS,
   CALENDLY, SAMPLE_SCORECARD_PDF, SAMPLE_100DAY_PDF,
@@ -181,13 +181,15 @@ function BuyerSegmentCards({ setPage }) {
               {seg.proof}
             </p>
             <div style={{ marginTop: "auto", paddingTop: "16px" }}>
-              <button
-                onClick={() => handleAction(seg.action)}
-                style={seg.action === "scorer" ? { display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.navy, fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: `1.5px solid ${COLORS.navy}`, borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" } : { display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: "none", borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}
-                onMouseEnter={e => { e.currentTarget.style.opacity = "0.85"; }}
-                onMouseLeave={e => { e.currentTarget.style.opacity = "1"; }}>
-                {seg.cta}
-              </button>
+              {seg.action === "scorer" ? (
+                <button className="card-text-link" onClick={() => setPage("scorer")}>
+                  {seg.cta}
+                </button>
+              ) : (
+                <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer">
+                  {seg.cta} →
+                </a>
+              )}
             </div>
           </div>
         ))}
@@ -211,16 +213,6 @@ function LeversTeaserSection({ setPage }) {
         {Object.entries(DOMAINS).map(([k]) => (
           <DomainTag key={k} domain={k} />
         ))}
-      </div>
-
-      <div style={{ marginTop: "18px" }}>
-        <ButtonPair
-          primaryText="Book a Fit Check"
-          primaryLink={CALENDLY}
-          secondaryText="Score Your Deal →"
-          secondaryAction={() => setPage("scorer")}
-          secondaryLink={null}
-        />
       </div>
 
       <div style={{ padding: "12px 16px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.md} ${RADIUS.md} 0`, maxWidth: "960px", marginTop: "24px" }}>
@@ -313,8 +305,7 @@ function ChooseSituation({ setPage }) {
             ))}
           </ul>
           <div style={{ marginTop: "auto", paddingTop: "16px" }}>
-            <button onClick={() => setPage("scorer")}
-              style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.navy, fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: `1.5px solid ${COLORS.navy}`, borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap" }}>
+            <button className="card-text-link" onClick={() => setPage("scorer")}>
               Score Your Deal →
             </button>
           </div>
@@ -328,9 +319,8 @@ function ChooseSituation({ setPage }) {
             ))}
           </ul>
           <div style={{ marginTop: "auto", paddingTop: "16px" }}>
-            <a href={CALENDLY} target="_blank" rel="noopener noreferrer"
-              style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: "none", borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap" }}>
-              Book a Fit Check
+            <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer">
+              Book a Fit Check →
             </a>
           </div>
         </div>
@@ -482,28 +472,6 @@ function EndorsementQuote() {
 // ─── LEVER EXPLORER PAGE ─────────────────────────────────────
 
 export default function LeverExplorer({ setPage }) {
-  // ── Scroll-depth sticky bar ──────────────────────────────────
-  const [showStickyBar, setShowStickyBar] = useState(false);
-  const [stickyDismissed, setStickyDismissed] = useState(() => {
-    try { return sessionStorage.getItem("scorerBarDismissed") === "true"; } catch { return false; }
-  });
-
-  useEffect(() => {
-    if (stickyDismissed) return;
-    const handleScroll = () => {
-      const scrolled = window.scrollY / Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-      const threshold = window.innerWidth <= 600 ? 0.5 : 0.65;
-      setShowStickyBar(scrolled > threshold);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [stickyDismissed]);
-
-  const handleStickyDismiss = () => {
-    setShowStickyBar(false);
-    setStickyDismissed(true);
-    try { sessionStorage.setItem("scorerBarDismissed", "true"); } catch {}
-  };
 
   return (
     <div className="fade-in">
@@ -539,35 +507,6 @@ export default function LeverExplorer({ setPage }) {
         />
       </Section>
 
-      {/* ── Scroll-depth sticky bar ── */}
-      {showStickyBar && !stickyDismissed && (
-        <div className="scorer-sticky-bar" style={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 200, background: COLORS.navy, borderTop: `3px solid ${COLORS.gold}`, padding: "14px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px", boxShadow: "0 -4px 20px rgba(20,33,61,0.25)" }}>
-          <p style={{ fontFamily: FONTS.body, color: COLORS.offWhite, margin: 0, lineHeight: 1.5 }}>
-            <strong style={{ color: COLORS.gold }}>Ready to find the gaps?</strong> 15 minutes — I'll assess the situation and scope the right engagement.
-          </p>
-          <div className="sticky-bar-ctas" style={{ display: "flex", gap: "16px", alignItems: "center", flexShrink: 0 }}>
-            <a
-              href={CALENDLY}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={handleStickyDismiss}
-              style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: "none", borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}>
-              Book a Fit Check
-            </a>
-            <button
-              onClick={() => { handleStickyDismiss(); setPage("scorer"); }}
-              style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.gold, fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: `1.5px solid ${COLORS.gold}`, borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}>
-              Score Your Deal →
-            </button>
-            <button
-              onClick={handleStickyDismiss}
-              aria-label="Dismiss"
-              style={{ padding: "10px 14px", background: "transparent", border: `1px solid ${COLORS.offWhite}40`, borderRadius: RADIUS.md, color: COLORS.offWhite, fontFamily: FONTS.body, fontSize: "1rem", cursor: "pointer", lineHeight: 1 }}>
-              ×
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

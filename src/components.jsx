@@ -77,8 +77,8 @@ export function SectionTitle({ children, sub }) {
   );
 }
 
-export const PRIMARY_BTN = { display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: "none", borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" };
-export const SECONDARY_BTN = { display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.navy, fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: `1.5px solid ${COLORS.navy}`, borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" };
+export const PRIMARY_BTN = { display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 32px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: "none", borderRadius: "8px", cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" };
+export const SECONDARY_BTN = { display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.navy, fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 500, border: "1.5px solid #D6D4CE", borderRadius: "8px", cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" };
 
 export function ButtonPair({
   primaryText = "Book a Fit Check",
@@ -95,15 +95,15 @@ export function ButtonPair({
         {primaryLink ? (
           <a href={primaryLink} target="_blank" rel="noopener noreferrer"
              style={PRIMARY_BTN}
-             onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; }}
-             onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; }}>
+             onMouseEnter={e => { e.currentTarget.style.background = "#B07E22"; e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 4px 12px rgba(200,149,46,0.25)"; }}
+             onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}>
             {primaryText}
           </a>
         ) : (
           <button onClick={primaryAction}
              style={PRIMARY_BTN}
-             onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; }}
-             onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; }}>
+             onMouseEnter={e => { e.currentTarget.style.background = "#B07E22"; e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 4px 12px rgba(200,149,46,0.25)"; }}
+             onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}>
             {primaryText}
           </button>
         )}
@@ -112,15 +112,15 @@ export function ButtonPair({
           secondaryLink ? (
             <a href={secondaryLink} target="_blank" rel="noopener noreferrer"
                style={SECONDARY_BTN}
-               onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.navy}08`; }}
-               onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}>
+               onMouseEnter={e => { e.currentTarget.style.borderColor = "#1B2A4A"; }}
+               onMouseLeave={e => { e.currentTarget.style.borderColor = "#D6D4CE"; }}>
               {secondaryText}
             </a>
           ) : (
             <button onClick={secondaryAction}
                style={SECONDARY_BTN}
-               onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.navy}08`; }}
-               onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}>
+               onMouseEnter={e => { e.currentTarget.style.borderColor = "#1B2A4A"; }}
+               onMouseLeave={e => { e.currentTarget.style.borderColor = "#D6D4CE"; }}>
               {secondaryText}
             </button>
           )
@@ -778,7 +778,7 @@ export function Footer({ setPage }) {
                 Book a Fit Check
               </a>
               <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.offWhite }}>
-                Q2 availability is limited.
+                Q2 availability is limited. Book early.
               </span>
             </div>
           </div>
