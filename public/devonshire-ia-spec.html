@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Information Architecture Spec — devonshireops.com/pe</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600&family=DM+Mono&display=swap');
+  :root { --midnight: #1B2A4A; --gold: #C8952E; --steel: #5A7A9B; --graphite: #3D3D3A; --bg: #FAF9F6; --border: #D6D4CE; --red: #C0392B; --green: #1D9E75; --blue: #2E6DA4; --amber: #BA7517; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--graphite); background: var(--bg); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  .cover { background: var(--midnight); color: #fff; padding: 80px 48px 64px; text-align: center; }
+  .cover-badge { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(200,149,46,0.35); padding: 6px 16px; border-radius: 4px; margin-bottom: 32px; }
+  .cover h1 { font-family: 'EB Garamond', serif; font-size: 38px; font-weight: 400; line-height: 1.2; margin-bottom: 16px; }
+  .cover h1 em { font-style: italic; color: var(--gold); }
+  .cover .subtitle { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 620px; margin: 0 auto 32px; }
+  .cover-meta { display: flex; justify-content: center; gap: 40px; font-size: 12px; color: rgba(255,255,255,0.4); }
+  .container { max-width: 880px; margin: 0 auto; padding: 0 32px; }
+  .section-num { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .section-title { font-family: 'EB Garamond', serif; font-size: 28px; font-weight: 400; color: var(--midnight); margin-bottom: 8px; }
+  .section-lead { font-size: 15px; color: #6B6B65; margin-bottom: 32px; max-width: 680px; }
+  section { padding: 56px 0; border-bottom: 1px solid var(--border); }
+  section:last-of-type { border-bottom: none; }
+  .issue-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 28px; margin-bottom: 24px; position: relative; }
+  .issue-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; border-radius: 10px 0 0 10px; }
+  .issue-card.critical::before { background: var(--red); }
+  .issue-card.high::before { background: var(--amber); }
+  .issue-card.moderate::before { background: var(--steel); }
+  .issue-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .severity-badge { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; }
+  .severity-badge.critical { background: #FCEAEA; color: var(--red); }
+  .severity-badge.high { background: #FDF3E0; color: var(--amber); }
+  .severity-badge.moderate { background: #E8F0F7; color: var(--steel); }
+  .issue-title { font-size: 17px; font-weight: 600; color: var(--midnight); }
+  .issue-body p { font-size: 14px; margin-bottom: 12px; }
+  .spec-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  .spec-table th { text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: #888; padding: 8px 12px; border-bottom: 2px solid var(--border); }
+  .spec-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .spec-table tr:last-child td { border-bottom: none; }
+  .spec-table .prop { font-weight: 500; color: var(--midnight); white-space: nowrap; }
+  .val-current { color: var(--red); font-family: 'DM Mono', monospace; font-size: 12px; }
+  .val-fix { color: var(--green); font-weight: 600; font-family: 'DM Mono', monospace; font-size: 12px; }
+  .css-block { background: #1E1E2E; color: #CDD6F4; padding: 20px 24px; border-radius: 8px; font-family: 'DM Mono', monospace; font-size: 12px; line-height: 1.8; overflow-x: auto; margin: 16px 0; white-space: pre; }
+  .css-block .sel { color: #89B4FA; } .css-block .prop { color: #CBA6F7; } .css-block .val { color: #A6E3A1; } .css-block .comment { color: #6C7086; font-style: italic; } .css-block .num { color: #FAB387; } .css-block .unit { color: #F9E2AF; } .css-block .str { color: #F38BA8; } .css-block .tag { color: #89DCEB; }
+  .callout { background: #FFFBF0; border-left: 3px solid var(--gold); padding: 16px 20px; font-size: 14px; border-radius: 0 6px 6px 0; margin: 20px 0; color: #5A4E2F; }
+  .callout strong { color: #3D3000; }
+  .callout-blue { background: #EDF4FC; border-left: 3px solid var(--blue); padding: 16px 20px; font-size: 14px; border-radius: 0 6px 6px 0; margin: 20px 0; color: #1A3A5C; }
+  h4 { font-size: 14px; font-weight: 600; color: var(--midnight); margin: 24px 0 8px; }
+  .measure { display: inline; font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; color: var(--blue); background: #EDF4FC; padding: 1px 6px; border-radius: 3px; }
+  .order-map { background: #F8F7F4; border: 1px solid var(--border); border-radius: 8px; padding: 20px 24px; margin: 16px 0; font-size: 12px; font-family: 'DM Mono', monospace; line-height: 2.4; }
+  .order-map .label { color: #555; font-weight: 500; }
+  .order-map .keep { color: var(--green); font-weight: 600; }
+  .order-map .merge { color: var(--amber); font-weight: 600; }
+  .order-map .remove { color: var(--red); font-weight: 600; text-decoration: line-through; }
+  .order-map .move { color: var(--blue); font-weight: 600; }
+  .order-map .dim { color: #BBB; }
+  .order-map .vpn { color: #999; font-size: 10px; }
+  .summary-box { background: var(--midnight); color: #fff; padding: 32px; border-radius: 10px; margin: 24px 0; }
+  .summary-box h3 { font-family: 'EB Garamond', serif; font-size: 22px; font-weight: 400; margin-bottom: 16px; color: var(--gold); }
+  .summary-box ul { list-style: none; padding: 0; }
+  .summary-box li { font-size: 14px; padding: 6px 0 6px 20px; position: relative; color: rgba(255,255,255,0.8); }
+  .summary-box li::before { content: '→'; position: absolute; left: 0; color: var(--gold); }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-badge">Implementation Spec</div>
+  <h1>Information <em>Architecture</em></h1>
+  <p class="subtitle">Reduce the main page from 12.3 viewport-heights to ~9.5 by merging redundant sections, collapsing detail-heavy content, and tightening the persuasion sequence. Plus cross-page consistency for /pe/services, /pe/about, and McKinsey blockquote standardization. No content is deleted — it's restructured for faster comprehension.</p>
+  <div class="cover-meta">
+    <span>5 items + global scope addendum</span>
+    <span>April 2026</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════════════ CURRENT MAP -->
+<section>
+  <div class="section-num">Current state</div>
+  <div class="section-title">Page section map — 12.3 viewport-heights</div>
+  <div class="section-lead">The page is 8,376px tall at 1512×682 viewport. A PE buyer arriving from a cold email has 12+ full screens of content to evaluate before reaching the footer. The section flow is logical but the sheer volume creates scroll fatigue, and two sections are structurally redundant.</div>
+
+  <div class="order-map">
+    <span class="label">VP&nbsp;&nbsp;&nbsp;</span> <span class="label">SECTION</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label">HEIGHT</span>&nbsp;&nbsp;&nbsp;<span class="label">ACTION</span><br>
+    <span class="vpn">0.1</span>&nbsp;&nbsp; <span class="keep">Hero + CTAs</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">463px</span>&nbsp;&nbsp;&nbsp;<span class="keep">KEEP</span><br>
+    <span class="vpn">0.9</span>&nbsp;&nbsp; <span class="keep">Proof metrics strip</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">113px</span>&nbsp;&nbsp;&nbsp;<span class="keep">KEEP</span><br>
+    <span class="vpn">1.2</span>&nbsp;&nbsp; <span class="keep">Who This Is Built For (3 cards)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">879px</span>&nbsp;&nbsp;&nbsp;<span class="keep">KEEP</span><br>
+    <span class="vpn">2.5</span>&nbsp;&nbsp; <span class="keep">20 Operational Value Levers</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">456px</span>&nbsp;&nbsp;&nbsp;<span class="keep">KEEP</span><br>
+    <span class="vpn">3.1</span>&nbsp;&nbsp; <span class="keep">The Cost of Not Acting (3 cards)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">696px</span>&nbsp;&nbsp;&nbsp;<span class="keep">KEEP</span><br>
+    <span class="vpn">4.1</span>&nbsp;&nbsp; <span class="merge">Choose Your Situation (2 cards)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">602px</span>&nbsp;&nbsp;&nbsp;<span class="merge">MERGE into pricing</span><br>
+    <span class="vpn">5.1</span>&nbsp;&nbsp; <span class="keep">Services &amp; Pricing (3 cards)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">737px</span>&nbsp;&nbsp;&nbsp;<span class="keep">KEEP (absorbs path cards)</span><br>
+    <span class="vpn">6.2</span>&nbsp;&nbsp; <span class="merge">Representative Outcomes (4 cards)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">971px</span>&nbsp;&nbsp;&nbsp;<span class="merge">MERGE into Track Record</span><br>
+    <span class="vpn">7.6</span>&nbsp;&nbsp; <span class="keep">Hassan Tariq bio card</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">410px</span>&nbsp;&nbsp;&nbsp;<span class="move">MOVE up (before pricing)</span><br>
+    <span class="vpn">8.2</span>&nbsp;&nbsp; <span class="keep">Institutional Track Record</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">703px</span>&nbsp;&nbsp;&nbsp;<span class="keep">KEEP (absorbs outcomes)</span><br>
+    <span class="vpn">9.3</span>&nbsp;&nbsp; <span class="keep">Endorsement quote</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">269px</span>&nbsp;&nbsp;&nbsp;<span class="keep">KEEP</span><br>
+    <span class="vpn">9.7</span>&nbsp;&nbsp; <span class="keep">FAQ (12 questions)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">806px</span>&nbsp;&nbsp;&nbsp;<span class="keep">KEEP (already accordion)</span><br>
+    <span class="vpn">10.9</span>&nbsp; <span class="remove">Closing proof strip (redundant)</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">324px</span>&nbsp;&nbsp;&nbsp;<span class="remove">REMOVE (duplicates proof metrics)</span><br>
+  </div>
+
+  <div class="callout">
+    <strong>Net reduction:</strong> Merging "Choose Your Situation" into pricing (~-400px), merging Representative Outcomes into Track Record (~-500px), removing the closing proof strip (~-324px), and moving the bio card up saves approximately 1,200–1,500px — bringing the page from ~12.3 to ~9.5 viewport-heights. No content is deleted — it's consolidated.
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ITEM 01 -->
+<section>
+  <div class="section-num">Item 01</div>
+  <div class="section-title">Merge "Choose Your Situation" into "Services &amp; Pricing"</div>
+  <div class="section-lead">The "Choose Your Situation" section (Evaluating a Target vs. First 100 Days Post-Close) and the "Services &amp; Pricing" section are saying the same thing from different angles. The path cards describe what you get; the pricing cards describe what it costs. They should be one unified decision section.</div>
+
+  <div class="issue-card critical">
+    <div class="issue-header">
+      <span class="severity-badge critical">Critical</span>
+      <span class="issue-title">Merge path cards into pricing section</span>
+    </div>
+    <div class="issue-body">
+
+      <h4>What to do</h4>
+      <p>Move the two path card elements ("Evaluating a Target" and "First 100 Days Post-Close") from their standalone section into the top of the "Services &amp; Pricing" section. They become an introductory sub-section within pricing — not a separate page section.</p>
+
+      <table class="spec-table">
+        <tr><th>Step</th><th>Action</th></tr>
+        <tr>
+          <td class="prop">1. Move path cards</td>
+          <td>Cut the two path card <code>&lt;div&gt;</code> elements (the flex container holding "Evaluating a Target" + "First 100 Days Post-Close") from the "Choose Your Situation" <code>.section-wrapper</code></td>
+        </tr>
+        <tr>
+          <td class="prop">2. Insert into pricing</td>
+          <td>Paste the path cards flex container into the "Services &amp; Pricing" section, immediately after the section heading ("Services &amp; Pricing") and lead paragraph, and before the three pricing cards</td>
+        </tr>
+        <tr>
+          <td class="prop">3. Update heading</td>
+          <td>Change the "Services &amp; Pricing" heading to <code>"Choose Your Path &amp; Pricing"</code></td>
+        </tr>
+        <tr>
+          <td class="prop">4. Add sub-heading</td>
+          <td>Add a <code>&lt;h3&gt;</code> reading <code>"Engagement options"</code> between the path cards and the pricing cards, with <code>margin-top: 32px; margin-bottom: 16px;</code></td>
+        </tr>
+        <tr>
+          <td class="prop">5. Keep lead text</td>
+          <td>Move the "Choose Your Situation" lead paragraph ("Pick the track that matches...") to sit above the path cards within the pricing section. Delete the "Services &amp; Pricing" original lead paragraph if it's redundant, or keep both if they complement.</td>
+        </tr>
+        <tr>
+          <td class="prop">6. Delete empty wrapper</td>
+          <td>Remove the now-empty "Choose Your Situation" <code>.section-wrapper.section-contained</code> element entirely</td>
+        </tr>
+      </table>
+
+      <h4>Spacing within the merged section</h4>
+      <div class="css-block"><span class="comment">/* Sub-heading between path cards and pricing cards */</span>
+<span class="sel">.pricing-subheading</span> {
+  <span class="prop">font-family</span>: <span class="val">'EB Garamond', serif</span>;
+  <span class="prop">font-size</span>: <span class="num">22</span><span class="unit">px</span>;
+  <span class="prop">font-weight</span>: <span class="num">400</span>;
+  <span class="prop">color</span>: <span class="val">#1B2A4A</span>;
+  <span class="prop">margin-top</span>: <span class="num">40</span><span class="unit">px</span>;
+  <span class="prop">margin-bottom</span>: <span class="num">20</span><span class="unit">px</span>;
+  <span class="prop">padding-top</span>: <span class="num">32</span><span class="unit">px</span>;
+  <span class="prop">border-top</span>: <span class="num">1</span><span class="unit">px</span> <span class="val">solid</span> <span class="val">#E4E2DC</span>; <span class="comment">/* subtle divider */</span>
+}</div>
+
+      <div class="callout">
+        <strong>Why merge instead of just removing?</strong> The path cards serve a genuine function — they help the visitor self-identify as "pre-close" vs "post-close." But placing them in a standalone section 600px above pricing creates a disconnect. When they sit directly above the pricing tiers, the visitor thinks: "I'm evaluating a target → here's the diligence package and price." One fluid decision instead of two separate moments.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ITEM 02 -->
+<section>
+  <div class="section-num">Item 02</div>
+  <div class="section-title">Merge "Representative Outcomes" into "Institutional Track Record"</div>
+  <div class="section-lead">These two sections both serve the same purpose: proving you've done this work before. The Representative Outcomes section shows 4 anonymized gap → fix → result vignettes. The Institutional Track Record shows 2 named case studies with metrics. They're separated by the bio card (410px), fragmenting the proof narrative.</div>
+
+  <div class="issue-card critical">
+    <div class="issue-header">
+      <span class="severity-badge critical">Critical</span>
+      <span class="issue-title">Consolidate proof sections</span>
+    </div>
+    <div class="issue-body">
+
+      <table class="spec-table">
+        <tr><th>Step</th><th>Action</th></tr>
+        <tr>
+          <td class="prop">1. Rename section</td>
+          <td>Change "Institutional Track Record" heading to <code>"Track Record &amp; Outcomes"</code></td>
+        </tr>
+        <tr>
+          <td class="prop">2. Move outcome cards</td>
+          <td>Cut the <code>.outcomes-visible</code> container (and the hidden outcomes toggle if present) from the "Representative Outcomes" section. Paste them into the "Track Record &amp; Outcomes" section, AFTER the two existing track record vignettes.</td>
+        </tr>
+        <tr>
+          <td class="prop">3. Add sub-heading</td>
+          <td>Add a <code>&lt;h3&gt;</code> reading <code>"Additional engagement outcomes"</code> between the track record vignettes and the outcome cards, with <code>margin-top: 32px; margin-bottom: 16px;</code></td>
+        </tr>
+        <tr>
+          <td class="prop">4. Keep lead text</td>
+          <td>Move the Representative Outcomes lead text ("Anonymized engagement outcomes from $10B+ institutional operating roles...") to sit above the outcome cards within the merged section</td>
+        </tr>
+        <tr>
+          <td class="prop">5. Delete empty wrapper</td>
+          <td>Remove the now-empty "Representative Outcomes" <code>.section-wrapper.section-tinted</code> element entirely</td>
+        </tr>
+        <tr>
+          <td class="prop">6. Section treatment</td>
+          <td>The merged section stays as <code>.section-contained</code> (white bg, bordered card). The tinted treatment from the old outcomes section is no longer needed since the content is now inside a contained card.</td>
+        </tr>
+      </table>
+
+      <div class="css-block"><span class="comment">/* Sub-heading between track vignettes and outcome cards */</span>
+<span class="sel">.outcomes-subheading</span> {
+  <span class="prop">font-family</span>: <span class="val">'EB Garamond', serif</span>;
+  <span class="prop">font-size</span>: <span class="num">22</span><span class="unit">px</span>;
+  <span class="prop">font-weight</span>: <span class="num">400</span>;
+  <span class="prop">color</span>: <span class="val">#1B2A4A</span>;
+  <span class="prop">margin-top</span>: <span class="num">40</span><span class="unit">px</span>;
+  <span class="prop">margin-bottom</span>: <span class="num">16</span><span class="unit">px</span>;
+  <span class="prop">padding-top</span>: <span class="num">32</span><span class="unit">px</span>;
+  <span class="prop">border-top</span>: <span class="num">1</span><span class="unit">px</span> <span class="val">solid</span> <span class="val">#E4E2DC</span>;
+}</div>
+
+      <div class="callout">
+        <strong>Persuasion logic:</strong> The current page splits proof into two sections separated by 900px of other content (bio + track record). By the time the visitor reaches the outcome cards at VP 6.2, they may have forgotten the track record vignettes they passed at VP 8.2 — or more likely, they never scrolled that far. Consolidating all proof into one section creates a "wall of evidence" effect that's more convincing than scattered fragments.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ITEM 03 -->
+<section>
+  <div class="section-num">Item 03</div>
+  <div class="section-title">Move bio card before pricing</div>
+  <div class="section-lead">The Hassan Tariq bio card currently sits at viewport 7.6 — deep in the page, after pricing. Most visitors will see pricing before they know who's behind the practice. Moving the bio above pricing establishes credibility before the ask.</div>
+
+  <div class="issue-card high">
+    <div class="issue-header">
+      <span class="severity-badge high">High</span>
+      <span class="issue-title">Reorder bio card</span>
+    </div>
+    <div class="issue-body">
+
+      <table class="spec-table">
+        <tr><th>Step</th><th>Action</th></tr>
+        <tr>
+          <td class="prop">1. Cut bio section</td>
+          <td>Cut the entire bio card <code>.section-wrapper.section-contained</code> (the one containing "Hassan Tariq", credentials, metrics, headshot, logo strip)</td>
+        </tr>
+        <tr>
+          <td class="prop">2. New position</td>
+          <td>Paste it BEFORE the "Choose Your Path &amp; Pricing" section (the merged section from Item 01). The bio now sits between "The Cost of Not Acting" and pricing.</td>
+        </tr>
+        <tr>
+          <td class="prop">3. No styling changes</td>
+          <td>The bio card keeps its <code>.section-contained</code> class and all existing styling. No CSS changes needed.</td>
+        </tr>
+      </table>
+
+      <div class="callout">
+        <strong>New persuasion flow:</strong> The visitor sees the problem space (Cost of Not Acting) → meets the person who solves it (bio + credentials) → sees what it costs (pricing). This is the classic consultative sales sequence: Pain → Authority → Offer. The current sequence puts the offer before the authority, which weakens conversion.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ITEM 04 -->
+<section>
+  <div class="section-num">Item 04</div>
+  <div class="section-title">Remove the closing proof strip</div>
+  <div class="section-lead">The last section on the page (VP 10.9, 324px) is a closing strip with "~67% incident volume reduction · ~31% MTTR improvement · $2M+ annual vendor savings." This content is now redundant — the same metrics appear in the proof metrics strip at VP 0.9 and in the bio card's metric row.</div>
+
+  <div class="issue-card high">
+    <div class="issue-header">
+      <span class="severity-badge high">High</span>
+      <span class="issue-title">Remove redundant closing strip</span>
+    </div>
+    <div class="issue-body">
+
+      <table class="spec-table">
+        <tr><th>Step</th><th>Action</th></tr>
+        <tr>
+          <td class="prop">1. Identify element</td>
+          <td>The last <code>.section-wrapper.section-contained</code> on the page — contains "~67% incident volume reduction" text and a "Not sure where to start?" CTA</td>
+        </tr>
+        <tr>
+          <td class="prop">2. Check for unique content</td>
+          <td>If the "Not sure where to start? Let's assess fit..." text and CTA are unique (not duplicated elsewhere), move that CTA block into the footer's "Not ready to book?" column before deleting</td>
+        </tr>
+        <tr>
+          <td class="prop">3. Delete section</td>
+          <td>Remove the entire <code>.section-wrapper.section-contained</code> element</td>
+        </tr>
+      </table>
+
+      <div class="css-block"><span class="comment">/* If using CSS-only approach instead of DOM removal: */</span>
+<span class="sel">.section-wrapper.section-contained:last-of-type</span> {
+  <span class="prop">display</span>: <span class="val">none</span>;
+}
+<span class="comment">/* WARNING: This selector is fragile — DOM removal is preferred */</span></div>
+
+      <div class="callout-blue">
+        <strong>For the coding agent:</strong> DOM removal is strongly preferred over CSS hiding. The closing strip's metrics are already displayed in two other locations (proof-metrics-strip below hero, and the bio card's metric row). Removing it saves 324px and eliminates a "this looks familiar" moment that breaks scroll momentum right before the footer.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ITEM 05 -->
+<section>
+  <div class="section-num">Item 05</div>
+  <div class="section-title">Tighten FAQ — collapse into 2 categories</div>
+  <div class="section-lead">The FAQ section has 12 questions in a single flat list, consuming 806px. Group them into 2 collapsible categories to reduce visual density while keeping all content accessible.</div>
+
+  <div class="issue-card moderate">
+    <div class="issue-header">
+      <span class="severity-badge moderate">Minor</span>
+      <span class="issue-title">FAQ category grouping</span>
+    </div>
+    <div class="issue-body">
+
+      <h4>Category grouping</h4>
+      <table class="spec-table">
+        <tr><th>Category</th><th>Questions (current order)</th></tr>
+        <tr>
+          <td class="prop">Working with me</td>
+          <td>
+            Do you replace the operating team?<br>
+            What do you need from us?<br>
+            How do you handle confidentiality?<br>
+            When are you not a fit?<br>
+            What industries do you cover?<br>
+            Do you work with family offices?
+          </td>
+        </tr>
+        <tr>
+          <td class="prop">Engagement &amp; process</td>
+          <td>
+            What is a Value Creation Plan (VCP) and what does it include?<br>
+            Why should we hire you instead of a Big 4 firm?<br>
+            Why should we hire you instead of building an in-house operating team?<br>
+            Why should we trust a solo practitioner?<br>
+            How long does a pre-close diligence engagement take?<br>
+            What if we're still in LOI or haven't entered exclusivity yet?
+          </td>
+        </tr>
+      </table>
+
+      <h4>Implementation</h4>
+      <div class="css-block"><span class="comment">/* HTML structure — replace the flat FAQ list */</span>
+<span class="tag">&lt;div</span> <span class="sel">class="faq-categories"</span><span class="tag">&gt;</span>
+
+  <span class="tag">&lt;div</span> <span class="sel">class="faq-category"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;h3</span> <span class="sel">class="faq-category-heading"</span><span class="tag">&gt;</span>Working with me<span class="tag">&lt;/h3&gt;</span>
+    <span class="comment">&lt;!-- 6 faq-row buttons here --&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+
+  <span class="tag">&lt;div</span> <span class="sel">class="faq-category"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;h3</span> <span class="sel">class="faq-category-heading"</span><span class="tag">&gt;</span>Engagement &amp; process<span class="tag">&lt;/h3&gt;</span>
+    <span class="comment">&lt;!-- 6 faq-row buttons here --&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+
+<span class="tag">&lt;/div&gt;</span></div>
+
+      <div class="css-block"><span class="sel">.faq-categories</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">flex-direction</span>: <span class="val">column</span>;
+  <span class="prop">gap</span>: <span class="num">32</span><span class="unit">px</span>;
+}
+
+<span class="sel">.faq-category-heading</span> {
+  <span class="prop">font-family</span>: <span class="val">'EB Garamond', serif</span>;
+  <span class="prop">font-size</span>: <span class="num">18</span><span class="unit">px</span>;
+  <span class="prop">font-weight</span>: <span class="num">600</span>;
+  <span class="prop">color</span>: <span class="val">#1B2A4A</span>;
+  <span class="prop">margin-bottom</span>: <span class="num">12</span><span class="unit">px</span>;
+  <span class="prop">padding-bottom</span>: <span class="num">8</span><span class="unit">px</span>;
+  <span class="prop">border-bottom</span>: <span class="num">2</span><span class="unit">px</span> <span class="val">solid</span> <span class="val">#C8952E</span>;
+  <span class="prop">display</span>: <span class="val">inline-block</span>; <span class="comment">/* underline only as wide as text */</span>
+}</div>
+
+      <div class="callout">
+        <strong>Why not collapse the categories themselves?</strong> All 12 questions should remain individually expandable (they already are — <code>.faq-row</code> buttons with onclick). The category headings just add structure so the visitor can scan "Working with me" vs "Engagement &amp; process" and jump to the relevant cluster. This doesn't reduce the FAQ height much, but it makes 12 questions feel organized rather than overwhelming.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ TARGET MAP -->
+<section>
+  <div class="section-num">Target state</div>
+  <div class="section-title">New page section order</div>
+
+  <div class="order-map">
+    <span class="label">VP&nbsp;&nbsp;&nbsp;</span> <span class="label">SECTION</span><br>
+    <span class="vpn">0.1</span>&nbsp;&nbsp; <span class="keep">Hero + CTAs</span><br>
+    <span class="vpn">0.9</span>&nbsp;&nbsp; <span class="keep">Proof metrics strip</span><br>
+    <span class="vpn">1.2</span>&nbsp;&nbsp; <span class="keep">Who This Is Built For (3 persona cards)</span><br>
+    <span class="vpn">2.5</span>&nbsp;&nbsp; <span class="keep">20 Operational Value Creation Levers</span><br>
+    <span class="vpn">3.1</span>&nbsp;&nbsp; <span class="keep">The Cost of Not Acting (3 risk cards)</span><br>
+    <span class="vpn">4.1</span>&nbsp;&nbsp; <span class="move">Hassan Tariq bio card (MOVED UP from VP 7.6)</span><br>
+    <span class="vpn">4.7</span>&nbsp;&nbsp; <span class="merge">Choose Your Path &amp; Pricing (path cards + pricing cards MERGED)</span><br>
+    <span class="vpn">6.2</span>&nbsp;&nbsp; <span class="merge">Track Record &amp; Outcomes (vignettes + outcomes MERGED)</span><br>
+    <span class="vpn">7.5</span>&nbsp;&nbsp; <span class="keep">Endorsement quote</span><br>
+    <span class="vpn">7.9</span>&nbsp;&nbsp; <span class="keep">FAQ (12 questions in 2 categories)</span><br>
+    <span class="vpn">9.1</span>&nbsp;&nbsp; <span class="keep">Footer</span><br>
+  </div>
+
+  <p style="font-size:14px;color:#6B6B65;margin-top:16px;"><strong>New persuasion sequence:</strong> Problem definition (hero → persona cards → value levers → cost of inaction) → Authority (bio + credentials) → Offer (path selection → pricing) → Evidence (track record + outcomes + endorsement) → Objection handling (FAQ) → Conversion (footer form). This follows the classic Pain → Authority → Offer → Proof → Close structure.</p>
+</section>
+
+<!-- ══════════════════════════════════════════════ SUMMARY -->
+<section>
+  <div class="section-num">Implementation Summary</div>
+  <div class="section-title">Priority sequence</div>
+
+  <div class="summary-box">
+    <h3>Execute in this order</h3>
+    <ul>
+      <li><strong>Pass 1 — Removals (Item 04):</strong> Delete the closing proof strip. Fastest change, immediate scroll reduction.</li>
+      <li><strong>Pass 2 — Merge path cards into pricing (Item 01):</strong> Move the two path card divs and their parent into the pricing section. Add sub-heading. Delete the empty "Choose Your Situation" wrapper.</li>
+      <li><strong>Pass 3 — Merge outcomes into track record (Item 02):</strong> Move the outcomes container into the track record section. Add sub-heading. Delete the empty "Representative Outcomes" wrapper.</li>
+      <li><strong>Pass 4 — Move bio card (Item 03):</strong> Cut and paste the bio section wrapper to before the merged pricing section.</li>
+      <li><strong>Pass 5 — FAQ categories (Item 05):</strong> Wrap FAQ questions into two category groups with headings.</li>
+    </ul>
+  </div>
+
+  <table class="spec-table" style="margin-top: 24px;">
+    <tr><th>Item</th><th>Severity</th><th>LOE</th><th>Type</th></tr>
+    <tr>
+      <td class="prop">01 — Merge path → pricing</td>
+      <td><span class="severity-badge critical" style="font-size:9px;">Critical</span></td>
+      <td>25 min</td>
+      <td>HTML restructure</td>
+    </tr>
+    <tr>
+      <td class="prop">02 — Merge outcomes → track record</td>
+      <td><span class="severity-badge critical" style="font-size:9px;">Critical</span></td>
+      <td>25 min</td>
+      <td>HTML restructure</td>
+    </tr>
+    <tr>
+      <td class="prop">03 — Move bio card up</td>
+      <td><span class="severity-badge high" style="font-size:9px;">High</span></td>
+      <td>10 min</td>
+      <td>HTML reorder</td>
+    </tr>
+    <tr>
+      <td class="prop">04 — Remove closing strip</td>
+      <td><span class="severity-badge high" style="font-size:9px;">High</span></td>
+      <td>5 min</td>
+      <td>HTML deletion</td>
+    </tr>
+    <tr>
+      <td class="prop">05 — FAQ categories</td>
+      <td><span class="severity-badge moderate" style="font-size:9px;">Minor</span></td>
+      <td>15 min</td>
+      <td>HTML + CSS</td>
+    </tr>
+  </table>
+
+  <div class="callout" style="margin-top:24px;">
+    <strong>Total LOE:</strong> ~1.5 hours. This is primarily HTML restructuring — moving DOM elements, not writing new CSS. The only new CSS is the sub-heading styles and FAQ category heading styles. All moves are cut-and-paste operations with no content changes.
+  </div>
+
+  <div class="callout-blue" style="margin-top:16px;">
+    <strong>Important:</strong> These are structural DOM changes, not CSS tweaks. The coding agent should work carefully — test after each pass to make sure no content is lost and all internal links/scroll targets still work. The tinted section assignments may need updating after the merges (the old "Representative Outcomes" tinted section is being absorbed into a contained section).
+  </div>
+</section>
+
+</div>
+
+<!-- ══════════════════════════════════════════════ GLOBAL SCOPE -->
+<section>
+  <div class="section-num">Global scope</div>
+  <div class="section-title">Cross-page consistency requirements</div>
+  <div class="section-lead">The items above target /pe. These additional changes ensure the same patterns apply across all 5 pages on the site.</div>
+
+  <div class="issue-card critical">
+    <div class="issue-header">
+      <span class="severity-badge critical">Critical</span>
+      <span class="issue-title">/pe/services — apply same IA patterns</span>
+    </div>
+    <div class="issue-body">
+      <p>The Services page is 9,138px (13.4 viewport-depths) — even longer than the main page. It shares many structural patterns that need the same treatment.</p>
+
+      <table class="spec-table">
+        <tr><th>Item</th><th>Action</th></tr>
+        <tr>
+          <td class="prop">Closing CTA strip</td>
+          <td>The last <code>.section-wrapper.section-contained</code> on /pe/services is a closing CTA/proof strip similar to the one removed from /pe (Item 04). Remove it — same rationale (redundant with metrics shown elsewhere).</td>
+        </tr>
+        <tr>
+          <td class="prop">FAQ categorization</td>
+          <td>The Services page has the same 12 FAQ questions. Apply the same 2-category grouping from Item 05 ("Working with me" / "Engagement &amp; process") with the same heading styles.</td>
+        </tr>
+        <tr>
+          <td class="prop">McKinsey blockquote</td>
+          <td>The Services page has a McKinsey quote (53% of LPs stat) inside the "Framework" section at the top. Apply the standardized blockquote treatment: <code>background: #FFFBF0; border-left: 3px solid #C8952E; padding: 14px 16px; border-radius: 0 6px 6px 0;</code></td>
+        </tr>
+        <tr>
+          <td class="prop">Card design tokens</td>
+          <td>The Services page has 3 <code>.pricing-card</code> elements. Ensure the card design spec tokens (12px radius, <code>#E4E2DC</code> border, shadow, padding) and recommended card treatment apply here too. The CSS is global, so this should work automatically if the class names match.</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="issue-card high">
+    <div class="issue-header">
+      <span class="severity-badge high">High</span>
+      <span class="issue-title">/pe/about — collapse oversized outcomes section</span>
+    </div>
+    <div class="issue-body">
+      <p>The About page's "Representative Outcomes" section is <strong>2,194px tall</strong> — it alone consumes 3.2 viewport-heights. This is the same outcome content that appears on /pe (where it's been merged into Track Record). On the About page it's standalone and fully expanded.</p>
+
+      <table class="spec-table">
+        <tr><th>Item</th><th>Action</th></tr>
+        <tr>
+          <td class="prop">Collapse outcomes</td>
+          <td>Apply the same expand/collapse pattern from the social proof spec (Item 05): show the first 2 outcome cards expanded by default, put the remainder behind a "Show more outcomes ▸" toggle. This reduces the section from ~2,194px to ~800px.</td>
+        </tr>
+        <tr>
+          <td class="prop">Closing CTA strip</td>
+          <td>The About page has a closing section at the bottom ("15 minutes. I'll assess the situation..."). Review for redundancy — if it duplicates content available in the footer form, remove it.</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="issue-card high">
+    <div class="issue-header">
+      <span class="severity-badge high">High</span>
+      <span class="issue-title">McKinsey blockquote — standardized treatment (both pages)</span>
+    </div>
+    <div class="issue-body">
+      <p>There are two McKinsey blockquotes across the site. Neither has a dedicated class — they're classless <code>&lt;div&gt;</code> elements with inline-ish styling. Both should receive the same treatment as all other blockquotes in the card design system.</p>
+
+      <table class="spec-table">
+        <tr><th>Location</th><th>Current content</th><th>Action</th></tr>
+        <tr>
+          <td class="prop">/pe — inside "20 Levers" tinted section</td>
+          <td>"16,000+ PE-backed companies..." + "MCKINSEY GLOBAL PRIVATE MARKETS REVIEW 2026"</td>
+          <td>Add class <code>mckinsey-quote</code>. Apply standardized blockquote CSS below.</td>
+        </tr>
+        <tr>
+          <td class="prop">/pe/services — inside "Framework" contained section</td>
+          <td>"53% of LPs now rank a GP's value creation strategy..." + "MCKINSEY GLOBAL PRIVATE MARKETS REVIEW 2026"</td>
+          <td>Add class <code>mckinsey-quote</code>. Apply same CSS.</td>
+        </tr>
+      </table>
+
+      <div class="css-block"><span class="comment">/* ══ McKinsey blockquote — standardized treatment ══ */</span>
+<span class="sel">.mckinsey-quote</span> {
+  <span class="prop">background</span>: <span class="val">#FFFBF0</span>;
+  <span class="prop">border-left</span>: <span class="num">3</span><span class="unit">px</span> <span class="val">solid</span> <span class="val">#C8952E</span>;
+  <span class="prop">padding</span>: <span class="num">20</span><span class="unit">px</span> <span class="num">24</span><span class="unit">px</span>;
+  <span class="prop">border-radius</span>: <span class="num">0</span> <span class="num">8</span><span class="unit">px</span> <span class="num">8</span><span class="unit">px</span> <span class="num">0</span>;
+  <span class="prop">margin</span>: <span class="num">24</span><span class="unit">px</span> <span class="num">0</span>;
+}
+
+<span class="comment">/* Attribution line ("MCKINSEY GLOBAL...") */</span>
+<span class="sel">.mckinsey-quote .attribution,
+.mckinsey-quote small,
+.mckinsey-quote:last-child</span> {
+  <span class="prop">display</span>: <span class="val">block</span>;
+  <span class="prop">font-size</span>: <span class="num">10</span><span class="unit">px</span>;
+  <span class="prop">font-weight</span>: <span class="num">600</span>;
+  <span class="prop">letter-spacing</span>: <span class="num">1.5</span><span class="unit">px</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">color</span>: <span class="val">#A0A09A</span>;
+  <span class="prop">margin-top</span>: <span class="num">12</span><span class="unit">px</span>;
+}
+
+<span class="comment">/* Slightly larger padding than standard proof quotes
+   because McKinsey quotes contain longer statistical text */</span></div>
+
+      <div class="callout">
+        <strong>Design note:</strong> The McKinsey blockquotes use <code>padding: 20px 24px</code> (slightly larger than the standard <code>14px 16px</code> for proof quotes) because they contain longer statistical paragraphs. The border-radius is also <code>0 8px 8px 0</code> (slightly larger than the <code>0 6px 6px 0</code> on card-internal proof quotes) to feel proportionate to the larger block. This is a deliberate size variation within the shared visual language — same family, slightly larger sibling.
+      </div>
+    </div>
+  </div>
+
+  <div class="issue-card moderate">
+    <div class="issue-header">
+      <span class="severity-badge moderate">Minor</span>
+      <span class="issue-title">Global checklist for coding agent</span>
+    </div>
+    <div class="issue-body">
+      <p>Before marking any spec as complete, the coding agent should verify these patterns are consistent across all pages:</p>
+
+      <table class="spec-table">
+        <tr><th>Pattern</th><th>Pages that should have it</th></tr>
+        <tr>
+          <td class="prop">Card design tokens (12px radius, #E4E2DC border, shadow)</td>
+          <td>/pe, /pe/services, /pe/about, /pe/resources</td>
+        </tr>
+        <tr>
+          <td class="prop">Tinted/contained section rhythm</td>
+          <td>/pe (done), /pe/services (partially done), /pe/about (partially done), /pe/resources (1 section)</td>
+        </tr>
+        <tr>
+          <td class="prop">CTA hierarchy (primary gold, secondary gray-border)</td>
+          <td>/pe (done), /pe/services, /pe/about, /pe/resources</td>
+        </tr>
+        <tr>
+          <td class="prop">Blockquote treatment (#FFFBF0 bg, gold left-border)</td>
+          <td>All pages with blockquotes — /pe (proof quotes, McKinsey), /pe/services (McKinsey), /pe/about (if any)</td>
+        </tr>
+        <tr>
+          <td class="prop">FAQ categorization (2 groups)</td>
+          <td>/pe (done), /pe/services (needs same treatment)</td>
+        </tr>
+        <tr>
+          <td class="prop">Closing CTA strip removal</td>
+          <td>/pe (done), /pe/services (needs removal), /pe/about (review)</td>
+        </tr>
+        <tr>
+          <td class="prop">Heading spacing (12px h2 margin, 32px lead margin)</td>
+          <td>All pages globally</td>
+        </tr>
+        <tr>
+          <td class="prop">.card-text-link style (underline links replacing buttons)</td>
+          <td>All pages where card CTAs were downgraded</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div style="background: var(--midnight); color: rgba(255,255,255,0.3); text-align: center; padding: 32px; font-size: 12px;">
+  Devonshire Ops — Information Architecture Spec — April 2026
+</div>
+
+</body>
+</html>
