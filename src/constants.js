@@ -303,6 +303,17 @@ export const globalCSS = `
     --muted: #6B7280;
     --maxcopy: 70ch;
     --nav-h: 76px;
+    --card-radius: 12px;
+    --card-border: 1px solid #E4E2DC;
+    --card-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    --card-shadow-hover: 0 4px 16px rgba(0,0,0,0.08);
+    --card-pad-x: 28px;
+    --card-pad-top: 28px;
+    --card-pad-bottom: 32px;
+    --card-bg: #fff;
+    --card-gap: 20px;
+    --card-accent-width: 3px;
+    --card-transition: all 0.2s ease;
   }
 
   body {
@@ -555,24 +566,29 @@ export const globalCSS = `
   }
 
   /* Issue 04 — Pricing cards */
+  .pricing-grid { padding-top: 20px; }
+  .pricing-card.recommended {
+    position: relative !important;
+    background: #FFFBF0 !important;
+    border: 2px solid #C8952E !important;
+    box-shadow: 0 8px 24px rgba(200,149,46,0.15) !important;
+    transform: scale(1.03);
+    z-index: 2;
+  }
+  .pricing-card.recommended::before {
+    content: 'Recommended';
+    position: absolute; top: -14px; left: 50%;
+    transform: translateX(-50%);
+    background: #C8952E; color: #fff;
+    font-size: 11px; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; padding: 5px 18px;
+    border-radius: 20px; white-space: nowrap;
+  }
+  .pricing-card.recommended .price { font-size: 22px; font-weight: 600; }
   @media (max-width: 768px) {
     .pricing-grid { gap: 20px !important; }
     .pricing-card { padding: 24px 20px 28px !important; border-radius: 12px !important; }
-    .pricing-card.recommended {
-      position: relative !important;
-      background: #FFFBF0 !important;
-      border: 2px solid ${COLORS.gold} !important;
-      padding: 32px 20px 28px !important;
-    }
-    .pricing-card.recommended::before {
-      content: 'Recommended';
-      position: absolute; top: -12px; left: 50%;
-      transform: translateX(-50%);
-      background: ${COLORS.gold}; color: #fff;
-      font-size: 11px; font-weight: 600; letter-spacing: 1px;
-      text-transform: uppercase; padding: 4px 16px;
-      border-radius: 20px; white-space: nowrap;
-    }
+    .pricing-card.recommended { transform: none !important; padding: 32px 20px 28px !important; }
     .pricing-card .price { font-size: 22px !important; font-weight: 600 !important; }
   }
 
@@ -808,5 +824,76 @@ export const globalCSS = `
   .card-text-link:hover {
     text-decoration-color: #B8860B;
     color: #B8860B;
+  }
+
+  /* ══════════════════════════════════════════════════════════════
+     CARD DESIGN — spec: devonshire-card-design-spec.html
+     ══════════════════════════════════════════════════════════════ */
+
+  /* Item 01 — Persona cards */
+  .buyer-cards-wrapper { align-items: stretch; }
+  .proof-quote {
+    padding: 14px 16px !important;
+    background: #FAFAF8 !important;
+    border-radius: 0 6px 6px 0 !important;
+    margin-top: 0 !important;
+  }
+  .buyer-card .card-text-link { margin-top: auto; padding-top: 20px; }
+
+  /* Item 03 — Risk/cost cards */
+  .cost-card {
+    border: 1px solid #E8C4C0 !important;
+    border-top: 3px solid #C0392B !important;
+    border-radius: var(--card-radius) !important;
+    box-shadow: var(--card-shadow) !important;
+  }
+  .pe-consequence {
+    background: #FDF6F6 !important;
+    border: none !important;
+    border-left: 3px solid #C0392B !important;
+    border-radius: 0 6px 6px 0 !important;
+    padding: 14px 16px !important;
+    margin-top: 20px !important;
+  }
+
+  /* Item 04 — Path cards */
+  .path-cards-grid { display: flex; gap: var(--card-gap); align-items: stretch; flex-wrap: wrap; }
+  .path-card {
+    background: var(--card-bg) !important;
+    border: var(--card-border) !important;
+    border-top: 3px solid #1B2A4A !important;
+    border-radius: var(--card-radius) !important;
+    box-shadow: var(--card-shadow) !important;
+    padding: var(--card-pad-top) var(--card-pad-x) var(--card-pad-bottom) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 280px;
+  }
+  .path-card .card-text-link { margin-top: auto; padding-top: 20px; }
+
+  /* Item 05 — Outcome cards */
+  .outcome-card {
+    border: var(--card-border) !important;
+    border-top: 3px solid #C8952E !important;
+    border-radius: var(--card-radius) !important;
+    box-shadow: var(--card-shadow) !important;
+  }
+
+  /* Item 06 — Track record vignettes */
+  .track-vignettes-grid { display: flex; gap: var(--card-gap); align-items: stretch; flex-wrap: wrap; }
+  .track-vignette {
+    background: var(--card-bg) !important;
+    border: var(--card-border) !important;
+    border-radius: var(--card-radius) !important;
+    box-shadow: var(--card-shadow) !important;
+    padding: var(--card-pad-top) var(--card-pad-x) var(--card-pad-bottom) !important;
+    flex: 1 1 300px;
+  }
+  .track-result {
+    background: #FFFBF0 !important;
+    border-left: 3px solid #C8952E !important;
+    padding: 14px 16px !important;
+    border-radius: 0 6px 6px 0 !important;
+    margin-top: 20px !important;
   }
 `;

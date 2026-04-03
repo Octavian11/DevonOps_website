@@ -295,8 +295,8 @@ function ChooseSituation({ setPage }) {
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "24px" }}>
         Pick the track that matches where you are in the lifecycle. Both paths deliver <strong>risk-rated findings, PE impact framing, and a clear Day-1 critical path</strong>.
       </p>
-      <div style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap" }}>
-        <div style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
+      <div className="path-cards-grid" style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap" }}>
+        <div className="path-card" style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
           <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{leftSide.title}</div>
           <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{leftSide.description}</p>
           <ul style={{ paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
@@ -310,7 +310,7 @@ function ChooseSituation({ setPage }) {
             </button>
           </div>
         </div>
-        <div style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
+        <div className="path-card" style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
           <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{rightSide.title}</div>
           <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{rightSide.description}</p>
           <ul style={{ paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
@@ -334,9 +334,9 @@ function ChooseSituation({ setPage }) {
 function MiniCases() {
   const [moreExpanded, setMoreExpanded] = useState(false);
   const box = { border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.gold}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" };
-  const fieldLabel = { fontFamily: FONTS.body, fontSize: "0.75rem", fontWeight: 700, color: COLORS.navy, letterSpacing: "0.6px", textTransform: "uppercase", display: "block", marginBottom: "4px" };
+  const fieldLabel = { fontFamily: FONTS.body, fontSize: "10px", fontWeight: 700, color: COLORS.navy, letterSpacing: "1.5px", textTransform: "uppercase", display: "block", marginBottom: "4px" };
   const fieldVal = { fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, margin: "0 0 14px 0" };
-  const valueCreated = { fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, margin: 0, padding: "10px 12px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0` };
+  const valueCreated = { fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, margin: 0, padding: "14px 16px", background: "#FFFBF0", borderLeft: `3px solid #C8952E`, borderRadius: "0 6px 6px 0" };
 
   return (
     <Section title="Representative Outcomes" noCTA variant="tinted">

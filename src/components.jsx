@@ -612,14 +612,14 @@ export function TestimonialBlock() {
   const result = { fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0, padding: "10px 12px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0` };
   return (
     <Section title="Institutional Track Record" noCTA>
-      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginBottom: "14px" }}>
-        <div style={cardStyle}>
+      <div className="track-vignettes-grid" style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginBottom: "14px" }}>
+        <div className="track-vignette" style={cardStyle}>
           <span style={contextLabel}>Platform Stabilization · Multi-strategy hedge fund, ~$10B AUM</span>
           <div style={cardTitle}>Platform Stabilization & Reliability</div>
           <p style={body}>Inherited a platform with 4 critical outages in 12 months, 94% availability, and a deteriorating NPS score. Built a 10-person global ops team, installed incident command with severity classification and postmortem discipline, and stood up a KPI cadence across 18 metrics.</p>
           <div className="track-result" style={result}>Zero critical outages for 18 consecutive months. Availability: 94% → 99.2%. MTTR reduced 31%. NPS improved +22 points. Supported ~50% AUM growth with ~12% headcount increase.</div>
         </div>
-        <div style={cardStyle}>
+        <div className="track-vignette" style={cardStyle}>
           <span style={contextLabel}>Vendor Optimization · Global asset manager, ~$40M vendor program</span>
           <div style={cardTitle}>Vendor Optimization & Cost Control</div>
           <p style={body}>Vendor costs growing 22% annually, outpacing business growth. 15 fragmented providers, no utilization visibility, no governance. Built spend transparency, ran utilization analytics, consolidated 15 vendors to 8 strategic partners, and installed scorecard governance with QBRs.</p>
