@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Card &amp; Component Design Spec — devonshireops.com/pe</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600&family=DM+Mono&display=swap');
+  :root { --midnight: #1B2A4A; --gold: #C8952E; --steel: #5A7A9B; --graphite: #3D3D3A; --bg: #FAF9F6; --border: #D6D4CE; --border-light: #E4E2DC; --red: #C0392B; --green: #1D9E75; --blue: #2E6DA4; --amber: #BA7517; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--graphite); background: var(--bg); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  .cover { background: var(--midnight); color: #fff; padding: 80px 48px 64px; text-align: center; }
+  .cover-badge { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(200,149,46,0.35); padding: 6px 16px; border-radius: 4px; margin-bottom: 32px; }
+  .cover h1 { font-family: 'EB Garamond', serif; font-size: 38px; font-weight: 400; line-height: 1.2; margin-bottom: 16px; }
+  .cover h1 em { font-style: italic; color: var(--gold); }
+  .cover .subtitle { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 600px; margin: 0 auto 32px; }
+  .cover-meta { display: flex; justify-content: center; gap: 40px; font-size: 12px; color: rgba(255,255,255,0.4); }
+  .container { max-width: 880px; margin: 0 auto; padding: 0 32px; }
+  .section-num { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .section-title { font-family: 'EB Garamond', serif; font-size: 28px; font-weight: 400; color: var(--midnight); margin-bottom: 8px; }
+  .section-lead { font-size: 15px; color: #6B6B65; margin-bottom: 32px; max-width: 680px; }
+  section { padding: 56px 0; border-bottom: 1px solid var(--border); }
+  section:last-of-type { border-bottom: none; }
+  .issue-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 28px; margin-bottom: 24px; position: relative; }
+  .issue-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; border-radius: 10px 0 0 10px; }
+  .issue-card.critical::before { background: var(--red); }
+  .issue-card.high::before { background: var(--amber); }
+  .issue-card.moderate::before { background: var(--steel); }
+  .issue-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .severity-badge { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; }
+  .severity-badge.critical { background: #FCEAEA; color: var(--red); }
+  .severity-badge.high { background: #FDF3E0; color: var(--amber); }
+  .severity-badge.moderate { background: #E8F0F7; color: var(--steel); }
+  .issue-title { font-size: 17px; font-weight: 600; color: var(--midnight); }
+  .issue-body p { font-size: 14px; margin-bottom: 12px; }
+  .spec-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  .spec-table th { text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: #888; padding: 8px 12px; border-bottom: 2px solid var(--border); }
+  .spec-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .spec-table tr:last-child td { border-bottom: none; }
+  .spec-table .prop { font-weight: 500; color: var(--midnight); white-space: nowrap; }
+  .val-current { color: var(--red); font-family: 'DM Mono', monospace; font-size: 12px; }
+  .val-fix { color: var(--green); font-weight: 600; font-family: 'DM Mono', monospace; font-size: 12px; }
+  .val-keep { color: var(--blue); font-family: 'DM Mono', monospace; font-size: 12px; }
+  .css-block { background: #1E1E2E; color: #CDD6F4; padding: 20px 24px; border-radius: 8px; font-family: 'DM Mono', monospace; font-size: 12px; line-height: 1.8; overflow-x: auto; margin: 16px 0; white-space: pre; }
+  .css-block .sel { color: #89B4FA; } .css-block .prop { color: #CBA6F7; } .css-block .val { color: #A6E3A1; } .css-block .comment { color: #6C7086; font-style: italic; } .css-block .num { color: #FAB387; } .css-block .unit { color: #F9E2AF; }
+  .callout { background: #FFFBF0; border-left: 3px solid var(--gold); padding: 16px 20px; font-size: 14px; border-radius: 0 6px 6px 0; margin: 20px 0; color: #5A4E2F; }
+  .callout strong { color: #3D3000; }
+  .callout-blue { background: #EDF4FC; border-left: 3px solid var(--blue); padding: 16px 20px; font-size: 14px; border-radius: 0 6px 6px 0; margin: 20px 0; color: #1A3A5C; }
+  h4 { font-size: 14px; font-weight: 600; color: var(--midnight); margin: 24px 0 8px; }
+  .design-token-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 12px; }
+  .design-token-table th { text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); padding: 10px 12px; border-bottom: 2px solid var(--border); background: #FFFBF0; }
+  .design-token-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); font-family: 'DM Mono', monospace; font-size: 12px; }
+  .design-token-table tr:last-child td { border-bottom: none; }
+  .summary-box { background: var(--midnight); color: #fff; padding: 32px; border-radius: 10px; margin: 24px 0; }
+  .summary-box h3 { font-family: 'EB Garamond', serif; font-size: 22px; font-weight: 400; margin-bottom: 16px; color: var(--gold); }
+  .summary-box ul { list-style: none; padding: 0; }
+  .summary-box li { font-size: 14px; padding: 6px 0 6px 20px; position: relative; color: rgba(255,255,255,0.8); }
+  .summary-box li::before { content: '→'; position: absolute; left: 0; color: var(--gold); }
+</style>
+</head>
+<body>
+<div class="cover"><div class="cover-badge">Implementation Spec</div><h1>Card &amp; Component <em>Design</em></h1><p class="subtitle">Establish a unified card design system across 7 component types. Fix pricing card hierarchy, standardize internal spacing, and create consistent visual language across persona cards, risk cards, path cards, and proof blocks.</p><div class="cover-meta"><span>6 implementation items</span><span>April 2026</span></div></div>
+<div class="container">
+
+<section><div class="section-num">Foundation</div><div class="section-title">Shared card design tokens</div><div class="section-lead">Before touching individual card types, establish a shared design vocabulary. Every card on the site should inherit from this token system.</div><div class="issue-card critical"><div class="issue-header"><span class="severity-badge critical">Critical</span><span class="issue-title">Card token system</span></div><div class="issue-body"><p>Define CSS custom properties that all card types share. Individual card types override only what they need to.</p><table class="design-token-table"><tr><th>Token</th><th>Value</th><th>Usage</th></tr><tr><td>--card-radius</td><td>12px</td><td>All card corners</td></tr><tr><td>--card-border</td><td>1px solid #E4E2DC</td><td>Default border</td></tr><tr><td>--card-shadow</td><td>0 1px 3px rgba(0,0,0,0.04)</td><td>Subtle depth</td></tr><tr><td>--card-shadow-hover</td><td>0 4px 16px rgba(0,0,0,0.08)</td><td>Lift on hover (interactive cards)</td></tr><tr><td>--card-pad-x</td><td>28px</td><td>Horizontal padding</td></tr><tr><td>--card-pad-top</td><td>28px</td><td>Top padding</td></tr><tr><td>--card-pad-bottom</td><td>32px</td><td>Bottom padding (CTA breathing room)</td></tr><tr><td>--card-bg</td><td>#fff</td><td>Default background</td></tr><tr><td>--card-gap</td><td>20px</td><td>Gap between cards in grid</td></tr><tr><td>--card-accent-width</td><td>3px</td><td>Top/left accent border thickness</td></tr><tr><td>--card-transition</td><td>all 0.2s ease</td><td>Hover transitions</td></tr></table><div class="css-block"><span class="sel">:root</span> {
+  <span class="prop">--card-radius</span>: <span class="num">12</span><span class="unit">px</span>;
+  <span class="prop">--card-border</span>: <span class="num">1</span><span class="unit">px</span> <span class="val">solid</span> <span class="val">#E4E2DC</span>;
+  <span class="prop">--card-shadow</span>: <span class="num">0</span> <span class="num">1</span><span class="unit">px</span> <span class="num">3</span><span class="unit">px</span> <span class="val">rgba(0,0,0,0.04)</span>;
+  <span class="prop">--card-shadow-hover</span>: <span class="num">0</span> <span class="num">4</span><span class="unit">px</span> <span class="num">16</span><span class="unit">px</span> <span class="val">rgba(0,0,0,0.08)</span>;
+  <span class="prop">--card-pad-x</span>: <span class="num">28</span><span class="unit">px</span>;
+  <span class="prop">--card-pad-top</span>: <span class="num">28</span><span class="unit">px</span>;
+  <span class="prop">--card-pad-bottom</span>: <span class="num">32</span><span class="unit">px</span>;
+  <span class="prop">--card-bg</span>: <span class="val">#fff</span>;
+  <span class="prop">--card-gap</span>: <span class="num">20</span><span class="unit">px</span>;
+  <span class="prop">--card-accent-width</span>: <span class="num">3</span><span class="unit">px</span>;
+  <span class="prop">--card-transition</span>: <span class="val">all 0.2s ease</span>;
+}</div><div class="callout-blue"><strong>For the coding agent:</strong> Add these tokens to <code>:root</code> in your stylesheet. Then apply them to existing card classes — do NOT add a new <code>.card-base</code> class to every element. Each card type's CSS block below references these tokens directly.</div></div></div></section>
+
+<section><div class="section-num">Item 01</div><div class="section-title">Persona cards — equal height + internal spacing</div><div class="section-lead">The three persona cards are the strongest card type. Fixes: equal height across the row, consistent internal spacing, and proof quote tinting.</div><div class="issue-card high"><div class="issue-header"><span class="severity-badge high">High</span><span class="issue-title">Persona card refinement</span></div><div class="issue-body"><table class="spec-table"><tr><th>Property</th><th>Current</th><th>Fix</th></tr><tr><td class="prop">Card grid</td><td class="val-current">flex (no equal height guarantee)</td><td class="val-fix">display: grid; grid-template-columns: repeat(3,1fr); align-items: stretch; gap: var(--card-gap);</td></tr><tr><td class="prop">Card internal layout</td><td class="val-current">natural flow</td><td class="val-fix">display: flex; flex-direction: column; — CTA link pushed to bottom</td></tr><tr><td class="prop">Badge icon size</td><td class="val-current">~28px</td><td class="val-fix">32×32px, border-radius: 6px</td></tr><tr><td class="prop">Heading → italic text gap</td><td class="val-current">varies</td><td class="val-fix">12px</td></tr><tr><td class="prop">Italic text → bullet list gap</td><td class="val-current">varies</td><td class="val-fix">16px</td></tr><tr><td class="prop">Bullet list → proof quote gap</td><td class="val-current">~8px</td><td class="val-fix">20px</td></tr><tr><td class="prop">Proof quote background</td><td class="val-current">transparent</td><td class="val-fix">#FAFAF8 — barely-there tint</td></tr><tr><td class="prop">Proof quote padding</td><td class="val-current">~12px left only</td><td class="val-fix">14px 16px all sides</td></tr><tr><td class="prop">Proof quote border-radius</td><td class="val-current">0</td><td class="val-fix">0 6px 6px 0</td></tr><tr><td class="prop">CTA link position</td><td class="val-current">varies by content</td><td class="val-fix">margin-top: auto; padding-top: 20px; — aligns across row</td></tr></table><div class="css-block"><span class="sel">.buyer-cards-wrapper</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>; <span class="comment">/* already flex in DOM — keep */</span>
+  <span class="prop">gap</span>: <span class="val">var(--card-gap)</span>;
+  <span class="prop">align-items</span>: <span class="val">stretch</span>;
+}
+<span class="sel">.buyer-cards-wrapper .buyer-card</span> {
+  <span class="prop">flex</span>: <span class="num">1</span>; <span class="comment">/* equal width */</span>
+}
+<span class="sel">.buyer-card</span> {
+  <span class="prop">background</span>: <span class="val">var(--card-bg)</span>;
+  <span class="prop">border</span>: <span class="val">var(--card-border)</span>;
+  <span class="prop">border-radius</span>: <span class="val">var(--card-radius)</span>;
+  <span class="prop">box-shadow</span>: <span class="val">var(--card-shadow)</span>;
+  <span class="prop">padding</span>: <span class="val">var(--card-pad-top) var(--card-pad-x) var(--card-pad-bottom)</span>;
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">flex-direction</span>: <span class="val">column</span>;
+}
+<span class="sel">.buyer-card .card-text-link</span> {
+  <span class="prop">margin-top</span>: <span class="val">auto</span>;
+  <span class="prop">padding-top</span>: <span class="num">20</span><span class="unit">px</span>;
+}
+<span class="sel">.buyer-card .badge-icon</span> {
+  <span class="prop">width</span>: <span class="num">32</span><span class="unit">px</span>; <span class="prop">height</span>: <span class="num">32</span><span class="unit">px</span>;
+  <span class="prop">border-radius</span>: <span class="num">6</span><span class="unit">px</span>; <span class="prop">font-size</span>: <span class="num">12</span><span class="unit">px</span>;
+}
+<span class="sel">.buyer-card blockquote</span> {
+  <span class="prop">padding</span>: <span class="num">14</span><span class="unit">px</span> <span class="num">16</span><span class="unit">px</span>;
+  <span class="prop">background</span>: <span class="val">#FAFAF8</span>;
+  <span class="prop">border-radius</span>: <span class="num">0</span> <span class="num">6</span><span class="unit">px</span> <span class="num">6</span><span class="unit">px</span> <span class="num">0</span>;
+  <span class="prop">margin-top</span>: <span class="num">20</span><span class="unit">px</span>;
+}
+<span class="sel">.buyer-card h3</span> { <span class="prop">margin-bottom</span>: <span class="num">12</span><span class="unit">px</span>; }
+<span class="sel">.buyer-card ul</span> { <span class="prop">margin-top</span>: <span class="num">16</span><span class="unit">px</span>; }</div></div></div></section>
+
+<section><div class="section-num">Item 02</div><div class="section-title">Pricing cards — recommended tier visually dominant</div><div class="section-lead">Extend the mobile spec's recommended badge to desktop with scale lift and warm shadow.</div><div class="issue-card critical"><div class="issue-header"><span class="severity-badge critical">Critical</span><span class="issue-title">Pricing card hierarchy (desktop)</span></div><div class="issue-body"><table class="spec-table"><tr><th>Property</th><th>Non-recommended</th><th>Recommended (Bundle)</th></tr><tr><td class="prop">Background</td><td class="val-keep">#fff</td><td class="val-fix">#FFFBF0</td></tr><tr><td class="prop">Border</td><td class="val-keep">var(--card-border)</td><td class="val-fix">2px solid #C8952E (all sides)</td></tr><tr><td class="prop">Scale (desktop only)</td><td class="val-keep">1</td><td class="val-fix">transform: scale(1.03); z-index: 2;</td></tr><tr><td class="prop">Box-shadow</td><td class="val-keep">var(--card-shadow)</td><td class="val-fix">0 8px 24px rgba(200,149,46,0.15)</td></tr><tr><td class="prop">"Recommended" badge</td><td class="val-keep">none</td><td class="val-fix">Gold pill, top: -14px, centered</td></tr><tr><td class="prop">Price font-size</td><td class="val-keep">18px</td><td class="val-fix">22px</td></tr></table><div class="callout" style="margin-bottom:16px;">
+        <strong>CRITICAL — Desktop not rendering:</strong> Live DOM audit confirms the recommended card currently has <code>transform: none</code>, <code>z-index: auto</code>, and <code>::before content: none</code> on desktop. The mobile spec's recommended card styles are likely inside an <code>@media (max-width: 768px)</code> block. The CSS below must be placed OUTSIDE any media query so it applies to all viewports. The mobile media query should ONLY contain the <code>transform: none</code> override.
+      </div>
+      <div class="css-block"><span class="comment">/* ══ IMPORTANT: These styles go OUTSIDE any media query ══ */</span>
+<span class="sel">.pricing-grid</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>; <span class="comment">/* already flex in DOM — keep */</span>
+  <span class="prop">gap</span>: <span class="val">var(--card-gap)</span>;
+  <span class="prop">align-items</span>: <span class="val">start</span>;
+  <span class="prop">padding-top</span>: <span class="num">20</span><span class="unit">px</span>; <span class="comment">/* room for badge */</span>
+}
+<span class="sel">.pricing-grid .pricing-card</span> {
+  <span class="prop">flex</span>: <span class="num">1</span>;
+}
+<span class="sel">.pricing-card</span> {
+  <span class="prop">background</span>: <span class="val">var(--card-bg)</span>;
+  <span class="prop">border</span>: <span class="val">var(--card-border)</span>;
+  <span class="prop">border-radius</span>: <span class="val">var(--card-radius)</span>;
+  <span class="prop">box-shadow</span>: <span class="val">var(--card-shadow)</span>;
+  <span class="prop">padding</span>: <span class="val">var(--card-pad-top) var(--card-pad-x) var(--card-pad-bottom)</span>;
+  <span class="prop">transition</span>: <span class="val">var(--card-transition)</span>;
+}
+<span class="sel">.pricing-card.recommended</span> {
+  <span class="prop">position</span>: <span class="val">relative</span>;
+  <span class="prop">background</span>: <span class="val">#FFFBF0</span>;
+  <span class="prop">border</span>: <span class="num">2</span><span class="unit">px</span> <span class="val">solid</span> <span class="val">#C8952E</span>;
+  <span class="prop">box-shadow</span>: <span class="num">0</span> <span class="num">8</span><span class="unit">px</span> <span class="num">24</span><span class="unit">px</span> <span class="val">rgba(200,149,46,0.15)</span>;
+  <span class="prop">transform</span>: <span class="val">scale(1.03)</span>;
+  <span class="prop">z-index</span>: <span class="num">2</span>;
+}
+<span class="sel">.pricing-card.recommended::before</span> {
+  <span class="prop">content</span>: <span class="val">'Recommended'</span>;
+  <span class="prop">position</span>: <span class="val">absolute</span>;
+  <span class="prop">top</span>: <span class="num">-14</span><span class="unit">px</span>;
+  <span class="prop">left</span>: <span class="num">50</span><span class="unit">%</span>;
+  <span class="prop">transform</span>: <span class="val">translateX(-50%)</span>;
+  <span class="prop">background</span>: <span class="val">#C8952E</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">font-size</span>: <span class="num">11</span><span class="unit">px</span>;
+  <span class="prop">font-weight</span>: <span class="num">600</span>;
+  <span class="prop">letter-spacing</span>: <span class="num">1</span><span class="unit">px</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">padding</span>: <span class="num">5</span><span class="unit">px</span> <span class="num">18</span><span class="unit">px</span>;
+  <span class="prop">border-radius</span>: <span class="num">20</span><span class="unit">px</span>;
+  <span class="prop">white-space</span>: <span class="val">nowrap</span>;
+}
+<span class="sel">.pricing-card.recommended .price</span> { <span class="prop">font-size</span>: <span class="num">22</span><span class="unit">px</span>; }
+<span class="sel">@media (max-width: 768px)</span> {
+  <span class="sel">.pricing-card.recommended</span> { <span class="prop">transform</span>: <span class="val">none</span>; }
+}</div></div></div></section>
+
+<section><div class="section-num">Item 03</div><div class="section-title">Risk cards — soften borders, keep warning intent</div><div class="section-lead">Replace heavy dashed red borders with a top-accent + muted-rose system. The all-dashed-red pattern competes with the tinted section background and makes cards feel like error states.</div><div class="issue-card high"><div class="issue-header"><span class="severity-badge high">High</span><span class="issue-title">Risk card border refinement</span></div><div class="issue-body"><table class="spec-table"><tr><th>Property</th><th>Current</th><th>Fix</th></tr><tr><td class="prop">Border</td><td class="val-current">2px dashed red (all sides)</td><td class="val-fix">1px solid #E8C4C0 (muted rose)</td></tr><tr><td class="prop">Top accent</td><td class="val-current">same dashed red</td><td class="val-fix">3px solid #C0392B (strong red, top only)</td></tr><tr><td class="prop">Border-radius</td><td class="val-current">~8px</td><td class="val-fix">var(--card-radius)</td></tr><tr><td class="prop">Box-shadow</td><td class="val-current">none</td><td class="val-fix">var(--card-shadow)</td></tr><tr><td class="prop">Warning icon size</td><td class="val-current">~14px</td><td class="val-fix">18px, color: #C0392B</td></tr><tr><td class="prop">"PE CONSEQUENCE" margin-top</td><td class="val-current">~8px</td><td class="val-fix">20px</td></tr><tr><td class="prop">"PE CONSEQUENCE" background</td><td class="val-current">transparent or light</td><td class="val-fix">#FDF6F6, border-left: 3px solid #C0392B, border-radius: 0 6px 6px 0</td></tr></table><div class="css-block"><span class="sel">.cost-card</span> {
+  <span class="prop">background</span>: <span class="val">var(--card-bg)</span>;
+  <span class="prop">border</span>: <span class="num">1</span><span class="unit">px</span> <span class="val">solid</span> <span class="val">#E8C4C0</span>;
+  <span class="prop">border-top</span>: <span class="num">3</span><span class="unit">px</span> <span class="val">solid</span> <span class="val">#C0392B</span>;
+  <span class="prop">border-radius</span>: <span class="val">var(--card-radius)</span>;
+  <span class="prop">box-shadow</span>: <span class="val">var(--card-shadow)</span>;
+  <span class="prop">padding</span>: <span class="val">var(--card-pad-top) var(--card-pad-x) var(--card-pad-bottom)</span>;
+}
+<span class="sel">.cost-card .card-heading</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>; <span class="prop">align-items</span>: <span class="val">flex-start</span>; <span class="prop">gap</span>: <span class="num">10</span><span class="unit">px</span>;
+}
+<span class="sel">.cost-card .warning-icon</span> {
+  <span class="prop">font-size</span>: <span class="num">18</span><span class="unit">px</span>; <span class="prop">color</span>: <span class="val">#C0392B</span>;
+  <span class="prop">flex-shrink</span>: <span class="num">0</span>; <span class="prop">margin-top</span>: <span class="num">2</span><span class="unit">px</span>;
+}
+<span class="sel">.pe-consequence</span> {
+  <span class="prop">margin-top</span>: <span class="num">20</span><span class="unit">px</span>;
+  <span class="prop">padding</span>: <span class="num">14</span><span class="unit">px</span> <span class="num">16</span><span class="unit">px</span>;
+  <span class="prop">background</span>: <span class="val">#FDF6F6</span>;
+  <span class="prop">border-left</span>: <span class="num">3</span><span class="unit">px</span> <span class="val">solid</span> <span class="val">#C0392B</span>;
+  <span class="prop">border-radius</span>: <span class="num">0</span> <span class="num">6</span><span class="unit">px</span> <span class="num">6</span><span class="unit">px</span> <span class="num">0</span>;
+}
+<span class="sel">.cost-cards-grid</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>; <span class="comment">/* already flex in DOM — keep */</span>
+  <span class="prop">gap</span>: <span class="val">var(--card-gap)</span>; <span class="prop">align-items</span>: <span class="val">stretch</span>;
+}
+<span class="sel">.cost-cards-grid .cost-card</span> {
+  <span class="prop">flex</span>: <span class="num">1</span>;
+}</div></div></div></section>
+
+<section><div class="section-num">Item 04</div><div class="section-title">Path cards — replace dashed borders with solid system</div><div class="section-lead">The "Choose Your Situation" path cards use dashed borders that now look inconsistent with the refined solid-border system.</div><div class="issue-card high"><div class="issue-header"><span class="severity-badge high">High</span><span class="issue-title">Path card system alignment</span></div><div class="issue-body"><table class="spec-table"><tr><th>Property</th><th>Current</th><th>Fix</th></tr><tr><td class="prop">Border</td><td class="val-current">dashed midnight</td><td class="val-fix">var(--card-border) — solid #E4E2DC</td></tr><tr><td class="prop">Top accent</td><td class="val-current">dashed</td><td class="val-fix">3px solid #1B2A4A — midnight top accent</td></tr><tr><td class="prop">Border-radius</td><td class="val-current">~8px</td><td class="val-fix">var(--card-radius)</td></tr><tr><td class="prop">Internal layout</td><td class="val-current">natural</td><td class="val-fix">flex column, CTA margin-top: auto</td></tr><tr><td class="prop">Grid</td><td class="val-current">2-column</td><td class="val-fix">grid; 1fr 1fr; gap: var(--card-gap); align-items: stretch;</td></tr></table><div class="callout" style="margin-bottom:16px;">
+        <strong>IMPORTANT — HTML change required:</strong> The two path card <code>&lt;div&gt;</code> elements currently have NO class. The coding agent must add <code>class="path-card"</code> to each of the two child <code>&lt;div&gt;</code> elements inside the "Choose Your Situation" section's flex container. Also add <code>class="path-cards-grid"</code> to the parent flex container holding both cards.
+      </div>
+      <div class="css-block"><span class="comment">/* Step 1: ADD these classes to the HTML:
+   - The flex container holding both cards → class="path-cards-grid"
+   - Each of the two card divs → class="path-card"
+*/</span>
+
+<span class="sel">.path-card</span> {
+  <span class="prop">background</span>: <span class="val">var(--card-bg)</span>;
+  <span class="prop">border</span>: <span class="val">var(--card-border)</span>;
+  <span class="prop">border-top</span>: <span class="num">3</span><span class="unit">px</span> <span class="val">solid</span> <span class="val">#1B2A4A</span>;
+  <span class="prop">border-radius</span>: <span class="val">var(--card-radius)</span>;
+  <span class="prop">box-shadow</span>: <span class="val">var(--card-shadow)</span>;
+  <span class="prop">padding</span>: <span class="val">var(--card-pad-top) var(--card-pad-x) var(--card-pad-bottom)</span>;
+  <span class="prop">display</span>: <span class="val">flex</span>; <span class="prop">flex-direction</span>: <span class="val">column</span>;
+}
+<span class="sel">.path-card .card-text-link</span> {
+  <span class="prop">margin-top</span>: <span class="val">auto</span>; <span class="prop">padding-top</span>: <span class="num">20</span><span class="unit">px</span>;
+}
+<span class="sel">.path-cards-grid</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>; <span class="comment">/* already flex — keep as flex */</span>
+  <span class="prop">gap</span>: <span class="val">var(--card-gap)</span>;
+  <span class="prop">align-items</span>: <span class="val">stretch</span>;
+}
+<span class="sel">.path-cards-grid .path-card</span> {
+  <span class="prop">flex</span>: <span class="num">1</span>; <span class="comment">/* equal width */</span>
+}</div></div></div></section>
+
+<section><div class="section-num">Item 05</div><div class="section-title">Outcome cards — standardize GAP/FIX/RESULT blocks</div><div class="section-lead">The Representative Outcomes cards sit on a tinted section. Standardize their borders and blockquote treatment.</div><div class="issue-card moderate"><div class="issue-header"><span class="severity-badge moderate">Minor</span><span class="issue-title">Outcome card refinement</span></div><div class="issue-body"><table class="spec-table"><tr><th>Property</th><th>Current</th><th>Fix</th></tr><tr><td class="prop">Card border</td><td class="val-current">gold top + sides</td><td class="val-fix">var(--card-border) + border-top: 3px solid #C8952E</td></tr><tr><td class="prop">Border-radius</td><td class="val-current">~8px</td><td class="val-fix">var(--card-radius)</td></tr><tr><td class="prop">Box-shadow</td><td class="val-current">none</td><td class="val-fix">var(--card-shadow)</td></tr><tr><td class="prop">GAP/FIX/RESULT labels</td><td class="val-current">bold uppercase</td><td class="val-fix">10px, weight: 700, spacing: 1.5px, color: #1B2A4A</td></tr><tr><td class="prop">RESULT blockquote bg</td><td class="val-current">transparent</td><td class="val-fix">#FFFBF0, border-left: 3px solid #C8952E, radius: 0 6px 6px 0</td></tr><tr><td class="prop">Card gap</td><td class="val-current">~16px</td><td class="val-fix">var(--card-gap)</td></tr></table><div class="css-block"><span class="sel">.outcome-card</span> {
+  <span class="prop">background</span>: <span class="val">var(--card-bg)</span>;
+  <span class="prop">border</span>: <span class="val">var(--card-border)</span>;
+  <span class="prop">border-top</span>: <span class="num">3</span><span class="unit">px</span> <span class="val">solid</span> <span class="val">#C8952E</span>;
+  <span class="prop">border-radius</span>: <span class="val">var(--card-radius)</span>;
+  <span class="prop">box-shadow</span>: <span class="val">var(--card-shadow)</span>;
+  <span class="prop">padding</span>: <span class="val">var(--card-pad-top) var(--card-pad-x) var(--card-pad-bottom)</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">var(--card-gap)</span>;
+}
+<span class="sel">.outcome-card .label</span> {
+  <span class="prop">font-size</span>: <span class="num">10</span><span class="unit">px</span>; <span class="prop">font-weight</span>: <span class="num">700</span>;
+  <span class="prop">letter-spacing</span>: <span class="num">1.5</span><span class="unit">px</span>; <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">color</span>: <span class="val">#1B2A4A</span>;
+  <span class="prop">margin-top</span>: <span class="num">16</span><span class="unit">px</span>; <span class="prop">margin-bottom</span>: <span class="num">6</span><span class="unit">px</span>;
+}
+<span class="sel">.outcome-card blockquote</span> {
+  <span class="prop">background</span>: <span class="val">#FFFBF0</span>;
+  <span class="prop">border-left</span>: <span class="num">3</span><span class="unit">px</span> <span class="val">solid</span> <span class="val">#C8952E</span>;
+  <span class="prop">padding</span>: <span class="num">14</span><span class="unit">px</span> <span class="num">16</span><span class="unit">px</span>;
+  <span class="prop">border-radius</span>: <span class="num">0</span> <span class="num">6</span><span class="unit">px</span> <span class="num">6</span><span class="unit">px</span> <span class="num">0</span>;
+}</div></div></div></section>
+
+<section><div class="section-num">Item 06</div><div class="section-title">Track record vignettes — match outcome card pattern</div><div class="section-lead">The two track record cards (Platform Stabilization, Vendor Optimization) should feel like siblings of the outcome cards.</div><div class="issue-card moderate"><div class="issue-header"><span class="severity-badge moderate">Minor</span><span class="issue-title">Track record card alignment</span></div><div class="issue-body"><table class="spec-table"><tr><th>Property</th><th>Current</th><th>Fix</th></tr><tr><td class="prop">Border-radius</td><td class="val-current">~8px</td><td class="val-fix">var(--card-radius)</td></tr><tr><td class="prop">Box-shadow</td><td class="val-current">none</td><td class="val-fix">var(--card-shadow)</td></tr><tr><td class="prop">Grid</td><td class="val-current">2-column</td><td class="val-fix">grid; 1fr 1fr; gap: var(--card-gap); align-items: stretch;</td></tr><tr><td class="prop">Result blockquote</td><td class="val-current">gold left-border only</td><td class="val-fix">bg: #FFFBF0; padding: 14px 16px; border-left: 3px solid #C8952E; radius: 0 6px 6px 0;</td></tr></table><div class="callout" style="margin-bottom:16px;">
+        <strong>IMPORTANT — DOM structure note:</strong> The <code>.track-result</code> class is on the result blockquote elements themselves, NOT on card containers. The two track record vignettes (Platform Stabilization, Vendor Optimization) are each inside classless <code>&lt;div&gt;</code> containers within a classless flex parent. The coding agent should add <code>class="track-vignette"</code> to each of the two vignette divs, and <code>class="track-vignettes-grid"</code> to their flex parent.
+      </div>
+      <div class="css-block"><span class="comment">/* Step 1: ADD these classes to the HTML:
+   - The flex container holding both vignettes → class="track-vignettes-grid"
+   - Each of the two vignette wrapper divs → class="track-vignette"
+   - .track-result already exists on the result blockquotes — keep it
+*/</span>
+
+<span class="sel">.track-vignette</span> {
+  <span class="prop">background</span>: <span class="val">var(--card-bg)</span>;
+  <span class="prop">border</span>: <span class="val">var(--card-border)</span>;
+  <span class="prop">border-radius</span>: <span class="val">var(--card-radius)</span>;
+  <span class="prop">box-shadow</span>: <span class="val">var(--card-shadow)</span>;
+  <span class="prop">padding</span>: <span class="val">var(--card-pad-top) var(--card-pad-x) var(--card-pad-bottom)</span>;
+}
+<span class="sel">.track-result</span> {
+  <span class="prop">background</span>: <span class="val">#FFFBF0</span>;
+  <span class="prop">border-left</span>: <span class="num">3</span><span class="unit">px</span> <span class="val">solid</span> <span class="val">#C8952E</span>;
+  <span class="prop">padding</span>: <span class="num">14</span><span class="unit">px</span> <span class="num">16</span><span class="unit">px</span>;
+  <span class="prop">border-radius</span>: <span class="num">0</span> <span class="num">6</span><span class="unit">px</span> <span class="num">6</span><span class="unit">px</span> <span class="num">0</span>;
+  <span class="prop">margin-top</span>: <span class="num">20</span><span class="unit">px</span>;
+}
+<span class="sel">.track-vignettes-grid</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">gap</span>: <span class="val">var(--card-gap)</span>;
+  <span class="prop">align-items</span>: <span class="val">stretch</span>;
+}
+<span class="sel">.track-vignettes-grid .track-vignette</span> {
+  <span class="prop">flex</span>: <span class="num">1</span>;
+}</div></div></div></section>
+
+<section><div class="section-num">Implementation Summary</div><div class="section-title">Priority sequence</div><div class="summary-box"><h3>Execute in this order</h3><ul><li><strong>Pass 1 — Tokens (Foundation):</strong> Add CSS custom properties to <code>:root</code>. No visual changes yet.</li><li><strong>Pass 2 — Pricing cards (Item 02):</strong> Highest conversion impact. Scale lift, warm shadow, badge, cream bg on recommended card.</li><li><strong>Pass 3 — Risk cards (Item 03):</strong> Replace dashed red borders with top-accent + muted-rose. Most visually noticeable change.</li><li><strong>Pass 4 — Persona + Path cards (Items 01, 04):</strong> Equal-height grids, flex column layout, proof quote tinting. Replace dashed path borders with solid.</li><li><strong>Pass 5 — Proof blocks (Items 05, 06):</strong> Standardize blockquote treatment (#FFFBF0 bg, gold left-border, rounded right corners) across all proof elements.</li></ul></div><table class="spec-table" style="margin-top:24px;"><tr><th>Item</th><th>Severity</th><th>LOE</th><th>Type</th></tr><tr><td class="prop">Foundation — Tokens</td><td><span class="severity-badge critical" style="font-size:9px;">Critical</span></td><td>10 min</td><td>CSS variables</td></tr><tr><td class="prop">01 — Persona cards</td><td><span class="severity-badge high" style="font-size:9px;">High</span></td><td>20 min</td><td>CSS</td></tr><tr><td class="prop">02 — Pricing cards</td><td><span class="severity-badge critical" style="font-size:9px;">Critical</span></td><td>15 min</td><td>CSS</td></tr><tr><td class="prop">03 — Risk cards</td><td><span class="severity-badge high" style="font-size:9px;">High</span></td><td>15 min</td><td>CSS</td></tr><tr><td class="prop">04 — Path cards</td><td><span class="severity-badge high" style="font-size:9px;">High</span></td><td>10 min</td><td>CSS</td></tr><tr><td class="prop">05 — Outcome cards</td><td><span class="severity-badge moderate" style="font-size:9px;">Minor</span></td><td>10 min</td><td>CSS</td></tr><tr><td class="prop">06 — Track record cards</td><td><span class="severity-badge moderate" style="font-size:9px;">Minor</span></td><td>10 min</td><td>CSS</td></tr></table><div class="callout" style="margin-top:24px;"><strong>Total LOE:</strong> ~1.5 hours. All CSS-only. No HTML restructuring, no new elements, no asset dependencies.</div><div class="callout-blue" style="margin-top:16px;"><strong>Visual coherence after implementation:</strong> Every card shares 12px radius, 1px solid #E4E2DC borders, subtle box-shadow, 28px horizontal padding. The ONLY differences between card types are the <em>top accent border color</em> (blue/green/gold for persona, red for risk, midnight for paths, gold for outcomes) and the <em>internal sub-blocks</em>. This creates "same family, different personality" rather than "seven independent designs."</div></section>
+
+</div>
+<div style="background:var(--midnight);color:rgba(255,255,255,0.3);text-align:center;padding:32px;font-size:12px;">Devonshire Ops — Card & Component Design Spec — April 2026</div>
+</body>
+</html>
