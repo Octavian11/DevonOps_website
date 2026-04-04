@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Typography &amp; Hierarchy Spec — devonshireops.com/pe</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600&family=DM+Mono&display=swap');
+  :root { --midnight: #1B2A4A; --gold: #C8952E; --steel: #5A7A9B; --graphite: #3D3D3A; --bg: #FAF9F6; --border: #D6D4CE; --red: #C0392B; --green: #1D9E75; --blue: #2E6DA4; --amber: #BA7517; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--graphite); background: var(--bg); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  .cover { background: var(--midnight); color: #fff; padding: 80px 48px 64px; text-align: center; }
+  .cover-badge { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(200,149,46,0.35); padding: 6px 16px; border-radius: 4px; margin-bottom: 32px; }
+  .cover h1 { font-family: 'EB Garamond', serif; font-size: 38px; font-weight: 400; line-height: 1.2; margin-bottom: 16px; }
+  .cover h1 em { font-style: italic; color: var(--gold); }
+  .cover .subtitle { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 620px; margin: 0 auto 32px; }
+  .cover-meta { display: flex; justify-content: center; gap: 40px; font-size: 12px; color: rgba(255,255,255,0.4); }
+  .container { max-width: 880px; margin: 0 auto; padding: 0 32px; }
+  .section-num { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .section-title { font-family: 'EB Garamond', serif; font-size: 28px; font-weight: 400; color: var(--midnight); margin-bottom: 8px; }
+  .section-lead { font-size: 15px; color: #6B6B65; margin-bottom: 32px; max-width: 680px; }
+  section { padding: 56px 0; border-bottom: 1px solid var(--border); }
+  section:last-of-type { border-bottom: none; }
+  .issue-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 28px; margin-bottom: 24px; position: relative; }
+  .issue-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; border-radius: 10px 0 0 10px; }
+  .issue-card.critical::before { background: var(--red); }
+  .issue-card.high::before { background: var(--amber); }
+  .issue-card.moderate::before { background: var(--steel); }
+  .issue-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .severity-badge { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; }
+  .severity-badge.critical { background: #FCEAEA; color: var(--red); }
+  .severity-badge.high { background: #FDF3E0; color: var(--amber); }
+  .severity-badge.moderate { background: #E8F0F7; color: var(--steel); }
+  .issue-title { font-size: 17px; font-weight: 600; color: var(--midnight); }
+  .issue-body p { font-size: 14px; margin-bottom: 12px; }
+  .spec-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  .spec-table th { text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: #888; padding: 8px 12px; border-bottom: 2px solid var(--border); }
+  .spec-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .spec-table tr:last-child td { border-bottom: none; }
+  .spec-table .prop { font-weight: 500; color: var(--midnight); white-space: nowrap; }
+  .val-current { color: var(--red); font-family: 'DM Mono', monospace; font-size: 12px; }
+  .val-fix { color: var(--green); font-weight: 600; font-family: 'DM Mono', monospace; font-size: 12px; }
+  .css-block { background: #1E1E2E; color: #CDD6F4; padding: 20px 24px; border-radius: 8px; font-family: 'DM Mono', monospace; font-size: 12px; line-height: 1.8; overflow-x: auto; margin: 16px 0; white-space: pre; }
+  .css-block .sel { color: #89B4FA; } .css-block .prop { color: #CBA6F7; } .css-block .val { color: #A6E3A1; } .css-block .comment { color: #6C7086; font-style: italic; } .css-block .num { color: #FAB387; } .css-block .unit { color: #F9E2AF; }
+  .callout { background: #FFFBF0; border-left: 3px solid var(--gold); padding: 16px 20px; font-size: 14px; border-radius: 0 6px 6px 0; margin: 20px 0; color: #5A4E2F; }
+  .callout strong { color: #3D3000; }
+  .callout-blue { background: #EDF4FC; border-left: 3px solid var(--blue); padding: 16px 20px; font-size: 14px; border-radius: 0 6px 6px 0; margin: 20px 0; color: #1A3A5C; }
+  h4 { font-size: 14px; font-weight: 600; color: var(--midnight); margin: 24px 0 8px; }
+  .measure { display: inline; font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; color: var(--blue); background: #EDF4FC; padding: 1px 6px; border-radius: 3px; }
+  .type-scale { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  .type-scale th { text-align: left; font-weight: 600; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); padding: 10px 12px; border-bottom: 2px solid var(--border); background: #FFFBF0; }
+  .type-scale td { padding: 12px; border-bottom: 1px solid var(--border); }
+  .type-scale tr:last-child td { border-bottom: none; }
+  .type-scale .demo { font-family: 'EB Garamond', serif; color: var(--midnight); }
+  .type-scale .mono { font-family: 'DM Mono', monospace; font-size: 12px; color: #888; }
+  .summary-box { background: var(--midnight); color: #fff; padding: 32px; border-radius: 10px; margin: 24px 0; }
+  .summary-box h3 { font-family: 'EB Garamond', serif; font-size: 22px; font-weight: 400; margin-bottom: 16px; color: var(--gold); }
+  .summary-box ul { list-style: none; padding: 0; }
+  .summary-box li { font-size: 14px; padding: 6px 0 6px 20px; position: relative; color: rgba(255,255,255,0.8); }
+  .summary-box li::before { content: '→'; position: absolute; left: 0; color: var(--gold); }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-badge">Implementation Spec</div>
+  <h1>Typography &amp; <em>Hierarchy</em></h1>
+  <p class="subtitle">Standardize the type scale across all pages. Fix heading weights for Garamond elegance, eliminate h3 size variations (currently 4 different sizes), tighten body text line-height, and create a consistent label system. All changes are global CSS.</p>
+  <div class="cover-meta">
+    <span>5 implementation items</span>
+    <span>April 2026</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════════════ DIAGNOSIS -->
+<section>
+  <div class="section-num">Diagnosis</div>
+  <div class="section-title">Current typography audit findings</div>
+  <div class="section-lead">The Garamond + sans-serif pairing is strong. The issues are inconsistency in sizing, weight, and spacing — not the typeface choices themselves.</div>
+
+  <div class="issue-card critical">
+    <div class="issue-header">
+      <span class="severity-badge critical">Critical</span>
+      <span class="issue-title">4 problems found across all pages</span>
+    </div>
+    <div class="issue-body">
+
+      <p><strong>Problem 1: Garamond headings use weight 700.</strong> EB Garamond at weight 700 loses its characteristic elegance — the hairline/thick stroke contrast that makes serifs feel premium gets flattened. Weight 400 or 500 is the sweet spot for Garamond display use. The current 700 makes headings feel heavy and slightly generic.</p>
+
+      <p><strong>Problem 2: h3 has 4 different sizes.</strong> Live DOM audit found h3 elements at 22px, 21px, 20px, and 18px — four distinct sizes with no apparent logic. FAQ questions are 21px/700, sub-headings are 22px/400, section sub-titles are 18px/600, and card headings are 20px/700. These should collapse to 2 sizes maximum.</p>
+
+      <p><strong>Problem 3: Body text line-height is too open.</strong> Some paragraphs have generous line-height that works for long-form reading but feels loose in short card descriptions and bullet points. The same line-height shouldn't apply to a 3-line paragraph and a single-line list item.</p>
+
+      <p><strong>Problem 4: Uppercase label styling is inconsistent.</strong> The hero category label ("OPS DILIGENCE · VALUE CREATION PLANS · POST-CLOSE GOVERNANCE") is 19px/400/1.5px tracking. Category pills are 15px/700/0.6px. Pricing tier labels are different again. These should all share a single label style.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ TYPE SCALE -->
+<section>
+  <div class="section-num">Item 01</div>
+  <div class="section-title">Define the type scale — all pages</div>
+  <div class="section-lead">A single type scale that every heading, body text, and label element inherits. This is the foundation — all other items reference these values.</div>
+
+  <div class="issue-card critical">
+    <div class="issue-header">
+      <span class="severity-badge critical">Critical</span>
+      <span class="issue-title">Global type scale</span>
+    </div>
+    <div class="issue-body">
+
+      <table class="type-scale">
+        <tr><th>Element</th><th>Current</th><th>Fix</th><th>Preview</th></tr>
+        <tr>
+          <td class="prop">h1 (hero headline)</td>
+          <td class="val-current">48px / 700 / 1.2 lh</td>
+          <td class="val-fix">48px / 400 / 1.15 lh</td>
+          <td class="demo" style="font-size:28px;font-weight:400;line-height:1.15;">Your deal team handles...</td>
+        </tr>
+        <tr>
+          <td class="prop">h2 (section heading)</td>
+          <td class="val-current">28px / 700 / 1.3 lh</td>
+          <td class="val-fix">28px / 400 / 1.3 lh</td>
+          <td class="demo" style="font-size:22px;font-weight:400;line-height:1.3;">Who This Is Built For</td>
+        </tr>
+        <tr>
+          <td class="prop">h3 (sub-heading)</td>
+          <td class="val-current">18–22px / 400–700 (inconsistent)</td>
+          <td class="val-fix">20px / 600 / 1.3 lh</td>
+          <td class="demo" style="font-size:17px;font-weight:600;line-height:1.3;">Platform Stabilization &amp; Reliability</td>
+        </tr>
+        <tr>
+          <td class="prop">h3.faq (FAQ questions)</td>
+          <td class="val-current">21px / 700 / 1.15 lh</td>
+          <td class="val-fix">18px / 600 / 1.35 lh</td>
+          <td class="demo" style="font-size:16px;font-weight:600;line-height:1.35;">Do you replace the operating team?</td>
+        </tr>
+        <tr>
+          <td class="prop">Body text (p)</td>
+          <td class="val-current">16px / 400 / 1.7 lh</td>
+          <td class="val-fix">16px / 400 / 1.65 lh</td>
+          <td style="font-size:14px;line-height:1.65;">Pre-close ops diligence and 100-day...</td>
+        </tr>
+        <tr>
+          <td class="prop">Card body text</td>
+          <td class="val-current">16px / 400 / 1.7 lh</td>
+          <td class="val-fix">15px / 400 / 1.6 lh</td>
+          <td style="font-size:13px;line-height:1.6;">Smaller deal teams mean no dedicated ops...</td>
+        </tr>
+        <tr>
+          <td class="prop">List items (li)</td>
+          <td class="val-current">16px / 400 / 1.7 lh</td>
+          <td class="val-fix">15px / 400 / 1.5 lh</td>
+          <td style="font-size:13px;line-height:1.5;">• IC-credible ops findings without Big 4 cost</td>
+        </tr>
+        <tr>
+          <td class="prop">Uppercase label</td>
+          <td class="val-current">10–19px / 400–700 (inconsistent)</td>
+          <td class="val-fix">11px / 600 / 1.5px tracking</td>
+          <td style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#C8952E;">Independent Sponsors · Pre-Close</td>
+        </tr>
+        <tr>
+          <td class="prop">Small text / disclaimer</td>
+          <td class="val-current">varies</td>
+          <td class="val-fix">13px / 400 / 1.5 lh / color #888</td>
+          <td style="font-size:12px;color:#888;">Engagements typically book 2–3 weeks out</td>
+        </tr>
+      </table>
+
+      <div class="css-block"><span class="comment">/* ══════════════════════════════════════════
+   GLOBAL TYPE SCALE — applies to ALL pages
+   /pe, /pe/services, /pe/about, /pe/resources, /pe/scorer
+   ══════════════════════════════════════════ */</span>
+
+<span class="comment">/* ── H1: Hero headline ── */</span>
+<span class="sel">h1</span> {
+  <span class="prop">font-family</span>: <span class="val">'EB Garamond', Garamond, 'Times New Roman', serif</span>;
+  <span class="prop">font-size</span>: <span class="num">48</span><span class="unit">px</span>;
+  <span class="prop">font-weight</span>: <span class="num">400</span>; <span class="comment">/* was 700 — Garamond shines at 400 */</span>
+  <span class="prop">line-height</span>: <span class="num">1.15</span>;
+  <span class="prop">letter-spacing</span>: <span class="num">-0.2</span><span class="unit">px</span>; <span class="comment">/* slight tightening at display size */</span>
+  <span class="prop">color</span>: <span class="val">#fff</span>; <span class="comment">/* hero context — dark bg */</span>
+}
+
+<span class="comment">/* ── H2: Section headings ── */</span>
+<span class="sel">h2, .section-title</span> {
+  <span class="prop">font-family</span>: <span class="val">'EB Garamond', Garamond, 'Times New Roman', serif</span>;
+  <span class="prop">font-size</span>: <span class="num">28</span><span class="unit">px</span>;
+  <span class="prop">font-weight</span>: <span class="num">400</span>; <span class="comment">/* was 700 */</span>
+  <span class="prop">line-height</span>: <span class="num">1.3</span>;
+  <span class="prop">letter-spacing</span>: <span class="num">0</span><span class="unit">px</span>;
+  <span class="prop">color</span>: <span class="val">#14213D</span>;
+  <span class="prop">margin-bottom</span>: <span class="num">12</span><span class="unit">px</span>;
+}
+
+<span class="comment">/* ── H3: Sub-headings (card titles, track record, outcomes) ── */</span>
+<span class="sel">h3</span> {
+  <span class="prop">font-family</span>: <span class="val">'EB Garamond', Garamond, 'Times New Roman', serif</span>;
+  <span class="prop">font-size</span>: <span class="num">20</span><span class="unit">px</span>; <span class="comment">/* was 18-22px inconsistent */</span>
+  <span class="prop">font-weight</span>: <span class="num">600</span>;
+  <span class="prop">line-height</span>: <span class="num">1.3</span>;
+  <span class="prop">color</span>: <span class="val">#14213D</span>;
+  <span class="prop">margin-bottom</span>: <span class="num">8</span><span class="unit">px</span>;
+}
+
+<span class="comment">/* ── FAQ questions — slightly smaller, same weight ── */</span>
+<span class="sel">.faq-row h3,
+.faq-row,
+[class*="faq-question"]</span> {
+  <span class="prop">font-family</span>: <span class="val">'EB Garamond', Garamond, 'Times New Roman', serif</span>;
+  <span class="prop">font-size</span>: <span class="num">18</span><span class="unit">px</span>; <span class="comment">/* was 21px — too large for accordion rows */</span>
+  <span class="prop">font-weight</span>: <span class="num">600</span>; <span class="comment">/* was 700 */</span>
+  <span class="prop">line-height</span>: <span class="num">1.35</span>;
+}
+
+<span class="comment">/* ── Body text ── */</span>
+<span class="sel">p</span> {
+  <span class="prop">font-size</span>: <span class="num">16</span><span class="unit">px</span>;
+  <span class="prop">line-height</span>: <span class="num">1.65</span>;
+  <span class="prop">color</span>: <span class="val">#3D3D3A</span>;
+}
+
+<span class="comment">/* ── Card body text — tighter than free paragraphs ── */</span>
+<span class="sel">.buyer-card p,
+.cost-card p,
+.pricing-card p,
+.outcome-card p,
+.path-card p,
+.track-vignette p</span> {
+  <span class="prop">font-size</span>: <span class="num">15</span><span class="unit">px</span>;
+  <span class="prop">line-height</span>: <span class="num">1.6</span>;
+}
+
+<span class="comment">/* ── List items — tighter line-height than body ── */</span>
+<span class="sel">li</span> {
+  <span class="prop">font-size</span>: <span class="num">15</span><span class="unit">px</span>;
+  <span class="prop">line-height</span>: <span class="num">1.5</span>;
+  <span class="prop">margin-bottom</span>: <span class="num">6</span><span class="unit">px</span>;
+}
+
+<span class="comment">/* ── Small / disclaimer text ── */</span>
+<span class="sel">small, .disclaimer, .confidentiality-note p</span> {
+  <span class="prop">font-size</span>: <span class="num">13</span><span class="unit">px</span>;
+  <span class="prop">line-height</span>: <span class="num">1.5</span>;
+  <span class="prop">color</span>: <span class="val">#888</span>;
+}</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ITEM 02 -->
+<section>
+  <div class="section-num">Item 02</div>
+  <div class="section-title">Heading weight — 400 for Garamond elegance</div>
+  <div class="section-lead">The single most impactful typography change. EB Garamond at weight 400 has beautiful thick/thin stroke contrast that signals "premium advisory." At 700, those strokes flatten and the font looks like any bold serif.</div>
+
+  <div class="issue-card critical">
+    <div class="issue-header">
+      <span class="severity-badge critical">Critical</span>
+      <span class="issue-title">Reduce h1 and h2 weight from 700 to 400</span>
+    </div>
+    <div class="issue-body">
+
+      <table class="spec-table">
+        <tr><th>Element</th><th>Current weight</th><th>New weight</th><th>Why</th></tr>
+        <tr>
+          <td class="prop">h1</td>
+          <td class="val-current">700</td>
+          <td class="val-fix">400</td>
+          <td>At 48px display size, weight 400 has commanding presence without heaviness</td>
+        </tr>
+        <tr>
+          <td class="prop">h2</td>
+          <td class="val-current">700</td>
+          <td class="val-fix">400</td>
+          <td>At 28px, weight 400 reads clearly while maintaining serif refinement</td>
+        </tr>
+        <tr>
+          <td class="prop">h3</td>
+          <td class="val-current">600–700 (varies)</td>
+          <td class="val-fix">600</td>
+          <td>Sub-headings need slightly more weight to anchor card content — 600 is the compromise</td>
+        </tr>
+        <tr>
+          <td class="prop">FAQ questions</td>
+          <td class="val-current">700</td>
+          <td class="val-fix">600</td>
+          <td>FAQ rows at 700 feel heavy for an accordion — 600 is sufficient for scannability</td>
+        </tr>
+      </table>
+
+      <div class="callout">
+        <strong>Design rationale:</strong> Look at any premium advisory firm's website — McKinsey, Bain, KKR, Lazard. None of them use bold serif headings. They all use light or regular-weight serifs at display sizes. Weight 700 on a serif font is a tell that says "template" to a trained eye. Weight 400 says "designed." Since your buyers are PE professionals who see dozens of advisory pitch decks, this subtlety registers at a subconscious level.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ITEM 03 -->
+<section>
+  <div class="section-num">Item 03</div>
+  <div class="section-title">Standardize uppercase label system — all pages</div>
+  <div class="section-lead">Currently there are at least 4 different uppercase label treatments on the site. Collapse to 2 variants: one for category/context labels and one for interactive pills.</div>
+
+  <div class="issue-card high">
+    <div class="issue-header">
+      <span class="severity-badge high">High</span>
+      <span class="issue-title">Unified label styles</span>
+    </div>
+    <div class="issue-body">
+
+      <table class="spec-table">
+        <tr><th>Label type</th><th>Current</th><th>Fix</th><th>Used for</th></tr>
+        <tr>
+          <td class="prop">Context label (category)</td>
+          <td class="val-current">10–19px, weight 400–700, tracking 0.6–1.5px — varies wildly</td>
+          <td class="val-fix">11px / 600 / 1.5px tracking / uppercase / color #C8952E (gold)</td>
+          <td>Hero category line, pricing tier labels, track record category labels, card type badges</td>
+        </tr>
+        <tr>
+          <td class="prop">Interactive pill</td>
+          <td class="val-current">15px / 700 / 0.6px tracking</td>
+          <td class="val-fix">12px / 600 / 0.8px tracking / uppercase / color #5A7A9B (steel)</td>
+          <td>Domain pills (INCIDENTS, CHANGE CONTROL, etc.)</td>
+        </tr>
+      </table>
+
+      <div class="css-block"><span class="comment">/* ══ Context label — gold uppercase ══ */</span>
+<span class="sel">.context-label,
+.hero-category,
+.pricing-card .tier-label,
+.track-vignette .category-label,
+.buyer-card .type-label,
+[class*="pe-consequence"] .label</span> {
+  <span class="prop">font-family</span>: <span class="val">'DM Sans', sans-serif</span>;
+  <span class="prop">font-size</span>: <span class="num">11</span><span class="unit">px</span>;
+  <span class="prop">font-weight</span>: <span class="num">600</span>;
+  <span class="prop">letter-spacing</span>: <span class="num">1.5</span><span class="unit">px</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">color</span>: <span class="val">#C8952E</span>;
+}
+
+<span class="comment">/* Exception: PE CONSEQUENCE label uses red */</span>
+<span class="sel">.pe-consequence .label,
+[class*="consequence"] .label</span> {
+  <span class="prop">color</span>: <span class="val">#C0392B</span>;
+}
+
+<span class="comment">/* ══ Interactive pill — steel blue ══ */</span>
+<span class="sel">.domain-pill,
+[class*="category-pill"],
+.lever-pill</span> {
+  <span class="prop">font-family</span>: <span class="val">'DM Sans', sans-serif</span>;
+  <span class="prop">font-size</span>: <span class="num">12</span><span class="unit">px</span>; <span class="comment">/* was 15px — too large */</span>
+  <span class="prop">font-weight</span>: <span class="num">600</span>; <span class="comment">/* was 700 */</span>
+  <span class="prop">letter-spacing</span>: <span class="num">0.8</span><span class="unit">px</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">color</span>: <span class="val">#5A7A9B</span>;
+}
+
+<span class="comment">/* ══ Hero category line — special case ══ */</span>
+<span class="comment">/* The "OPS DILIGENCE · VALUE CREATION PLANS · POST-CLOSE GOVERNANCE"
+   line in the hero is currently 19px — way too large for a label.
+   Bring it down to match the context-label system. */</span>
+<span class="sel">.hero-category,
+.hero-block [class*="category"],
+.hero-block [class*="label"]</span> {
+  <span class="prop">font-size</span>: <span class="num">11</span><span class="unit">px</span>; <span class="comment">/* was 19px */</span>
+  <span class="prop">font-weight</span>: <span class="num">600</span>; <span class="comment">/* was 400 */</span>
+  <span class="prop">letter-spacing</span>: <span class="num">2</span><span class="unit">px</span>; <span class="comment">/* slightly more tracking for hero context */</span>
+  <span class="prop">color</span>: <span class="val">#C8952E</span>;
+  <span class="prop">margin-bottom</span>: <span class="num">16</span><span class="unit">px</span>;
+}</div>
+
+      <div class="callout-blue">
+        <strong>For the coding agent:</strong> The hero category label selector is a best-guess. The actual element is the "OPS DILIGENCE · VALUE CREATION PLANS · POST-CLOSE GOVERNANCE" text above the h1 in the hero block. It's currently rendering at 19px with no class. Inspect the DOM, find this element, and apply the <code>.hero-category</code> styles. If it doesn't have a class, add <code>class="hero-category"</code>.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ITEM 04 -->
+<section>
+  <div class="section-num">Item 04</div>
+  <div class="section-title">Body text line-height tightening</div>
+  <div class="section-lead">The current 1.7 line-height works for long-form paragraphs but feels loose in card contexts and list items. Different containers need different line-heights.</div>
+
+  <div class="issue-card high">
+    <div class="issue-header">
+      <span class="severity-badge high">High</span>
+      <span class="issue-title">Context-appropriate line-heights</span>
+    </div>
+    <div class="issue-body">
+
+      <table class="spec-table">
+        <tr><th>Context</th><th>Current lh</th><th>New lh</th><th>Rationale</th></tr>
+        <tr>
+          <td class="prop">Section lead paragraphs</td>
+          <td class="val-current">1.7</td>
+          <td class="val-fix">1.65</td>
+          <td>Slight tightening — still comfortable for 2-3 line descriptions</td>
+        </tr>
+        <tr>
+          <td class="prop">Card body text</td>
+          <td class="val-current">1.7</td>
+          <td class="val-fix">1.6</td>
+          <td>Cards are dense by nature — tighter lh prevents wasted vertical space</td>
+        </tr>
+        <tr>
+          <td class="prop">List items</td>
+          <td class="val-current">1.7</td>
+          <td class="val-fix">1.5</td>
+          <td>Bullet lists should be scannable, not airy</td>
+        </tr>
+        <tr>
+          <td class="prop">Blockquotes / proof</td>
+          <td class="val-current">1.7</td>
+          <td class="val-fix">1.55</td>
+          <td>Quotes are short — tight lh increases visual weight of the statement</td>
+        </tr>
+        <tr>
+          <td class="prop">Hero subheadline</td>
+          <td class="val-current">~1.6</td>
+          <td class="val-fix">1.55</td>
+          <td>The hero sub-text should feel compact and authoritative</td>
+        </tr>
+      </table>
+
+      <div class="css-block"><span class="comment">/* ══ Context-specific line-heights ══ */</span>
+
+<span class="comment">/* Section leads */</span>
+<span class="sel">.section-wrapper > p:first-of-type,
+h2 + p</span> {
+  <span class="prop">line-height</span>: <span class="num">1.65</span>;
+}
+
+<span class="comment">/* Card body */</span>
+<span class="sel">.buyer-card p,
+.cost-card p,
+.pricing-card p,
+.path-card p,
+.outcome-card p,
+.track-vignette p</span> {
+  <span class="prop">line-height</span>: <span class="num">1.6</span>;
+}
+
+<span class="comment">/* List items */</span>
+<span class="sel">li</span> {
+  <span class="prop">line-height</span>: <span class="num">1.5</span>;
+}
+
+<span class="comment">/* Blockquotes */</span>
+<span class="sel">blockquote, .mckinsey-quote, .track-result,
+.buyer-card blockquote</span> {
+  <span class="prop">line-height</span>: <span class="num">1.55</span>;
+}
+
+<span class="comment">/* Hero subheadline */</span>
+<span class="sel">.hero-subheadline, .hero-block p</span> {
+  <span class="prop">line-height</span>: <span class="num">1.55</span>;
+}</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ITEM 05 -->
+<section>
+  <div class="section-num">Item 05</div>
+  <div class="section-title">Mobile type scale adjustments</div>
+  <div class="section-lead">Heading sizes need to scale down gracefully on mobile. The h1 at 48px is too large for a 390px viewport.</div>
+
+  <div class="issue-card moderate">
+    <div class="issue-header">
+      <span class="severity-badge moderate">Minor</span>
+      <span class="issue-title">Responsive type scale</span>
+    </div>
+    <div class="issue-body">
+
+      <table class="spec-table">
+        <tr><th>Element</th><th>Desktop</th><th>Mobile (≤768px)</th></tr>
+        <tr>
+          <td class="prop">h1</td>
+          <td>48px</td>
+          <td class="val-fix">32px</td>
+        </tr>
+        <tr>
+          <td class="prop">h2</td>
+          <td>28px</td>
+          <td class="val-fix">24px</td>
+        </tr>
+        <tr>
+          <td class="prop">h3</td>
+          <td>20px</td>
+          <td class="val-fix">18px</td>
+        </tr>
+        <tr>
+          <td class="prop">Body (p)</td>
+          <td>16px</td>
+          <td class="val-fix">15px</td>
+        </tr>
+        <tr>
+          <td class="prop">Card body</td>
+          <td>15px</td>
+          <td class="val-fix">14px</td>
+        </tr>
+        <tr>
+          <td class="prop">Context label</td>
+          <td>11px</td>
+          <td class="val-fix">10px</td>
+        </tr>
+      </table>
+
+      <div class="css-block"><span class="sel">@media (max-width: 768px)</span> {
+  <span class="sel">h1</span> {
+    <span class="prop">font-size</span>: <span class="num">32</span><span class="unit">px</span>;
+    <span class="prop">line-height</span>: <span class="num">1.2</span>;
+  }
+  <span class="sel">h2, .section-title</span> {
+    <span class="prop">font-size</span>: <span class="num">24</span><span class="unit">px</span>;
+  }
+  <span class="sel">h3</span> {
+    <span class="prop">font-size</span>: <span class="num">18</span><span class="unit">px</span>;
+  }
+  <span class="sel">p</span> {
+    <span class="prop">font-size</span>: <span class="num">15</span><span class="unit">px</span>;
+  }
+  <span class="sel">.buyer-card p, .cost-card p, .pricing-card p</span> {
+    <span class="prop">font-size</span>: <span class="num">14</span><span class="unit">px</span>;
+  }
+  <span class="sel">.context-label, .hero-category</span> {
+    <span class="prop">font-size</span>: <span class="num">10</span><span class="unit">px</span>;
+  }
+  <span class="sel">.faq-row h3, .faq-row</span> {
+    <span class="prop">font-size</span>: <span class="num">16</span><span class="unit">px</span>;
+  }
+}</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ GLOBAL -->
+<section>
+  <div class="section-num">Global scope</div>
+  <div class="section-title">Cross-page application</div>
+  <div class="section-lead">All typography changes in this spec are global — they use element selectors (h1, h2, h3, p, li) that apply across every page automatically. The only page-specific selectors are hero-related classes.</div>
+
+  <div class="issue-card moderate">
+    <div class="issue-header">
+      <span class="severity-badge moderate">Minor</span>
+      <span class="issue-title">Page-by-page verification checklist</span>
+    </div>
+    <div class="issue-body">
+      <table class="spec-table">
+        <tr><th>Page</th><th>Elements to verify</th></tr>
+        <tr>
+          <td class="prop">/pe</td>
+          <td>h1 (hero), all h2s, h3s in persona/pricing/risk/outcome/track record cards, FAQ questions, category labels, pills, body text in cards, list items</td>
+        </tr>
+        <tr>
+          <td class="prop">/pe/services</td>
+          <td>h2 section headings (Framework, Services & Pricing, 20 Levers, Rubric, Red Flags, Stabilization, How It Works, FAQ), h3 sub-headings (Phase 1/2/3), pricing card headings, FAQ questions, category labels</td>
+        </tr>
+        <tr>
+          <td class="prop">/pe/about</td>
+          <td>h2 section headings (Who I Am, What I Do, How I Work, Why Not Big 4, Representative Outcomes, Sample Deliverables), body text paragraphs, outcome card headings</td>
+        </tr>
+        <tr>
+          <td class="prop">/pe/resources</td>
+          <td>h2 heading, card titles (Ops Scorer, Lever Explorer), body text</td>
+        </tr>
+        <tr>
+          <td class="prop">/pe/scorer</td>
+          <td>h1 page title, h3 step headings, form labels, body text</td>
+        </tr>
+      </table>
+
+      <div class="callout">
+        <strong>Testing note:</strong> After deploying, the most visually noticeable change will be the h1 and h2 weight drop from 700 to 400. Garamond at 400 is noticeably lighter — this is intentional and correct. If any heading looks "too thin" at 400, the fix is NOT to go back to 700 — it's to go to 500 (which provides a middle ground). But 400 is the recommendation for maximum PE-appropriate refinement.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ SUMMARY -->
+<section>
+  <div class="section-num">Implementation Summary</div>
+  <div class="section-title">Priority sequence</div>
+
+  <div class="summary-box">
+    <h3>Execute in this order</h3>
+    <ul>
+      <li><strong>Pass 1 — Heading weights (Item 02):</strong> Change h1 and h2 from 700 to 400, h3 from varied to 600. This is the most impactful visual change — do it first and verify it looks right before proceeding.</li>
+      <li><strong>Pass 2 — Type scale (Item 01):</strong> Standardize all h3 elements to 20px/600, FAQ to 18px/600. Fix the h3 inconsistency.</li>
+      <li><strong>Pass 3 — Labels (Item 03):</strong> Apply the unified context-label style (11px/600/1.5px tracking) to all uppercase labels. Fix the hero category from 19px to 11px.</li>
+      <li><strong>Pass 4 — Line-heights (Item 04):</strong> Apply context-specific line-heights to body text, card text, list items, and blockquotes.</li>
+      <li><strong>Pass 5 — Mobile scale (Item 05):</strong> Apply the responsive type scale in the ≤768px media query.</li>
+    </ul>
+  </div>
+
+  <table class="spec-table" style="margin-top: 24px;">
+    <tr><th>Item</th><th>Severity</th><th>LOE</th><th>Type</th></tr>
+    <tr>
+      <td class="prop">01 — Type scale</td>
+      <td><span class="severity-badge critical" style="font-size:9px;">Critical</span></td>
+      <td>15 min</td>
+      <td>CSS only — global</td>
+    </tr>
+    <tr>
+      <td class="prop">02 — Heading weights</td>
+      <td><span class="severity-badge critical" style="font-size:9px;">Critical</span></td>
+      <td>10 min</td>
+      <td>CSS only — global</td>
+    </tr>
+    <tr>
+      <td class="prop">03 — Label system</td>
+      <td><span class="severity-badge high" style="font-size:9px;">High</span></td>
+      <td>15 min</td>
+      <td>CSS + 1 HTML class addition</td>
+    </tr>
+    <tr>
+      <td class="prop">04 — Line-heights</td>
+      <td><span class="severity-badge high" style="font-size:9px;">High</span></td>
+      <td>10 min</td>
+      <td>CSS only — global</td>
+    </tr>
+    <tr>
+      <td class="prop">05 — Mobile type scale</td>
+      <td><span class="severity-badge moderate" style="font-size:9px;">Minor</span></td>
+      <td>10 min</td>
+      <td>CSS only — media query</td>
+    </tr>
+  </table>
+
+  <div class="callout" style="margin-top:24px;">
+    <strong>Total LOE:</strong> ~1 hour. All CSS-only except one HTML class addition (hero category label). Every change applies globally across all 5 pages via element selectors.
+  </div>
+
+  <div class="callout-blue" style="margin-top:16px;">
+    <strong>This is the final spec in the audit.</strong> All 8 categories from the original scorecard have now been addressed: Mobile Experience, Visual & Social Proof, CTA Design & Conversion Flow, Visual Density & Whitespace, Card & Component Design, Information Architecture, Typography & Hierarchy, and Brand Identity (which scored an A and required no changes).
+  </div>
+</section>
+
+</div>
+
+<div style="background: var(--midnight); color: rgba(255,255,255,0.3); text-align: center; padding: 32px; font-size: 12px;">
+  Devonshire Ops — Typography &amp; Hierarchy Spec — April 2026
+</div>
+
+</body>
+</html>
