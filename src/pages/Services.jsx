@@ -596,7 +596,7 @@ export default function ServicesPage({ setPage }) {
   return (
     <div>
       <Section noCTA>
-        <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 700, color: COLORS.navy, marginBottom: SPACING.sm }}>Framework</h1>
+        <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 400, color: COLORS.navy, marginBottom: SPACING.sm }}>Framework</h1>
         <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "14px" }}>
           Operational support for PE funds and portfolio companies — from pre-close diligence through post-close stabilization to ongoing governance. Fixed fees, board-ready deliverables, measurable from Day 1.
         </p>

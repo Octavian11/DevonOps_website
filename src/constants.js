@@ -337,8 +337,8 @@ export const globalCSS = `
     letter-spacing: 0.2px;
   }
 
-  main p { max-width: var(--maxcopy); font-size: 17px; }
-  main li { font-size: 17px; }
+  main p { max-width: var(--maxcopy); font-size: 16px; }
+  main li { font-size: 15px; }
   td p, th p, nav p, footer p, .no-max-width p { max-width: none; font-size: inherit; }
 
   ::selection { background: ${COLORS.primary}; color: white; }
@@ -874,6 +874,89 @@ export const globalCSS = `
     padding-bottom: 8px;
     border-bottom: 2px solid #C8952E;
     display: inline-block;
+  }
+
+  /* ══════════════════════════════════════════════════════════════
+     TYPOGRAPHY — spec: devonshire-typography-spec.html
+     ══════════════════════════════════════════════════════════════ */
+
+  /* Items 01+02 — Heading weight + type scale */
+  h1 {
+    font-weight: 400 !important;
+    font-size: 48px;
+    line-height: 1.15;
+    letter-spacing: -0.2px;
+  }
+  h2, .section-title {
+    font-weight: 400 !important;
+    font-size: 28px;
+    line-height: 1.3;
+    letter-spacing: 0px;
+    margin-bottom: 12px;
+  }
+  h3 {
+    font-weight: 600 !important;
+    font-size: 20px;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .faq-row h3, .faq-row {
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    line-height: 1.35;
+  }
+
+  /* Card body text — slightly smaller + tighter than free paragraphs */
+  .buyer-card p, .cost-card p, .pricing-card p,
+  .outcome-card p, .path-card p, .track-vignette p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* List items */
+  li { font-size: 15px; line-height: 1.5; margin-bottom: 6px; }
+
+  /* Small / disclaimer */
+  small, .disclaimer, .confidentiality-note p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #888;
+  }
+
+  /* Item 03 — Unified label system */
+  .context-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase;
+    color: #C8952E;
+  }
+  .hero-category {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase;
+    color: #C8952E !important;
+    margin-bottom: 16px;
+  }
+  .pe-consequence .label { color: #C0392B !important; }
+
+  /* Item 04 — Context-specific line-heights */
+  .section-wrapper > p:first-of-type, h2 + p { line-height: 1.65; }
+  blockquote, .mckinsey-quote p, .track-result, .proof-quote { line-height: 1.55; }
+  .hero-subheadline, .hero-block p { line-height: 1.55 !important; }
+
+  /* Item 05 — Mobile type scale */
+  @media (max-width: 768px) {
+    h1 { font-size: 32px !important; line-height: 1.2 !important; }
+    h2, .section-title { font-size: 24px !important; }
+    h3 { font-size: 18px !important; }
+    p { font-size: 15px; }
+    .buyer-card p, .cost-card p, .pricing-card p { font-size: 14px; }
+    .context-label, .hero-category { font-size: 10px !important; }
+    .faq-row h3, .faq-row { font-size: 16px !important; }
   }
 
   /* ══════════════════════════════════════════════════════════════

@@ -64,7 +64,7 @@ const OUTCOMES = [
 export default function ResourcesPage({ setPage }) {
   return (
     <div className="fade-in">
-      <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 700, color: COLORS.navy, marginBottom: SPACING.lg }}>Resources</h1>
+      <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 400, color: COLORS.navy, marginBottom: SPACING.lg }}>Resources</h1>
 
       {/* Interactive Tools */}
       <Section noCTA title="Interactive Tools" variant="tinted">
