@@ -66,7 +66,7 @@ export function SectionTitle({ children, sub }) {
       <h2 className="section-title" style={{
         fontFamily: FONTS.heading,
         fontSize: sub ? "1rem" : "1.4rem",
-        fontWeight: 700,
+        fontWeight: sub ? 600 : 400,
         color: COLORS.navy,
         lineHeight: 1.3,
         marginTop: 0

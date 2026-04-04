@@ -9,7 +9,7 @@ export default function AboutPage() {
   const [outcomeExpanded, setOutcomeExpanded] = useState(false);
   return (
     <div className="fade-in">
-      <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 700, color: COLORS.navy, marginBottom: SPACING.lg }}>About</h1>
+      <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 400, color: COLORS.navy, marginBottom: SPACING.lg }}>About</h1>
 
       {/* Who I Am */}
       <Section noCTA title="Who I Am">

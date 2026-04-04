@@ -184,7 +184,7 @@ export default function ScorerPage() {
 
   return (
     <div className="fade-in">
-      <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.7rem", fontWeight: 700, color: COLORS.navy, marginBottom: "14px" }}>
+      <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.7rem", fontWeight: 400, color: COLORS.navy, marginBottom: "14px" }}>
         Portfolio Stability Readiness Scorer
       </h1>
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "24px" }}>
