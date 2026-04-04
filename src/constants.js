@@ -827,6 +827,56 @@ export const globalCSS = `
   }
 
   /* ══════════════════════════════════════════════════════════════
+     IA SPEC — spec: devonshire-ia-spec.html
+     ══════════════════════════════════════════════════════════════ */
+
+  /* McKinsey blockquote — standardized treatment */
+  .mckinsey-quote {
+    background: #FFFBF0 !important;
+    border-left: 3px solid #C8952E !important;
+    padding: 20px 24px !important;
+    border-radius: 0 8px 8px 0 !important;
+    margin: 24px 0 !important;
+  }
+
+  /* Sub-heading: path cards → pricing cards */
+  .pricing-subheading {
+    font-family: 'EB Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: #1B2A4A;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding-top: 32px;
+    border-top: 1px solid #E4E2DC;
+  }
+
+  /* Sub-heading: track vignettes → outcome cards */
+  .outcomes-subheading {
+    font-family: 'EB Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: #1B2A4A;
+    margin-top: 40px;
+    margin-bottom: 16px;
+    padding-top: 32px;
+    border-top: 1px solid #E4E2DC;
+  }
+
+  /* FAQ category grouping */
+  .faq-categories { display: flex; flex-direction: column; gap: 32px; }
+  .faq-category-heading {
+    font-family: 'EB Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1B2A4A;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #C8952E;
+    display: inline-block;
+  }
+
+  /* ══════════════════════════════════════════════════════════════
      CARD DESIGN — spec: devonshire-card-design-spec.html
      ══════════════════════════════════════════════════════════════ */
 

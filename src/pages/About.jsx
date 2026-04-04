@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   COLORS, FONTS, SPACING, SHADOWS, RADIUS,
   CALENDLY,
@@ -5,6 +6,7 @@ import {
 import { CTAButton, ButtonPair, Section, ServicesSamplesRow } from "../components.jsx";
 
 export default function AboutPage() {
+  const [outcomeExpanded, setOutcomeExpanded] = useState(false);
   return (
     <div className="fade-in">
       <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 700, color: COLORS.navy, marginBottom: SPACING.lg }}>About</h1>
@@ -100,63 +102,59 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* Engagement 2 */}
-        <div style={{ border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm }}>
-          <div style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "8px" }}>
-            Vendor Optimization · Global asset manager, ~$40M vendor program
-          </div>
-          <div style={{ fontFamily: FONTS.heading, fontSize: "1.15rem", fontWeight: 700, color: COLORS.navy, marginBottom: "14px" }}>
-            Vendor Optimization & Cost Control
-          </div>
-          <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Context</div>
-          <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "16px" }}>
-            A global asset manager was running a ~$40M annual technology-and-operations vendor program where spend was growing ~22% annually — materially outpacing AUM and business growth. The vendor landscape was fragmented across 15 providers, creating redundancy and weak negotiating leverage. There was no visibility into utilization or value realization, and no structured governance to prevent cost creep.
-          </p>
-          <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>What I Built</div>
-          <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "20px" }}>
-            Built a single source of truth for spend across the full $40M program and segmented it by business value and usage. Ran utilization analytics to right-size licensing and surface low-value or duplicative spend. Consolidated 15 providers down to 8 strategic partners, renegotiated terms across major market data and trading platform vendors, and introduced competitive tension through targeted RFP/RFQ processes. Installed ongoing vendor governance: scorecards, contract lifecycle discipline, and QBRs to sustain savings and performance.
-          </p>
-          <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "12px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Measured Outcomes</div>
-          <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "16px" }}>
-            {[
-              { v: ">$2M", l: "Annual run-rate reduction" },
-              { v: "15 → 8", l: "Vendors consolidated" },
-              { v: "~28%", l: "Cost per $1B AUM reduction" },
-              { v: "<6 mo", l: "Payback period" },
-            ].map((m, i) => (
-              <div key={i} style={{ border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "14px 18px", background: `${COLORS.navy}04`, flex: "1 1 120px", minWidth: "min(110px, 100%)" }}>
-                <div style={{ fontFamily: FONTS.body, fontSize: "1.3rem", fontWeight: 700, color: COLORS.gold, marginBottom: "4px" }}>{m.v}</div>
-                <div style={{ fontFamily: FONTS.body, fontSize: "0.82rem", color: COLORS.charcoal, lineHeight: 1.4 }}>{m.l}</div>
-              </div>
-            ))}
-          </div>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.88rem", color: COLORS.bodyMuted, lineHeight: 1.55, margin: "0 0 16px" }}>
-            Additional 10–15% licensing reduction via utilization-driven right-sizing, on top of the consolidation savings.
-          </p>
-          <div style={{ padding: "12px 16px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0` }}>
-            <div style={{ fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 700, color: COLORS.navy, marginBottom: "4px", textTransform: "uppercase", letterSpacing: "0.5px" }}>PE Translation</div>
-            <p style={{ fontFamily: FONTS.body, fontSize: "0.88rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0 }}>
-              Vendor rationalization is one of the first PE value creation levers — and the fastest path to defensible EBITDA improvement without headcount cuts. This playbook converts into a Stability Sprint add-on: spend transparency, utilization-based decisions, and a governance cadence that sticks. CFOs love it because the ROI is visible in the first quarter.
+        <button
+          onClick={() => setOutcomeExpanded(!outcomeExpanded)}
+          style={{ background: "transparent", border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "8px 16px", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, fontWeight: 600, cursor: "pointer", marginTop: "20px", marginBottom: outcomeExpanded ? "20px" : "0" }}>
+          {outcomeExpanded ? "Show fewer outcomes ▴" : "Show more outcomes ▸"}
+        </button>
+
+        {/* Engagement 2 — collapsed by default */}
+        {outcomeExpanded && (
+          <div style={{ border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm }}>
+            <div style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "8px" }}>
+              Vendor Optimization · Global asset manager, ~$40M vendor program
+            </div>
+            <div style={{ fontFamily: FONTS.heading, fontSize: "1.15rem", fontWeight: 700, color: COLORS.navy, marginBottom: "14px" }}>
+              Vendor Optimization & Cost Control
+            </div>
+            <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Context</div>
+            <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "16px" }}>
+              A global asset manager was running a ~$40M annual technology-and-operations vendor program where spend was growing ~22% annually — materially outpacing AUM and business growth. The vendor landscape was fragmented across 15 providers, creating redundancy and weak negotiating leverage. There was no visibility into utilization or value realization, and no structured governance to prevent cost creep.
             </p>
+            <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>What I Built</div>
+            <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "20px" }}>
+              Built a single source of truth for spend across the full $40M program and segmented it by business value and usage. Ran utilization analytics to right-size licensing and surface low-value or duplicative spend. Consolidated 15 providers down to 8 strategic partners, renegotiated terms across major market data and trading platform vendors, and introduced competitive tension through targeted RFP/RFQ processes. Installed ongoing vendor governance: scorecards, contract lifecycle discipline, and QBRs to sustain savings and performance.
+            </p>
+            <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "12px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Measured Outcomes</div>
+            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "16px" }}>
+              {[
+                { v: ">$2M", l: "Annual run-rate reduction" },
+                { v: "15 → 8", l: "Vendors consolidated" },
+                { v: "~28%", l: "Cost per $1B AUM reduction" },
+                { v: "<6 mo", l: "Payback period" },
+              ].map((m, i) => (
+                <div key={i} style={{ border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "14px 18px", background: `${COLORS.navy}04`, flex: "1 1 120px", minWidth: "min(110px, 100%)" }}>
+                  <div style={{ fontFamily: FONTS.body, fontSize: "1.3rem", fontWeight: 700, color: COLORS.gold, marginBottom: "4px" }}>{m.v}</div>
+                  <div style={{ fontFamily: FONTS.body, fontSize: "0.82rem", color: COLORS.charcoal, lineHeight: 1.4 }}>{m.l}</div>
+                </div>
+              ))}
+            </div>
+            <p style={{ fontFamily: FONTS.body, fontSize: "0.88rem", color: COLORS.bodyMuted, lineHeight: 1.55, margin: "0 0 16px" }}>
+              Additional 10–15% licensing reduction via utilization-driven right-sizing, on top of the consolidation savings.
+            </p>
+            <div style={{ padding: "12px 16px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0` }}>
+              <div style={{ fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 700, color: COLORS.navy, marginBottom: "4px", textTransform: "uppercase", letterSpacing: "0.5px" }}>PE Translation</div>
+              <p style={{ fontFamily: FONTS.body, fontSize: "0.88rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0 }}>
+                Vendor rationalization is one of the first PE value creation levers — and the fastest path to defensible EBITDA improvement without headcount cuts. This playbook converts into a Stability Sprint add-on: spend transparency, utilization-based decisions, and a governance cadence that sticks. CFOs love it because the ROI is visible in the first quarter.
+              </p>
+            </div>
           </div>
-        </div>
+        )}
       </Section>
 
       {/* Sample Deliverables */}
       <Section noCTA title="Sample Deliverables" variant="tinted">
         <ServicesSamplesRow />
-      </Section>
-
-      {/* Bottom CTA */}
-      <Section noCTA background={`${COLORS.navy}05`}>
-        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, marginBottom: "18px", textAlign: "center" }}>
-          15 minutes. I'll assess the situation and scope the right engagement.
-        </p>
-        <ButtonPair
-          primaryText="Book a Fit Check"
-          centered={true}
-          showAvailability={true}
-        />
       </Section>
     </div>
   );

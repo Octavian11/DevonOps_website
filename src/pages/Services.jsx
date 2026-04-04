@@ -600,7 +600,7 @@ export default function ServicesPage({ setPage }) {
         <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "14px" }}>
           Operational support for PE funds and portfolio companies — from pre-close diligence through post-close stabilization to ongoing governance. Fixed fees, board-ready deliverables, measurable from Day 1.
         </p>
-        <div style={{ padding: "12px 16px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.md} ${RADIUS.md} 0`, maxWidth: "960px", marginBottom: "16px" }}>
+        <div className="mckinsey-quote" style={{ maxWidth: "960px" }}>
           <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, margin: 0, lineHeight: 1.6 }}>
             <strong>53% of LPs now rank a GP's value creation strategy as a top-five criterion in manager selection</strong> — up to #3, above sector expertise. Operational execution is no longer a back-office function. It's a fund-level differentiator.
           </p>
@@ -621,7 +621,6 @@ export default function ServicesPage({ setPage }) {
       <div id="worked-example"><WorkedExampleAccordion /></div>
       <div id="how-it-works"><ServicesSteps /></div>
       <div id="faq"><FAQBlock variant="tinted" /></div>
-      <div id="fit-check"><FitCheckCTA /></div>
     </div>
   );
 }

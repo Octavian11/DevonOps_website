@@ -358,28 +358,40 @@ export function FAQBlock({ variant }) {
     { q: "Do you work with family offices?", a: "Yes, specifically on the Control Tower Retainer for longer holds. Family offices buying from founders often inherit zero institutional process — the gap between what's described in diligence and what's actually operating is widest in these deals. I install the governance baseline and operating cadence that prevents drift over a 5–7+ year hold." },
   ];
 
+  const workingWithMe = faqs.filter((_, i) => [0,1,2,3,8,11].includes(i));
+  const engagementProcess = faqs.filter((_, i) => [4,5,6,7,9,10].includes(i));
+
   const q = { fontFamily: FONTS.heading, fontSize: "1.05rem", color: COLORS.navy, margin: 0, flex: 1 };
   const a = { fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, margin: 0, paddingBottom: "14px" };
 
+  const renderFAQItem = (item, globalIndex) => (
+    <div key={globalIndex} style={{ borderBottom: `1px solid ${COLORS.border}` }}>
+      <button
+        className="faq-row"
+        onClick={() => toggle(globalIndex)}
+        style={{ width: "100%", textAlign: "left", background: "none", border: "none", padding: "14px 0", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <h3 style={q}>{item.q}</h3>
+        <span className="expand-icon" style={{ color: COLORS.steel, fontSize: "1rem", marginLeft: "12px", flexShrink: 0 }}>
+          {open === globalIndex ? "▾" : "▸"}
+        </span>
+      </button>
+      {open === globalIndex && (
+        <p style={a}>{item.a}</p>
+      )}
+    </div>
+  );
+
   return (
     <Section title="FAQ" noCTA variant={variant} background={variant ? undefined : `${COLORS.navy}04`}>
-      <div style={{ borderTop: `2px solid ${COLORS.gold}30`, paddingTop: SPACING.md }}>
-        {faqs.map((item, i) => (
-          <div key={i} style={{ borderBottom: `1px solid ${COLORS.border}` }}>
-            <button
-              className="faq-row"
-              onClick={() => toggle(i)}
-              style={{ width: "100%", textAlign: "left", background: "none", border: "none", padding: "14px 0", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <h3 style={q}>{item.q}</h3>
-              <span className="expand-icon" style={{ color: COLORS.steel, fontSize: "1rem", marginLeft: "12px", flexShrink: 0 }}>
-                {open === i ? "▾" : "▸"}
-              </span>
-            </button>
-            {open === i && (
-              <p style={a}>{item.a}</p>
-            )}
-          </div>
-        ))}
+      <div className="faq-categories" style={{ borderTop: `2px solid ${COLORS.gold}30`, paddingTop: SPACING.md }}>
+        <div className="faq-category">
+          <h3 className="faq-category-heading">Working with me</h3>
+          {workingWithMe.map((item) => renderFAQItem(item, faqs.indexOf(item)))}
+        </div>
+        <div className="faq-category">
+          <h3 className="faq-category-heading">Engagement &amp; process</h3>
+          {engagementProcess.map((item) => renderFAQItem(item, faqs.indexOf(item)))}
+        </div>
       </div>
     </Section>
   );
@@ -543,8 +555,53 @@ export function OfferCards({ setPage }) {
   const li = { marginBottom: "8px", lineHeight: 1.55 };
   const segLabel = { fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "10px", display: "block" };
 
+  const pathLeft = {
+    title: "Evaluating a Target",
+    description: "Decision-useful ops diligence designed for the IC: severity-rated red flags + evidence requests.",
+    items: ["Risk-rated findings memo (IC-ready)", "Evidence requests + diligence questions", "Day-1 → Day-100 stabilization priorities if you close"]
+  };
+  const pathRight = {
+    title: "First 100 Days Post-Close",
+    description: "Install a governance baseline so value creation isn't blocked by instability.",
+    items: ["Incident command (severity model, escalation, postmortems)", "Change governance (CAB-lite, risk classification, rollback discipline)", "KPI cadence (weekly operating reviews + board-ready pack)"],
+  };
+
   return (
-    <Section title="Services & Pricing" type="windowWithCards" noCTA>
+    <Section title={setPage ? "Choose Your Path & Pricing" : "Services & Pricing"} type="windowWithCards" noCTA>
+      {setPage && (
+        <>
+          <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "24px" }}>
+            Pick the track that matches where you are in the lifecycle. Both paths deliver <strong>risk-rated findings, PE impact framing, and a clear Day-1 critical path</strong>.
+          </p>
+          <div className="path-cards-grid" style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap" }}>
+            <div className="path-card" style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
+              <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{pathLeft.title}</div>
+              <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{pathLeft.description}</p>
+              <ul style={{ paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
+                {pathLeft.items.map((item, i) => (
+                  <li key={i} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>{item}</li>
+                ))}
+              </ul>
+              <div style={{ marginTop: "auto", paddingTop: "16px" }}>
+                <button className="card-text-link" onClick={() => setPage("scorer")}>Score Your Deal →</button>
+              </div>
+            </div>
+            <div className="path-card" style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
+              <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{pathRight.title}</div>
+              <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{pathRight.description}</p>
+              <ul style={{ paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
+                {pathRight.items.map((item, i) => (
+                  <li key={i} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>{item}</li>
+                ))}
+              </ul>
+              <div style={{ marginTop: "auto", paddingTop: "16px" }}>
+                <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer">Book a Fit Check →</a>
+              </div>
+            </div>
+          </div>
+          <h3 className="pricing-subheading">Engagement options</h3>
+        </>
+      )}
       <div className="pricing-grid" style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap", marginBottom: "24px" }}>
         <div className="pricing-card" style={{...box, borderTop: `3px solid ${COLORS.steel}`}}>
           <span style={segLabel}>Independent Sponsors · Pre-Close</span>
@@ -605,13 +662,18 @@ export function OfferCards({ setPage }) {
 }
 
 export function TestimonialBlock() {
+  const [moreExpanded, setMoreExpanded] = useState(false);
   const cardStyle = { border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "22px 24px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 300px", minWidth: "min(260px, 100%)" };
   const contextLabel = { fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "10px", display: "block" };
   const cardTitle = { fontFamily: FONTS.heading, fontSize: "1.1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" };
   const body = { fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.65, margin: "0 0 14px" };
   const result = { fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0, padding: "10px 12px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0` };
+  const box = { border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.gold}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" };
+  const fieldLabel = { fontFamily: FONTS.body, fontSize: "10px", fontWeight: 700, color: COLORS.navy, letterSpacing: "1.5px", textTransform: "uppercase", display: "block", marginBottom: "4px" };
+  const fieldVal = { fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, margin: "0 0 14px 0" };
+  const valueCreated = { fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, margin: 0, padding: "14px 16px", background: "#FFFBF0", borderLeft: `3px solid #C8952E`, borderRadius: "0 6px 6px 0" };
   return (
-    <Section title="Institutional Track Record" noCTA>
+    <Section title="Track Record & Outcomes" noCTA>
       <div className="track-vignettes-grid" style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginBottom: "14px" }}>
         <div className="track-vignette" style={cardStyle}>
           <span style={contextLabel}>Platform Stabilization · Multi-strategy hedge fund, ~$10B AUM</span>
@@ -629,6 +691,59 @@ export function TestimonialBlock() {
       <div className="confidentiality-note">
         <strong>All engagements are NDA-protected.</strong> Client identities and deal details remain confidential. Anonymized metrics and references are available on request.
       </div>
+
+      <h3 className="outcomes-subheading">Additional engagement outcomes</h3>
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "20px" }}>
+        Anonymized engagement outcomes from $10B+ institutional operating roles. Gap → intervention → result.
+      </p>
+
+      <div className="outcomes-visible">
+        <div className="outcome-card" style={box}>
+          <SectionTitle sub>Incident instability</SectionTitle>
+          <span style={fieldLabel}>GAP</span>
+          <p style={fieldVal}>Same failures recurring every 4–6 weeks. No severity model, no ownership, no postmortems.</p>
+          <span style={fieldLabel}>FIX</span>
+          <p style={fieldVal}>Severity model, incident command, escalation paths, postmortem cadence.</p>
+          <span style={fieldLabel}>RESULT</span>
+          <p style={valueCreated}>~67% incident reduction. ~31% faster resolution. Board reporting shifted from crisis-driven to weekly structured reviews.</p>
+        </div>
+        <div className="outcome-card" style={box}>
+          <SectionTitle sub>Change-driven outages</SectionTitle>
+          <span style={fieldLabel}>GAP</span>
+          <p style={fieldVal}>Deployments causing outages. No change calendar, no risk classification, no rollback plans.</p>
+          <span style={fieldLabel}>FIX</span>
+          <p style={fieldVal}>CAB-lite process, risk classification, rollback discipline, change-incident correlation.</p>
+          <span style={fieldLabel}>RESULT</span>
+          <p style={valueCreated}>~60% fewer critical outages. Uptime: 94% → 99%. Change-incident correlation visible to the board within 30 days.</p>
+        </div>
+      </div>
+
+      <div className={`outcomes-hidden${moreExpanded ? " expanded" : ""}`}>
+        <div className="outcome-card" style={box}>
+          <SectionTitle sub>Board reporting / KPI ambiguity</SectionTitle>
+          <span style={fieldLabel}>GAP</span>
+          <p style={fieldVal}>No KPIs. Board updates were verbal and anecdotal. No baselines, no targets, no measurement.</p>
+          <span style={fieldLabel}>FIX</span>
+          <p style={fieldVal}>KPI library, weekly operating review, executive dashboard, board-ready reporting pack.</p>
+          <span style={fieldLabel}>RESULT</span>
+          <p style={valueCreated}>Weekly operating rhythm installed. Issues surfaced through cadence, not crisis. Board gained real-time ops visibility — direct input to exit narrative.</p>
+        </div>
+        <div className="outcome-card" style={box}>
+          <SectionTitle sub>Vendor concentration risk</SectionTitle>
+          <span style={fieldLabel}>GAP</span>
+          <p style={fieldVal}>Single vendor covering 80%+ of critical infrastructure. Auto-renewing contracts, no SLA tracking, change-of-control clause missed in diligence.</p>
+          <span style={fieldLabel}>FIX</span>
+          <p style={fieldVal}>Full vendor mapping, contract consolidation, renewal calendar, SLA monitoring, concentration reduction plan.</p>
+          <span style={fieldLabel}>RESULT</span>
+          <p style={valueCreated}>$2M+ annual savings via renegotiation. Concentration reduced: 1 vendor → 3. Exit plan documented for top 5 vendors — turned a diligence liability into a hold narrative.</p>
+        </div>
+      </div>
+
+      <button
+        onClick={() => setMoreExpanded(!moreExpanded)}
+        style={{ background: "transparent", border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "8px 16px", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, fontWeight: 600, cursor: "pointer", marginTop: "16px" }}>
+        {moreExpanded ? "Show fewer outcomes ▴" : "Show more outcomes ▸"}
+      </button>
     </Section>
   );
 }

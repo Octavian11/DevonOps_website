@@ -215,7 +215,7 @@ function LeversTeaserSection({ setPage }) {
         ))}
       </div>
 
-      <div style={{ padding: "12px 16px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.md} ${RADIUS.md} 0`, maxWidth: "960px", marginTop: "24px" }}>
+      <div className="mckinsey-quote" style={{ maxWidth: "960px" }}>
         <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, margin: 0, lineHeight: 1.6 }}>
           <strong>16,000+ PE-backed companies are currently held 4+ years — 52% of total PE inventory, the highest on record.</strong> With median hold periods now at 6.6 years, the window for operational value creation is finite. Funds that identify and close these gaps early capture disproportionate returns.
         </p>
@@ -481,32 +481,11 @@ export default function LeverExplorer({ setPage }) {
       <BuyerSegmentCards setPage={setPage} />
       <LeversTeaserSection setPage={setPage} />
       <CostOfInaction />
-      <ChooseSituation setPage={setPage} />
-      <OfferCards setPage={setPage} />
-      <MiniCases />
       <CompactAboutBio setPage={setPage} />
+      <OfferCards setPage={setPage} />
       <TestimonialBlock />
       <EndorsementQuote />
       <FAQBlock />
-
-      <Section noCTA background={`${COLORS.navy}05`}>
-        <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.bodyMuted, textAlign: "center", fontStyle: "italic", margin: "0 auto 8px" }}>
-          ~67% incident volume reduction · ~31% MTTR improvement · $2M+ annual vendor savings — representative outcomes from prior institutional operating roles
-        </p>
-        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, textAlign: "center", margin: "0 auto 20px" }}>
-          Not sure where to start? Let's assess fit and scope the right engagement.
-        </p>
-        <ButtonPair
-          primaryText="Book a Fit Check"
-          primaryLink={CALENDLY}
-          secondaryText="Score Your Deal →"
-          secondaryLink={null}
-          secondaryAction={() => setPage("scorer")}
-          centered={true}
-          showAvailability={true}
-        />
-      </Section>
-
     </div>
   );
 }
