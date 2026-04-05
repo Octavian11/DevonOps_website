@@ -678,8 +678,8 @@ export const globalCSS = `
     font-size: 32px; font-weight: 400; color: ${COLORS.gold}; line-height: 1.1;
   }
   .proof-metric-label {
-    font-size: 11px; color: rgba(255,255,255,0.45);
-    margin-top: 4px; letter-spacing: 0.3px;
+    font-size: 13px; color: rgba(255,255,255,0.7);
+    font-weight: 500; margin-top: 4px; letter-spacing: 0.5px;
   }
   @media (max-width: 768px) {
     .proof-metrics-strip { gap: 32px; padding: 24px 20px; }
@@ -830,13 +830,50 @@ export const globalCSS = `
      IA SPEC — spec: devonshire-ia-spec.html
      ══════════════════════════════════════════════════════════════ */
 
-  /* McKinsey blockquote — standardized treatment */
+  /* McKinsey quote — full-width dark navy bar */
   .mckinsey-quote {
-    background: #FFFBF0 !important;
-    border-left: 3px solid #C8952E !important;
-    padding: 20px 24px !important;
-    border-radius: 0 8px 8px 0 !important;
-    margin: 24px 0 !important;
+    background: #14213D !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 40px 32px !important;
+    margin: 0 !important;
+    width: 100vw !important;
+    margin-left: calc(-50vw + 50%) !important;
+    text-align: center;
+  }
+  .mckinsey-quote p {
+    color: rgba(255,255,255,0.85) !important;
+    font-family: 'EB Garamond', Georgia, serif !important;
+    font-style: italic !important;
+    font-size: 18px !important;
+    line-height: 1.6 !important;
+    max-width: 800px;
+    margin: 0 auto !important;
+  }
+  .mckinsey-quote p strong {
+    color: #fff !important;
+    font-weight: 600 !important;
+    font-style: normal !important;
+  }
+  .mckinsey-quote .attribution, .mckinsey-quote small {
+    display: block !important;
+    margin-top: 16px !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 10px !important;
+    font-weight: 600 !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+    color: #C8952E !important;
+    font-style: normal !important;
+  }
+  @media (max-width: 768px) {
+    .mckinsey-quote {
+      padding: 32px 20px !important;
+    }
+    .mckinsey-quote p {
+      font-size: 16px !important;
+    }
   }
 
   /* Sub-heading: path cards → pricing cards */
@@ -906,15 +943,15 @@ export const globalCSS = `
     line-height: 1.35;
   }
 
-  /* Card body text — slightly smaller + tighter than free paragraphs */
+  /* Card body text */
   .buyer-card p, .cost-card p, .pricing-card p,
   .outcome-card p, .path-card p, .track-vignette p {
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.6;
   }
 
   /* List items */
-  li { font-size: 15px; line-height: 1.5; margin-bottom: 6px; }
+  li { font-size: 16px; line-height: 1.5; margin-bottom: 6px; }
 
   /* Small / disclaimer */
   small, .disclaimer, .confidentiality-note p {
@@ -934,7 +971,7 @@ export const globalCSS = `
   }
   .hero-category {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px !important;
+    font-size: 13px !important;
     font-weight: 600 !important;
     letter-spacing: 2px !important;
     text-transform: uppercase;
@@ -972,6 +1009,24 @@ export const globalCSS = `
     margin-top: 0 !important;
   }
   .buyer-card .card-text-link { margin-top: auto; padding-top: 20px; }
+
+  /* Gold checkmarks — persona, pricing, path cards (NOT cost cards) */
+  .buyer-card ul { list-style: none; padding-left: 0; margin-top: 20px; margin-bottom: 0; }
+  .buyer-card li, .pricing-card li, .path-card li {
+    padding-left: 24px;
+    position: relative;
+    margin-bottom: 10px;
+    line-height: 1.55;
+  }
+  .buyer-card li::before, .pricing-card li::before, .path-card li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #C8952E;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .buyer-card em, .buyer-card i { display: block; margin-bottom: 4px; }
 
   /* Item 03 — Risk/cost cards */
   .cost-card {
