@@ -214,13 +214,6 @@ function LeversTeaserSection({ setPage }) {
           <DomainTag key={k} domain={k} />
         ))}
       </div>
-
-      <div className="mckinsey-quote" style={{ maxWidth: "960px" }}>
-        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, margin: 0, lineHeight: 1.6 }}>
-          <strong>16,000+ PE-backed companies are currently held 4+ years — 52% of total PE inventory, the highest on record.</strong> With median hold periods now at 6.6 years, the window for operational value creation is finite. Funds that identify and close these gaps early capture disproportionate returns.
-        </p>
-        <span style={{ fontFamily: FONTS.body, fontSize: "0.78rem", color: COLORS.bodyMuted, letterSpacing: "0.4px", textTransform: "uppercase", display: "block", marginTop: "6px" }}>McKinsey Global Private Markets Review 2026</span>
-      </div>
     </Section>
   );
 }
@@ -480,6 +473,12 @@ export default function LeverExplorer({ setPage }) {
       <ProofMetricsStrip />
       <BuyerSegmentCards setPage={setPage} />
       <LeversTeaserSection setPage={setPage} />
+      <div className="mckinsey-quote">
+        <p>
+          <strong>16,000+ PE-backed companies are currently held 4+ years — 52% of total PE inventory, the highest on record.</strong> With median hold periods now at 6.6 years, the window for operational value creation is finite. Funds that identify and close these gaps early capture disproportionate returns.
+        </p>
+        <small>McKinsey Global Private Markets Review 2026</small>
+      </div>
       <CostOfInaction />
       <CompactAboutBio setPage={setPage} />
       <OfferCards setPage={setPage} />
