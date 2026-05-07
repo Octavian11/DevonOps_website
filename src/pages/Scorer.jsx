@@ -185,10 +185,10 @@ export default function ScorerPage() {
   return (
     <div className="fade-in">
       <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.7rem", fontWeight: 400, color: COLORS.navy, marginBottom: "14px" }}>
-        Portfolio Stability Readiness Scorer
+        How Operationally Ready Is Your Deal?
       </h1>
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "24px" }}>
-        Assess a portfolio company's operational stability across 6 dimensions. Identify where friction is highest and which interventions would create the most value.
+        6 questions. 2 minutes. See where the ops risk is hiding.
       </p>
 
       {/* Who's using this? */}
@@ -432,7 +432,7 @@ export default function ScorerPage() {
                 : "Ready to convert these gaps into a Value Creation Plan?"}
             </p>
             <ButtonPair
-              primaryText="Book a Fit Check"
+              primaryText="Book a Fit Check (15 min)"
               secondaryText="View Services"
               secondaryAction={() => window.location.hash = "#/services"}
               centered={true}

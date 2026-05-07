@@ -13,9 +13,14 @@ export default function AboutPage() {
 
       {/* Who I Am */}
       <Section noCTA title="Who I Am">
-        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, margin: 0 }}>
-          Hassan Tariq. 15+ years in platform operations across JP Morgan, Barclays, Bank of America, and Lazard — managing global trading operations, multi-billion dollar platform transformations, and operational risk at institutional scale. I'm currently completing my Executive MBA at Columbia Business School ('26), where I've sharpened a PE operator lens on the operational risks that derail value creation in the first 100 days.
-        </p>
+        <div style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7 }}>
+          <p style={{ marginBottom: SPACING.sm }}>
+            I've spent 15 years inside the machine — running platform operations at JPMorgan, Barclays, BofA, Lazard, and a $10B multi-strategy hedge fund. I've been the person at 2am on an incident bridge, the person rebuilding vendor governance under regulatory pressure, and the person who installed the KPI cadence that finally gave the board real-time visibility.
+          </p>
+          <p style={{ margin: 0 }}>
+            Now I do the same thing for PE portfolio companies — faster, with a playbook that's been pressure-tested at institutional scale. I completed my Executive MBA at Columbia Business School ('26), where I sharpened a PE operator lens on the operational risks that derail value creation in the first 100 days.
+          </p>
+        </div>
       </Section>
 
       {/* What I Do */}
@@ -31,7 +36,7 @@ export default function AboutPage() {
         <p style={{ fontFamily: FONTS.heading, color: COLORS.gold, fontStyle: "italic", marginBottom: SPACING.md }}>
           Find the gaps. Build the plan. Create the value.
         </p>
-        <CTAButton text="Book a Fit Check" showAvailability={true} />
+        <CTAButton text="Book a Fit Check (15 min)" showAvailability={true} />
       </Section>
 
       {/* How I Work */}
@@ -57,9 +62,7 @@ export default function AboutPage() {
 
       {/* Representative Outcomes */}
       <Section title="Representative Outcomes" noCTA variant="tinted">
-        <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.bodyMuted, lineHeight: 1.6, marginBottom: SPACING.md, padding: "10px 14px", background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md }}>
-          Outcomes from prior institutional operating roles — not client engagements. Identifiers withheld. Metrics are representative and sanitized for confidentiality. Details and references available on request.
-        </p>
+        <span className="measured-outcomes-label">Measured Outcomes (Post-Implementation)</span>
 
         {/* Engagement 1 */}
         <div style={{ border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, marginBottom: "20px" }}>
@@ -77,17 +80,16 @@ export default function AboutPage() {
           <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "20px" }}>
             Hired and led a 10-person global operations team across New York, London, and Hong Kong in ~6 months. Reset incident management from the ground up: severity model, escalation paths, communications cadence, on-call ownership, and closed-loop postmortems. Standardized runbooks and introduced change discipline through a CAB-lite governance process. Built a KPI dashboard tracking 18 operational metrics with weekly review cadence, and established quarterly stakeholder reviews with 50+ portfolio management and trading desk stakeholders.
           </p>
-          <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "12px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Measured Outcomes</div>
-          <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "16px" }}>
+          <div className="case-metrics" style={{ borderRadius: `0 0 ${RADIUS.md} ${RADIUS.md}`, marginBottom: "16px" }}>
             {[
               { v: "0", l: "Critical outages (18 months)" },
               { v: "99.2%", l: "Availability (from 94%)" },
-              { v: "−31%", l: "MTTR (6.0h → 4.1h)" },
+              { v: "−31%", l: "MTTR reduction" },
               { v: "+22", l: "NPS improvement (38 → 60)" },
             ].map((m, i) => (
-              <div key={i} style={{ border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "14px 18px", background: `${COLORS.navy}04`, flex: "1 1 120px", minWidth: "min(110px, 100%)" }}>
-                <div style={{ fontFamily: FONTS.body, fontSize: "1.3rem", fontWeight: 700, color: COLORS.gold, marginBottom: "4px" }}>{m.v}</div>
-                <div style={{ fontFamily: FONTS.body, fontSize: "0.82rem", color: COLORS.charcoal, lineHeight: 1.4 }}>{m.l}</div>
+              <div key={i} className="case-metric">
+                <div className="case-metric-number">{m.v}</div>
+                <div className="case-metric-label">{m.l}</div>
               </div>
             ))}
           </div>
@@ -97,7 +99,7 @@ export default function AboutPage() {
           <div style={{ padding: "12px 16px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0` }}>
             <div style={{ fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 700, color: COLORS.navy, marginBottom: "4px", textTransform: "uppercase", letterSpacing: "0.5px" }}>PE Translation</div>
             <p style={{ fontFamily: FONTS.body, fontSize: "0.88rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0 }}>
-              This is the Stability Sprint that becomes a Control Tower retainer. Fast diagnosis, incident-command reset, runbooks, change governance, and a KPI cadence that forces follow-through. The same playbook installs in a PE portfolio company in 100 days — at a fraction of the complexity of a $10B fund.
+              Same playbook installs in a portfolio company in 100 days — at a fraction of the complexity of a $10B fund.
             </p>
           </div>
         </div>
@@ -126,16 +128,16 @@ export default function AboutPage() {
               Built a single source of truth for spend across the full $40M program and segmented it by business value and usage. Ran utilization analytics to right-size licensing and surface low-value or duplicative spend. Consolidated 15 providers down to 8 strategic partners, renegotiated terms across major market data and trading platform vendors, and introduced competitive tension through targeted RFP/RFQ processes. Installed ongoing vendor governance: scorecards, contract lifecycle discipline, and QBRs to sustain savings and performance.
             </p>
             <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "12px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Measured Outcomes</div>
-            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "16px" }}>
+            <div className="case-metrics" style={{ borderRadius: `0 0 ${RADIUS.md} ${RADIUS.md}`, marginBottom: "16px" }}>
               {[
                 { v: ">$2M", l: "Annual run-rate reduction" },
-                { v: "15 → 8", l: "Vendors consolidated" },
+                { v: "10–15%", l: "Licensing savings via right-sizing" },
                 { v: "~28%", l: "Cost per $1B AUM reduction" },
                 { v: "<6 mo", l: "Payback period" },
               ].map((m, i) => (
-                <div key={i} style={{ border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "14px 18px", background: `${COLORS.navy}04`, flex: "1 1 120px", minWidth: "min(110px, 100%)" }}>
-                  <div style={{ fontFamily: FONTS.body, fontSize: "1.3rem", fontWeight: 700, color: COLORS.gold, marginBottom: "4px" }}>{m.v}</div>
-                  <div style={{ fontFamily: FONTS.body, fontSize: "0.82rem", color: COLORS.charcoal, lineHeight: 1.4 }}>{m.l}</div>
+                <div key={i} className="case-metric">
+                  <div className="case-metric-number">{m.v}</div>
+                  <div className="case-metric-label">{m.l}</div>
                 </div>
               ))}
             </div>
@@ -150,6 +152,8 @@ export default function AboutPage() {
             </div>
           </div>
         )}
+
+        <p className="confidentiality-note" style={{ marginTop: "16px" }}>All engagements are NDA-protected. Anonymized metrics and references available on request.</p>
       </Section>
 
       {/* Sample Deliverables */}

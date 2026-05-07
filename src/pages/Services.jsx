@@ -104,7 +104,7 @@ function WorkedExampleAccordion() {
           style={{ padding: "10px 20px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, border: "none", fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer" }}>
           See offers & pricing
         </button>
-        <CTAButton text="Book a Fit Check" showAvailability={true} />
+        <CTAButton text="Book a Fit Check (15 min)" showAvailability={true} />
       </div>
     </Accordion>
   );
@@ -266,7 +266,7 @@ function StabilizationSequence() {
 function ServicesSteps() {
   const steps = [
     { num: "1", title: "Fit Check", meta: "15 minutes", description: "15-minute call. Assess the situation, confirm scope, and determine fit." },
-    { num: "2", title: "Scoping + Data Request", meta: "48 hours", description: "Targeted data request. Fixed-fee proposal with timeline within 48 hours." },
+    { num: "2", title: "Scope + Underwrite", meta: "48 hours", description: "Targeted data request. I translate the operational landscape into investment-grade risk assessment. Fixed-fee proposal with timeline within 48 hours." },
     { num: "3", title: "Diligence Deliverable", meta: "2–3 weeks", description: "Risk-rated findings memo — severity-rated, PE impact framed, IC-ready. This becomes the foundation of the Value Creation Plan." },
     { num: "4", title: "Value Creation Plan + 100-Day Execution", meta: "Days 1–100", description: "Diligence findings roll directly into the VCP. I execute against it for 100 days — incident command, change control, KPI cadence, board-ready reporting." },
   ];
@@ -298,10 +298,10 @@ function FitCheckCTA() {
   return (
     <Section noCTA background={`${COLORS.navy}05`}>
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", margin: "0 auto 20px", textAlign: "center" }}>
-        Not sure where to start? Book a Fit Check. I'll assess the situation, identify the highest-priority friction points, and scope the right engagement.
+        15 minutes. I'll assess the situation and scope the right engagement.
       </p>
       <ButtonPair
-        primaryText="Book a Fit Check"
+        primaryText="Book a Fit Check (15 min)"
         secondaryText="Email me instead"
         secondaryLink={mailtoHref(subject, body)}
         centered={true}
@@ -321,10 +321,10 @@ function TypicalRedFlags() {
     title: "Red Flags I Surface",
     description: "Operational fragility that threatens deal value:",
     items: [
-      { title: "Hidden EBITDA drag", body: "Recurring incidents, rework, and unmanaged change inflate labor and vendor spend" },
+      { title: "Silent EBITDA drag", body: "Recurring incidents, rework, and unmanaged change inflate labor and vendor spend" },
       { title: "Day-1 governance gaps", body: "No incident command, no change control, no KPI cadence → risk compounds under new ownership" },
       { title: "Vendor concentration", body: "Single-vendor dependencies, auto-renew traps, and missing exit plans create holdback/TSA exposure" },
-      { title: "Audit fragility", body: "Evidence scattered, controls inconsistent → diligence and exit readiness risk" },
+      { title: "Exit-readiness gaps", body: "Evidence scattered, controls inconsistent → diligence and exit readiness risk" },
       { title: "Key-person dependency", body: "Tribal knowledge and fragile staffing → continuity risk and slower integration" }
     ]
   };
@@ -477,7 +477,7 @@ function LeverExplorerSection({ setPage }) {
         }
       `}</style>
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "960px", marginBottom: "32px" }}>
-        {LEVERS.length} operational friction points across 6 domains — severity-rated, PE impact framed. {!showAll && !hasActiveFilter ? "Showing the 6 most common gaps. Use filters above or expand to see all 20." : "Filter by timing, domain, or severity. Open any lever for symptoms and PE impact analysis."}
+        {LEVERS.length} operational friction points across 6 domains — severity-rated, PE impact framed. Every deal has 3–5 of these hiding in plain sight. {!showAll && !hasActiveFilter ? "Use the filters to find yours." : "Filter by timing, domain, or severity. Open any lever for symptoms and PE impact analysis."}
       </p>
 
       <DomainLegend />
@@ -553,7 +553,7 @@ function LeverExplorerSection({ setPage }) {
                   <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.whatGood}</p>
                   <div style={{ display: "flex", gap: "16px", paddingTop: "8px", borderTop: `1px solid ${COLORS.border}` }}>
                     <button onClick={() => setPage("scorer")} style={{ background: "none", border: "none", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, cursor: "pointer", textDecoration: "underline", padding: 0 }}>→ Assess your readiness</button>
-                    <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.gold, textDecoration: "underline" }}>Book a Fit Check</a>
+                    <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.gold, textDecoration: "underline" }}>Book a Fit Check (15 min)</a>
                   </div>
                 </div>
               </div>
@@ -563,11 +563,11 @@ function LeverExplorerSection({ setPage }) {
           {idx === 4 && visible.length > 5 && (
             <div style={{ margin: "12px 0 16px", padding: "20px 28px", background: COLORS.navy, borderRadius: RADIUS.md, boxShadow: "0 4px 12px rgba(67, 97, 125, 0.15)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
               <p style={{ fontFamily: FONTS.body, color: COLORS.offWhite, margin: 0, lineHeight: 1.55 }}>
-                <strong style={{ color: COLORS.gold }}>Not sure which of these apply to your deal?</strong> Score Your Deal — free, 2 minutes, produces a prioritized assessment.
+                <strong style={{ color: COLORS.gold }}>Not sure which of these apply to your deal?</strong> Score it in 2 minutes — free, produces a prioritized assessment.
               </p>
               <div style={{ display: "flex", gap: "16px", flexShrink: 0 }}>
                 <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: "none", borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}>
-                  Book a Fit Check
+                  Book a Fit Check (15 min)
                 </a>
                 <button onClick={() => setPage("scorer")} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.gold, fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: `1.5px solid ${COLORS.gold}`, borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}>
                   Score Your Deal →
