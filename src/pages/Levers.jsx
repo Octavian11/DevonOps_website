@@ -25,7 +25,7 @@ function HeroBlockWithNav({ setPage }) {
           Your deal team handles the financials. Who's stress-testing the operations?
         </h1>
         <p className="hero-subheadline" style={{ fontFamily: FONTS.body, color: "rgba(255,255,255,0.92)", lineHeight: 1.65, marginBottom: "22px" }}>
-          Pre-close ops diligence and 100-day post-close execution for PE funds, independent sponsors, and family offices. I find what financial DD misses — and build the plan that turns it into EBITDA improvement in 100 days.
+          Pre-close operational diligence and 100-day post-close execution for PE-backed deals. I surface the ops risks that kill value creation plans — typically between LOI and Day 100 — and fix them before they compound.
         </p>
 
         <div className="hero-ctas" style={{ display: "flex", gap: "16px", flexWrap: "wrap", alignItems: "flex-start" }}>
@@ -34,7 +34,7 @@ function HeroBlockWithNav({ setPage }) {
               style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: "none", borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}
               onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; }}
               onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; }}>
-              Book a Fit Check
+              Book a Fit Check (15 min)
             </a>
             <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: "rgba(255,255,255,0.95)", textAlign: "center" }}>
               Currently accepting 1–2 new engagements
@@ -103,12 +103,13 @@ function BuyerSegmentCards({ setPage }) {
       code: "IS",
       title: "Independent Sponsors",
       pain: "Smaller deal teams mean no dedicated ops function. Diligence gaps surface post-close — after price is locked.",
+      timing: "Most relevant: LOI through close",
       items: [
-        "IC-credible ops findings without Big 4 cost",
-        "LP-ready evidence that you stress-tested operations",
+        "IC-credible ops findings without Big 4 costs",
+        "Evidence the ops won't blow up in Year 1",
         "Day-1 critical path if you close",
       ],
-      proof: "Zero critical outages for 18 straight months at a $10B fund — same playbook, faster install for your deal.",
+      proof: "I kept a $10B platform at zero critical outages for 18 straight months. I install the same governance playbook for your deal — scoped for a smaller team and a tighter timeline.",
       action: "scorer",
       cta: "Score Your Deal →",
       accentColor: COLORS.steel,
@@ -116,29 +117,31 @@ function BuyerSegmentCards({ setPage }) {
     {
       code: "PE",
       title: "LMM PE Funds",
-      pain: "Portfolio companies rarely have institutional ops infrastructure. Post-close stabilization risk is the #1 EBITDA threat in Year 1.",
+      pain: "Your portco's ops team is three people and a Slack channel. Post-close stabilization risk is one of the biggest EBITDA threats in Year 1.",
+      timing: "Most visible in the first 90 days post-close",
       items: [
         "100-day governance installation from Day 1",
         "Board-ready ops reporting LPs can trust",
         "IC memo — severity-rated, PE impact framed",
       ],
-      proof: ">$2M in annual savings from a $40M vendor program in under 6 months. Same gaps exist at portfolio scale — I find them in 100 days.",
+      proof: ">$2M in annual savings from a $40M vendor program in under 6 months. I find the same gaps in portfolio companies — and close them in 100 days with a structured plan, not a slide deck.",
       action: "calendly",
-      cta: "Book a Fit Check",
+      cta: "Book a Fit Check (15 min)",
       accentColor: COLORS.navy,
     },
     {
       code: "FO",
       title: "Family Offices",
       pain: "Longer holds amplify operational drift. Buying from founders means zero institutional process — and no specialist ops bench.",
+      timing: "Most relevant: mid-hold without institutional ops in place",
       items: [
-        "Ongoing Control Tower — visibility into what's actually happening",
+        "Ongoing operational oversight — visibility into what's actually happening (what I call the Control Tower)",
         "Governance that scales without adding headcount",
         "Vendor controls and compliance cadence built for long holds",
       ],
       proof: "I was the operator before I was the advisor — incident command, vendor governance, KPI cadence at a $10B platform.",
       action: "calendly",
-      cta: "Book a Fit Check",
+      cta: "Book a Fit Check (15 min)",
       accentColor: COLORS.gold,
     },
   ];
@@ -167,8 +170,11 @@ function BuyerSegmentCards({ setPage }) {
                 {seg.title}
               </span>
             </div>
-            <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "14px", fontStyle: "italic" }}>
+            <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "10px", fontStyle: "italic" }}>
               {seg.pain}
+            </p>
+            <p style={{ fontFamily: FONTS.body, fontSize: "0.82rem", color: COLORS.steel, fontStyle: "italic", marginBottom: "10px" }}>
+              {seg.timing}
             </p>
             <ul style={{ paddingLeft: "18px", margin: "0 0 14px 0" }}>
               {seg.items.map((item, j) => (
@@ -205,8 +211,12 @@ function LeversTeaserSection({ setPage }) {
     <Section noCTA variant="tinted">
       <SectionTitle>20 Operational Value Creation Levers</SectionTitle>
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "960px" }}>
-        {LEVERS.length} operational friction points across 6 domains — severity-rated, PE impact framed. Browse the full interactive lever explorer on the{" "}
-        <a href="#" onClick={(e) => { e.preventDefault(); setPage("services"); }} style={{ color: COLORS.gold, textDecoration: "underline", fontWeight: 600 }}>Services page</a>.
+        {LEVERS.length} operational friction points across 6 domains.
+      </p>
+      <p style={{ fontFamily: FONTS.body, marginTop: "10px", maxWidth: "960px" }}>
+        <a href="#" onClick={(e) => { e.preventDefault(); setPage("services"); }} style={{ color: COLORS.gold, textDecoration: "underline", fontWeight: 600 }}>
+          See which ones are hiding in your deal →
+        </a>
       </p>
 
       <div className="domain-pills-row" style={{ marginTop: "16px", display: "flex", gap: "8px", flexWrap: "wrap" }}>
@@ -228,21 +238,16 @@ function CostOfInaction() {
       consequence: "EBITDA drag from rework and churn. LP questions about management quality — in month 2 of the hold.",
     },
     {
-      title: "No change control → value creation stalls",
-      what: "40% of incidents trace to recent deployments. Releases freeze as the team tries to stabilize. Every VCP initiative requiring a technology change gets deferred.",
-      consequence: "Value creation execution delayed 60–90 days. The operational narrative that supports your exit thesis doesn't exist yet.",
-    },
-    {
       title: "No KPI cadence → board flying blind",
       what: "Six months post-close, board updates are still verbal and anecdotal. No baselines, no targets, no operating rhythm. Exit prep begins with no operational track record to show.",
-      consequence: "Multiple risk at exit. Buyer diligence surfaces what the seller should have already fixed — and prices it in.",
+      consequence: "Multiple compression at exit. Buyer diligence surfaces what the seller should have already fixed — and prices it in.",
     },
   ];
 
   return (
     <Section title="The Cost of Not Acting" noCTA variant="tinted">
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "32px" }}>
-        Operational gaps don't stay static under PE ownership. Leverage amplifies friction. These are the scenarios that play out when diligence misses them — and post-close stabilization doesn't happen.
+        Operational gaps don't stay static under PE ownership. Leverage amplifies friction. These issues typically surface in the first 60–90 days post-close — not during diligence.
       </p>
       <div className="cost-cards-grid" style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap" }}>
         {scenarios.map((s, i) => (
@@ -258,10 +263,47 @@ function CostOfInaction() {
             </p>
             <div className="pe-consequence" style={{ padding: "10px 12px", background: `${COLORS.navy}05`, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.sm }}>
               <span style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, color: COLORS.critical, letterSpacing: "0.7px", textTransform: "uppercase", display: "block", marginBottom: "4px" }}>PE Consequence</span>
-              <p style={{ fontFamily: FONTS.body, fontSize: "0.92rem", color: COLORS.charcoal, lineHeight: 1.55, margin: 0 }}>{s.consequence}</p>
+              <p style={{ fontFamily: FONTS.body, fontSize: "0.92rem", color: COLORS.charcoal, lineHeight: 1.55, margin: 0 }}><strong>{s.consequence}</strong></p>
             </div>
           </div>
         ))}
+      </div>
+      <p style={{ fontFamily: FONTS.body, color: COLORS.bodyMuted, fontStyle: "italic", marginTop: "20px", maxWidth: "700px" }}>
+        These issues don't come from bad management. They come from missing operating infrastructure.
+      </p>
+    </Section>
+  );
+}
+
+// ─── WHY NOT BIG 4 ───────────────────────────────────────────
+
+function WhyNotBig4() {
+  return (
+    <Section title="Why Not a Big 4 Firm?" noCTA>
+      <div style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "800px" }}>
+        <p style={{ marginBottom: SPACING.sm }}>
+          Big 4 firms are excellent at audit-grade frameworks. I deliver what they don't: practitioner-grade execution. I've been the person at 2am running incident command, rebuilding vendor governance under regulatory scrutiny, and building the KPI cadence that gave boards real-time visibility. That's not advisory. That's operating.
+        </p>
+        <p style={{ margin: 0 }}>
+          GP operating teams have doubled in size since 2021 (McKinsey GPMR 2026) — independent of fund AUM. Funds that can't yet build in-house need a practitioner who can install the system and hand it off, not a framework to read about it.
+        </p>
+      </div>
+    </Section>
+  );
+}
+
+// ─── WHY TRUST A SOLO PRACTITIONER ───────────────────────────
+
+function WhySoloPractitioner() {
+  return (
+    <Section title="Why Trust a Solo Practitioner?" noCTA variant="tinted">
+      <div style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "800px" }}>
+        <p style={{ marginBottom: SPACING.sm }}>
+          Because the alternative is a team of juniors with a partner's name on the cover page. I do the diagnostic. I write the findings memo. I execute the 100-day plan. There's no handoff to someone who's never run an incident bridge or renegotiated a vendor contract under deadline.
+        </p>
+        <p style={{ margin: 0 }}>
+          The institutional background isn't just a credential — it's the reason the playbook works. I built these systems at a $10B multi-strategy fund. The governance model, the severity framework, the KPI cadence, the vendor scorecard — they've been pressure-tested at institutional scale. Your portfolio company gets that same system, installed by the person who built it.
+        </p>
       </div>
     </Section>
   );
@@ -470,16 +512,17 @@ export default function LeverExplorer({ setPage }) {
     <div className="fade-in">
       <HeroBlockWithNav setPage={setPage} />
       <MicroProofStrip />
-      <ProofMetricsStrip />
       <BuyerSegmentCards setPage={setPage} />
       <LeversTeaserSection setPage={setPage} />
       <div className="mckinsey-quote">
         <p>
-          <strong>16,000+ PE-backed companies are currently held 4+ years — 52% of total PE inventory, the highest on record.</strong> With median hold periods now at 6.6 years, the window for operational value creation is finite. Funds that identify and close these gaps early capture disproportionate returns.
+          <strong>16,000+ PE-backed companies are currently held 4+ years — 52% of total PE inventory, the highest on record.</strong> With median hold periods now at 6.6 years, the window for operational value creation is finite.
         </p>
         <small>McKinsey Global Private Markets Review 2026</small>
       </div>
       <CostOfInaction />
+      <WhyNotBig4 />
+      <WhySoloPractitioner />
       <CompactAboutBio setPage={setPage} />
       <OfferCards setPage={setPage} />
       <TestimonialBlock />

@@ -349,17 +349,14 @@ export function FAQBlock({ variant }) {
     { q: "How do you handle confidentiality?", a: "NDA-friendly by default. Minimal data handling; formats can be anonymized." },
     { q: "When are you not a fit?", a: "If the company already has mature incident/change governance, a live KPI cadence, and low volatility, you likely don't need stabilization—only optimization." },
     { q: "What is a Value Creation Plan (VCP) and what does it include?", a: "A VCP is the named operational deliverable from the diligence phase — not a slide deck. It defines which gaps to fix, in what sequence, with what accountability structure, and what measurable outcomes to expect in 100 days. It's the document that converts diligence findings into operating results. The VCP is what prevents the post-close \"now what?\" problem." },
-    { q: "Why should we hire you instead of a Big 4 firm?", a: "Big 4 firms deliver audit-grade frameworks. I deliver practitioner-grade execution. I've been the operator — incident command at 2am, vendor governance under regulatory scrutiny, KPI cadences built from zero. If you need a framework, hire a Big 4 firm. If you need someone who installs the operating system in 100 days and hands it off running, let's talk." },
-    { q: "Why should we hire you instead of building an in-house operating team?", a: "Build in-house — eventually. I'm the bridge. I install the infrastructure, cadence, and playbook in 100 days. Your in-house team inherits a system that works, instead of building one from scratch while also running the business. GP operating teams have doubled since 2021 (McKinsey GPMR 2026). I'm the on-demand version for funds that aren't there yet." },
-    { q: "Why should we trust a solo practitioner?", a: "Because you're hiring the practitioner who did this at scale—not a firm that staffs a junior associate on your $15K engagement. At JPM, Barclays, and Lazard, I built and ran the systems I'm now helping you install. The credential is mine, not a logo's. And at this price point, every dollar goes to senior-level execution, not overhead." },
     { q: "What industries do you cover?", a: "The 20 levers apply to any operationally complex business. Whether the portfolio company is a fintech platform or a regional services company, the same governance gaps—incident management, vendor concentration, key-person risk, and KPI cadence—drive the same value erosion." },
     { q: "How long does a pre-close diligence engagement take?", a: "2–3 weeks from data receipt to findings memo, assuming standard artifact availability (incident history, change logs, vendor contracts, org chart, compliance evidence). Expedited timelines are possible for deals in exclusivity — discuss during the fit check." },
     { q: "What if we're still in LOI or haven't entered exclusivity yet?", a: "Earlier is better. A light-touch ops review before exclusivity can shape the diligence scope and, in some cases, inform the structure of the deal itself. Even limited access produces useful signals — incident volume patterns and change frequency are often visible without full document access." },
     { q: "Do you work with family offices?", a: "Yes, specifically on the Control Tower Retainer for longer holds. Family offices buying from founders often inherit zero institutional process — the gap between what's described in diligence and what's actually operating is widest in these deals. I install the governance baseline and operating cadence that prevents drift over a 5–7+ year hold." },
   ];
 
-  const workingWithMe = faqs.filter((_, i) => [0,1,2,3,8,11].includes(i));
-  const engagementProcess = faqs.filter((_, i) => [4,5,6,7,9,10].includes(i));
+  const workingWithMe = faqs.filter((_, i) => [0,1,2,3,5,8].includes(i));
+  const engagementProcess = faqs.filter((_, i) => [4,6,7].includes(i));
 
   const q = { fontFamily: FONTS.heading, fontSize: "1.05rem", color: COLORS.navy, margin: 0, flex: 1 };
   const a = { fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, margin: 0, paddingBottom: "14px" };
@@ -566,15 +563,28 @@ export function OfferCards({ setPage }) {
     items: ["Incident command (severity model, escalation, postmortems)", "Change governance (CAB-lite, risk classification, rollback discipline)", "KPI cadence (weekly operating reviews + board-ready pack)"],
   };
 
+  const pathAddon = {
+    title: "Add-On Acquisition Support",
+    description: "Operational diligence and integration support for portfolio companies evaluating add-on acquisitions.",
+    items: [
+      "Ops diligence on the add-on target (same rigor as standalone deals)",
+      "Integration risk assessment — systems overlap, vendor consolidation, process harmonization",
+      "Post-merger governance alignment with the platform company's operating model",
+    ],
+  };
+
   return (
     <Section title={setPage ? "Choose Your Path & Pricing" : "Services & Pricing"} type="windowWithCards" noCTA>
       {setPage && (
         <>
-          <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "24px" }}>
-            Pick the track that matches where you are in the lifecycle. Both paths deliver <strong>risk-rated findings, PE impact framing, and a clear Day-1 critical path</strong>.
+          <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "8px" }}>
+            Pick the track that matches where you are in the deal lifecycle. Both deliver risk-rated findings, PE impact framing, and a clear Day-1 critical path.
+          </p>
+          <p style={{ fontFamily: FONTS.body, color: COLORS.bodyMuted, fontStyle: "italic", marginBottom: "24px" }}>
+            Most engagements begin during the LOI → close window to avoid post-close rework.
           </p>
           <div className="path-cards-grid" style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap" }}>
-            <div className="path-card" style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
+            <div className="path-card" style={{ flex: "1 1 260px", minWidth: "min(240px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
               <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{pathLeft.title}</div>
               <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{pathLeft.description}</p>
               <ul style={{ paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
@@ -586,7 +596,7 @@ export function OfferCards({ setPage }) {
                 <button className="card-text-link" onClick={() => setPage("scorer")}>Score Your Deal →</button>
               </div>
             </div>
-            <div className="path-card" style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
+            <div className="path-card" style={{ flex: "1 1 260px", minWidth: "min(240px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
               <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{pathRight.title}</div>
               <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{pathRight.description}</p>
               <ul style={{ paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
@@ -595,12 +605,29 @@ export function OfferCards({ setPage }) {
                 ))}
               </ul>
               <div style={{ marginTop: "auto", paddingTop: "16px" }}>
-                <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer">Book a Fit Check →</a>
+                <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer">Book a Fit Check (15 min) →</a>
+              </div>
+            </div>
+            <div className="path-card" style={{ flex: "1 1 260px", minWidth: "min(240px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
+              <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{pathAddon.title}</div>
+              <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{pathAddon.description}</p>
+              <ul style={{ paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
+                {pathAddon.items.map((item, i) => (
+                  <li key={i} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>{item}</li>
+                ))}
+              </ul>
+              <div style={{ marginTop: "auto", paddingTop: "16px" }}>
+                <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer">Book a Fit Check (15 min) →</a>
               </div>
             </div>
           </div>
           <h3 className="pricing-subheading">Engagement options</h3>
         </>
+      )}
+      {!setPage && (
+        <p style={{ fontFamily: FONTS.body, color: COLORS.bodyMuted, fontStyle: "italic", marginBottom: "20px" }}>
+          Most engagements begin during the LOI → close window to avoid post-close rework.
+        </p>
       )}
       <div className="pricing-grid" style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap", marginBottom: "24px" }}>
         <div className="pricing-card" style={{...box, borderTop: `3px solid ${COLORS.steel}`}}>
@@ -612,30 +639,39 @@ export function OfferCards({ setPage }) {
             <li style={li}>Evidence requests + diligence questions</li>
             <li style={li}>IC-ready memo format</li>
           </ul>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.82rem", color: COLORS.steel, lineHeight: 1.5, marginTop: "14px", paddingTop: "12px", borderTop: `1px solid ${COLORS.border}`, marginBottom: 0 }}>
-            Choose this if you want to know what's broken but plan to fix it yourself.
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.82rem", color: COLORS.steel, lineHeight: 1.5, marginTop: "14px", paddingTop: "12px", borderTop: `1px solid ${COLORS.border}`, marginBottom: "auto" }}>
+            Best for funds with in-house ops resources who need the diagnostic, not the execution.
           </p>
+          <div style={{ marginTop: "16px" }}>
+            <button className="card-text-link" onClick={() => window.location.href = '#scorer'}>Score Your Deal →</button>
+          </div>
         </div>
 
         <div className="pricing-card recommended" style={{...box, borderTop: `3px solid ${COLORS.gold}`}}>
-          <SectionTitle sub>Bundle (Recommended): Diligence → VCP → Execution</SectionTitle>
-          <div className="price" style={tag}>$25,000–$35,000 · diligence + 100 days</div>
-          <ul style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
-            <li style={li}>Diligence findings roll directly into the Value Creation Plan — no re-learning, no gap between discovery and execution</li>
+          <SectionTitle sub>Diligence → VCP → Execution Bundle (Recommended)</SectionTitle>
+          <div className="price" style={tag}>$25,000–$35,000 · diligence + 100 days (scope-dependent — scoped on the Fit Check call)</div>
+          <ul style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
+            <li style={li}>Diligence findings roll directly into the VCP — no re-learning, no gap</li>
             <li style={li}>Day-1 critical path + phased 100-day execution</li>
             <li style={li}>Clear ownership + cadence from close to value</li>
           </ul>
+          <div style={{ marginTop: "16px" }}>
+            <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer">Book a Fit Check (15 min) →</a>
+          </div>
         </div>
 
         <div className="pricing-card" style={{...box, borderTop: `3px solid ${COLORS.navy}`}}>
           <span style={segLabel}>Family Offices · Ongoing Hold</span>
           <SectionTitle sub>Control Tower Retainer (Ongoing)</SectionTitle>
           <div className="price" style={tag}>Starting at $7,500/month · ongoing</div>
-          <ul style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
+          <ul style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
             <li style={li}>Weekly operating review + board-ready KPI pack</li>
             <li style={li}>Incident + change governance discipline</li>
             <li style={li}>Vendor controls + audit readiness cadence</li>
           </ul>
+          <div style={{ marginTop: "16px" }}>
+            <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer">Book a Fit Check (15 min) →</a>
+          </div>
         </div>
       </div>
 
@@ -651,7 +687,7 @@ export function OfferCards({ setPage }) {
       )}
 
       <ButtonPair
-        primaryText="Book a Fit Check"
+        primaryText="Book a Fit Check (15 min)"
         secondaryText={setPage ? "View Full Services & Details" : undefined}
         secondaryAction={setPage ? () => setPage("services") : undefined}
         centered={true}
@@ -662,88 +698,230 @@ export function OfferCards({ setPage }) {
 }
 
 export function TestimonialBlock() {
-  const [moreExpanded, setMoreExpanded] = useState(false);
-  const cardStyle = { border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "22px 24px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 300px", minWidth: "min(260px, 100%)" };
-  const contextLabel = { fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "10px", display: "block" };
-  const cardTitle = { fontFamily: FONTS.heading, fontSize: "1.1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" };
-  const body = { fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.65, margin: "0 0 14px" };
-  const result = { fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0, padding: "10px 12px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0` };
-  const box = { border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.gold}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" };
-  const fieldLabel = { fontFamily: FONTS.body, fontSize: "10px", fontWeight: 700, color: COLORS.navy, letterSpacing: "1.5px", textTransform: "uppercase", display: "block", marginBottom: "4px" };
-  const fieldVal = { fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, margin: "0 0 14px 0" };
-  const valueCreated = { fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, margin: 0, padding: "14px 16px", background: "#FFFBF0", borderLeft: `3px solid #C8952E`, borderRadius: "0 6px 6px 0" };
+  const [expandedPlatform, setExpandedPlatform] = useState(false);
+  const [expandedVendor, setExpandedVendor] = useState(false);
+
   return (
     <Section title="Track Record & Outcomes" noCTA>
-      <div className="track-vignettes-grid" style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginBottom: "14px" }}>
-        <div className="track-vignette" style={cardStyle}>
-          <span style={contextLabel}>Platform Stabilization · Multi-strategy hedge fund, ~$10B AUM</span>
-          <div style={cardTitle}>Platform Stabilization & Reliability</div>
-          <p style={body}>Inherited a platform with 4 critical outages in 12 months, 94% availability, and a deteriorating NPS score. Built a 10-person global ops team, installed incident command with severity classification and postmortem discipline, and stood up a KPI cadence across 18 metrics.</p>
-          <div className="track-result" style={result}>Zero critical outages for 18 consecutive months. Availability: 94% → 99.2%. MTTR reduced 31%. NPS improved +22 points. Supported ~50% AUM growth with ~12% headcount increase.</div>
-        </div>
-        <div className="track-vignette" style={cardStyle}>
-          <span style={contextLabel}>Vendor Optimization · Global asset manager, ~$40M vendor program</span>
-          <div style={cardTitle}>Vendor Optimization & Cost Control</div>
-          <p style={body}>Vendor costs growing 22% annually, outpacing business growth. 15 fragmented providers, no utilization visibility, no governance. Built spend transparency, ran utilization analytics, consolidated 15 vendors to 8 strategic partners, and installed scorecard governance with QBRs.</p>
-          <div className="track-result" style={result}>&gt;$2M annual run-rate reduction. 10–15% licensing savings via right-sizing. Cost per $1B AUM reduced ~28%. Payback &lt;6 months.</div>
-        </div>
-      </div>
-      <div className="confidentiality-note">
-        <strong>All engagements are NDA-protected.</strong> Client identities and deal details remain confidential. Anonymized metrics and references are available on request.
-      </div>
-
-      <h3 className="outcomes-subheading">Additional engagement outcomes</h3>
-      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "20px" }}>
-        Anonymized engagement outcomes from $10B+ institutional operating roles. Gap → intervention → result.
+      <p style={{ fontFamily: FONTS.body, color: COLORS.bodyMuted, lineHeight: 1.6, marginBottom: "24px", maxWidth: "600px" }}>
+        Outcomes from institutional operating roles — same governance playbook, now installed for PE portfolio companies.
       </p>
 
-      <div className="outcomes-visible">
-        <div className="outcome-card" style={box}>
-          <SectionTitle sub>Incident instability</SectionTitle>
-          <span style={fieldLabel}>GAP</span>
-          <p style={fieldVal}>Same failures recurring every 4–6 weeks. No severity model, no ownership, no postmortems.</p>
-          <span style={fieldLabel}>FIX</span>
-          <p style={fieldVal}>Severity model, incident command, escalation paths, postmortem cadence.</p>
-          <span style={fieldLabel}>RESULT</span>
-          <p style={valueCreated}>~67% incident reduction. ~31% faster resolution. Board reporting shifted from crisis-driven to weekly structured reviews.</p>
+      {/* Proof Metrics Strip */}
+      <div className="proof-metrics-strip" style={{ marginBottom: "32px" }}>
+        {[
+          { value: "~67%", label: "incident reduction" },
+          { value: "$2M+", label: "annual savings" },
+          { value: "94→99%", label: "uptime improvement" },
+        ].map((m, i) => (
+          <div key={i} className="proof-metric">
+            <div className="proof-metric-number">{m.value}</div>
+            <div className="proof-metric-label">{m.label}</div>
+          </div>
+        ))}
+      </div>
+
+      <span className="measured-outcomes-label">Measured Outcomes (Post-Implementation)</span>
+
+      {/* Platform Stabilization Case Card */}
+      <div className="case-card">
+        <div className="case-header">
+          <div className="case-header-left">
+            <div className="case-icon stability">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <div className="case-label">Platform Stabilization &amp; Reliability</div>
+              <div className="case-context">Multi-strategy hedge fund · ~$10B AUM</div>
+            </div>
+          </div>
+          <span className="case-domain-tag ops">Platform Ops</span>
         </div>
-        <div className="outcome-card" style={box}>
-          <SectionTitle sub>Change-driven outages</SectionTitle>
-          <span style={fieldLabel}>GAP</span>
-          <p style={fieldVal}>Deployments causing outages. No change calendar, no risk classification, no rollback plans.</p>
-          <span style={fieldLabel}>FIX</span>
-          <p style={fieldVal}>CAB-lite process, risk classification, rollback discipline, change-incident correlation.</p>
-          <span style={fieldLabel}>RESULT</span>
-          <p style={valueCreated}>~60% fewer critical outages. Uptime: 94% → 99%. Change-incident correlation visible to the board within 30 days.</p>
+
+        <div className="case-body">
+          <div className="case-situation">
+            <div className="case-section-heading situation">Situation</div>
+            <p>Inherited a platform with 4 critical outages in 12 months, 94% availability, and a declining NPS. Leadership time consumed by firefighting. Operating cadence hadn't kept pace with AUM growth.</p>
+          </div>
+          <div className="case-intervention">
+            <div className="case-section-heading intervention">What I Installed</div>
+            <ul>
+              <li>10-person global ops team (NY, London, Hong Kong)</li>
+              <li>Incident command: severity model, escalation paths, postmortem discipline</li>
+              <li>KPI cadence: 18 metrics, weekly review, quarterly stakeholder reviews</li>
+              <li>Change governance: CAB-lite process, runbooks, rollback discipline</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="case-metrics">
+          <div className="case-metric">
+            <div className="case-metric-number">0</div>
+            <div className="case-metric-label">Critical outages<br />(18 months)</div>
+          </div>
+          <div className="case-metric">
+            <div className="case-metric-number">99.2%</div>
+            <div className="case-metric-label">Availability<br />(from 94%)</div>
+          </div>
+          <div className="case-metric">
+            <div className="case-metric-number">−31%</div>
+            <div className="case-metric-label">MTTR reduction</div>
+          </div>
+          <div className="case-metric">
+            <div className="case-metric-number">+22</div>
+            <div className="case-metric-label">NPS improvement<br />(38 → 60)</div>
+          </div>
+        </div>
+
+        <div className="case-footer">
+          <div className="case-pe-translation">
+            <strong>PE Translation</strong> Same playbook installs in a portfolio company in 100 days — at a fraction of the complexity of a $10B fund.
+          </div>
+        </div>
+
+        <div className="outcome-expandable">
+          <button
+            className={`outcome-toggle${expandedPlatform ? " active" : ""}`}
+            onClick={() => setExpandedPlatform(!expandedPlatform)}>
+            Related outcomes <span className="chevron">▸</span>
+          </button>
+          <div className={`outcome-cards-container${expandedPlatform ? " visible" : ""}`}>
+            <div className="outcome-grid">
+              <div className="outcome-card">
+                <div className="outcome-card-title"><span className="domain-dot incidents"></span>Incident Instability</div>
+                <div className="outcome-step">
+                  <div className="outcome-step-label gap">Gap</div>
+                  <p>Same failures recurring every 4–6 weeks. No severity model, no ownership, no postmortems.</p>
+                </div>
+                <div className="outcome-step">
+                  <div className="outcome-step-label fix">Fix</div>
+                  <p>Severity model, incident command, escalation paths, postmortem cadence.</p>
+                </div>
+                <div className="outcome-step">
+                  <div className="outcome-step-label result">Result</div>
+                  <p>~67% incident reduction. ~31% faster resolution. Board reporting shifted from crisis-driven to weekly structured reviews.</p>
+                </div>
+              </div>
+              <div className="outcome-card">
+                <div className="outcome-card-title"><span className="domain-dot change"></span>Change-Driven Outages</div>
+                <div className="outcome-step">
+                  <div className="outcome-step-label gap">Gap</div>
+                  <p>Deployments causing outages. No change calendar, no risk classification, no rollback plans.</p>
+                </div>
+                <div className="outcome-step">
+                  <div className="outcome-step-label fix">Fix</div>
+                  <p>CAB-lite process, risk classification, rollback discipline, change-incident correlation.</p>
+                </div>
+                <div className="outcome-step">
+                  <div className="outcome-step-label result">Result</div>
+                  <p>~60% fewer critical outages. Uptime: 94% → 99%. Change-incident correlation visible to the board within 30 days.</p>
+                </div>
+              </div>
+              <div className="outcome-card">
+                <div className="outcome-card-title"><span className="domain-dot kpi"></span>Board Reporting / KPI Ambiguity</div>
+                <div className="outcome-step">
+                  <div className="outcome-step-label gap">Gap</div>
+                  <p>No KPIs. Board updates were verbal and anecdotal. No baselines, no targets, no measurement.</p>
+                </div>
+                <div className="outcome-step">
+                  <div className="outcome-step-label fix">Fix</div>
+                  <p>KPI library, weekly operating review, executive dashboard, board-ready reporting pack.</p>
+                </div>
+                <div className="outcome-step">
+                  <div className="outcome-step-label result">Result</div>
+                  <p>Weekly operating rhythm installed. Issues surfaced through cadence, not crisis. Board gained real-time ops visibility.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className={`outcomes-hidden${moreExpanded ? " expanded" : ""}`}>
-        <div className="outcome-card" style={box}>
-          <SectionTitle sub>Board reporting / KPI ambiguity</SectionTitle>
-          <span style={fieldLabel}>GAP</span>
-          <p style={fieldVal}>No KPIs. Board updates were verbal and anecdotal. No baselines, no targets, no measurement.</p>
-          <span style={fieldLabel}>FIX</span>
-          <p style={fieldVal}>KPI library, weekly operating review, executive dashboard, board-ready reporting pack.</p>
-          <span style={fieldLabel}>RESULT</span>
-          <p style={valueCreated}>Weekly operating rhythm installed. Issues surfaced through cadence, not crisis. Board gained real-time ops visibility — direct input to exit narrative.</p>
+      {/* Vendor Optimization Case Card */}
+      <div className="case-card">
+        <div className="case-header">
+          <div className="case-header-left">
+            <div className="case-icon vendor">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <div>
+              <div className="case-label">Vendor Optimization &amp; Cost Control</div>
+              <div className="case-context">Global asset manager · ~$40M vendor program</div>
+            </div>
+          </div>
+          <span className="case-domain-tag vendor-tag">Vendor Governance</span>
         </div>
-        <div className="outcome-card" style={box}>
-          <SectionTitle sub>Vendor concentration risk</SectionTitle>
-          <span style={fieldLabel}>GAP</span>
-          <p style={fieldVal}>Single vendor covering 80%+ of critical infrastructure. Auto-renewing contracts, no SLA tracking, change-of-control clause missed in diligence.</p>
-          <span style={fieldLabel}>FIX</span>
-          <p style={fieldVal}>Full vendor mapping, contract consolidation, renewal calendar, SLA monitoring, concentration reduction plan.</p>
-          <span style={fieldLabel}>RESULT</span>
-          <p style={valueCreated}>$2M+ annual savings via renegotiation. Concentration reduced: 1 vendor → 3. Exit plan documented for top 5 vendors — turned a diligence liability into a hold narrative.</p>
+
+        <div className="case-body">
+          <div className="case-situation">
+            <div className="case-section-heading situation">Situation</div>
+            <p>Vendor costs growing 22% annually, outpacing business growth. 15 fragmented providers, no utilization visibility, no governance. Auto-renewing contracts with no SLA tracking.</p>
+          </div>
+          <div className="case-intervention">
+            <div className="case-section-heading intervention">What I Installed</div>
+            <ul>
+              <li>Spend transparency and utilization analytics</li>
+              <li>Consolidated 15 vendors to 8 strategic partners</li>
+              <li>Scorecard governance with quarterly business reviews</li>
+              <li>Renewal calendar with proactive renegotiation</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="case-metrics">
+          <div className="case-metric">
+            <div className="case-metric-number">&gt;$2M</div>
+            <div className="case-metric-label">Annual run-rate<br />reduction</div>
+          </div>
+          <div className="case-metric">
+            <div className="case-metric-number">10–15%</div>
+            <div className="case-metric-label">Licensing savings<br />via right-sizing</div>
+          </div>
+          <div className="case-metric">
+            <div className="case-metric-number">~28%</div>
+            <div className="case-metric-label">Cost per $1B AUM<br />reduction</div>
+          </div>
+          <div className="case-metric">
+            <div className="case-metric-number">&lt;6 mo</div>
+            <div className="case-metric-label">Payback period</div>
+          </div>
+        </div>
+
+        <div className="case-footer">
+          <div className="case-pe-translation">
+            <strong>PE Translation</strong> Same vendor governance installs at portfolio scale. Most portcos have 40–60% of these gaps on day one — I find and close them in the first 100 days.
+          </div>
+        </div>
+
+        <div className="outcome-expandable">
+          <button
+            className={`outcome-toggle${expandedVendor ? " active" : ""}`}
+            onClick={() => setExpandedVendor(!expandedVendor)}>
+            Related outcomes <span className="chevron">▸</span>
+          </button>
+          <div className={`outcome-cards-container${expandedVendor ? " visible" : ""}`}>
+            <div className="outcome-grid" style={{ gridTemplateColumns: "1fr" }}>
+              <div className="outcome-card">
+                <div className="outcome-card-title"><span className="domain-dot vendor-dot"></span>Vendor Concentration Risk</div>
+                <div className="outcome-step">
+                  <div className="outcome-step-label gap">Gap</div>
+                  <p>Single vendor covering 80%+ of critical infrastructure. Auto-renewing contracts, no SLA tracking, change-of-control clause missed in diligence.</p>
+                </div>
+                <div className="outcome-step">
+                  <div className="outcome-step-label fix">Fix</div>
+                  <p>Full vendor mapping, contract consolidation, renewal calendar, SLA monitoring, concentration reduction plan.</p>
+                </div>
+                <div className="outcome-step">
+                  <div className="outcome-step-label result">Result</div>
+                  <p>$2M+ annual savings via renegotiation. Concentration reduced: 1 vendor → 3. Exit plan documented for top 5 vendors — turned a diligence liability into a hold narrative.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <button
-        onClick={() => setMoreExpanded(!moreExpanded)}
-        style={{ background: "transparent", border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "8px 16px", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, fontWeight: 600, cursor: "pointer", marginTop: "16px" }}>
-        {moreExpanded ? "Show fewer outcomes ▴" : "Show more outcomes ▸"}
-      </button>
+      <p className="confidentiality-note">All engagements are NDA-protected. Anonymized metrics and references available on request.</p>
     </Section>
   );
 }
@@ -784,7 +962,7 @@ export function Nav({ page, setPage }) {
         <span className="nav-current-page">
           {items.find(i => i.key === page)?.label ?? ""}
         </span>
-        <div className="nav-cta"><CTAButton text="Book a Fit Check" /></div>
+        <div className="nav-cta"><CTAButton text="Book a Fit Check (15 min)" /></div>
         <button className="nav-hamburger" onClick={() => setMenuOpen(o => !o)} aria-label="Toggle menu">
           {menuOpen
             ? <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><line x1="4" y1="4" x2="18" y2="18" stroke={COLORS.navy} strokeWidth="2" strokeLinecap="round"/><line x1="18" y1="4" x2="4" y2="18" stroke={COLORS.navy} strokeWidth="2" strokeLinecap="round"/></svg>
@@ -800,7 +978,7 @@ export function Nav({ page, setPage }) {
               {label}
             </button>
           ))}
-          <div style={{ marginTop: "8px" }}><CTAButton text="Book a Fit Check" /></div>
+          <div style={{ marginTop: "8px" }}><CTAButton text="Book a Fit Check (15 min)" /></div>
         </div>
       )}
     </>

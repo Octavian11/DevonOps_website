@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Devonshire Ops — Case Study Cards Spec</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     DEVONSHIRE OPS — BRAND TOKENS
+     ============================================================ */
+  :root {
+    --midnight: #1B2A4A;
+    --gold: #C8952E;
+    --gold-light: #D4A94A;
+    --gold-dim: rgba(200, 149, 46, 0.08);
+    --gold-border: rgba(200, 149, 46, 0.18);
+    --steel: #5A7A9B;
+    --steel-light: #7A9AB8;
+    --steel-dim: rgba(90, 122, 155, 0.06);
+    --graphite: #3A3A3A;
+    --text-secondary: #6B6B6B;
+    --bg-warm: #FFFBF0;
+    --bg-tinted: #F8F7F3;
+    --bg-page: #FAFAF8;
+    --border-light: #E4E2DC;
+    --border-subtle: #EDEBE6;
+    --white: #FFFFFF;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+    --shadow-md: 0 2px 8px rgba(0,0,0,0.06);
+    --shadow-lg: 0 4px 16px rgba(0,0,0,0.08);
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --font-heading: 'EB Garamond', Georgia, serif;
+    --font-body: 'DM Sans', -apple-system, sans-serif;
+  }
+
+  /* ============================================================
+     RESET & BASE
+     ============================================================ */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: var(--font-body);
+    color: var(--graphite);
+    background: var(--bg-page);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ============================================================
+     SPEC WRAPPER (for this demo only)
+     ============================================================ */
+  .spec-page {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 60px 24px;
+  }
+
+  .spec-banner {
+    background: var(--midnight);
+    color: var(--white);
+    padding: 40px 48px;
+    border-radius: var(--radius-lg);
+    margin-bottom: 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .spec-banner::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 200px; height: 100%;
+    background: linear-gradient(135deg, transparent 40%, rgba(200,149,46,0.08) 100%);
+    pointer-events: none;
+  }
+
+  .spec-banner h1 {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+
+  .spec-banner p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 400;
+  }
+
+  .spec-banner .spec-tag {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--midnight);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 3px;
+    margin-bottom: 16px;
+  }
+
+  .spec-note {
+    background: var(--gold-dim);
+    border-left: 3px solid var(--gold);
+    padding: 16px 20px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin: 32px 0;
+    font-size: 13.5px;
+    color: var(--steel);
+    line-height: 1.55;
+  }
+
+  .spec-note strong {
+    color: var(--midnight);
+    font-weight: 600;
+  }
+
+  .spec-section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    margin-top: 56px;
+  }
+
+  .spec-divider {
+    border: none;
+    border-top: 1px solid var(--border-light);
+    margin: 56px 0;
+  }
+
+  /* ============================================================
+     SECTION HEADING: "Track Record & Outcomes"
+     ============================================================ */
+  .track-record-heading {
+    font-family: var(--font-heading);
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--midnight);
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+
+  .track-record-subtitle {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    max-width: 560px;
+  }
+
+  /* ============================================================
+     CASE STUDY CARD — PRIMARY VIGNETTES
+     ============================================================ */
+  .case-card {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-bottom: 28px;
+    transition: box-shadow 0.25s ease;
+  }
+
+  .case-card:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  /* --- Card Header --- */
+  .case-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 28px 16px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .case-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .case-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .case-icon.stability {
+    background: linear-gradient(135deg, rgba(90,122,155,0.1), rgba(90,122,155,0.05));
+    color: var(--steel);
+  }
+
+  .case-icon.vendor {
+    background: linear-gradient(135deg, var(--gold-dim), rgba(200,149,46,0.04));
+    color: var(--gold);
+  }
+
+  .case-label {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--midnight);
+    line-height: 1.3;
+  }
+
+  .case-context {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    font-weight: 400;
+    margin-top: 1px;
+  }
+
+  .case-domain-tag {
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .case-domain-tag.ops {
+    background: var(--steel-dim);
+    color: var(--steel);
+  }
+
+  .case-domain-tag.vendor-tag {
+    background: var(--gold-dim);
+    color: var(--gold);
+  }
+
+  /* --- Card Body --- */
+  .case-body {
+    padding: 24px 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  .case-section-heading {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .case-section-heading.situation { color: var(--steel); }
+  .case-section-heading.intervention { color: var(--gold); }
+
+  .case-situation p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--graphite);
+  }
+
+  .case-intervention ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .case-intervention li {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--graphite);
+    padding: 5px 0 5px 20px;
+    position: relative;
+  }
+
+  .case-intervention li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+
+  /* --- Metrics Strip --- */
+  .case-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 2px solid var(--gold);
+  }
+
+  .case-metric {
+    padding: 20px 24px;
+    text-align: center;
+    position: relative;
+  }
+
+  .case-metric:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 16px;
+    bottom: 16px;
+    width: 1px;
+    background: var(--border-subtle);
+  }
+
+  .case-metric-number {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--midnight);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+
+  /* REMOVED: .case-metric-number .accent — splitting numbers into
+     two colors (midnight + gold) was visually distracting.
+     Each number is now a single solid color (midnight). 
+     Gold accent comes from the metrics strip top border instead. */
+
+  .case-metric-label {
+    font-size: 11.5px;
+    color: var(--text-secondary);
+    font-weight: 400;
+    line-height: 1.35;
+  }
+
+  /* --- PE Translation Footer --- */
+  .case-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 28px;
+    background: var(--bg-warm);
+    border-top: 1px solid var(--gold-border);
+  }
+
+  .case-pe-translation {
+    font-size: 13.5px;
+    font-style: italic;
+    color: var(--steel);
+    line-height: 1.5;
+    flex: 1;
+    padding-right: 24px;
+  }
+
+  .case-pe-translation strong {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--midnight);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-right: 6px;
+  }
+
+  .case-read-more {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gold);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.2s;
+  }
+
+  .case-read-more:hover {
+    color: var(--gold-light);
+  }
+
+  /* ============================================================
+     NESTED OUTCOME CARDS (GAP → FIX → RESULT)
+     ============================================================ */
+  .outcome-expandable {
+    margin: 0 28px 24px;
+  }
+
+  .outcome-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--steel);
+    cursor: pointer;
+    padding: 8px 0;
+    border: none;
+    background: none;
+    transition: color 0.2s;
+  }
+
+  .outcome-toggle:hover { color: var(--midnight); }
+
+  .outcome-toggle .chevron {
+    display: inline-block;
+    transition: transform 0.25s ease;
+    font-size: 10px;
+  }
+
+  .outcome-toggle.active .chevron {
+    transform: rotate(90deg);
+  }
+
+  .outcome-cards-container {
+    display: none;
+    padding-top: 12px;
+  }
+
+  .outcome-cards-container.visible {
+    display: block;
+  }
+
+  .outcome-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .outcome-card {
+    background: var(--bg-tinted);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 20px 22px;
+  }
+
+  .outcome-card-title {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--midnight);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .outcome-card-title .domain-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .domain-dot.incidents { background: #D4574E; }
+  .domain-dot.change { background: #D49A4E; }
+  .domain-dot.kpi { background: var(--steel); }
+  .domain-dot.vendor { background: var(--gold); }
+
+  .outcome-step {
+    margin-bottom: 10px;
+  }
+
+  .outcome-step:last-child { margin-bottom: 0; }
+
+  .outcome-step-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+
+  .outcome-step-label.gap { color: #B85450; }
+  .outcome-step-label.fix { color: var(--gold); }
+  .outcome-step-label.result { color: #4A8C6F; }
+
+  .outcome-step p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--graphite);
+  }
+
+  /* ============================================================
+     CONFIDENTIALITY NOTE
+     ============================================================ */
+  .confidentiality-note {
+    text-align: center;
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin-top: 12px;
+    font-style: italic;
+  }
+
+  /* ============================================================
+     TESTIMONIAL BLOCK
+     ============================================================ */
+  .testimonial-block {
+    margin-top: 40px;
+    padding: 28px 32px;
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    position: relative;
+  }
+
+  .testimonial-block::before {
+    content: '\201C';
+    font-family: var(--font-heading);
+    font-size: 64px;
+    color: var(--gold);
+    opacity: 0.25;
+    position: absolute;
+    top: 8px;
+    left: 24px;
+    line-height: 1;
+  }
+
+  .testimonial-text {
+    font-family: var(--font-heading);
+    font-size: 17px;
+    font-style: italic;
+    color: var(--midnight);
+    line-height: 1.6;
+    padding-left: 24px;
+    margin-bottom: 14px;
+  }
+
+  .testimonial-attribution {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    padding-left: 24px;
+  }
+
+  /* ============================================================
+     PROOF METRICS STRIP (standalone, moved from hero)
+     ============================================================ */
+  .proof-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    background: var(--midnight);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+
+  .proof-strip-metric {
+    padding: 22px 24px;
+    text-align: center;
+    position: relative;
+  }
+
+  .proof-strip-metric:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 18px;
+    bottom: 18px;
+    width: 1px;
+    background: rgba(255,255,255,0.12);
+  }
+
+  .proof-strip-number {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: -0.02em;
+    margin-bottom: 3px;
+  }
+
+  .proof-strip-label {
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.55);
+    font-weight: 400;
+  }
+
+  /* ============================================================
+     MOBILE RESPONSIVE
+     ============================================================ */
+  @media (max-width: 680px) {
+    .case-body {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .case-metrics {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .case-metric:nth-child(2)::after {
+      display: none;
+    }
+
+    .case-metric:nth-child(1),
+    .case-metric:nth-child(2) {
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .case-footer {
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .case-pe-translation { padding-right: 0; }
+
+    .outcome-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .proof-strip {
+      grid-template-columns: 1fr;
+    }
+
+    .proof-strip-metric:not(:last-child)::after {
+      right: 20%;
+      left: 20%;
+      top: auto;
+      bottom: 0;
+      width: auto;
+      height: 1px;
+    }
+
+    .spec-banner { padding: 28px 24px; }
+    .spec-banner h1 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="spec-page">
+
+  <!-- ============================================================
+       SPEC HEADER
+       ============================================================ -->
+  <div class="spec-banner">
+    <div class="spec-tag">Implementation Spec</div>
+    <h1>Case Study Cards — Restructured</h1>
+    <p>Pixel-perfect HTML/CSS for coding agent · Devonshire Ops brand system · April 2026</p>
+  </div>
+
+  <div class="spec-note">
+    <strong>Implementation notes:</strong> This spec defines the restructured case study presentation for the homepage <code>/pe</code> Track Record section. The same card component is reused on <code>/pe/about</code> with the expanded format. All colors, fonts, and spacing use the confirmed Devonshire brand tokens. Copy your brand CSS variables into your global stylesheet and drop these components in.
+  </div>
+
+
+  <!-- ============================================================
+       COMPONENT 1: PROOF METRICS STRIP (moved from hero)
+       ============================================================ -->
+  <p class="spec-section-label">Component 1 — Proof Metrics Strip (moved from hero)</p>
+
+  <div class="proof-strip">
+    <div class="proof-strip-metric">
+      <div class="proof-strip-number">~67%</div>
+      <div class="proof-strip-label">incident reduction</div>
+    </div>
+    <div class="proof-strip-metric">
+      <div class="proof-strip-number">$2M+</div>
+      <div class="proof-strip-label">annual savings</div>
+    </div>
+    <div class="proof-strip-metric">
+      <div class="proof-strip-number">94→99%</div>
+      <div class="proof-strip-label">uptime improvement</div>
+    </div>
+  </div>
+
+  <div class="spec-note">
+    <strong>Placement:</strong> This strip opens the Track Record section — directly below the <code>&lt;h2&gt;Track Record &amp; Outcomes&lt;/h2&gt;</code> heading. It was previously in the hero section where the metrics floated without context. Here, they land after the reader has been primed by persona cards and the "Cost of Not Acting" section.
+  </div>
+
+
+  <!-- ============================================================
+       SECTION HEADING
+       ============================================================ -->
+  <h2 class="track-record-heading">Track Record &amp; Outcomes</h2>
+  <p class="track-record-subtitle">Outcomes from institutional operating roles — same governance playbook, now installed for PE portfolio companies.</p>
+
+
+  <!-- ============================================================
+       COMPONENT 2: CASE STUDY CARD — Platform Stabilization
+       ============================================================ -->
+  <p class="spec-section-label" style="margin-top: 32px;">Component 2 — Primary Case Card</p>
+
+  <div class="case-card">
+
+    <!-- Header -->
+    <div class="case-header">
+      <div class="case-header-left">
+        <div class="case-icon stability">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <div class="case-label">Platform Stabilization &amp; Reliability</div>
+          <div class="case-context">Multi-strategy hedge fund · ~$10B AUM</div>
+        </div>
+      </div>
+      <span class="case-domain-tag ops">Platform Ops</span>
+    </div>
+
+    <!-- Body: Situation + Intervention -->
+    <div class="case-body">
+      <div class="case-situation">
+        <div class="case-section-heading situation">Situation</div>
+        <p>Inherited a platform with 4 critical outages in 12 months, 94% availability, and a declining NPS. Leadership time consumed by firefighting. Operating cadence hadn't kept pace with AUM growth.</p>
+      </div>
+      <div class="case-intervention">
+        <div class="case-section-heading intervention">What I Installed</div>
+        <ul>
+          <li>10-person global ops team (NY, London, Hong Kong)</li>
+          <li>Incident command: severity model, escalation paths, postmortem discipline</li>
+          <li>KPI cadence: 18 metrics, weekly review, quarterly stakeholder reviews</li>
+          <li>Change governance: CAB-lite process, runbooks, rollback discipline</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Metrics Strip -->
+    <div class="case-metrics">
+      <div class="case-metric">
+        <div class="case-metric-number">0</div>
+        <div class="case-metric-label">Critical outages<br>(18 months)</div>
+      </div>
+      <div class="case-metric">
+        <div class="case-metric-number">99.2%</div>
+        <div class="case-metric-label">Availability<br>(from 94%)</div>
+      </div>
+      <div class="case-metric">
+        <div class="case-metric-number">−31%</div>
+        <div class="case-metric-label">MTTR reduction</div>
+      </div>
+      <div class="case-metric">
+        <div class="case-metric-number">+22</div>
+        <div class="case-metric-label">NPS improvement<br>(38 → 60)</div>
+      </div>
+    </div>
+
+    <!-- PE Translation Footer -->
+    <div class="case-footer">
+      <div class="case-pe-translation">
+        <strong>PE Translation</strong>
+        Same playbook installs in a portfolio company in 100 days — at a fraction of the complexity of a $10B fund.
+      </div>
+      <a href="/pe/about#platform-stabilization" class="case-read-more">Read full case study →</a>
+    </div>
+
+    <!-- Nested Outcome Cards (expandable) -->
+    <div class="outcome-expandable">
+      <button class="outcome-toggle" onclick="toggleOutcomes(this)">
+        Related outcomes <span class="chevron">▸</span>
+      </button>
+      <div class="outcome-cards-container">
+        <div class="outcome-grid">
+
+          <!-- Outcome Card 1 -->
+          <div class="outcome-card">
+            <div class="outcome-card-title">
+              <span class="domain-dot incidents"></span>
+              Incident Instability
+            </div>
+            <div class="outcome-step">
+              <div class="outcome-step-label gap">Gap</div>
+              <p>Same failures recurring every 4–6 weeks. No severity model, no ownership, no postmortems.</p>
+            </div>
+            <div class="outcome-step">
+              <div class="outcome-step-label fix">Fix</div>
+              <p>Severity model, incident command, escalation paths, postmortem cadence.</p>
+            </div>
+            <div class="outcome-step">
+              <div class="outcome-step-label result">Result</div>
+              <p>~67% incident reduction. ~31% faster resolution. Board reporting shifted from crisis-driven to weekly structured reviews.</p>
+            </div>
+          </div>
+
+          <!-- Outcome Card 2 -->
+          <div class="outcome-card">
+            <div class="outcome-card-title">
+              <span class="domain-dot change"></span>
+              Change-Driven Outages
+            </div>
+            <div class="outcome-step">
+              <div class="outcome-step-label gap">Gap</div>
+              <p>Deployments causing outages. No change calendar, no risk classification, no rollback plans.</p>
+            </div>
+            <div class="outcome-step">
+              <div class="outcome-step-label fix">Fix</div>
+              <p>CAB-lite process, risk classification, rollback discipline, change-incident correlation.</p>
+            </div>
+            <div class="outcome-step">
+              <div class="outcome-step-label result">Result</div>
+              <p>~60% fewer critical outages. Uptime: 94% → 99%. Change-incident correlation visible to the board within 30 days.</p>
+            </div>
+          </div>
+
+          <!-- Outcome Card 3 -->
+          <div class="outcome-card">
+            <div class="outcome-card-title">
+              <span class="domain-dot kpi"></span>
+              Board Reporting / KPI Ambiguity
+            </div>
+            <div class="outcome-step">
+              <div class="outcome-step-label gap">Gap</div>
+              <p>No KPIs. Board updates were verbal and anecdotal. No baselines, no targets, no measurement.</p>
+            </div>
+            <div class="outcome-step">
+              <div class="outcome-step-label fix">Fix</div>
+              <p>KPI library, weekly operating review, executive dashboard, board-ready reporting pack.</p>
+            </div>
+            <div class="outcome-step">
+              <div class="outcome-step-label result">Result</div>
+              <p>Weekly operating rhythm installed. Issues surfaced through cadence, not crisis. Board gained real-time ops visibility.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ============================================================
+       COMPONENT 3: CASE STUDY CARD — Vendor Optimization
+       ============================================================ -->
+  <p class="spec-section-label">Component 2 (variant) — Vendor Optimization</p>
+
+  <div class="case-card">
+
+    <!-- Header -->
+    <div class="case-header">
+      <div class="case-header-left">
+        <div class="case-icon vendor">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div>
+          <div class="case-label">Vendor Optimization &amp; Cost Control</div>
+          <div class="case-context">Global asset manager · ~$40M vendor program</div>
+        </div>
+      </div>
+      <span class="case-domain-tag vendor-tag">Vendor Governance</span>
+    </div>
+
+    <!-- Body: Situation + Intervention -->
+    <div class="case-body">
+      <div class="case-situation">
+        <div class="case-section-heading situation">Situation</div>
+        <p>Vendor costs growing 22% annually, outpacing business growth. 15 fragmented providers, no utilization visibility, no governance. Auto-renewing contracts with no SLA tracking.</p>
+      </div>
+      <div class="case-intervention">
+        <div class="case-section-heading intervention">What I Installed</div>
+        <ul>
+          <li>Spend transparency and utilization analytics</li>
+          <li>Consolidated 15 vendors to 8 strategic partners</li>
+          <li>Scorecard governance with quarterly business reviews</li>
+          <li>Renewal calendar with proactive renegotiation</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Metrics Strip -->
+    <div class="case-metrics">
+      <div class="case-metric">
+        <div class="case-metric-number">&gt;$2M</div>
+        <div class="case-metric-label">Annual run-rate<br>reduction</div>
+      </div>
+      <div class="case-metric">
+        <div class="case-metric-number">10–15%</div>
+        <div class="case-metric-label">Licensing savings<br>via right-sizing</div>
+      </div>
+      <div class="case-metric">
+        <div class="case-metric-number">~28%</div>
+        <div class="case-metric-label">Cost per $1B AUM<br>reduction</div>
+      </div>
+      <div class="case-metric">
+        <div class="case-metric-number">&lt;6 mo</div>
+        <div class="case-metric-label">Payback period</div>
+      </div>
+    </div>
+
+    <!-- PE Translation Footer -->
+    <div class="case-footer">
+      <div class="case-pe-translation">
+        <strong>PE Translation</strong>
+        Same vendor governance installs at portfolio scale. Most portcos have 40–60% of these gaps on day one — I find and close them in the first 100 days.
+      </div>
+      <a href="/pe/about#vendor-optimization" class="case-read-more">Read full case study →</a>
+    </div>
+
+    <!-- Nested Outcome Card -->
+    <div class="outcome-expandable">
+      <button class="outcome-toggle" onclick="toggleOutcomes(this)">
+        Related outcomes <span class="chevron">▸</span>
+      </button>
+      <div class="outcome-cards-container">
+        <div class="outcome-grid" style="grid-template-columns: 1fr;">
+          <div class="outcome-card">
+            <div class="outcome-card-title">
+              <span class="domain-dot vendor"></span>
+              Vendor Concentration Risk
+            </div>
+            <div class="outcome-step">
+              <div class="outcome-step-label gap">Gap</div>
+              <p>Single vendor covering 80%+ of critical infrastructure. Auto-renewing contracts, no SLA tracking, change-of-control clause missed in diligence.</p>
+            </div>
+            <div class="outcome-step">
+              <div class="outcome-step-label fix">Fix</div>
+              <p>Full vendor mapping, contract consolidation, renewal calendar, SLA monitoring, concentration reduction plan.</p>
+            </div>
+            <div class="outcome-step">
+              <div class="outcome-step-label result">Result</div>
+              <p>$2M+ annual savings via renegotiation. Concentration reduced: 1 vendor → 3. Exit plan documented for top 5 vendors — turned a diligence liability into a hold narrative.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ============================================================
+       TESTIMONIAL
+       ============================================================ -->
+  <div class="testimonial-block">
+    <div class="testimonial-text">
+      Hassan brings a rare combination of institutional-grade operational rigor and the practical urgency of someone who has actually run the platform during a crisis.
+    </div>
+    <div class="testimonial-attribution">
+      Senior Director, Platform Operations · Multi-Strategy Hedge Fund, ~$10B AUM
+    </div>
+  </div>
+
+  <!-- Confidentiality note (appears once, here only) -->
+  <p class="confidentiality-note">All engagements are NDA-protected. Anonymized metrics and references available on request.</p>
+
+
+  <hr class="spec-divider">
+
+
+  <!-- ============================================================
+       IMPLEMENTATION NOTES
+       ============================================================ -->
+  <p class="spec-section-label">Implementation Notes for Coding Agent</p>
+
+  <div class="spec-note">
+    <strong>Structure change (homepage):</strong> Replace the current <code>.track-vignettes-grid</code> (two side-by-side flex cards with dense paragraphs) with stacked full-width <code>.case-card</code> components. Each card uses a two-column grid for Situation + Intervention, then a four-column metrics strip, then a PE Translation footer. The additional outcome cards (currently in a separate <code>.outcomes-visible</code> section) are nested inside each parent case card as expandable content.
+  </div>
+
+  <div class="spec-note">
+    <strong>Structure change (about page):</strong> Keep the expanded Context / What I Built / Measured Outcomes / PE Translation format, but replace the Measured Outcomes prose paragraph with the same <code>.case-metrics</code> four-tile strip used on the homepage. This creates visual consistency across pages while allowing the About page to retain its longer narrative.
+  </div>
+
+  <div class="spec-note">
+    <strong>Metrics are not prose.</strong> The single most important change is breaking outcome numbers out of sentences and into visual tiles. Current: "Zero critical outages for 18 consecutive months. Availability: 94% → 99.2%. MTTR reduced 31%." New: four tiles with large numbers and short labels. PE buyers scan numbers before they read sentences.
+  </div>
+
+  <div class="spec-note">
+    <strong>Metric numbers: single color only.</strong> Each metric number renders entirely in midnight blue (<code>#1B2A4A</code>). Do NOT split numbers and their units into two colors (e.g., "28" in blue + "%" in gold). This was visually distracting and fragmented. Gold accent is applied structurally via the 2px gold top-border on the <code>.case-metrics</code> strip, not on individual characters.
+  </div>
+
+  <div class="spec-note">
+    <strong>Mobile behavior:</strong> On screens below 680px, the Situation/Intervention grid collapses to single column. The metrics strip collapses to a 2×2 grid. The PE Translation footer stacks vertically. The outcome cards grid goes single column. The proof strip at the top goes single column with horizontal dividers.
+  </div>
+
+  <div class="spec-note">
+    <strong>Expandable outcomes:</strong> The "Related outcomes" toggle uses a simple JS handler (below). Default state is collapsed. The chevron rotates 90° on open. Animation is CSS transition on <code>transform</code>.
+  </div>
+
+</div>
+
+<script>
+  function toggleOutcomes(btn) {
+    btn.classList.toggle('active');
+    const container = btn.nextElementSibling;
+    container.classList.toggle('visible');
+  }
+</script>
+
+</body>
+</html>
