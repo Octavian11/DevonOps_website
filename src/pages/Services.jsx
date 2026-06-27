@@ -92,7 +92,7 @@ function WorkedExampleAccordion() {
 
       <div style={{ marginTop: "16px", fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
         <p style={{ marginTop: 0 }}>
-          <strong>Pre-close implication:</strong> Uncontrolled changes are a leading cause of production incidents. If the target has no change control, flag it in the diligence memo — this is direct EBITDA drag hiding in incident correlation data.
+          <strong>Pre-close implication:</strong> Uncontrolled changes are a common cause of production incidents. If the target has no change control, flag it in the diligence memo — this is direct EBITDA drag hiding in incident correlation data.
         </p>
         <p style={{ marginBottom: 0 }}>
           <strong>First 100 days implication:</strong> Install a lightweight CAB within the first two weeks. This is a high-certainty, low-attention, fast-proof intervention. Change-incident correlation tracking starts producing board-ready data within 30 days.

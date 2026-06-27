@@ -105,7 +105,7 @@ export const LEVERS = [
   { id: 1, domain: "IM", name: "No Formal Incident Command Structure", severity: "Critical", timing: "First 100 Days",
     definition: "The portfolio company lacks a defined incident response process — no severity classification, no designated incident commander, and no structured communication protocol during operational failures. Response is ad hoc and depends on whoever happens to be available.",
     symptoms: ["Multiple people troubleshooting without coordination", "No clear escalation to management or the board", "Customers and clients learn about service disruptions before internal teams do", "Post-incident: no root cause analysis, same failures recur", "Operating partner hears about issues days late"],
-    peImpact: "Time to restore operations (MTTR) inflated 2–5× vs. structured response. Client churn risk from repeated disruptions. EBITDA drag from firefighting — executive time diverted from growth initiatives. Compliance exposure creates risk in diligence for the next buyer. Exit narrative weakened if incident history is visible.",
+    peImpact: "Time to restore operations (MTTR) runs materially longer without a structured response. Client churn risk from repeated disruptions. EBITDA drag from firefighting — executive time diverted from growth initiatives. Compliance exposure creates risk in diligence for the next buyer. Exit narrative weakened if incident history is visible.",
     whatGood: "Severity-classified incidents with designated commanders, structured comms (internal + board), defined escalation thresholds, mandatory post-incident reviews feeding a recurrence prevention backlog, and clean incident history for exit diligence." },
   { id: 2, domain: "IM", name: "No Severity Classification System", severity: "Critical", timing: "First 100 Days",
     definition: "All operational issues are treated equally — a minor disruption gets the same response as a critical failure affecting revenue. Without severity classification, everything is either an emergency or ignored.",
@@ -125,7 +125,7 @@ export const LEVERS = [
   { id: 11, domain: "CG", name: "No Change Advisory Board or Change Control Process", severity: "Critical", timing: "First 100 Days",
     definition: "Operational changes happen without review, approval, or risk assessment. There is no change review process, no change calendar, and no structured way to evaluate whether a proposed change is safe to implement.",
     symptoms: ["Operational changes happen at any time without notice", "No one can tell you what changed when a failure occurs", "Failed changes are discovered by customers, not by the team", "Change-related failures are frequent but not tracked as such"],
-    peImpact: "Uncontrolled changes are the #1 cause of operational failures in portfolio companies. Without change governance, every operational change is a potential revenue-impacting event. The correlation between changes and failures — invisible without tracking — is where most EBITDA drag hides.",
+    peImpact: "Uncontrolled change is one of the most common sources of avoidable operational failures in portfolio companies. Without change governance, every operational change is a potential revenue-impacting event. The correlation between changes and failures — invisible without tracking — is where most EBITDA drag hides.",
     whatGood: "Change review process (CAB or equivalent) with risk classification (Standard/Normal/Emergency), mandatory approval workflows, implementation windows, rollback procedures, and change-failure correlation tracking." },
   { id: 12, domain: "CG", name: "Undocumented or Ad Hoc Change Execution Process", severity: "Critical", timing: "Pre-Close Red Flag",
     definition: "Operational and process changes are made ad hoc with no standard procedure, no checklists, and no rollback plan. Change execution knowledge lives in individual heads.",
@@ -155,7 +155,7 @@ export const LEVERS = [
   { id: 31, domain: "AC", name: "No Evidence Collection Process or Evidence Index", severity: "Critical", timing: "Pre-Close Red Flag",
     definition: "When auditors or diligence teams request evidence of controls (access reviews, change approvals, incident postmortems), the team scrambles to locate or reconstruct documentation.",
     symptoms: ["Audit preparation takes weeks and pulls people off productive work", "Evidence is reconstructed from memory rather than collected contemporaneously", "Different people produce conflicting evidence for the same control", "Audit findings cite missing or insufficient evidence"],
-    peImpact: "Audit readiness is a proxy for operational maturity. If evidence collection is a scramble, the company will fail SOC 2 Type II, struggle with regulatory exams, and present poorly in exit diligence. The cost of audit remediation post-finding is 3–5× the cost of maintaining evidence trails proactively.",
+    peImpact: "Audit readiness is a proxy for operational maturity. If evidence collection is a scramble, the company will fail SOC 2 Type II, struggle with regulatory exams, and present poorly in exit diligence. Remediating audit findings after the fact is far more expensive than maintaining evidence trails proactively.",
     whatGood: "Evidence index maintained continuously, not assembled for audits. Evidence collection automated where possible. Clear mapping between controls, evidence artifacts, and audit requirements. Audit prep takes hours, not weeks." },
   { id: 32, domain: "AC", name: "SOC 2 Controls Not Mapped to Operating Procedures", severity: "Critical", timing: "First 100 Days",
     definition: "The company has SOC 2 controls documented on paper, but the actual operating procedures do not align with what the controls describe. The gap between stated controls and practiced procedures is significant.",
@@ -180,7 +180,7 @@ export const LEVERS = [
   { id: 42, common: true, domain: "KO", name: "No Weekly/Monthly Operating Review Cadence", severity: "Critical", timing: "First 100 Days",
     definition: "There is no structured operating review — no weekly or monthly rhythm where metrics are reviewed, issues are surfaced, and decisions are made. Operations run on ad hoc check-ins and crisis response.",
     symptoms: ["No standing operational review meeting exists", "Problems surface through escalation, not through proactive review", "Operating decisions are made without data or structured discussion", "The board receives operational updates only when something goes wrong"],
-    peImpact: "The operating cadence is the foundation of PE-style governance. Without it, the operating partner has no visibility, no control, and no early warning system. Installing a cadence is typically the single highest-impact intervention in the first 100 days.",
+    peImpact: "The operating cadence is the foundation of PE-style governance. Without it, the operating partner has no visibility, no control, and no early warning system. Installing a cadence is often among the highest-impact early interventions.",
     whatGood: "Weekly operating review with defined agenda, metrics package, issue log, and decision log. Monthly board-ready operational summary. Quarterly deep-dives on strategic operational topics. Clear escalation from weekly review to board when thresholds are breached." },
   { id: 44, domain: "KO", name: "No Board-Ready Operational Reporting", severity: "High", timing: "First 100 Days",
     definition: "The operating partner or board receives no structured operational reporting — or receives reports that are inconsistent, incomplete, or not actionable.",
@@ -195,12 +195,12 @@ export const LEVERS = [
   { id: 52, common: true, domain: "OP", name: "Tribal Knowledge / No Runbooks or SOPs", severity: "Critical", timing: "Pre-Close Red Flag",
     definition: "Critical operational knowledge exists only in individuals' heads. No runbooks, no standard operating procedures, no documentation that would allow someone else to perform the same function.",
     symptoms: ["Specific people are required for specific tasks — no substitutes", "Onboarding new team members takes months because nothing is written down", "When key people are on vacation, certain functions simply don't happen", "Post-acquisition knowledge transfer is impossible to scope because no one knows what needs to be transferred"],
-    peImpact: "The most dangerous pre-close red flag for operational continuity. If key people leave post-acquisition (which happens frequently), undocumented knowledge leaves with them. Rebuilding from zero is 10× more expensive than documenting proactively. Diligence should quantify key-person risk explicitly.",
+    peImpact: "One of the most consequential pre-close red flags for operational continuity. If key people leave post-acquisition (which happens frequently), undocumented knowledge leaves with them. Rebuilding lost knowledge is far more expensive than documenting it while the people are still in seat. Diligence should quantify key-person risk explicitly.",
     whatGood: "Runbooks for all critical operational procedures. SOPs for recurring processes. Knowledge base maintained and version-controlled. Cross-training program ensures no single point of knowledge failure. Documentation currency tracked as a KPI." },
   { id: 57, common: true, domain: "OP", name: "Staffing Model Fragile (Key-Person Risk)", severity: "High", timing: "Pre-Close Red Flag",
     definition: "The organizational structure has single points of failure — individuals whose departure would materially impair operations. No succession planning, no cross-training, no redundancy.",
     symptoms: ["Org chart shows one person covering a critical function with no backup", "Retention risk for key personnel not identified or mitigated", "No succession plan for any operational role", "Post-acquisition retention packages not informed by actual key-person analysis"],
-    peImpact: "Key-person risk directly affects deal structuring (earn-outs, retention packages, employment agreements). If not identified pre-close, it becomes an expensive surprise post-close. Key-person departures in the first year are the #1 operational risk in PE-backed transitions.",
+    peImpact: "Key-person risk directly affects deal structuring (earn-outs, retention packages, employment agreements). If not identified pre-close, it becomes an expensive surprise post-close. Key-person departures are among the most common operational risks in PE-backed transitions.",
     whatGood: "Key-person risk assessment completed and updated annually. Cross-training and documentation eliminate single points of failure. Succession plans for all critical roles. Retention strategy informed by actual risk analysis, not gut feel." },
 ];
 
@@ -237,12 +237,12 @@ export const DIM_RECS = {
   incident: {
     days: "Days 1–14",
     action: "Install incident command: severity model, designated commander, escalation thresholds, and postmortem discipline.",
-    impact: "Unstructured outages compound into EBITDA drag — management time diverted, client trust eroded, root causes unresolved. The same incidents recur until governance stops them. Postmortem discipline alone typically cuts Sev-1 recurrence by more than half.",
+    impact: "Unstructured outages compound into EBITDA drag — management time diverted, client trust eroded, root causes unresolved. The same incidents recur until governance stops them. In the platform I ran, disciplined postmortems were central to a ~67% drop in recurring incidents.",
   },
   change: {
     days: "Days 1–14",
     action: "Install change control: CAB-lite charter, risk classification, rollback discipline, and change-incident correlation tracking.",
-    impact: "Uncontrolled deployments are the leading cause of production incidents. Without change governance, you cannot see the correlation between releases and outages — which means you cannot stop it. Every unreviewed deployment is a potential revenue-impacting event.",
+    impact: "Uncontrolled deployments are a common cause of production incidents. Without change governance, you cannot see the correlation between releases and outages — which means you cannot stop it. Every unreviewed deployment is a potential revenue-impacting event.",
   },
   vendor: {
     days: "Days 1–30",
@@ -252,7 +252,7 @@ export const DIM_RECS = {
   audit: {
     days: "Days 15–45",
     action: "Build evidence index, map SOC 2 controls to operating procedures, and begin quarterly access reviews.",
-    impact: "Scrambling to reconstruct evidence costs 3–5× more than maintaining it continuously. SOC 2 exceptions signal governance immaturity to institutional clients and exit diligence teams. Controls that exist on paper but not in practice are a liability, not an asset.",
+    impact: "Reconstructing evidence after the fact costs far more than maintaining it continuously. SOC 2 exceptions signal governance immaturity to institutional clients and exit diligence teams. Controls that exist on paper but not in practice are a liability, not an asset.",
   },
   kpi: {
     days: "Days 1–30",
@@ -262,7 +262,7 @@ export const DIM_RECS = {
   process: {
     days: "Days 15–60",
     action: "Document critical runbooks, map RACI, identify key-person risks, and begin cross-training program.",
-    impact: "Tribal knowledge is the most dangerous pre-close risk. If key people leave post-acquisition — which happens frequently — undocumented knowledge leaves with them. Rebuilding from zero is 10× more expensive than documenting proactively.",
+    impact: "Tribal knowledge is one of the most consequential pre-close risks. If key people leave post-acquisition — which happens frequently — undocumented knowledge leaves with them. Rebuilding lost knowledge is far more expensive than documenting it proactively.",
   },
 };
 
