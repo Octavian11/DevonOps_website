@@ -60,6 +60,18 @@ export default function AboutPage() {
         </div>
       </Section>
 
+      {/* Why Trust a Solo Practitioner */}
+      <Section noCTA title="Why Trust a Solo Practitioner?">
+        <div style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
+          <p style={{ marginBottom: SPACING.sm }}>
+            Because the alternative is a team of juniors with a partner's name on the cover page. I do the diagnostic. I write the findings memo. I execute the 100-day plan. There's no handoff to someone who's never run an incident bridge or renegotiated a vendor contract under deadline.
+          </p>
+          <p style={{ margin: 0 }}>
+            The institutional background isn't just a credential — it's the reason the playbook works. I built these systems at a $10B multi-strategy fund. The governance model, the severity framework, the KPI cadence, the vendor scorecard — they've been pressure-tested at institutional scale. Your portfolio company gets that same system, installed by the person who built it.
+          </p>
+        </div>
+      </Section>
+
       {/* Representative Outcomes */}
       <Section title="Representative Outcomes" noCTA variant="tinted">
         <span className="measured-outcomes-label">Measured Outcomes (Post-Implementation)</span>

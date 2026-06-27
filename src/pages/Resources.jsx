@@ -48,17 +48,6 @@ function SampleDeliverableCard({ title, description, pdfUrl, label }) {
   );
 }
 
-// ─── METRICS STRIP ────────────────────────────────────────────
-
-const OUTCOMES = [
-  { metric: "~60%", label: "Reduction in critical outages over 8 months" },
-  { metric: "~94% → 99%", label: "Uptime improvement" },
-  { metric: "$2M+", label: "Annual run-rate savings via vendor consolidation" },
-  { metric: "~31%", label: "MTTR reduction" },
-  { metric: "~67%", label: "Incident volume reduction" },
-  { metric: "~17%", label: "Compliance error reduction" },
-];
-
 // ─── RESOURCES PAGE ───────────────────────────────────────────
 
 export default function ResourcesPage({ setPage }) {
@@ -109,21 +98,6 @@ export default function ResourcesPage({ setPage }) {
             description="The structured execution plan that installs incident governance, change control, vendor oversight, KPI cadence, and board-ready reporting from Day 1."
             pdfUrl={SAMPLE_100DAY_PDF}
           />
-        </div>
-      </Section>
-
-      {/* Representative Outcomes */}
-      <Section noCTA title="Representative Outcomes">
-        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: SPACING.sm, fontStyle: "italic" }}>
-          Outcomes from prior institutional operating roles managing platforms with $10B+ AUM. These represent the governance systems I now install for PE portfolio companies at a fraction of the complexity.
-        </p>
-        <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
-          {OUTCOMES.map((item, i) => (
-            <div key={i} style={{ border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, padding: "18px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 200px", minWidth: "min(200px, 100%)" }}>
-              <div style={{ fontFamily: FONTS.body, fontSize: "1.3rem", fontWeight: 700, color: COLORS.gold, marginBottom: SPACING.xs }}>{item.metric}</div>
-              <div style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, lineHeight: 1.5 }}>{item.label}</div>
-            </div>
-          ))}
         </div>
       </Section>
 
