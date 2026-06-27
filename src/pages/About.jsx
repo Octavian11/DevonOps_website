@@ -42,9 +42,9 @@ export default function AboutPage() {
       {/* How I Work */}
       <Section noCTA title="How I Work">
         <div style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
-          <p style={{ marginBottom: SPACING.sm }}>For funds evaluating targets, I run an <strong>Ops Diligence Report</strong> that surfaces the friction points standard diligence misses — and delivers a risk-rated findings memo to the investment committee. The findings feed directly into the <strong>Value Creation Plan (VCP)</strong>.</p>
-          <p style={{ marginBottom: SPACING.sm }}>Post-close, I execute the VCP through a <strong>100-Day Stabilization Plan</strong>: install incident governance, change control, vendor oversight, KPI cadence, and board-ready reporting. Fast. Structured. Measurable from Day 1.</p>
-          <p style={{ margin: 0 }}>For ongoing operational governance, I run a <strong>Control Tower Retainer</strong> — the weekly operating rhythm, escalation support, and compliance cadence that keeps the portfolio company from drifting back.</p>
+          <p style={{ marginBottom: SPACING.sm }}>For funds evaluating targets, I run an <strong>Ops Diligence Snapshot</strong> that surfaces the friction points standard diligence misses — and delivers a risk-rated findings memo to the investment committee. The findings feed directly into the 100-day plan.</p>
+          <p style={{ marginBottom: SPACING.sm }}>Post-close, I execute through a <strong>100-Day Operating Playbook</strong>: install incident governance, change control, vendor oversight, KPI cadence, and board-ready reporting. Fast. Structured. Measurable from Day 1.</p>
+          <p style={{ margin: 0 }}>For ongoing operational governance, I run a <strong>Post-Close Control Tower</strong> — the weekly operating rhythm, escalation support, and compliance cadence that keeps the portfolio company from drifting back.</p>
         </div>
       </Section>
 

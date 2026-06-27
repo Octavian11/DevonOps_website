@@ -352,7 +352,7 @@ export function FAQBlock({ variant }) {
     { q: "What industries do you cover?", a: "The 20 levers apply to any operationally complex business. Whether the portfolio company is a fintech platform or a regional services company, the same governance gaps—incident management, vendor concentration, key-person risk, and KPI cadence—drive the same value erosion." },
     { q: "How long does a pre-close diligence engagement take?", a: "2–3 weeks from data receipt to findings memo, assuming standard artifact availability (incident history, change logs, vendor contracts, org chart, compliance evidence). Expedited timelines are possible for deals in exclusivity — discuss during the fit check." },
     { q: "What if we're still in LOI or haven't entered exclusivity yet?", a: "Earlier is better. A light-touch ops review before exclusivity can shape the diligence scope and, in some cases, inform the structure of the deal itself. Even limited access produces useful signals — incident volume patterns and change frequency are often visible without full document access." },
-    { q: "Do you work with family offices?", a: "Yes, specifically on the Control Tower Retainer for longer holds. Family offices buying from founders often inherit zero institutional process — the gap between what's described in diligence and what's actually operating is widest in these deals. I install the governance baseline and operating cadence that prevents drift over a 5–7+ year hold." },
+    { q: "Do you work with family offices?", a: "Yes, specifically on the Post-Close Control Tower for longer holds. Family offices buying from founders often inherit zero institutional process — the gap between what's described in diligence and what's actually operating is widest in these deals. I install the governance baseline and operating cadence that prevents drift over a 5–7+ year hold." },
   ];
 
   const workingWithMe = faqs.filter((_, i) => [0,1,2,3,5,8].includes(i));
@@ -631,16 +631,16 @@ export function OfferCards({ setPage }) {
       )}
       <div className="pricing-grid" style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap", marginBottom: "24px" }}>
         <div className="pricing-card" style={{...box, borderTop: `3px solid ${COLORS.steel}`}}>
-          <span style={segLabel}>Independent Sponsors · Pre-Close</span>
-          <SectionTitle sub>Ops Diligence Report (Pre-Close)</SectionTitle>
-          <div className="price" style={tag}>Starting at $15,000 · 2–3 weeks</div>
+          <span style={segLabel}>Pre-Close · LOI to Close</span>
+          <SectionTitle sub>Ops Diligence Snapshot</SectionTitle>
+          <div className="price" style={tag}>$7,500–15,000 · 2–3 weeks</div>
           <ul style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
             <li style={li}>Risk-rated red flags with severity + PE impact</li>
             <li style={li}>Evidence requests + diligence questions</li>
-            <li style={li}>IC-ready memo format</li>
+            <li style={li}>Top execution risks + stabilization priorities</li>
           </ul>
           <p style={{ fontFamily: FONTS.body, fontSize: "0.82rem", color: COLORS.steel, lineHeight: 1.5, marginTop: "14px", paddingTop: "12px", borderTop: `1px solid ${COLORS.border}`, marginBottom: "auto" }}>
-            Best for funds with in-house ops resources who need the diagnostic, not the execution.
+            Best for funds that need the diagnostic before they commit.
           </p>
           <div style={{ marginTop: "16px" }}>
             <button className="card-text-link" onClick={() => window.location.href = '#scorer'}>Score Your Deal →</button>
@@ -648,12 +648,29 @@ export function OfferCards({ setPage }) {
         </div>
 
         <div className="pricing-card recommended" style={{...box, borderTop: `3px solid ${COLORS.gold}`}}>
-          <SectionTitle sub>Diligence → VCP → Execution Bundle (Recommended)</SectionTitle>
-          <div className="price" style={tag}>$25,000–$35,000 · diligence + 100 days (scope-dependent — scoped on the Fit Check call)</div>
+          <SectionTitle sub>Diligence + 100-Day Operating Playbook (Recommended)</SectionTitle>
+          <div className="price" style={tag}>$30,000–40,000 · Snapshot + Playbook (scoped on the Fit Check call)</div>
           <ul style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
-            <li style={li}>Diligence findings roll directly into the VCP — no re-learning, no gap</li>
+            <li style={li}>Diligence findings roll directly into the 100-day plan — no re-learning, no gap</li>
             <li style={li}>Day-1 critical path + phased 100-day execution</li>
             <li style={li}>Clear ownership + cadence from close to value</li>
+          </ul>
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.82rem", color: COLORS.steel, lineHeight: 1.5, marginTop: "14px", paddingTop: "12px", borderTop: `1px solid ${COLORS.border}`, marginBottom: "auto" }}>
+            100-Day Operating Playbook on its own: $20,000–35,000.
+          </p>
+          <div style={{ marginTop: "16px" }}>
+            <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer">Book a Fit Check (15 min) →</a>
+          </div>
+        </div>
+
+        <div className="pricing-card" style={{...box, borderTop: `3px solid ${COLORS.gold}`}}>
+          <span style={segLabel}>Post-Close · Hands-On</span>
+          <SectionTitle sub>Embedded Operating Sprint</SectionTitle>
+          <div className="price" style={tag}>$15,000–30,000 · 2–6 weeks</div>
+          <ul style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
+            <li style={li}>Embedded execution on one priority: KPI architecture, operating cadence, vendor governance, post-close stabilization, incident/reliability, or transformation PMO</li>
+            <li style={li}>Built and installed on-site or hybrid</li>
+            <li style={li}>Converts to a retainer at $7,500–12,000/month</li>
           </ul>
           <div style={{ marginTop: "16px" }}>
             <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer">Book a Fit Check (15 min) →</a>
@@ -661,9 +678,9 @@ export function OfferCards({ setPage }) {
         </div>
 
         <div className="pricing-card" style={{...box, borderTop: `3px solid ${COLORS.navy}`}}>
-          <span style={segLabel}>Family Offices · Ongoing Hold</span>
-          <SectionTitle sub>Control Tower Retainer (Ongoing)</SectionTitle>
-          <div className="price" style={tag}>Starting at $7,500/month · ongoing</div>
+          <span style={segLabel}>Ongoing Hold</span>
+          <SectionTitle sub>Post-Close Control Tower</SectionTitle>
+          <div className="price" style={tag}>$7,500–10,000+/month · ongoing</div>
           <ul style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
             <li style={li}>Weekly operating review + board-ready KPI pack</li>
             <li style={li}>Incident + change governance discipline</li>
@@ -678,7 +695,7 @@ export function OfferCards({ setPage }) {
       {!setPage && (
         <div style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, padding: "14px 18px", background: `${COLORS.navy}05`, borderRadius: RADIUS.md, border: `1px solid ${COLORS.border}`, marginBottom: SPACING.md }}>
           <p style={{ margin: "0 0 8px 0" }}>
-            <strong>Pre-close option:</strong> Add an Ops Diligence Report ($15K, 2–3 weeks) before signing to surface red flags for the IC.
+            <strong>Pre-close option:</strong> Add an Ops Diligence Snapshot (from $7,500, 2–3 weeks) before signing to surface red flags for the IC.
           </p>
           <p style={{ margin: 0 }}>
             <strong>Recommended:</strong> Choose the bundle if you expect to close — diligence findings feed directly into Day-1 priorities with no re-learning.

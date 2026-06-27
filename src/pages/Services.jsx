@@ -1,13 +1,10 @@
 import { useState } from "react";
 import {
   COLORS, FONTS, SPACING, SHADOWS, RADIUS,
-  CALENDLY, SAMPLE_SCORECARD_PDF, SAMPLE_100DAY_PDF,
-  LEVERS, DOMAINS,
-  mailtoHref,
+  CALENDLY, LEVERS, DOMAINS,
 } from "../constants.js";
 import {
-  CTAButton, SectionTitle, ButtonPair, Card, Section,
-  TimelineRail, SplitContrast, FAQBlock, ServicesSamplesRow, OfferCards,
+  Section, FAQBlock, ServicesSamplesRow, OfferCards,
   SeverityBadge, TimingBadge, DomainTag,
 } from "../components.jsx";
 
@@ -23,13 +20,10 @@ function ServicesMethodJumpBar() {
   };
 
   const links = [
-    { href: "#top", label: "Pricing" },
-    { href: "#lever-explorer", label: "20 Levers" },
-    { href: "#rubric", label: "Rubric" },
-    { href: "#sequence", label: "100-Day Sequence" },
-    { href: "#how-it-works", label: "How It Works" },
+    { href: "#method", label: "Method" },
+    { href: "#lever-explorer", label: "Levers" },
+    { href: "#red-flags", label: "Red Flags" },
     { href: "#faq", label: "FAQ" },
-    { href: "#fit-check", label: "Fit Check" },
   ];
 
   return (
@@ -45,270 +39,68 @@ function ServicesMethodJumpBar() {
   );
 }
 
-// ─── ACCORDION ───────────────────────────────────────────────
+// ─── METHOD: FEDRSSQE SPINE (compact, expand-on-click) ───────
 
-function Accordion({ title, children, defaultOpen = false }) {
-  const [open, setOpen] = useState(defaultOpen);
+const METHOD_STEPS = [
+  { n: "1", name: "Frame", q: "What does the sponsor need to decide?",
+    detail: "Diligence hypotheses and materiality thresholds, set against the investment thesis, hold plan, and risk appetite." },
+  { n: "2", name: "Evidence", q: "What facts confirm or refute each hypothesis?",
+    detail: "An evidence map with gaps and confidence levels, built from the CIM, financials, interviews, systems, logs, contracts, and KPIs." },
+  { n: "3", name: "Diagnose", q: "Where is operational friction concentrated?",
+    detail: "Maturity scores across the six operating domains (incidents, change, vendor, audit, KPI cadence, process), with red flags and causal problem statements." },
+  { n: "4", name: "Retrieve", q: "Which value levers are actually relevant?",
+    detail: "A company-specific shortlist, drawn from a 355-lever operational value-creation library and filtered by sector and deal thesis." },
+  { n: "5", name: "Score", q: "Which levers matter first?",
+    detail: "Each lever scored against a seven-factor PE-fit rubric: time to proof, FCF impact, execution certainty, covenant/liquidity, exit multiple, reversibility, and management attention load." },
+  { n: "6", name: "Sequence", q: "What must precede what?",
+    detail: "Each initiative slotted as Immediate GO, Conditional GO, or Sequence Later — mapped across pre-close, Day 1, Days 1–30, 31–100, and the hold." },
+  { n: "7", name: "Quantify", q: "What is the defensible value range?",
+    detail: "EBITDA, cash, risk, scalability, and exit-readiness implications, framed as scenarios rather than a single point estimate." },
+  { n: "8", name: "Execute", q: "Who owns each action, and how is progress measured?",
+    detail: "A 100-day plan with named owners, milestones, KPIs, and an ongoing operating cadence, sequenced Visibility → Control → Cadence." },
+];
 
+const METHOD_PRINCIPLES = [
+  ["Evidence before scoring", "The library structures inquiry; it never creates a finding without company-specific support."],
+  ["Economics before activity", "Every recommendation ties to a measurable driver or an explicitly stated risk."],
+  ["Portco ownership before consultant ownership", "I design, facilitate, and validate; management owns execution and sustainability."],
+];
+
+function MethodSpine() {
+  const [open, setOpen] = useState(null);
   return (
-    <Card style={{ borderLeft: `3px solid ${COLORS.gold}` }}>
-      <button onClick={() => setOpen(!open)}
-        style={{ width: "100%", textAlign: "left", background: "transparent", border: "none", padding: "0", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px" }}>
-        <div>
-          <div style={{ fontFamily: FONTS.heading, fontSize: "1.25rem", fontWeight: 700, color: COLORS.navy }}>{title}</div>
-          <div style={{ fontFamily: FONTS.body, fontSize: "0.98rem", color: COLORS.bodyMuted, marginTop: "6px" }}>Click to {open ? "collapse" : "expand"}.</div>
-        </div>
-        <div style={{ fontFamily: FONTS.body, fontSize: "1.25rem", fontWeight: 700, color: COLORS.navy }}>{open ? "−" : "+"}</div>
-      </button>
-      {open && <div style={{ marginTop: "16px" }}>{children}</div>}
-    </Card>
-  );
-}
-
-// ─── MINI METRIC ─────────────────────────────────────────────
-
-function MiniMetric({ label, value, valueColor }) {
-  return (
-    <div style={{ border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "12px", background: COLORS.white }}>
-      <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, color: COLORS.bodyMuted, marginBottom: "6px" }}>{label}</div>
-      <div style={{ fontFamily: FONTS.heading, fontSize: "1.25rem", fontWeight: 700, color: valueColor || COLORS.navy }}>{value}</div>
-    </div>
-  );
-}
-
-// ─── WORKED EXAMPLE ACCORDION ────────────────────────────────
-
-function WorkedExampleAccordion() {
-  return (
-    <Accordion title='Worked example: "No Change Advisory Board or Change Control Process"' defaultOpen={false}>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(180px, 100%), 1fr))", gap: "12px" }}>
-        <MiniMetric label="EBITDA Impact" value="Direct" valueColor="#8B1E1E" />
-        <MiniMetric label="Time to Proof" value="< 30 days" valueColor="#1F6F3A" />
-        <MiniMetric label="Execution Certainty" value="High" valueColor="#1F6F3A" />
-        <MiniMetric label="Exit Story Impact" value="Strengthens" valueColor="#1F6F3A" />
-        <MiniMetric label="Reversibility" value="Easily" valueColor="#1F6F3A" />
-        <MiniMetric label="Attention Load" value="Low" valueColor="#1F6F3A" />
-      </div>
-
-      <div style={{ marginTop: "16px", fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7 }}>
-        <p style={{ marginTop: 0 }}>
-          <strong>Pre-close implication:</strong> Uncontrolled changes are a common cause of production incidents. If the target has no change control, flag it in the diligence memo — this is direct EBITDA drag hiding in incident correlation data.
-        </p>
-        <p style={{ marginBottom: 0 }}>
-          <strong>First 100 days implication:</strong> Install a lightweight CAB within the first two weeks. This is a high-certainty, low-attention, fast-proof intervention. Change-incident correlation tracking starts producing board-ready data within 30 days.
-        </p>
-      </div>
-
-      <div style={{ marginTop: "16px", display: "flex", gap: "10px", flexWrap: "wrap" }}>
-        <button onClick={() => window.location.hash = "#top"}
-          style={{ padding: "10px 20px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, border: "none", fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer" }}>
-          See offers & pricing
-        </button>
-        <CTAButton text="Book a Fit Check (15 min)" showAvailability={true} />
-      </div>
-    </Accordion>
-  );
-}
-
-// ─── FRAMEWORK WHY FRICTION TIGHT ────────────────────────────
-
-function FrameworkWhyFrictionTight() {
-  const leftSide = {
-    title: "Operational Friction",
-    description: "Unmanaged ops risk compounds under leverage:",
-    items: [
-      "Disruption becomes covenant risk",
-      "Months spent stabilizing compress the value creation window",
-      "Unresolved friction becomes a multiple discount at exit",
-      "Recurring incidents erode EBITDA through rework and churn",
-      "Key-person dependency blocks scaling"
-    ]
-  };
-
-  const rightSide = {
-    title: "Operational Clarity",
-    description: "Systematic governance unlocks value creation:",
-    items: [
-      "Incident command → faster resolution, fewer repeat failures",
-      "Change governance → fewer outages, faster releases",
-      "KPI cadence → board-ready reporting from Day 1",
-      "Vendor governance → concentration risk managed, renewal leverage captured",
-      "Compliance cadence → audit-ready by default"
-    ],
-    highlight: "Friction diagnosed early → value creation accelerated"
-  };
-
-  return (
-    <Section title="Why Operational Friction Compounds Under PE Ownership" noCTA>
-      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "24px" }}>
-        My method: diagnose friction, prioritize by EBITDA impact and time to proof.
+    <Section title="How I Work a Deal" noCTA variant="tinted" id="method">
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "960px", marginBottom: "24px" }}>
+        Every engagement runs the same eight-step method — from the sponsor's decision down to a measurable 100-day plan. Tap any step.
       </p>
-      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
-        <div style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `4px solid ${COLORS.critical}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
-          <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{leftSide.title}</div>
-          <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{leftSide.description}</p>
-          <ul style={{ paddingLeft: "18px", margin: 0 }}>
-            {leftSide.items.map((item, i) => (
-              <li key={i} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>{item}</li>
-            ))}
-          </ul>
-        </div>
-        <div style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `4px solid ${COLORS.gold}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
-          <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{rightSide.title}</div>
-          <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{rightSide.description}</p>
-          <ul style={{ paddingLeft: "18px", margin: 0 }}>
-            {rightSide.items.map((item, i) => (
-              <li key={i} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>{item}</li>
-            ))}
-          </ul>
-          <div style={{ marginTop: "auto", paddingTop: "12px", borderTop: `1px solid ${COLORS.border}`, fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.gold, fontWeight: 600 }}>
-            {rightSide.highlight}
-          </div>
-        </div>
-      </div>
-    </Section>
-  );
-}
-
-// ─── FRAMEWORK RUBRIC TABLE ──────────────────────────────────
-
-function FrameworkRubricTable() {
-  const [open, setOpen] = useState(false);
-  return (
-    <Section title="The Friction Evaluation Rubric" noCTA>
-      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "12px" }}>
-        Each lever is evaluated across six dimensions — EBITDA impact, time to proof, execution certainty, exit story impact, reversibility, and attention load.
-      </p>
-      <button
-        onClick={() => setOpen(!open)}
-        style={{ background: "transparent", border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "8px 16px", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, fontWeight: 600, cursor: "pointer", marginBottom: "16px" }}>
-        {open ? "Hide rubric ▾" : "Show scoring rubric — 6 evaluation criteria with action triggers ▸"}
-      </button>
-
-      {open && <>
-        <div style={{ overflowX: "auto" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: FONTS.body, fontSize: "0.85rem" }}>
-            <thead>
-              <tr style={{ borderBottom: `2px solid ${COLORS.navy}` }}>
-                {["Criterion", "What It Tests", "Scoring", "Action Trigger"].map(h => (
-                  <th key={h} style={{ textAlign: "left", padding: "8px 10px", fontWeight: 600, color: COLORS.navy, fontSize: "0.9rem", letterSpacing: "0.3px" }}>{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                ["EBITDA Impact", "Directly erode earnings or margin?", "Direct / Indirect / Minimal", "Direct → flag in IC memo, quantify drag"],
-                ["Time to Proof", "How quickly does improvement appear?", "< 30 / 30–90 / 90+ days", "< 30 days → Day-1 quick win candidate"],
-                ["Execution Certainty", "How proven is the playbook?", "High / Medium / Low", "High → include in 100-day plan scope"],
-                ["Exit Story Impact", "Improve risk profile for next buyer?", "Strengthens / Neutral / None", "Strengthens → prioritize for exit prep"],
-                ["Reversibility", "Can this be reversed if needed?", "Easily / Partially / One-way", "One-way → requires board approval"],
-                ["Attention Load", "Management bandwidth required?", "Low / Medium / High", "High → defer early in hold period"],
-              ].map(([c, w, s, a], i) => (
-                <tr key={i} style={{ borderBottom: `1px solid ${COLORS.border}` }}>
-                  <td style={{ padding: "8px 10px", fontWeight: 600, color: COLORS.charcoal, whiteSpace: "nowrap", fontSize: "0.9rem" }}>{c}</td>
-                  <td style={{ padding: "8px 10px", color: COLORS.charcoal, fontSize: "0.9rem" }}>{w}</td>
-                  <td style={{ padding: "8px 10px", fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.charcoal }}>{s}</td>
-                  <td style={{ padding: "8px 10px", fontSize: "0.85rem", color: COLORS.navy, fontWeight: 500 }}>{a}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginTop: "14px" }}>
-          Levers scoring well on <em>EBITDA Impact + Time to Proof + Low Attention Load</em> are highest-priority quick wins. Strong <em>Exit Story Impact</em> with longer timelines are strategic investments.
-        </p>
-      </>}
-    </Section>
-  );
-}
-
-// ─── STABILIZATION SEQUENCE ──────────────────────────────────
-
-function StabilizationSequence() {
-  const timelineItems = [
-    {
-      title: "Phase 1: Visibility", meta: "Days 1–14",
-      description: "You can't fix what you can't see. Establish baseline visibility into what's actually happening — not what management says is happening.",
-      items: ["Incident volume, severity, MTTR, recurrence rate", "Change frequency, failure rate, rollback frequency", "Vendor inventory, contract terms, concentration exposure", "Current compliance posture vs. stated posture"],
-      deliverable: "Baseline assessment memo + operational risk heatmap",
-      completed: true
-    },
-    {
-      title: "Phase 2: Control", meta: "Days 15–45",
-      description: "Install the minimum governance gates that prevent new damage from accumulating while you address existing debt.",
-      items: ["Incident command structure with severity classification", "Change control process with risk classification", "Escalation paths with defined thresholds", "Access review and vendor oversight cadence"],
-      deliverable: "CAB charter + severity policy + escalation matrix",
-      active: true
-    },
-    {
-      title: "Phase 3: Cadence", meta: "Days 45–100",
-      description: "Governance installed ad hoc decays without rhythm. Build the operating cadence that makes stability self-sustaining.",
-      items: ["Weekly operating review with defined KPIs and thresholds", "Monthly board-ready reporting package", "Quarterly vendor scorecards and control testing", "Postmortem → recurrence prevention → backlog loop"],
-      deliverable: "Board ops dashboard + first QBR pack + audit evidence index"
-    }
-  ];
-
-  return (
-    <Section noCTA title="The Stabilization Sequence" variant="tinted">
-      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "32px" }}>
-        Operational stabilization follows a consistent three-phase sequence: <strong>Visibility → Control → Cadence</strong>.
-      </p>
-      <TimelineRail items={timelineItems} />
-      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginTop: "24px" }}>
-        After Day 100, the Control Tower Retainer maintains the cadence and prevents drift-back.
-      </p>
-    </Section>
-  );
-}
-
-// ─── SERVICES STEPS ──────────────────────────────────────────
-
-function ServicesSteps() {
-  const steps = [
-    { num: "1", title: "Fit Check", meta: "15 minutes", description: "15-minute call. Assess the situation, confirm scope, and determine fit." },
-    { num: "2", title: "Scope + Underwrite", meta: "48 hours", description: "Targeted data request. I translate the operational landscape into investment-grade risk assessment. Fixed-fee proposal with timeline within 48 hours." },
-    { num: "3", title: "Diligence Deliverable", meta: "2–3 weeks", description: "Risk-rated findings memo — severity-rated, PE impact framed, IC-ready. This becomes the foundation of the Value Creation Plan." },
-    { num: "4", title: "Value Creation Plan + 100-Day Execution", meta: "Days 1–100", description: "Diligence findings roll directly into the VCP. I execute against it for 100 days — incident command, change control, KPI cadence, board-ready reporting." },
-  ];
-
-  return (
-    <Section noCTA title="How it works">
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
-        {steps.map((s) => (
-          <div key={s.num} style={{ border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column", gap: "8px" }}>
-            <div style={{ display: "flex", alignItems: "baseline", gap: "10px" }}>
-              <span style={{ fontFamily: FONTS.body, fontSize: "1.4rem", fontWeight: 700, color: COLORS.gold, lineHeight: 1 }}>{s.num}</span>
-              <span style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy }}>{s.title}</span>
+      <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+        {METHOD_STEPS.map((s) => {
+          const isOpen = open === s.n;
+          return (
+            <div key={s.n} style={{ background: COLORS.white, border: `1px solid ${isOpen ? COLORS.steel : COLORS.border}`, borderRadius: RADIUS.md, cursor: "pointer", transition: "all 0.15s" }}
+              onClick={() => setOpen(isOpen ? null : s.n)}>
+              <div style={{ padding: "14px 18px", display: "flex", alignItems: "center", gap: "14px" }}>
+                <span style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.gold, width: "18px", flexShrink: 0 }}>{s.n}</span>
+                <span style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, minWidth: "92px", flexShrink: 0 }}>{s.name}</span>
+                <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, flex: 1 }}>{s.q}</span>
+                <span style={{ fontFamily: FONTS.body, fontSize: "1.1rem", color: COLORS.steel, flexShrink: 0 }}>{isOpen ? "▾" : "▸"}</span>
+              </div>
+              {isOpen && (
+                <div className="lever-expand" style={{ padding: "0 18px 16px 50px", borderTop: `1px solid ${COLORS.border}` }} onClick={e => e.stopPropagation()}>
+                  <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, margin: "12px 0 0" }}>{s.detail}</p>
+                </div>
+              )}
             </div>
-            <div style={{ fontFamily: FONTS.body, fontSize: "0.78rem", fontWeight: 700, color: COLORS.steel, letterSpacing: "0.6px", textTransform: "uppercase" }}>{s.meta}</div>
-            <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, margin: 0 }}>{s.description}</p>
+          );
+        })}
+      </div>
+      <div style={{ marginTop: "24px", display: "flex", gap: "16px", flexWrap: "wrap" }}>
+        {METHOD_PRINCIPLES.map(([t, d], i) => (
+          <div key={i} style={{ flex: "1 1 240px", minWidth: "min(220px, 100%)", borderTop: `3px solid ${COLORS.gold}`, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.lg, padding: "18px 20px", background: COLORS.white }}>
+            <div style={{ fontFamily: FONTS.heading, fontSize: "0.95rem", fontWeight: 700, color: COLORS.navy, marginBottom: "6px" }}>{t}</div>
+            <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.55, margin: 0 }}>{d}</p>
           </div>
         ))}
-      </div>
-    </Section>
-  );
-}
-
-// ─── FIT CHECK CTA ───────────────────────────────────────────
-
-function FitCheckCTA() {
-  const subject = "Devonshire Ops – Fit Check request";
-  const body = "Hi Hassan,\n\nI reviewed the Services & Method page and would like to discuss fit.\n\nContext:\n- Company / deal stage:\n- Primary concern (incidents, change, vendor risk, KPI cadence, audit posture):\n- Timeline:\n\nBest,\n";
-
-  return (
-    <Section noCTA background={`${COLORS.navy}05`}>
-      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", margin: "0 auto 20px", textAlign: "center" }}>
-        15 minutes. I'll assess the situation and scope the right engagement.
-      </p>
-      <ButtonPair
-        primaryText="Book a Fit Check (15 min)"
-        secondaryText="Email me instead"
-        secondaryLink={mailtoHref(subject, body)}
-        centered={true}
-        showAvailability={true}
-      />
-      <div style={{ marginTop: "16px", padding: "10px 12px", borderRadius: RADIUS.md, border: `1px solid ${COLORS.border}`, background: `${COLORS.navy}03`, fontFamily: FONTS.body, fontSize: "0.92rem", color: COLORS.charcoal, lineHeight: 1.45, maxWidth: "960px", margin: "16px auto 0" }}>
-        NDA-friendly. I can sign an NDA before receiving sensitive materials; initial triage can be done with high-level facts only.
       </div>
     </Section>
   );
@@ -611,15 +403,12 @@ export default function ServicesPage({ setPage }) {
       <ServicesMethodJumpBar />
       <OfferCards />
 
+      <MethodSpine />
+
       <LeverExplorerSection setPage={setPage} />
 
-      <div id="rubric"><FrameworkRubricTable /></div>
       <div id="red-flags"><TypicalRedFlags /></div>
-      <div id="why-friction"><FrameworkWhyFrictionTight /></div>
-      <div id="sequence"><StabilizationSequence /></div>
       <div id="memo-samples"><MemoSampleScreenshots /></div>
-      <div id="worked-example"><WorkedExampleAccordion /></div>
-      <div id="how-it-works"><ServicesSteps /></div>
       <div id="faq"><FAQBlock variant="tinted" /></div>
     </div>
   );
