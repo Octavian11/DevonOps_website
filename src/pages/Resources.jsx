@@ -114,10 +114,10 @@ export default function ResourcesPage({ setPage }) {
             This is a pricing error.
           </p>
           <p style={{ marginBottom: "16px" }}>
-            The operational gaps that compound under PE ownership are predictable. They follow patterns. A portfolio company with no incident governance will have its first production failure within 90 days of close. A company with no change control process will trace 40% of its outages to recent deployments. A company with no KPI cadence will enter its first board meeting with verbal updates and anecdotal evidence — and the board will have no way to distinguish signal from noise.
+            The operational gaps that compound under PE ownership are predictable. They follow patterns. A portfolio company with no incident governance often surfaces a production failure early in the hold. A company with no change control process tends to trace a meaningful share of its outages to recent, unreviewed deployments. A company with no KPI cadence will enter its first board meeting with verbal updates and anecdotal evidence — and the board will have no way to distinguish signal from noise.
           </p>
           <p style={{ marginBottom: "16px" }}>
-            These are not edge cases. In 15 years of platform operations across JPMorgan, Barclays, Lazard, and a $10B multi-strategy hedge fund, I've seen every one of these patterns. The difference between a smooth first 100 days and a firefighting spiral almost always comes down to whether someone assessed the operational risk before close — and built a plan to address it.
+            These are not edge cases. In 15 years of platform operations across JPMorgan, Barclays, Lazard, and a $10B+ platform, I've seen every one of these patterns. The difference between a smooth first 100 days and a firefighting spiral almost always comes down to whether someone assessed the operational risk before close — and built a plan to address it.
           </p>
           <p style={{ marginBottom: "16px" }}>
             Financial DD tells you what the business earns. Ops diligence tells you whether it can keep earning it under new ownership, new governance, and new expectations.

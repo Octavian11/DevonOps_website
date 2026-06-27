@@ -732,7 +732,7 @@ export function TestimonialBlock() {
             </div>
             <div>
               <div className="case-label">Platform Stabilization &amp; Reliability</div>
-              <div className="case-context">Multi-strategy hedge fund · ~$10B AUM</div>
+              <div className="case-context">$10B+ platform</div>
             </div>
           </div>
           <span className="case-domain-tag ops">Platform Ops</span>

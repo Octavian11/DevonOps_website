@@ -21,7 +21,7 @@ const BUYER_TYPES = [
 const BUYER_TYPE_FRAMING = {
   is:    "As an independent sponsor, diligence gaps affect IC credibility and LP confidence. These findings translate directly into how you frame deal risk to your capital partner.",
   pe:    "For a PE fund, post-close stabilization risk is the primary threat to Year 1 EBITDA. These gaps predict which levers will stall and which will compound.",
-  fo:    "For a family office with a longer hold horizon, these gaps compound over time. Operational drift is the #1 silent value leak — and the hardest to diagnose without a structured framework.",
+  fo:    "For a family office with a longer hold horizon, these gaps compound over time. Operational drift is a major silent value leak — and one of the hardest to diagnose without a structured framework.",
   other: null,
 };
 
@@ -343,7 +343,7 @@ export default function ScorerPage() {
                 {unknownDims.length} Dimensions Unassessed — This Is Itself a Finding
               </h4>
               <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "14px" }}>
-                You marked {unknownDims.length} dimensions as unknown — that's a red flag in itself. Lack of operational visibility is the #1 pattern I see in pre-close diligence.
+                You marked {unknownDims.length} dimensions as unknown — that's a red flag in itself. Lack of operational visibility is one of the most common patterns I see in pre-close diligence.
               </p>
               <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, marginBottom: "8px", fontWeight: 600 }}>Unassessed dimensions:</p>
               {unknownDims.map(dim => (
