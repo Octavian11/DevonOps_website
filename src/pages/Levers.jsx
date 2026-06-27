@@ -1,14 +1,11 @@
-import { useState } from "react";
 import {
   COLORS, FONTS, SPACING, SHADOWS, RADIUS,
   CALENDLY, SAMPLE_SCORECARD_PDF, SAMPLE_100DAY_PDF,
   LEVERS, DOMAINS,
 } from "../constants.js";
 import {
-  DomainTag,
-  CTAButton, SectionTitle, ButtonPair, Section,
-  SplitContrast, FAQBlock,
-  LeadMagnetLink, OfferCards, TestimonialBlock,
+  DomainTag, SectionTitle, Section,
+  LeadMagnetLink, OfferCards,
 } from "../components.jsx";
 
 // ─── HERO BLOCK WITH NAV ─────────────────────────────────────
@@ -275,163 +272,6 @@ function CostOfInaction() {
   );
 }
 
-// ─── WHY NOT BIG 4 ───────────────────────────────────────────
-
-function WhyNotBig4() {
-  return (
-    <Section title="Why Not a Big 4 Firm?" noCTA>
-      <div style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "800px" }}>
-        <p style={{ marginBottom: SPACING.sm }}>
-          Big 4 firms are excellent at audit-grade frameworks. I deliver what they don't: practitioner-grade execution. I've been the person at 2am running incident command, rebuilding vendor governance under regulatory scrutiny, and building the KPI cadence that gave boards real-time visibility. That's not advisory. That's operating.
-        </p>
-        <p style={{ margin: 0 }}>
-          GP operating teams have doubled in size since 2021 (McKinsey GPMR 2026) — independent of fund AUM. Funds that can't yet build in-house need a practitioner who can install the system and hand it off, not a framework to read about it.
-        </p>
-      </div>
-    </Section>
-  );
-}
-
-// ─── WHY TRUST A SOLO PRACTITIONER ───────────────────────────
-
-function WhySoloPractitioner() {
-  return (
-    <Section title="Why Trust a Solo Practitioner?" noCTA variant="tinted">
-      <div style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "800px" }}>
-        <p style={{ marginBottom: SPACING.sm }}>
-          Because the alternative is a team of juniors with a partner's name on the cover page. I do the diagnostic. I write the findings memo. I execute the 100-day plan. There's no handoff to someone who's never run an incident bridge or renegotiated a vendor contract under deadline.
-        </p>
-        <p style={{ margin: 0 }}>
-          The institutional background isn't just a credential — it's the reason the playbook works. I built these systems at a $10B multi-strategy fund. The governance model, the severity framework, the KPI cadence, the vendor scorecard — they've been pressure-tested at institutional scale. Your portfolio company gets that same system, installed by the person who built it.
-        </p>
-      </div>
-    </Section>
-  );
-}
-
-// ─── CHOOSE SITUATION ────────────────────────────────────────
-
-function ChooseSituation({ setPage }) {
-  const leftSide = {
-    title: "Evaluating a Target",
-    description: "Decision-useful ops diligence designed for the IC: severity-rated red flags + evidence requests.",
-    items: ["Risk-rated findings memo (IC-ready)", "Evidence requests + diligence questions", "Day-1 → Day-100 stabilization priorities if you close"]
-  };
-
-  const rightSide = {
-    title: "First 100 Days Post-Close",
-    description: "Install a governance baseline so value creation isn't blocked by instability.",
-    items: ["Incident command (severity model, escalation, postmortems)", "Change governance (CAB-lite, risk classification, rollback discipline)", "KPI cadence (weekly operating reviews + board-ready pack)"],
-    highlight: "Governance installed → value creation unlocked"
-  };
-
-  return (
-    <Section title="Choose Your Situation" noCTA>
-      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "24px" }}>
-        Pick the track that matches where you are in the lifecycle. Both paths deliver <strong>risk-rated findings, PE impact framing, and a clear Day-1 critical path</strong>.
-      </p>
-      <div className="path-cards-grid" style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap" }}>
-        <div className="path-card" style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
-          <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{leftSide.title}</div>
-          <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{leftSide.description}</p>
-          <ul style={{ paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
-            {leftSide.items.map((item, i) => (
-              <li key={i} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>{item}</li>
-            ))}
-          </ul>
-          <div style={{ marginTop: "auto", paddingTop: "16px" }}>
-            <button className="card-text-link" onClick={() => setPage("scorer")}>
-              Score Your Deal →
-            </button>
-          </div>
-        </div>
-        <div className="path-card" style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
-          <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{rightSide.title}</div>
-          <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{rightSide.description}</p>
-          <ul style={{ paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
-            {rightSide.items.map((item, i) => (
-              <li key={i} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>{item}</li>
-            ))}
-          </ul>
-          <div style={{ marginTop: "auto", paddingTop: "16px" }}>
-            <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer">
-              Book a Fit Check →
-            </a>
-          </div>
-        </div>
-      </div>
-    </Section>
-  );
-}
-
-// ─── MINI CASES ──────────────────────────────────────────────
-
-function MiniCases() {
-  const [moreExpanded, setMoreExpanded] = useState(false);
-  const box = { border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.gold}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" };
-  const fieldLabel = { fontFamily: FONTS.body, fontSize: "10px", fontWeight: 700, color: COLORS.navy, letterSpacing: "1.5px", textTransform: "uppercase", display: "block", marginBottom: "4px" };
-  const fieldVal = { fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, margin: "0 0 14px 0" };
-  const valueCreated = { fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, margin: 0, padding: "14px 16px", background: "#FFFBF0", borderLeft: `3px solid #C8952E`, borderRadius: "0 6px 6px 0" };
-
-  return (
-    <Section title="Representative Outcomes" noCTA variant="tinted">
-      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "32px" }}>
-        Anonymized engagement outcomes from $10B+ institutional operating roles. Gap → intervention → result.
-      </p>
-
-      <div className="outcomes-visible">
-        <div className="outcome-card" style={box}>
-          <SectionTitle sub>Incident instability</SectionTitle>
-          <span style={fieldLabel}>GAP</span>
-          <p style={fieldVal}>Same failures recurring every 4–6 weeks. No severity model, no ownership, no postmortems.</p>
-          <span style={fieldLabel}>FIX</span>
-          <p style={fieldVal}>Severity model, incident command, escalation paths, postmortem cadence.</p>
-          <span style={fieldLabel}>RESULT</span>
-          <p style={valueCreated}>~67% incident reduction. ~31% faster resolution. Board reporting shifted from crisis-driven to weekly structured reviews.</p>
-        </div>
-
-        <div className="outcome-card" style={box}>
-          <SectionTitle sub>Change-driven outages</SectionTitle>
-          <span style={fieldLabel}>GAP</span>
-          <p style={fieldVal}>Deployments causing outages. No change calendar, no risk classification, no rollback plans.</p>
-          <span style={fieldLabel}>FIX</span>
-          <p style={fieldVal}>CAB-lite process, risk classification, rollback discipline, change-incident correlation.</p>
-          <span style={fieldLabel}>RESULT</span>
-          <p style={valueCreated}>~60% fewer critical outages. Uptime: 94% → 99%. Change-incident correlation visible to the board within 30 days.</p>
-        </div>
-      </div>
-
-      <div className={`outcomes-hidden${moreExpanded ? " expanded" : ""}`}>
-        <div className="outcome-card" style={box}>
-          <SectionTitle sub>Board reporting / KPI ambiguity</SectionTitle>
-          <span style={fieldLabel}>GAP</span>
-          <p style={fieldVal}>No KPIs. Board updates were verbal and anecdotal. No baselines, no targets, no measurement.</p>
-          <span style={fieldLabel}>FIX</span>
-          <p style={fieldVal}>KPI library, weekly operating review, executive dashboard, board-ready reporting pack.</p>
-          <span style={fieldLabel}>RESULT</span>
-          <p style={valueCreated}>Weekly operating rhythm installed. Issues surfaced through cadence, not crisis. Board gained real-time ops visibility — direct input to exit narrative.</p>
-        </div>
-
-        <div className="outcome-card" style={box}>
-          <SectionTitle sub>Vendor concentration risk</SectionTitle>
-          <span style={fieldLabel}>GAP</span>
-          <p style={fieldVal}>Single vendor covering 80%+ of critical infrastructure. Auto-renewing contracts, no SLA tracking, change-of-control clause missed in diligence.</p>
-          <span style={fieldLabel}>FIX</span>
-          <p style={fieldVal}>Full vendor mapping, contract consolidation, renewal calendar, SLA monitoring, concentration reduction plan.</p>
-          <span style={fieldLabel}>RESULT</span>
-          <p style={valueCreated}>$2M+ annual savings via renegotiation. Concentration reduced: 1 vendor → 3. Exit plan documented for top 5 vendors — turned a diligence liability into a hold narrative.</p>
-        </div>
-      </div>
-
-      <button
-        onClick={() => setMoreExpanded(!moreExpanded)}
-        style={{ background: "transparent", border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "8px 16px", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, fontWeight: 600, cursor: "pointer", marginTop: "16px" }}>
-        {moreExpanded ? "Hide ▾" : "Show 2 more outcomes ▸"}
-      </button>
-    </Section>
-  );
-}
-
 // ─── COMPACT ABOUT BIO ───────────────────────────────────────
 
 function CompactAboutBio({ setPage }) {
@@ -483,27 +323,6 @@ function CompactAboutBio({ setPage }) {
   );
 }
 
-// ─── ENDORSEMENT QUOTE (Item 07) ────────────────────────────
-
-function EndorsementQuote() {
-  return (
-    <div className="endorsement-section">
-      <div className="endorsement-container">
-        <div className="endorsement-quote-mark">"</div>
-        <blockquote className="endorsement-text">
-          Hassan brings a rare combination of institutional-grade operational rigor and the practical urgency of someone who has actually run the platform during a crisis.
-        </blockquote>
-        <div className="endorsement-attribution">
-          <div>
-            <div className="endorser-name">Senior Director, Platform Operations</div>
-            <div className="endorser-title">Multi-Strategy Hedge Fund, ~$10B AUM</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 // ─── LEVER EXPLORER PAGE ─────────────────────────────────────
 
 export default function LeverExplorer({ setPage }) {
@@ -521,13 +340,8 @@ export default function LeverExplorer({ setPage }) {
         <small>McKinsey Global Private Markets Review 2026</small>
       </div>
       <CostOfInaction />
-      <WhyNotBig4 />
-      <WhySoloPractitioner />
       <CompactAboutBio setPage={setPage} />
       <OfferCards setPage={setPage} />
-      <TestimonialBlock />
-      <EndorsementQuote />
-      <FAQBlock />
     </div>
   );
 }
