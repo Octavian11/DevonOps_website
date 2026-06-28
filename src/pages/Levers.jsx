@@ -368,7 +368,7 @@ function OfferTeaser({ setPage }) {
       </p>
       <div style={{ display: "flex", flexDirection: "column", gap: "8px", maxWidth: "680px", marginBottom: "24px" }}>
         {offers.map((o, i) => (
-          <div key={i} style={{ display: "grid", gridTemplateColumns: "148px 1fr auto", alignItems: "center", gap: "12px", padding: "10px 14px", borderLeft: `3px solid ${o.accent}`, background: `${o.accent}06`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0` }}>
+          <div key={i} style={{ display: "grid", gridTemplateColumns: "140px 1fr 175px", alignItems: "center", gap: "12px", padding: "10px 14px", borderLeft: `3px solid ${o.accent}`, background: `${o.accent}06`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0` }}>
             <span style={{ fontFamily: FONTS.body, fontSize: "0.7rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: o.accent, lineHeight: 1.3 }}>{o.label}</span>
             <span style={{ fontFamily: FONTS.body, fontWeight: 600, color: COLORS.navy, lineHeight: 1.4 }}>{o.name}</span>
             <span style={{ fontFamily: FONTS.body, fontSize: "0.88rem", color: COLORS.gold, fontWeight: 600, whiteSpace: "nowrap", textAlign: "right" }}>{o.price}</span>
