@@ -358,7 +358,7 @@ function OfferTeaser({ setPage }) {
   const offers = [
     { label: "Pre-Close", name: "Ops Diligence Snapshot", price: "from $7,500", accent: COLORS.steel },
     { label: "Recommended", name: "Diligence + 100-Day Operating Playbook Bundle", price: "$30,000–40,000", accent: COLORS.gold },
-    { label: "Post-Close · Hands-On", name: "Embedded Operating Sprint", price: "$15,000–30,000", accent: COLORS.gold },
+    { label: "Post-Close", name: "Embedded Operating Sprint", price: "$15,000–30,000", accent: COLORS.gold },
     { label: "Ongoing Hold", name: "Post-Close Control Tower", price: "$7,500–10,000+/mo", accent: COLORS.navy },
   ];
   return (
@@ -366,12 +366,12 @@ function OfferTeaser({ setPage }) {
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "20px" }}>
         Four engagement structures — from a focused pre-close diagnostic to an ongoing post-close retainer.
       </p>
-      <div style={{ display: "flex", flexDirection: "column", gap: "10px", maxWidth: "680px", marginBottom: "24px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "8px", maxWidth: "680px", marginBottom: "24px" }}>
         {offers.map((o, i) => (
-          <div key={i} style={{ display: "flex", alignItems: "baseline", gap: "12px", padding: "10px 14px", borderLeft: `3px solid ${o.accent}`, background: `${o.accent}06`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0` }}>
-            <span style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: o.accent, whiteSpace: "nowrap", minWidth: "100px" }}>{o.label}</span>
-            <span style={{ fontFamily: FONTS.body, fontWeight: 600, color: COLORS.navy, flex: 1 }}>{o.name}</span>
-            <span style={{ fontFamily: FONTS.body, fontSize: "0.88rem", color: COLORS.gold, fontWeight: 600, whiteSpace: "nowrap" }}>{o.price}</span>
+          <div key={i} style={{ display: "grid", gridTemplateColumns: "148px 1fr auto", alignItems: "center", gap: "12px", padding: "10px 14px", borderLeft: `3px solid ${o.accent}`, background: `${o.accent}06`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0` }}>
+            <span style={{ fontFamily: FONTS.body, fontSize: "0.7rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: o.accent, lineHeight: 1.3 }}>{o.label}</span>
+            <span style={{ fontFamily: FONTS.body, fontWeight: 600, color: COLORS.navy, lineHeight: 1.4 }}>{o.name}</span>
+            <span style={{ fontFamily: FONTS.body, fontSize: "0.88rem", color: COLORS.gold, fontWeight: 600, whiteSpace: "nowrap", textAlign: "right" }}>{o.price}</span>
           </div>
         ))}
       </div>
@@ -380,7 +380,7 @@ function OfferTeaser({ setPage }) {
           style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", height: "44px", padding: "0 22px", background: COLORS.gold, color: "#fff", fontFamily: "'Arial', sans-serif", fontSize: "0.95rem", fontWeight: 600, borderRadius: RADIUS.md, textDecoration: "none", whiteSpace: "nowrap" }}>
           Book a Fit Check (15 min)
         </a>
-        <button onClick={() => setPage("services")}
+        <button onClick={() => { setPage("services"); setTimeout(() => document.getElementById("offers")?.scrollIntoView({ behavior: "smooth" }), 120); }}
           style={{ background: "none", border: "none", padding: 0, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, color: COLORS.navy, cursor: "pointer", textDecoration: "underline", textUnderlineOffset: "3px" }}>
           View full engagement details →
         </button>
@@ -397,7 +397,6 @@ export default function LeverExplorer({ setPage }) {
     <div className="fade-in">
       <HeroBlockWithNav setPage={setPage} />
       <HeroCredStrip />
-      <MicroProofStrip />
       <BuyerSegmentCards setPage={setPage} />
       <LeversTeaserSection setPage={setPage} />
       <div className="mckinsey-quote">
