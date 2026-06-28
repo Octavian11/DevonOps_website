@@ -8,37 +8,6 @@ import {
   SeverityBadge, TimingBadge, DomainTag,
 } from "../components.jsx";
 
-// ─── JUMP BAR ────────────────────────────────────────────────
-
-function ServicesMethodJumpBar() {
-  const linkStyle = {
-    fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 700,
-    color: COLORS.navy, textDecoration: "none",
-    padding: "8px 14px", borderRadius: RADIUS.md,
-    border: `1px solid ${COLORS.steel}`, background: COLORS.white,
-    transition: "all 0.15s",
-  };
-
-  const links = [
-    { href: "#method", label: "Method" },
-    { href: "#lever-explorer", label: "Levers" },
-    { href: "#red-flags", label: "Red Flags" },
-    { href: "#faq", label: "FAQ" },
-  ];
-
-  return (
-    <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: SPACING.md }}>
-      {links.map(({ href, label }) => (
-        <a key={href} href={href} style={linkStyle}
-          onMouseEnter={e => { e.currentTarget.style.background = COLORS.navy; e.currentTarget.style.color = COLORS.white; e.currentTarget.style.borderColor = COLORS.navy; }}
-          onMouseLeave={e => { e.currentTarget.style.background = COLORS.white; e.currentTarget.style.color = COLORS.navy; e.currentTarget.style.borderColor = COLORS.steel; }}>
-          {label}
-        </a>
-      ))}
-    </div>
-  );
-}
-
 // ─── METHOD: FEDRSSQE SPINE (compact, expand-on-click) ───────
 
 const METHOD_STEPS = [
@@ -69,9 +38,10 @@ const METHOD_PRINCIPLES = [
 function MethodSpine() {
   const [open, setOpen] = useState(null);
   return (
-    <Section title="How I Work a Deal" noCTA variant="tinted" id="method">
-      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "960px", marginBottom: "24px" }}>
-        Every engagement runs the same eight-step method — from the sponsor's decision down to a measurable 100-day plan. Tap any step.
+    <Section noCTA variant="tinted" id="method">
+      <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 400, color: COLORS.navy, marginBottom: SPACING.sm }}>Framework</h1>
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "960px", marginBottom: "20px" }}>
+        Operational diligence and post-close execution for PE funds and portfolio companies — fixed-fee, board-ready, measurable from Day 1. Every engagement runs the same eight-step method, from the sponsor's decision down to a measurable 100-day plan. Tap any step.
       </p>
       <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
         {METHOD_STEPS.map((s) => {
@@ -101,6 +71,10 @@ function MethodSpine() {
             <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.55, margin: 0 }}>{d}</p>
           </div>
         ))}
+      </div>
+      <div style={{ marginTop: "28px", paddingTop: "20px", borderTop: `1px solid ${COLORS.border}` }}>
+        <div style={{ fontFamily: FONTS.body, fontSize: "0.82rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "4px" }}>What it produces</div>
+        <ServicesSamplesRow />
       </div>
     </Section>
   );
@@ -387,13 +361,7 @@ function LeverExplorerSection({ setPage }) {
 export default function ServicesPage({ setPage }) {
   return (
     <div>
-      <Section noCTA>
-        <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 400, color: COLORS.navy, marginBottom: SPACING.sm }}>Framework</h1>
-        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "14px" }}>
-          Operational diligence and post-close execution for PE funds and portfolio companies — fixed-fee, board-ready, measurable from Day 1.
-        </p>
-        <ServicesSamplesRow />
-      </Section>
+      <MethodSpine />
 
       <div className="mckinsey-quote">
         <p>
@@ -401,10 +369,6 @@ export default function ServicesPage({ setPage }) {
         </p>
         <small>McKinsey Global Private Markets Review 2026</small>
       </div>
-
-      <ServicesMethodJumpBar />
-
-      <MethodSpine />
 
       <OfferCards />
 
