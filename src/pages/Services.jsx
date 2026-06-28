@@ -401,9 +401,10 @@ export default function ServicesPage({ setPage }) {
         <ServicesSamplesRow />
       </Section>
       <ServicesMethodJumpBar />
-      <OfferCards />
 
       <MethodSpine />
+
+      <OfferCards />
 
       <LeverExplorerSection setPage={setPage} />
 
