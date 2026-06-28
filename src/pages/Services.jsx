@@ -370,7 +370,7 @@ export default function ServicesPage({ setPage }) {
         <small>McKinsey Global Private Markets Review 2026</small>
       </div>
 
-      <OfferCards />
+      <div id="offers"><OfferCards /></div>
 
       <LeverExplorerSection setPage={setPage} />
 

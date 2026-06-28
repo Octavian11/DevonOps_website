@@ -5,7 +5,7 @@ import {
 } from "../constants.js";
 import {
   DomainTag, SectionTitle, Section,
-  LeadMagnetLink, OfferCards,
+  LeadMagnetLink,
 } from "../components.jsx";
 
 // ─── HERO BLOCK WITH NAV ─────────────────────────────────────
@@ -45,6 +45,37 @@ function HeroBlockWithNav({ setPage }) {
           </button>
         </div>
       </div>
+    </div>
+  );
+}
+
+// ─── HERO CREDIBILITY STRIP ──────────────────────────────────
+
+function HeroCredStrip() {
+  const metrics = [
+    { value: "~67%", label: "incident reduction" },
+    { value: "$2M+", label: "annual savings" },
+    { value: "94→99%", label: "uptime" },
+  ];
+  return (
+    <div style={{ background: COLORS.white, borderBottom: `1px solid ${COLORS.border}`, padding: "12px 32px", width: "100vw", marginLeft: "calc(-50vw + 50%)", display: "flex", gap: "24px", flexWrap: "wrap", justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap", justifyContent: "center" }}>
+        <span style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, color: COLORS.steel, textTransform: "uppercase", letterSpacing: "0.06em", whiteSpace: "nowrap" }}>Background</span>
+        {["JPMorgan", "Barclays", "Lazard", "Bank of America", "Columbia EMBA"].map((name, i) => (
+          <span key={i} style={{ fontFamily: FONTS.body, fontSize: "0.78rem", fontWeight: 600, color: COLORS.charcoal, opacity: 0.65, whiteSpace: "nowrap" }}>{name}</span>
+        ))}
+      </div>
+      <div style={{ width: "1px", height: "28px", background: COLORS.border, flexShrink: 0 }} />
+      <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", justifyContent: "center" }}>
+        {metrics.map((m, i) => (
+          <div key={i} style={{ display: "flex", alignItems: "baseline", gap: "5px" }}>
+            <span style={{ fontFamily: FONTS.body, fontWeight: 700, fontSize: "0.95rem", color: COLORS.gold }}>{m.value}</span>
+            <span style={{ fontFamily: FONTS.body, fontSize: "0.75rem", color: COLORS.steel }}>{m.label}</span>
+          </div>
+        ))}
+      </div>
+      <div style={{ width: "1px", height: "28px", background: COLORS.border, flexShrink: 0 }} />
+      <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.steel }}>Pressure-tested in a <strong style={{ color: COLORS.charcoal }}>$10B+ platform</strong></span>
     </div>
   );
 }
@@ -154,7 +185,7 @@ function BuyerSegmentCards({ setPage }) {
   return (
     <Section title="Who This Is Built For" noCTA type="windowWithCards">
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "20px" }}>
-        Three buyer types, three distinct problems. Each gets a tailored diligence depth and post-close playbook.
+        Three buyer types, three distinct risk profiles — each gets a tailored diligence depth and post-close playbook.
       </p>
       <div className="buyer-cards-wrapper" style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap" }}>
         {segments.map((seg, i) => (
@@ -244,7 +275,7 @@ function CostOfInaction() {
   return (
     <Section title="The Cost of Not Acting" noCTA variant="tinted">
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "32px" }}>
-        Operational gaps don't stay static under PE ownership. Leverage amplifies friction. These issues typically surface in the first 60–90 days post-close — not during diligence.
+        Operational gaps don't stay static under PE ownership — leverage amplifies friction, and these issues typically surface in the first 60–90 days post-close, not during diligence.
       </p>
       <div className="cost-cards-grid" style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap" }}>
         {scenarios.map((s, i) => (
@@ -298,11 +329,9 @@ function CompactAboutBio({ setPage }) {
           </div>
           <div className="credential-logos">
             <span className="credential-label">Institutional background</span>
-            <img src="/images/logo-jpmorgan.svg" alt="JPMorgan" height="18" loading="lazy" />
-            <img src="/images/logo-barclays.svg" alt="Barclays" height="18" loading="lazy" />
-            <img src="/images/logo-bofa.svg" alt="Bank of America" height="18" loading="lazy" />
-            <img src="/images/logo-lazard.svg" alt="Lazard" height="18" loading="lazy" />
-            <img src="/images/logo-columbia.svg" alt="Columbia Business School" height="18" loading="lazy" />
+            {["JPMorgan", "Barclays", "Lazard", "Bank of America", "Columbia EMBA"].map((name, i) => (
+              <span key={i} style={{ fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 600, color: COLORS.charcoal, opacity: 0.65 }}>{name}</span>
+            ))}
           </div>
           <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", marginBottom: "16px" }}>
             {metrics.map((m, i) => (
@@ -323,6 +352,43 @@ function CompactAboutBio({ setPage }) {
   );
 }
 
+// ─── OFFER TEASER ────────────────────────────────────────────
+
+function OfferTeaser({ setPage }) {
+  const offers = [
+    { label: "Pre-Close", name: "Ops Diligence Snapshot", price: "from $7,500", highlight: false },
+    { label: "Recommended", name: "Diligence + 100-Day Operating Playbook Bundle", price: "$30,000–40,000", highlight: true },
+    { label: "Post-Close", name: "Embedded Operating Sprint", price: "$15,000–30,000", highlight: false },
+    { label: "Ongoing Hold", name: "Post-Close Control Tower", price: "$7,500–10,000+/mo", highlight: false },
+  ];
+  return (
+    <Section title="Engagement Options" noCTA>
+      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "20px" }}>
+        Four engagement structures — from a focused pre-close diagnostic to an ongoing post-close retainer.
+      </p>
+      <div style={{ display: "flex", flexDirection: "column", gap: "8px", maxWidth: "680px", marginBottom: "24px" }}>
+        {offers.map((o, i) => (
+          <div key={i} style={{ display: "grid", gridTemplateColumns: "140px 1fr 175px", alignItems: "center", gap: "12px", padding: "10px 14px", borderLeft: `3px solid ${o.highlight ? COLORS.gold : COLORS.navy}`, background: `${COLORS.navy}06`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0` }}>
+            <span style={{ fontFamily: FONTS.body, fontSize: "0.7rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: o.highlight ? COLORS.gold : COLORS.navy, lineHeight: 1.3 }}>{o.label}</span>
+            <span style={{ fontFamily: FONTS.body, fontWeight: 600, color: COLORS.navy, lineHeight: 1.4 }}>{o.name}</span>
+            <span style={{ fontFamily: FONTS.body, fontSize: "0.88rem", color: COLORS.navy, fontWeight: 600, whiteSpace: "nowrap" }}>{o.price}</span>
+          </div>
+        ))}
+      </div>
+      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", alignItems: "center" }}>
+        <a href={CALENDLY} target="_blank" rel="noopener noreferrer"
+          style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", height: "44px", padding: "0 22px", background: COLORS.gold, color: "#fff", fontFamily: "'Arial', sans-serif", fontSize: "0.95rem", fontWeight: 600, borderRadius: RADIUS.md, textDecoration: "none", whiteSpace: "nowrap" }}>
+          Book a Fit Check (15 min)
+        </a>
+        <button onClick={() => { setPage("services"); setTimeout(() => document.getElementById("offers")?.scrollIntoView({ behavior: "smooth" }), 120); }}
+          style={{ background: "none", border: "none", padding: 0, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, color: COLORS.navy, cursor: "pointer", textDecoration: "underline", textUnderlineOffset: "3px" }}>
+          View full engagement details →
+        </button>
+      </div>
+    </Section>
+  );
+}
+
 // ─── LEVER EXPLORER PAGE ─────────────────────────────────────
 
 export default function LeverExplorer({ setPage }) {
@@ -330,7 +396,7 @@ export default function LeverExplorer({ setPage }) {
   return (
     <div className="fade-in">
       <HeroBlockWithNav setPage={setPage} />
-      <MicroProofStrip />
+      <HeroCredStrip />
       <BuyerSegmentCards setPage={setPage} />
       <LeversTeaserSection setPage={setPage} />
       <div className="mckinsey-quote">
@@ -341,7 +407,7 @@ export default function LeverExplorer({ setPage }) {
       </div>
       <CostOfInaction />
       <CompactAboutBio setPage={setPage} />
-      <OfferCards setPage={setPage} />
+      <OfferTeaser setPage={setPage} />
     </div>
   );
 }
