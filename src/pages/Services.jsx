@@ -390,16 +390,18 @@ export default function ServicesPage({ setPage }) {
       <Section noCTA>
         <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 400, color: COLORS.navy, marginBottom: SPACING.sm }}>Framework</h1>
         <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "14px" }}>
-          Operational support for PE funds and portfolio companies — from pre-close diligence through post-close stabilization to ongoing governance. Fixed fees, board-ready deliverables, measurable from Day 1.
+          Operational diligence and post-close execution for PE funds and portfolio companies — fixed-fee, board-ready, measurable from Day 1.
         </p>
-        <div className="mckinsey-quote" style={{ maxWidth: "960px" }}>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, margin: 0, lineHeight: 1.6 }}>
-            <strong>53% of LPs now rank a GP's value creation strategy as a top-five criterion in manager selection</strong> — up to #3, above sector expertise. Operational execution is no longer a back-office function. It's a fund-level differentiator.
-          </p>
-          <span style={{ fontFamily: FONTS.body, fontSize: "0.78rem", color: COLORS.bodyMuted, letterSpacing: "0.4px", textTransform: "uppercase", display: "block", marginTop: "6px" }}>McKinsey Global Private Markets Review 2026</span>
-        </div>
         <ServicesSamplesRow />
       </Section>
+
+      <div className="mckinsey-quote">
+        <p>
+          <strong>53% of LPs now rank a GP's value creation strategy as a top-five criterion in manager selection</strong> — above sector expertise. Operational execution is now a fund-level differentiator.
+        </p>
+        <small>McKinsey Global Private Markets Review 2026</small>
+      </div>
+
       <ServicesMethodJumpBar />
 
       <MethodSpine />
