@@ -94,7 +94,7 @@ export default function ResourcesPage({ setPage }) {
           />
           <SampleDeliverableCard
             label="Post-Close Deliverable"
-            title="100-Day Stabilization Plan"
+            title="100-Day Operating Playbook"
             description="The structured execution plan that installs incident governance, change control, vendor oversight, KPI cadence, and board-ready reporting from Day 1."
             pdfUrl={SAMPLE_100DAY_PDF}
           />
