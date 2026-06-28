@@ -91,7 +91,7 @@ function ScorerEmailCapture({ rating, score, context, buyerType }) {
             Sample Ops Diligence Scorecard — IC-ready, severity-rated (PDF)
           </a>
           <a href={SAMPLE_100DAY_PDF} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, color: COLORS.navy, textDecoration: "none", borderBottom: `1px solid ${COLORS.navy}` }}>
-            Sample 100-Day Stabilization Plan — Visibility → Control → Cadence (PDF)
+            100-Day Operating Playbook — Visibility → Control → Cadence (PDF)
           </a>
         </div>
       </Card>
@@ -417,7 +417,7 @@ export default function ScorerPage() {
                   })}
                 </div>
                 <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginTop: "24px", marginBottom: 0, paddingTop: "20px", borderTop: `1px solid ${COLORS.border}` }}>
-                  Each of these is a defined deliverable — not a slide recommendation. The <strong>100-Day Stabilization Plan</strong> covers all of them, sequenced, tracked, and board-ready from Day 1.
+                  Each of these is a defined deliverable — not a slide recommendation. The <strong>100-Day Operating Playbook</strong> covers all of them, sequenced, tracked, and board-ready from Day 1.
                 </p>
               </div>
             )}

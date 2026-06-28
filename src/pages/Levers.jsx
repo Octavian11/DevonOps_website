@@ -61,7 +61,7 @@ function HeroCredStrip() {
     <div style={{ background: COLORS.white, borderBottom: `1px solid ${COLORS.border}`, padding: "12px 32px", width: "100vw", marginLeft: "calc(-50vw + 50%)", display: "flex", gap: "24px", flexWrap: "wrap", justifyContent: "center", alignItems: "center" }}>
       <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap", justifyContent: "center" }}>
         <span style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, color: COLORS.steel, textTransform: "uppercase", letterSpacing: "0.06em", whiteSpace: "nowrap" }}>Background</span>
-        {["JPMorgan", "Barclays", "Lazard", "Bank of America", "Columbia EMBA"].map((name, i) => (
+        {["JPMorgan", "Barclays", "Lazard", "Bank of America", "Columbia MBA"].map((name, i) => (
           <span key={i} style={{ fontFamily: FONTS.body, fontSize: "0.78rem", fontWeight: 600, color: COLORS.charcoal, opacity: 0.65, whiteSpace: "nowrap" }}>{name}</span>
         ))}
       </div>
@@ -242,7 +242,7 @@ function LeversTeaserSection({ setPage }) {
         {LEVERS.length} operational friction points across 6 domains.
       </p>
       <p style={{ fontFamily: FONTS.body, marginTop: "10px", maxWidth: "960px" }}>
-        <a href="#" onClick={(e) => { e.preventDefault(); setPage("services"); }} style={{ color: COLORS.gold, textDecoration: "underline", fontWeight: 600 }}>
+        <a href="#" onClick={(e) => { e.preventDefault(); setPage("services"); setTimeout(() => document.getElementById("levers")?.scrollIntoView({ behavior: "smooth" }), 120); }} style={{ color: COLORS.gold, textDecoration: "underline", fontWeight: 600 }}>
           See which ones are hiding in your deal →
         </a>
       </p>
@@ -329,7 +329,7 @@ function CompactAboutBio({ setPage }) {
           </div>
           <div className="credential-logos">
             <span className="credential-label">Institutional background</span>
-            {["JPMorgan", "Barclays", "Lazard", "Bank of America", "Columbia EMBA"].map((name, i) => (
+            {["JPMorgan", "Barclays", "Lazard", "Bank of America", "Columbia MBA"].map((name, i) => (
               <span key={i} style={{ fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 600, color: COLORS.charcoal, opacity: 0.65 }}>{name}</span>
             ))}
           </div>

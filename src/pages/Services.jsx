@@ -147,7 +147,7 @@ function MemoSampleScreenshots() {
     { src: "/memo-samples/ops-dd-exec-summary.png", alt: "Ops Diligence Scorecard executive summary excerpt", caption: "Ops Diligence Scorecard — Executive Summary (overall rating + deal implications)" },
     { src: "/memo-samples/domain-scores-1.png", alt: "Operational risk summary table excerpt (top)", caption: "Operational Risk Summary — domain ratings (excerpt 1 of 2)" },
     { src: "/memo-samples/domain-scores-2.png", alt: "Operational risk summary table excerpt (bottom)", caption: "Operational Risk Summary — domain ratings (excerpt 2 of 2)" },
-    { src: "/memo-samples/100-day-phases.png", alt: "100-Day Stabilization Plan phase overview excerpt", caption: "100-Day Stabilization Plan — phase overview (Visibility → Control → Cadence)" },
+    { src: "/memo-samples/100-day-phases.png", alt: "100-Day Operating Playbook phase overview excerpt", caption: "100-Day Operating Playbook — phase overview (Visibility → Control → Cadence)" },
   ];
 
   return (
@@ -372,7 +372,7 @@ export default function ServicesPage({ setPage }) {
 
       <div id="offers"><OfferCards /></div>
 
-      <LeverExplorerSection setPage={setPage} />
+      <div id="levers"><LeverExplorerSection setPage={setPage} /></div>
 
       <div id="red-flags"><TypicalRedFlags /></div>
       <div id="memo-samples"><MemoSampleScreenshots /></div>

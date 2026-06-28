@@ -348,7 +348,7 @@ export function FAQBlock({ variant }) {
     { q: "What do you need from us?", a: "A lightweight artifact pull (incident/change history, vendor list/contracts, KPIs, org/RACI, audit evidence folders) plus targeted stakeholder access." },
     { q: "How do you handle confidentiality?", a: "NDA-friendly by default. Minimal data handling; formats can be anonymized." },
     { q: "When are you not a fit?", a: "If the company already has mature incident/change governance, a live KPI cadence, and low volatility, you likely don't need stabilization—only optimization." },
-    { q: "What is a Value Creation Plan (VCP) and what does it include?", a: "A VCP is the named operational deliverable from the diligence phase — not a slide deck. It defines which gaps to fix, in what sequence, with what accountability structure, and what measurable outcomes to expect in 100 days. It's the document that converts diligence findings into operating results. The VCP is what prevents the post-close \"now what?\" problem." },
+    { q: "What does the 100-Day Operating Playbook include?", a: "The 100-Day Operating Playbook is the operational deliverable from the diligence phase — not a slide deck. It defines which gaps to fix, in what sequence, with what accountability structure, and what measurable outcomes to expect in 100 days. It's the document that converts diligence findings into operating results and prevents the post-close \"now what?\" problem." },
     { q: "What industries do you cover?", a: "The 20 levers apply to any operationally complex business. Whether the portfolio company is a fintech platform or a regional services company, the same governance gaps—incident management, vendor concentration, key-person risk, and KPI cadence—drive the same value erosion." },
     { q: "How long does a pre-close diligence engagement take?", a: "2–3 weeks from data receipt to findings memo, assuming standard artifact availability (incident history, change logs, vendor contracts, org chart, compliance evidence). Expedited timelines are possible for deals in exclusivity — discuss during the fit check." },
     { q: "What if we're still in LOI or haven't entered exclusivity yet?", a: "Earlier is better. A light-touch ops review before exclusivity can shape the diligence scope and, in some cases, inform the structure of the deal itself. Even limited access produces useful signals — incident volume patterns and change frequency are often visible without full document access." },
@@ -536,7 +536,7 @@ export function ServicesSamplesRow() {
         Sample Ops Diligence Scorecard (PDF)
       </LeadMagnetLink>
       <LeadMagnetLink pdfUrl={SAMPLE_100DAY_PDF} variant="inline-button">
-        Sample 100-Day Stabilization Plan (PDF)
+        100-Day Operating Playbook (PDF)
       </LeadMagnetLink>
     </div>
   );
@@ -1141,7 +1141,7 @@ export function Footer({ setPage }) {
               Ops Diligence Scorecard (PDF)
             </LeadMagnetLink>
             <LeadMagnetLink pdfUrl={SAMPLE_100DAY_PDF} variant="footer-link">
-              100-Day Stabilization Plan (PDF)
+              100-Day Operating Playbook (PDF)
             </LeadMagnetLink>
           </div>
         </div>
