@@ -53,7 +53,7 @@ function HeroBlockWithNav({ setPage }) {
 
 function HeroCredStrip() {
   const metrics = [
-    { value: "~67%", label: "incident reduction" },
+    { value: "~50%", label: "incident reduction" },
     { value: "$2M+", label: "annual savings" },
     { value: "94→99%", label: "uptime" },
   ];
@@ -84,7 +84,7 @@ function HeroCredStrip() {
 
 function ProofMetricsStrip() {
   const metrics = [
-    { value: "~67%", label: "incident reduction" },
+    { value: "~50%", label: "incident reduction" },
     { value: "$2M+", label: "annual savings" },
     { value: "94→99%", label: "uptime" },
   ];
@@ -307,7 +307,7 @@ function CostOfInaction() {
 
 function CompactAboutBio({ setPage }) {
   const metrics = [
-    { value: "~67%", label: "incident reduction" },
+    { value: "~50%", label: "incident reduction" },
     { value: "$2M+", label: "annual savings" },
     { value: "94→99%", label: "uptime" },
   ];
@@ -325,7 +325,7 @@ function CompactAboutBio({ setPage }) {
         <div style={{ flex: "1 1 280px" }}>
           <div style={{ fontFamily: FONTS.heading, fontSize: "1.2rem", fontWeight: 700, color: COLORS.navy, marginBottom: "4px" }}>Hassan Tariq</div>
           <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", color: COLORS.steel, lineHeight: 1.5, marginBottom: "14px" }}>
-            15+ years platform ops · JPMorgan · Barclays · Bank of America · Lazard<br />Columbia Executive MBA '26
+            15+ years platform ops · JPMorgan · Barclays · Bank of America · Lazard<br />Columbia MBA '26
           </div>
           <div className="credential-logos">
             <span className="credential-label">Institutional background</span>

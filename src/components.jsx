@@ -643,7 +643,7 @@ export function OfferCards({ setPage }) {
             Best for funds that need the diagnostic before they commit.
           </p>
           <div style={{ marginTop: "16px" }}>
-            <button className="card-text-link" onClick={() => window.location.href = '#scorer'}>Score Your Deal →</button>
+            <button className="card-text-link" onClick={() => setPage ? setPage("scorer") : window.location.assign("/pe/scorer")}>Score Your Deal →</button>
           </div>
         </div>
 
@@ -727,7 +727,7 @@ export function TestimonialBlock() {
       {/* Proof Metrics Strip */}
       <div className="proof-metrics-strip" style={{ marginBottom: "32px" }}>
         {[
-          { value: "~67%", label: "incident reduction" },
+          { value: "~50%", label: "incident reduction" },
           { value: "$2M+", label: "annual savings" },
           { value: "94→99%", label: "uptime improvement" },
         ].map((m, i) => (
@@ -763,7 +763,7 @@ export function TestimonialBlock() {
           <div className="case-intervention">
             <div className="case-section-heading intervention">What I Installed</div>
             <ul>
-              <li>10-person global ops team (NY, London, Hong Kong)</li>
+              <li>8-person global ops team (NY, London, Hong Kong)</li>
               <li>Incident command: severity model, escalation paths, postmortem discipline</li>
               <li>KPI cadence: 18 metrics, weekly review, quarterly stakeholder reviews</li>
               <li>Change governance: CAB-lite process, runbooks, rollback discipline</li>
@@ -816,7 +816,7 @@ export function TestimonialBlock() {
                 </div>
                 <div className="outcome-step">
                   <div className="outcome-step-label result">Result</div>
-                  <p>~67% incident reduction. ~31% faster resolution. Board reporting shifted from crisis-driven to weekly structured reviews.</p>
+                  <p>~50% incident reduction. ~31% faster resolution. Board reporting shifted from crisis-driven to weekly structured reviews.</p>
                 </div>
               </div>
               <div className="outcome-card">
@@ -831,7 +831,7 @@ export function TestimonialBlock() {
                 </div>
                 <div className="outcome-step">
                   <div className="outcome-step-label result">Result</div>
-                  <p>~60% fewer critical outages. Uptime: 94% → 99%. Change-incident correlation visible to the board within 30 days.</p>
+                  <p>Critical outages fell to zero over the following 18 months. Uptime: 94% → 99%. Change-incident correlation visible to the board within 30 days.</p>
                 </div>
               </div>
               <div className="outcome-card">
@@ -863,7 +863,7 @@ export function TestimonialBlock() {
             </div>
             <div>
               <div className="case-label">Vendor Optimization &amp; Cost Control</div>
-              <div className="case-context">Global asset manager · ~$40M vendor program</div>
+              <div className="case-context">Global asset manager · $40M program · $240M annual spend base</div>
             </div>
           </div>
           <span className="case-domain-tag vendor-tag">Vendor Governance</span>
@@ -946,8 +946,8 @@ export function TestimonialBlock() {
 export function Nav({ page, setPage }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const items = [
-    { key: "levers", label: "Operational Gaps" },
-    { key: "services", label: "Services" },
+    { key: "levers", label: "Home" },
+    { key: "services", label: "Services & Pricing" },
     { key: "scorer", label: "Score Your Deal" },
     { key: "about", label: "About" },
     { key: "resources", label: "Resources" },
@@ -1106,7 +1106,7 @@ export function Footer({ setPage }) {
                 Book a Fit Check
               </a>
               <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.offWhite }}>
-                Q2 availability is limited. Book early.
+                Currently accepting 1–2 new engagements.
               </span>
             </div>
           </div>
@@ -1117,8 +1117,8 @@ export function Footer({ setPage }) {
           <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.gold, marginBottom: "16px", letterSpacing: "0.5px" }}>Navigation</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
             {[
-              { key: "levers", label: "Operational Gaps" },
-              { key: "services", label: "Services" },
+              { key: "levers", label: "Home" },
+              { key: "services", label: "Services & Pricing" },
               { key: "scorer", label: "Score Your Deal" },
               { key: "about", label: "About" },
               { key: "resources", label: "Resources" },

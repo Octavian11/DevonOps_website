@@ -82,7 +82,7 @@ function ScorerEmailCapture({ rating, score, context, buyerType }) {
   if (status === "success") {
     return (
       <Card style={{ borderLeft: `4px solid ${COLORS.stable}`, marginBottom: "24px" }}>
-        <p style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.stable, margin: "0 0 6px 0" }}>Report sent.</p>
+        <p style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.stable, margin: "0 0 6px 0" }}>Done — sample downloading.</p>
         <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, margin: 0, lineHeight: 1.6 }}>
           Your sample scorecard is downloading. Hassan will follow up with context specific to your situation.
         </p>
@@ -101,10 +101,10 @@ function ScorerEmailCapture({ rating, score, context, buyerType }) {
   return (
     <Card style={{ borderLeft: `4px solid ${COLORS.gold}`, marginBottom: "24px" }}>
       <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.navy, margin: "0 0 6px 0" }}>
-        Download Your Ops Assessment Report
+        See What the Full Deliverable Looks Like
       </h3>
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, margin: "0 0 6px 0" }}>
-        Get a formatted PDF of your assessment with prioritized recommendations. See what your IC-ready deliverable looks like.
+        Download the sample IC-ready scorecard now — and I'll follow up personally with my read on your assessment.
       </p>
       <div style={{ marginBottom: "14px", display: "flex", gap: "12px", flexWrap: "wrap" }}>
         <a href={SAMPLE_SCORECARD_PDF} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.bodyMuted, textDecoration: "none", borderBottom: `1px solid ${COLORS.border}` }}>
@@ -139,7 +139,7 @@ function ScorerEmailCapture({ rating, score, context, buyerType }) {
           type="submit"
           disabled={status === "loading"}
           style={{ padding: "14px 28px", background: status === "loading" ? COLORS.bodyMuted : COLORS.gold, color: "white", border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, cursor: status === "loading" ? "default" : "pointer", textAlign: "left", transition: "background 0.2s" }}>
-          {status === "loading" ? "Sending…" : "Send My Report →"}
+          {status === "loading" ? "Sending…" : "Get the Sample (PDF) →"}
         </button>
         <p style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.bodyMuted, margin: 0 }}>
           No spam. Your email is used only to follow up on this assessment.
@@ -149,7 +149,7 @@ function ScorerEmailCapture({ rating, score, context, buyerType }) {
   );
 }
 
-export default function ScorerPage() {
+export default function ScorerPage({ setPage }) {
   const [buyerType, setBuyerType] = useState("");
   const [context, setContext] = useState(CONTEXT_OPTIONS[0].key);
   const [scores, setScores] = useState({ incident: 3, change: 3, vendor: 3, audit: 3, kpi: 3, process: 3 });
@@ -434,7 +434,7 @@ export default function ScorerPage() {
             <ButtonPair
               primaryText="Book a Fit Check (15 min)"
               secondaryText="View Services"
-              secondaryAction={() => window.location.hash = "#/services"}
+              secondaryAction={() => setPage ? setPage("services") : window.location.assign("/pe/services")}
               centered={true}
               showAvailability={true}
             />

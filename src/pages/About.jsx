@@ -15,10 +15,10 @@ export default function AboutPage() {
       <Section noCTA title="Who I Am">
         <div style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7 }}>
           <p style={{ marginBottom: SPACING.sm }}>
-            I've spent 15 years inside the machine — running platform operations at JPMorgan, Barclays, BofA, Lazard, and a $10B+ platform. I've been the person at 2am on an incident bridge, the person rebuilding vendor governance under regulatory pressure, and the person who installed the KPI cadence that finally gave the board real-time visibility.
+            I've spent 15 years inside the machine — operations roles at JPMorgan, Barclays, BofA, and Lazard, then running platform operations for a $10B+ platform. I've been the person at 2am on an incident bridge, the person rebuilding vendor governance under regulatory pressure, and the person who installed the KPI cadence that finally gave the board real-time visibility.
           </p>
           <p style={{ margin: 0 }}>
-            Now I do the same thing for PE portfolio companies — faster, with a playbook that's been pressure-tested at institutional scale. I completed my Executive MBA at Columbia Business School ('26), where I sharpened a PE operator lens on the operational risks that derail value creation in the first 100 days.
+            Now I do the same thing for PE portfolio companies — faster, with a playbook that's been pressure-tested at institutional scale. I completed my MBA (Executive Program) at Columbia Business School ('26), where I sharpened a PE operator lens on the operational risks that derail value creation in the first 100 days.
           </p>
         </div>
       </Section>
@@ -90,7 +90,7 @@ export default function AboutPage() {
           </p>
           <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>What I Built</div>
           <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "20px" }}>
-            Hired and led a 10-person global operations team across New York, London, and Hong Kong in ~6 months. Reset incident management from the ground up: severity model, escalation paths, communications cadence, on-call ownership, and closed-loop postmortems. Standardized runbooks and introduced change discipline through a CAB-lite governance process. Built a KPI dashboard tracking 18 operational metrics with weekly review cadence, and established quarterly stakeholder reviews with 50+ portfolio management and trading desk stakeholders.
+            Hired and led an 8-person global operations team across New York, London, and Hong Kong in ~6 months. Reset incident management from the ground up: severity model, escalation paths, communications cadence, on-call ownership, and closed-loop postmortems. Standardized runbooks and introduced change discipline through a CAB-lite governance process. Built a KPI dashboard tracking 18 operational metrics with weekly review cadence, and established quarterly stakeholder reviews with 50+ portfolio management and trading desk stakeholders.
           </p>
           <div className="case-metrics" style={{ borderRadius: `0 0 ${RADIUS.md} ${RADIUS.md}`, marginBottom: "16px" }}>
             {[
@@ -126,14 +126,14 @@ export default function AboutPage() {
         {outcomeExpanded && (
           <div style={{ border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm }}>
             <div style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "8px" }}>
-              Vendor Optimization · Global asset manager, ~$40M vendor program
+              Vendor Optimization · Global asset manager · $40M program · $240M annual spend base
             </div>
             <div style={{ fontFamily: FONTS.heading, fontSize: "1.15rem", fontWeight: 700, color: COLORS.navy, marginBottom: "14px" }}>
               Vendor Optimization & Cost Control
             </div>
             <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Context</div>
             <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "16px" }}>
-              A global asset manager was running a ~$40M annual technology-and-operations vendor program where spend was growing ~22% annually — materially outpacing AUM and business growth. The vendor landscape was fragmented across 15 providers, creating redundancy and weak negotiating leverage. There was no visibility into utilization or value realization, and no structured governance to prevent cost creep.
+              A global asset manager was running a ~$40M annual technology-and-operations vendor program — within a $240M annual vendor spend base — where spend was growing ~22% annually — materially outpacing AUM and business growth. The vendor landscape was fragmented across 15 providers, creating redundancy and weak negotiating leverage. There was no visibility into utilization or value realization, and no structured governance to prevent cost creep.
             </p>
             <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>What I Built</div>
             <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "20px" }}>
