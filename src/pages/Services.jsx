@@ -47,10 +47,10 @@ function MethodSpine() {
         {METHOD_STEPS.map((s, i) => (
           <span key={s.n} style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}>
             <button onClick={() => setOpen(open === s.n ? null : s.n)}
-              style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: open === s.n ? `${COLORS.gold}15` : COLORS.white, border: `1px solid ${open === s.n ? COLORS.gold : COLORS.border}`, borderRadius: "999px", padding: "6px 12px", fontFamily: FONTS.body, fontSize: "0.82rem", fontWeight: 700, color: COLORS.navy, cursor: "pointer", minHeight: "34px" }}>
+              style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: open === s.n ? `${COLORS.gold}15` : COLORS.white, border: `1px solid ${open === s.n ? COLORS.gold : COLORS.border}`, borderRadius: "999px", padding: "6px 12px", fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 700, color: COLORS.navy, cursor: "pointer", minHeight: "34px" }}>
               <span style={{ color: COLORS.gold }}>{s.n}</span> {s.name}
             </button>
-            {i < METHOD_STEPS.length - 1 && <span style={{ color: COLORS.steel, fontSize: "0.85rem" }}>→</span>}
+            {i < METHOD_STEPS.length - 1 && <span style={{ color: COLORS.steel, fontSize: "0.8rem" }}>→</span>}
           </span>
         ))}
       </div>
@@ -63,7 +63,7 @@ function MethodSpine() {
               <div style={{ padding: "14px 18px", display: "flex", alignItems: "center", gap: "14px" }}>
                 <span style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.gold, width: "18px", flexShrink: 0 }}>{s.n}</span>
                 <span style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, minWidth: "92px", flexShrink: 0 }}>{s.name}</span>
-                <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, flex: 1 }}>{s.q}</span>
+                <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, flex: 1 }}>{s.q}</span>
                 <span style={{ fontFamily: FONTS.body, fontSize: "1.1rem", color: COLORS.steel, flexShrink: 0 }}>{isOpen ? "▾" : "▸"}</span>
               </div>
               {isOpen && (
@@ -78,13 +78,13 @@ function MethodSpine() {
       <div style={{ marginTop: "24px", display: "flex", gap: "16px", flexWrap: "wrap" }}>
         {METHOD_PRINCIPLES.map(([t, d], i) => (
           <div key={i} style={{ flex: "1 1 240px", minWidth: "min(220px, 100%)", borderTop: `3px solid ${COLORS.gold}`, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.lg, padding: "18px 20px", background: COLORS.white }}>
-            <div style={{ fontFamily: FONTS.heading, fontSize: "0.95rem", fontWeight: 700, color: COLORS.navy, marginBottom: "6px" }}>{t}</div>
+            <div style={{ fontFamily: FONTS.heading, fontSize: "0.9rem", fontWeight: 700, color: COLORS.navy, marginBottom: "6px" }}>{t}</div>
             <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.55, margin: 0 }}>{d}</p>
           </div>
         ))}
       </div>
       <div style={{ marginTop: "28px", paddingTop: "20px", borderTop: `1px solid ${COLORS.border}` }}>
-        <div style={{ fontFamily: FONTS.body, fontSize: "0.82rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "4px" }}>What it produces</div>
+        <div style={{ fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "4px" }}>What it produces</div>
         <ServicesSamplesRow />
       </div>
     </Section>
@@ -199,7 +199,7 @@ function DomainLegend() {
         <span>Domain codes legend</span>
         <div style={{ display: "inline-flex", gap: "6px", marginLeft: "8px" }}>
           {Object.entries(DOMAINS).map(([k]) => (
-            <span key={k} style={{ display: "inline-block", padding: "2px 6px", borderRadius: "2px", fontSize: "0.75rem", fontFamily: FONTS.body, color: COLORS.steel, background: `${COLORS.steel}12` }}>{DOMAINS[k].short}</span>
+            <span key={k} style={{ display: "inline-block", padding: "2px 6px", borderRadius: "2px", fontSize: "0.72rem", fontFamily: FONTS.body, color: COLORS.steel, background: `${COLORS.steel}12` }}>{DOMAINS[k].short}</span>
           ))}
         </div>
       </button>
@@ -208,7 +208,7 @@ function DomainLegend() {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px 24px" }}>
             {Object.entries(DOMAINS).map(([k, v]) => (
               <div key={k} style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "0 12px", alignItems: "start" }}>
-                <span style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "3px 8px", borderRadius: "3px", fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 500, color: COLORS.steel, background: `${COLORS.steel}12`, border: `1px solid ${COLORS.steel}25`, marginTop: "3px", textAlign: "center" }}>{v.short}</span>
+                <span style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "3px 8px", borderRadius: "3px", fontSize: "0.72rem", fontFamily: FONTS.body, fontWeight: 500, color: COLORS.steel, background: `${COLORS.steel}12`, border: `1px solid ${COLORS.steel}25`, marginTop: "3px", textAlign: "center" }}>{v.short}</span>
                 <div>
                   <span style={{ display: "block", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "4px" }}>{v.name}</span>
                   <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, margin: 0, lineHeight: 1.5, maxWidth: "none" }}>{v.desc}</p>
@@ -261,17 +261,17 @@ function LeverExplorerSection({ setPage }) {
 
       {/* Severity × Timing map — click a cell to filter */}
       <div style={{ marginBottom: "24px" }}>
-        <div style={{ fontFamily: FONTS.body, fontSize: "0.78rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "8px" }}>
+        <div style={{ fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "8px" }}>
           Where the {LEVERS.length} levers concentrate — click a cell to filter
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "minmax(78px, 110px) repeat(2, minmax(0, 1fr))", gap: "6px", maxWidth: "560px" }}>
           <span />
           {["Pre-Close Red Flag", "First 100 Days"].map(t => (
-            <span key={t} style={{ fontFamily: FONTS.body, fontSize: "0.75rem", fontWeight: 700, color: COLORS.navy, textAlign: "center", alignSelf: "end", lineHeight: 1.3 }}>{t}</span>
+            <span key={t} style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, color: COLORS.navy, textAlign: "center", alignSelf: "end", lineHeight: 1.3 }}>{t}</span>
           ))}
           {["Critical", "High"].map(sev => (
             <div key={sev} style={{ display: "contents" }}>
-              <span style={{ fontFamily: FONTS.body, fontSize: "0.75rem", fontWeight: 700, color: SEVERITY_STYLE[sev].text, alignSelf: "center" }}>{sev}</span>
+              <span style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, color: SEVERITY_STYLE[sev].text, alignSelf: "center" }}>{sev}</span>
               {["Pre-Close Red Flag", "First 100 Days"].map(t => {
                 const count = LEVERS.filter(l => l.severity === sev && l.timing === t).length;
                 const isActive = severityFilter === sev && timingFilter === t;
@@ -279,8 +279,8 @@ function LeverExplorerSection({ setPage }) {
                   <button key={sev + t}
                     onClick={() => { setSeverityFilter(isActive ? "All" : sev); setTimingFilter(isActive ? "All" : t); }}
                     style={{ padding: "12px 8px", borderRadius: RADIUS.sm, border: `2px solid ${isActive ? COLORS.gold : SEVERITY_STYLE[sev].border}`, background: SEVERITY_STYLE[sev].bg, cursor: "pointer", textAlign: "center", transition: "all 0.15s" }}>
-                    <span style={{ fontFamily: FONTS.body, fontSize: "1.15rem", fontWeight: 700, color: SEVERITY_STYLE[sev].text }}>{count}</span>
-                    <span style={{ display: "block", fontFamily: FONTS.body, fontSize: "0.7rem", color: COLORS.charcoal }}>levers</span>
+                    <span style={{ fontFamily: FONTS.body, fontSize: "1.1rem", fontWeight: 700, color: SEVERITY_STYLE[sev].text }}>{count}</span>
+                    <span style={{ display: "block", fontFamily: FONTS.body, fontSize: "0.72rem", color: COLORS.charcoal }}>levers</span>
                   </button>
                 );
               })}
@@ -321,7 +321,7 @@ function LeverExplorerSection({ setPage }) {
         <div key={lever.id}>
           {showGroupHeader && (
             <div style={{ display: "flex", alignItems: "center", gap: "10px", margin: `${idx === 0 ? "0" : "24px"} 0 10px` }}>
-              <span style={{ fontFamily: FONTS.body, fontSize: "0.75rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.8px", color: domainInfo?.color || COLORS.steel, background: `${domainInfo?.color || COLORS.steel}15`, padding: "4px 10px", borderRadius: "4px" }}>
+              <span style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.8px", color: domainInfo?.color || COLORS.steel, background: `${domainInfo?.color || COLORS.steel}15`, padding: "4px 10px", borderRadius: "4px" }}>
                 {domainInfo?.name || lever.domain}
               </span>
               <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.bodyMuted }}>
@@ -350,17 +350,17 @@ function LeverExplorerSection({ setPage }) {
                 <div style={{ paddingTop: "18px" }}>
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))", gap: "0 32px", marginBottom: "10px" }}>
                     <div>
-                      <h4 style={{ fontFamily: FONTS.heading, fontSize: "0.85rem", color: COLORS.steel, marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.6px" }}>Definition</h4>
+                      <h4 style={{ fontFamily: FONTS.heading, fontSize: "0.8rem", color: COLORS.steel, marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.6px" }}>Definition</h4>
                       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.definition}</p>
-                      <h4 style={{ fontFamily: FONTS.heading, fontSize: "0.85rem", color: COLORS.steel, marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.6px" }}>Symptoms</h4>
+                      <h4 style={{ fontFamily: FONTS.heading, fontSize: "0.8rem", color: COLORS.steel, marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.6px" }}>Symptoms</h4>
                       <ul style={{ paddingLeft: "22px", marginBottom: "18px" }}>
                         {lever.symptoms.map((s, i) => <li key={i} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "6px" }}>{s}</li>)}
                       </ul>
                     </div>
                     <div>
-                      <h4 style={{ fontFamily: FONTS.heading, fontSize: "0.85rem", color: COLORS.critical, marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.6px" }}>PE Impact</h4>
+                      <h4 style={{ fontFamily: FONTS.heading, fontSize: "0.8rem", color: COLORS.critical, marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.6px" }}>PE Impact</h4>
                       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.peImpact}</p>
-                      <h4 style={{ fontFamily: FONTS.heading, fontSize: "0.85rem", color: COLORS.stable, marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.6px" }}>What Good Looks Like</h4>
+                      <h4 style={{ fontFamily: FONTS.heading, fontSize: "0.8rem", color: COLORS.stable, marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.6px" }}>What Good Looks Like</h4>
                       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.whatGood}</p>
                     </div>
                   </div>
@@ -379,10 +379,10 @@ function LeverExplorerSection({ setPage }) {
                 <strong style={{ color: COLORS.gold }}>Not sure which of these apply to your deal?</strong> Score it in 2 minutes — free, produces a prioritized assessment.
               </p>
               <div style={{ display: "flex", gap: "16px", flexShrink: 0 }}>
-                <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: "none", borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}>
+                <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif", fontSize: "0.9rem", fontWeight: 600, border: "none", borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}>
                   Book a Fit Check (15 min)
                 </a>
-                <button onClick={() => setPage("scorer")} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.gold, fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: `1.5px solid ${COLORS.gold}`, borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}>
+                <button onClick={() => setPage("scorer")} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.gold, fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif", fontSize: "0.9rem", fontWeight: 600, border: `1.5px solid ${COLORS.gold}`, borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}>
                   Score Your Deal →
                 </button>
               </div>
@@ -394,7 +394,7 @@ function LeverExplorerSection({ setPage }) {
 
       {!showAll && !hasActiveFilter && (
         <div style={{ textAlign: "center", marginTop: "24px" }}>
-          <button onClick={() => setShowAll(true)} style={{ padding: "12px 28px", background: "transparent", border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.navy, cursor: "pointer", fontWeight: 500 }}>
+          <button onClick={() => setShowAll(true)} style={{ padding: "12px 28px", background: "transparent", border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, cursor: "pointer", fontWeight: 500 }}>
             Show all {LEVERS.length} levers ↓
           </button>
         </div>

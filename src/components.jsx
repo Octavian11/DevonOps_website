@@ -13,7 +13,7 @@ import {
 export function SeverityBadge({ severity }) {
   const s = SEVERITY_STYLE[severity];
   return (
-    <span style={{ display: "inline-block", padding: "5px 12px", borderRadius: RADIUS.sm, fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 700, letterSpacing: "0.05em", textTransform: "uppercase", color: s.text, background: s.bg, border: `1px solid ${s.border}`, lineHeight: 1, minWidth: "80px", textAlign: "center" }}>
+    <span style={{ display: "inline-block", padding: "5px 12px", borderRadius: RADIUS.sm, fontSize: "0.72rem", fontFamily: FONTS.body, fontWeight: 700, letterSpacing: "0.05em", textTransform: "uppercase", color: s.text, background: s.bg, border: `1px solid ${s.border}`, lineHeight: 1, minWidth: "80px", textAlign: "center" }}>
       {severity}
     </span>
   );
@@ -21,7 +21,7 @@ export function SeverityBadge({ severity }) {
 
 export function TimingBadge({ timing }) {
   return (
-    <span style={{ display: "inline-block", padding: "5px 12px", borderRadius: RADIUS.sm, fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 700, letterSpacing: "0.05em", textTransform: "uppercase", color: "white", background: TIMING_COLORS[timing] || COLORS.ongoing, lineHeight: 1, minWidth: "auto", textAlign: "center" }}>
+    <span style={{ display: "inline-block", padding: "5px 12px", borderRadius: RADIUS.sm, fontSize: "0.72rem", fontFamily: FONTS.body, fontWeight: 700, letterSpacing: "0.05em", textTransform: "uppercase", color: "white", background: TIMING_COLORS[timing] || COLORS.ongoing, lineHeight: 1, minWidth: "auto", textAlign: "center" }}>
       {timing}
     </span>
   );
@@ -30,7 +30,7 @@ export function TimingBadge({ timing }) {
 export function DomainTag({ domain }) {
   const d = DOMAINS[domain];
   return (
-    <span style={{ display: "inline-block", padding: "4px 10px", borderRadius: RADIUS.sm, fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase", color: COLORS.steel, background: `${COLORS.steel}12`, border: `1px solid ${COLORS.steel}25` }}>
+    <span style={{ display: "inline-block", padding: "4px 10px", borderRadius: RADIUS.sm, fontSize: "0.72rem", fontFamily: FONTS.body, fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase", color: COLORS.steel, background: `${COLORS.steel}12`, border: `1px solid ${COLORS.steel}25` }}>
       {d.short}
     </span>
   );
@@ -77,8 +77,8 @@ export function SectionTitle({ children, sub }) {
   );
 }
 
-export const PRIMARY_BTN = { display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 32px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: "none", borderRadius: "8px", cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" };
-export const SECONDARY_BTN = { display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.navy, fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 500, border: "1.5px solid #D6D4CE", borderRadius: "8px", cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" };
+export const PRIMARY_BTN = { display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 32px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif", fontSize: "0.9rem", fontWeight: 600, border: "none", borderRadius: "8px", cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" };
+export const SECONDARY_BTN = { display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.navy, fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif", fontSize: "0.9rem", fontWeight: 500, border: "1.5px solid #D6D4CE", borderRadius: "8px", cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" };
 
 export function ButtonPair({
   primaryText = "Book a Fit Check",
@@ -206,10 +206,10 @@ export function TimelineRail({ items, compact = false }) {
 
               {item.deliverable && (
                 <div style={{ padding: "10px 14px", background: COLORS.offWhite, borderRadius: "6px", display: "flex", alignItems: "center", gap: "10px", marginTop: "12px" }}>
-                  <span style={{ fontFamily: FONTS.body, fontSize: "0.75rem", color: COLORS.navy, letterSpacing: "0.5px", textTransform: "uppercase", fontWeight: 700, flexShrink: 0 }}>
+                  <span style={{ fontFamily: FONTS.body, fontSize: "0.72rem", color: COLORS.navy, letterSpacing: "0.5px", textTransform: "uppercase", fontWeight: 700, flexShrink: 0 }}>
                     Deliverable
                   </span>
-                  <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, fontWeight: 500 }}>
+                  <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, fontWeight: 500 }}>
                     {item.deliverable}
                   </span>
                 </div>
@@ -358,7 +358,7 @@ export function FAQBlock({ variant }) {
   const workingWithMe = faqs.filter((_, i) => [0,1,2,3,5,8].includes(i));
   const engagementProcess = faqs.filter((_, i) => [4,6,7].includes(i));
 
-  const q = { fontFamily: FONTS.heading, fontSize: "1.05rem", color: COLORS.navy, margin: 0, flex: 1 };
+  const q = { fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.navy, margin: 0, flex: 1 };
   const a = { fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, margin: 0, paddingBottom: "14px" };
 
   const renderFAQItem = (item, globalIndex) => (
@@ -447,11 +447,11 @@ export function LeadMagnetLink({ pdfUrl, children, variant = "link", style: extr
 
   // ── Variant styles ───────────────────────────────────────────
   const linkStyle = {
-    link: { fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 700, color: COLORS.navy, textDecoration: "none", borderBottom: `2px solid ${COLORS.navy}`, cursor: "pointer", transition: "all 0.2s" },
+    link: { fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 700, color: COLORS.navy, textDecoration: "none", borderBottom: `2px solid ${COLORS.navy}`, cursor: "pointer", transition: "all 0.2s" },
     button: { display: "inline-block", padding: "14px 28px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, textDecoration: "none", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", transition: "all 0.2s", border: "none", cursor: "pointer", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "min(180px, 100%)" },
     "inline-button": { padding: "12px 16px", borderRadius: RADIUS.md, border: `1px solid ${COLORS.border}`, background: COLORS.white, color: COLORS.navy, textDecoration: "none", fontFamily: FONTS.body, fontWeight: 600, display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", transition: "all 0.2s" },
-    "footer-link": { fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.offWhite, textDecoration: "none", transition: "color 0.2s", cursor: "pointer" },
-    "micro-proof": { display: "flex", alignItems: "center", gap: "8px", textDecoration: "none", color: COLORS.navy, fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, transition: "all 0.2s", padding: "8px 10px", borderRadius: RADIUS.sm, cursor: "pointer" }
+    "footer-link": { fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.offWhite, textDecoration: "none", transition: "color 0.2s", cursor: "pointer" },
+    "micro-proof": { display: "flex", alignItems: "center", gap: "8px", textDecoration: "none", color: COLORS.navy, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, transition: "all 0.2s", padding: "8px 10px", borderRadius: RADIUS.sm, cursor: "pointer" }
   }[variant] || linkStyle.link;
 
   // ── Initial state: clickable link/button ─────────────────────
@@ -501,7 +501,7 @@ export function LeadMagnetLink({ pdfUrl, children, variant = "link", style: extr
             </button>
           </div>
           {errorMsg && (
-            <p style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: "#FC8181", margin: 0 }}>
+            <p style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: "#FC8181", margin: 0 }}>
               {errorMsg}
             </p>
           )}
@@ -548,7 +548,7 @@ export function ServicesSamplesRow() {
 
 export function OfferCards({ setPage }) {
   const box = { border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 calc(50% - 10px)", minWidth: "min(240px, 100%)", display: "flex", flexDirection: "column" };
-  const tag = { fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.gold, fontWeight: 600, marginBottom: "10px" };
+  const tag = { fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.gold, fontWeight: 600, marginBottom: "10px" };
   const li = { marginBottom: "8px", lineHeight: 1.55 };
   const segLabel = { fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "10px", display: "block" };
 
@@ -639,7 +639,7 @@ export function OfferCards({ setPage }) {
             <li style={li}>Evidence requests + diligence questions</li>
             <li style={li}>Top execution risks + stabilization priorities</li>
           </ul>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.82rem", color: COLORS.steel, lineHeight: 1.5, marginTop: "14px", paddingTop: "12px", borderTop: `1px solid ${COLORS.border}`, marginBottom: "auto" }}>
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.steel, lineHeight: 1.5, marginTop: "14px", paddingTop: "12px", borderTop: `1px solid ${COLORS.border}`, marginBottom: "auto" }}>
             Best for funds that need the diagnostic before they commit.
           </p>
           <div style={{ marginTop: "16px" }}>
@@ -655,7 +655,7 @@ export function OfferCards({ setPage }) {
             <li style={li}>Day-1 critical path + phased 100-day execution</li>
             <li style={li}>Clear ownership + cadence from close to value</li>
           </ul>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.82rem", color: COLORS.steel, lineHeight: 1.5, marginTop: "14px", paddingTop: "12px", borderTop: `1px solid ${COLORS.border}`, marginBottom: "auto" }}>
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.steel, lineHeight: 1.5, marginTop: "14px", paddingTop: "12px", borderTop: `1px solid ${COLORS.border}`, marginBottom: "auto" }}>
             100-Day Operating Playbook on its own: $20,000–35,000.
           </p>
           <div style={{ marginTop: "16px" }}>
@@ -1001,7 +1001,7 @@ function FooterLeadCapture() {
     borderRadius: RADIUS.sm,
     border: `1px solid ${COLORS.steel}`,
     fontFamily: FONTS.body,
-    fontSize: "0.875rem",
+    fontSize: "0.9rem",
     background: `${COLORS.white}10`,
     color: COLORS.offWhite,
     boxSizing: "border-box",
@@ -1047,7 +1047,7 @@ function FooterLeadCapture() {
       <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.gold, marginBottom: "16px", letterSpacing: "0.5px" }}>
         Not ready to book?
       </h3>
-      <p style={{ fontFamily: FONTS.body, fontSize: "0.875rem", color: `${COLORS.offWhite}B0`, lineHeight: 1.55, marginBottom: "14px" }}>
+      <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: `${COLORS.offWhite}B0`, lineHeight: 1.55, marginBottom: "14px" }}>
         Share your situation and I'll reply with fit and next steps.
       </p>
       <form className="footer-form" onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -1061,7 +1061,7 @@ function FooterLeadCapture() {
           {status.state === "loading" ? "Sending…" : "Send →"}
         </button>
         {status.state !== "idle" && (
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: status.state === "ok" ? "#68D391" : status.state === "loading" ? COLORS.offWhite : "#FC8181", margin: 0 }}>
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: status.state === "ok" ? "#68D391" : status.state === "loading" ? COLORS.offWhite : "#FC8181", margin: 0 }}>
             {status.msg}
           </p>
         )}
@@ -1078,16 +1078,16 @@ export function Footer({ setPage }) {
         <div>
           <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.gold, marginBottom: "16px", letterSpacing: "0.5px" }}>Contact</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            <a href={`mailto:${CONTACT_EMAIL}`} style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.offWhite, textDecoration: "none", transition: "color 0.2s" }}
+            <a href={`mailto:${CONTACT_EMAIL}`} style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.offWhite, textDecoration: "none", transition: "color 0.2s" }}
               onMouseEnter={e => e.currentTarget.style.color = COLORS.gold} onMouseLeave={e => e.currentTarget.style.color = COLORS.offWhite}>
               {CONTACT_EMAIL}
             </a>
-            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.offWhite, textDecoration: "none", transition: "color 0.2s" }}
+            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.offWhite, textDecoration: "none", transition: "color 0.2s" }}
               onMouseEnter={e => e.currentTarget.style.color = COLORS.gold} onMouseLeave={e => e.currentTarget.style.color = COLORS.offWhite}>
               LinkedIn →
             </a>
             <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-              <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.gold, textDecoration: "none", fontWeight: 600, transition: "opacity 0.2s" }}
+              <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.gold, textDecoration: "none", fontWeight: 600, transition: "opacity 0.2s" }}
                 onMouseEnter={e => e.currentTarget.style.opacity = "0.8"} onMouseLeave={e => e.currentTarget.style.opacity = "1"}>
                 Book a Fit Check
               </a>
@@ -1110,7 +1110,7 @@ export function Footer({ setPage }) {
               { key: "resources", label: "Resources" },
             ].map(({ key, label }) => (
               <button key={key} onClick={() => setPage(key)}
-                style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.offWhite, background: "none", border: "none", padding: 0, textAlign: "left", cursor: "pointer", transition: "color 0.2s" }}
+                style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.offWhite, background: "none", border: "none", padding: 0, textAlign: "left", cursor: "pointer", transition: "color 0.2s" }}
                 onMouseEnter={e => e.currentTarget.style.color = COLORS.gold}
                 onMouseLeave={e => e.currentTarget.style.color = COLORS.offWhite}>
                 {label}
@@ -1139,14 +1139,14 @@ export function Footer({ setPage }) {
       {/* Copyright */}
       <div style={{ maxWidth: "1200px", margin: "32px auto 0", padding: "24px 24px 0 24px", borderTop: `1px solid ${COLORS.steel}40`, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "16px" }}>
         <div>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.offWhite, opacity: 0.7, margin: "0 0 4px 0" }}>
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.offWhite, opacity: 0.7, margin: "0 0 4px 0" }}>
             © {new Date().getFullYear()} Devonshire Ops. All rights reserved.
           </p>
-          <p style={{ fontFamily: FONTS.heading, fontSize: "0.9rem", color: COLORS.gold, opacity: 0.85, margin: 0, fontStyle: "italic" }}>
+          <p style={{ fontFamily: FONTS.heading, fontSize: "0.9rem", color: COLORS.gold, opacity: 0.9, margin: 0, fontWeight: 600 }}>
             Find the gaps. Build the plan. Create the value.
           </p>
         </div>
-        <p style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.offWhite, opacity: 0.7, margin: 0 }}>
+        <p style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.offWhite, opacity: 0.7, margin: 0 }}>
           NDA-friendly. Minimal data handling. Anonymized formats accepted.
         </p>
       </div>

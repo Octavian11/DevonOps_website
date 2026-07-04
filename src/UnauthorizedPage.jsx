@@ -19,7 +19,7 @@ export default function UnauthorizedPage() {
       <div style={{ maxWidth: "480px" }}>
         <div style={{
           fontFamily: BODY,
-          fontSize: "0.85rem",
+          fontSize: "0.8rem",
           color: GOLD,
           letterSpacing: "1.5px",
           textTransform: "uppercase",

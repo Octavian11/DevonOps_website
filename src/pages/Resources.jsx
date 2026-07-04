@@ -83,7 +83,7 @@ export default function ResourcesPage({ setPage }) {
       {/* Sample Deliverables */}
       <Section noCTA title="Sample Deliverables">
         <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: SPACING.md }}>
-          Anonymized examples of the board-ready deliverables included in each engagement. <em>Enter your email to download. I respect your inbox.</em>
+          Anonymized examples of the board-ready deliverables included in each engagement. Enter your email to download. I respect your inbox.
         </p>
         <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
           <SampleDeliverableCard
@@ -103,17 +103,17 @@ export default function ResourcesPage({ setPage }) {
 
       {/* Thought Leadership */}
       <Section noCTA title="Point of View" variant="tinted">
-        <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.2rem", fontWeight: 600, color: COLORS.navy, marginBottom: "6px" }}>
+        <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", fontWeight: 600, color: COLORS.navy, marginBottom: "6px" }}>
           Why Ops Diligence Is the Most Underpriced Risk in PE
         </h3>
-        <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.steel, fontStyle: "italic", marginBottom: "20px" }}>
+        <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.steel, fontWeight: 600, marginBottom: "20px" }}>
           The operating layer beneath the financials is still priced as optional. It isn't.
         </p>
         <div style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.75, maxWidth: "800px" }}>
           <p style={{ marginBottom: "16px" }}>
             Every deal gets financial diligence. Most get legal, tax, and environmental. But operational diligence — the systematic assessment of whether a company's operations can actually deliver the value creation plan — is still treated as optional by the majority of lower-middle-market PE funds.
           </p>
-          <p style={{ margin: "24px 0", padding: "14px 20px", borderLeft: `4px solid ${COLORS.gold}`, background: `${COLORS.gold}0D`, fontFamily: FONTS.heading, fontSize: "1.25rem", color: COLORS.navy, fontStyle: "italic" }}>
+          <p style={{ margin: "24px 0", padding: "14px 20px", borderLeft: `4px solid ${COLORS.gold}`, background: `${COLORS.gold}0D`, fontFamily: FONTS.heading, fontSize: "1.1rem", fontWeight: 600, color: COLORS.navy }}>
             This is a pricing error.
           </p>
           <p style={{ marginBottom: "16px" }}>

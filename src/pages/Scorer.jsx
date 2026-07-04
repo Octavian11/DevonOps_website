@@ -38,7 +38,7 @@ function ScorerEmailCapture({ rating, score, context, buyerType }) {
     borderRadius: RADIUS.sm,
     border: `1px solid ${COLORS.border}`,
     fontFamily: FONTS.body,
-    fontSize: "0.95rem",
+    fontSize: "0.9rem",
     color: COLORS.charcoal,
     background: COLORS.white,
     boxSizing: "border-box",
@@ -123,7 +123,7 @@ function ScorerEmailCapture({ rating, score, context, buyerType }) {
           style={{ ...inputStyle, borderColor: status === "error" ? COLORS.critical : COLORS.border }}
         />
         {status === "error" && (
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.critical, margin: 0 }}>
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.critical, margin: 0 }}>
             Please enter a valid email address.
           </p>
         )}
@@ -176,7 +176,7 @@ export default function ScorerPage({ setPage }) {
 
   return (
     <div className="fade-in">
-      <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.7rem", fontWeight: 400, color: COLORS.navy, marginBottom: "14px" }}>
+      <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 400, color: COLORS.navy, marginBottom: "14px" }}>
         How Operationally Ready Is Your Deal?
       </h1>
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "24px" }}>
@@ -216,7 +216,7 @@ export default function ScorerPage({ setPage }) {
           {CONTEXT_OPTIONS.map(opt => (
             <label key={opt.key} style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", padding: "8px 12px", borderRadius: RADIUS.sm, background: context === opt.key ? `${COLORS.navy}08` : "transparent", border: `1px solid ${context === opt.key ? COLORS.steel : "transparent"}` }}>
               <input type="radio" name="context" checked={context === opt.key} onChange={() => setContext(opt.key)} style={{ accentColor: COLORS.navy }} />
-              <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal }}>{opt.label}</span>
+              <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal }}>{opt.label}</span>
             </label>
           ))}
         </div>
@@ -259,7 +259,7 @@ export default function ScorerPage({ setPage }) {
                   onChange={e => toggleUnknown(dim.key, e.target.checked)}
                   style={{ accentColor: COLORS.steel, cursor: "pointer" }}
                 />
-                <span style={{ fontFamily: FONTS.body, fontSize: "0.82rem", color: COLORS.bodyMuted }}>
+                <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.bodyMuted }}>
                   Not assessed / don't know
                 </span>
               </label>
@@ -284,12 +284,12 @@ export default function ScorerPage({ setPage }) {
       {showResults && (
         <div className="fade-in" id="scorer-results">
           <Card style={{ borderLeft: `4px solid ${ratingColor}`, marginBottom: "24px" }}>
-            <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.2rem", color: COLORS.navy, marginBottom: "20px" }}>Assessment Results</h3>
+            <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.navy, marginBottom: "20px" }}>Assessment Results</h3>
 
             {/* Buyer type badge */}
             {buyerType && BUYER_TYPES.find(t => t.key === buyerType) && (
               <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "4px 12px", borderRadius: RADIUS.sm, background: `${COLORS.gold}12`, border: `1px solid ${COLORS.gold}40`, marginBottom: "16px" }}>
-                <span style={{ fontFamily: FONTS.body, fontSize: "0.78rem", fontWeight: 700, color: "#8B6A00", textTransform: "uppercase", letterSpacing: "0.6px" }}>
+                <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 700, color: "#8B6A00", textTransform: "uppercase", letterSpacing: "0.6px" }}>
                   Scored as: {BUYER_TYPES.find(t => t.key === buyerType)?.label}
                 </span>
               </div>
@@ -297,12 +297,12 @@ export default function ScorerPage({ setPage }) {
 
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: "24px" }}>
               <div style={{ width: "100px", height: "100px", borderRadius: "50%", border: `4px solid ${ratingColor}`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "14px" }}>
-                <span style={{ fontFamily: FONTS.body, fontSize: "1.7rem", fontWeight: 700, color: ratingColor }}>{avg.toFixed(1)}</span>
+                <span style={{ fontFamily: FONTS.body, fontSize: "1.8rem", fontWeight: 700, color: ratingColor }}>{avg.toFixed(1)}</span>
               </div>
               <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 700, color: ratingColor, letterSpacing: "1.2px", marginBottom: "10px" }}>
                 {ratingLabel}
                 {unknownDims.length > 0 && (
-                  <span style={{ fontWeight: 400, color: COLORS.bodyMuted, letterSpacing: 0, fontSize: "0.85rem" }}>
+                  <span style={{ fontWeight: 400, color: COLORS.bodyMuted, letterSpacing: 0, fontSize: "0.8rem" }}>
                     {" "}({knownDims.length} of 6 dimensions scored)
                   </span>
                 )}
@@ -312,7 +312,7 @@ export default function ScorerPage({ setPage }) {
               </p>
               {/* Buyer type framing */}
               {buyerType && BUYER_TYPE_FRAMING[buyerType] && (
-                <p style={{ fontFamily: FONTS.body, fontSize: "0.93rem", color: COLORS.steel, lineHeight: 1.6, margin: "12px 0 0", maxWidth: "600px", fontStyle: "italic" }}>
+                <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.6, margin: "12px 0 0", maxWidth: "600px" }}>
                   {BUYER_TYPE_FRAMING[buyerType]}
                 </p>
               )}
@@ -340,7 +340,7 @@ export default function ScorerPage({ setPage }) {
               <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, marginBottom: "8px", fontWeight: 600 }}>Unassessed dimensions:</p>
               {unknownDims.map(dim => (
                 <div key={dim.key} style={{ marginBottom: "8px", paddingBottom: "8px", borderBottom: `1px solid ${COLORS.border}` }}>
-                  <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, color: COLORS.charcoal }}>{dim.label}</span>
+                  <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, color: COLORS.charcoal }}>{dim.label}</span>
                 </div>
               ))}
             </Card>
@@ -349,7 +349,7 @@ export default function ScorerPage({ setPage }) {
               <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.steel, marginBottom: "10px" }}>Not Yet Assessed — Flag for Diligence</h4>
               {unknownDims.map(dim => (
                 <div key={dim.key} style={{ marginBottom: "8px", paddingBottom: "8px", borderBottom: `1px solid ${COLORS.border}` }}>
-                  <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, color: COLORS.charcoal }}>{dim.label}</span>
+                  <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, color: COLORS.charcoal }}>{dim.label}</span>
                 </div>
               ))}
               <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.6, margin: "10px 0 0" }}>
@@ -363,7 +363,7 @@ export default function ScorerPage({ setPage }) {
               <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.critical, marginBottom: "14px" }}>Critical Gaps</h4>
               {lowDims.map(dim => (
                 <div key={dim.key} style={{ marginBottom: "10px", paddingBottom: "10px", borderBottom: `1px solid ${COLORS.border}` }}>
-                  <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", fontWeight: 600, color: COLORS.charcoal }}>{dim.label}</span>
+                  <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, color: COLORS.charcoal }}>{dim.label}</span>
                   <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.critical, marginLeft: "8px" }}>({scores[dim.key]}/5)</span>
                 </div>
               ))}

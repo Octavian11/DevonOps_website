@@ -28,7 +28,7 @@ function HeroBlockWithNav({ setPage }) {
         <div className="hero-ctas" style={{ display: "flex", gap: "16px", flexWrap: "wrap", alignItems: "flex-start" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
             <a href={CALENDLY} target="_blank" rel="noopener noreferrer"
-              style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: "none", borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}
+              style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif", fontSize: "0.9rem", fontWeight: 600, border: "none", borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}
               onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; }}
               onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; }}>
               Book a Fit Check (15 min)
@@ -38,7 +38,7 @@ function HeroBlockWithNav({ setPage }) {
             </span>
           </div>
           <button onClick={() => setPage("scorer")}
-            style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.gold, fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: `1.5px solid ${COLORS.gold}`, borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}
+            style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.gold, fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif", fontSize: "0.9rem", fontWeight: 600, border: `1.5px solid ${COLORS.gold}`, borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}
             onMouseEnter={e => { e.currentTarget.style.background = `${COLORS.gold}15`; }}
             onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}>
             Score Your Deal →
@@ -62,15 +62,15 @@ function HeroCredStrip() {
       <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap", justifyContent: "center" }}>
         <span style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, color: COLORS.steel, textTransform: "uppercase", letterSpacing: "0.06em", whiteSpace: "nowrap" }}>Background</span>
         {["JPMorgan", "Barclays", "Lazard", "Bank of America", "Columbia MBA"].map((name, i) => (
-          <span key={i} style={{ fontFamily: FONTS.body, fontSize: "0.78rem", fontWeight: 600, color: COLORS.charcoal, opacity: 0.65, whiteSpace: "nowrap" }}>{name}</span>
+          <span key={i} style={{ fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 600, color: COLORS.charcoal, opacity: 0.65, whiteSpace: "nowrap" }}>{name}</span>
         ))}
       </div>
       <div style={{ width: "1px", height: "28px", background: COLORS.border, flexShrink: 0 }} />
       <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", justifyContent: "center" }}>
         {metrics.map((m, i) => (
           <div key={i} style={{ display: "flex", alignItems: "baseline", gap: "5px" }}>
-            <span style={{ fontFamily: FONTS.body, fontWeight: 700, fontSize: "0.95rem", color: COLORS.gold }}>{m.value}</span>
-            <span style={{ fontFamily: FONTS.body, fontSize: "0.75rem", color: COLORS.steel }}>{m.label}</span>
+            <span style={{ fontFamily: FONTS.body, fontWeight: 700, fontSize: "0.9rem", color: COLORS.gold }}>{m.value}</span>
+            <span style={{ fontFamily: FONTS.body, fontSize: "0.72rem", color: COLORS.steel }}>{m.label}</span>
           </div>
         ))}
       </div>
@@ -171,10 +171,10 @@ function BuyerSegmentCards({ setPage }) {
         {segments.map((seg, i) => (
           <div key={i} className="buyer-card" style={{ border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${seg.accentColor}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 260px", minWidth: "min(220px, 100%)", display: "flex", flexDirection: "column" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
-              <span style={{ display: "inline-block", padding: "4px 10px", borderRadius: RADIUS.sm, fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase", color: seg.accentColor, background: `${seg.accentColor}15`, border: `1px solid ${seg.accentColor}30` }}>
+              <span style={{ display: "inline-block", padding: "4px 10px", borderRadius: RADIUS.sm, fontSize: "0.72rem", fontFamily: FONTS.body, fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase", color: seg.accentColor, background: `${seg.accentColor}15`, border: `1px solid ${seg.accentColor}30` }}>
                 {seg.code}
               </span>
-              <span style={{ fontFamily: FONTS.heading, fontSize: "1.2rem", fontWeight: 700, color: COLORS.navy }}>
+              <span style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", fontWeight: 700, color: COLORS.navy }}>
                 {seg.title}
               </span>
             </div>
@@ -191,7 +191,7 @@ function BuyerSegmentCards({ setPage }) {
                 </li>
               ))}
             </ul>
-            <p className="proof-quote" style={{ fontFamily: FONTS.body, fontSize: "0.92rem", color: COLORS.charcoal, lineHeight: 1.6, margin: "0", padding: "12px 14px", background: `${COLORS.navy}05`, borderRadius: RADIUS.sm, borderLeft: `3px solid ${seg.accentColor}` }}>
+            <p className="proof-quote" style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.6, margin: "0", padding: "12px 14px", background: `${COLORS.navy}05`, borderRadius: RADIUS.sm, borderLeft: `3px solid ${seg.accentColor}` }}>
               {seg.proof}
             </p>
             <div style={{ paddingTop: "16px" }}>
@@ -277,12 +277,12 @@ function CostOfInaction() {
             </p>
             <div className="pe-consequence" style={{ padding: "10px 12px", background: `${COLORS.navy}05`, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.sm }}>
               <span style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, color: COLORS.critical, letterSpacing: "0.7px", textTransform: "uppercase", display: "block", marginBottom: "4px" }}>PE Consequence</span>
-              <p style={{ fontFamily: FONTS.body, fontSize: "0.92rem", color: COLORS.charcoal, lineHeight: 1.55, margin: 0 }}><strong>{s.consequence}</strong></p>
+              <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.55, margin: 0 }}><strong>{s.consequence}</strong></p>
             </div>
           </div>
         ))}
       </div>
-      <p style={{ fontFamily: FONTS.body, color: COLORS.bodyMuted, fontStyle: "italic", marginTop: "20px", maxWidth: "700px" }}>
+      <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, marginTop: "20px", maxWidth: "700px" }}>
         These issues don't come from bad management. They come from missing operating infrastructure.
       </p>
     </Section>
@@ -303,8 +303,8 @@ function CompactAboutBio({ setPage }) {
           className="bio-headshot"
         />
         <div style={{ flex: "1 1 280px" }}>
-          <div style={{ fontFamily: FONTS.heading, fontSize: "1.2rem", fontWeight: 700, color: COLORS.navy, marginBottom: "4px" }}>Hassan Tariq</div>
-          <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", color: COLORS.steel, lineHeight: 1.5, marginBottom: "14px" }}>
+          <div style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "4px" }}>Hassan Tariq</div>
+          <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.steel, lineHeight: 1.5, marginBottom: "14px" }}>
             15+ years platform ops · JPMorgan · Barclays · Bank of America · Lazard<br />Columbia MBA '26
           </div>
           <div className="credential-logos">
@@ -341,15 +341,15 @@ function OfferTeaser({ setPage }) {
       <div style={{ display: "flex", flexDirection: "column", gap: "8px", maxWidth: "680px", marginBottom: "24px" }}>
         {offers.map((o, i) => (
           <div key={i} style={{ display: "grid", gridTemplateColumns: "140px 1fr 175px", alignItems: "center", gap: "12px", padding: "10px 14px", borderLeft: `3px solid ${o.highlight ? COLORS.gold : COLORS.navy}`, background: `${COLORS.navy}06`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0` }}>
-            <span style={{ fontFamily: FONTS.body, fontSize: "0.7rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: o.highlight ? COLORS.gold : COLORS.navy, lineHeight: 1.3 }}>{o.label}</span>
+            <span style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: o.highlight ? COLORS.gold : COLORS.navy, lineHeight: 1.3 }}>{o.label}</span>
             <span style={{ fontFamily: FONTS.body, fontWeight: 600, color: COLORS.navy, lineHeight: 1.4 }}>{o.name}</span>
-            <span style={{ fontFamily: FONTS.body, fontSize: "0.88rem", color: COLORS.navy, fontWeight: 600, whiteSpace: "nowrap" }}>{o.price}</span>
+            <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, fontWeight: 600, whiteSpace: "nowrap" }}>{o.price}</span>
           </div>
         ))}
       </div>
       <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", alignItems: "center" }}>
         <a href={CALENDLY} target="_blank" rel="noopener noreferrer"
-          style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", height: "44px", padding: "0 22px", background: COLORS.gold, color: "#fff", fontFamily: "'Arial', sans-serif", fontSize: "0.95rem", fontWeight: 600, borderRadius: RADIUS.md, textDecoration: "none", whiteSpace: "nowrap" }}>
+          style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", height: "44px", padding: "0 22px", background: COLORS.gold, color: "#fff", fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif", fontSize: "0.9rem", fontWeight: 600, borderRadius: RADIUS.md, textDecoration: "none", whiteSpace: "nowrap" }}>
           Book a Fit Check (15 min)
         </a>
         <button onClick={() => { setPage("services"); setTimeout(() => document.getElementById("offers")?.scrollIntoView({ behavior: "smooth" }), 120); }}
