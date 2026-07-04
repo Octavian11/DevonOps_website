@@ -1,6 +1,6 @@
 // Design system tokens — kept inline to avoid circular import from constants.js
 const NAVY = "#14213D";
-const GOLD = "#B8860B";
+const GOLD = "#D6A63F";
 const OFF_WHITE = "#FCFCFC";
 const HEADING = "'EB Garamond', Garamond, 'Times New Roman', serif";
 const BODY = "Georgia, 'Times New Roman', serif";

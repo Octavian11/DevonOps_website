@@ -41,7 +41,7 @@ export function DomainTag({ domain }) {
 export function CTAButton({ text, variant, style: extraStyle, showAvailability }) {
   const isPrimary = variant !== "secondary";
   const btnStyle = isPrimary ? PRIMARY_BTN : SECONDARY_BTN;
-  const hoverBg = isPrimary ? "#A07D2E" : `${COLORS.navy}08`;
+  const hoverBg = isPrimary ? "#B58A2E" : `${COLORS.navy}08`;
   const restoreBg = isPrimary ? COLORS.gold : "transparent";
   return (
     <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
@@ -95,14 +95,14 @@ export function ButtonPair({
         {primaryLink ? (
           <a href={primaryLink} target="_blank" rel="noopener noreferrer"
              style={PRIMARY_BTN}
-             onMouseEnter={e => { e.currentTarget.style.background = "#B07E22"; e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 4px 12px rgba(200,149,46,0.25)"; }}
+             onMouseEnter={e => { e.currentTarget.style.background = "#B58A2E"; e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 4px 12px rgba(214,166,63,0.25)"; }}
              onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}>
             {primaryText}
           </a>
         ) : (
           <button onClick={primaryAction}
              style={PRIMARY_BTN}
-             onMouseEnter={e => { e.currentTarget.style.background = "#B07E22"; e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 4px 12px rgba(200,149,46,0.25)"; }}
+             onMouseEnter={e => { e.currentTarget.style.background = "#B58A2E"; e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 4px 12px rgba(214,166,63,0.25)"; }}
              onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}>
             {primaryText}
           </button>
@@ -165,12 +165,12 @@ export function TimelineRail({ items, compact = false }) {
         } else if (isActive) {
           nodeColor = COLORS.gold;
           nodeBorder = COLORS.gold;
-          cardGlow = `0 0 0 3px rgba(184, 134, 11, 0.15)`;
+          cardGlow = `0 0 0 3px rgba(214, 166, 63, 0.15)`;
         }
 
         return (
           <div key={i} style={{ position: "relative", marginBottom: isLast ? "0" : (compact ? "24px" : SPACING.lg) }}>
-            <div style={{ position: "absolute", left: compact ? "-32px" : "-46px", top: "12px", width: compact ? "16px" : "18px", height: compact ? "16px" : "18px", borderRadius: "50%", background: nodeColor, border: `3px solid ${nodeBorder}`, boxShadow: isActive ? `0 0 0 4px rgba(184, 134, 11, 0.1)` : "none", zIndex: 1 }} />
+            <div style={{ position: "absolute", left: compact ? "-32px" : "-46px", top: "12px", width: compact ? "16px" : "18px", height: compact ? "16px" : "18px", borderRadius: "50%", background: nodeColor, border: `3px solid ${nodeBorder}`, boxShadow: isActive ? `0 0 0 4px rgba(214, 166, 63, 0.1)` : "none", zIndex: 1 }} />
 
             <div style={{ background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.lg, padding: compact ? "16px" : SPACING.md, boxShadow: cardGlow !== "none" ? `${SHADOWS.sm}, ${cardGlow}` : SHADOWS.sm, transition: "all 0.3s ease" }}>
               {(item.title || item.meta) && (

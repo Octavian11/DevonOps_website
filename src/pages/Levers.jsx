@@ -29,7 +29,7 @@ function HeroBlockWithNav({ setPage }) {
           <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
             <a href={CALENDLY} target="_blank" rel="noopener noreferrer"
               style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif", fontSize: "0.9rem", fontWeight: 600, border: "none", borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}
-              onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; }}
+              onMouseEnter={e => { e.currentTarget.style.background = "#B58A2E"; }}
               onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; }}>
               Book a Fit Check (15 min)
             </a>

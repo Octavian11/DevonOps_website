@@ -199,7 +199,7 @@ export default function ScorerPage({ setPage }) {
                 fontFamily: FONTS.body,
                 fontSize: "0.9rem",
                 fontWeight: 600,
-                color: buyerType === type.key ? "#8B6A00" : COLORS.charcoal,
+                color: buyerType === type.key ? "#14213D" : COLORS.charcoal,
                 cursor: "pointer",
                 transition: "all 0.15s",
               }}>
@@ -273,7 +273,7 @@ export default function ScorerPage({ setPage }) {
         <div style={{ textAlign: "center", marginBottom: "28px" }}>
           <button onClick={() => { setShowResults(true); setTimeout(() => document.getElementById("scorer-results")?.scrollIntoView({ behavior: "smooth", block: "start" }), 80); }}
             style={{ padding: "14px 28px", background: COLORS.gold, color: "white", border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, cursor: "pointer", letterSpacing: "0.3px", transition: "background 0.2s" }}
-            onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; }}
+            onMouseEnter={e => { e.currentTarget.style.background = "#B58A2E"; }}
             onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; }}>
             View Results →
           </button>
@@ -289,7 +289,7 @@ export default function ScorerPage({ setPage }) {
             {/* Buyer type badge */}
             {buyerType && BUYER_TYPES.find(t => t.key === buyerType) && (
               <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "4px 12px", borderRadius: RADIUS.sm, background: `${COLORS.gold}12`, border: `1px solid ${COLORS.gold}40`, marginBottom: "16px" }}>
-                <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 700, color: "#8B6A00", textTransform: "uppercase", letterSpacing: "0.6px" }}>
+                <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 700, color: "#14213D", textTransform: "uppercase", letterSpacing: "0.6px" }}>
                   Scored as: {BUYER_TYPES.find(t => t.key === buyerType)?.label}
                 </span>
               </div>
