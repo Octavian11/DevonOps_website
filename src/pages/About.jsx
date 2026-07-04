@@ -3,7 +3,7 @@ import {
   COLORS, FONTS, SPACING, SHADOWS, RADIUS,
   CALENDLY,
 } from "../constants.js";
-import { CTAButton, ButtonPair, Section, ServicesSamplesRow } from "../components.jsx";
+import { CTAButton, ButtonPair, Section, ServicesSamplesRow, TimelineRail } from "../components.jsx";
 
 export default function AboutPage() {
   const [outcomeExpanded, setOutcomeExpanded] = useState(false);
@@ -21,6 +21,17 @@ export default function AboutPage() {
             Now I do the same thing for PE portfolio companies — faster, with a playbook that's been pressure-tested at institutional scale. I completed my MBA (Executive Program) at Columbia Business School ('26), where I sharpened a PE operator lens on the operational risks that derail value creation in the first 100 days.
           </p>
         </div>
+      </Section>
+
+      {/* Career Timeline */}
+      <Section noCTA title="The Path Here" variant="tinted">
+        <TimelineRail compact items={[
+          { title: "JPMorgan · Barclays · Lazard", meta: "Early career", description: "Operations roles across trading and banking platforms — front-to-back workflow, automation, and vendor foundations." },
+          { title: "Bank of America", meta: "Operations Manager", description: "Operating-model consolidation across $700M+ daily transaction flow; automation business cases funded at $1.8M." },
+          { title: "$10B+ investment platform", meta: "Head of Platform Operations", description: "8-person global team. Nearly 50% drop in critical incidents, $2M in cost reduction, 94% → 99% availability." },
+          { title: "Columbia Business School", meta: "MBA, Executive Program '26", description: "PE value-creation research and the operator lens formalized into a repeatable diligence methodology." },
+          { title: "Devonshire Operations", meta: "Now", description: "Operational diligence and post-close execution for LMM PE sponsors, independent sponsors, and family offices.", active: true },
+        ]} />
       </Section>
 
       {/* What I Do */}

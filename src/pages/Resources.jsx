@@ -110,7 +110,7 @@ export default function ResourcesPage({ setPage }) {
           <p style={{ marginBottom: "16px" }}>
             Every deal gets financial diligence. Most get legal, tax, and environmental. But operational diligence — the systematic assessment of whether a company's operations can actually deliver the value creation plan — is still treated as optional by the majority of lower-middle-market PE funds.
           </p>
-          <p style={{ marginBottom: "16px", fontWeight: 600, fontStyle: "italic" }}>
+          <p style={{ margin: "24px 0", padding: "14px 20px", borderLeft: `4px solid ${COLORS.gold}`, background: `${COLORS.gold}0D`, fontFamily: FONTS.heading, fontSize: "1.25rem", color: COLORS.navy, fontStyle: "italic" }}>
             This is a pricing error.
           </p>
           <p style={{ marginBottom: "16px" }}>

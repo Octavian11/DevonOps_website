@@ -1,11 +1,11 @@
 import { useState } from "react";
 import {
   COLORS, FONTS, SPACING, SHADOWS, RADIUS,
-  CALENDLY, LEVERS, DOMAINS,
+  CALENDLY, LEVERS, DOMAINS, SEVERITY_STYLE,
 } from "../constants.js";
 import {
   Section, FAQBlock, ServicesSamplesRow, OfferCards,
-  SeverityBadge, TimingBadge, DomainTag,
+  SeverityBadge, TimingBadge, DomainTag, SectionTitle,
 } from "../components.jsx";
 
 // ─── METHOD: FEDRSSQE SPINE (compact, expand-on-click) ───────
@@ -39,10 +39,21 @@ function MethodSpine() {
   const [open, setOpen] = useState(null);
   return (
     <Section noCTA variant="tinted" id="method">
-      <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 400, color: COLORS.navy, marginBottom: SPACING.sm }}>Framework</h1>
+      <SectionTitle>The Method Behind Every Engagement</SectionTitle>
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "960px", marginBottom: "20px" }}>
-        Operational diligence and post-close execution for PE funds and portfolio companies — fixed-fee, board-ready, measurable from Day 1. Every engagement runs the same eight-step method, from the sponsor's decision down to a measurable 100-day plan. Tap any step.
+        Every engagement runs the same eight-step method — from the sponsor's decision down to a measurable 100-day plan. Tap any step for detail.
       </p>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", alignItems: "center", marginBottom: "18px" }}>
+        {METHOD_STEPS.map((s, i) => (
+          <span key={s.n} style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}>
+            <button onClick={() => setOpen(open === s.n ? null : s.n)}
+              style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: open === s.n ? `${COLORS.gold}15` : COLORS.white, border: `1px solid ${open === s.n ? COLORS.gold : COLORS.border}`, borderRadius: "999px", padding: "6px 12px", fontFamily: FONTS.body, fontSize: "0.82rem", fontWeight: 700, color: COLORS.navy, cursor: "pointer", minHeight: "34px" }}>
+              <span style={{ color: COLORS.gold }}>{s.n}</span> {s.name}
+            </button>
+            {i < METHOD_STEPS.length - 1 && <span style={{ color: COLORS.steel, fontSize: "0.85rem" }}>→</span>}
+          </span>
+        ))}
+      </div>
       <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
         {METHOD_STEPS.map((s) => {
           const isOpen = open === s.n;
@@ -142,7 +153,7 @@ function TypicalRedFlags() {
 // ─── MEMO SAMPLE SCREENSHOTS ─────────────────────────────────
 
 function MemoSampleScreenshots() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const samples = [
     { src: "/memo-samples/ops-dd-exec-summary.png", alt: "Ops Diligence Scorecard executive summary excerpt", caption: "Ops Diligence Scorecard — Executive Summary (overall rating + deal implications)" },
     { src: "/memo-samples/domain-scores-1.png", alt: "Operational risk summary table excerpt (top)", caption: "Operational Risk Summary — domain ratings (excerpt 1 of 2)" },
@@ -247,6 +258,36 @@ function LeverExplorerSection({ setPage }) {
       </p>
 
       <DomainLegend />
+
+      {/* Severity × Timing map — click a cell to filter */}
+      <div style={{ marginBottom: "24px" }}>
+        <div style={{ fontFamily: FONTS.body, fontSize: "0.78rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "8px" }}>
+          Where the {LEVERS.length} levers concentrate — click a cell to filter
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "minmax(78px, 110px) repeat(2, minmax(0, 1fr))", gap: "6px", maxWidth: "560px" }}>
+          <span />
+          {["Pre-Close Red Flag", "First 100 Days"].map(t => (
+            <span key={t} style={{ fontFamily: FONTS.body, fontSize: "0.75rem", fontWeight: 700, color: COLORS.navy, textAlign: "center", alignSelf: "end", lineHeight: 1.3 }}>{t}</span>
+          ))}
+          {["Critical", "High"].map(sev => (
+            <div key={sev} style={{ display: "contents" }}>
+              <span style={{ fontFamily: FONTS.body, fontSize: "0.75rem", fontWeight: 700, color: SEVERITY_STYLE[sev].text, alignSelf: "center" }}>{sev}</span>
+              {["Pre-Close Red Flag", "First 100 Days"].map(t => {
+                const count = LEVERS.filter(l => l.severity === sev && l.timing === t).length;
+                const isActive = severityFilter === sev && timingFilter === t;
+                return (
+                  <button key={sev + t}
+                    onClick={() => { setSeverityFilter(isActive ? "All" : sev); setTimingFilter(isActive ? "All" : t); }}
+                    style={{ padding: "12px 8px", borderRadius: RADIUS.sm, border: `2px solid ${isActive ? COLORS.gold : SEVERITY_STYLE[sev].border}`, background: SEVERITY_STYLE[sev].bg, cursor: "pointer", textAlign: "center", transition: "all 0.15s" }}>
+                    <span style={{ fontFamily: FONTS.body, fontSize: "1.15rem", fontWeight: 700, color: SEVERITY_STYLE[sev].text }}>{count}</span>
+                    <span style={{ display: "block", fontFamily: FONTS.body, fontSize: "0.7rem", color: COLORS.charcoal }}>levers</span>
+                  </button>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      </div>
 
       <div className="lever-filters" style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "24px", alignItems: "center" }}>
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search levers..." style={{ ...selectStyle, minWidth: "220px", flex: "1 1 220px" }} />
@@ -361,7 +402,14 @@ function LeverExplorerSection({ setPage }) {
 export default function ServicesPage({ setPage }) {
   return (
     <div>
-      <MethodSpine />
+      <Section noCTA>
+        <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 400, color: COLORS.navy, marginBottom: SPACING.sm }}>Services &amp; Pricing</h1>
+        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "960px", margin: 0 }}>
+          Operational diligence and post-close execution for PE funds and portfolio companies — fixed-fee, board-ready, measurable from Day 1.
+        </p>
+      </Section>
+
+      <div id="offers"><OfferCards /></div>
 
       <div className="mckinsey-quote">
         <p>
@@ -370,7 +418,7 @@ export default function ServicesPage({ setPage }) {
         <small>McKinsey Global Private Markets Review 2026</small>
       </div>
 
-      <div id="offers"><OfferCards /></div>
+      <MethodSpine />
 
       <div id="levers"><LeverExplorerSection setPage={setPage} /></div>
 

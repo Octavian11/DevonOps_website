@@ -724,20 +724,6 @@ export function TestimonialBlock() {
         Outcomes from institutional operating roles — same governance playbook, now installed for PE portfolio companies.
       </p>
 
-      {/* Proof Metrics Strip */}
-      <div className="proof-metrics-strip" style={{ marginBottom: "32px" }}>
-        {[
-          { value: "~50%", label: "incident reduction" },
-          { value: "$2M+", label: "annual savings" },
-          { value: "94→99%", label: "uptime improvement" },
-        ].map((m, i) => (
-          <div key={i} className="proof-metric">
-            <div className="proof-metric-number">{m.value}</div>
-            <div className="proof-metric-label">{m.label}</div>
-          </div>
-        ))}
-      </div>
-
       <span className="measured-outcomes-label">Measured Outcomes (Post-Implementation)</span>
 
       {/* Platform Stabilization Case Card */}

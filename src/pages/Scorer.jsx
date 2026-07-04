@@ -7,7 +7,7 @@ import {
   SCORER_DIMS, DIM_RECS, CONTEXT_OPTIONS, CONTEXT_CALLOUTS,
   mailtoHref,
 } from "../constants.js";
-import { SectionTitle, ButtonPair, Card, Section } from "../components.jsx";
+import { SectionTitle, ButtonPair, Card, Section, TimelineRail } from "../components.jsx";
 
 // ─── BUYER TYPE OPTIONS ───────────────────────────────────────
 
@@ -114,7 +114,7 @@ function ScorerEmailCapture({ rating, score, context, buyerType }) {
           Sample 100-Day Plan (PDF)
         </a>
       </div>
-      <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+      <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "10px", maxWidth: "520px" }}>
         <input
           type="text"
           placeholder="Your name (optional)"
@@ -138,7 +138,7 @@ function ScorerEmailCapture({ rating, score, context, buyerType }) {
         <button
           type="submit"
           disabled={status === "loading"}
-          style={{ padding: "14px 28px", background: status === "loading" ? COLORS.bodyMuted : COLORS.gold, color: "white", border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, cursor: status === "loading" ? "default" : "pointer", textAlign: "left", transition: "background 0.2s" }}>
+          style={{ padding: "14px 28px", background: status === "loading" ? COLORS.bodyMuted : COLORS.gold, color: "white", border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, cursor: status === "loading" ? "default" : "pointer", textAlign: "center", transition: "background 0.2s" }}>
           {status === "loading" ? "Sending…" : "Get the Sample (PDF) →"}
         </button>
         <p style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.bodyMuted, margin: 0 }}>
@@ -397,25 +397,22 @@ export default function ScorerPage({ setPage }) {
                     mid: "Operational drift doesn't reverse on its own. These are the highest-ROI interventions before exit preparation begins — each is a defined deliverable, not a recommendation.",
                   }[context]}
                 </p>
-                <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-                  {[...lowDims, ...midDims].slice(0, 4).map((dim, i) => {
-                    const rec = DIM_RECS[dim.key];
-                    const isGap = scores[dim.key] <= 2;
-                    return (
-                      <div key={dim.key} style={{ paddingLeft: "16px", borderLeft: `3px solid ${isGap ? COLORS.critical : COLORS.atRisk}` }}>
-                        <p style={{ fontFamily: FONTS.heading, fontWeight: 700, color: COLORS.navy, margin: "0 0 4px 0" }}>
-                          {dim.label} — <span style={{ fontWeight: 400, color: COLORS.bodyMuted }}>{rec.days}</span>
-                        </p>
-                        <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.65, margin: "0 0 6px 0" }}>
-                          {rec.impact}
-                        </p>
-                        <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.65, margin: 0 }}>
-                          <strong>What gets done:</strong> {rec.action}
-                        </p>
-                      </div>
-                    );
-                  })}
-                </div>
+                <TimelineRail compact items={
+                  [...lowDims, ...midDims].slice(0, 4)
+                    .map(dim => ({
+                      dim,
+                      rec: DIM_RECS[dim.key],
+                      start: parseInt((DIM_RECS[dim.key].days.match(/\d+/) || ["0"])[0], 10),
+                    }))
+                    .sort((a, b) => a.start - b.start)
+                    .map(({ dim, rec }) => ({
+                      title: dim.label,
+                      meta: rec.days,
+                      active: scores[dim.key] <= 2,
+                      description: rec.impact,
+                      deliverable: rec.action,
+                    }))
+                } />
                 <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginTop: "24px", marginBottom: 0, paddingTop: "20px", borderTop: `1px solid ${COLORS.border}` }}>
                   Each of these is a defined deliverable — not a slide recommendation. The <strong>100-Day Operating Playbook</strong> covers all of them, sequenced, tracked, and board-ready from Day 1.
                 </p>

@@ -570,7 +570,7 @@ export const globalCSS = `
   .pricing-card.recommended {
     position: relative !important;
     background: #FFFBF0 !important;
-    border: 2px solid #C8952E !important;
+    border: 2px solid #B8860B !important;
     box-shadow: 0 8px 24px rgba(200,149,46,0.15) !important;
     transform: scale(1.03);
     z-index: 2;
@@ -579,7 +579,7 @@ export const globalCSS = `
     content: 'Recommended';
     position: absolute; top: -14px; left: 50%;
     transform: translateX(-50%);
-    background: #C8952E; color: #fff;
+    background: #B8860B; color: #fff;
     font-size: 11px; font-weight: 600; letter-spacing: 1px;
     text-transform: uppercase; padding: 5px 18px;
     border-radius: 20px; white-space: nowrap;
@@ -864,7 +864,7 @@ export const globalCSS = `
     font-weight: 600 !important;
     letter-spacing: 1.5px !important;
     text-transform: uppercase !important;
-    color: #C8952E !important;
+    color: #B8860B !important;
     font-style: normal !important;
   }
   @media (max-width: 768px) {
@@ -909,7 +909,7 @@ export const globalCSS = `
     color: #1B2A4A;
     margin-bottom: 12px;
     padding-bottom: 8px;
-    border-bottom: 2px solid #C8952E;
+    border-bottom: 2px solid #B8860B;
     display: inline-block;
   }
 
@@ -967,7 +967,7 @@ export const globalCSS = `
     font-weight: 600 !important;
     letter-spacing: 1.5px !important;
     text-transform: uppercase;
-    color: #C8952E;
+    color: #B8860B;
   }
   .hero-category {
     font-family: 'DM Sans', sans-serif;
@@ -975,7 +975,7 @@ export const globalCSS = `
     font-weight: 600 !important;
     letter-spacing: 2px !important;
     text-transform: uppercase;
-    color: #C8952E !important;
+    color: #B8860B !important;
     margin-bottom: 16px;
   }
   .pe-consequence .label { color: #C0392B !important; }
@@ -1022,7 +1022,7 @@ export const globalCSS = `
     content: '✓';
     position: absolute;
     left: 0;
-    color: #C8952E;
+    color: #B8860B;
     font-weight: 700;
     font-size: 14px;
   }
@@ -1081,7 +1081,7 @@ export const globalCSS = `
   }
   .track-result {
     background: #FFFBF0 !important;
-    border-left: 3px solid #C8952E !important;
+    border-left: 3px solid #B8860B !important;
     padding: 14px 16px !important;
     border-radius: 0 6px 6px 0 !important;
     margin-top: 20px !important;
@@ -1113,7 +1113,7 @@ export const globalCSS = `
     font-size: 16px; flex-shrink: 0;
   }
   .case-icon.stability { background: linear-gradient(135deg, rgba(90,122,155,0.1), rgba(90,122,155,0.05)); color: #5A7A9B; }
-  .case-icon.vendor { background: linear-gradient(135deg, rgba(200,149,46,0.08), rgba(200,149,46,0.04)); color: #C8952E; }
+  .case-icon.vendor { background: linear-gradient(135deg, rgba(200,149,46,0.08), rgba(200,149,46,0.04)); color: #B8860B; }
   .case-label { font-family: 'EB Garamond', serif; font-size: 18px; font-weight: 600; color: #1B2A4A; line-height: 1.3; }
   .case-context { font-size: 12.5px; color: #6B6B6B; font-weight: 400; margin-top: 1px; }
   .case-domain-tag {
@@ -1121,7 +1121,7 @@ export const globalCSS = `
     padding: 4px 10px; border-radius: 4px; flex-shrink: 0; white-space: nowrap;
   }
   .case-domain-tag.ops { background: rgba(90,122,155,0.06); color: #5A7A9B; }
-  .case-domain-tag.vendor-tag { background: rgba(200,149,46,0.08); color: #C8952E; }
+  .case-domain-tag.vendor-tag { background: rgba(200,149,46,0.08); color: #B8860B; }
 
   .case-body { padding: 24px 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
   .case-section-heading {
@@ -1129,7 +1129,7 @@ export const globalCSS = `
     text-transform: uppercase; margin-bottom: 10px;
   }
   .case-section-heading.situation { color: #5A7A9B; }
-  .case-section-heading.intervention { color: #C8952E; }
+  .case-section-heading.intervention { color: #B8860B; }
   .case-situation p { font-size: 14.5px; line-height: 1.6; color: #3A3A3A; margin: 0; }
   .case-intervention ul { list-style: none; padding: 0; margin: 0; }
   .case-intervention li {
@@ -1138,10 +1138,10 @@ export const globalCSS = `
   }
   .case-intervention li::before {
     content: ''; position: absolute; left: 0; top: 12px;
-    width: 6px; height: 6px; border-radius: 50%; background: #C8952E; opacity: 0.5;
+    width: 6px; height: 6px; border-radius: 50%; background: #B8860B; opacity: 0.5;
   }
 
-  .case-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 2px solid #C8952E; }
+  .case-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 2px solid #B8860B; }
   .case-metric { padding: 20px 24px; text-align: center; position: relative; }
   .case-metric:not(:last-child)::after {
     content: ''; position: absolute; right: 0; top: 16px; bottom: 16px;
@@ -1162,7 +1162,7 @@ export const globalCSS = `
     font-style: normal; font-weight: 600; color: #1B2A4A;
     font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; margin-right: 6px;
   }
-  .case-read-more { font-size: 13px; font-weight: 600; color: #C8952E; text-decoration: none; white-space: nowrap; }
+  .case-read-more { font-size: 13px; font-weight: 600; color: #B8860B; text-decoration: none; white-space: nowrap; }
   .case-read-more:hover { color: #D4A94A; }
 
   /* Expandable nested outcome cards */
@@ -1188,7 +1188,7 @@ export const globalCSS = `
   .domain-dot.incidents { background: #D4574E; }
   .domain-dot.change { background: #D49A4E; }
   .domain-dot.kpi { background: #5A7A9B; }
-  .domain-dot.vendor-dot { background: #C8952E; }
+  .domain-dot.vendor-dot { background: #B8860B; }
 
   .outcome-step { margin-bottom: 10px; }
   .outcome-step:last-child { margin-bottom: 0; }
@@ -1196,13 +1196,13 @@ export const globalCSS = `
     font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 3px;
   }
   .outcome-step-label.gap { color: #B85450; }
-  .outcome-step-label.fix { color: #C8952E; }
+  .outcome-step-label.fix { color: #B8860B; }
   .outcome-step-label.result { color: #4A8C6F; }
   .outcome-step p { font-size: 13px; line-height: 1.5; color: #3A3A3A; margin: 0; }
 
   .measured-outcomes-label {
     font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-    color: #C8952E; margin-bottom: 20px; display: block;
+    color: #B8860B; margin-bottom: 20px; display: block;
   }
 
   @media (max-width: 680px) {

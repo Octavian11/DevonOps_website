@@ -5,7 +5,7 @@ import {
 } from "../constants.js";
 import {
   DomainTag, SectionTitle, Section,
-  LeadMagnetLink,
+  LeadMagnetLink, TestimonialBlock,
 } from "../components.jsx";
 
 // ─── HERO BLOCK WITH NAV ─────────────────────────────────────
@@ -76,26 +76,6 @@ function HeroCredStrip() {
       </div>
       <div style={{ width: "1px", height: "28px", background: COLORS.border, flexShrink: 0 }} />
       <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.steel }}>Pressure-tested in a <strong style={{ color: COLORS.charcoal }}>$10B+ platform</strong></span>
-    </div>
-  );
-}
-
-// ─── PROOF METRICS STRIP (Item 04) ──────────────────────────
-
-function ProofMetricsStrip() {
-  const metrics = [
-    { value: "~50%", label: "incident reduction" },
-    { value: "$2M+", label: "annual savings" },
-    { value: "94→99%", label: "uptime" },
-  ];
-  return (
-    <div className="proof-metrics-strip">
-      {metrics.map((m, i) => (
-        <div key={i} className="proof-metric">
-          <div className="proof-metric-number">{m.value}</div>
-          <div className="proof-metric-label">{m.label}</div>
-        </div>
-      ))}
     </div>
   );
 }
@@ -247,9 +227,15 @@ function LeversTeaserSection({ setPage }) {
         </a>
       </p>
 
-      <div className="domain-pills-row" style={{ marginTop: "16px", display: "flex", gap: "8px", flexWrap: "wrap" }}>
-        {Object.entries(DOMAINS).map(([k]) => (
-          <DomainTag key={k} domain={k} />
+      <div style={{ marginTop: "16px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))", gap: "12px" }}>
+        {Object.entries(DOMAINS).map(([k, v]) => (
+          <div key={k} style={{ display: "flex", gap: "10px", alignItems: "flex-start", background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "12px 14px" }}>
+            <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: v.color, flexShrink: 0, marginTop: "6px" }} />
+            <div>
+              <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 700, color: COLORS.navy }}>{v.name}</div>
+              <div style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.bodyMuted, lineHeight: 1.45 }}>{v.desc}</div>
+            </div>
+          </div>
         ))}
       </div>
     </Section>
@@ -306,12 +292,6 @@ function CostOfInaction() {
 // ─── COMPACT ABOUT BIO ───────────────────────────────────────
 
 function CompactAboutBio({ setPage }) {
-  const metrics = [
-    { value: "~50%", label: "incident reduction" },
-    { value: "$2M+", label: "annual savings" },
-    { value: "94→99%", label: "uptime" },
-  ];
-
   return (
     <Section noCTA background={`${COLORS.navy}04`}>
       <div style={{ display: "flex", gap: "20px", alignItems: "flex-start", flexWrap: "wrap" }}>
@@ -331,14 +311,6 @@ function CompactAboutBio({ setPage }) {
             <span className="credential-label">Institutional background</span>
             {["JPMorgan", "Barclays", "Lazard", "Bank of America", "Columbia MBA"].map((name, i) => (
               <span key={i} style={{ fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 600, color: COLORS.charcoal, opacity: 0.65 }}>{name}</span>
-            ))}
-          </div>
-          <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", marginBottom: "16px" }}>
-            {metrics.map((m, i) => (
-              <div key={i}>
-                <div style={{ fontFamily: FONTS.body, fontSize: "1.1rem", fontWeight: 700, color: COLORS.gold }}>{m.value}</div>
-                <div style={{ fontFamily: FONTS.body, fontSize: "0.78rem", color: COLORS.steel }}>{m.label}</div>
-              </div>
             ))}
           </div>
           <button
@@ -406,6 +378,7 @@ export default function LeverExplorer({ setPage }) {
         <small>McKinsey Global Private Markets Review 2026</small>
       </div>
       <CostOfInaction />
+      <TestimonialBlock />
       <CompactAboutBio setPage={setPage} />
       <OfferTeaser setPage={setPage} />
     </div>
