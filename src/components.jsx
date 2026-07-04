@@ -41,7 +41,7 @@ export function DomainTag({ domain }) {
 export function CTAButton({ text, variant, style: extraStyle, showAvailability }) {
   const isPrimary = variant !== "secondary";
   const btnStyle = isPrimary ? PRIMARY_BTN : SECONDARY_BTN;
-  const hoverBg = isPrimary ? "#B58A2E" : `${COLORS.navy}08`;
+  const hoverBg = isPrimary ? "#A07D2E" : `${COLORS.navy}08`;
   const restoreBg = isPrimary ? COLORS.gold : "transparent";
   return (
     <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
@@ -95,14 +95,14 @@ export function ButtonPair({
         {primaryLink ? (
           <a href={primaryLink} target="_blank" rel="noopener noreferrer"
              style={PRIMARY_BTN}
-             onMouseEnter={e => { e.currentTarget.style.background = "#B58A2E"; e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 4px 12px rgba(214,166,63,0.25)"; }}
+             onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 4px 12px rgba(214,166,63,0.25)"; }}
              onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}>
             {primaryText}
           </a>
         ) : (
           <button onClick={primaryAction}
              style={PRIMARY_BTN}
-             onMouseEnter={e => { e.currentTarget.style.background = "#B58A2E"; e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 4px 12px rgba(214,166,63,0.25)"; }}
+             onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 4px 12px rgba(214,166,63,0.25)"; }}
              onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}>
             {primaryText}
           </button>
@@ -1044,7 +1044,7 @@ function FooterLeadCapture() {
 
   return (
     <div>
-      <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.gold, marginBottom: "16px", letterSpacing: "0.5px" }}>
+      <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.goldOnDark, marginBottom: "16px", letterSpacing: "0.5px" }}>
         Not ready to book?
       </h3>
       <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: `${COLORS.offWhite}B0`, lineHeight: 1.55, marginBottom: "14px" }}>
@@ -1076,18 +1076,18 @@ export function Footer({ setPage }) {
       <div className="footer-grid" style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(200px, 100%), 1fr))", gap: "32px" }}>
         {/* Contact */}
         <div>
-          <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.gold, marginBottom: "16px", letterSpacing: "0.5px" }}>Contact</h3>
+          <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.goldOnDark, marginBottom: "16px", letterSpacing: "0.5px" }}>Contact</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
             <a href={`mailto:${CONTACT_EMAIL}`} style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.offWhite, textDecoration: "none", transition: "color 0.2s" }}
-              onMouseEnter={e => e.currentTarget.style.color = COLORS.gold} onMouseLeave={e => e.currentTarget.style.color = COLORS.offWhite}>
+              onMouseEnter={e => e.currentTarget.style.color = COLORS.goldOnDark} onMouseLeave={e => e.currentTarget.style.color = COLORS.offWhite}>
               {CONTACT_EMAIL}
             </a>
             <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.offWhite, textDecoration: "none", transition: "color 0.2s" }}
-              onMouseEnter={e => e.currentTarget.style.color = COLORS.gold} onMouseLeave={e => e.currentTarget.style.color = COLORS.offWhite}>
+              onMouseEnter={e => e.currentTarget.style.color = COLORS.goldOnDark} onMouseLeave={e => e.currentTarget.style.color = COLORS.offWhite}>
               LinkedIn →
             </a>
             <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-              <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.gold, textDecoration: "none", fontWeight: 600, transition: "opacity 0.2s" }}
+              <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.goldOnDark, textDecoration: "none", fontWeight: 600, transition: "opacity 0.2s" }}
                 onMouseEnter={e => e.currentTarget.style.opacity = "0.8"} onMouseLeave={e => e.currentTarget.style.opacity = "1"}>
                 Book a Fit Check
               </a>
@@ -1100,7 +1100,7 @@ export function Footer({ setPage }) {
 
         {/* Navigation */}
         <div>
-          <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.gold, marginBottom: "16px", letterSpacing: "0.5px" }}>Navigation</h3>
+          <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.goldOnDark, marginBottom: "16px", letterSpacing: "0.5px" }}>Navigation</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
             {[
               { key: "levers", label: "Home" },
@@ -1111,7 +1111,7 @@ export function Footer({ setPage }) {
             ].map(({ key, label }) => (
               <button key={key} onClick={() => setPage(key)}
                 style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.offWhite, background: "none", border: "none", padding: 0, textAlign: "left", cursor: "pointer", transition: "color 0.2s" }}
-                onMouseEnter={e => e.currentTarget.style.color = COLORS.gold}
+                onMouseEnter={e => e.currentTarget.style.color = COLORS.goldOnDark}
                 onMouseLeave={e => e.currentTarget.style.color = COLORS.offWhite}>
                 {label}
               </button>
@@ -1121,7 +1121,7 @@ export function Footer({ setPage }) {
 
         {/* Resources */}
         <div>
-          <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.gold, marginBottom: "16px", letterSpacing: "0.5px" }}>Resources</h3>
+          <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.goldOnDark, marginBottom: "16px", letterSpacing: "0.5px" }}>Resources</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
             <LeadMagnetLink pdfUrl={SAMPLE_SCORECARD_PDF} variant="footer-link">
               Ops Diligence Scorecard (PDF)
@@ -1142,7 +1142,7 @@ export function Footer({ setPage }) {
           <p style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.offWhite, opacity: 0.7, margin: "0 0 4px 0" }}>
             © {new Date().getFullYear()} Devonshire Ops. All rights reserved.
           </p>
-          <p style={{ fontFamily: FONTS.heading, fontSize: "0.9rem", color: COLORS.gold, opacity: 0.9, margin: 0, fontWeight: 600 }}>
+          <p style={{ fontFamily: FONTS.heading, fontSize: "0.9rem", color: COLORS.goldOnDark, opacity: 0.9, margin: 0, fontWeight: 600 }}>
             Find the gaps. Build the plan. Create the value.
           </p>
         </div>

@@ -376,13 +376,13 @@ function LeverExplorerSection({ setPage }) {
           {idx === 4 && visible.length > 5 && (
             <div style={{ margin: "12px 0 16px", padding: "20px 28px", background: COLORS.navy, borderRadius: RADIUS.md, boxShadow: "0 4px 12px rgba(20, 33, 61, 0.15)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
               <p style={{ fontFamily: FONTS.body, color: COLORS.offWhite, margin: 0, lineHeight: 1.55 }}>
-                <strong style={{ color: COLORS.gold }}>Not sure which of these apply to your deal?</strong> Score it in 2 minutes — free, produces a prioritized assessment.
+                <strong style={{ color: COLORS.goldOnDark }}>Not sure which of these apply to your deal?</strong> Score it in 2 minutes — free, produces a prioritized assessment.
               </p>
               <div style={{ display: "flex", gap: "16px", flexShrink: 0 }}>
                 <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif", fontSize: "0.9rem", fontWeight: 600, border: "none", borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}>
                   Book a Fit Check (15 min)
                 </a>
-                <button onClick={() => setPage("scorer")} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.gold, fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif", fontSize: "0.9rem", fontWeight: 600, border: `1.5px solid ${COLORS.gold}`, borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}>
+                <button onClick={() => setPage("scorer")} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.goldOnDark, fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif", fontSize: "0.9rem", fontWeight: 600, border: `1.5px solid ${COLORS.goldOnDark}`, borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}>
                   Score Your Deal →
                 </button>
               </div>

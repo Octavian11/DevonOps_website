@@ -273,7 +273,7 @@ export default function ScorerPage({ setPage }) {
         <div style={{ textAlign: "center", marginBottom: "28px" }}>
           <button onClick={() => { setShowResults(true); setTimeout(() => document.getElementById("scorer-results")?.scrollIntoView({ behavior: "smooth", block: "start" }), 80); }}
             style={{ padding: "14px 28px", background: COLORS.gold, color: "white", border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, cursor: "pointer", letterSpacing: "0.3px", transition: "background 0.2s" }}
-            onMouseEnter={e => { e.currentTarget.style.background = "#B58A2E"; }}
+            onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; }}
             onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; }}>
             View Results →
           </button>

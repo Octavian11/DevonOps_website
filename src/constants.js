@@ -24,8 +24,9 @@ export async function copyToClipboard(text) {
 export const COLORS = {
   navy: "#14213D",
   steel: "#14213D",
-  gold: "#D6A63F",
-  goldDark: "#B58A2E",
+  gold: "#B8860B",          // deep gold — use ON WHITE/CREAM surfaces + button fills
+  goldOnDark: "#B8860B",    // bright gold — use ON NAVY surfaces only
+  goldDark: "#A07D2E",      // hover state for deep gold
   offWhite: "#FCFCFC",
   charcoal: "#0A0A0A",
   border: "#E2E8F0",
@@ -575,7 +576,7 @@ export const globalCSS = `
   .pricing-card.recommended {
     position: relative !important;
     background: #FFFBF0 !important;
-    border: 2px solid #D6A63F !important;
+    border: 2px solid #B8860B !important;
     box-shadow: 0 8px 24px rgba(214,166,63,0.15) !important;
     transform: scale(1.03);
     z-index: 2;
@@ -584,7 +585,7 @@ export const globalCSS = `
     content: 'Recommended';
     position: absolute; top: -14px; left: 50%;
     transform: translateX(-50%);
-    background: #D6A63F; color: #fff;
+    background: #B8860B; color: #fff;
     font-size: 0.6rem; font-weight: 600; letter-spacing: 1px;
     text-transform: uppercase; padding: 5px 18px;
     border-radius: 20px; white-space: nowrap;
@@ -680,7 +681,7 @@ export const globalCSS = `
   .proof-metric { text-align: center; }
   .proof-metric-number {
     font-family: 'EB Garamond', Georgia, serif;
-    font-size: 1.6rem; font-weight: 400; color: ${COLORS.gold}; line-height: 1.1;
+    font-size: 1.6rem; font-weight: 400; color: #D6A63F; line-height: 1.1;
   }
   .proof-metric-label {
     font-size: 0.72rem; color: rgba(255,255,255,0.7);
@@ -827,8 +828,8 @@ export const globalCSS = `
     cursor: pointer; font-family: inherit;
   }
   .card-text-link:hover {
-    text-decoration-color: #D6A63F;
-    color: #D6A63F;
+    text-decoration-color: #B8860B;
+    color: #B8860B;
   }
 
   /* ══════════════════════════════════════════════════════════════
@@ -913,7 +914,7 @@ export const globalCSS = `
     color: #1B2A4A;
     margin-bottom: 12px;
     padding-bottom: 8px;
-    border-bottom: 2px solid #D6A63F;
+    border-bottom: 2px solid #B8860B;
     display: inline-block;
   }
 
@@ -971,7 +972,7 @@ export const globalCSS = `
     font-weight: 600 !important;
     letter-spacing: 1.5px !important;
     text-transform: uppercase;
-    color: #D6A63F;
+    color: #B8860B;
   }
   .hero-category {
     font-family: 'DM Sans', sans-serif;
@@ -1024,7 +1025,7 @@ export const globalCSS = `
     content: '✓';
     position: absolute;
     left: 0;
-    color: #D6A63F;
+    color: #B8860B;
     font-weight: 700;
     font-size: 0.72rem;
   }
@@ -1083,7 +1084,7 @@ export const globalCSS = `
   }
   .track-result {
     background: #FFFBF0 !important;
-    border-left: 3px solid #D6A63F !important;
+    border-left: 3px solid #B8860B !important;
     padding: 14px 16px !important;
     border-radius: 0 6px 6px 0 !important;
     margin-top: 20px !important;
@@ -1115,7 +1116,7 @@ export const globalCSS = `
     font-size: 0.8rem; flex-shrink: 0;
   }
   .case-icon.stability { background: linear-gradient(135deg, rgba(20,33,61,0.1), rgba(20,33,61,0.05)); color: #14213D; }
-  .case-icon.vendor { background: linear-gradient(135deg, rgba(214,166,63,0.08), rgba(214,166,63,0.04)); color: #D6A63F; }
+  .case-icon.vendor { background: linear-gradient(135deg, rgba(214,166,63,0.08), rgba(214,166,63,0.04)); color: #B8860B; }
   .case-label { font-family: 'EB Garamond', serif; font-size: 0.9rem; font-weight: 600; color: #1B2A4A; line-height: 1.3; }
   .case-context { font-size: 0.65rem; color: #6B6B6B; font-weight: 400; margin-top: 1px; }
   .case-domain-tag {
@@ -1123,7 +1124,7 @@ export const globalCSS = `
     padding: 4px 10px; border-radius: 4px; flex-shrink: 0; white-space: nowrap;
   }
   .case-domain-tag.ops { background: rgba(20,33,61,0.06); color: #14213D; }
-  .case-domain-tag.vendor-tag { background: rgba(214,166,63,0.08); color: #D6A63F; }
+  .case-domain-tag.vendor-tag { background: rgba(214,166,63,0.08); color: #B8860B; }
 
   .case-body { padding: 24px 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
   .case-section-heading {
@@ -1131,7 +1132,7 @@ export const globalCSS = `
     text-transform: uppercase; margin-bottom: 10px;
   }
   .case-section-heading.situation { color: #14213D; }
-  .case-section-heading.intervention { color: #D6A63F; }
+  .case-section-heading.intervention { color: #B8860B; }
   .case-situation p { font-size: 0.8rem; line-height: 1.6; color: #3A3A3A; margin: 0; }
   .case-intervention ul { list-style: none; padding: 0; margin: 0; }
   .case-intervention li {
@@ -1140,10 +1141,10 @@ export const globalCSS = `
   }
   .case-intervention li::before {
     content: ''; position: absolute; left: 0; top: 12px;
-    width: 6px; height: 6px; border-radius: 50%; background: #D6A63F; opacity: 0.5;
+    width: 6px; height: 6px; border-radius: 50%; background: #B8860B; opacity: 0.5;
   }
 
-  .case-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 2px solid #D6A63F; }
+  .case-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 2px solid #B8860B; }
   .case-metric { padding: 20px 24px; text-align: center; position: relative; }
   .case-metric:not(:last-child)::after {
     content: ''; position: absolute; right: 0; top: 16px; bottom: 16px;
@@ -1164,8 +1165,8 @@ export const globalCSS = `
     font-style: normal; font-weight: 600; color: #1B2A4A;
     font-size: 0.6rem; letter-spacing: 0.06em; text-transform: uppercase; margin-right: 6px;
   }
-  .case-read-more { font-size: 0.72rem; font-weight: 600; color: #D6A63F; text-decoration: none; white-space: nowrap; }
-  .case-read-more:hover { color: #D6A63F; }
+  .case-read-more { font-size: 0.72rem; font-weight: 600; color: #B8860B; text-decoration: none; white-space: nowrap; }
+  .case-read-more:hover { color: #B8860B; }
 
   /* Expandable nested outcome cards */
   .outcome-expandable { margin: 0 28px 24px; }
@@ -1190,7 +1191,7 @@ export const globalCSS = `
   .domain-dot.incidents { background: #D4574E; }
   .domain-dot.change { background: #D49A4E; }
   .domain-dot.kpi { background: #14213D; }
-  .domain-dot.vendor-dot { background: #D6A63F; }
+  .domain-dot.vendor-dot { background: #B8860B; }
 
   .outcome-step { margin-bottom: 10px; }
   .outcome-step:last-child { margin-bottom: 0; }
@@ -1198,13 +1199,13 @@ export const globalCSS = `
     font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 3px;
   }
   .outcome-step-label.gap { color: #B85450; }
-  .outcome-step-label.fix { color: #D6A63F; }
+  .outcome-step-label.fix { color: #B8860B; }
   .outcome-step-label.result { color: #4A8C6F; }
   .outcome-step p { font-size: 0.72rem; line-height: 1.5; color: #3A3A3A; margin: 0; }
 
   .measured-outcomes-label {
     font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-    color: #D6A63F; margin-bottom: 20px; display: block;
+    color: #B8860B; margin-bottom: 20px; display: block;
   }
 
   @media (max-width: 680px) {
