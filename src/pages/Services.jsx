@@ -243,7 +243,7 @@ function LeverExplorerSection({ setPage }) {
   const hasActiveFilter = search || domainFilter !== "All" || timingFilter !== "All" || severityFilter !== "All";
   const visible = hasActiveFilter ? filtered : (showAll ? filtered : filtered.filter(l => l.common));
 
-  const selectStyle = { padding: "10px 14px", border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, background: COLORS.white, cursor: "pointer", minWidth: "160px", boxShadow: "0 1px 2px rgba(67, 97, 125, 0.05)" };
+  const selectStyle = { padding: "10px 14px", border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, background: COLORS.white, cursor: "pointer", minWidth: "160px", boxShadow: "0 1px 2px rgba(20, 33, 61, 0.05)" };
 
   return (
     <Section title="20 Operational Value Creation Levers" noCTA variant="tinted" id="lever-explorer">
@@ -374,7 +374,7 @@ function LeverExplorerSection({ setPage }) {
           </div>
 
           {idx === 4 && visible.length > 5 && (
-            <div style={{ margin: "12px 0 16px", padding: "20px 28px", background: COLORS.navy, borderRadius: RADIUS.md, boxShadow: "0 4px 12px rgba(67, 97, 125, 0.15)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
+            <div style={{ margin: "12px 0 16px", padding: "20px 28px", background: COLORS.navy, borderRadius: RADIUS.md, boxShadow: "0 4px 12px rgba(20, 33, 61, 0.15)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
               <p style={{ fontFamily: FONTS.body, color: COLORS.offWhite, margin: 0, lineHeight: 1.55 }}>
                 <strong style={{ color: COLORS.gold }}>Not sure which of these apply to your deal?</strong> Score it in 2 minutes — free, produces a prioritized assessment.
               </p>
