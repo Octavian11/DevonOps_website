@@ -3,7 +3,7 @@ import {
   COLORS, FONTS, SPACING, SHADOWS, RADIUS,
   CALENDLY,
 } from "../constants.js";
-import { CTAButton, ButtonPair, Section, ServicesSamplesRow } from "../components.jsx";
+import { CTAButton, ButtonPair, Section, ServicesSamplesRow, TimelineRail } from "../components.jsx";
 
 export default function AboutPage() {
   const [outcomeExpanded, setOutcomeExpanded] = useState(false);
@@ -23,17 +23,28 @@ export default function AboutPage() {
         </div>
       </Section>
 
+      {/* Career Timeline */}
+      <Section noCTA title="The Path Here" variant="tinted">
+        <TimelineRail compact items={[
+          { title: "JPMorgan · Barclays · Lazard", meta: "Early career", description: "Operations roles across trading and banking platforms — front-to-back workflow, automation, and vendor foundations." },
+          { title: "Bank of America", meta: "Operations Manager", description: "Operating-model consolidation across $700M+ daily transaction flow; automation business cases funded at $1.8M." },
+          { title: "$10B+ investment platform", meta: "Head of Platform Operations", description: "8-person global team. Nearly 50% drop in critical incidents, $2M in cost reduction, 94% → 99% availability." },
+          { title: "Columbia Business School", meta: "MBA, Executive Program '26", description: "PE value-creation research and the operator lens formalized into a repeatable diligence methodology." },
+          { title: "Devonshire Operations", meta: "Now", description: "Operational diligence and post-close execution for LMM PE sponsors, independent sponsors, and family offices.", active: true },
+        ]} />
+      </Section>
+
       {/* What I Do */}
       <Section noCTA title="What I Do" variant="tinted">
         <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "32px" }}>
-          I help PE funds and portfolio companies eliminate the operational friction that erodes EBITDA, extends hold periods, and creates risk that surfaces too late. From pre-close diligence through post-close stabilization to ongoing governance — I install the operating discipline that makes value creation plans actually executable.
+          I work the operating layer beneath the financials — the layer that decides whether the value creation plan actually happens. I help PE funds and portfolio companies eliminate the operational friction that erodes EBITDA, extends hold periods, and creates risk that surfaces too late. From pre-close diligence through post-close stabilization to ongoing governance — I install the operating discipline that makes value creation plans actually executable.
         </p>
         <div style={{ padding: "14px 18px", background: `${COLORS.navy}06`, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, marginBottom: SPACING.md }}>
           <p style={{ fontFamily: FONTS.body, color: COLORS.navy, lineHeight: 1.6, margin: 0 }}>
             <strong>Best fit:</strong> Lower-middle-market PE funds, independent sponsors, and family offices doing control deals where operational risk can break the value creation plan.
           </p>
         </div>
-        <p style={{ fontFamily: FONTS.heading, color: COLORS.gold, fontStyle: "italic", marginBottom: SPACING.md }}>
+        <p style={{ fontFamily: FONTS.heading, color: COLORS.gold, fontWeight: 600, marginBottom: SPACING.md }}>
           Find the gaps. Build the plan. Create the value.
         </p>
         <CTAButton text="Book a Fit Check (15 min)" showAvailability={true} />
@@ -81,20 +92,20 @@ export default function AboutPage() {
           <div style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "8px" }}>
             Platform Stabilization · $10B+ platform
           </div>
-          <div style={{ fontFamily: FONTS.heading, fontSize: "1.15rem", fontWeight: 700, color: COLORS.navy, marginBottom: "14px" }}>
+          <div style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "14px" }}>
             Platform Stabilization & Reliability
           </div>
-          <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Context</div>
+          <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Context</div>
           <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "16px" }}>
             A $10B+ platform was scaling rapidly, but its operating cadence hadn't kept pace. The platform had suffered 4 critical outages in 12 months. Portfolio-weighted availability sat at ~94%. High-severity incidents averaged 6 hours to resolve. Leadership time was consumed by firefighting, and stakeholder satisfaction was declining — NPS had dropped from 45 to 38 over 18 months.
           </p>
-          <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>What I Built</div>
+          <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>What I Built</div>
           <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "20px" }}>
             Hired and led an 8-person global operations team across New York, London, and Hong Kong in ~6 months. Reset incident management from the ground up: severity model, escalation paths, communications cadence, on-call ownership, and closed-loop postmortems. Standardized runbooks and introduced change discipline through a CAB-lite governance process. Built a KPI dashboard tracking 18 operational metrics with weekly review cadence, and established quarterly stakeholder reviews with 50+ portfolio management and trading desk stakeholders.
           </p>
           <div className="case-metrics" style={{ borderRadius: `0 0 ${RADIUS.md} ${RADIUS.md}`, marginBottom: "16px" }}>
             {[
-              { v: "0", l: "Critical outages (18 months)" },
+              { v: "~50%", l: "Critical incident reduction" },
               { v: "99.2%", l: "Availability (from 94%)" },
               { v: "−31%", l: "MTTR reduction" },
               { v: "+22", l: "NPS improvement (38 → 60)" },
@@ -105,12 +116,12 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.88rem", color: COLORS.bodyMuted, lineHeight: 1.55, margin: "0 0 16px" }}>
+          <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.bodyMuted, lineHeight: 1.55, margin: "0 0 16px" }}>
             Supported ~50% AUM growth with ~12% headcount increase — operational leverage through governance, not headcount.
           </p>
           <div style={{ padding: "12px 16px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0` }}>
             <div style={{ fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 700, color: COLORS.navy, marginBottom: "4px", textTransform: "uppercase", letterSpacing: "0.5px" }}>PE Translation</div>
-            <p style={{ fontFamily: FONTS.body, fontSize: "0.88rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0 }}>
+            <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0 }}>
               Same playbook installs in a portfolio company in 100 days — at a fraction of the complexity of a $10B fund.
             </p>
           </div>
@@ -128,18 +139,18 @@ export default function AboutPage() {
             <div style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "8px" }}>
               Vendor Optimization · Global asset manager · $40M program · $240M annual spend base
             </div>
-            <div style={{ fontFamily: FONTS.heading, fontSize: "1.15rem", fontWeight: 700, color: COLORS.navy, marginBottom: "14px" }}>
+            <div style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "14px" }}>
               Vendor Optimization & Cost Control
             </div>
-            <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Context</div>
+            <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Context</div>
             <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "16px" }}>
               A global asset manager was running a ~$40M annual technology-and-operations vendor program — within a $240M annual vendor spend base — where spend was growing ~22% annually — materially outpacing AUM and business growth. The vendor landscape was fragmented across 15 providers, creating redundancy and weak negotiating leverage. There was no visibility into utilization or value realization, and no structured governance to prevent cost creep.
             </p>
-            <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>What I Built</div>
+            <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>What I Built</div>
             <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "20px" }}>
               Built a single source of truth for spend across the full $40M program and segmented it by business value and usage. Ran utilization analytics to right-size licensing and surface low-value or duplicative spend. Consolidated 15 providers down to 8 strategic partners, renegotiated terms across major market data and trading platform vendors, and introduced competitive tension through targeted RFP/RFQ processes. Installed ongoing vendor governance: scorecards, contract lifecycle discipline, and QBRs to sustain savings and performance.
             </p>
-            <div style={{ fontFamily: FONTS.body, fontSize: "0.88rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "12px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Measured Outcomes</div>
+            <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 700, color: COLORS.charcoal, marginBottom: "12px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Measured Outcomes</div>
             <div className="case-metrics" style={{ borderRadius: `0 0 ${RADIUS.md} ${RADIUS.md}`, marginBottom: "16px" }}>
               {[
                 { v: ">$2M", l: "Annual run-rate reduction" },
@@ -153,12 +164,12 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
-            <p style={{ fontFamily: FONTS.body, fontSize: "0.88rem", color: COLORS.bodyMuted, lineHeight: 1.55, margin: "0 0 16px" }}>
+            <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.bodyMuted, lineHeight: 1.55, margin: "0 0 16px" }}>
               Additional 10–15% licensing reduction via utilization-driven right-sizing, on top of the consolidation savings.
             </p>
             <div style={{ padding: "12px 16px", background: `${COLORS.gold}0D`, borderLeft: `3px solid ${COLORS.gold}`, borderRadius: `0 ${RADIUS.sm} ${RADIUS.sm} 0` }}>
               <div style={{ fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 700, color: COLORS.navy, marginBottom: "4px", textTransform: "uppercase", letterSpacing: "0.5px" }}>PE Translation</div>
-              <p style={{ fontFamily: FONTS.body, fontSize: "0.88rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0 }}>
+              <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.6, margin: 0 }}>
                 Vendor rationalization is one of the first PE value creation levers — and a fast, defensible path to EBITDA improvement without headcount cuts. This playbook converts into a Stability Sprint add-on: spend transparency, utilization-based decisions, and a governance cadence that sticks. CFOs love it because the ROI is visible in the first quarter.
               </p>
             </div>

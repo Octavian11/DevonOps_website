@@ -23,15 +23,16 @@ export async function copyToClipboard(text) {
 
 export const COLORS = {
   navy: "#14213D",
-  steel: "#43617D",
-  gold: "#B8860B",
-  goldDark: "#7B5C07",
+  steel: "#14213D",
+  gold: "#B8860B",          // deep gold — use ON WHITE/CREAM surfaces + button fills
+  goldOnDark: "#B8860B",    // bright gold — use ON NAVY surfaces only
+  goldDark: "#A07D2E",      // hover state for deep gold
   offWhite: "#FCFCFC",
   charcoal: "#0A0A0A",
   border: "#E2E8F0",
   white: "#FFFFFF",
   primary: "#14213D",
-  bodyMuted: "#6B7280",
+  bodyMuted: "#1F2937",
   criticalBg: "#FFF5F5",
   criticalText: "#9B2C2C",
   criticalBorder: "#FEB2B2",
@@ -53,9 +54,14 @@ export const COLORS = {
 };
 
 export const FONTS = {
-  heading: "'EB Garamond', Garamond, 'Times New Roman', serif",
-  body: "Georgia, 'Times New Roman', serif",
+  heading: "'EB Garamond', Garamond, 'Times New Roman', serif",   // headings + display numbers
+  body: "Georgia, 'Times New Roman', serif",                      // body copy
+  label: "'DM Sans', 'Helvetica Neue', sans-serif",               // UI: buttons, badges, overline labels
 };
+// TYPE SCALE (rem, root 20px desktop / 18 / 16 mobile):
+// 0.6 overline · 0.72 label/caption · 0.8 small body · 0.9 secondary body/UI · 1.0 body/card title
+// 1.1 card heading · 1.4 section H2 · 1.8 page H1 · 2.4 hero — no other sizes.
+const _TYPE_DOC = null;;
 
 // ─── DESIGN SYSTEM TOKENS ───────────────────────────────────
 export const SPACING = {
@@ -69,11 +75,11 @@ export const SPACING = {
 
 export const SHADOWS = {
   none: "none",
-  xs: "0 1px 2px rgba(67, 97, 125, 0.05)",
-  sm: "0 1px 3px rgba(67, 97, 125, 0.1)",
-  md: "0 4px 12px rgba(67, 97, 125, 0.15)",
-  lg: "0 6px 20px rgba(67, 97, 125, 0.18)",
-  xl: "0 10px 30px rgba(67, 97, 125, 0.22)"
+  xs: "0 1px 2px rgba(20, 33, 61, 0.05)",
+  sm: "0 1px 3px rgba(20, 33, 61, 0.1)",
+  md: "0 4px 12px rgba(20, 33, 61, 0.15)",
+  lg: "0 6px 20px rgba(20, 33, 61, 0.18)",
+  xl: "0 10px 30px rgba(20, 33, 61, 0.22)"
 };
 
 export const RADIUS = {
@@ -300,7 +306,7 @@ export const globalCSS = `
     --navy: ${COLORS.primary};
     --gold: ${COLORS.gold};
     --text: #1F2937;
-    --muted: #6B7280;
+    --muted: #1F2937;
     --maxcopy: 70ch;
     --nav-h: 76px;
     --card-radius: 12px;
@@ -337,8 +343,8 @@ export const globalCSS = `
     letter-spacing: 0.2px;
   }
 
-  main p { max-width: var(--maxcopy); font-size: 16px; }
-  main li { font-size: 15px; }
+  main p { max-width: var(--maxcopy); font-size: 0.8rem; }
+  main li { font-size: 0.8rem; }
   td p, th p, nav p, footer p, .no-max-width p { max-width: none; font-size: inherit; }
 
   ::selection { background: ${COLORS.primary}; color: white; }
@@ -570,8 +576,8 @@ export const globalCSS = `
   .pricing-card.recommended {
     position: relative !important;
     background: #FFFBF0 !important;
-    border: 2px solid #C8952E !important;
-    box-shadow: 0 8px 24px rgba(200,149,46,0.15) !important;
+    border: 2px solid #B8860B !important;
+    box-shadow: 0 8px 24px rgba(214,166,63,0.15) !important;
     transform: scale(1.03);
     z-index: 2;
   }
@@ -579,17 +585,17 @@ export const globalCSS = `
     content: 'Recommended';
     position: absolute; top: -14px; left: 50%;
     transform: translateX(-50%);
-    background: #C8952E; color: #fff;
-    font-size: 11px; font-weight: 600; letter-spacing: 1px;
+    background: #B8860B; color: #fff;
+    font-size: 0.6rem; font-weight: 600; letter-spacing: 1px;
     text-transform: uppercase; padding: 5px 18px;
     border-radius: 20px; white-space: nowrap;
   }
-  .pricing-card.recommended .price { font-size: 22px; font-weight: 600; }
+  .pricing-card.recommended .price { font-size: 1.1rem; font-weight: 600; }
   @media (max-width: 768px) {
     .pricing-grid { gap: 20px !important; }
     .pricing-card { padding: 24px 20px 28px !important; border-radius: 12px !important; }
     .pricing-card.recommended { transform: none !important; padding: 32px 20px 28px !important; }
-    .pricing-card .price { font-size: 22px !important; font-weight: 600 !important; }
+    .pricing-card .price { font-size: 1.1rem !important; font-weight: 600 !important; }
   }
 
   /* Issue 05 — Category pills: horizontal scroll */
@@ -650,14 +656,14 @@ export const globalCSS = `
   /* Issue 09 — FAQ accordion touch targets */
   @media (max-width: 768px) {
     .faq-row { min-height: 52px !important; padding: 16px 0 !important; }
-    .expand-icon { font-size: 16px !important; min-width: 24px !important; text-align: center; }
+    .expand-icon { font-size: 0.9rem !important; min-width: 24px !important; text-align: center; }
   }
 
   /* Issue 10 — Footer 2×2 grid, form inputs */
   @media (max-width: 768px) {
     .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 32px 20px !important; padding: 40px 20px !important; }
-    .footer-form input[type="email"] { height: 44px !important; font-size: 14px !important; padding: 0 12px !important; box-sizing: border-box !important; }
-    .footer-form button[type="submit"] { height: 48px !important; width: 100% !important; font-size: 14px !important; }
+    .footer-form input[type="email"] { height: 44px !important; font-size: 0.8rem !important; padding: 0 12px !important; box-sizing: border-box !important; }
+    .footer-form button[type="submit"] { height: 48px !important; width: 100% !important; font-size: 0.8rem !important; }
   }
 
   /* ══════════════════════════════════════════════════════════════
@@ -675,15 +681,15 @@ export const globalCSS = `
   .proof-metric { text-align: center; }
   .proof-metric-number {
     font-family: 'EB Garamond', Georgia, serif;
-    font-size: 32px; font-weight: 400; color: ${COLORS.gold}; line-height: 1.1;
+    font-size: 1.6rem; font-weight: 400; color: #D6A63F; line-height: 1.1;
   }
   .proof-metric-label {
-    font-size: 13px; color: rgba(255,255,255,0.7);
+    font-size: 0.72rem; color: rgba(255,255,255,0.7);
     font-weight: 500; margin-top: 4px; letter-spacing: 0.5px;
   }
   @media (max-width: 768px) {
     .proof-metrics-strip { gap: 32px; padding: 24px 20px; }
-    .proof-metric-number { font-size: 24px; }
+    .proof-metric-number { font-size: 1.2rem; }
   }
 
   /* Item 05 — Outcome cards */
@@ -700,8 +706,8 @@ export const globalCSS = `
     border-left: 3px solid ${COLORS.steel};
     border-radius: 0 6px 6px 0;
     padding: 14px 16px;
-    font-size: 13px;
-    color: #6B6B65;
+    font-size: 0.72rem;
+    color: #1F2937;
     margin-top: 16px;
     font-family: ${FONTS.body};
     line-height: 1.5;
@@ -712,7 +718,7 @@ export const globalCSS = `
   .bio-headshot {
     width: 80px; height: 80px;
     border-radius: 50%; object-fit: cover;
-    border: 2.5px solid rgba(184,134,11,0.3);
+    border: 2.5px solid rgba(214,166,63,0.3);
     flex-shrink: 0;
     background: ${COLORS.navy};
   }
@@ -728,8 +734,8 @@ export const globalCSS = `
     margin-bottom: 14px;
   }
   .credential-label {
-    font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
-    text-transform: uppercase; color: #A0A09A;
+    font-size: 0.6rem; font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase; color: #1F2937;
     width: 100%; flex-shrink: 0; margin-bottom: -8px;
   }
   .credential-logos img {
@@ -753,18 +759,18 @@ export const globalCSS = `
   }
   .endorsement-text {
     font-family: 'EB Garamond', Georgia, serif;
-    font-style: italic; font-size: 20px; font-weight: 400;
+    font-size: 1rem; font-weight: 400;
     color: ${COLORS.navy}; line-height: 1.6; margin: 0;
   }
   .endorsement-attribution {
     display: inline-flex; align-items: center;
     gap: 12px; margin-top: 20px;
   }
-  .endorser-name { font-size: 14px; font-weight: 600; color: ${COLORS.navy}; }
-  .endorser-title { font-size: 13px; color: #6B6B65; margin-top: 2px; }
+  .endorser-name { font-size: 0.72rem; font-weight: 600; color: ${COLORS.navy}; }
+  .endorser-title { font-size: 0.65rem; color: #1F2937; margin-top: 2px; }
   @media (max-width: 768px) {
     .endorsement-section { padding: 40px 20px; }
-    .endorsement-text { font-size: 18px; }
+    .endorsement-text { font-size: 0.9rem; }
   }
 
   /* ══════════════════════════════════════════════════════════════
@@ -811,7 +817,7 @@ export const globalCSS = `
   /* Card text links (persona cards + path cards) */
   .card-text-link {
     display: inline-block;
-    font-size: 14px; font-weight: 600;
+    font-size: 0.75rem; font-weight: 600;
     color: #14213D;
     text-decoration: underline;
     text-decoration-color: rgba(20,33,61,0.3);
@@ -843,10 +849,10 @@ export const globalCSS = `
     text-align: center;
   }
   .mckinsey-quote p {
-    color: rgba(255,255,255,0.85) !important;
+    color: rgba(255,255,255,0.9) !important;
     font-family: 'EB Garamond', Georgia, serif !important;
-    font-style: italic !important;
-    font-size: 18px !important;
+    font-style: normal !important;
+    font-size: 0.9rem !important;
     line-height: 1.6 !important;
     max-width: 800px;
     margin: 0 auto !important;
@@ -860,26 +866,25 @@ export const globalCSS = `
     display: block !important;
     margin-top: 16px !important;
     font-family: 'DM Sans', sans-serif !important;
-    font-size: 10px !important;
+    font-size: 0.6rem !important;
     font-weight: 600 !important;
     letter-spacing: 1.5px !important;
     text-transform: uppercase !important;
-    color: #C8952E !important;
-    font-style: normal !important;
+    color: #D6A63F !important;
   }
   @media (max-width: 768px) {
     .mckinsey-quote {
       padding: 32px 20px !important;
     }
     .mckinsey-quote p {
-      font-size: 16px !important;
+      font-size: 0.8rem !important;
     }
   }
 
   /* Sub-heading: path cards → pricing cards */
   .pricing-subheading {
     font-family: 'EB Garamond', serif;
-    font-size: 22px;
+    font-size: 1.1rem;
     font-weight: 400;
     color: #1B2A4A;
     margin-top: 40px;
@@ -891,7 +896,7 @@ export const globalCSS = `
   /* Sub-heading: track vignettes → outcome cards */
   .outcomes-subheading {
     font-family: 'EB Garamond', serif;
-    font-size: 22px;
+    font-size: 1.1rem;
     font-weight: 400;
     color: #1B2A4A;
     margin-top: 40px;
@@ -904,12 +909,12 @@ export const globalCSS = `
   .faq-categories { display: flex; flex-direction: column; gap: 32px; }
   .faq-category-heading {
     font-family: 'EB Garamond', serif;
-    font-size: 18px;
+    font-size: 0.9rem;
     font-weight: 600;
     color: #1B2A4A;
     margin-bottom: 12px;
     padding-bottom: 8px;
-    border-bottom: 2px solid #C8952E;
+    border-bottom: 2px solid #B8860B;
     display: inline-block;
   }
 
@@ -920,25 +925,25 @@ export const globalCSS = `
   /* Items 01+02 — Heading weight + type scale */
   h1 {
     font-weight: 400 !important;
-    font-size: 48px;
+    font-size: 2.4rem;
     line-height: 1.15;
     letter-spacing: -0.2px;
   }
   h2, .section-title {
     font-weight: 400 !important;
-    font-size: 28px;
+    font-size: 1.4rem;
     line-height: 1.3;
     letter-spacing: 0px;
     margin-bottom: 12px;
   }
   h3 {
     font-weight: 600 !important;
-    font-size: 20px;
+    font-size: 1rem;
     line-height: 1.3;
     margin-bottom: 8px;
   }
   .faq-row h3, .faq-row {
-    font-size: 18px !important;
+    font-size: 0.9rem !important;
     font-weight: 600 !important;
     line-height: 1.35;
   }
@@ -946,36 +951,36 @@ export const globalCSS = `
   /* Card body text */
   .buyer-card p, .cost-card p, .pricing-card p,
   .outcome-card p, .path-card p, .track-vignette p {
-    font-size: 16px;
+    font-size: 0.8rem;
     line-height: 1.6;
   }
 
   /* List items */
-  li { font-size: 16px; line-height: 1.5; margin-bottom: 6px; }
+  li { font-size: 0.8rem; line-height: 1.5; margin-bottom: 6px; }
 
   /* Small / disclaimer */
   small, .disclaimer, .confidentiality-note p {
-    font-size: 13px;
+    font-size: 0.65rem;
     line-height: 1.5;
-    color: #888;
+    color: #1F2937;
   }
 
   /* Item 03 — Unified label system */
   .context-label {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px !important;
+    font-size: 0.6rem !important;
     font-weight: 600 !important;
     letter-spacing: 1.5px !important;
     text-transform: uppercase;
-    color: #C8952E;
+    color: #14213D;
   }
   .hero-category {
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px !important;
-    font-weight: 600 !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
     letter-spacing: 2px !important;
     text-transform: uppercase;
-    color: #C8952E !important;
+    color: #D6A63F !important;
     margin-bottom: 16px;
   }
   .pe-consequence .label { color: #C0392B !important; }
@@ -987,13 +992,11 @@ export const globalCSS = `
 
   /* Item 05 — Mobile type scale */
   @media (max-width: 768px) {
-    h1 { font-size: 32px !important; line-height: 1.2 !important; }
-    h2, .section-title { font-size: 24px !important; }
-    h3 { font-size: 18px !important; }
-    p { font-size: 15px; }
-    .buyer-card p, .cost-card p, .pricing-card p { font-size: 14px; }
-    .context-label, .hero-category { font-size: 10px !important; }
-    .faq-row h3, .faq-row { font-size: 16px !important; }
+    h1 { font-size: 1.8rem !important; line-height: 1.2 !important; }
+    h2, .section-title { font-size: 1.4rem !important; }
+    h3 { font-size: 1rem !important; }
+    .context-label, .hero-category { font-size: 0.6rem !important; }
+    .faq-row h3, .faq-row { font-size: 0.9rem !important; }
   }
 
   /* ══════════════════════════════════════════════════════════════
@@ -1022,9 +1025,9 @@ export const globalCSS = `
     content: '✓';
     position: absolute;
     left: 0;
-    color: #C8952E;
+    color: #B8860B;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 0.72rem;
   }
   .buyer-card em, .buyer-card i { display: block; margin-bottom: 4px; }
 
@@ -1081,7 +1084,7 @@ export const globalCSS = `
   }
   .track-result {
     background: #FFFBF0 !important;
-    border-left: 3px solid #C8952E !important;
+    border-left: 3px solid #B8860B !important;
     padding: 14px 16px !important;
     border-radius: 0 6px 6px 0 !important;
     margin-top: 20px !important;
@@ -1110,99 +1113,99 @@ export const globalCSS = `
   .case-icon {
     width: 36px; height: 36px; border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 16px; flex-shrink: 0;
+    font-size: 0.8rem; flex-shrink: 0;
   }
-  .case-icon.stability { background: linear-gradient(135deg, rgba(90,122,155,0.1), rgba(90,122,155,0.05)); color: #5A7A9B; }
-  .case-icon.vendor { background: linear-gradient(135deg, rgba(200,149,46,0.08), rgba(200,149,46,0.04)); color: #C8952E; }
-  .case-label { font-family: 'EB Garamond', serif; font-size: 18px; font-weight: 600; color: #1B2A4A; line-height: 1.3; }
-  .case-context { font-size: 12.5px; color: #6B6B6B; font-weight: 400; margin-top: 1px; }
+  .case-icon.stability { background: linear-gradient(135deg, rgba(20,33,61,0.1), rgba(20,33,61,0.05)); color: #14213D; }
+  .case-icon.vendor { background: linear-gradient(135deg, rgba(214,166,63,0.08), rgba(214,166,63,0.04)); color: #B8860B; }
+  .case-label { font-family: 'EB Garamond', serif; font-size: 0.9rem; font-weight: 600; color: #1B2A4A; line-height: 1.3; }
+  .case-context { font-size: 0.65rem; color: #1F2937; font-weight: 400; margin-top: 1px; }
   .case-domain-tag {
-    font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    font-size: 0.6rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
     padding: 4px 10px; border-radius: 4px; flex-shrink: 0; white-space: nowrap;
   }
-  .case-domain-tag.ops { background: rgba(90,122,155,0.06); color: #5A7A9B; }
-  .case-domain-tag.vendor-tag { background: rgba(200,149,46,0.08); color: #C8952E; }
+  .case-domain-tag.ops { background: rgba(20,33,61,0.06); color: #14213D; }
+  .case-domain-tag.vendor-tag { background: rgba(214,166,63,0.08); color: #B8860B; }
 
   .case-body { padding: 24px 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
   .case-section-heading {
-    font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em;
     text-transform: uppercase; margin-bottom: 10px;
   }
-  .case-section-heading.situation { color: #5A7A9B; }
-  .case-section-heading.intervention { color: #C8952E; }
-  .case-situation p { font-size: 14.5px; line-height: 1.6; color: #3A3A3A; margin: 0; }
+  .case-section-heading.situation { color: #14213D; }
+  .case-section-heading.intervention { color: #14213D; }
+  .case-situation p { font-size: 0.8rem; line-height: 1.6; color: #1F2937; margin: 0; }
   .case-intervention ul { list-style: none; padding: 0; margin: 0; }
   .case-intervention li {
-    font-size: 14px; line-height: 1.5; color: #3A3A3A;
+    font-size: 0.8rem; line-height: 1.5; color: #1F2937;
     padding: 5px 0 5px 20px; position: relative;
   }
   .case-intervention li::before {
     content: ''; position: absolute; left: 0; top: 12px;
-    width: 6px; height: 6px; border-radius: 50%; background: #C8952E; opacity: 0.5;
+    width: 6px; height: 6px; border-radius: 50%; background: #B8860B; opacity: 0.5;
   }
 
-  .case-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 2px solid #C8952E; }
+  .case-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 2px solid #B8860B; }
   .case-metric { padding: 20px 24px; text-align: center; position: relative; }
   .case-metric:not(:last-child)::after {
     content: ''; position: absolute; right: 0; top: 16px; bottom: 16px;
     width: 1px; background: #EDEBE6;
   }
   .case-metric-number {
-    font-family: 'EB Garamond', serif; font-size: 28px; font-weight: 700;
+    font-family: 'EB Garamond', serif; font-size: 1.4rem; font-weight: 700;
     color: #1B2A4A; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 4px;
   }
-  .case-metric-label { font-size: 11.5px; color: #6B6B6B; font-weight: 400; line-height: 1.35; }
+  .case-metric-label { font-size: 0.6rem; color: #1F2937; font-weight: 400; line-height: 1.35; }
 
   .case-footer {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 28px; background: #FFFBF0; border-top: 1px solid rgba(200,149,46,0.18);
+    padding: 16px 28px; background: #FFFBF0; border-top: 1px solid rgba(214,166,63,0.18);
   }
-  .case-pe-translation { font-size: 13.5px; font-style: italic; color: #5A7A9B; line-height: 1.5; flex: 1; padding-right: 24px; }
+  .case-pe-translation { font-size: 0.72rem; color: #1F2937; line-height: 1.5; flex: 1; padding-right: 24px; }
   .case-pe-translation strong {
     font-style: normal; font-weight: 600; color: #1B2A4A;
-    font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; margin-right: 6px;
+    font-size: 0.6rem; letter-spacing: 0.06em; text-transform: uppercase; margin-right: 6px;
   }
-  .case-read-more { font-size: 13px; font-weight: 600; color: #C8952E; text-decoration: none; white-space: nowrap; }
-  .case-read-more:hover { color: #D4A94A; }
+  .case-read-more { font-size: 0.72rem; font-weight: 600; color: #14213D; text-decoration: none; white-space: nowrap; }
+  .case-read-more:hover { color: #B8860B; }
 
   /* Expandable nested outcome cards */
   .outcome-expandable { margin: 0 28px 24px; }
   .outcome-toggle {
     display: inline-flex; align-items: center; gap: 6px;
-    font-size: 13px; font-weight: 600; color: #5A7A9B;
+    font-size: 0.72rem; font-weight: 600; color: #14213D;
     cursor: pointer; padding: 8px 0; border: none; background: none;
     font-family: 'DM Sans', sans-serif; transition: color 0.2s;
   }
   .outcome-toggle:hover { color: #1B2A4A; }
-  .outcome-toggle .chevron { display: inline-block; transition: transform 0.25s ease; font-size: 10px; }
+  .outcome-toggle .chevron { display: inline-block; transition: transform 0.25s ease; font-size: 0.6rem; }
   .outcome-toggle.active .chevron { transform: rotate(90deg); }
   .outcome-cards-container { display: none; padding-top: 12px; }
   .outcome-cards-container.visible { display: block; }
   .outcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
   .outcome-card-title {
-    font-family: 'EB Garamond', serif; font-size: 15px; font-weight: 600;
+    font-family: 'EB Garamond', serif; font-size: 0.8rem; font-weight: 600;
     color: #1B2A4A; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
   }
   .domain-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; display: inline-block; }
   .domain-dot.incidents { background: #D4574E; }
   .domain-dot.change { background: #D49A4E; }
-  .domain-dot.kpi { background: #5A7A9B; }
-  .domain-dot.vendor-dot { background: #C8952E; }
+  .domain-dot.kpi { background: #14213D; }
+  .domain-dot.vendor-dot { background: #B8860B; }
 
   .outcome-step { margin-bottom: 10px; }
   .outcome-step:last-child { margin-bottom: 0; }
   .outcome-step-label {
-    font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 3px;
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 3px;
   }
   .outcome-step-label.gap { color: #B85450; }
-  .outcome-step-label.fix { color: #C8952E; }
+  .outcome-step-label.fix { color: #A07D2E; }
   .outcome-step-label.result { color: #4A8C6F; }
-  .outcome-step p { font-size: 13px; line-height: 1.5; color: #3A3A3A; margin: 0; }
+  .outcome-step p { font-size: 0.72rem; line-height: 1.5; color: #1F2937; margin: 0; }
 
   .measured-outcomes-label {
-    font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-    color: #C8952E; margin-bottom: 20px; display: block;
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: #14213D; margin-bottom: 20px; display: block;
   }
 
   @media (max-width: 680px) {

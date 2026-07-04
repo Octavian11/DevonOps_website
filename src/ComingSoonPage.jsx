@@ -1,6 +1,6 @@
 // Design system tokens — kept inline to avoid circular import from constants.js
 const NAVY = "#14213D";
-const GOLD = "#B8860B";
+const GOLD = "#D6A63F";
 const OFF_WHITE = "#FCFCFC";
 const CHARCOAL = "#0A0A0A";
 const BORDER = "#E2E8F0";
@@ -21,7 +21,7 @@ export default function ComingSoonPage() {
       <div style={{ maxWidth: "480px" }}>
         <div style={{
           fontFamily: BODY,
-          fontSize: "0.85rem",
+          fontSize: "0.8rem",
           color: GOLD,
           letterSpacing: "1.5px",
           textTransform: "uppercase",

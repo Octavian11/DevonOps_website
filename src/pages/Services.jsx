@@ -1,11 +1,11 @@
 import { useState } from "react";
 import {
   COLORS, FONTS, SPACING, SHADOWS, RADIUS,
-  CALENDLY, LEVERS, DOMAINS,
+  CALENDLY, LEVERS, DOMAINS, SEVERITY_STYLE,
 } from "../constants.js";
 import {
   Section, FAQBlock, ServicesSamplesRow, OfferCards,
-  SeverityBadge, TimingBadge, DomainTag,
+  SeverityBadge, TimingBadge, DomainTag, SectionTitle,
 } from "../components.jsx";
 
 // ─── METHOD: FEDRSSQE SPINE (compact, expand-on-click) ───────
@@ -39,10 +39,21 @@ function MethodSpine() {
   const [open, setOpen] = useState(null);
   return (
     <Section noCTA variant="tinted" id="method">
-      <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 400, color: COLORS.navy, marginBottom: SPACING.sm }}>Framework</h1>
+      <SectionTitle>The Method Behind Every Engagement</SectionTitle>
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "960px", marginBottom: "20px" }}>
-        Operational diligence and post-close execution for PE funds and portfolio companies — fixed-fee, board-ready, measurable from Day 1. Every engagement runs the same eight-step method, from the sponsor's decision down to a measurable 100-day plan. Tap any step.
+        Every engagement runs the same eight-step method — from the sponsor's decision down to a measurable 100-day plan. Tap any step for detail.
       </p>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", alignItems: "center", marginBottom: "18px" }}>
+        {METHOD_STEPS.map((s, i) => (
+          <span key={s.n} style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}>
+            <button onClick={() => setOpen(open === s.n ? null : s.n)}
+              style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: open === s.n ? `${COLORS.gold}15` : COLORS.white, border: `1px solid ${open === s.n ? COLORS.gold : COLORS.border}`, borderRadius: "999px", padding: "6px 12px", fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 700, color: COLORS.navy, cursor: "pointer", minHeight: "34px" }}>
+              <span style={{ color: COLORS.gold }}>{s.n}</span> {s.name}
+            </button>
+            {i < METHOD_STEPS.length - 1 && <span style={{ color: COLORS.steel, fontSize: "0.8rem" }}>→</span>}
+          </span>
+        ))}
+      </div>
       <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
         {METHOD_STEPS.map((s) => {
           const isOpen = open === s.n;
@@ -52,7 +63,7 @@ function MethodSpine() {
               <div style={{ padding: "14px 18px", display: "flex", alignItems: "center", gap: "14px" }}>
                 <span style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.gold, width: "18px", flexShrink: 0 }}>{s.n}</span>
                 <span style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, minWidth: "92px", flexShrink: 0 }}>{s.name}</span>
-                <span style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.charcoal, flex: 1 }}>{s.q}</span>
+                <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, flex: 1 }}>{s.q}</span>
                 <span style={{ fontFamily: FONTS.body, fontSize: "1.1rem", color: COLORS.steel, flexShrink: 0 }}>{isOpen ? "▾" : "▸"}</span>
               </div>
               {isOpen && (
@@ -67,13 +78,13 @@ function MethodSpine() {
       <div style={{ marginTop: "24px", display: "flex", gap: "16px", flexWrap: "wrap" }}>
         {METHOD_PRINCIPLES.map(([t, d], i) => (
           <div key={i} style={{ flex: "1 1 240px", minWidth: "min(220px, 100%)", borderTop: `3px solid ${COLORS.gold}`, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.lg, padding: "18px 20px", background: COLORS.white }}>
-            <div style={{ fontFamily: FONTS.heading, fontSize: "0.95rem", fontWeight: 700, color: COLORS.navy, marginBottom: "6px" }}>{t}</div>
+            <div style={{ fontFamily: FONTS.heading, fontSize: "0.9rem", fontWeight: 700, color: COLORS.navy, marginBottom: "6px" }}>{t}</div>
             <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.55, margin: 0 }}>{d}</p>
           </div>
         ))}
       </div>
       <div style={{ marginTop: "28px", paddingTop: "20px", borderTop: `1px solid ${COLORS.border}` }}>
-        <div style={{ fontFamily: FONTS.body, fontSize: "0.82rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "4px" }}>What it produces</div>
+        <div style={{ fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "4px" }}>What it produces</div>
         <ServicesSamplesRow />
       </div>
     </Section>
@@ -142,7 +153,7 @@ function TypicalRedFlags() {
 // ─── MEMO SAMPLE SCREENSHOTS ─────────────────────────────────
 
 function MemoSampleScreenshots() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const samples = [
     { src: "/memo-samples/ops-dd-exec-summary.png", alt: "Ops Diligence Scorecard executive summary excerpt", caption: "Ops Diligence Scorecard — Executive Summary (overall rating + deal implications)" },
     { src: "/memo-samples/domain-scores-1.png", alt: "Operational risk summary table excerpt (top)", caption: "Operational Risk Summary — domain ratings (excerpt 1 of 2)" },
@@ -188,7 +199,7 @@ function DomainLegend() {
         <span>Domain codes legend</span>
         <div style={{ display: "inline-flex", gap: "6px", marginLeft: "8px" }}>
           {Object.entries(DOMAINS).map(([k]) => (
-            <span key={k} style={{ display: "inline-block", padding: "2px 6px", borderRadius: "2px", fontSize: "0.75rem", fontFamily: FONTS.body, color: COLORS.steel, background: `${COLORS.steel}12` }}>{DOMAINS[k].short}</span>
+            <span key={k} style={{ display: "inline-block", padding: "2px 6px", borderRadius: "2px", fontSize: "0.72rem", fontFamily: FONTS.body, color: COLORS.steel, background: `${COLORS.steel}12` }}>{DOMAINS[k].short}</span>
           ))}
         </div>
       </button>
@@ -197,7 +208,7 @@ function DomainLegend() {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px 24px" }}>
             {Object.entries(DOMAINS).map(([k, v]) => (
               <div key={k} style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "0 12px", alignItems: "start" }}>
-                <span style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "3px 8px", borderRadius: "3px", fontSize: "0.75rem", fontFamily: FONTS.body, fontWeight: 500, color: COLORS.steel, background: `${COLORS.steel}12`, border: `1px solid ${COLORS.steel}25`, marginTop: "3px", textAlign: "center" }}>{v.short}</span>
+                <span style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "3px 8px", borderRadius: "3px", fontSize: "0.72rem", fontFamily: FONTS.body, fontWeight: 500, color: COLORS.steel, background: `${COLORS.steel}12`, border: `1px solid ${COLORS.steel}25`, marginTop: "3px", textAlign: "center" }}>{v.short}</span>
                 <div>
                   <span style={{ display: "block", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "4px" }}>{v.name}</span>
                   <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, margin: 0, lineHeight: 1.5, maxWidth: "none" }}>{v.desc}</p>
@@ -232,7 +243,7 @@ function LeverExplorerSection({ setPage }) {
   const hasActiveFilter = search || domainFilter !== "All" || timingFilter !== "All" || severityFilter !== "All";
   const visible = hasActiveFilter ? filtered : (showAll ? filtered : filtered.filter(l => l.common));
 
-  const selectStyle = { padding: "10px 14px", border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, background: COLORS.white, cursor: "pointer", minWidth: "160px", boxShadow: "0 1px 2px rgba(67, 97, 125, 0.05)" };
+  const selectStyle = { padding: "10px 14px", border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, background: COLORS.white, cursor: "pointer", minWidth: "160px", boxShadow: "0 1px 2px rgba(20, 33, 61, 0.05)" };
 
   return (
     <Section title="20 Operational Value Creation Levers" noCTA variant="tinted" id="lever-explorer">
@@ -247,6 +258,36 @@ function LeverExplorerSection({ setPage }) {
       </p>
 
       <DomainLegend />
+
+      {/* Severity × Timing map — click a cell to filter */}
+      <div style={{ marginBottom: "24px" }}>
+        <div style={{ fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "8px" }}>
+          Where the {LEVERS.length} levers concentrate — click a cell to filter
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "minmax(78px, 110px) repeat(2, minmax(0, 1fr))", gap: "6px", maxWidth: "560px" }}>
+          <span />
+          {["Pre-Close Red Flag", "First 100 Days"].map(t => (
+            <span key={t} style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, color: COLORS.navy, textAlign: "center", alignSelf: "end", lineHeight: 1.3 }}>{t}</span>
+          ))}
+          {["Critical", "High"].map(sev => (
+            <div key={sev} style={{ display: "contents" }}>
+              <span style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, color: SEVERITY_STYLE[sev].text, alignSelf: "center" }}>{sev}</span>
+              {["Pre-Close Red Flag", "First 100 Days"].map(t => {
+                const count = LEVERS.filter(l => l.severity === sev && l.timing === t).length;
+                const isActive = severityFilter === sev && timingFilter === t;
+                return (
+                  <button key={sev + t}
+                    onClick={() => { setSeverityFilter(isActive ? "All" : sev); setTimingFilter(isActive ? "All" : t); }}
+                    style={{ padding: "12px 8px", borderRadius: RADIUS.sm, border: `2px solid ${isActive ? COLORS.gold : SEVERITY_STYLE[sev].border}`, background: SEVERITY_STYLE[sev].bg, cursor: "pointer", textAlign: "center", transition: "all 0.15s" }}>
+                    <span style={{ fontFamily: FONTS.body, fontSize: "1.1rem", fontWeight: 700, color: SEVERITY_STYLE[sev].text }}>{count}</span>
+                    <span style={{ display: "block", fontFamily: FONTS.body, fontSize: "0.72rem", color: COLORS.charcoal }}>levers</span>
+                  </button>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      </div>
 
       <div className="lever-filters" style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "24px", alignItems: "center" }}>
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search levers..." style={{ ...selectStyle, minWidth: "220px", flex: "1 1 220px" }} />
@@ -280,7 +321,7 @@ function LeverExplorerSection({ setPage }) {
         <div key={lever.id}>
           {showGroupHeader && (
             <div style={{ display: "flex", alignItems: "center", gap: "10px", margin: `${idx === 0 ? "0" : "24px"} 0 10px` }}>
-              <span style={{ fontFamily: FONTS.body, fontSize: "0.75rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.8px", color: domainInfo?.color || COLORS.steel, background: `${domainInfo?.color || COLORS.steel}15`, padding: "4px 10px", borderRadius: "4px" }}>
+              <span style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.8px", color: domainInfo?.color || COLORS.steel, background: `${domainInfo?.color || COLORS.steel}15`, padding: "4px 10px", borderRadius: "4px" }}>
                 {domainInfo?.name || lever.domain}
               </span>
               <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.bodyMuted }}>
@@ -307,16 +348,22 @@ function LeverExplorerSection({ setPage }) {
             {expanded === lever.id && (
               <div className="lever-expand lever-expand-detail" style={{ padding: "0 22px 22px 52px", borderTop: `1px solid ${COLORS.border}` }} onClick={e => e.stopPropagation()}>
                 <div style={{ paddingTop: "18px" }}>
-                  <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "8px" }}>Definition</h4>
-                  <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.definition}</p>
-                  <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "8px" }}>Symptoms</h4>
-                  <ul style={{ paddingLeft: "22px", marginBottom: "18px" }}>
-                    {lever.symptoms.map((s, i) => <li key={i} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "6px" }}>{s}</li>)}
-                  </ul>
-                  <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "8px" }}>PE Impact</h4>
-                  <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.peImpact}</p>
-                  <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "8px" }}>What Good Looks Like</h4>
-                  <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.whatGood}</p>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))", gap: "0 32px", marginBottom: "10px" }}>
+                    <div>
+                      <h4 style={{ fontFamily: FONTS.heading, fontSize: "0.8rem", color: COLORS.steel, marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.6px" }}>Definition</h4>
+                      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.definition}</p>
+                      <h4 style={{ fontFamily: FONTS.heading, fontSize: "0.8rem", color: COLORS.steel, marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.6px" }}>Symptoms</h4>
+                      <ul style={{ paddingLeft: "22px", marginBottom: "18px" }}>
+                        {lever.symptoms.map((s, i) => <li key={i} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "6px" }}>{s}</li>)}
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 style={{ fontFamily: FONTS.heading, fontSize: "0.8rem", color: COLORS.critical, marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.6px" }}>PE Impact</h4>
+                      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.peImpact}</p>
+                      <h4 style={{ fontFamily: FONTS.heading, fontSize: "0.8rem", color: COLORS.stable, marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.6px" }}>What Good Looks Like</h4>
+                      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.whatGood}</p>
+                    </div>
+                  </div>
                   <div style={{ display: "flex", gap: "16px", paddingTop: "8px", borderTop: `1px solid ${COLORS.border}` }}>
                     <button onClick={() => setPage("scorer")} style={{ background: "none", border: "none", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, cursor: "pointer", textDecoration: "underline", padding: 0 }}>→ Assess your readiness</button>
                     <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.gold, textDecoration: "underline" }}>Book a Fit Check (15 min)</a>
@@ -327,15 +374,15 @@ function LeverExplorerSection({ setPage }) {
           </div>
 
           {idx === 4 && visible.length > 5 && (
-            <div style={{ margin: "12px 0 16px", padding: "20px 28px", background: COLORS.navy, borderRadius: RADIUS.md, boxShadow: "0 4px 12px rgba(67, 97, 125, 0.15)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
+            <div style={{ margin: "12px 0 16px", padding: "20px 28px", background: COLORS.navy, borderRadius: RADIUS.md, boxShadow: "0 4px 12px rgba(20, 33, 61, 0.15)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
               <p style={{ fontFamily: FONTS.body, color: COLORS.offWhite, margin: 0, lineHeight: 1.55 }}>
-                <strong style={{ color: COLORS.gold }}>Not sure which of these apply to your deal?</strong> Score it in 2 minutes — free, produces a prioritized assessment.
+                <strong style={{ color: COLORS.goldOnDark }}>Not sure which of these apply to your deal?</strong> Score it in 2 minutes — free, produces a prioritized assessment.
               </p>
               <div style={{ display: "flex", gap: "16px", flexShrink: 0 }}>
-                <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: "none", borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}>
+                <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif", fontSize: "0.9rem", fontWeight: 600, border: "none", borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}>
                   Book a Fit Check (15 min)
                 </a>
-                <button onClick={() => setPage("scorer")} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.gold, fontFamily: "'Arial', sans-serif", fontSize: "17px", fontWeight: 600, border: `1.5px solid ${COLORS.gold}`, borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}>
+                <button onClick={() => setPage("scorer")} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.goldOnDark, fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif", fontSize: "0.9rem", fontWeight: 600, border: `1.5px solid ${COLORS.goldOnDark}`, borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}>
                   Score Your Deal →
                 </button>
               </div>
@@ -347,7 +394,7 @@ function LeverExplorerSection({ setPage }) {
 
       {!showAll && !hasActiveFilter && (
         <div style={{ textAlign: "center", marginTop: "24px" }}>
-          <button onClick={() => setShowAll(true)} style={{ padding: "12px 28px", background: "transparent", border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.navy, cursor: "pointer", fontWeight: 500 }}>
+          <button onClick={() => setShowAll(true)} style={{ padding: "12px 28px", background: "transparent", border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, cursor: "pointer", fontWeight: 500 }}>
             Show all {LEVERS.length} levers ↓
           </button>
         </div>
@@ -361,7 +408,14 @@ function LeverExplorerSection({ setPage }) {
 export default function ServicesPage({ setPage }) {
   return (
     <div>
-      <MethodSpine />
+      <Section noCTA>
+        <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 400, color: COLORS.navy, marginBottom: SPACING.sm }}>Services &amp; Pricing</h1>
+        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "960px", margin: 0 }}>
+          Operational diligence and post-close execution for PE funds and portfolio companies — fixed-fee, board-ready, measurable from Day 1.
+        </p>
+      </Section>
+
+      <div id="offers"><OfferCards /></div>
 
       <div className="mckinsey-quote">
         <p>
@@ -370,7 +424,7 @@ export default function ServicesPage({ setPage }) {
         <small>McKinsey Global Private Markets Review 2026</small>
       </div>
 
-      <div id="offers"><OfferCards /></div>
+      <MethodSpine />
 
       <div id="levers"><LeverExplorerSection setPage={setPage} /></div>
 
