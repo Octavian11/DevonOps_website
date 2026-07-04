@@ -972,7 +972,7 @@ export const globalCSS = `
     font-weight: 600 !important;
     letter-spacing: 1.5px !important;
     text-transform: uppercase;
-    color: #B8860B;
+    color: #14213D;
   }
   .hero-category {
     font-family: 'DM Sans', sans-serif;
@@ -1132,7 +1132,7 @@ export const globalCSS = `
     text-transform: uppercase; margin-bottom: 10px;
   }
   .case-section-heading.situation { color: #14213D; }
-  .case-section-heading.intervention { color: #B8860B; }
+  .case-section-heading.intervention { color: #14213D; }
   .case-situation p { font-size: 0.8rem; line-height: 1.6; color: #3A3A3A; margin: 0; }
   .case-intervention ul { list-style: none; padding: 0; margin: 0; }
   .case-intervention li {
@@ -1165,7 +1165,7 @@ export const globalCSS = `
     font-style: normal; font-weight: 600; color: #1B2A4A;
     font-size: 0.6rem; letter-spacing: 0.06em; text-transform: uppercase; margin-right: 6px;
   }
-  .case-read-more { font-size: 0.72rem; font-weight: 600; color: #B8860B; text-decoration: none; white-space: nowrap; }
+  .case-read-more { font-size: 0.72rem; font-weight: 600; color: #14213D; text-decoration: none; white-space: nowrap; }
   .case-read-more:hover { color: #B8860B; }
 
   /* Expandable nested outcome cards */
@@ -1199,13 +1199,13 @@ export const globalCSS = `
     font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 3px;
   }
   .outcome-step-label.gap { color: #B85450; }
-  .outcome-step-label.fix { color: #B8860B; }
+  .outcome-step-label.fix { color: #A07D2E; }
   .outcome-step-label.result { color: #4A8C6F; }
   .outcome-step p { font-size: 0.72rem; line-height: 1.5; color: #3A3A3A; margin: 0; }
 
   .measured-outcomes-label {
     font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-    color: #B8860B; margin-bottom: 20px; display: block;
+    color: #14213D; margin-bottom: 20px; display: block;
   }
 
   @media (max-width: 680px) {
