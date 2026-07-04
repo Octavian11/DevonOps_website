@@ -237,7 +237,7 @@ export const DIM_RECS = {
   incident: {
     days: "Days 1–14",
     action: "Install incident command: severity model, designated commander, escalation thresholds, and postmortem discipline.",
-    impact: "Unstructured outages compound into EBITDA drag — management time diverted, client trust eroded, root causes unresolved. The same incidents recur until governance stops them. In the platform I ran, disciplined postmortems were central to a ~67% drop in recurring incidents.",
+    impact: "Unstructured outages compound into EBITDA drag — management time diverted, client trust eroded, root causes unresolved. The same incidents recur until governance stops them. In the platform I ran, disciplined postmortems were central to a nearly 50% drop in recurring incidents.",
   },
   change: {
     days: "Days 1–14",

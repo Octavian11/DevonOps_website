@@ -31,8 +31,8 @@ export default function App() {
   useEffect(() => {
     window.scrollTo(0, 0);
     const titles = {
-      levers: "Operational Value Creation Levers — Devonshire Ops",
-      services: "Services & Method — Devonshire Ops",
+      levers: "Devonshire Ops — Operational Diligence & Post-Close Execution for PE",
+      services: "Services & Pricing — Devonshire Ops",
       scorer: "Ops Scorer — Devonshire Ops",
       about: "About — Devonshire Ops",
       resources: "Resources — Devonshire Ops"
@@ -43,7 +43,7 @@ export default function App() {
   const pages = {
     levers: <LeverExplorer setPage={setPage} />,
     services: <ServicesPage setPage={setPage} />,
-    scorer: <ScorerPage />,
+    scorer: <ScorerPage setPage={setPage} />,
     about: <AboutPage />,
     resources: <ResourcesPage setPage={setPage} />,
   };
