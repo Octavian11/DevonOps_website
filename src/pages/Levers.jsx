@@ -117,7 +117,7 @@ function BuyerSegmentCards({ setPage }) {
         "Evidence the ops won't blow up in Year 1",
         "Day-1 critical path if you close",
       ],
-      proof: "I kept a $10B platform at zero critical outages for 18 straight months. I install the same governance playbook for your deal — scoped for a smaller team and a tighter timeline.",
+      proof: "I cut critical incidents by nearly 50% on a $10B+ platform. I install the same governance playbook for your deal — scoped for a smaller team and a tighter timeline.",
       action: "scorer",
       cta: "Score Your Deal →",
       accentColor: COLORS.steel,
@@ -178,23 +178,23 @@ function BuyerSegmentCards({ setPage }) {
                 {seg.title}
               </span>
             </div>
-            <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "10px", fontStyle: "italic" }}>
+            <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>
               {seg.pain}
             </p>
-            <p style={{ fontFamily: FONTS.body, fontSize: "0.82rem", color: COLORS.steel, fontStyle: "italic", marginBottom: "10px" }}>
+            <p style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.6px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "12px" }}>
               {seg.timing}
             </p>
-            <ul style={{ paddingLeft: "18px", margin: "0 0 14px 0" }}>
+            <ul style={{ paddingLeft: "18px", margin: "0 0 14px 0", flexGrow: 1 }}>
               {seg.items.map((item, j) => (
                 <li key={j} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "6px" }}>
                   {item}
                 </li>
               ))}
             </ul>
-            <p className="proof-quote" style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.55, margin: "0 0 16px", padding: "10px 12px", background: `${COLORS.navy}05`, borderRadius: RADIUS.sm, borderLeft: `2px solid ${seg.accentColor}` }}>
+            <p className="proof-quote" style={{ fontFamily: FONTS.body, fontSize: "0.92rem", color: COLORS.charcoal, lineHeight: 1.6, margin: "0", padding: "12px 14px", background: `${COLORS.navy}05`, borderRadius: RADIUS.sm, borderLeft: `3px solid ${seg.accentColor}` }}>
               {seg.proof}
             </p>
-            <div style={{ marginTop: "auto", paddingTop: "16px" }}>
+            <div style={{ paddingTop: "16px" }}>
               {seg.action === "scorer" ? (
                 <button className="card-text-link" onClick={() => setPage("scorer")}>
                   {seg.cta}

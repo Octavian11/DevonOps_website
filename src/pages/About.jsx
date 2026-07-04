@@ -105,7 +105,7 @@ export default function AboutPage() {
           </p>
           <div className="case-metrics" style={{ borderRadius: `0 0 ${RADIUS.md} ${RADIUS.md}`, marginBottom: "16px" }}>
             {[
-              { v: "0", l: "Critical outages (18 months)" },
+              { v: "~50%", l: "Critical incident reduction" },
               { v: "99.2%", l: "Availability (from 94%)" },
               { v: "−31%", l: "MTTR reduction" },
               { v: "+22", l: "NPS improvement (38 → 60)" },

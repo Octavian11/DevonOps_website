@@ -574,14 +574,14 @@ export function OfferCards({ setPage }) {
   };
 
   return (
-    <Section title={setPage ? "Choose Your Path & Pricing" : "Services & Pricing"} type="windowWithCards" noCTA>
+    <Section title={setPage ? "Choose Your Path & Pricing" : "Engagement Options"} type="windowWithCards" noCTA>
       {setPage && (
         <>
           <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "8px" }}>
             Pick the track that matches where you are in the deal lifecycle. Both deliver risk-rated findings, PE impact framing, and a clear Day-1 critical path.
           </p>
-          <p style={{ fontFamily: FONTS.body, color: COLORS.bodyMuted, fontStyle: "italic", marginBottom: "24px" }}>
-            Most engagements begin during the LOI → close window to avoid post-close rework.
+          <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, marginBottom: "24px" }}>
+            Most engagements begin during the <strong>LOI → close window</strong> to avoid post-close rework.
           </p>
           <div className="path-cards-grid" style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap" }}>
             <div className="path-card" style={{ flex: "1 1 260px", minWidth: "min(240px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
@@ -625,8 +625,8 @@ export function OfferCards({ setPage }) {
         </>
       )}
       {!setPage && (
-        <p style={{ fontFamily: FONTS.body, color: COLORS.bodyMuted, fontStyle: "italic", marginBottom: "20px" }}>
-          Most engagements begin during the LOI → close window to avoid post-close rework.
+        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, marginBottom: "20px" }}>
+          Most engagements begin during the <strong>LOI → close window</strong> to avoid post-close rework.
         </p>
       )}
       <div className="pricing-grid" style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap", marginBottom: "24px" }}>
@@ -759,8 +759,8 @@ export function TestimonialBlock() {
 
         <div className="case-metrics">
           <div className="case-metric">
-            <div className="case-metric-number">0</div>
-            <div className="case-metric-label">Critical outages<br />(18 months)</div>
+            <div className="case-metric-number">~50%</div>
+            <div className="case-metric-label">Critical incident<br />reduction</div>
           </div>
           <div className="case-metric">
             <div className="case-metric-number">99.2%</div>
@@ -817,7 +817,7 @@ export function TestimonialBlock() {
                 </div>
                 <div className="outcome-step">
                   <div className="outcome-step-label result">Result</div>
-                  <p>Critical outages fell to zero over the following 18 months. Uptime: 94% → 99%. Change-incident correlation visible to the board within 30 days.</p>
+                  <p>Uptime improved from 94% to 99%. Change-incident correlation visible to the board within 30 days.</p>
                 </div>
               </div>
               <div className="outcome-card">
