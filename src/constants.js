@@ -32,7 +32,7 @@ export const COLORS = {
   border: "#E2E8F0",
   white: "#FFFFFF",
   primary: "#14213D",
-  bodyMuted: "#6B7280",
+  bodyMuted: "#1F2937",
   criticalBg: "#FFF5F5",
   criticalText: "#9B2C2C",
   criticalBorder: "#FEB2B2",
@@ -306,7 +306,7 @@ export const globalCSS = `
     --navy: ${COLORS.primary};
     --gold: ${COLORS.gold};
     --text: #1F2937;
-    --muted: #6B7280;
+    --muted: #1F2937;
     --maxcopy: 70ch;
     --nav-h: 76px;
     --card-radius: 12px;
@@ -707,7 +707,7 @@ export const globalCSS = `
     border-radius: 0 6px 6px 0;
     padding: 14px 16px;
     font-size: 0.72rem;
-    color: #6B6B65;
+    color: #1F2937;
     margin-top: 16px;
     font-family: ${FONTS.body};
     line-height: 1.5;
@@ -735,7 +735,7 @@ export const globalCSS = `
   }
   .credential-label {
     font-size: 0.6rem; font-weight: 600; letter-spacing: 1.5px;
-    text-transform: uppercase; color: #A0A09A;
+    text-transform: uppercase; color: #1F2937;
     width: 100%; flex-shrink: 0; margin-bottom: -8px;
   }
   .credential-logos img {
@@ -767,7 +767,7 @@ export const globalCSS = `
     gap: 12px; margin-top: 20px;
   }
   .endorser-name { font-size: 0.72rem; font-weight: 600; color: ${COLORS.navy}; }
-  .endorser-title { font-size: 0.65rem; color: #6B6B65; margin-top: 2px; }
+  .endorser-title { font-size: 0.65rem; color: #1F2937; margin-top: 2px; }
   @media (max-width: 768px) {
     .endorsement-section { padding: 40px 20px; }
     .endorsement-text { font-size: 0.9rem; }
@@ -962,7 +962,7 @@ export const globalCSS = `
   small, .disclaimer, .confidentiality-note p {
     font-size: 0.65rem;
     line-height: 1.5;
-    color: #888;
+    color: #1F2937;
   }
 
   /* Item 03 — Unified label system */
@@ -1118,7 +1118,7 @@ export const globalCSS = `
   .case-icon.stability { background: linear-gradient(135deg, rgba(20,33,61,0.1), rgba(20,33,61,0.05)); color: #14213D; }
   .case-icon.vendor { background: linear-gradient(135deg, rgba(214,166,63,0.08), rgba(214,166,63,0.04)); color: #B8860B; }
   .case-label { font-family: 'EB Garamond', serif; font-size: 0.9rem; font-weight: 600; color: #1B2A4A; line-height: 1.3; }
-  .case-context { font-size: 0.65rem; color: #6B6B6B; font-weight: 400; margin-top: 1px; }
+  .case-context { font-size: 0.65rem; color: #1F2937; font-weight: 400; margin-top: 1px; }
   .case-domain-tag {
     font-size: 0.6rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
     padding: 4px 10px; border-radius: 4px; flex-shrink: 0; white-space: nowrap;
@@ -1133,10 +1133,10 @@ export const globalCSS = `
   }
   .case-section-heading.situation { color: #14213D; }
   .case-section-heading.intervention { color: #14213D; }
-  .case-situation p { font-size: 0.8rem; line-height: 1.6; color: #3A3A3A; margin: 0; }
+  .case-situation p { font-size: 0.8rem; line-height: 1.6; color: #1F2937; margin: 0; }
   .case-intervention ul { list-style: none; padding: 0; margin: 0; }
   .case-intervention li {
-    font-size: 0.8rem; line-height: 1.5; color: #3A3A3A;
+    font-size: 0.8rem; line-height: 1.5; color: #1F2937;
     padding: 5px 0 5px 20px; position: relative;
   }
   .case-intervention li::before {
@@ -1154,13 +1154,13 @@ export const globalCSS = `
     font-family: 'EB Garamond', serif; font-size: 1.4rem; font-weight: 700;
     color: #1B2A4A; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 4px;
   }
-  .case-metric-label { font-size: 0.6rem; color: #6B6B6B; font-weight: 400; line-height: 1.35; }
+  .case-metric-label { font-size: 0.6rem; color: #1F2937; font-weight: 400; line-height: 1.35; }
 
   .case-footer {
     display: flex; align-items: center; justify-content: space-between;
     padding: 16px 28px; background: #FFFBF0; border-top: 1px solid rgba(214,166,63,0.18);
   }
-  .case-pe-translation { font-size: 0.72rem; color: #3A3A3A; line-height: 1.5; flex: 1; padding-right: 24px; }
+  .case-pe-translation { font-size: 0.72rem; color: #1F2937; line-height: 1.5; flex: 1; padding-right: 24px; }
   .case-pe-translation strong {
     font-style: normal; font-weight: 600; color: #1B2A4A;
     font-size: 0.6rem; letter-spacing: 0.06em; text-transform: uppercase; margin-right: 6px;
@@ -1201,7 +1201,7 @@ export const globalCSS = `
   .outcome-step-label.gap { color: #B85450; }
   .outcome-step-label.fix { color: #A07D2E; }
   .outcome-step-label.result { color: #4A8C6F; }
-  .outcome-step p { font-size: 0.72rem; line-height: 1.5; color: #3A3A3A; margin: 0; }
+  .outcome-step p { font-size: 0.72rem; line-height: 1.5; color: #1F2937; margin: 0; }
 
   .measured-outcomes-label {
     font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;

@@ -62,7 +62,7 @@ function HeroCredStrip() {
       <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap", justifyContent: "center" }}>
         <span style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, color: COLORS.steel, textTransform: "uppercase", letterSpacing: "0.06em", whiteSpace: "nowrap" }}>Background</span>
         {["JPMorgan", "Barclays", "Lazard", "Bank of America", "Columbia MBA"].map((name, i) => (
-          <span key={i} style={{ fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 600, color: COLORS.charcoal, opacity: 0.65, whiteSpace: "nowrap" }}>{name}</span>
+          <span key={i} style={{ fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 600, color: COLORS.charcoal, whiteSpace: "nowrap" }}>{name}</span>
         ))}
       </div>
       <div style={{ width: "1px", height: "28px", background: COLORS.border, flexShrink: 0 }} />
@@ -310,7 +310,7 @@ function CompactAboutBio({ setPage }) {
           <div className="credential-logos">
             <span className="credential-label">Institutional background</span>
             {["JPMorgan", "Barclays", "Lazard", "Bank of America", "Columbia MBA"].map((name, i) => (
-              <span key={i} style={{ fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 600, color: COLORS.charcoal, opacity: 0.65 }}>{name}</span>
+              <span key={i} style={{ fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 600, color: COLORS.charcoal }}>{name}</span>
             ))}
           </div>
           <button
