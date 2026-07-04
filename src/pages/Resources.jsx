@@ -103,9 +103,12 @@ export default function ResourcesPage({ setPage }) {
 
       {/* Thought Leadership */}
       <Section noCTA title="Point of View" variant="tinted">
-        <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.2rem", fontWeight: 600, color: COLORS.navy, marginBottom: "20px" }}>
+        <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.2rem", fontWeight: 600, color: COLORS.navy, marginBottom: "6px" }}>
           Why Ops Diligence Is the Most Underpriced Risk in PE
         </h3>
+        <p style={{ fontFamily: FONTS.body, fontSize: "0.95rem", color: COLORS.steel, fontStyle: "italic", marginBottom: "20px" }}>
+          The operating layer beneath the financials is still priced as optional. It isn't.
+        </p>
         <div style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.75, maxWidth: "800px" }}>
           <p style={{ marginBottom: "16px" }}>
             Every deal gets financial diligence. Most get legal, tax, and environmental. But operational diligence — the systematic assessment of whether a company's operations can actually deliver the value creation plan — is still treated as optional by the majority of lower-middle-market PE funds.
@@ -122,7 +125,7 @@ export default function ResourcesPage({ setPage }) {
           <p style={{ marginBottom: "16px" }}>
             Financial DD tells you what the business earns. Ops diligence tells you whether it can keep earning it under new ownership, new governance, and new expectations.
           </p>
-          <p style={{ marginBottom: "16px" }}>
+          <p style={{ margin: "24px 0", padding: "14px 20px", borderLeft: `4px solid ${COLORS.steel}`, background: `${COLORS.navy}05`, lineHeight: 1.65 }}>
             The cost of a pre-close ops diligence engagement is a rounding error on a $20M deal. The cost of discovering the gaps at month 3 — after the management honeymoon ends and the first crisis hits — is measured in EBITDA, management credibility, and LP confidence.
           </p>
           <p style={{ marginBottom: "16px" }}>

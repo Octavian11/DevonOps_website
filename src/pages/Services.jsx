@@ -348,16 +348,22 @@ function LeverExplorerSection({ setPage }) {
             {expanded === lever.id && (
               <div className="lever-expand lever-expand-detail" style={{ padding: "0 22px 22px 52px", borderTop: `1px solid ${COLORS.border}` }} onClick={e => e.stopPropagation()}>
                 <div style={{ paddingTop: "18px" }}>
-                  <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "8px" }}>Definition</h4>
-                  <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.definition}</p>
-                  <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "8px" }}>Symptoms</h4>
-                  <ul style={{ paddingLeft: "22px", marginBottom: "18px" }}>
-                    {lever.symptoms.map((s, i) => <li key={i} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "6px" }}>{s}</li>)}
-                  </ul>
-                  <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "8px" }}>PE Impact</h4>
-                  <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.peImpact}</p>
-                  <h4 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.navy, marginBottom: "8px" }}>What Good Looks Like</h4>
-                  <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.whatGood}</p>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))", gap: "0 32px", marginBottom: "10px" }}>
+                    <div>
+                      <h4 style={{ fontFamily: FONTS.heading, fontSize: "0.85rem", color: COLORS.steel, marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.6px" }}>Definition</h4>
+                      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.definition}</p>
+                      <h4 style={{ fontFamily: FONTS.heading, fontSize: "0.85rem", color: COLORS.steel, marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.6px" }}>Symptoms</h4>
+                      <ul style={{ paddingLeft: "22px", marginBottom: "18px" }}>
+                        {lever.symptoms.map((s, i) => <li key={i} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "6px" }}>{s}</li>)}
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 style={{ fontFamily: FONTS.heading, fontSize: "0.85rem", color: COLORS.critical, marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.6px" }}>PE Impact</h4>
+                      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.peImpact}</p>
+                      <h4 style={{ fontFamily: FONTS.heading, fontSize: "0.85rem", color: COLORS.stable, marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.6px" }}>What Good Looks Like</h4>
+                      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.whatGood}</p>
+                    </div>
+                  </div>
                   <div style={{ display: "flex", gap: "16px", paddingTop: "8px", borderTop: `1px solid ${COLORS.border}` }}>
                     <button onClick={() => setPage("scorer")} style={{ background: "none", border: "none", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, cursor: "pointer", textDecoration: "underline", padding: 0 }}>→ Assess your readiness</button>
                     <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.gold, textDecoration: "underline" }}>Book a Fit Check (15 min)</a>

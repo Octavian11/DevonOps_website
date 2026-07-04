@@ -22,7 +22,7 @@ function HeroBlockWithNav({ setPage }) {
           Your deal team handles the financials. Who's stress-testing the operations?
         </h1>
         <p className="hero-subheadline" style={{ fontFamily: FONTS.body, color: "rgba(255,255,255,0.92)", lineHeight: 1.65, marginBottom: "22px" }}>
-          Pre-close operational diligence and 100-day post-close execution for PE-backed deals. I surface the ops risks that kill value creation plans — typically between LOI and Day 100 — and fix them before they compound.
+          The operating layer beneath the financials is where value creation plans live or die. I surface the ops risks that kill them — typically between LOI and Day 100 — and fix them before they compound. Pre-close operational diligence and 100-day post-close execution for PE-backed deals.
         </p>
 
         <div className="hero-ctas" style={{ display: "flex", gap: "16px", flexWrap: "wrap", alignItems: "flex-start" }}>
@@ -143,7 +143,7 @@ function BuyerSegmentCards({ setPage }) {
       pain: "Longer holds amplify operational drift. Buying from founders means zero institutional process — and no specialist ops bench.",
       timing: "Most relevant: mid-hold without institutional ops in place",
       items: [
-        "Ongoing operational oversight — visibility into what's actually happening (what I call the Control Tower)",
+        "The Control Tower: ongoing operational oversight with real visibility into what's actually happening",
         "Governance that scales without adding headcount",
         "Vendor controls and compliance cadence built for long holds",
       ],

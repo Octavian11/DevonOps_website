@@ -106,14 +106,6 @@ function ScorerEmailCapture({ rating, score, context, buyerType }) {
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, margin: "0 0 6px 0" }}>
         Download the sample IC-ready scorecard now — and I'll follow up personally with my read on your assessment.
       </p>
-      <div style={{ marginBottom: "14px", display: "flex", gap: "12px", flexWrap: "wrap" }}>
-        <a href={SAMPLE_SCORECARD_PDF} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.bodyMuted, textDecoration: "none", borderBottom: `1px solid ${COLORS.border}` }}>
-          Sample Scorecard (PDF)
-        </a>
-        <a href={SAMPLE_100DAY_PDF} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.85rem", color: COLORS.bodyMuted, textDecoration: "none", borderBottom: `1px solid ${COLORS.border}` }}>
-          Sample 100-Day Plan (PDF)
-        </a>
-      </div>
       <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "10px", maxWidth: "520px" }}>
         <input
           type="text"
@@ -279,7 +271,7 @@ export default function ScorerPage({ setPage }) {
       {/* View Results Button */}
       {!showResults && (
         <div style={{ textAlign: "center", marginBottom: "28px" }}>
-          <button onClick={() => setShowResults(true)}
+          <button onClick={() => { setShowResults(true); setTimeout(() => document.getElementById("scorer-results")?.scrollIntoView({ behavior: "smooth", block: "start" }), 80); }}
             style={{ padding: "14px 28px", background: COLORS.gold, color: "white", border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, cursor: "pointer", letterSpacing: "0.3px", transition: "background 0.2s" }}
             onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; }}
             onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; }}>
@@ -290,7 +282,7 @@ export default function ScorerPage({ setPage }) {
 
       {/* Results Section */}
       {showResults && (
-        <div className="fade-in">
+        <div className="fade-in" id="scorer-results">
           <Card style={{ borderLeft: `4px solid ${ratingColor}`, marginBottom: "24px" }}>
             <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.2rem", color: COLORS.navy, marginBottom: "20px" }}>Assessment Results</h3>
 
