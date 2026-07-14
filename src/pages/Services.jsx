@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { track } from "@vercel/analytics/react";
 import {
-  COLORS, FONTS, SPACING, SHADOWS, RADIUS,
-  CALENDLY, LEVERS, DOMAINS, SEVERITY_STYLE,
+  COLORS, FONTS, RADIUS,
+  CALENDLY, LEVERS, DOMAINS,
 } from "../constants.js";
 import {
   Section, FAQBlock, ServicesSamplesRow, OfferCards,
@@ -14,13 +15,13 @@ const METHOD_STEPS = [
   { n: "1", name: "Frame", q: "What does the sponsor need to decide?",
     detail: "Diligence hypotheses and materiality thresholds, set against the investment thesis, hold plan, and risk appetite." },
   { n: "2", name: "Evidence", q: "What facts confirm or refute each hypothesis?",
-    detail: "An evidence map with gaps and confidence levels, built from the CIM, financials, interviews, systems, logs, contracts, and KPIs." },
+    detail: "An evidence map that distinguishes what is known, what remains unproven, and where confidence is strong enough to support an investment decision." },
   { n: "3", name: "Diagnose", q: "Where is operational friction concentrated?",
     detail: "Maturity scores across the six operating domains (incidents, change, vendor, audit, KPI cadence, process), with red flags and causal problem statements." },
   { n: "4", name: "Retrieve", q: "Which value levers are actually relevant?",
-    detail: "A company-specific shortlist, drawn from a 355-lever operational value-creation library and filtered by sector and deal thesis." },
+    detail: "A company-specific shortlist drawn from Devonshire’s proprietary 355-lever value-creation library and filtered by the business model, observed evidence, and deal thesis. The work distinguishes what must be fixed, what should be standardized, and which target strengths should be preserved or propagated across the platform." },
   { n: "5", name: "Score", q: "Which levers matter first?",
-    detail: "Each lever scored against a seven-factor PE-fit rubric: time to proof, FCF impact, execution certainty, covenant/liquidity, exit multiple, reversibility, and management attention load." },
+    detail: "Applicable levers are prioritized using Devonshire’s proprietary seven-factor PE-fit rubric. The result is a defensible sequence—not a generic list of attractive initiatives." },
   { n: "6", name: "Sequence", q: "What must precede what?",
     detail: "Each initiative slotted as Immediate GO, Conditional GO, or Sequence Later — mapped across pre-close, Day 1, Days 1–30, 31–100, and the hold." },
   { n: "7", name: "Quantify", q: "What is the defensible value range?",
@@ -32,8 +33,38 @@ const METHOD_STEPS = [
 const METHOD_PRINCIPLES = [
   ["Evidence before scoring", "The library structures inquiry; it never creates a finding without company-specific support."],
   ["Economics before activity", "Every recommendation ties to a measurable driver or an explicitly stated risk."],
-  ["Portco ownership before consultant ownership", "I design, facilitate, and validate; management owns execution and sustainability."],
+  ["Management ownership before advisor dependence", "The deliverable is not the document. I design, facilitate, and validate; management owns an operating system it can use and improve after Devonshire leaves."],
 ];
+
+function MethodFlowGraphic({ active, onSelect }) {
+  const layers = [
+    { n: "01", step: "1", label: "Sponsor thesis", className: "layer-thesis" },
+    { n: "02", step: "2", label: "Evidence collected and tested", className: "layer-evidence" },
+    { n: "03", step: "3", label: "Operating friction diagnosed", className: "layer-friction" },
+    { n: "04", step: "4", label: "Relevant levers selected", className: "layer-levers" },
+    { n: "05", step: "6", label: "Priorities sequenced and quantified", className: "layer-priorities" },
+  ];
+  return (
+    <figure className="method-layers" aria-labelledby="method-layers-title method-layers-desc">
+      <figcaption id="method-layers-title">The operating layers beneath the thesis</figcaption>
+      <p id="method-layers-desc">Move inward from the sponsor thesis to evidence, diagnosis, selected priorities, and 100-day operating control.</p>
+      <svg className="method-contours" viewBox="0 0 440 440" aria-hidden="true">
+        <path className={active === "1" ? "active" : ""} d="M221 18C305 12 389 61 416 139C446 224 414 330 337 386C266 438 153 428 79 369C6 311-10 207 25 125C59 47 137 24 221 18Z" />
+        <path className={active === "2" ? "active" : ""} d="M221 64C290 58 355 93 381 153C409 217 386 292 328 339C272 385 184 384 122 343C60 302 36 224 62 157C86 94 151 70 221 64Z" />
+        <path className={active === "3" ? "active" : ""} d="M221 109C277 104 329 132 349 181C371 233 349 288 306 319C260 351 194 348 148 316C102 283 85 226 105 177C126 129 168 113 221 109Z" />
+        <path className={active === "4" ? "active" : ""} d="M220 151C260 148 301 170 315 207C330 245 313 282 281 303C246 326 198 322 166 299C133 275 125 231 142 198C158 166 184 154 220 151Z" />
+        <path className={["5", "6", "7"].includes(active) ? "active" : ""} d="M220 188C249 186 275 201 285 224C296 250 283 277 261 289C236 303 203 299 184 281C164 262 161 233 176 211C187 195 201 190 220 188Z" />
+      </svg>
+      <div className="method-layer-controls">
+        {layers.map((layer) => {
+          const isActive = active === layer.step || (layer.step === "6" && ["5", "6", "7"].includes(active));
+          return <button key={layer.n} className={`${layer.className}${isActive ? " active" : ""}`} onClick={() => onSelect(layer.step)} aria-label={`Open methodology step: ${layer.label}`}><span>{layer.n}</span>{layer.label}</button>;
+        })}
+        <button className={`layer-control${active === "8" ? " active" : ""}`} onClick={() => onSelect("8")} aria-label="Open methodology step: 100-Day Operating Control"><span>06</span><strong>100-Day<br />Operating Control</strong></button>
+      </div>
+    </figure>
+  );
+}
 
 function MethodSpine() {
   const [open, setOpen] = useState(null);
@@ -41,25 +72,22 @@ function MethodSpine() {
     <Section noCTA variant="tinted" id="method">
       <SectionTitle>The Method Behind Every Engagement</SectionTitle>
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "960px", marginBottom: "20px" }}>
-        Every engagement runs the same eight-step method — from the sponsor's decision down to a measurable 100-day plan. Tap any step for detail.
+        Every engagement runs the same eight-step method—from the sponsor's decision to an evidence-backed, management-owned 100-day plan. Tap any step for detail.
       </p>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", alignItems: "center", marginBottom: "18px" }}>
-        {METHOD_STEPS.map((s, i) => (
-          <span key={s.n} style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}>
-            <button onClick={() => setOpen(open === s.n ? null : s.n)}
-              style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: open === s.n ? `${COLORS.gold}15` : COLORS.white, border: `1px solid ${open === s.n ? COLORS.gold : COLORS.border}`, borderRadius: "999px", padding: "6px 12px", fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 700, color: COLORS.navy, cursor: "pointer", minHeight: "34px" }}>
-              <span style={{ color: COLORS.gold }}>{s.n}</span> {s.name}
-            </button>
-            {i < METHOD_STEPS.length - 1 && <span style={{ color: COLORS.steel, fontSize: "0.8rem" }}>→</span>}
-          </span>
-        ))}
-      </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+      <div className="method-workbench">
+      <MethodFlowGraphic active={open} onSelect={(step) => setOpen(open === step ? null : step)} />
+      <div className="method-accordion">
         {METHOD_STEPS.map((s) => {
           const isOpen = open === s.n;
           return (
-            <div key={s.n} style={{ background: COLORS.white, border: `1px solid ${isOpen ? COLORS.steel : COLORS.border}`, borderRadius: RADIUS.md, cursor: "pointer", transition: "all 0.15s" }}
-              onClick={() => setOpen(isOpen ? null : s.n)}>
+            <div key={s.n} className={`method-step-card${isOpen ? " open" : ""}`} role="button" tabIndex={0} aria-expanded={isOpen} aria-controls={`method-detail-${s.n}`}
+              onClick={() => setOpen(isOpen ? null : s.n)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setOpen(isOpen ? null : s.n);
+                }
+              }}>
               <div style={{ padding: "14px 18px", display: "flex", alignItems: "center", gap: "14px" }}>
                 <span style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.gold, width: "18px", flexShrink: 0 }}>{s.n}</span>
                 <span style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, minWidth: "92px", flexShrink: 0 }}>{s.name}</span>
@@ -67,7 +95,7 @@ function MethodSpine() {
                 <span style={{ fontFamily: FONTS.body, fontSize: "1.1rem", color: COLORS.steel, flexShrink: 0 }}>{isOpen ? "▾" : "▸"}</span>
               </div>
               {isOpen && (
-                <div className="lever-expand" style={{ padding: "0 18px 16px 50px", borderTop: `1px solid ${COLORS.border}` }} onClick={e => e.stopPropagation()}>
+                <div id={`method-detail-${s.n}`} className="method-step-detail lever-expand" onClick={e => e.stopPropagation()}>
                   <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, margin: "12px 0 0" }}>{s.detail}</p>
                 </div>
               )}
@@ -75,17 +103,20 @@ function MethodSpine() {
           );
         })}
       </div>
-      <div style={{ marginTop: "24px", display: "flex", gap: "16px", flexWrap: "wrap" }}>
+      </div>
+      <div className="method-proof-band">
+      <div className="method-principles">
         {METHOD_PRINCIPLES.map(([t, d], i) => (
-          <div key={i} style={{ flex: "1 1 240px", minWidth: "min(220px, 100%)", borderTop: `3px solid ${COLORS.gold}`, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.lg, padding: "18px 20px", background: COLORS.white }}>
+          <div key={i} className="method-principle">
             <div style={{ fontFamily: FONTS.heading, fontSize: "0.9rem", fontWeight: 700, color: COLORS.navy, marginBottom: "6px" }}>{t}</div>
             <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.55, margin: 0 }}>{d}</p>
           </div>
         ))}
       </div>
-      <div style={{ marginTop: "28px", paddingTop: "20px", borderTop: `1px solid ${COLORS.border}` }}>
-        <div style={{ fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "4px" }}>What it produces</div>
+      <div className="method-outputs">
+        <div className="method-outputs-label">What it produces</div>
         <ServicesSamplesRow />
+      </div>
       </div>
     </Section>
   );
@@ -93,94 +124,72 @@ function MethodSpine() {
 
 // ─── TYPICAL RED FLAGS ───────────────────────────────────────
 
-function TypicalRedFlags() {
-  const leftSide = {
-    title: "Red Flags I Surface",
-    description: "Operational fragility that threatens deal value:",
-    items: [
-      { title: "Silent EBITDA drag", body: "Recurring incidents, rework, and unmanaged change inflate labor and vendor spend" },
-      { title: "Day-1 governance gaps", body: "No incident command, no change control, no KPI cadence → risk compounds under new ownership" },
-      { title: "Vendor concentration", body: "Single-vendor dependencies, auto-renew traps, and missing exit plans create holdback/TSA exposure" },
-      { title: "Exit-readiness gaps", body: "Evidence scattered, controls inconsistent → diligence and exit readiness risk" },
-      { title: "Key-person dependency", body: "Tribal knowledge and fragile staffing → continuity risk and slower integration" }
-    ]
-  };
+// ─── MEMO SAMPLE SCREENSHOTS ─────────────────────────────────
 
-  const rightSide = {
-    title: "Interventions I Install",
-    description: "Systematic fixes that prevent recurrence:",
-    items: [
-      { title: "Incident command", body: "Severity classification, escalation paths, postmortem discipline → MTTR reduction" },
-      { title: "Change governance", body: "CAB-lite process, risk classification, rollback discipline → change failure rate drops" },
-      { title: "Vendor governance", body: "Contract mapping, renewal calendar, SLA monitoring → concentration risk managed" },
-      { title: "Compliance cadence", body: "Evidence index, control testing, access reviews → audit-ready by default" },
-      { title: "Knowledge capture", body: "Runbooks, RACI, cross-training → key-person risk mitigated" }
-    ],
-    highlight: "Day-1 governance → sustainable value creation"
-  };
+function OperatingTranslation() {
+  const rows = [
+    ["Reactive firefighting", "Incident command and escalation discipline", "Fewer disruptions and clearer accountability"],
+    ["Vendor sprawl and weak oversight", "Vendor governance and commercial cadence", "Cost control and reduced concentration risk"],
+    ["Key-person dependency", "Documented ownership and operating routines", "Greater continuity and scalability"],
+  ];
 
   return (
-    <Section noCTA title="Typical Red Flags I Surface">
-      <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
-        <div style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `4px solid ${COLORS.critical}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
-          <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{leftSide.title}</div>
-          <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "14px" }}>{leftSide.description}</p>
-          {leftSide.items.map((item, i) => (
-            <div key={i} style={{ marginBottom: "10px" }}>
-              <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 700, color: COLORS.navy, marginBottom: "2px" }}>{item.title}</div>
-              <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.55 }}>{item.body}</div>
-            </div>
-          ))}
+    <Section noCTA variant="tinted" id="operating-translation">
+      <div className="translation-heading">
+        <div className="editorial-label">From operating friction to operating control</div>
+        <h2>Translate the problem into an owned operating outcome.</h2>
+        <p>Three examples of how observed operating gaps become practical controls. The catalog below shows the underlying issues in greater depth.</p>
+      </div>
+      <div className="translation-grid" role="table" aria-label="Examples of operating gaps, installed controls, and sponsor outcomes">
+        <div className="translation-labels" role="row">
+          <span role="columnheader">Typical operating gap</span>
+          <span role="columnheader">Devonshire installs</span>
+          <span role="columnheader">Sponsor outcome</span>
         </div>
-        <div style={{ flex: "1 1 280px", minWidth: "min(260px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `4px solid ${COLORS.gold}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
-          <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{rightSide.title}</div>
-          <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "14px" }}>{rightSide.description}</p>
-          {rightSide.items.map((item, i) => (
-            <div key={i} style={{ marginBottom: "10px" }}>
-              <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 700, color: COLORS.navy, marginBottom: "2px" }}>{item.title}</div>
-              <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.55 }}>{item.body}</div>
-            </div>
-          ))}
-          <div style={{ marginTop: "auto", paddingTop: "12px", borderTop: `1px solid ${COLORS.border}`, fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.gold, fontWeight: 600 }}>
-            {rightSide.highlight}
+        {rows.map(([gap, control, outcome]) => (
+          <div className="translation-row" role="row" key={gap}>
+            <div role="cell"><span>Operating gap</span><strong>{gap}</strong></div>
+            <i aria-hidden="true">→</i>
+            <div role="cell"><span>Installed control</span><strong>{control}</strong></div>
+            <i aria-hidden="true">→</i>
+            <div role="cell"><span>Sponsor outcome</span><strong>{outcome}</strong></div>
           </div>
-        </div>
+        ))}
       </div>
     </Section>
   );
 }
 
-// ─── MEMO SAMPLE SCREENSHOTS ─────────────────────────────────
-
 function MemoSampleScreenshots() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const samples = [
-    { src: "/memo-samples/ops-dd-exec-summary.png", alt: "Ops Diligence Scorecard executive summary excerpt", caption: "Ops Diligence Scorecard — Executive Summary (overall rating + deal implications)" },
-    { src: "/memo-samples/domain-scores-1.png", alt: "Operational risk summary table excerpt (top)", caption: "Operational Risk Summary — domain ratings (excerpt 1 of 2)" },
-    { src: "/memo-samples/domain-scores-2.png", alt: "Operational risk summary table excerpt (bottom)", caption: "Operational Risk Summary — domain ratings (excerpt 2 of 2)" },
-    { src: "/memo-samples/100-day-phases.png", alt: "100-Day Operating Playbook phase overview excerpt", caption: "100-Day Operating Playbook — phase overview (Visibility → Control → Cadence)" },
+    { src: "/memo-samples/execution-risk-scorecard-preview.png", width:1200, height:900, alt: "Illustrative Execution Risk Scorecard executive summary", caption: "Execution Risk Scorecard — executive risk summary and six-domain findings" },
+    { src: "/memo-samples/100-day-operating-playbook-preview.png", width:1200, height:900, alt: "Illustrative 100-Day Operating Playbook execution architecture", caption: "100-Day Operating Playbook — Visibility → Control → Cadence" },
   ];
 
   return (
-    <Section noCTA background={`${COLORS.navy}03`} title="Sample Deliverable Excerpts (Anonymized)">
+    <Section noCTA background={`${COLORS.navy}03`} title="Sample Deliverable Excerpts">
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.55, marginBottom: "12px" }}>
-        Real format, anonymized for readability — severity-rated, IC-ready.
+        Illustrative samples in the format used for Devonshire engagements. Based on institutional operating experience; not Devonshire client case studies.
       </p>
       <button
         onClick={() => setOpen(!open)}
+        aria-expanded={open}
+        aria-controls="memo-sample-grid"
+        className="sample-toggle"
         style={{ background: "transparent", border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "8px 16px", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, fontWeight: 600, cursor: "pointer", marginBottom: "16px" }}>
-        {open ? "Hide sample excerpts ▾" : "Show 4 anonymized deliverable excerpts (Scorecard + 100-Day Plan) ▸"}
+        {open ? "Hide sample excerpts ▾" : "Show 2 illustrative deliverable excerpts (Scorecard + 100-Day Playbook) ▸"}
       </button>
 
       {open && (
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(260px, 100%), 1fr))", gap: "14px" }}>
+        <div id="memo-sample-grid" className="sample-grid">
           {samples.map((s, i) => (
-            <div key={i} style={{ border: `1px solid ${COLORS.border}`, borderRadius: "8px", overflow: "hidden", background: COLORS.white }}>
-              <img src={s.src} alt={s.alt} loading="lazy" style={{ width: "100%", height: "auto", display: "block" }} />
-              <div style={{ padding: "10px 12px", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.4 }}>
+            <figure key={i} className="sample-card">
+              <img src={s.src} width={s.width} height={s.height} alt={s.alt} loading="lazy" decoding="async" style={{ width: "100%", height: "auto", display: "block" }} />
+              <figcaption>
                 {s.caption}
-              </div>
-            </div>
+              </figcaption>
+            </figure>
           ))}
         </div>
       )}
@@ -188,36 +197,77 @@ function MemoSampleScreenshots() {
   );
 }
 
-// ─── DOMAIN LEGEND ───────────────────────────────────────────
-
-function DomainLegend() {
-  const [open, setOpen] = useState(true);
+function HowItWorks() {
+  const steps = [
+    ["Fit Check", "15-minute call to confirm the operating trigger, scope, and fit."],
+    ["Scope + Underwrite", "Targeted evidence review translates the operating reality into a fixed-fee scope within 48 hours."],
+    ["Diligence Deliverable", "IC-ready, severity-rated, PE impact framed findings connect directly to Day-1 priorities."],
+    ["Value Creation Plan + 100-Day Execution", "The plan moves directly into owned execution and board cadence."],
+  ];
   return (
-    <div style={{ marginBottom: "20px" }}>
-      <button onClick={() => setOpen(!open)} style={{ background: "none", border: "none", cursor: "pointer", fontFamily: FONTS.body, fontSize: "1.1rem", color: COLORS.navy, display: "flex", alignItems: "center", gap: "8px", padding: "6px 0" }}>
-        <span style={{ fontSize: "1.4rem" }}>{open ? "▾" : "▸"}</span>
-        <span>Domain codes legend</span>
-        <div style={{ display: "inline-flex", gap: "6px", marginLeft: "8px" }}>
-          {Object.entries(DOMAINS).map(([k]) => (
-            <span key={k} style={{ display: "inline-block", padding: "2px 6px", borderRadius: "2px", fontSize: "0.72rem", fontFamily: FONTS.body, color: COLORS.steel, background: `${COLORS.steel}12` }}>{DOMAINS[k].short}</span>
-          ))}
-        </div>
-      </button>
-      {open && (
-        <div className="fade-in" style={{ marginTop: "10px", padding: "16px 20px", background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: "6px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px 24px" }}>
-            {Object.entries(DOMAINS).map(([k, v]) => (
-              <div key={k} style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "0 12px", alignItems: "start" }}>
-                <span style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "3px 8px", borderRadius: "3px", fontSize: "0.72rem", fontFamily: FONTS.body, fontWeight: 500, color: COLORS.steel, background: `${COLORS.steel}12`, border: `1px solid ${COLORS.steel}25`, marginTop: "3px", textAlign: "center" }}>{v.short}</span>
-                <div>
-                  <span style={{ display: "block", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "4px" }}>{v.name}</span>
-                  <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, margin: 0, lineHeight: 1.5, maxWidth: "none" }}>{v.desc}</p>
-                </div>
-              </div>
-            ))}
+    <div className="how-it-works-dark" id="process">
+    <Section title="How It Works" noCTA>
+      <figure className="process-sline" aria-label="Four-stage engagement process from Fit Check through 100-Day Execution">
+        <svg className="process-sline-curve" viewBox="0 0 1000 320" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M20 160C90 125 180 125 250 160S410 195 500 160S660 125 750 160S910 195 980 160" />
+          <circle cx="125" cy="134" r="7" />
+          <circle cx="375" cy="186" r="7" />
+          <circle cx="625" cy="134" r="7" />
+          <circle cx="875" cy="186" r="7" />
+        </svg>
+        <svg className="process-sline-mobile" viewBox="0 0 320 780" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M74 20C248 82 248 178 74 240S-78 398 74 455S248 620 74 760" />
+          <circle cx="150" cy="61" r="7" /><circle cx="150" cy="213" r="7" /><circle cx="25" cy="407" r="7" /><circle cx="150" cy="716" r="7" />
+        </svg>
+        <div className="process-sline-stages">
+        {steps.map(([title, copy], i) => (
+          <div className={`process-step process-step-${i + 1}`} key={title}>
+            <span>0{i + 1}</span><h3>{title}</h3><p>{copy}</p>
           </div>
+        ))}
         </div>
-      )}
+      </figure>
+    </Section>
+    </div>
+  );
+}
+
+// ─── DOMAIN × DEAL-STAGE OPERATING-CONTROL MATRIX ───────────
+
+const MATRIX_STAGES = [
+  ["Pre-Close Red Flag", "Pre-Close", "Underwrite the exposure"],
+  ["First 100 Days", "First 100 Days", "Install the control"],
+  ["Ongoing Hold", "Ongoing Hold", "Sustain the cadence"],
+];
+
+function OperatingControlMatrix({ domainFilter, timingFilter, onSelect }) {
+  return (
+    <div className="control-matrix" aria-label="Representative levers by operating domain and deal stage">
+      <div className="control-matrix-intro">
+        <div><span>Operating-control matrix</span><strong>Where operating risk appears—and when to act</strong></div>
+        <p>Select any cell to inspect the representative levers beneath it.</p>
+      </div>
+      <div className="control-matrix-grid">
+        <div className="matrix-corner"><span>Operating domain</span></div>
+        {MATRIX_STAGES.map(([value, label, note]) => <div className="matrix-stage" key={value}><strong>{label}</strong><span>{note}</span></div>)}
+        {Object.entries(DOMAINS).map(([domain, info]) => (
+          <div className="matrix-row" key={domain}>
+            <div className="matrix-domain"><span>{info.short}</span><strong>{info.name}</strong></div>
+            {MATRIX_STAGES.map(([timing, label]) => {
+              const matches = LEVERS.filter((lever) => lever.domain === domain && lever.timing === timing);
+              const isActive = domainFilter === domain && timingFilter === timing;
+              const severityCounts = ["Critical", "High", "Medium"].map((severity) => [severity, matches.filter((lever) => lever.severity === severity).length]);
+              return (
+                <button key={timing} className={`matrix-cell${isActive ? " active" : ""}${matches.length === 0 ? " empty" : ""}`} onClick={() => onSelect(domain, timing)} aria-pressed={isActive} aria-label={`${info.short}, ${label}: ${matches.length} representative ${matches.length === 1 ? "lever" : "levers"}`}>
+                  <strong>{matches.length}</strong><span>{matches.length === 1 ? "lever" : "levers"}</span>
+                  <div className="matrix-severity" aria-hidden="true">{severityCounts.map(([severity, count]) => count > 0 && <i key={severity} className={severity.toLowerCase()}>{count}</i>)}</div>
+                </button>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+      <div className="matrix-key" aria-hidden="true"><span><i className="critical" />Critical</span><span><i className="high" />High</span><span><i className="medium" />Medium</span></div>
     </div>
   );
 }
@@ -242,76 +292,50 @@ function LeverExplorerSection({ setPage }) {
 
   const hasActiveFilter = search || domainFilter !== "All" || timingFilter !== "All" || severityFilter !== "All";
   const visible = hasActiveFilter ? filtered : (showAll ? filtered : filtered.filter(l => l.common));
+  const clearFilters = () => { setSearch(""); setDomainFilter("All"); setTimingFilter("All"); setSeverityFilter("All"); setExpanded(null); };
+  const selectMatrixCell = (domain, timing) => {
+    const isActive = domainFilter === domain && timingFilter === timing;
+    setDomainFilter(isActive ? "All" : domain);
+    setTimingFilter(isActive ? "All" : timing);
+    setSeverityFilter("All");
+    setSearch("");
+    setExpanded(null);
+    setShowAll(true);
+  };
 
   const selectStyle = { padding: "10px 14px", border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, background: COLORS.white, cursor: "pointer", minWidth: "160px", boxShadow: "0 1px 2px rgba(20, 33, 61, 0.05)" };
 
   return (
-    <Section title="20 Operational Value Creation Levers" noCTA variant="tinted" id="lever-explorer">
-      <style>{`
-        @media (max-width: 540px) {
-          .lever-filters input { width: 100% !important; flex: 1 1 100% !important; }
-          .lever-filters select { flex: 1 1 calc(50% - 6px) !important; min-width: 120px !important; }
-        }
-      `}</style>
+    <Section title="Representative Operational Lever Catalog" noCTA variant="tinted" id="lever-explorer">
+      <div className="editorial-label">20 representative levers · proprietary 355-lever library</div>
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "960px", marginBottom: "32px" }}>
-        {LEVERS.length} operational friction points across 6 domains — severity-rated, PE impact framed. Every deal has 3–5 of these hiding in plain sight. {!showAll && !hasActiveFilter ? "Use the filters to find yours." : "Filter by timing, domain, or severity. Open any lever for symptoms and PE impact analysis."}
+        These {LEVERS.length} examples are drawn from Devonshire’s proprietary 355-lever value-creation library. Each is severity-rated, PE impact framed and prioritized through a proprietary seven-factor PE-fit rubric, then validated against company evidence and the deal thesis—not applied as a checklist. {!showAll && !hasActiveFilter ? "Filter the catalog or open a lever to see symptoms, deal implications, and what good looks like." : "Open any result for symptoms, deal implications, and what good looks like."}
       </p>
 
-      <DomainLegend />
+      <OperatingControlMatrix domainFilter={domainFilter} timingFilter={timingFilter} onSelect={selectMatrixCell} />
 
-      {/* Severity × Timing map — click a cell to filter */}
-      <div style={{ marginBottom: "24px" }}>
-        <div style={{ fontFamily: FONTS.body, fontSize: "0.8rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "8px" }}>
-          Where the {LEVERS.length} levers concentrate — click a cell to filter
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "minmax(78px, 110px) repeat(2, minmax(0, 1fr))", gap: "6px", maxWidth: "560px" }}>
-          <span />
-          {["Pre-Close Red Flag", "First 100 Days"].map(t => (
-            <span key={t} style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, color: COLORS.navy, textAlign: "center", alignSelf: "end", lineHeight: 1.3 }}>{t}</span>
-          ))}
-          {["Critical", "High"].map(sev => (
-            <div key={sev} style={{ display: "contents" }}>
-              <span style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, color: SEVERITY_STYLE[sev].text, alignSelf: "center" }}>{sev}</span>
-              {["Pre-Close Red Flag", "First 100 Days"].map(t => {
-                const count = LEVERS.filter(l => l.severity === sev && l.timing === t).length;
-                const isActive = severityFilter === sev && timingFilter === t;
-                return (
-                  <button key={sev + t}
-                    onClick={() => { setSeverityFilter(isActive ? "All" : sev); setTimingFilter(isActive ? "All" : t); }}
-                    style={{ padding: "12px 8px", borderRadius: RADIUS.sm, border: `2px solid ${isActive ? COLORS.gold : SEVERITY_STYLE[sev].border}`, background: SEVERITY_STYLE[sev].bg, cursor: "pointer", textAlign: "center", transition: "all 0.15s" }}>
-                    <span style={{ fontFamily: FONTS.body, fontSize: "1.1rem", fontWeight: 700, color: SEVERITY_STYLE[sev].text }}>{count}</span>
-                    <span style={{ display: "block", fontFamily: FONTS.body, fontSize: "0.72rem", color: COLORS.charcoal }}>levers</span>
-                  </button>
-                );
-              })}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="lever-filters" style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "24px", alignItems: "center" }}>
-        <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search levers..." style={{ ...selectStyle, minWidth: "220px", flex: "1 1 220px" }} />
-        <select value={domainFilter} onChange={e => setDomainFilter(e.target.value)} style={selectStyle}>
+      <div className="lever-filter-panel">
+      <div className="lever-filters">
+        <label className="filter-field filter-search"><span>Search</span><input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search names and definitions…" style={{ ...selectStyle, minWidth: "220px" }} /></label>
+        <label className="filter-field"><span>Domain</span><select value={domainFilter} onChange={e => setDomainFilter(e.target.value)} style={selectStyle}>
           <option value="All">All Domains</option>
           {Object.entries(DOMAINS).map(([k, v]) => <option key={k} value={k}>{v.name}</option>)}
-        </select>
-        <select value={timingFilter} onChange={e => setTimingFilter(e.target.value)} style={selectStyle}>
+        </select></label>
+        <label className="filter-field"><span>Timing</span><select value={timingFilter} onChange={e => setTimingFilter(e.target.value)} style={selectStyle}>
           <option value="All">All Timing</option>
           <option value="Pre-Close Red Flag">Pre-Close Red Flag</option>
           <option value="First 100 Days">First 100 Days</option>
           <option value="Ongoing Hold">Ongoing Hold</option>
-        </select>
-        <select value={severityFilter} onChange={e => setSeverityFilter(e.target.value)} style={selectStyle}>
+        </select></label>
+        <label className="filter-field"><span>Severity</span><select value={severityFilter} onChange={e => setSeverityFilter(e.target.value)} style={selectStyle}>
           <option value="All">All Severity</option>
           <option value="Critical">Critical</option>
           <option value="High">High</option>
           <option value="Medium">Medium</option>
-        </select>
+        </select></label>
       </div>
-
-      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, marginBottom: "18px" }}>
-        Showing {visible.length} of {LEVERS.length} levers
-      </p>
+      <div className="lever-results-bar"><p role="status" aria-live="polite">Showing <strong>{visible.length}</strong> of {LEVERS.length} levers</p>{hasActiveFilter && <button onClick={clearFilters}>Clear filters</button>}</div>
+      </div>
 
       {visible.map((lever, idx) => {
         const showGroupHeader = domainFilter === "All" && (idx === 0 || visible[idx - 1].domain !== lever.domain);
@@ -324,15 +348,15 @@ function LeverExplorerSection({ setPage }) {
               <span style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.8px", color: domainInfo?.color || COLORS.steel, background: `${domainInfo?.color || COLORS.steel}15`, padding: "4px 10px", borderRadius: "4px" }}>
                 {domainInfo?.name || lever.domain}
               </span>
-              <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.bodyMuted }}>
+              <span className="domain-lever-count" style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.charcoal }}>
                 {domainCount} lever{domainCount !== 1 ? "s" : ""}
               </span>
               <div style={{ flex: 1, height: "1px", background: COLORS.border }} />
             </div>
           )}
-          <div style={{ background: COLORS.white, border: `1px solid ${expanded === lever.id ? COLORS.steel : COLORS.border}`, borderRadius: RADIUS.md, marginBottom: "8px", transition: "all 0.15s", cursor: "pointer" }}
-            onClick={() => setExpanded(expanded === lever.id ? null : lever.id)}>
-            <div className="lever-row" style={{ padding: "16px 22px", display: "flex", alignItems: "center", gap: "14px" }}>
+          <article className={`lever-card${expanded === lever.id ? " expanded" : ""}`}>
+            <button className="lever-row" aria-expanded={expanded === lever.id} aria-controls={`lever-detail-${lever.id}`}
+              onClick={() => setExpanded(expanded === lever.id ? null : lever.id)}>
               <span style={{ fontFamily: FONTS.body, fontSize: "1.3rem", color: COLORS.navy, width: "20px", flexShrink: 0 }}>
                 {expanded === lever.id ? "▾" : "▸"}
               </span>
@@ -344,9 +368,9 @@ function LeverExplorerSection({ setPage }) {
                 <SeverityBadge severity={lever.severity} />
                 <TimingBadge timing={lever.timing} />
               </div>
-            </div>
+            </button>
             {expanded === lever.id && (
-              <div className="lever-expand lever-expand-detail" style={{ padding: "0 22px 22px 52px", borderTop: `1px solid ${COLORS.border}` }} onClick={e => e.stopPropagation()}>
+              <div id={`lever-detail-${lever.id}`} role="region" aria-label={`${lever.name} details`} className="lever-expand lever-expand-detail">
                 <div style={{ paddingTop: "18px" }}>
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))", gap: "0 32px", marginBottom: "10px" }}>
                     <div>
@@ -364,30 +388,15 @@ function LeverExplorerSection({ setPage }) {
                       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, marginBottom: "18px" }}>{lever.whatGood}</p>
                     </div>
                   </div>
-                  <div style={{ display: "flex", gap: "16px", paddingTop: "8px", borderTop: `1px solid ${COLORS.border}` }}>
-                    <button onClick={() => setPage("scorer")} style={{ background: "none", border: "none", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, cursor: "pointer", textDecoration: "underline", padding: 0 }}>→ Assess your readiness</button>
-                    <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.gold, textDecoration: "underline" }}>Book a Fit Check (15 min)</a>
+                  <div className="lever-detail-actions">
+                    <button onClick={() => { track("services_scorer_click", { location: "lever_detail", lever: lever.id }); setPage("scorer"); }} style={{ background: "none", border: "none", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, cursor: "pointer", textDecoration: "underline", padding: 0 }}>→ Assess your readiness</button>
+                    <a href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => track("services_fit_check_click", { location: "lever_detail", lever: lever.id })} style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.gold, textDecoration: "underline" }}>Book a Fit Check (15 min)</a>
                   </div>
                 </div>
               </div>
             )}
-          </div>
+          </article>
 
-          {idx === 4 && visible.length > 5 && (
-            <div style={{ margin: "12px 0 16px", padding: "20px 28px", background: COLORS.navy, borderRadius: RADIUS.md, boxShadow: "0 4px 12px rgba(20, 33, 61, 0.15)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
-              <p style={{ fontFamily: FONTS.body, color: COLORS.offWhite, margin: 0, lineHeight: 1.55 }}>
-                <strong style={{ color: COLORS.goldOnDark }}>Not sure which of these apply to your deal?</strong> Score it in 2 minutes — free, produces a prioritized assessment.
-              </p>
-              <div style={{ display: "flex", gap: "16px", flexShrink: 0 }}>
-                <a href={CALENDLY} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif", fontSize: "0.9rem", fontWeight: 600, border: "none", borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}>
-                  Book a Fit Check (15 min)
-                </a>
-                <button onClick={() => setPage("scorer")} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.goldOnDark, fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif", fontSize: "0.9rem", fontWeight: 600, border: `1.5px solid ${COLORS.goldOnDark}`, borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}>
-                  Score Your Deal →
-                </button>
-              </div>
-            </div>
-          )}
         </div>
         );
       })}
@@ -399,6 +408,17 @@ function LeverExplorerSection({ setPage }) {
           </button>
         </div>
       )}
+
+      <div className="lever-closing-action">
+        <div>
+          <span>Next step</span>
+          <strong>Not sure which operating issues are material to your deal?</strong>
+        </div>
+        <div className="lever-closing-links">
+          <button onClick={() => { track("services_scorer_click", { location: "closing_cta" }); setPage("scorer"); }}>Score Your Deal →</button>
+          <a href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => track("services_fit_check_click", { location: "closing_cta" })}>Book a Fit Check</a>
+        </div>
+      </div>
     </Section>
   );
 }
@@ -407,29 +427,33 @@ function LeverExplorerSection({ setPage }) {
 
 export default function ServicesPage({ setPage }) {
   return (
-    <div>
-      <Section noCTA>
-        <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 400, color: COLORS.navy, marginBottom: SPACING.sm }}>Services &amp; Pricing</h1>
-        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "960px", margin: 0 }}>
-          Operational diligence and post-close execution for PE funds and portfolio companies — fixed-fee, board-ready, measurable from Day 1.
+    <div className="services-page">
+      <section className="services-hero">
+        <div className="services-hero-inner">
+        <div className="services-kicker">Services · Method · Execution</div>
+        <h1>Services, Method &amp; the Operating Lever Library</h1>
+        <p>
+          Senior operating support for active deals and early platforms—from LOI through the first 30 days after close, then into a management-owned 100-day cadence. Fixed fees, board-ready deliverables, and clear ownership from Day 1.
         </p>
-      </Section>
+        <p className="services-trigger"><strong>Especially relevant for buy-and-build platforms when:</strong> multiple tuck-ins are moving, integration ownership is unclear, or the platform has not yet built the management and shared-services capacity to absorb them.</p>
+        <nav className="services-jump" aria-label="Services page sections"><a href="#offers">Engagements</a><a href="#method">Method</a><a href="#memo-samples">Deliverables</a><a href="#process">Process</a><a href="#levers">Representative Levers</a><a href="#faq">FAQ</a></nav>
+        </div>
+      </section>
 
       <div id="offers"><OfferCards /></div>
 
       <div className="mckinsey-quote">
         <p>
-          <strong>53% of LPs now rank a GP's value creation strategy as a top-five criterion in manager selection</strong> — above sector expertise. Operational execution is now a fund-level differentiator.
+          <strong><span>53%</span> of 300 LPs ranked a GP's value-creation strategy among their top five manager-selection metrics</strong>—placing it ahead of sector expertise. Operational execution is now a <em>fund-level differentiator.</em>
         </p>
-        <small>McKinsey Global Private Markets Review 2026</small>
+        <a className="mckinsey-source" href="https://www.mckinsey.com/industries/private-capital/our-insights/global-private-markets-report/private-equity" target="_blank" rel="noopener noreferrer">McKinsey Global Private Markets Report 2026 ↗</a>
       </div>
 
       <MethodSpine />
-
-      <div id="levers"><LeverExplorerSection setPage={setPage} /></div>
-
-      <div id="red-flags"><TypicalRedFlags /></div>
       <div id="memo-samples"><MemoSampleScreenshots /></div>
+      <HowItWorks />
+      <OperatingTranslation />
+      <div id="levers"><LeverExplorerSection setPage={setPage} /></div>
       <div id="faq"><FAQBlock variant="tinted" /></div>
     </div>
   );

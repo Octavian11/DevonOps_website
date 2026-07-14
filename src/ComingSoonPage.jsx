@@ -1,11 +1,11 @@
 // Design system tokens — kept inline to avoid circular import from constants.js
-const NAVY = "#14213D";
-const GOLD = "#D6A63F";
+const NAVY = "#1B1C1F";
+const GOLD = "#6E1F2E";
 const OFF_WHITE = "#FCFCFC";
 const CHARCOAL = "#0A0A0A";
 const BORDER = "#E2E8F0";
 const HEADING = "'EB Garamond', Garamond, 'Times New Roman', serif";
-const BODY = "Georgia, 'Times New Roman', serif";
+const BODY = "'Inter', -apple-system, sans-serif";
 
 export default function ComingSoonPage() {
   return (

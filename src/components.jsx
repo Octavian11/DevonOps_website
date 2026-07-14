@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
+import { track } from "@vercel/analytics/react";
 import {
   COLORS, FONTS, SPACING, SHADOWS, RADIUS,
   SEVERITY_STYLE, TIMING_COLORS, DOMAINS,
@@ -7,6 +8,7 @@ import {
   FORMSPREE_URL,
   mailtoHref,
 } from "./constants.js";
+import { OFFERS } from "./offerArchitecture.js";
 
 // ─── BADGES & TAGS ───────────────────────────────────────────
 
@@ -38,22 +40,23 @@ export function DomainTag({ domain }) {
 
 // ─── BUTTONS ─────────────────────────────────────────────────
 
-export function CTAButton({ text, variant, style: extraStyle, showAvailability }) {
+export function CTAButton({ text, variant, style: extraStyle, showAvailability, location = "shared_cta" }) {
   const isPrimary = variant !== "secondary";
   const btnStyle = isPrimary ? PRIMARY_BTN : SECONDARY_BTN;
-  const hoverBg = isPrimary ? "#A07D2E" : `${COLORS.navy}08`;
+  const hoverBg = isPrimary ? "#571825" : `${COLORS.navy}08`;
   const restoreBg = isPrimary ? COLORS.gold : "transparent";
   return (
     <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
       <a href={CALENDLY} target="_blank" rel="noopener noreferrer"
         style={{ ...btnStyle, ...extraStyle }}
+        onClick={() => track("fit_check_click", { location })}
         onMouseEnter={e => { e.currentTarget.style.background = hoverBg; }}
         onMouseLeave={e => { e.currentTarget.style.background = restoreBg; }}>
         {text || "Book a Fit Check"}
       </a>
       {showAvailability && (
         <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.navy }}>
-          Engagements typically book 2–3 weeks out
+          Limited concurrent capacity. Every engagement is led directly by Hassan.
         </span>
       )}
     </div>
@@ -63,7 +66,7 @@ export function CTAButton({ text, variant, style: extraStyle, showAvailability }
 export function SectionTitle({ children, sub }) {
   return (
     <div style={{ marginBottom: sub ? "16px" : "12px" }}>
-      <h2 className="section-title" style={{
+      <h2 className={`section-title${sub ? " section-title-sub" : ""}`} style={{
         fontFamily: FONTS.heading,
         fontSize: sub ? "1rem" : "1.4rem",
         fontWeight: sub ? 600 : 400,
@@ -77,8 +80,8 @@ export function SectionTitle({ children, sub }) {
   );
 }
 
-export const PRIMARY_BTN = { display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 32px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif", fontSize: "0.9rem", fontWeight: 600, border: "none", borderRadius: "8px", cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" };
-export const SECONDARY_BTN = { display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.navy, fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif", fontSize: "0.9rem", fontWeight: 500, border: "1.5px solid #D6D4CE", borderRadius: "8px", cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" };
+export const PRIMARY_BTN = { display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 32px", background: COLORS.gold, color: "#FFFFFF", fontFamily: "'Inter', -apple-system, 'Helvetica Neue', sans-serif", fontSize: "0.9rem", fontWeight: 600, border: "none", borderRadius: "8px", cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" };
+export const SECONDARY_BTN = { display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: "transparent", color: COLORS.navy, fontFamily: "'Inter', -apple-system, 'Helvetica Neue', sans-serif", fontSize: "0.9rem", fontWeight: 500, border: "1.5px solid #D6D4CE", borderRadius: "8px", cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" };
 
 export function ButtonPair({
   primaryText = "Book a Fit Check",
@@ -95,14 +98,15 @@ export function ButtonPair({
         {primaryLink ? (
           <a href={primaryLink} target="_blank" rel="noopener noreferrer"
              style={PRIMARY_BTN}
-             onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 4px 12px rgba(214,166,63,0.25)"; }}
+             onClick={() => track("cta_click", { label: primaryText, destination: primaryLink })}
+             onMouseEnter={e => { e.currentTarget.style.background = "#571825"; e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 4px 12px rgba(110,31,46,0.25)"; }}
              onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}>
             {primaryText}
           </a>
         ) : (
           <button onClick={primaryAction}
              style={PRIMARY_BTN}
-             onMouseEnter={e => { e.currentTarget.style.background = "#A07D2E"; e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 4px 12px rgba(214,166,63,0.25)"; }}
+             onMouseEnter={e => { e.currentTarget.style.background = "#571825"; e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 4px 12px rgba(110,31,46,0.25)"; }}
              onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}>
             {primaryText}
           </button>
@@ -112,14 +116,15 @@ export function ButtonPair({
           secondaryLink ? (
             <a href={secondaryLink} target="_blank" rel="noopener noreferrer"
                style={SECONDARY_BTN}
-               onMouseEnter={e => { e.currentTarget.style.borderColor = "#1B2A4A"; }}
+               onClick={() => track("cta_click", { label: secondaryText, destination: secondaryLink })}
+               onMouseEnter={e => { e.currentTarget.style.borderColor = "#1B1C1F"; }}
                onMouseLeave={e => { e.currentTarget.style.borderColor = "#D6D4CE"; }}>
               {secondaryText}
             </a>
           ) : (
             <button onClick={secondaryAction}
                style={SECONDARY_BTN}
-               onMouseEnter={e => { e.currentTarget.style.borderColor = "#1B2A4A"; }}
+               onMouseEnter={e => { e.currentTarget.style.borderColor = "#1B1C1F"; }}
                onMouseLeave={e => { e.currentTarget.style.borderColor = "#D6D4CE"; }}>
               {secondaryText}
             </button>
@@ -128,7 +133,7 @@ export function ButtonPair({
       </div>
       {showAvailability && (
         <span style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.navy, marginTop: "8px" }}>
-          Engagements typically book 2–3 weeks out
+          Limited concurrent capacity. Every engagement is led directly by Hassan.
         </span>
       )}
     </div>
@@ -147,7 +152,7 @@ export function Card({ children, style: extraStyle }) {
 
 export function TimelineRail({ items, compact = false }) {
   return (
-    <div style={{ position: "relative", paddingLeft: compact ? "40px" : "60px" }}>
+    <div className="timeline-rail" style={{ position: "relative", paddingLeft: compact ? "40px" : "60px" }}>
       <div style={{ position: "absolute", left: compact ? "15px" : "23px", top: "12px", bottom: "12px", width: "2px", background: COLORS.steel, zIndex: 0 }} />
 
       {items.map((item, i) => {
@@ -206,7 +211,7 @@ export function TimelineRail({ items, compact = false }) {
 
               {item.deliverable && (
                 <div style={{ padding: "10px 14px", background: COLORS.offWhite, borderRadius: "6px", display: "flex", alignItems: "center", gap: "10px", marginTop: "12px" }}>
-                  <span style={{ fontFamily: FONTS.body, fontSize: "0.72rem", color: COLORS.navy, letterSpacing: "0.5px", textTransform: "uppercase", fontWeight: 700, flexShrink: 0 }}>
+                  <span className="timeline-deliverable-label" style={{ fontFamily: FONTS.body, fontSize: "0.72rem", color: COLORS.navy, letterSpacing: "0.5px", textTransform: "uppercase", fontWeight: 700, flexShrink: 0 }}>
                     Deliverable
                   </span>
                   <span style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, fontWeight: 500 }}>
@@ -345,18 +350,19 @@ export function FAQBlock({ variant }) {
 
   const faqs = [
     { q: "Do you replace the operating team?", a: "No. I install the operating system—governance, cadence, and controls—while ownership stays internal." },
-    { q: "What do you need from us?", a: "A lightweight artifact pull (incident/change history, vendor list/contracts, KPIs, org/RACI, audit evidence folders) plus targeted stakeholder access." },
+    { q: "How do you work with an Operating Partner or platform COO?", a: "Devonshire does not replace either. I own the transaction-specific evidence, dependencies, Day-1 sequence, and 100-day operating architecture that senior leaders need but may not have capacity to produce while running the platform and the deal pipeline." },
+    { q: "What do you need from us?", a: "A lightweight, targeted artifact pull tailored to the deal—typically organization and process materials, KPI reporting, vendor and contract data, incident or escalation history, change records, and relevant audit evidence—plus focused stakeholder access." },
     { q: "How do you handle confidentiality?", a: "NDA-friendly by default. Minimal data handling; formats can be anonymized." },
     { q: "When are you not a fit?", a: "If the company already has mature incident/change governance, a live KPI cadence, and low volatility, you likely don't need stabilization—only optimization." },
-    { q: "What does the 100-Day Operating Playbook include?", a: "The 100-Day Operating Playbook is the operational deliverable from the diligence phase — not a slide deck. It defines which gaps to fix, in what sequence, with what accountability structure, and what measurable outcomes to expect in 100 days. It's the document that converts diligence findings into operating results and prevents the post-close \"now what?\" problem." },
-    { q: "What industries do you cover?", a: "The 20 levers apply to any operationally complex business. Whether the portfolio company is a fintech platform or a regional services company, the same governance gaps—incident management, vendor concentration, key-person risk, and KPI cadence—drive the same value erosion." },
-    { q: "How long does a pre-close diligence engagement take?", a: "2–3 weeks from data receipt to findings memo, assuming standard artifact availability (incident history, change logs, vendor contracts, org chart, compliance evidence). Expedited timelines are possible for deals in exclusivity — discuss during the fit check." },
-    { q: "What if we're still in LOI or haven't entered exclusivity yet?", a: "Earlier is better. A light-touch ops review before exclusivity can shape the diligence scope and, in some cases, inform the structure of the deal itself. Even limited access produces useful signals — incident volume patterns and change frequency are often visible without full document access." },
-    { q: "Do you work with family offices?", a: "Yes, specifically on the Post-Close Control Tower for longer holds. Family offices buying from founders often inherit zero institutional process — the gap between what's described in diligence and what's actually operating is widest in these deals. I install the governance baseline and operating cadence that prevents drift over a 5–7+ year hold." },
+    { q: "What does 100-Day Operating Design produce?", a: "The engagement produces a 100-Day Operating Playbook—not a slide deck. It defines which gaps to address, in what sequence, with what accountability structure, and how progress will be measured. It converts validated findings into an operating plan management can own after the engagement." },
+    { q: "What industries do you cover?", a: "Devonshire is designed for financial services, fintech, market infrastructure, and acquisition-heavy professional and tech-enabled services. The method travels across sectors; the evidence requests and selected levers remain company-specific." },
+    { q: "How long does an Execution Risk Review take?", a: "Typically 2–3 weeks from data receipt to the Execution Risk Memo, assuming standard access to organization, process, KPI, vendor, control, and risk evidence. Expedited timelines may be possible for deals in exclusivity—discuss during the Fit Check." },
+    { q: "What if we're still in LOI or haven't entered exclusivity yet?", a: "Earlier is better. A light-touch review can shape the diligence scope and identify the evidence required once access expands. Even limited materials—an organization chart, KPI pack, vendor list, process documentation, and management interviews—can reveal ownership, visibility, and key-person risks." },
+    { q: "Do you work with family offices?", a: "Yes. The work is most relevant where a direct-investing family office inherits a founder-led operating model without a dedicated portfolio-operations bench. Depending on the trigger, the starting point may be an Execution Risk Review, an Operating Control Sprint, or a Post-Close Control Tower for longer-hold sponsor visibility." },
   ];
 
-  const workingWithMe = faqs.filter((_, i) => [0,1,2,3,5,8].includes(i));
-  const engagementProcess = faqs.filter((_, i) => [4,6,7].includes(i));
+  const workingWithMe = faqs.filter((_, i) => [0,1,2,3,4,6,9].includes(i));
+  const engagementProcess = faqs.filter((_, i) => [5,7,8].includes(i));
 
   const q = { fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.navy, margin: 0, flex: 1 };
   const a = { fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, margin: 0, paddingBottom: "14px" };
@@ -365,6 +371,9 @@ export function FAQBlock({ variant }) {
     <div key={globalIndex} style={{ borderBottom: `1px solid ${COLORS.border}` }}>
       <button
         className="faq-row"
+        id={`faq-button-${globalIndex}`}
+        aria-expanded={open === globalIndex}
+        aria-controls={`faq-panel-${globalIndex}`}
         onClick={() => toggle(globalIndex)}
         style={{ width: "100%", textAlign: "left", background: "none", border: "none", padding: "14px 0", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <h3 style={q}>{item.q}</h3>
@@ -373,7 +382,7 @@ export function FAQBlock({ variant }) {
         </span>
       </button>
       {open === globalIndex && (
-        <p style={a}>{item.a}</p>
+        <p id={`faq-panel-${globalIndex}`} role="region" aria-labelledby={`faq-button-${globalIndex}`} style={a}>{item.a}</p>
       )}
     </div>
   );
@@ -402,6 +411,18 @@ export function LeadMagnetLink({ pdfUrl, children, variant = "link", style: extr
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const fieldId = useId().replace(/:/g, "");
+
+  const downloadPdf = (source) => {
+    track("lead_magnet_download", { pdf: pdfUrl, source });
+    const link = document.createElement("a");
+    link.href = pdfUrl;
+    link.download = pdfUrl.split("/").pop() || "devonshire-sample.pdf";
+    link.setAttribute("aria-hidden", "true");
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  };
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -432,7 +453,9 @@ export function LeadMagnetLink({ pdfUrl, children, variant = "link", style: extr
       });
 
       if (res.ok) {
+        track("lead_magnet_submit", { pdf: pdfUrl });
         setState("success");
+        downloadPdf("gate_success");
       } else {
         setState("error");
         setErrorMsg("Something went wrong. Please try again.");
@@ -450,16 +473,15 @@ export function LeadMagnetLink({ pdfUrl, children, variant = "link", style: extr
     link: { fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 700, color: COLORS.navy, textDecoration: "none", borderBottom: `2px solid ${COLORS.navy}`, cursor: "pointer", transition: "all 0.2s" },
     button: { display: "inline-block", padding: "14px 28px", background: COLORS.navy, color: "white", borderRadius: RADIUS.md, textDecoration: "none", fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, textAlign: "center", transition: "all 0.2s", border: "none", cursor: "pointer", whiteSpace: "nowrap", flex: "1 1 auto", minWidth: "min(180px, 100%)" },
     "inline-button": { padding: "12px 16px", borderRadius: RADIUS.md, border: `1px solid ${COLORS.border}`, background: COLORS.white, color: COLORS.navy, textDecoration: "none", fontFamily: FONTS.body, fontWeight: 600, display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", transition: "all 0.2s" },
-    "footer-link": { fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.offWhite, textDecoration: "none", transition: "color 0.2s", cursor: "pointer" },
-    "micro-proof": { display: "flex", alignItems: "center", gap: "8px", textDecoration: "none", color: COLORS.navy, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, transition: "all 0.2s", padding: "8px 10px", borderRadius: RADIUS.sm, cursor: "pointer" }
+    "footer-link": { fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.offWhite, textDecoration: "none", transition: "color 0.2s", cursor: "pointer" }
   }[variant] || linkStyle.link;
 
   // ── Initial state: clickable link/button ─────────────────────
   if (state === "initial") {
     return (
-      <span onClick={handleClick} style={{ ...linkStyle, ...extraStyle }}>
+      <button type="button" onClick={handleClick} style={{ border: 0, padding: 0, background: "transparent", ...linkStyle, ...extraStyle }}>
         {children}
-      </span>
+      </button>
     );
   }
 
@@ -470,20 +492,28 @@ export function LeadMagnetLink({ pdfUrl, children, variant = "link", style: extr
         <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, marginBottom: "12px", fontWeight: 600 }}>
           Enter your email to download: <strong>{children}</strong>
         </p>
-        <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+        <form onSubmit={handleSubmit} noValidate style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          <label htmlFor={`${fieldId}-name`} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, fontSize: "0.9rem", fontWeight: 600 }}>Name <span style={{ fontWeight: 400 }}>(optional)</span></label>
           <input
+            id={`${fieldId}-name`}
+            name="name"
             type="text"
             value={name}
             onChange={e => setName(e.target.value)}
-            placeholder="Your name"
+            autoComplete="name"
             style={{ padding: "11px 12px", borderRadius: RADIUS.sm, border: `1px solid ${COLORS.steel}`, fontFamily: FONTS.body, fontSize: "0.9rem", background: COLORS.white, width: "100%", boxSizing: "border-box" }}
           />
+          <label htmlFor={`${fieldId}-email`} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, fontSize: "0.9rem", fontWeight: 600 }}>Work email</label>
           <input
+            id={`${fieldId}-email`}
+            name="email"
             type="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
-            placeholder="you@fund.com"
+            autoComplete="email"
             required
+            aria-invalid={Boolean(errorMsg)}
+            aria-describedby={`${fieldId}-message`}
             style={{ padding: "11px 12px", borderRadius: RADIUS.sm, border: `1px solid ${COLORS.steel}`, fontFamily: FONTS.body, fontSize: "0.9rem", background: COLORS.white, width: "100%", boxSizing: "border-box" }}
           />
           <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
@@ -500,11 +530,7 @@ export function LeadMagnetLink({ pdfUrl, children, variant = "link", style: extr
               Cancel
             </button>
           </div>
-          {errorMsg && (
-            <p style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: "#FC8181", margin: 0 }}>
-              {errorMsg}
-            </p>
-          )}
+          <p id={`${fieldId}-message`} className="lead-magnet-form-message" role={errorMsg ? "alert" : "status"} aria-live={errorMsg ? "assertive" : "polite"} style={{ minHeight: "20px", fontFamily: FONTS.body, fontSize: "0.8rem", color: errorMsg ? COLORS.critical : COLORS.charcoal, margin: 0 }}>{errorMsg || (state === "loading" ? "Submitting your request…" : "")}</p>
         </form>
       </div>
     );
@@ -513,11 +539,11 @@ export function LeadMagnetLink({ pdfUrl, children, variant = "link", style: extr
   // ── Success state: download link ─────────────────────────────
   if (state === "success") {
     return (
-      <div style={{ padding: "16px 20px", background: `${COLORS.gold}15`, border: `1px solid ${COLORS.gold}`, borderRadius: RADIUS.md, marginTop: "8px", marginBottom: "8px" }}>
+      <div role="status" aria-live="polite" style={{ padding: "16px 20px", background: `${COLORS.gold}15`, border: `1px solid ${COLORS.gold}`, borderRadius: RADIUS.md, marginTop: "8px", marginBottom: "8px" }}>
         <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, marginBottom: "12px" }}>
           ✓ Thanks! Your download is ready:
         </p>
-        <a href={pdfUrl} target="_blank" rel="noopener noreferrer"
+        <a href={pdfUrl} download onClick={() => track("lead_magnet_download", { pdf: pdfUrl, source: "success_link" })}
           style={{ fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, textDecoration: "underline" }}>
           Download {children} →
         </a>
@@ -533,7 +559,7 @@ export function ServicesSamplesRow() {
   return (
     <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "14px" }}>
       <LeadMagnetLink pdfUrl={SAMPLE_SCORECARD_PDF} variant="inline-button">
-        Sample Ops Diligence Scorecard (PDF)
+        Sample Execution Risk Scorecard (PDF)
       </LeadMagnetLink>
       <LeadMagnetLink pdfUrl={SAMPLE_100DAY_PDF} variant="inline-button">
         100-Day Operating Playbook (PDF)
@@ -547,6 +573,8 @@ export function ServicesSamplesRow() {
 // ─── OFFER CARDS (SHARED SERVICES PRICING) ──────────────────
 
 export function OfferCards({ setPage }) {
+  const [mobileDetails, setMobileDetails] = useState({});
+  const toggleDetails = (key) => setMobileDetails((current) => ({ ...current, [key]: !current[key] }));
   const box = { border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, flex: "1 1 calc(50% - 10px)", minWidth: "min(240px, 100%)", display: "flex", flexDirection: "column" };
   const tag = { fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.gold, fontWeight: 600, marginBottom: "10px" };
   const li = { marginBottom: "8px", lineHeight: 1.55 };
@@ -554,8 +582,8 @@ export function OfferCards({ setPage }) {
 
   const pathLeft = {
     title: "Evaluating a Target",
-    description: "Decision-useful ops diligence designed for the IC: severity-rated red flags + evidence requests.",
-    items: ["Risk-rated findings memo (IC-ready)", "Evidence requests + diligence questions", "Day-1 → Day-100 stabilization priorities if you close"]
+    description: "Decision-useful operational diligence designed for the IC and the ownership transition.",
+    items: ["Execution Risk Memo", "Evidence requests + severity-rated findings", "Day-1 Critical Path + first-30-day priorities"]
   };
   const pathRight = {
     title: "First 100 Days Post-Close",
@@ -565,11 +593,11 @@ export function OfferCards({ setPage }) {
 
   const pathAddon = {
     title: "Add-On Acquisition Support",
-    description: "Operational diligence and integration support for portfolio companies evaluating add-on acquisitions.",
+    description: "A relevant use case for platforms whose acquisition pace is outrunning available operating capacity.",
     items: [
-      "Ops diligence on the add-on target (same rigor as standalone deals)",
-      "Integration risk assessment — systems overlap, vendor consolidation, process harmonization",
-      "Post-merger governance alignment with the platform company's operating model",
+      "Operational diligence on the add-on target",
+      "Integration ownership, Day-1 sequencing, and critical dependencies",
+      "Platform-aligned reporting, governance, and benefit tracking",
     ],
   };
 
@@ -593,7 +621,7 @@ export function OfferCards({ setPage }) {
                 ))}
               </ul>
               <div style={{ marginTop: "auto", paddingTop: "16px" }}>
-                <button className="card-text-link" onClick={() => setPage("scorer")}>Score Your Deal →</button>
+                <button className="card-text-link" onClick={() => { track("pricing_cta", { offer: OFFERS.executionRiskReview.key, destination: "scorer" }); setPage("scorer"); }}>Score Your Deal →</button>
               </div>
             </div>
             <div className="path-card" style={{ flex: "1 1 260px", minWidth: "min(240px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
@@ -605,7 +633,7 @@ export function OfferCards({ setPage }) {
                 ))}
               </ul>
               <div style={{ marginTop: "auto", paddingTop: "16px" }}>
-                <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer">Book a Fit Check (15 min) →</a>
+                <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => track("pricing_cta", { offer: OFFERS.operatingDesign.key, destination: "calendly" })}>Book a Fit Check (15 min) →</a>
               </div>
             </div>
             <div className="path-card" style={{ flex: "1 1 260px", minWidth: "min(240px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
@@ -617,7 +645,7 @@ export function OfferCards({ setPage }) {
                 ))}
               </ul>
               <div style={{ marginTop: "auto", paddingTop: "16px" }}>
-                <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer">Book a Fit Check (15 min) →</a>
+                <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => track("pricing_cta", { offer: OFFERS.operatingControlSprint.key, destination: "calendly" })}>Book a Fit Check (15 min) →</a>
               </div>
             </div>
           </div>
@@ -626,102 +654,112 @@ export function OfferCards({ setPage }) {
       )}
       {!setPage && (
         <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, marginBottom: "20px" }}>
-          Most engagements begin during the <strong>LOI → close window</strong> to avoid post-close rework.
+          Fixed fees are scoped to transaction stage, complexity, and required access. Most engagements begin during the <strong>LOI → close window</strong> to avoid post-close rework.
         </p>
       )}
       <div className="pricing-grid" style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap", marginBottom: "24px" }}>
         <div className="pricing-card" style={{...box, borderTop: `3px solid ${COLORS.steel}`}}>
           <span style={segLabel}>Pre-Close · LOI to Close</span>
-          <SectionTitle sub>Ops Diligence Snapshot</SectionTitle>
-          <div className="price" style={tag}>$7,500–15,000 · 2–3 weeks</div>
-          <ul style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
-            <li style={li}>Risk-rated red flags with severity + PE impact</li>
-            <li style={li}>Evidence requests + diligence questions</li>
-            <li style={li}>Top execution risks + stabilization priorities</li>
+          <SectionTitle sub>{OFFERS.executionRiskReview.name}</SectionTitle>
+          <div className="price" style={tag}>{OFFERS.executionRiskReview.price}</div>
+          <div className="price-detail">{OFFERS.executionRiskReview.timing}</div>
+          <button className="offer-details-toggle" aria-expanded={!!mobileDetails.review} aria-controls="review-deliverables" onClick={() => toggleDetails("review")}>View deliverables <span>{mobileDetails.review ? "−" : "+"}</span></button>
+          <ul id="review-deliverables" className={`offer-deliverables-list${mobileDetails.review ? " open" : ""}`} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
+            <li style={li}>Execution Risk Memo</li>
+            <li style={li}>Evidence requests + severity-rated findings</li>
+            <li style={li}>Day-1 Critical Path + first-30-day priorities</li>
+            <li style={li}>100-day priority map</li>
           </ul>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.steel, lineHeight: 1.5, marginTop: "14px", paddingTop: "12px", borderTop: `1px solid ${COLORS.border}`, marginBottom: "auto" }}>
-            Best for funds that need the diagnostic before they commit.
-          </p>
           <div style={{ marginTop: "16px" }}>
-            <button className="card-text-link" onClick={() => setPage ? setPage("scorer") : window.location.assign("/pe/scorer")}>Score Your Deal →</button>
+            <button className="card-text-link" onClick={() => { track("pricing_cta", { offer: OFFERS.executionRiskReview.key, destination: "scorer" }); setPage ? setPage("scorer") : window.location.assign("/pe/scorer"); }}>Score Your Deal →</button>
           </div>
         </div>
 
         <div className="pricing-card recommended" style={{...box, borderTop: `3px solid ${COLORS.gold}`}}>
-          <SectionTitle sub>Diligence + 100-Day Operating Playbook (Recommended)</SectionTitle>
-          <div className="price" style={tag}>$30,000–40,000 · Snapshot + Playbook (scoped on the Fit Check call)</div>
-          <ul style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
-            <li style={li}>Diligence findings roll directly into the 100-day plan — no re-learning, no gap</li>
-            <li style={li}>Day-1 critical path + phased 100-day execution</li>
-            <li style={li}>Clear ownership + cadence from close to value</li>
+          <span style={segLabel}>LOI → Day 100</span>
+          <SectionTitle sub>{OFFERS.diligenceToExecution.name}</SectionTitle>
+          <div className="price" style={tag}>{OFFERS.diligenceToExecution.price}</div>
+          <div className="price-detail">{OFFERS.diligenceToExecution.primaryDeliverable}</div>
+          <button className="offer-details-toggle" aria-expanded={!!mobileDetails.mandate} aria-controls="mandate-deliverables" onClick={() => toggleDetails("mandate")}>View deliverables <span>{mobileDetails.mandate ? "−" : "+"}</span></button>
+          <ul id="mandate-deliverables" className={`offer-deliverables-list${mobileDetails.mandate ? " open" : ""}`} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
+            <li style={li}>Execution Risk Memo + Scorecard</li>
+            <li style={li}>Day-1 Readiness Plan + 100-Day Operating Playbook</li>
+            <li style={li}>Ownership, milestones + operating cadence</li>
           </ul>
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.steel, lineHeight: 1.5, marginTop: "14px", paddingTop: "12px", borderTop: `1px solid ${COLORS.border}`, marginBottom: "auto" }}>
-            100-Day Operating Playbook on its own: $20,000–35,000.
-          </p>
           <div style={{ marginTop: "16px" }}>
-            <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer">Book a Fit Check (15 min) →</a>
+            <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => track("pricing_cta", { offer: OFFERS.diligenceToExecution.key, destination: "calendly" })}>Book a Fit Check (15 min) →</a>
           </div>
         </div>
 
         <div className="pricing-card" style={{...box, borderTop: `3px solid ${COLORS.gold}`}}>
           <span style={segLabel}>Post-Close · Hands-On</span>
-          <SectionTitle sub>Embedded Operating Sprint</SectionTitle>
-          <div className="price" style={tag}>$15,000–30,000 · 2–6 weeks</div>
-          <ul style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
-            <li style={li}>Embedded execution on one priority: KPI architecture, operating cadence, vendor governance, post-close stabilization, incident/reliability, or transformation PMO</li>
-            <li style={li}>Built and installed on-site or hybrid</li>
-            <li style={li}>Converts to a retainer at $7,500–12,000/month</li>
+          <SectionTitle sub>{OFFERS.operatingControlSprint.name}</SectionTitle>
+          <div className="price" style={tag}>{OFFERS.operatingControlSprint.price}</div>
+          <div className="price-detail">{OFFERS.operatingControlSprint.timing}</div>
+          <button className="offer-details-toggle" aria-expanded={!!mobileDetails.sprint} aria-controls="sprint-deliverables" onClick={() => toggleDetails("sprint")}>View deliverables <span>{mobileDetails.sprint ? "−" : "+"}</span></button>
+          <ul id="sprint-deliverables" className={`offer-deliverables-list${mobileDetails.sprint ? " open" : ""}`} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
+            <li style={li}>One operating control or integration capability, fully installed</li>
+            <li style={li}>Working governance + ownership map</li>
+            <li style={li}>Capability Transfer Pack</li>
           </ul>
           <div style={{ marginTop: "16px" }}>
-            <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer">Book a Fit Check (15 min) →</a>
+            <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => track("pricing_cta", { offer: OFFERS.operatingControlSprint.key, destination: "calendly" })}>Book a Fit Check (15 min) →</a>
           </div>
         </div>
 
         <div className="pricing-card" style={{...box, borderTop: `3px solid ${COLORS.navy}`}}>
           <span style={segLabel}>Ongoing Hold</span>
-          <SectionTitle sub>Post-Close Control Tower</SectionTitle>
-          <div className="price" style={tag}>$7,500–10,000+/month · ongoing</div>
-          <ul style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
-            <li style={li}>Weekly operating review + board-ready KPI pack</li>
-            <li style={li}>Incident + change governance discipline</li>
-            <li style={li}>Vendor controls + audit readiness cadence</li>
+          <SectionTitle sub>{OFFERS.postCloseControlTower.name}</SectionTitle>
+          <div className="price" style={tag}>{OFFERS.postCloseControlTower.price}</div>
+          <div className="price-detail">{OFFERS.postCloseControlTower.timing}</div>
+          <button className="offer-details-toggle" aria-expanded={!!mobileDetails.tower} aria-controls="tower-deliverables" onClick={() => toggleDetails("tower")}>View deliverables <span>{mobileDetails.tower ? "−" : "+"}</span></button>
+          <ul id="tower-deliverables" className={`offer-deliverables-list${mobileDetails.tower ? " open" : ""}`} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
+            <li style={li}>Sponsor Operating Pack + Control Tower Dashboard</li>
+            <li style={li}>Weekly review + decision and action register</li>
+            <li style={li}>Risk watchlist + monthly board-readiness pack</li>
           </ul>
           <div style={{ marginTop: "16px" }}>
-            <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer">Book a Fit Check (15 min) →</a>
+            <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => track("pricing_cta", { offer: OFFERS.postCloseControlTower.key, destination: "calendly" })}>Book a Fit Check (15 min) →</a>
           </div>
         </div>
       </div>
 
+      <p className="standalone-playbook-note"><strong>{OFFERS.operatingDesign.name}:</strong> {OFFERS.operatingDesign.price}; produces the 100-Day Operating Playbook. <strong>Continuity Credit:</strong> 100% of the Execution Risk Review fee is applied to a Diligence-to-Execution Mandate commissioned before close or within 30 days after close.</p>
+
       {!setPage && (
-        <div style={{ fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, lineHeight: 1.7, padding: "14px 18px", background: `${COLORS.navy}05`, borderRadius: RADIUS.md, border: `1px solid ${COLORS.border}`, marginBottom: SPACING.md }}>
-          <p style={{ margin: "0 0 8px 0" }}>
-            <strong>Pre-close option:</strong> Add an Ops Diligence Snapshot (from $7,500, 2–3 weeks) before signing to surface red flags for the IC.
-          </p>
-          <p style={{ margin: 0 }}>
-            <strong>Recommended:</strong> Choose the bundle if you expect to close — diligence findings feed directly into Day-1 priorities with no re-learning.
-          </p>
-        </div>
+        <aside className="buy-build-use-case" aria-labelledby="buy-build-use-case-title">
+          <div>
+            <span>Priority use case</span>
+            <h3 id="buy-build-use-case-title">Buy-and-Build / Tuck-In Support</h3>
+            <p>For platforms where acquisition pace has outgrown internal operating capacity. The Review, Mandate, or Sprint can be scoped to one live acquisition while strengthening the platform's operating baseline for the next.</p>
+          </div>
+          <ul>
+            <li>Absorption capacity and critical dependencies before close</li>
+            <li>Integration ownership and Day-1 sequence</li>
+            <li>A common operating baseline that improves across acquisitions</li>
+          </ul>
+        </aside>
       )}
 
-      <ButtonPair
+      {setPage && <ButtonPair
         primaryText="Book a Fit Check (15 min)"
         secondaryText={setPage ? "View Full Services & Details" : undefined}
         secondaryAction={setPage ? () => setPage("services") : undefined}
         centered={true}
         showAvailability={true}
-      />
+      />}
     </Section>
   );
 }
 
-export function TestimonialBlock() {
+export function TrackRecordBlock() {
   const [expandedPlatform, setExpandedPlatform] = useState(false);
   const [expandedVendor, setExpandedVendor] = useState(false);
 
   return (
-    <Section title="Track Record & Outcomes" noCTA>
+    <Section title="Track Record & Outcomes" noCTA id="track-record">
       <p style={{ fontFamily: FONTS.body, color: COLORS.bodyMuted, lineHeight: 1.6, marginBottom: "24px", maxWidth: "600px" }}>
-        Outcomes from institutional operating roles — same governance playbook, now installed for PE portfolio companies.
+        Representative outcomes from institutional operating roles—not Devonshire client case studies. The governance methods are adapted to lower-middle-market deals and portfolio companies.
       </p>
 
       <span className="measured-outcomes-label">Measured Outcomes (Post-Implementation)</span>
@@ -778,7 +816,7 @@ export function TestimonialBlock() {
 
         <div className="case-footer">
           <div className="case-pe-translation">
-            <strong>PE Translation</strong> Same playbook installs in a portfolio company in 100 days — at a fraction of the complexity of a $10B fund.
+            <strong>PE Translation</strong> The same operating principles—clear ownership, evidence, escalation, and cadence—can be adapted to portfolio-company scale and sequenced through the first 100 days.
           </div>
         </div>
 
@@ -892,7 +930,7 @@ export function TestimonialBlock() {
 
         <div className="case-footer">
           <div className="case-pe-translation">
-            <strong>PE Translation</strong> Same vendor governance installs at portfolio scale. Most portcos have 40–60% of these gaps on day one — I find and close them in the first 100 days.
+            <strong>PE Translation</strong> Vendor visibility, ownership, renewal discipline, and performance cadence can be adapted to portfolio-company scale and prioritized against the evidence found in diligence.
           </div>
         </div>
 
@@ -924,49 +962,65 @@ export function TestimonialBlock() {
         </div>
       </div>
 
-      <p className="confidentiality-note">All engagements are NDA-protected. Anonymized metrics and references available on request.</p>
+      <p className="confidentiality-note">NDA protection is available as standard. Institutional outcome detail and illustrative work-product formats are available on request.</p>
     </Section>
   );
 }
 
 export function Nav({ page, setPage }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+  const toggleRef = useRef(null);
   const items = [
     { key: "levers", label: "Home" },
-    { key: "services", label: "Services & Pricing" },
+    { key: "services", label: "Services & Method" },
     { key: "scorer", label: "Score Your Deal" },
     { key: "about", label: "About" },
     { key: "resources", label: "Resources" },
   ];
   const handleNav = (key) => { setPage(key); setMenuOpen(false); };
+  useEffect(() => {
+    if (!menuOpen) return;
+    const menu = menuRef.current;
+    const focusable = () => [...menu.querySelectorAll('a[href],button:not([disabled])')];
+    focusable()[0]?.focus();
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") { setMenuOpen(false); toggleRef.current?.focus(); return; }
+      if (e.key !== "Tab") return;
+      const items = focusable(); const first = items[0]; const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
+    };
+    menu.addEventListener("keydown", onKeyDown);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { menu.removeEventListener("keydown", onKeyDown); document.body.style.overflow = previousOverflow; };
+  }, [menuOpen]);
   return (
     <>
       <nav className="site-nav" style={{ position: "sticky", top: 0, zIndex: 100, background: COLORS.white, borderBottom: `3px solid ${COLORS.gold}`, padding: "0 clamp(12px, 3.5vw, 28px)", display: "flex", alignItems: "center", justifyContent: "space-between", height: "76px", minHeight: "76px", boxShadow: "0 2px 8px rgba(20, 33, 61, 0.08)" }}>
         <div className="nav-logo-col" style={{ display: "flex", alignItems: "center", gap: "16px", minWidth: 0 }}>
-          <img
-            src="/Devonshire_Operations_Logo_Exact-cropped1.svg"
-            alt="Devonshire Operations"
-            className="nav-logo"
-            style={{ height: "64px", maxWidth: "100%", cursor: "pointer" }}
-            onClick={() => handleNav("levers")}
-          />
+          <a className="editorial-brand" href="/pe/" onClick={(e) => { e.preventDefault(); handleNav("levers"); }} aria-label="Devonshire Operations home">
+            <span className="editorial-brand-mark">D</span>
+            <span className="editorial-brand-word"><b>DEVONSHIRE</b><small>Operations</small></span>
+          </a>
           <div style={{ width: "1px", height: "36px", background: COLORS.border }} className="nav-links" />
           <div className="nav-links" style={{ display: "flex", gap: "4px" }}>
             {items.map(({ key, label }) => (
-              <button key={key} onClick={() => handleNav(key)}
+              <a key={key} href={key === "levers" ? "/pe/" : `/pe/${key}`} onClick={(e) => { e.preventDefault(); handleNav(key); }}
                 style={{ background: "transparent", border: "none", padding: "10px 16px", borderRadius: RADIUS.sm, color: COLORS.navy, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: page === key ? 700 : 500, cursor: "pointer", transition: "all 0.15s", letterSpacing: "0.3px", borderBottom: page === key ? `2px solid ${COLORS.gold}` : "2px solid transparent" }}
                 onMouseEnter={e => { if (page !== key) e.currentTarget.style.color = COLORS.gold; }}
                 onMouseLeave={e => { if (page !== key) e.currentTarget.style.color = COLORS.navy; }}>
                 {label}
-              </button>
+              </a>
             ))}
           </div>
         </div>
         <span className="nav-current-page">
           {items.find(i => i.key === page)?.label ?? ""}
         </span>
-        <div className="nav-cta"><CTAButton text="Book a Fit Check (15 min)" /></div>
-        <button className="nav-hamburger" onClick={() => setMenuOpen(o => !o)} aria-label="Toggle menu">
+        <div className="nav-cta"><CTAButton text="Book a Fit Check (15 min)" location="desktop_navigation" /></div>
+        <button ref={toggleRef} className="nav-hamburger" onClick={() => setMenuOpen(o => !o)} aria-label="Toggle menu" aria-expanded={menuOpen} aria-controls="mobile-navigation">
           {menuOpen
             ? <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><line x1="4" y1="4" x2="18" y2="18" stroke={COLORS.navy} strokeWidth="2" strokeLinecap="round"/><line x1="18" y1="4" x2="4" y2="18" stroke={COLORS.navy} strokeWidth="2" strokeLinecap="round"/></svg>
             : <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect y="4" width="22" height="2" rx="1" fill={COLORS.navy}/><rect y="10" width="22" height="2" rx="1" fill={COLORS.navy}/><rect y="16" width="22" height="2" rx="1" fill={COLORS.navy}/></svg>
@@ -974,14 +1028,14 @@ export function Nav({ page, setPage }) {
         </button>
       </nav>
       {menuOpen && (
-        <div className="nav-mobile-menu">
+        <div ref={menuRef} id="mobile-navigation" className="nav-mobile-menu" role="dialog" aria-modal="true" aria-label="Site navigation">
           {items.map(({ key, label }) => (
-            <button key={key} className="nav-mobile-item" onClick={() => handleNav(key)}
+            <a key={key} href={key === "levers" ? "/pe/" : `/pe/${key}`} className="nav-mobile-item" onClick={(e) => { e.preventDefault(); handleNav(key); }}
               style={{ color: page === key ? COLORS.gold : COLORS.navy, fontFamily: FONTS.body, fontSize: "1rem", fontWeight: 600, letterSpacing: "0.3px", background: page === key ? `${COLORS.gold}12` : "transparent" }}>
               {label}
-            </button>
+            </a>
           ))}
-          <div style={{ marginTop: "8px" }}><CTAButton text="Book a Fit Check (15 min)" /></div>
+          <div style={{ marginTop: "8px" }}><CTAButton text="Book a Fit Check (15 min)" location="mobile_navigation" /></div>
         </div>
       )}
     </>
@@ -1028,6 +1082,7 @@ function FooterLeadCapture() {
         }),
       });
       if (res.ok) {
+        track("footer_lead_submit", { situation });
         setStatus({ state: "ok", msg: "Thanks! I'll be in touch soon." });
         setEmail("");
         setSituation("Evaluating a target");
@@ -1050,21 +1105,19 @@ function FooterLeadCapture() {
       <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: `${COLORS.offWhite}B0`, lineHeight: 1.55, marginBottom: "14px" }}>
         Share your situation and I'll reply with fit and next steps.
       </p>
-      <form className="footer-form" onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-        <select value={situation} onChange={e => setSituation(e.target.value)} style={inputStyle}>
+      <form className="footer-form" onSubmit={submit} noValidate style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+        <label className="footer-field-label" htmlFor="footer-situation">Situation</label>
+        <select id="footer-situation" value={situation} onChange={e => setSituation(e.target.value)} style={inputStyle}>
           <option>Evaluating a target</option>
           <option>First 100 days post-close</option>
           <option>Mid-hold optimization</option>
         </select>
-        <input value={email} onChange={e => setEmail(e.target.value)} placeholder="you@fund.com" style={inputStyle} />
+        <label className="footer-field-label" htmlFor="footer-email">Email address</label>
+        <input id="footer-email" name="email" type="email" required autoComplete="email" value={email} onChange={e => { setEmail(e.target.value); if (status.state === "error") setStatus({ state: "idle", msg: "" }); }} placeholder="you@fund.com" aria-invalid={status.state === "error"} aria-describedby="footer-form-status" style={inputStyle} />
         <button type="submit" disabled={status.state === "loading"} style={{ padding: "10px 20px", background: status.state === "loading" ? COLORS.bodyMuted : COLORS.gold, color: COLORS.white, border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: status.state === "loading" ? "default" : "pointer", textAlign: "center" }}>
           {status.state === "loading" ? "Sending…" : "Send →"}
         </button>
-        {status.state !== "idle" && (
-          <p style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: status.state === "ok" ? "#68D391" : status.state === "loading" ? COLORS.offWhite : "#FC8181", margin: 0 }}>
-            {status.msg}
-          </p>
-        )}
+        <p id="footer-form-status" role={status.state === "error" ? "alert" : "status"} aria-live={status.state === "error" ? "assertive" : "polite"} style={{ minHeight: "20px", fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.white, margin: 0 }}>{status.msg}</p>
       </form>
     </div>
   );
@@ -1104,17 +1157,17 @@ export function Footer({ setPage }) {
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
             {[
               { key: "levers", label: "Home" },
-              { key: "services", label: "Services & Pricing" },
+              { key: "services", label: "Services & Method" },
               { key: "scorer", label: "Score Your Deal" },
               { key: "about", label: "About" },
               { key: "resources", label: "Resources" },
             ].map(({ key, label }) => (
-              <button key={key} onClick={() => setPage(key)}
+              <a key={key} href={key === "levers" ? "/pe/" : `/pe/${key}`} onClick={(e) => { e.preventDefault(); setPage(key); }}
                 style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.offWhite, background: "none", border: "none", padding: 0, textAlign: "left", cursor: "pointer", transition: "color 0.2s" }}
                 onMouseEnter={e => e.currentTarget.style.color = COLORS.goldOnDark}
                 onMouseLeave={e => e.currentTarget.style.color = COLORS.offWhite}>
                 {label}
-              </button>
+              </a>
             ))}
           </div>
         </div>
@@ -1124,7 +1177,7 @@ export function Footer({ setPage }) {
           <h3 style={{ fontFamily: FONTS.heading, fontSize: "1rem", color: COLORS.goldOnDark, marginBottom: "16px", letterSpacing: "0.5px" }}>Resources</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
             <LeadMagnetLink pdfUrl={SAMPLE_SCORECARD_PDF} variant="footer-link">
-              Ops Diligence Scorecard (PDF)
+              Execution Risk Scorecard (PDF)
             </LeadMagnetLink>
             <LeadMagnetLink pdfUrl={SAMPLE_100DAY_PDF} variant="footer-link">
               100-Day Operating Playbook (PDF)
@@ -1140,9 +1193,9 @@ export function Footer({ setPage }) {
       <div style={{ maxWidth: "1200px", margin: "32px auto 0", padding: "24px 24px 0 24px", borderTop: `1px solid ${COLORS.steel}40`, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "16px" }}>
         <div>
           <p style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.offWhite, opacity: 0.7, margin: "0 0 4px 0" }}>
-            © {new Date().getFullYear()} Devonshire Ops. All rights reserved.
+            © {new Date().getFullYear()} Devonshire Operations. All rights reserved.
           </p>
-          <p style={{ fontFamily: FONTS.heading, fontSize: "0.9rem", color: COLORS.goldOnDark, opacity: 0.9, margin: 0, fontWeight: 600 }}>
+          <p className="footer-tagline" style={{ fontFamily: FONTS.heading, fontSize: "0.9rem", color: COLORS.goldOnDark, opacity: 0.9, margin: 0, fontWeight: 600 }}>
             Find the gaps. Build the plan. Create the value.
           </p>
         </div>
