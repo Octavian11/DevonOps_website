@@ -2,8 +2,8 @@
 export const CALENDLY = "https://calendly.com/hassantariq1/15-minute-triage-call-hassan-tariq";
 export const CONTACT_EMAIL = "hassan@devonshireops.com";
 export const LINKEDIN_URL = "https://www.linkedin.com/in/hassantar/";
-export const SAMPLE_SCORECARD_PDF = "/sample-ops-diligence-scorecard.pdf";
-export const SAMPLE_100DAY_PDF = "/sample-100-day-stabilization-plan.pdf";
+export const SAMPLE_SCORECARD_PDF = "/sample-execution-risk-scorecard.pdf";
+export const SAMPLE_100DAY_PDF = "/sample-100-day-operating-playbook.pdf";
 export const NDA_NOTE = "NDA-friendly. Minimal data handling. Anonymized formats accepted.";
 // FormSpree endpoint for Scorer email capture
 export const FORMSPREE_URL = "https://formspree.io/f/xvzbbyrj";
@@ -22,41 +22,41 @@ export async function copyToClipboard(text) {
 }
 
 export const COLORS = {
-  navy: "#14213D",
-  steel: "#14213D",
-  gold: "#B8860B",          // deep gold — use ON WHITE/CREAM surfaces + button fills
-  goldOnDark: "#B8860B",    // bright gold — use ON NAVY surfaces only
-  goldDark: "#A07D2E",      // hover state for deep gold
-  offWhite: "#FCFCFC",
-  charcoal: "#0A0A0A",
-  border: "#E2E8F0",
+  navy: "#1B1C1F",
+  steel: "#303236",
+  gold: "#6E1F2E",
+  goldOnDark: "#C97B8A",
+  goldDark: "#571825",
+  offWhite: "#F4F4F3",
+  charcoal: "#212226",
+  border: "rgba(27,28,31,.16)",
   white: "#FFFFFF",
-  primary: "#14213D",
-  bodyMuted: "#1F2937",
-  criticalBg: "#FFF5F5",
-  criticalText: "#9B2C2C",
-  criticalBorder: "#FEB2B2",
-  highBg: "#FFFAF0",
-  highText: "#C05621",
-  highBorder: "#FBD38D",
-  mediumBg: "#FFFFF0",
-  mediumText: "#B7791F",
-  mediumBorder: "#FEFCBF",
-  preClose: "#2C5282",
-  first100: "#2C7A7B",
-  ongoing: "#4A5568",
-  stable: "#276749",
-  atRisk: "#C05621",
-  critical: "#9B2C2C",
-  costRed: "#C53030",
-  heroGradientStart: "#14213D",
-  heroGradientEnd: "#0F1A2E",
+  primary: "#1B1C1F",
+  bodyMuted: "#303236",
+  criticalBg: "#FBF0F0",
+  criticalText: "#96404A",
+  criticalBorder: "#E7C6C9",
+  highBg: "#FAF3EE",
+  highText: "#8A4F2F",
+  highBorder: "#E5CDBB",
+  mediumBg: "#F5F3EA",
+  mediumText: "#8F8353",
+  mediumBorder: "#E2DCC4",
+  preClose: "#6E1F2E",
+  first100: "#1B1C1F",
+  ongoing: "#303236",
+  stable: "#3E6259",
+  atRisk: "#A2653C",
+  critical: "#96404A",
+  costRed: "#96404A",
+  heroGradientStart: "#FFFFFF",
+  heroGradientEnd: "#F4F4F3",
 };
 
 export const FONTS = {
   heading: "'EB Garamond', Garamond, 'Times New Roman', serif",   // headings + display numbers
-  body: "Georgia, 'Times New Roman', serif",                      // body copy
-  label: "'DM Sans', 'Helvetica Neue', sans-serif",               // UI: buttons, badges, overline labels
+  body: "'Inter', -apple-system, 'Helvetica Neue', Arial, sans-serif",
+  label: "'Inter', -apple-system, 'Helvetica Neue', Arial, sans-serif",
 };
 // TYPE SCALE (rem, root 20px desktop / 18 / 16 mobile):
 // 0.6 overline · 0.72 label/caption · 0.8 small body · 0.9 secondary body/UI · 1.0 body/card title
@@ -75,18 +75,18 @@ export const SPACING = {
 
 export const SHADOWS = {
   none: "none",
-  xs: "0 1px 2px rgba(20, 33, 61, 0.05)",
-  sm: "0 1px 3px rgba(20, 33, 61, 0.1)",
-  md: "0 4px 12px rgba(20, 33, 61, 0.15)",
-  lg: "0 6px 20px rgba(20, 33, 61, 0.18)",
-  xl: "0 10px 30px rgba(20, 33, 61, 0.22)"
+  xs: "0 1px 2px rgba(27, 28, 31, 0.05)",
+  sm: "0 1px 3px rgba(27, 28, 31, 0.1)",
+  md: "0 4px 12px rgba(27, 28, 31, 0.15)",
+  lg: "0 6px 20px rgba(27, 28, 31, 0.18)",
+  xl: "0 10px 30px rgba(27, 28, 31, 0.22)"
 };
 
 export const RADIUS = {
-  sm: "4px",
-  md: "6px",
-  lg: "8px",
-  xl: "12px"
+  sm: "0",
+  md: "0",
+  lg: "0",
+  xl: "0"
 };
 
 export const SEVERITY_STYLE = {
@@ -98,177 +98,177 @@ export const SEVERITY_STYLE = {
 export const TIMING_COLORS = { "Pre-Close Red Flag": COLORS.preClose, "First 100 Days": COLORS.first100, "Ongoing Hold": COLORS.ongoing };
 
 export const DOMAINS = {
-  IM: { name: "Things That Break Repeatedly", short: "Incidents", color: "#E53E3E", desc: "Recurring operational failures, severity classification, post-incident reviews, escalation" },
-  CG: { name: "Changes That Cause Failures", short: "Change Control", color: "#DD6B20", desc: "Operational change control, review processes, rollback capability, change-incident correlation" },
-  VP: { name: "Vendor Risk & Dependency", short: "Vendors", color: "#D69E2E", desc: "Contracts, concentration risk, scorecards, fourth-party visibility" },
-  AC: { name: "Things That Won't Survive Buyer DD", short: "Compliance", color: "#38A169", desc: "Evidence trails, compliance controls, access reviews, audit readiness" },
-  KO: { name: "Missing Metrics & Reporting Cadence", short: "KPIs", color: "#3182CE", desc: "Board reporting, operating reviews, KPIs, targets" },
-  OP: { name: "Things Nobody Owns", short: "Process", color: "#805AD5", desc: "Documented procedures, accountability, key-person risk, knowledge management" },
+  IM: { name: "Things That Break Repeatedly", short: "Incidents", color: "#96404A", desc: "Recurring operating failures, escalation discipline, root-cause learning, and service continuity" },
+  CG: { name: "Changes That Cause Failures", short: "Change Control", color: "#A2653C", desc: "Material-change decision rights, dependency sequencing, outcome validation, and fallback discipline" },
+  VP: { name: "Vendor Risk & Dependency", short: "Vendors", color: "#6D4A62", desc: "Contracts, concentration risk, scorecards, fourth-party visibility" },
+  AC: { name: "Things That Won't Survive Buyer DD", short: "Compliance", color: "#3E6259", desc: "Evidence readiness, operating controls, client and regulatory obligations, and exception closure" },
+  KO: { name: "Missing Metrics & Reporting Cadence", short: "KPIs", color: "#4A5D74", desc: "Board reporting, operating reviews, KPIs, targets" },
+  OP: { name: "Things Nobody Owns", short: "Process", color: "#303236", desc: "Operating ownership, integration capacity, key-person dependency, and knowledge transfer" },
 };
 
-// ─── 20 LEVERS (MVP) ───────────────────────────────────────
+// ─── 20 LEVERS (public representative catalog — rebalanced Jul 14, 2026) ───
 export const LEVERS = [
-  { id: 1, domain: "IM", name: "No Formal Incident Command Structure", severity: "Critical", timing: "First 100 Days",
-    definition: "The portfolio company lacks a defined incident response process — no severity classification, no designated incident commander, and no structured communication protocol during operational failures. Response is ad hoc and depends on whoever happens to be available.",
-    symptoms: ["Multiple people troubleshooting without coordination", "No clear escalation to management or the board", "Customers and clients learn about service disruptions before internal teams do", "Post-incident: no root cause analysis, same failures recur", "Operating partner hears about issues days late"],
-    peImpact: "Time to restore operations (MTTR) runs materially longer without a structured response. Client churn risk from repeated disruptions. EBITDA drag from firefighting — executive time diverted from growth initiatives. Compliance exposure creates risk in diligence for the next buyer. Exit narrative weakened if incident history is visible.",
-    whatGood: "Severity-classified incidents with designated commanders, structured comms (internal + board), defined escalation thresholds, mandatory post-incident reviews feeding a recurrence prevention backlog, and clean incident history for exit diligence." },
-  { id: 2, domain: "IM", name: "No Severity Classification System", severity: "Critical", timing: "First 100 Days",
-    definition: "All operational issues are treated equally — a minor disruption gets the same response as a critical failure affecting revenue. Without severity classification, everything is either an emergency or ignored.",
-    symptoms: ["Every issue triggers all-hands response or none at all", "No SLA differentiation between critical and low-severity issues", "Management cannot distinguish signal from noise in operational reporting", "Board reports show issue counts without severity context"],
-    peImpact: "Without severity classification, operational metrics are meaningless for board reporting. The operating partner cannot assess risk accurately. Resource allocation is inefficient — senior leaders are pulled into low-severity issues while critical problems queue.",
-    whatGood: "4-tier severity model (Critical/High/Medium/Low) with defined criteria, response SLAs per tier, escalation thresholds, and severity-weighted reporting that gives the board an accurate risk picture." },
-  { id: 3, domain: "IM", name: "No Post-Incident Review / Root Cause Discipline", severity: "Critical", timing: "First 100 Days",
-    definition: "When operational failures occur, the team fixes the immediate problem and moves on. No root cause analysis, no post-incident review, no documentation of what happened or what would prevent recurrence.",
-    symptoms: ["Same failures recur on a predictable cycle", "Fixes are tactical patches rather than structural solutions", "No shared learning from failures — lessons die with the responder", "Diligence team finds no failure documentation or trend data"],
-    peImpact: "Recurring failures compound into EBITDA drag — each disruption costs revenue, client trust, and management time. Without post-incident reviews, the same problems resurface under new ownership. Exit diligence reveals a pattern of unresolved operational instability.",
-    whatGood: "Mandatory blameless post-incident reviews for all Critical/High-severity failures, documented root cause and contributing factors, action items tracked to completion, recurrence prevention backlog reviewed weekly, and trend analysis reported to the board quarterly." },
-  { id: 10, domain: "IM", name: "Hero Dependency in Incident Response", severity: "High", timing: "Pre-Close Red Flag",
-    definition: "One or two people are the only ones who can resolve critical operational failures. When they are unavailable, problems escalate or remain unresolved for extended periods.",
-    symptoms: ["Resolution time spikes when specific individuals are on vacation or unavailable", "Response rotation is nominal — the same person always gets called", "Knowledge of critical operations exists only in one person's head", "Team morale issues from burnout of key responders"],
-    peImpact: "Key-person risk that directly threatens operational continuity. If the hero leaves post-acquisition, response capability collapses. This is a pre-close red flag that should inform deal pricing and the 100-day plan.",
-    whatGood: "Cross-trained responders with documented procedures, rotating on-call schedules with real distribution of load, knowledge transfer programs, and no single point of failure for any critical operational function." },
-  { id: 11, domain: "CG", name: "No Change Advisory Board or Change Control Process", severity: "Critical", timing: "First 100 Days",
-    definition: "Operational changes happen without review, approval, or risk assessment. There is no change review process, no change calendar, and no structured way to evaluate whether a proposed change is safe to implement.",
-    symptoms: ["Operational changes happen at any time without notice", "No one can tell you what changed when a failure occurs", "Failed changes are discovered by customers, not by the team", "Change-related failures are frequent but not tracked as such"],
-    peImpact: "Uncontrolled change is one of the most common sources of avoidable operational failures in portfolio companies. Without change governance, every operational change is a potential revenue-impacting event. The correlation between changes and failures — invisible without tracking — is where most EBITDA drag hides.",
-    whatGood: "Change review process (CAB or equivalent) with risk classification (Standard/Normal/Emergency), mandatory approval workflows, implementation windows, rollback procedures, and change-failure correlation tracking." },
-  { id: 12, domain: "CG", name: "Undocumented or Ad Hoc Change Execution Process", severity: "Critical", timing: "Pre-Close Red Flag",
-    definition: "Operational and process changes are made ad hoc with no standard procedure, no checklists, and no rollback plan. Change execution knowledge lives in individual heads.",
-    symptoms: ["Changes require specific people to be present", "No change checklists, documented procedures, or validation steps", "Rollback is manual and slow — or impossible", "Post-change validation is inconsistent or absent"],
-    peImpact: "A pre-close red flag that signals operational fragility. If change execution depends on tribal knowledge, any personnel change (voluntary or involuntary) risks operational continuity. For the next buyer's diligence team, this is a reliability concern that affects the multiple.",
-    whatGood: "Documented change procedures with checklists, validation steps, rollback plans tested regularly, and change execution capability distributed across the team — not dependent on any single individual." },
-  { id: 19, domain: "CG", name: "Uncontrolled Tool & System Sprawl", severity: "High", timing: "Pre-Close Red Flag",
-    definition: "Teams adopt tools, platforms, and external services without management approval. No inventory of what tools are in use, who has access, or what they cost.",
-    symptoms: ["Finance discovers subscriptions and services during expense review", "No one can enumerate all systems that store company data", "Multiple tools serve the same function across different teams", "No one knows the total spend on external tools and services"],
-    peImpact: "Hidden cost exposure that erodes EBITDA. Risk from unmanaged data flows and ungoverned third-party access. Vendor rationalization (a standard PE value creation lever) is impossible without a complete inventory. Change-of-control clauses in undiscovered contracts can create post-close surprises.",
-    whatGood: "Complete tool and service inventory with ownership, cost, and data classification. Governance process for adopting new tools. Regular rationalization reviews to eliminate redundancy and reduce spend." },
-  { id: 21, common: true, domain: "VP", name: "No Vendor Inventory or Contract Visibility", severity: "Critical", timing: "Pre-Close Red Flag",
+  { id: 1, common: true, domain: "IM", name: "No Severity and Escalation Model", severity: "Critical", timing: "First 100 Days",
+    definition: "Operational issues are not classified by business impact, and there is no agreed threshold for escalation to management, the sponsor, clients, or the board. Response depends on individual judgment rather than a shared operating model.",
+    symptoms: ["Minor issues and material disruptions receive the same response", "Teams disagree about when leadership should be notified", "Escalations depend on personal relationships", "Board reporting counts issues without showing business severity"],
+    peImpact: "The sponsor cannot reliably distinguish routine noise from risks that may affect revenue, clients, compliance, or the value-creation plan. Senior attention may be allocated inconsistently while material issues remain invisible.",
+    whatGood: "A practical severity model with business-impact criteria, response expectations, named decision rights, and explicit thresholds for management, sponsor, client, and board communication." },
+  { id: 3, domain: "IM", name: "Recurring Failures Without Root-Cause Discipline", severity: "High", timing: "Ongoing Hold",
+    definition: "The immediate problem is resolved, but its underlying causes, contributing conditions, and corrective actions are not examined or tracked. The organization restores service without building institutional learning.",
+    symptoms: ["The same failure returns under slightly different circumstances", "Corrective actions are agreed verbally and then disappear", "No owner verifies whether remediation worked", "Management cannot show trends in recurrence or corrective-action closure"],
+    peImpact: "Recurring failures consume management capacity, may weaken client confidence, and obscure the true cost of operational instability. Repetition also makes it harder to demonstrate that the operating model is becoming more durable during the hold.",
+    whatGood: "Material failures receive a documented, blameless review; causal factors and corrective actions have named owners and dates; recurrence and action closure are reviewed through the operating cadence." },
+  { id: 69, domain: "IM", name: "Service-Continuity Dependencies Unmapped", severity: "Critical", timing: "Pre-Close Red Flag",
+    definition: "Management cannot identify the people, processes, vendors, facilities, data, or systems required to keep critical client and business services operating through disruption or ownership transition.",
+    symptoms: ["Critical services depend on informal workarounds", "Recovery plans cover technology but not people or third parties", "Client commitments are not linked to supporting processes", "Management cannot explain the effect of losing a key person, vendor, or location"],
+    peImpact: "An unmapped dependency can turn an otherwise manageable disruption into lost revenue, client attrition, or a post-close governance event. It also prevents the sponsor from defining credible Day-1 protections for the most important services.",
+    whatGood: "Critical services are mapped end to end with owners, dependencies, recovery priorities, client obligations, and tested contingencies. Material gaps feed directly into the Day-1 Critical Path." },
+  { id: 11, domain: "CG", name: "No Change Decision Rights or Rollback Discipline", severity: "Critical", timing: "First 100 Days",
+    definition: "Material operating changes happen without clear approval, risk review, or a tested path back. No one can say who authorizes a change, what risk tier it carries, or how it gets reversed when it fails — and execution knowledge lives in individual heads.",
+    symptoms: ["Operating changes happen at any time without notice or review", "No one can tell you what changed when a failure occurs", "Failed changes are discovered by customers, not by the team", "Rollback is manual and slow — or impossible", "Change execution requires specific people to be present"],
+    peImpact: "Uncontrolled change increases the likelihood of operational disruption precisely when a new owner is introducing new priorities. It also makes causality difficult to establish: the sponsor cannot tell whether performance changed because of the initiative, execution quality, or an unrelated intervention.",
+    whatGood: "Changes are classified by business risk, assigned a decision owner, reviewed with affected stakeholders, implemented through defined checkpoints, and paired with validation and fallback criteria." },
+  { id: 60, common: true, domain: "CG", name: "Day-1 Integration Sequence Undefined", severity: "Critical", timing: "Pre-Close Red Flag",
+    definition: "The platform has no agreed sequence for what happens after close — which owners, people decisions, systems, vendors, controls, and reporting change on Day 1, in the first 30 days, and by Day 100. Integration starts as improvisation.",
+    symptoms: ["No written Day-1 plan beyond legal close mechanics", "Management cannot say which systems, vendors, or controls converge — or when", "Acquired-company leaders don't know what changes and what doesn't", "Prior add-ons still run standalone processes months after close"],
+    peImpact: "Poor sequencing consumes management attention, creates avoidable rework, and can interrupt client or employee continuity. The issue is not the absence of activity; it is the absence of an integrated decision order tied to the deal thesis.",
+    whatGood: "A concise Day-1 Readiness Plan distinguishes must-happen, can-wait, and conditional decisions; maps dependencies and owners; and carries unresolved items into the 100-Day Operating Playbook." },
+  { id: 70, domain: "CG", name: "Shared Systems and Process Changes Uncoordinated", severity: "High", timing: "Ongoing Hold",
+    definition: "The platform and acquired companies change shared processes, vendors, data, or systems independently, without a common roadmap or a view of downstream operating effects.",
+    symptoms: ["Different teams run overlapping transformation projects", "Local changes conflict with platform standards", "Process redesign and system implementation follow different timelines", "Employees maintain duplicate workflows because neither model is authoritative"],
+    peImpact: "Uncoordinated change can delay integration benefits, add cost, and leave the platform with more complexity than it acquired. It also weakens confidence that the operating model can absorb subsequent add-ons without repeating the same work.",
+    whatGood: "A single change roadmap connects business outcomes, process design, data, vendors, systems, owners, and decision gates. Exceptions are explicit, temporary, and reviewed through the operating cadence." },
+  { id: 21, common: true, domain: "VP", name: "No Vendor and Contract Inventory", severity: "Critical", timing: "Pre-Close Red Flag",
     definition: "No central record of who the company's vendors are, what contracts exist, what the terms are, or when renewals occur. Vendor information is scattered across email inboxes, shared drives, and individual knowledge.",
     symptoms: ["Cannot produce a list of all active vendors with contract terms", "Renewal dates are missed or discovered last-minute", "Duplicate vendor relationships exist across departments", "Contract terms are unfavorable because no one reviewed them before auto-renewal"],
-    peImpact: "Vendor spend is one of the first value creation levers PE funds pull. Without an inventory, you cannot rationalize, renegotiate, or benchmark. Change-of-control clauses in undiscovered contracts can create cost exposure or service disruption post-close.",
-    whatGood: "Centralized vendor registry with contract terms, renewal dates, spend data, and owner assignment. Renewal calendar with 90-day advance review triggers. Annual vendor rationalization review." },
-  { id: 23, common: true, domain: "VP", name: "Vendor Concentration Risk (Single Points of Failure)", severity: "Critical", timing: "Pre-Close Red Flag",
+    peImpact: "Without contract visibility, the sponsor cannot underwrite addressable cost, concentration, change-of-control exposure, or service continuity. Post-close savings assumptions may be overstated because the contractual baseline is not known.",
+    whatGood: "A centralized vendor register links spend, contract terms, renewals, obligations, criticality, concentration, and ownership. Material contracts receive pre-close review and enter a governed renewal calendar." },
+  { id: 23, domain: "VP", name: "Vendor Concentration Risk (Single Points of Failure)", severity: "Critical", timing: "Pre-Close Red Flag",
     definition: "Critical business functions depend on a single vendor with no alternative, no exit plan, and no negotiating leverage. If the vendor fails, raises prices, or terminates the relationship, the business is disrupted.",
     symptoms: ["Single vendor for a critical function with no documented alternative", "Vendor has significant pricing power due to switching costs", "No exit or transition plan exists for key vendors", "Vendor outage directly causes business outage"],
-    peImpact: "Concentration risk is a material diligence finding. It represents both business continuity risk (vendor failure = business failure) and value capture risk (vendor can extract margin through pricing power). Exit diligence will flag unmitigated concentration.",
-    whatGood: "Concentration risk mapped for all critical vendors. Exit and transition plans documented for top-10 vendors. Alternative sourcing identified. Contract terms include adequate notice periods and data portability." },
-  { id: 28, domain: "VP", name: "Vendor Access Not Governed (Entitlements Drift)", severity: "High", timing: "Pre-Close Red Flag",
-    definition: "Vendor staff have persistent access to company systems with no regular review, no access certification, and no offboarding process when vendor personnel change.",
-    symptoms: ["Former vendor employees still have active credentials", "Vendor access levels exceed what's needed for their current scope", "No access certification or review process for vendor accounts", "Audit findings related to vendor access management"],
-    peImpact: "Security and compliance exposure. SOC 2 auditors flag vendor access governance as a control failure. For regulated industries, this can trigger regulatory action. Diligence teams treat ungoverned vendor access as both a security risk and a governance maturity indicator.",
-    whatGood: "Quarterly vendor access reviews, just-in-time access provisioning where possible, vendor personnel change notifications contractually required, and vendor access included in the regular access certification process." },
-  { id: 31, domain: "AC", name: "No Evidence Collection Process or Evidence Index", severity: "Critical", timing: "Pre-Close Red Flag",
+    peImpact: "Concentration can affect continuity, negotiating leverage, margin durability, and the future buyer's risk assessment. The material question is not concentration alone, but whether management understands and governs the dependency.",
+    whatGood: "Critical vendors are risk-tiered; concentration and switching constraints are quantified; alternatives or contingencies are documented; and the sponsor receives visibility into mitigation progress." },
+  { id: 61, domain: "VP", name: "Renewal, Change-of-Control and Transition Obligations Unmapped", severity: "Critical", timing: "Pre-Close Red Flag",
+    definition: "Contract events that could affect price, continuity, or integration — renewals, auto-extensions, change-of-control clauses, termination rights, and data-return or transition obligations — have not been identified before close.",
+    symptoms: ["No consolidated view of renewal dates and notice windows", "Change-of-control clauses discovered after signing", "Auto-renewals lock in unfavorable terms mid-integration", "Transition and data-return obligations surface during carve-out or migration"],
+    peImpact: "An overlooked provision may create avoidable cost, delay, or continuity exposure. It can also weaken the Day-1 plan if the operating team assumes rights, data, or services that the contract does not provide.",
+    whatGood: "Material obligations are summarized in an operational contract map with owners, deadlines, required consents, commercial decisions, transition rights, and escalation into the closing workplan." },
+  { id: 31, common: true, domain: "AC", name: "Evidence Cannot Be Produced Without a Fire Drill", severity: "Critical", timing: "Pre-Close Red Flag",
     definition: "When auditors or diligence teams request evidence of controls (access reviews, change approvals, incident postmortems), the team scrambles to locate or reconstruct documentation.",
     symptoms: ["Audit preparation takes weeks and pulls people off productive work", "Evidence is reconstructed from memory rather than collected contemporaneously", "Different people produce conflicting evidence for the same control", "Audit findings cite missing or insufficient evidence"],
-    peImpact: "Audit readiness is a proxy for operational maturity. If evidence collection is a scramble, the company will fail SOC 2 Type II, struggle with regulatory exams, and present poorly in exit diligence. Remediating audit findings after the fact is far more expensive than maintaining evidence trails proactively.",
-    whatGood: "Evidence index maintained continuously, not assembled for audits. Evidence collection automated where possible. Clear mapping between controls, evidence artifacts, and audit requirements. Audit prep takes hours, not weeks." },
-  { id: 32, domain: "AC", name: "SOC 2 Controls Not Mapped to Operating Procedures", severity: "Critical", timing: "First 100 Days",
-    definition: "The company has SOC 2 controls documented on paper, but the actual operating procedures do not align with what the controls describe. The gap between stated controls and practiced procedures is significant.",
-    symptoms: ["SOC 2 report describes processes that don't match reality", "Control owners cannot explain how their controls are implemented", "Auditors find exceptions because actual practice diverges from documented controls", "Employees follow undocumented workarounds"],
-    peImpact: "A SOC 2 report with Type II exceptions is a red flag for institutional clients and for exit diligence. The gap between documented controls and actual practice indicates governance theater — the company looks compliant without being operationally sound.",
-    whatGood: "Controls mapped 1:1 to operating procedures with named owners. Control testing performed quarterly (not just annually for the audit). Exceptions tracked and remediated with documented timelines. Zero-exception SOC 2 Type II as the standard." },
-  { id: 34, domain: "AC", name: "Access Reviews Not Conducted or Documented", severity: "High", timing: "Pre-Close Red Flag",
-    definition: "User access to systems is granted but never reviewed. Former employees, role changes, and vendor personnel accumulate access entitlements over time without certification.",
-    symptoms: ["Former employees still have active accounts", "Users have access to systems they no longer need", "No periodic access certification process exists", "Audit findings consistently cite access management"],
-    peImpact: "Access governance is one of the most scrutinized controls in SOC 2, regulatory exams, and exit diligence. Persistent findings here signal weak governance broadly — if the company cannot manage who has access to what, it likely struggles with other controls too.",
-    whatGood: "Quarterly access reviews with manager certification, automated deprovisioning on termination, role-based access control with regular role reviews, and access review completion tracked as a KPI." },
-  { id: 37, domain: "AC", name: "No Audit Trail for Privileged Actions", severity: "High", timing: "Pre-Close Red Flag",
-    definition: "Administrators and privileged users perform actions on critical systems without logging. There is no record of who did what, when, or why.",
-    symptoms: ["Cannot determine who made a specific configuration change", "No centralized logging for privileged actions", "Investigations after incidents cannot trace root cause to a specific action", "Compliance teams cannot demonstrate segregation of duties"],
-    peImpact: "Without audit trails, the company cannot demonstrate control over its most sensitive operations. Regulators, auditors, and diligence teams treat this as a fundamental control gap. Remediation post-finding requires significant investment in logging infrastructure.",
-    whatGood: "All privileged actions logged with user identity, timestamp, and description. Logs centralized, tamper-evident, and retained per policy. Regular review of privileged action logs. Automated alerts for anomalous privileged activity." },
-  { id: 41, common: true, domain: "KO", name: "No Defined Operating KPIs or Metrics", severity: "Critical", timing: "First 100 Days",
-    definition: "The portfolio company does not have a defined set of operational KPIs. Performance is discussed anecdotally rather than measured. There is no baseline and no way to demonstrate improvement.",
+    peImpact: "Evidence weakness reduces confidence in management assertions and expands diligence uncertainty. It also consumes scarce capacity during a transaction and may conceal whether a control gap or only a documentation gap exists.",
+    whatGood: "A maintained evidence index links material obligations and controls to owners, source records, review dates, exceptions, and remediation. Standard requests can be answered from the operating process rather than reconstructed for diligence." },
+  { id: 62, domain: "AC", name: "Controls Exist on Paper, Not in Operating Practice", severity: "High", timing: "Pre-Close Red Flag",
+    definition: "Documented policies and controls describe one operating reality; employees follow another. The gap between stated controls and daily practice is wide enough that the documentation gives false assurance.",
+    symptoms: ["Control owners cannot explain how their controls actually run", "Reviews and approvals are back-filled at audit or diligence time", "Employees follow undocumented workarounds to get work done", "Findings repeat across successive audits or exams"],
+    peImpact: "A documented control cannot protect the business if it is not embedded in the workflow. The gap can create regulatory, client, audit, and exit-readiness exposure while giving the sponsor false confidence that the risk is already managed.",
+    whatGood: "Material controls map directly to real procedures, named owners, evidence, exception handling, and periodic testing. Policy language changes when the operating model changes." },
+  { id: 63, domain: "AC", name: "Regulatory and Client Commitments Lack Named Owners", severity: "High", timing: "Pre-Close Red Flag",
+    definition: "Obligations to regulators and clients — reporting deadlines, service commitments, contractual controls, licensing conditions — exist, but responsibility for monitoring and meeting them is unclear or informal.",
+    symptoms: ["No register of regulatory and client commitments with owners", "Deadlines met through individual memory and last-minute scrambles", "Client contractual commitments unknown to the teams delivering them", "Ownership disputes surface only after a miss"],
+    peImpact: "Unowned commitments can become service, compliance, or reputation events and may restrict the sponsor's ability to demonstrate a controlled operating environment. They also complicate integration when obligations transfer across teams or entities.",
+    whatGood: "A single obligations register assigns an accountable owner, evidence requirement, due date, escalation threshold, and closure standard to each material commitment." },
+  { id: 41, common: true, domain: "KO", name: "No Investment-Thesis KPI Tree", severity: "Critical", timing: "First 100 Days",
+    definition: "The portfolio company does not have a defined set of operational KPIs, and operating metrics are not connected to the assumptions underpinning the deal. Performance is discussed anecdotally rather than measured. There is no baseline and no way to demonstrate improvement.",
     symptoms: ["Board meetings discuss operations qualitatively, not quantitatively", "No dashboard or regular metrics report exists", "Different stakeholders cite different numbers for the same metric", "Improvement initiatives cannot demonstrate measurable impact"],
-    peImpact: "Without KPIs, the value creation plan has no measurement framework. You cannot prove EBITDA improvement, demonstrate operational stability, or build the data narrative for exit. Every PE fund expects metrics-driven operations — their absence signals management immaturity.",
-    whatGood: "Defined KPI set covering reliability (uptime, MTTR), efficiency (cost per transaction, utilization), quality (error rates, SLA adherence), and risk (incident volume, audit findings). Baselines established within 30 days. Targets set within 60 days. Board-ready reporting within 90 days." },
-  { id: 42, common: true, domain: "KO", name: "No Weekly/Monthly Operating Review Cadence", severity: "Critical", timing: "First 100 Days",
-    definition: "There is no structured operating review — no weekly or monthly rhythm where metrics are reviewed, issues are surfaced, and decisions are made. Operations run on ad hoc check-ins and crisis response.",
-    symptoms: ["No standing operational review meeting exists", "Problems surface through escalation, not through proactive review", "Operating decisions are made without data or structured discussion", "The board receives operational updates only when something goes wrong"],
-    peImpact: "The operating cadence is the foundation of PE-style governance. Without it, the operating partner has no visibility, no control, and no early warning system. Installing a cadence is often among the highest-impact early interventions.",
-    whatGood: "Weekly operating review with defined agenda, metrics package, issue log, and decision log. Monthly board-ready operational summary. Quarterly deep-dives on strategic operational topics. Clear escalation from weekly review to board when thresholds are breached." },
-  { id: 44, domain: "KO", name: "No Board-Ready Operational Reporting", severity: "High", timing: "First 100 Days",
-    definition: "The operating partner or board receives no structured operational reporting — or receives reports that are inconsistent, incomplete, or not actionable.",
-    symptoms: ["Board decks contain no operational metrics", "Operational updates are verbal and anecdotal", "Different reports show conflicting data", "The board cannot assess operational risk between meetings"],
-    peImpact: "Board reporting is how the fund maintains governance oversight. Without it, problems compound silently until they become crises. For exit preparation, a track record of structured board reporting demonstrates management maturity and operational discipline.",
-    whatGood: "Monthly board-ready operational report with defined KPIs, trend analysis, risk flags, incident summary, and action items. Consistent format. Data-driven. Delivered on schedule without heroic effort." },
-  { id: 51, domain: "OP", name: "No RACI or Ownership Matrix for Critical Functions", severity: "High", timing: "First 100 Days",
-    definition: "Critical operational functions have no clear owner. When something needs to happen, it's unclear who is responsible, who approves, who needs to be consulted, and who should be informed.",
-    symptoms: ["Decisions stall because no one knows who owns them", "Multiple people do the same work or no one does it", "Escalations go to the wrong person or go nowhere", "Post-acquisition confusion about roles intensifies as new reporting lines are established"],
-    peImpact: "Ownership ambiguity is a friction multiplier — it makes every other operational problem harder to solve. Without RACI, the 100-day plan has no accountability structure. The operating partner cannot hold anyone accountable because accountability hasn't been defined.",
-    whatGood: "RACI matrix for all critical operational functions, reviewed quarterly. Single-threaded ownership for each critical function. Escalation paths defined and published. New hires and role changes trigger RACI updates." },
-  { id: 52, common: true, domain: "OP", name: "Tribal Knowledge / No Runbooks or SOPs", severity: "Critical", timing: "Pre-Close Red Flag",
-    definition: "Critical operational knowledge exists only in individuals' heads. No runbooks, no standard operating procedures, no documentation that would allow someone else to perform the same function.",
-    symptoms: ["Specific people are required for specific tasks — no substitutes", "Onboarding new team members takes months because nothing is written down", "When key people are on vacation, certain functions simply don't happen", "Post-acquisition knowledge transfer is impossible to scope because no one knows what needs to be transferred"],
-    peImpact: "One of the most consequential pre-close red flags for operational continuity. If key people leave post-acquisition (which happens frequently), undocumented knowledge leaves with them. Rebuilding lost knowledge is far more expensive than documenting it while the people are still in seat. Diligence should quantify key-person risk explicitly.",
-    whatGood: "Runbooks for all critical operational procedures. SOPs for recurring processes. Knowledge base maintained and version-controlled. Cross-training program ensures no single point of knowledge failure. Documentation currency tracked as a KPI." },
-  { id: 57, common: true, domain: "OP", name: "Staffing Model Fragile (Key-Person Risk)", severity: "High", timing: "Pre-Close Red Flag",
-    definition: "The organizational structure has single points of failure — individuals whose departure would materially impair operations. No succession planning, no cross-training, no redundancy.",
-    symptoms: ["Org chart shows one person covering a critical function with no backup", "Retention risk for key personnel not identified or mitigated", "No succession plan for any operational role", "Post-acquisition retention packages not informed by actual key-person analysis"],
-    peImpact: "Key-person risk directly affects deal structuring (earn-outs, retention packages, employment agreements). If not identified pre-close, it becomes an expensive surprise post-close. Key-person departures are among the most common operational risks in PE-backed transitions.",
-    whatGood: "Key-person risk assessment completed and updated annually. Cross-training and documentation eliminate single points of failure. Succession plans for all critical roles. Retention strategy informed by actual risk analysis, not gut feel." },
+    peImpact: "Without a driver-based view, the sponsor cannot tell whether the value-creation plan is working early enough to intervene. Good or bad financial results arrive without an operating explanation or a clear management response.",
+    whatGood: "A focused KPI tree connects thesis assumptions to operating drivers, owners, baselines, targets, thresholds, and actions. Management reviews leading indicators; the board receives the subset relevant to value and risk." },
+  { id: 42, common: true, domain: "KO", name: "No Weekly Operating Cadence", severity: "Critical", timing: "First 100 Days",
+    definition: "There is no structured operating rhythm — no weekly or monthly forum where metrics are reviewed, issues surfaced, and decisions made — and the board receives no consistent, structured operational reporting between meetings.",
+    symptoms: ["No standing operational review with agenda, metrics, and decision log", "Problems surface through escalation, not proactive review", "Board updates are verbal, anecdotal, and inconsistent between packs", "The sponsor cannot assess operational risk between board meetings"],
+    peImpact: "The value-creation plan lacks an execution mechanism. Without cadence, ownership can decay, cross-functional dependencies remain unresolved, and the sponsor has limited early warning when progress or operating risk moves off plan.",
+    whatGood: "A weekly operating review uses a stable agenda, decision-useful KPI pack, risk and dependency log, named actions, and explicit escalation thresholds. Outputs feed a concise monthly sponsor and board view." },
+  { id: 64, domain: "KO", name: "Synergies and Benefits Not Baselined or Validated", severity: "High", timing: "First 100 Days",
+    definition: "The value-creation initiatives underwriting the deal have no starting baselines, no accountable owners, and no credible tracking. Benefits are asserted in the model but never measured in the business.",
+    symptoms: ["Synergy estimates exist in the deal model but nowhere in operations", "No pre-close baseline against which improvement can be shown", "Initiative owners are unaware they own a number", "Benefit claims cannot be reconciled to the P&L"],
+    peImpact: "The sponsor cannot distinguish activity from value capture or determine whether the deal thesis remains achievable. Unvalidated benefits can also undermine management credibility and the eventual exit narrative.",
+    whatGood: "Each material benefit has an approved baseline, owner, timing, calculation method, evidence source, confidence level, and finance validation. Shortfalls trigger decisions rather than narrative updates." },
+  { id: 65, domain: "KO", name: "Platform and Add-On Reporting Definitions Do Not Align", severity: "High", timing: "First 100 Days",
+    definition: "Companies across the platform report similar metrics under different definitions — revenue timing, margin construction, utilization, churn — preventing reliable comparison, consolidation, and sponsor visibility.",
+    symptoms: ["The same KPI means different things in different companies", "Consolidation requires manual re-work every reporting cycle", "Management debates whose number is right instead of what to do", "Add-ons still report on legacy definitions quarters after close"],
+    peImpact: "Inconsistent definitions delay visibility, obscure performance, and make synergy or integration claims difficult to validate. The platform also loses the ability to transfer learning from one acquisition to the next.",
+    whatGood: "A controlled metric dictionary defines owners, formulas, data sources, reporting frequency, and transition dates. Temporary local measures are reconciled explicitly until the common reporting model is live." },
+  { id: 51, domain: "OP", name: "Critical Talent Retention and Cultural Integration Unplanned", severity: "High", timing: "First 100 Days",
+    definition: "The acquisition plan identifies legal close and organization structure but does not define which people, behaviors, relationships, and operating practices must be retained, changed, or integrated.",
+    symptoms: ["Retention decisions are based on title rather than operating importance", "Employees receive inconsistent messages about the future model", "Platform standards are imposed without understanding local strengths", "Cultural concerns are discussed but have no owner or action plan"],
+    peImpact: "The platform may lose the talent and client knowledge required to preserve value while also failing to establish the behaviors needed for the combined operating model. Integration then becomes a choice between drift and disruption.",
+    whatGood: "Critical talent and cultural dependencies are assessed before close; retention and communication actions have owners; local strengths worth preserving are explicit; and operating expectations are reinforced through management cadence." },
+  { id: 66, common: true, domain: "OP", name: "No Dedicated Integration Owner", severity: "Critical", timing: "Pre-Close Red Flag",
+    definition: "Integration is distributed across executives who are also running the business. No single person owns the integration outcome, sequence, and decisions across add-ons.",
+    symptoms: ["Integration tasks assigned as side-of-desk work to functional leaders", "Cross-company decisions stall waiting for someone with authority", "Each add-on integrated differently — or not at all", "Integration status reporting doesn't exist or is assembled ad hoc"],
+    peImpact: "The operating gap is greatest when acquisition pace exceeds dedicated integration capacity. Work can fall between the deal team and management, creating delays, rework, and avoidable use of senior leadership attention.",
+    whatGood: "One accountable integration owner has a defined mandate, decision rights, workstream owners, dependency view, escalation route, and sponsor reporting cadence. The role may be temporary, but the ownership is explicit." },
+  { id: 67, common: true, domain: "OP", name: "Key-Person and Knowledge Dependency", severity: "Critical", timing: "Pre-Close Red Flag",
+    definition: "Critical operating knowledge and capability are concentrated in a small number of people — undocumented, unbacked-up, and unavailable when they leave, take vacation, or burn out.",
+    symptoms: ["Specific tasks can only be done by specific people, with no substitutes", "Resolution times spike when particular individuals are unavailable", "Onboarding takes months because little is written down", "Post-acquisition knowledge transfer cannot even be scoped"],
+    peImpact: "A departure or distraction can impair continuity during the ownership transition and may affect deal protections, retention priorities, or the Day-1 plan. The risk is often larger than the organization chart suggests because knowledge dependency is not visible there.",
+    whatGood: "Critical roles and knowledge are mapped; backups and succession are explicit; essential procedures and relationships are documented; and retention or transfer actions reflect evidence of dependency." },
+  { id: 68, common: true, domain: "OP", name: "Management Capacity Overloaded by Concurrent Acquisitions", severity: "Critical", timing: "Pre-Close Red Flag",
+    definition: "The management team's practical capacity — bandwidth, bench depth, and succession — is insufficient for what the plan asks of it: running the business, absorbing acquisitions, and executing value creation at the same time.",
+    symptoms: ["The acquisition pipeline exceeds the team's ability to diligence and integrate each deal", "Executives hold two or three roles' worth of responsibility", "No succession or backup for critical operating roles", "Value-creation initiatives stall whenever operations demand attention"],
+    peImpact: "An attractive acquisition pipeline can exceed the platform's absorption capacity. The resulting attention constraint raises execution risk across both the new deals and the existing business, even when each initiative is individually sensible.",
+    whatGood: "Management capacity is treated as a finite underwriting constraint. Critical work is sequenced, lower-value activity is stopped, temporary support is added where justified, and the board sees explicit trade-offs." },
 ];
 
 // ─── SCORER DIMENSIONS ──────────────────────────────────────
 export const SCORER_DIMS = [
-  { key: "incident", label: "Incident Governance", short: "Incident",
-    low: "Ad hoc — whoever's available, no process",
-    mid: "Some process exists, inconsistently followed",
-    high: "Formal incident command with severity classification, designated roles, postmortems, and board escalation" },
-  { key: "change", label: "Change Control", short: "Change",
-    low: "Anyone can deploy anything, no approval process",
-    mid: "Informal approval exists, no tracking or risk classification",
-    high: "CAB with risk classification, rollback procedures, post-implementation reviews, and change-incident correlation" },
+  { key: "incident", label: "Issue & Escalation Governance", short: "Escalation",
+    low: "Issues are handled case by case, with no common severity or escalation model",
+    mid: "An informal process exists, but ownership and escalation vary by team",
+    high: "Business-impact severity, named response roles, escalation thresholds, and corrective-action follow-through are consistently used" },
+  { key: "change", label: "Operating Change Control", short: "Change",
+    low: "Material changes occur without defined approval, impact review, or fallback plans",
+    mid: "Informal approval exists, but risk, dependencies, and outcomes are not tracked consistently",
+    high: "Material changes have decision owners, risk classification, affected-party review, validation, and rollback criteria" },
   { key: "vendor", label: "Vendor Oversight", short: "Vendor",
     low: "No inventory, no scorecards, renewal surprises, unknown concentration risks",
     mid: "Basic inventory exists, some SLA tracking, renewal dates known",
-    high: "Active scorecards, renewal calendar, risk assessments, exit planning, and fourth-party visibility" },
-  { key: "audit", label: "Audit & Compliance", short: "Audit",
-    low: "Scramble mode — evidence scattered, policies outdated or missing",
-    mid: "Some controls documented, gaps in evidence trails and testing",
-    high: "Evidence index maintained, periodic control testing, segregation of duties, audit-ready at all times" },
+    high: "Active scorecards, contract and renewal calendar, concentration review, accountable owners, and transition planning" },
+  { key: "audit", label: "Evidence & Control Readiness", short: "Evidence",
+    low: "Evidence is scattered and management reconstructs answers when diligence, clients, or auditors ask",
+    mid: "Some controls and evidence are documented, with gaps in ownership, consistency, or testing",
+    high: "Material obligations and controls have owners, maintained evidence, exception handling, and periodic validation" },
   { key: "kpi", label: "KPI & Cadence", short: "KPI",
-    low: "No regular reviews, no defined KPIs, board reporting is ad hoc",
-    mid: "Monthly reviews with some metrics, no targets, reporting is manual",
-    high: "Weekly cadence, defined KPIs with thresholds, executive dashboard, board-ready package" },
-  { key: "process", label: "Process & Knowledge", short: "Process",
-    low: "Tribal knowledge, hero dependency, no documentation",
-    mid: "Some documentation, inconsistent quality, key-person risk in critical functions",
-    high: "Comprehensive runbooks, RACI matrix, onboarding playbooks, service catalog, operational readiness reviews" },
+    low: "No regular operating review, limited KPI ownership, and ad hoc board reporting",
+    mid: "Periodic reviews and some metrics exist, but definitions, targets, or decisions are inconsistent",
+    high: "A focused thesis-linked KPI set, clear thresholds, weekly operating cadence, and concise board reporting are in place" },
+  { key: "process", label: "Ownership, Capacity & Knowledge", short: "Ownership",
+    low: "Critical work depends on individual heroics, with unclear ownership and little documented backup",
+    mid: "Some ownership and documentation exist, but key-person or management-capacity risks remain",
+    high: "Critical work has accountable owners, documented procedures, backup capacity, and explicit cross-functional decision rights" },
 ];
 
 // Recommended action per dimension, used by the dynamic scorer results
 export const DIM_RECS = {
   incident: {
     days: "Days 1–14",
-    action: "Install incident command: severity model, designated commander, escalation thresholds, and postmortem discipline.",
-    impact: "Unstructured outages compound into EBITDA drag — management time diverted, client trust eroded, root causes unresolved. The same incidents recur until governance stops them. In the platform I ran, disciplined postmortems were central to a nearly 50% drop in recurring incidents.",
+    action: "Install an issue-governance model with business-impact severity, named response roles, escalation thresholds, and corrective-action follow-through.",
+    impact: "Without a shared model, routine issues consume senior attention while material problems can remain invisible. Disciplined escalation and root-cause follow-through helped reduce critical incidents by nearly 50% on the institutional platform I operated.",
   },
   change: {
     days: "Days 1–14",
-    action: "Install change control: CAB-lite charter, risk classification, rollback discipline, and change-incident correlation tracking.",
-    impact: "Uncontrolled deployments are a common cause of production incidents. Without change governance, you cannot see the correlation between releases and outages — which means you cannot stop it. Every unreviewed deployment is a potential revenue-impacting event.",
+    action: "Define decision rights for material operating changes, including risk classification, affected-party review, outcome validation, and fallback criteria.",
+    impact: "Uncoordinated change can create service disruption, employee confusion, duplicated work, and unclear accountability. A controlled decision path makes execution faster because ownership and dependencies are visible before the change is made.",
   },
   vendor: {
     days: "Days 1–30",
-    action: "Run vendor inventory, map concentration risk, build renewal calendar, and assign vendor owners.",
-    impact: "Vendor rationalization is one of the first PE value creation levers — and it requires an inventory to pull. Undiscovered change-of-control clauses and auto-renewals create post-close cost exposure. Concentration risk that isn't mapped isn't mitigated.",
+    action: "Build the vendor and contract inventory, map concentration and transition risk, establish the renewal calendar, and assign accountable business owners.",
+    impact: "Unknown renewals, contractual obligations, and single-point dependencies can create avoidable cost or continuity exposure after close. A reliable baseline is also required before savings assumptions can be validated.",
   },
   audit: {
     days: "Days 15–45",
-    action: "Build evidence index, map SOC 2 controls to operating procedures, and begin quarterly access reviews.",
-    impact: "Reconstructing evidence after the fact costs far more than maintaining it continuously. SOC 2 exceptions signal governance immaturity to institutional clients and exit diligence teams. Controls that exist on paper but not in practice are a liability, not an asset.",
+    action: "Build an evidence index that connects material obligations and controls to real procedures, owners, source records, exceptions, and remediation.",
+    impact: "Reconstructing evidence during diligence consumes scarce management capacity and reduces confidence in management assertions. The evidence process should show that controls operate in practice—not merely that policies exist.",
   },
   kpi: {
     days: "Days 1–30",
-    action: "Define core KPI set, baseline current performance, and launch weekly operating reviews with board-ready reporting.",
-    impact: "Without a measurement framework, you cannot prove EBITDA improvement or build the data narrative for exit. The operating cadence is the primary mechanism through which the board maintains governance — its absence means problems compound silently.",
+    action: "Define a focused KPI tree tied to the investment thesis, baseline performance, and launch a weekly decision-oriented operating review with concise sponsor reporting.",
+    impact: "Without leading indicators and a regular decision cadence, the sponsor sees outcomes after the opportunity to intervene has passed. A clear KPI tree connects operating activity to the assumptions and risks being underwritten.",
   },
   process: {
     days: "Days 15–60",
-    action: "Document critical runbooks, map RACI, identify key-person risks, and begin cross-training program.",
-    impact: "Tribal knowledge is one of the most consequential pre-close risks. If key people leave post-acquisition — which happens frequently — undocumented knowledge leaves with them. Rebuilding lost knowledge is far more expensive than documenting it proactively.",
+    action: "Clarify ownership and decision rights, identify management-capacity and key-person constraints, document critical procedures, and establish practical backup coverage.",
+    impact: "Unclear ownership and concentrated knowledge can interrupt execution during an ownership transition. The risk is often larger than the organization chart suggests because operating dependency and available management capacity are not visible there.",
   },
 };
 
@@ -280,19 +280,19 @@ export const CONTEXT_OPTIONS = [
 
 export const CONTEXT_CALLOUTS = {
   stable: {
-    pre: "Operational posture appears mature. Validate with targeted diligence, but the risk profile is favorable.",
-    post: "Operations are well-governed. Focus on optimization and durability for exit diligence.",
-    mid: "Strong operational foundation. Shift to efficiency and ensuring the posture is durable through exit preparation.",
+    pre: "The self-assessment indicates a relatively controlled posture. Validate it with targeted evidence before relying on that conclusion in underwriting.",
+    post: "The self-assessment indicates a relatively controlled starting point. Focus on keeping ownership and cadence durable as the value-creation plan accelerates.",
+    mid: "The self-assessment indicates a relatively controlled foundation. Test its durability and concentrate improvement work on the few areas that remain dependent on individuals or manual effort.",
   },
   atRisk: {
-    pre: "Operational friction is present and should be reflected in the value creation plan. Identify the top red flags and convert them into evidence requests and diligence asks.",
-    post: "Friction is accumulating. Establish the governance baseline in the first 30 days: incident discipline, change control, and KPI cadence.",
-    mid: "Operational drift is occurring. Re-establish governance discipline and cadence before exit preparation.",
+    pre: "The responses suggest operating friction that may constrain execution. Convert the highest-risk areas into targeted evidence requests and explicit Day-1 priorities.",
+    post: "The responses suggest gaps in operating ownership or control. Use the first 30 days to establish the management cadence, escalation model, and accountability required by the plan.",
+    mid: "The responses suggest operating drift. Re-establish ownership, evidence, and management cadence before the gaps become embedded in the exit narrative.",
   },
   critical: {
-    pre: "Operational risk is material. These findings should inform deal terms and the Day-1 critical path. Recommend formal ops diligence before close.",
-    post: "Immediate stabilization is needed. The first 30 days should prioritize incident command, change control, and board-ready KPI cadence.",
-    mid: "Operational risk is material and will impact exit valuation. Immediate intervention is recommended to restore control and visibility.",
+    pre: "The responses indicate possible material operating exposure. A formal evidence-based review before close can determine which risks belong in underwriting, ownership planning, and the Day-1 Critical Path.",
+    post: "The responses indicate a need for near-term operating stabilization. Prioritize the controls and ownership gaps most likely to interrupt execution in the first 30 days.",
+    mid: "The responses indicate material operating gaps that may weaken value capture or exit readiness. Establish the evidence, ownership, and intervention sequence before adding more initiatives.",
   },
 };
 
@@ -343,8 +343,8 @@ export const globalCSS = `
     letter-spacing: 0.2px;
   }
 
-  main p { max-width: var(--maxcopy); font-size: 0.8rem; }
-  main li { font-size: 0.8rem; }
+  main p { max-width: var(--maxcopy); font-size: 0.9rem; }
+  main li { font-size: 0.9rem; }
   td p, th p, nav p, footer p, .no-max-width p { max-width: none; font-size: inherit; }
 
   ::selection { background: ${COLORS.primary}; color: white; }
@@ -425,7 +425,7 @@ export const globalCSS = `
     .nav-mobile-menu {
       position: fixed; top: var(--nav-h); left: 0; right: 0; z-index: 99;
       background: ${COLORS.white}; border-bottom: 3px solid ${COLORS.gold};
-      box-shadow: 0 4px 16px rgba(20, 33, 61, 0.14);
+      box-shadow: 0 4px 16px rgba(27, 28, 31, 0.14);
       display: flex; flex-direction: column; padding: 12px 16px 16px; gap: 4px;
       animation: slideDown 0.18s ease-out forwards;
     }
@@ -575,20 +575,21 @@ export const globalCSS = `
   .pricing-grid { padding-top: 20px; }
   .pricing-card.recommended {
     position: relative !important;
-    background: #FFFBF0 !important;
-    border: 2px solid #B8860B !important;
-    box-shadow: 0 8px 24px rgba(214,166,63,0.15) !important;
-    transform: scale(1.03);
+    background: #F4F4F3 !important;
+    border: 1px solid rgba(27,28,31,.16) !important;
+    border-top: 3px solid #6E1F2E !important;
+    box-shadow: none !important;
+    transform: none;
     z-index: 2;
   }
   .pricing-card.recommended::before {
     content: 'Recommended';
     position: absolute; top: -14px; left: 50%;
     transform: translateX(-50%);
-    background: #B8860B; color: #fff;
-    font-size: 0.6rem; font-weight: 600; letter-spacing: 1px;
+    background: #6E1F2E; color: #fff;
+    font-size: 0.66rem; font-weight: 600; letter-spacing: 1px;
     text-transform: uppercase; padding: 5px 18px;
-    border-radius: 20px; white-space: nowrap;
+    border-radius: 0; white-space: nowrap;
   }
   .pricing-card.recommended .price { font-size: 1.1rem; font-weight: 600; }
   @media (max-width: 768px) {
@@ -681,7 +682,7 @@ export const globalCSS = `
   .proof-metric { text-align: center; }
   .proof-metric-number {
     font-family: 'EB Garamond', Georgia, serif;
-    font-size: 1.6rem; font-weight: 400; color: #D6A63F; line-height: 1.1;
+    font-size: 1.6rem; font-weight: 400; color: #C97B8A; line-height: 1.1;
   }
   .proof-metric-label {
     font-size: 0.72rem; color: rgba(255,255,255,0.7);
@@ -702,7 +703,7 @@ export const globalCSS = `
 
   /* Item 06 — Confidentiality note */
   .confidentiality-note {
-    background: #F0F4F8;
+    background: #F4F4F3;
     border-left: 3px solid ${COLORS.steel};
     border-radius: 0 6px 6px 0;
     padding: 14px 16px;
@@ -718,7 +719,7 @@ export const globalCSS = `
   .bio-headshot {
     width: 80px; height: 80px;
     border-radius: 50%; object-fit: cover;
-    border: 2.5px solid rgba(214,166,63,0.3);
+    border: 2.5px solid rgba(110,31,46,0.3);
     flex-shrink: 0;
     background: ${COLORS.navy};
   }
@@ -734,7 +735,7 @@ export const globalCSS = `
     margin-bottom: 14px;
   }
   .credential-label {
-    font-size: 0.6rem; font-weight: 600; letter-spacing: 1.5px;
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 1.5px;
     text-transform: uppercase; color: #1F2937;
     width: 100%; flex-shrink: 0; margin-bottom: -8px;
   }
@@ -750,7 +751,7 @@ export const globalCSS = `
   }
 
   /* Item 07 — Endorsement quote */
-  .endorsement-section { background: #E8DFD0; padding: 48px 32px; border-top: 1px solid #D6CDBF; border-bottom: 1px solid #D6CDBF; }
+  .endorsement-section { background: #F4F4F3; padding: 48px 32px; border-top: 1px solid #E5E3DF; border-bottom: 1px solid #E5E3DF; }
   .endorsement-container { max-width: 640px; margin: 0 auto; text-align: center; }
   .endorsement-quote-mark {
     font-family: 'EB Garamond', Georgia, serif;
@@ -779,9 +780,9 @@ export const globalCSS = `
 
   /* Tinted background on ALL viewports */
   .section-tinted {
-    background: #E8DFD0 !important;
-    border-top: 1px solid #D6CDBF;
-    border-bottom: 1px solid #D6CDBF;
+    background: #F4F4F3 !important;
+    border-top: 1px solid #E5E3DF;
+    border-bottom: 1px solid #E5E3DF;
   }
 
   /* Desktop-only whitespace layout */
@@ -818,9 +819,9 @@ export const globalCSS = `
   .card-text-link {
     display: inline-block;
     font-size: 0.75rem; font-weight: 600;
-    color: #14213D;
+    color: #1B1C1F;
     text-decoration: underline;
-    text-decoration-color: rgba(20,33,61,0.3);
+    text-decoration-color: rgba(27,28,31,0.3);
     text-underline-offset: 3px;
     transition: text-decoration-color 0.2s, color 0.2s;
     margin-top: 16px;
@@ -828,8 +829,8 @@ export const globalCSS = `
     cursor: pointer; font-family: inherit;
   }
   .card-text-link:hover {
-    text-decoration-color: #B8860B;
-    color: #B8860B;
+    text-decoration-color: #6E1F2E;
+    color: #6E1F2E;
   }
 
   /* ══════════════════════════════════════════════════════════════
@@ -838,7 +839,7 @@ export const globalCSS = `
 
   /* McKinsey quote — full-width dark navy bar */
   .mckinsey-quote {
-    background: #14213D !important;
+    background: #1B1C1F !important;
     border: none !important;
     border-radius: 0 !important;
     box-shadow: none !important;
@@ -865,12 +866,12 @@ export const globalCSS = `
   .mckinsey-quote .attribution, .mckinsey-quote small {
     display: block !important;
     margin-top: 16px !important;
-    font-family: 'DM Sans', sans-serif !important;
-    font-size: 0.6rem !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.72rem !important;
     font-weight: 600 !important;
     letter-spacing: 1.5px !important;
     text-transform: uppercase !important;
-    color: #D6A63F !important;
+    color: #C97B8A !important;
   }
   @media (max-width: 768px) {
     .mckinsey-quote {
@@ -886,7 +887,7 @@ export const globalCSS = `
     font-family: 'EB Garamond', serif;
     font-size: 1.1rem;
     font-weight: 400;
-    color: #1B2A4A;
+    color: #1B1C1F;
     margin-top: 40px;
     margin-bottom: 20px;
     padding-top: 32px;
@@ -898,7 +899,7 @@ export const globalCSS = `
     font-family: 'EB Garamond', serif;
     font-size: 1.1rem;
     font-weight: 400;
-    color: #1B2A4A;
+    color: #1B1C1F;
     margin-top: 40px;
     margin-bottom: 16px;
     padding-top: 32px;
@@ -909,12 +910,12 @@ export const globalCSS = `
   .faq-categories { display: flex; flex-direction: column; gap: 32px; }
   .faq-category-heading {
     font-family: 'EB Garamond', serif;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 600;
-    color: #1B2A4A;
+    color: #1B1C1F;
     margin-bottom: 12px;
     padding-bottom: 8px;
-    border-bottom: 2px solid #B8860B;
+    border-bottom: 2px solid #6E1F2E;
     display: inline-block;
   }
 
@@ -943,7 +944,7 @@ export const globalCSS = `
     margin-bottom: 8px;
   }
   .faq-row h3, .faq-row {
-    font-size: 0.9rem !important;
+    font-size: 1rem !important;
     font-weight: 600 !important;
     line-height: 1.35;
   }
@@ -951,39 +952,39 @@ export const globalCSS = `
   /* Card body text */
   .buyer-card p, .cost-card p, .pricing-card p,
   .outcome-card p, .path-card p, .track-vignette p {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     line-height: 1.6;
   }
 
   /* List items */
-  li { font-size: 0.8rem; line-height: 1.5; margin-bottom: 6px; }
+  li { font-size: 0.9rem; line-height: 1.5; margin-bottom: 6px; }
 
   /* Small / disclaimer */
   small, .disclaimer, .confidentiality-note p {
-    font-size: 0.65rem;
+    font-size: 0.72rem;
     line-height: 1.5;
     color: #1F2937;
   }
 
   /* Item 03 — Unified label system */
   .context-label {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.6rem !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem !important;
     font-weight: 600 !important;
     letter-spacing: 1.5px !important;
     text-transform: uppercase;
-    color: #14213D;
+    color: #1B1C1F;
   }
   .hero-category {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 0.72rem !important;
     font-weight: 700 !important;
     letter-spacing: 2px !important;
     text-transform: uppercase;
-    color: #D6A63F !important;
+    color: #6E1F2E !important;
     margin-bottom: 16px;
   }
-  .pe-consequence .label { color: #C0392B !important; }
+  .pe-consequence .label { color: #96404A !important; }
 
   /* Item 04 — Context-specific line-heights */
   .section-wrapper > p:first-of-type, h2 + p { line-height: 1.65; }
@@ -995,8 +996,8 @@ export const globalCSS = `
     h1 { font-size: 1.8rem !important; line-height: 1.2 !important; }
     h2, .section-title { font-size: 1.4rem !important; }
     h3 { font-size: 1rem !important; }
-    .context-label, .hero-category { font-size: 0.6rem !important; }
-    .faq-row h3, .faq-row { font-size: 0.9rem !important; }
+    .context-label, .hero-category { font-size: 0.7rem !important; }
+    .faq-row h3, .faq-row { font-size: 1rem !important; }
   }
 
   /* ══════════════════════════════════════════════════════════════
@@ -1025,7 +1026,7 @@ export const globalCSS = `
     content: '✓';
     position: absolute;
     left: 0;
-    color: #B8860B;
+    color: #6E1F2E;
     font-weight: 700;
     font-size: 0.72rem;
   }
@@ -1033,15 +1034,15 @@ export const globalCSS = `
 
   /* Item 03 — Risk/cost cards */
   .cost-card {
-    border: 1px solid #E8C4C0 !important;
-    border-top: 3px solid #C0392B !important;
+    border: 1px solid #E7C6C9 !important;
+    border-top: 3px solid #96404A !important;
     border-radius: var(--card-radius) !important;
     box-shadow: var(--card-shadow) !important;
   }
   .pe-consequence {
-    background: #FDF6F6 !important;
+    background: #FBF0F0 !important;
     border: none !important;
-    border-left: 3px solid #C0392B !important;
+    border-left: 3px solid #96404A !important;
     border-radius: 0 6px 6px 0 !important;
     padding: 14px 16px !important;
     margin-top: 20px !important;
@@ -1052,7 +1053,7 @@ export const globalCSS = `
   .path-card {
     background: var(--card-bg) !important;
     border: var(--card-border) !important;
-    border-top: 3px solid #1B2A4A !important;
+    border-top: 3px solid #6E1F2E !important;
     border-radius: var(--card-radius) !important;
     box-shadow: var(--card-shadow) !important;
     padding: var(--card-pad-top) var(--card-pad-x) var(--card-pad-bottom) !important;
@@ -1083,8 +1084,8 @@ export const globalCSS = `
     flex: 1 1 300px;
   }
   .track-result {
-    background: #FFFBF0 !important;
-    border-left: 3px solid #B8860B !important;
+    background: #F4F4F3 !important;
+    border-left: 3px solid #6E1F2E !important;
     padding: 14px 16px !important;
     border-radius: 0 6px 6px 0 !important;
     margin-top: 20px !important;
@@ -1115,24 +1116,24 @@ export const globalCSS = `
     display: flex; align-items: center; justify-content: center;
     font-size: 0.8rem; flex-shrink: 0;
   }
-  .case-icon.stability { background: linear-gradient(135deg, rgba(20,33,61,0.1), rgba(20,33,61,0.05)); color: #14213D; }
-  .case-icon.vendor { background: linear-gradient(135deg, rgba(214,166,63,0.08), rgba(214,166,63,0.04)); color: #B8860B; }
-  .case-label { font-family: 'EB Garamond', serif; font-size: 0.9rem; font-weight: 600; color: #1B2A4A; line-height: 1.3; }
+  .case-icon.stability { background: linear-gradient(135deg, rgba(27,28,31,0.1), rgba(27,28,31,0.05)); color: #1B1C1F; }
+  .case-icon.vendor { background: linear-gradient(135deg, rgba(110,31,46,0.08), rgba(110,31,46,0.04)); color: #6E1F2E; }
+  .case-label { font-family: 'EB Garamond', serif; font-size: 0.9rem; font-weight: 600; color: #1B1C1F; line-height: 1.3; }
   .case-context { font-size: 0.65rem; color: #1F2937; font-weight: 400; margin-top: 1px; }
   .case-domain-tag {
-    font-size: 0.6rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
     padding: 4px 10px; border-radius: 4px; flex-shrink: 0; white-space: nowrap;
   }
-  .case-domain-tag.ops { background: rgba(20,33,61,0.06); color: #14213D; }
-  .case-domain-tag.vendor-tag { background: rgba(214,166,63,0.08); color: #B8860B; }
+  .case-domain-tag.ops { background: rgba(27,28,31,0.06); color: #1B1C1F; }
+  .case-domain-tag.vendor-tag { background: rgba(110,31,46,0.08); color: #6E1F2E; }
 
   .case-body { padding: 24px 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
   .case-section-heading {
-    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
     text-transform: uppercase; margin-bottom: 10px;
   }
-  .case-section-heading.situation { color: #14213D; }
-  .case-section-heading.intervention { color: #14213D; }
+  .case-section-heading.situation { color: #1B1C1F; }
+  .case-section-heading.intervention { color: #1B1C1F; }
   .case-situation p { font-size: 0.8rem; line-height: 1.6; color: #1F2937; margin: 0; }
   .case-intervention ul { list-style: none; padding: 0; margin: 0; }
   .case-intervention li {
@@ -1141,10 +1142,10 @@ export const globalCSS = `
   }
   .case-intervention li::before {
     content: ''; position: absolute; left: 0; top: 12px;
-    width: 6px; height: 6px; border-radius: 50%; background: #B8860B; opacity: 0.5;
+    width: 6px; height: 6px; border-radius: 50%; background: #6E1F2E; opacity: 0.5;
   }
 
-  .case-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 2px solid #B8860B; }
+  .case-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 2px solid #6E1F2E; }
   .case-metric { padding: 20px 24px; text-align: center; position: relative; }
   .case-metric:not(:last-child)::after {
     content: ''; position: absolute; right: 0; top: 16px; bottom: 16px;
@@ -1152,31 +1153,31 @@ export const globalCSS = `
   }
   .case-metric-number {
     font-family: 'EB Garamond', serif; font-size: 1.4rem; font-weight: 700;
-    color: #1B2A4A; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 4px;
+    color: #1B1C1F; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 4px;
   }
-  .case-metric-label { font-size: 0.6rem; color: #1F2937; font-weight: 400; line-height: 1.35; }
+  .case-metric-label { font-size: 0.7rem; color: #1F2937; font-weight: 400; line-height: 1.35; }
 
   .case-footer {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 28px; background: #FFFBF0; border-top: 1px solid rgba(214,166,63,0.18);
+    padding: 16px 28px; background: #F4F4F3; border-top: 1px solid rgba(110,31,46,0.18);
   }
   .case-pe-translation { font-size: 0.72rem; color: #1F2937; line-height: 1.5; flex: 1; padding-right: 24px; }
   .case-pe-translation strong {
-    font-style: normal; font-weight: 600; color: #1B2A4A;
-    font-size: 0.6rem; letter-spacing: 0.06em; text-transform: uppercase; margin-right: 6px;
+    font-style: normal; font-weight: 600; color: #1B1C1F;
+    font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; margin-right: 6px;
   }
-  .case-read-more { font-size: 0.72rem; font-weight: 600; color: #14213D; text-decoration: none; white-space: nowrap; }
-  .case-read-more:hover { color: #B8860B; }
+  .case-read-more { font-size: 0.72rem; font-weight: 600; color: #1B1C1F; text-decoration: none; white-space: nowrap; }
+  .case-read-more:hover { color: #6E1F2E; }
 
   /* Expandable nested outcome cards */
   .outcome-expandable { margin: 0 28px 24px; }
   .outcome-toggle {
     display: inline-flex; align-items: center; gap: 6px;
-    font-size: 0.72rem; font-weight: 600; color: #14213D;
+    font-size: 0.72rem; font-weight: 600; color: #1B1C1F;
     cursor: pointer; padding: 8px 0; border: none; background: none;
-    font-family: 'DM Sans', sans-serif; transition: color 0.2s;
+    font-family: 'Inter', sans-serif; transition: color 0.2s;
   }
-  .outcome-toggle:hover { color: #1B2A4A; }
+  .outcome-toggle:hover { color: #1B1C1F; }
   .outcome-toggle .chevron { display: inline-block; transition: transform 0.25s ease; font-size: 0.6rem; }
   .outcome-toggle.active .chevron { transform: rotate(90deg); }
   .outcome-cards-container { display: none; padding-top: 12px; }
@@ -1185,27 +1186,27 @@ export const globalCSS = `
 
   .outcome-card-title {
     font-family: 'EB Garamond', serif; font-size: 0.8rem; font-weight: 600;
-    color: #1B2A4A; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+    color: #1B1C1F; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
   }
   .domain-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; display: inline-block; }
-  .domain-dot.incidents { background: #D4574E; }
-  .domain-dot.change { background: #D49A4E; }
-  .domain-dot.kpi { background: #14213D; }
-  .domain-dot.vendor-dot { background: #B8860B; }
+  .domain-dot.incidents { background: #96404A; }
+  .domain-dot.change { background: #A2653C; }
+  .domain-dot.kpi { background: #4A5D74; }
+  .domain-dot.vendor-dot { background: #6D4A62; }
 
   .outcome-step { margin-bottom: 10px; }
   .outcome-step:last-child { margin-bottom: 0; }
   .outcome-step-label {
-    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 3px;
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 3px;
   }
-  .outcome-step-label.gap { color: #B85450; }
-  .outcome-step-label.fix { color: #A07D2E; }
-  .outcome-step-label.result { color: #4A8C6F; }
+  .outcome-step-label.gap { color: #96404A; }
+  .outcome-step-label.fix { color: #571825; }
+  .outcome-step-label.result { color: #3E6259; }
   .outcome-step p { font-size: 0.72rem; line-height: 1.5; color: #1F2937; margin: 0; }
 
   .measured-outcomes-label {
-    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-    color: #14213D; margin-bottom: 20px; display: block;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: #1B1C1F; margin-bottom: 20px; display: block;
   }
 
   @media (max-width: 680px) {

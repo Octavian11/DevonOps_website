@@ -1,157 +1,236 @@
+import { useState } from "react";
+import { track } from "@vercel/analytics/react";
 import {
-  COLORS, FONTS, SPACING, SHADOWS, RADIUS,
-  CALENDLY, SAMPLE_SCORECARD_PDF, SAMPLE_100DAY_PDF,
+  CALENDLY, FORMSPREE_URL, SAMPLE_SCORECARD_PDF, SAMPLE_100DAY_PDF,
 } from "../constants.js";
-import { CTAButton, ButtonPair, Section, LeadMagnetLink } from "../components.jsx";
 
-// ─── TOOL CARD ────────────────────────────────────────────────
+const DOWNLOADS = {
+  scorecard: {
+    key: "execution_risk_scorecard",
+    label: "Pre-close sample",
+    title: "Execution Risk Scorecard",
+    description: "See how evidence, severity, and operating implications are organized for an investment-committee decision.",
+    detail: "Executive summary · Domain findings · Operating-risk scores",
+    pages: "4-page PDF",
+    preview: "/memo-samples/execution-risk-scorecard-preview.png",
+    url: SAMPLE_SCORECARD_PDF,
+    filename: "Devonshire-Sample-Execution-Risk-Scorecard.pdf",
+  },
+  playbook: {
+    key: "playbook",
+    label: "Post-close sample",
+    title: "100-Day Operating Playbook",
+    description: "See how diligence findings become sequenced actions, management ownership, and sponsor visibility after close.",
+    detail: "Phased priorities · Ownership · Operating cadence",
+    pages: "2-page PDF",
+    preview: "/memo-samples/100-day-operating-playbook-preview.png",
+    url: SAMPLE_100DAY_PDF,
+    filename: "Devonshire-Sample-100-Day-Operating-Playbook.pdf",
+  },
+};
 
-function ToolCard({ title, description, badge, badgeColor, ctaText, ctaAction, ctaHref }) {
-  return (
-    <div style={{ flex: "1 1 280px", minWidth: "min(280px, 100%)", background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.lg, padding: "28px", boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column", gap: "14px" }}>
-      {badge && (
-        <span style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: badgeColor || COLORS.steel, display: "inline-block", marginBottom: "2px" }}>
-          {badge}
-        </span>
-      )}
-      <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", fontWeight: 700, color: COLORS.navy, margin: 0 }}>{title}</h3>
-      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, margin: 0, flex: 1 }}>{description}</p>
-      {ctaHref ? (
-        <a href={ctaHref} target="_blank" rel="noopener noreferrer"
-          style={{ display: "inline-block", padding: "10px 20px", background: COLORS.gold, color: COLORS.white, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, textDecoration: "none", textAlign: "center", marginTop: "auto" }}>
-          {ctaText}
-        </a>
-      ) : (
-        <button onClick={ctaAction}
-          style={{ padding: "10px 20px", background: COLORS.gold, color: COLORS.white, border: "none", borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, cursor: "pointer", textAlign: "center", marginTop: "auto" }}>
-          {ctaText}
-        </button>
-      )}
-    </div>
-  );
+function recordEvent(name, properties = {}) {
+  try { track(name, properties); } catch { /* Analytics cannot block a resource. */ }
 }
 
-// ─── PDF ROW ──────────────────────────────────────────────────
+function startDownload(asset, source) {
+  recordEvent("resource_download", { asset: asset.key, source });
+  const link = document.createElement("a");
+  link.href = asset.url;
+  link.download = asset.filename;
+  link.setAttribute("aria-hidden", "true");
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+}
 
-function SampleDeliverableCard({ title, description, pdfUrl, label }) {
-  return (
-    <div style={{ background: COLORS.white, border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "20px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px", flexWrap: "wrap", boxShadow: SHADOWS.sm }}>
-      <div style={{ flex: 1, minWidth: "200px" }}>
-        <div style={{ fontFamily: FONTS.body, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.8px", textTransform: "uppercase", color: COLORS.steel, marginBottom: "6px" }}>{label}</div>
-        <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "6px" }}>{title}</div>
-        <div style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.6 }}>{description}</div>
+function ToolDiagram({ type }) {
+  if (type === "score") {
+    return (
+      <div className="resource-score-graphic" aria-hidden="true">
+        {[72, 46, 84, 61, 55, 78].map((value, index) => (
+          <i key={index} style={{ "--score-height": `${value}%` }} />
+        ))}
       </div>
-      <LeadMagnetLink pdfUrl={pdfUrl}>
-        Download Sample (PDF)
-      </LeadMagnetLink>
+    );
+  }
+  return (
+    <div className="resource-lever-graphic" aria-hidden="true">
+      {Array.from({ length: 18 }, (_, index) => <i key={index} className={index % 5 === 0 ? "active" : ""} />)}
     </div>
   );
 }
 
-// ─── RESOURCES PAGE ───────────────────────────────────────────
+function DownloadCard({ asset, onSelect }) {
+  return (
+    <article className="resource-download-card">
+      <a className="resource-preview" href={asset.url} target="_blank" rel="noopener noreferrer" onClick={() => recordEvent("resource_preview", { asset: asset.key })} aria-label={`Preview ${asset.title} PDF`}>
+        <img src={asset.preview} alt={`Preview of the ${asset.title}`} width="840" height="620" />
+        <span>Preview PDF ↗</span>
+      </a>
+      <div className="resource-download-copy">
+        <span className="resources-kicker">{asset.label}</span>
+        <h3>{asset.title}</h3>
+        <p>{asset.description}</p>
+        <div className="resource-file-meta"><span>{asset.pages}</span><span>Illustrative sample</span></div>
+        <strong>{asset.detail}</strong>
+        <button type="button" onClick={() => onSelect(asset)}>Request &amp; download →</button>
+      </div>
+    </article>
+  );
+}
+
+function ResourceGate({ asset, onClose }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState("idle");
+  const [message, setMessage] = useState("");
+
+  const submit = async (event) => {
+    event.preventDefault();
+    if (!email || !email.includes("@")) {
+      setStatus("error");
+      setMessage("Enter a valid work email address.");
+      return;
+    }
+    setStatus("loading");
+    setMessage("Preparing your sample…");
+    try {
+      const response = await fetch(FORMSPREE_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ name: name || "(not provided)", email, requested_resource: asset.title, source: "resources_page" }),
+      });
+      if (!response.ok) throw new Error("Submission failed");
+      recordEvent("resource_lead_submit", { asset: asset.key });
+      setStatus("success");
+      setMessage("Request received. Your download has started.");
+      startDownload(asset, "resource_gate_success");
+    } catch {
+      setStatus("error");
+      setMessage("The request could not be submitted. Please try again.");
+    }
+  };
+
+  return (
+    <section className="resource-gate" aria-labelledby="resource-gate-title">
+      <div className="resource-gate-copy">
+        <span className="resources-kicker">Selected resource</span>
+        <h3 id="resource-gate-title">{asset.title}</h3>
+        <p>{status === "success" ? "The file is ready below if your browser did not begin the download automatically." : "Enter your work email and the PDF will download immediately."}</p>
+        <button className="resource-change" type="button" onClick={onClose}>Choose a different resource</button>
+      </div>
+      {status === "success" ? (
+        <div className="resource-gate-success">
+          <button type="button" onClick={() => startDownload(asset, "resource_success_panel")}>Download {asset.title} →</button>
+          <p role="status" aria-live="polite">{message}</p>
+        </div>
+      ) : (
+        <form className="resource-gate-form" onSubmit={submit} noValidate>
+          <label htmlFor="resource-name">Name <span>Optional</span></label>
+          <input id="resource-name" name="name" autoComplete="name" value={name} onChange={(event) => setName(event.target.value)} />
+          <label htmlFor="resource-email">Work email</label>
+          <input id="resource-email" name="email" type="email" autoComplete="email" required value={email} aria-invalid={status === "error"} aria-describedby="resource-form-message" onChange={(event) => { setEmail(event.target.value); if (status === "error") { setStatus("idle"); setMessage(""); } }} />
+          <button type="submit" disabled={status === "loading"}>{status === "loading" ? "Preparing…" : "Get the PDF →"}</button>
+          <p className="resource-privacy">No mailing list. Your email is used only to respond to this request.</p>
+          <p id="resource-form-message" className={`resource-form-message ${status}`} role={status === "error" ? "alert" : "status"} aria-live={status === "error" ? "assertive" : "polite"}>{message}</p>
+        </form>
+      )}
+    </section>
+  );
+}
 
 export default function ResourcesPage({ setPage }) {
+  const [selectedAsset, setSelectedAsset] = useState(null);
+
+  const selectAsset = (asset) => {
+    setSelectedAsset(asset);
+    recordEvent("resource_download_select", { asset: asset.key });
+    window.setTimeout(() => document.getElementById("resource-access")?.scrollIntoView({ behavior: "smooth", block: "center" }), 0);
+  };
+
   return (
-    <div className="fade-in">
-      <h1 style={{ fontFamily: FONTS.heading, fontSize: "1.8rem", fontWeight: 400, color: COLORS.navy, marginBottom: SPACING.lg }}>Resources</h1>
-
-      {/* Interactive Tools */}
-      <Section noCTA title="Interactive Tools" variant="tinted">
-        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: SPACING.md }}>
-          Two free tools to help you identify operational risk and explore the 20 value creation levers before your first conversation.
-        </p>
-        <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
-          <ToolCard
-            badge="Free · 2 Minutes"
-            badgeColor={COLORS.gold}
-            title="Ops Scorer"
-            description="Rate your deal across 6 operational dimensions — incident governance, change management, vendor risk, and more. Produces a prioritized assessment with buyer-type framing for IS, PE fund, or family office contexts."
-            ctaText="Score Your Deal →"
-            ctaAction={() => setPage("scorer")}
-          />
-          <ToolCard
-            badge="20 Levers · Interactive"
-            badgeColor={COLORS.steel}
-            title="Operational Lever Explorer"
-            description="Browse all 20 operational friction points across 6 domains — severity-rated, PE impact framed. Filter by timing (Pre-Close / First 100 Days / Ongoing Hold), domain, or severity. Open any lever for symptoms and what good looks like."
-            ctaText="Explore the Levers →"
-            ctaAction={() => setPage("services")}
-          />
+    <div className="resources-page fade-in">
+      <header className="resources-hero">
+        <div className="resources-hero-inner">
+          <span className="resources-kicker">Resources · Tools · Deliverables</span>
+          <h1>Operating tools for the deal team.</h1>
+          <p>Assess operating risk, inspect the deliverables, and understand the judgment behind the work—before committing to an engagement.</p>
+          <nav className="resources-jump" aria-label="Resources on this page">
+            <a href="#tools">Decision tools</a>
+            <a href="#samples">Sample deliverables</a>
+            <a href="#perspectives">Perspectives</a>
+          </nav>
         </div>
-      </Section>
+      </header>
 
-      {/* Sample Deliverables */}
-      <Section noCTA title="Sample Deliverables">
-        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: SPACING.md }}>
-          Anonymized examples of the board-ready deliverables included in each engagement. Enter your email to download. I respect your inbox.
-        </p>
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-          <SampleDeliverableCard
-            label="Pre-Close Deliverable"
-            title="Ops Diligence Scorecard"
-            description="Risk-rated findings memo covering the operational gaps standard diligence misses — formatted for IC presentation."
-            pdfUrl={SAMPLE_SCORECARD_PDF}
-          />
-          <SampleDeliverableCard
-            label="Post-Close Deliverable"
-            title="100-Day Operating Playbook"
-            description="The structured execution plan that installs incident governance, change control, vendor oversight, KPI cadence, and board-ready reporting from Day 1."
-            pdfUrl={SAMPLE_100DAY_PDF}
-          />
-        </div>
-      </Section>
+      <div className="resources-main">
+        <section id="tools" className="resources-section resources-tools" aria-labelledby="tools-title">
+          <div className="resources-heading">
+            <span className="resources-kicker">01 · Decision tools</span>
+            <h2 id="tools-title">Start with the operating question.</h2>
+            <p>Use the assessment for a fast risk read, or inspect representative levers to understand how the operating model is tested.</p>
+          </div>
+          <div className="resource-tool-grid">
+            <article className="resource-tool-card primary">
+              <ToolDiagram type="score" />
+              <div><span>Free · about 2 minutes</span><h3>Score Your Deal</h3><p>Rate six operating domains and receive a prioritized, buyer-specific risk profile.</p><ul><li>Six-domain assessment</li><li>Risk profile and priorities</li><li>Sample scorecard access</li></ul><button type="button" onClick={() => { recordEvent("resource_tool_click", { tool: "scorer" }); setPage("scorer"); }}>Start the assessment →</button></div>
+            </article>
+            <article className="resource-tool-card">
+              <ToolDiagram type="levers" />
+              <div><span>20 representative levers</span><h3>Operational Lever Catalog</h3><p>Explore representative operating-infrastructure levers by timing, domain, and severity.</p><ul><li>Symptoms and evidence</li><li>Sponsor implications</li><li>Control-state examples</li></ul><button type="button" onClick={() => { recordEvent("resource_tool_click", { tool: "lever_catalog" }); setPage("services"); }}>Explore the catalog →</button></div>
+            </article>
+          </div>
+        </section>
 
-      {/* Thought Leadership */}
-      <Section noCTA title="Point of View" variant="tinted">
-        <h3 style={{ fontFamily: FONTS.heading, fontSize: "1.1rem", fontWeight: 600, color: COLORS.navy, marginBottom: "6px" }}>
-          Why Ops Diligence Is the Most Underpriced Risk in PE
-        </h3>
-        <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.steel, fontWeight: 600, marginBottom: "20px" }}>
-          The operating layer beneath the financials is still priced as optional. It isn't.
-        </p>
-        <div style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.75, maxWidth: "800px" }}>
-          <p style={{ marginBottom: "16px" }}>
-            Every deal gets financial diligence. Most get legal, tax, and environmental. But operational diligence — the systematic assessment of whether a company's operations can actually deliver the value creation plan — is still treated as optional by the majority of lower-middle-market PE funds.
-          </p>
-          <p style={{ margin: "24px 0", padding: "14px 20px", borderLeft: `4px solid ${COLORS.gold}`, background: `${COLORS.gold}0D`, fontFamily: FONTS.heading, fontSize: "1.1rem", fontWeight: 600, color: COLORS.navy }}>
-            This is a pricing error.
-          </p>
-          <p style={{ marginBottom: "16px" }}>
-            The operational gaps that compound under PE ownership are predictable. They follow patterns. A portfolio company with no incident governance often surfaces a production failure early in the hold. A company with no change control process tends to trace a meaningful share of its outages to recent, unreviewed deployments. A company with no KPI cadence will enter its first board meeting with verbal updates and anecdotal evidence — and the board will have no way to distinguish signal from noise.
-          </p>
-          <p style={{ marginBottom: "16px" }}>
-            These are not edge cases. In 15 years of platform operations across JPMorgan, Barclays, Lazard, and a $10B+ platform, I've seen every one of these patterns. The difference between a smooth first 100 days and a firefighting spiral almost always comes down to whether someone assessed the operational risk before close — and built a plan to address it.
-          </p>
-          <p style={{ marginBottom: "16px" }}>
-            Financial DD tells you what the business earns. Ops diligence tells you whether it can keep earning it under new ownership, new governance, and new expectations.
-          </p>
-          <p style={{ margin: "24px 0", padding: "14px 20px", borderLeft: `4px solid ${COLORS.steel}`, background: `${COLORS.navy}05`, lineHeight: 1.65 }}>
-            The cost of a pre-close ops diligence engagement is a rounding error on a $20M deal. The cost of discovering the gaps at month 3 — after the management honeymoon ends and the first crisis hits — is measured in EBITDA, management credibility, and LP confidence.
-          </p>
-          <p style={{ marginBottom: "16px" }}>
-            Funds that build operational diligence into their standard process don't just avoid surprises. They create a competitive advantage in sourcing: sellers and intermediaries learn that your diligence process is rigorous, your post-close execution is fast, and your value creation plans are credible. That reputation compounds over time.
-          </p>
-          <p style={{ margin: 0 }}>
-            The 20 Operational Value Creation Levers I've catalogued represent the most common friction points I've seen across institutional and PE-backed operating environments. Most deals have 3–5 of them hiding in plain sight. The question is whether you find them before close or after.
-          </p>
-        </div>
-      </Section>
+        <section id="samples" className="resources-section resources-samples" aria-labelledby="samples-title">
+          <div className="resources-heading light">
+            <span className="resources-kicker">02 · Sample deliverables</span>
+            <h2 id="samples-title">Inspect the work product.</h2>
+            <p>These illustrative samples show the format and decision logic of Devonshire work products. They are based on institutional operating experience—not Devonshire client cases.</p>
+          </div>
+          <div className="resource-download-grid">
+            <DownloadCard asset={DOWNLOADS.scorecard} onSelect={selectAsset} />
+            <DownloadCard asset={DOWNLOADS.playbook} onSelect={selectAsset} />
+          </div>
+          <div id="resource-access">{selectedAsset && <ResourceGate key={selectedAsset.key} asset={selectedAsset} onClose={() => setSelectedAsset(null)} />}</div>
+        </section>
 
-      {/* Bottom CTA */}
-      <Section noCTA background={`${COLORS.navy}05`}>
-        <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, marginBottom: "18px", textAlign: "center" }}>
-          15 minutes. I'll assess the situation and scope the right engagement.
-        </p>
-        <ButtonPair
-          primaryText="Book a Fit Check (15 min)"
-          primaryLink={CALENDLY}
-          secondaryText="Score Your Deal →"
-          secondaryLink={null}
-          secondaryAction={() => setPage("scorer")}
-          centered={true}
-          showAvailability={true}
-        />
-      </Section>
+        <section id="perspectives" className="resources-section resources-perspectives" aria-labelledby="perspectives-title">
+          <div className="resources-heading">
+            <span className="resources-kicker">03 · Perspectives</span>
+            <h2 id="perspectives-title">The operating layer beneath the financials.</h2>
+            <p>Practical perspectives on the risks that financial diligence cannot answer—and why the first 100 days matter.</p>
+          </div>
+          <div className="perspective-layout">
+            <article className="perspective-feature">
+              <span>Featured perspective</span>
+              <h3>Why Ops Diligence Is the Most Underpriced Risk in PE</h3>
+              <p className="perspective-deck">The operating layer beneath the financials is still priced as optional. It is not.</p>
+              <details onToggle={(event) => event.currentTarget.open && recordEvent("resource_perspective_open", { article: "ops_diligence_underpriced" })}>
+                <summary>Read the perspective <span>↓</span></summary>
+                <div className="perspective-article">
+                  <p>Every deal gets financial diligence. Most get legal and tax. But operational diligence—the systematic assessment of whether a company can deliver the value-creation plan—is still treated as optional by many lower-middle-market funds.</p>
+                  <blockquote>This is a pricing error.</blockquote>
+                  <p>The gaps that compound under PE ownership follow recognizable patterns: weak escalation, uncontrolled change, vendor dependency, and no reliable KPI cadence. Left unaddressed, they can determine whether the first 100 days establish control or begin a firefighting spiral.</p>
+                  <p>Financial diligence tells you what the business earns. Operational diligence tells you whether it can keep earning it under new ownership, new governance, and new expectations.</p>
+                  <p>The cost of a pre-close operating assessment is modest relative to a transaction. Discovering the gaps at month three can instead appear in lost management capacity, weaker operating economics, and reduced sponsor confidence.</p>
+                </div>
+              </details>
+            </article>
+            <aside className="perspective-notes" aria-label="Operating notes">
+              <article><span>01</span><h3>What financial diligence cannot answer</h3><p>Whether management has the controls, evidence, and cadence to execute under a new owner.</p></article>
+              <article><span>02</span><h3>Why Day 1 sets the hold</h3><p>Unowned risks compound quickly; early visibility lets the sponsor sequence control before drift becomes cost.</p></article>
+              <article><span>03</span><h3>What the IC should receive</h3><p>A clear view of operating exposure, the evidence behind it, and the actions required after close.</p></article>
+            </aside>
+          </div>
+        </section>
+      </div>
+
+      <section className="resources-final-cta">
+        <div><span className="resources-kicker">Have an active deal?</span><h2>Use the tools—or bring the operating question directly.</h2><p>A 15-minute fit check confirms the trigger, timing, and appropriate scope.</p></div>
+        <div><a href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => recordEvent("fit_check_click", { location: "resources_final_cta" })}>Book a Fit Check (15 min)</a><button type="button" onClick={() => { recordEvent("resource_tool_click", { tool: "scorer", location: "final_cta" }); setPage("scorer"); }}>Score Your Deal →</button></div>
+      </section>
     </div>
   );
 }
