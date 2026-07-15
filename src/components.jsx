@@ -583,7 +583,7 @@ export function OfferCards({ setPage }) {
   const pathLeft = {
     title: "Evaluating a Target",
     description: "Decision-useful operational diligence designed for the IC and the ownership transition.",
-    items: ["Execution Risk Memo", "Evidence requests + severity-rated findings", "Day-1 Critical Path + first-30-day priorities"]
+    items: ["Execution Risk Memo", "Evidence requests + severity-rated findings", "Day-1 Critical Path—decisions, owners, dependencies + immediate actions"]
   };
   const pathRight = {
     title: "First 100 Days Post-Close",
@@ -667,7 +667,7 @@ export function OfferCards({ setPage }) {
           <ul id="review-deliverables" className={`offer-deliverables-list${mobileDetails.review ? " open" : ""}`} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
             <li style={li}>Execution Risk Memo</li>
             <li style={li}>Evidence requests + severity-rated findings</li>
-            <li style={li}>Day-1 Critical Path + first-30-day priorities</li>
+            <li style={li}>Day-1 Critical Path—decisions, owners, dependencies + immediate actions</li>
             <li style={li}>100-day priority map</li>
           </ul>
           <div style={{ marginTop: "16px" }}>
@@ -744,7 +744,7 @@ export function OfferCards({ setPage }) {
       {setPage && <ButtonPair
         primaryText="Book a Fit Check (15 min)"
         secondaryText={setPage ? "View Full Services & Details" : undefined}
-        secondaryAction={setPage ? () => setPage("services") : undefined}
+        secondaryAction={setPage ? () => setPage("services", "offers") : undefined}
         centered={true}
         showAvailability={true}
       />}
