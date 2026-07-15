@@ -72,7 +72,7 @@ function MethodSpine() {
     <Section noCTA variant="tinted" id="method">
       <SectionTitle>The Method Behind the Work</SectionTitle>
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "960px", marginBottom: "20px" }}>
-        Every engagement runs the same eight-step method—from the sponsor's decision to an evidence-backed, management-owned 100-day plan. Tap any step for detail.
+        Every engagement runs the same eight-step method—from the sponsor's decision to an evidence-backed, management-owned 100-day plan. <strong className="method-tap-prompt">Tap any step for detail.</strong>
       </p>
       <div className="method-workbench">
       <MethodFlowGraphic active={open} onSelect={(step) => setOpen(open === step ? null : step)} />
@@ -328,7 +328,7 @@ function LeverExplorerSection({ setPage }) {
     <Section title="Representative Operational Lever Catalog" noCTA variant="tinted" id="lever-explorer">
       <div className="editorial-label">20 representative levers · proprietary 355-lever library</div>
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "960px", marginBottom: "32px" }}>
-        These {LEVERS.length} examples are drawn from Devonshire’s proprietary 355-lever value-creation library. Each is severity-rated, PE impact framed and prioritized through a proprietary seven-factor PE-fit rubric, then validated against company evidence and the deal thesis—not applied as a checklist. {!catalogOpen ? "The preview below shows one representative issue from each operating domain." : "Open any result for symptoms, deal implications, and what good looks like."}
+        Explore {LEVERS.length} representative examples from Devonshire’s proprietary 355-lever library. Each is severity-rated, PE impact framed, validated against deal evidence, and prioritized using Devonshire’s proprietary seven-factor PE-fit rubric—not applied as a checklist. {!catalogOpen ? "The preview shows one issue from each operating domain." : "Open any result for symptoms, deal implications, and what good looks like."}
       </p>
 
       {catalogOpen && <OperatingControlMatrix domainFilter={domainFilter} timingFilter={timingFilter} onSelect={selectMatrixCell} />}
@@ -442,11 +442,13 @@ export default function ServicesPage({ setPage }) {
         <div className="services-hero-inner">
         <div className="services-kicker">Services · Method · Execution</div>
         <h1>Services, Method &amp; the Operating Lever Library</h1>
-        <p>
-          Senior operating support for active deals and early platforms—from LOI through the first 30 days after close, then into a management-owned 100-day cadence. Fixed fees, board-ready deliverables, and clear ownership from Day 1.
+        <p className="services-lead">
+          Operator-led diligence and post-close execution for sponsors who need to know whether a business can deliver the investment thesis under new ownership. Devonshire converts operating evidence into an IC-ready risk view, pre-close priorities, and a management-owned 100-day plan.
         </p>
-        <p className="services-trigger"><strong>Especially relevant for buy-and-build platforms when:</strong> multiple tuck-ins are moving, integration ownership is unclear, or the platform has not yet built the management and shared-services capacity to absorb them.</p>
-        <nav className="services-jump" aria-label="Services page sections"><a href="#operating-translation">Solution</a><a href="#method">Method</a><a href="#levers">Lever Library</a><a href="#outputs">Outputs</a><a href="#offers">Engagements</a><a href="#process">Process</a><a href="#faq">FAQ</a></nav>
+        <p className="services-trigger"><strong>Especially relevant for buy-and-build platforms:</strong> when acquisition pace is outrunning integration ownership, management capacity, or the operating baseline needed to absorb the next tuck-in.</p>
+        <div className="services-proof-line" aria-label="Engagement characteristics">
+          <span>Fixed-fee engagements</span><span>Board-ready outputs</span><span>Senior ownership throughout</span>
+        </div>
         </div>
       </section>
 
@@ -456,6 +458,9 @@ export default function ServicesPage({ setPage }) {
       <WhatSponsorReceives />
       <div id="offers"><OfferCards /></div>
       <HowItWorks />
+      <aside className="services-market-note" aria-label="Private-equity value-creation research">
+        <p><span><strong>53%</strong> of LPs rank value creation among their top-five manager-selection criteria—above sector expertise.</span><a href="https://www.mckinsey.com/industries/private-capital/our-insights/global-private-markets-report/private-equity" target="_blank" rel="noopener noreferrer">McKinsey Global Private Markets Review 2026 ↗</a></p>
+      </aside>
       <div id="faq"><FAQBlock variant="tinted" /></div>
     </div>
   );
