@@ -22,7 +22,7 @@ function HeroBlockWithNav({ setPage }) {
           Your deal team handles the financials. <em>Who's stress-testing the operations?</em>
         </h1>
         <p className="hero-subheadline" style={{ fontFamily: FONTS.body, color: "rgba(255,255,255,0.94)", lineHeight: 1.7, marginBottom: "24px", maxWidth: "600px" }}>
-          Financial diligence shows what the business earned. From LOI through close and the first 30 days afterward, I test whether the operating model can carry the deal thesis—then turn the findings into an IC-ready risk view, a Day-1 Critical Path, and an owned 100-day plan.
+          Financial diligence shows what the business earned. I test whether the operating model can deliver the investment thesis—then convert the evidence into an IC-ready risk view, pre-close priorities, and an owned 100-day plan.
         </p>
 
         <div className="hero-ctas" style={{ display: "flex", gap: "16px", flexWrap: "wrap", alignItems: "flex-start" }}>
@@ -48,7 +48,7 @@ function HeroBlockWithNav({ setPage }) {
           <div className="hero-chart-card">
             <div className="hero-chart-label">The Window Where Value Is Won or Lost</div>
             <h3>LOI → Close → Day 100</h3>
-            <svg viewBox="0 0 520 260" role="img" aria-label="Operational risk from LOI through Day 100">
+            <svg viewBox="0 0 520 226" role="img" aria-label="Operational risk from LOI through Day 100">
               <title>Operational risk from LOI through Day 100</title>
               <desc>Two lines compare operational risk surfaced at LOI and governed down by Day 100 with risk left unexamined and compounding under new ownership.</desc>
               <defs><linearGradient id="riskFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#6E1F2E" stopOpacity=".2"/><stop offset="1" stopColor="#6E1F2E" stopOpacity="0"/></linearGradient></defs>
@@ -58,10 +58,13 @@ function HeroBlockWithNav({ setPage }) {
               <path d="M44 178 C150 169 250 145 326 98 C390 58 445 35 494 24 L494 196 L44 196Z" fill="url(#riskFill)"/>
               <path d="M44 178 C150 169 250 145 326 98 C390 58 445 35 494 24" fill="none" stroke="#6E1F2E" strokeWidth="2.5"/>
               <path d="M44 178 C145 167 226 140 300 142 C370 143 432 158 494 166" fill="none" stroke="#212226" strokeWidth="2.4"/>
-              <rect x="87" y="169" width="9" height="9" transform="rotate(45 91.5 173.5)" fill="#212226"/><circle cx="414" cy="63" r="5" fill="#6E1F2E"/><circle cx="414" cy="153" r="5" fill="#212226"/>
+              <rect x="87" y="169" width="9" height="9" transform="rotate(45 91.5 173.5)" fill="#212226"/><circle cx="414" cy="153" r="5" fill="#212226"/>
               <g className="chart-axis"><text x="92" y="220" textAnchor="middle">LOI</text><text x="260" y="220" textAnchor="middle">CLOSE</text><text x="414" y="220" textAnchor="middle">DAY 100</text></g>
-              <g className="chart-legend"><line x1="54" y1="238" x2="76" y2="238" stroke="#212226" strokeWidth="2.5"/><text x="84" y="242">Surfaced at LOI — governed down</text><line x1="54" y1="254" x2="76" y2="254" stroke="#6E1F2E" strokeWidth="2.5"/><text x="84" y="258">Unexamined — compounds under ownership</text></g>
             </svg>
+            <div className="hero-chart-legend" aria-label="Chart legend">
+              <span><i className="legend-governed" aria-hidden="true"/>Surfaced early; governed down</span>
+              <span><i className="legend-unexamined" aria-hidden="true"/>Left unexamined; compounds</span>
+            </div>
             <p>Built for the window from LOI through close and the first 30 days afterward — when operating risks become owned problems. The earlier the diagnosis, the cheaper the fix.</p>
           </div>
         </div>
@@ -261,7 +264,7 @@ function LeversTeaserSection({ setPage }) {
           </div>
         </div>
       </div>
-      <div className="home-lever-cta"><span><strong>20 levers, risk-rated.</strong> See which ones are hiding in your deal.</span><a href="/pe/services#levers" onClick={(e) => { track("lever_explorer_click"); e.preventDefault(); setPage("services"); setTimeout(() => document.getElementById("levers")?.scrollIntoView({ behavior: "smooth" }), 120); }}>Explore the Levers →</a></div>
+      <div className="home-lever-cta"><span><strong>20 levers, risk-rated.</strong> See which ones are hiding in your deal.</span><a href="/pe/services#levers" onClick={(e) => { track("lever_explorer_click"); e.preventDefault(); setPage("services", "levers"); }}>Explore the Levers →</a></div>
     </Section>
   );
 }
@@ -392,6 +395,7 @@ function ObjectionHandlers() {
     ["Lower-middle-market fit", "Enterprise delivery model", "Flexible", "Scoped to the deal and portco"],
   ];
   return (
+    <div className="positioning-dark">
     <Section noCTA variant="tinted">
       <div className="editorial-label">Positioning</div>
       <h2 className="editorial-heading">The operating depth of an institution.<br/>The accountability of a principal.</h2>
@@ -415,6 +419,7 @@ function ObjectionHandlers() {
         </div>
       </div>
     </Section>
+    </div>
   );
 }
 
@@ -472,7 +477,7 @@ function CompactAboutBio({ setPage }) {
 
 function OfferTeaser({ setPage }) {
   const offers = [
-    { ...OFFERS.executionRiskReview, label: "Pre-Close · LOI to Close", description: "For one live deal: determine whether the platform can absorb the acquisition without weakening the core business—or carrying unresolved work into the next deal.", bullets: ["Execution Risk Memo", "Evidence requests + severity-rated findings", "Day-1 Critical Path + first-30-day priorities", "100-day priority map"], action: "score" },
+    { ...OFFERS.executionRiskReview, label: "Pre-Close · LOI to Close", description: "For one live deal: determine whether the platform can absorb the acquisition without weakening the core business—or carrying unresolved work into the next deal.", bullets: ["Execution Risk Memo", "Evidence requests + severity-rated findings", "Day-1 Critical Path—decisions, owners, dependencies + immediate actions", "100-day priority map"], action: "score" },
     { ...OFFERS.diligenceToExecution, label: "LOI → Day 100", description: "Review findings carry directly into the 100-Day Operating Playbook—no reset between diligence and execution. What the platform learns becomes a stronger baseline for the next acquisition.", bullets: ["Execution Risk Memo + Scorecard", "Day-1 Readiness Plan + 100-Day Operating Playbook", "Ownership, milestones + operating cadence"], featured: true },
     { ...OFFERS.operatingControlSprint, label: "Post-Close · Hands-On", description: "Install one high-priority operating control or integration capability, then transfer ownership to management.", bullets: ["One operating control, fully installed", "Working governance + ownership map", "Capability Transfer Pack"] },
     { ...OFFERS.postCloseControlTower, label: "Ongoing Hold", description: "Ongoing execution governance and sponsor visibility without permanent operating-partner headcount.", bullets: ["Sponsor Operating Pack + Control Tower Dashboard", "Weekly review + action register", "Risk watchlist + board-readiness pack"] },
@@ -504,7 +509,7 @@ function OfferTeaser({ setPage }) {
         ))}
       </div>
       <p className="timing-note">Most engagements begin during the LOI → close window. The <strong>Continuity Credit</strong> applies 100% of the Execution Risk Review fee to a Diligence-to-Execution Mandate commissioned before close or within 30 days after close. 100-Day Operating Design is also available as a standalone engagement from $30,000. Add-on acquisition support is available for platform portcos.</p>
-      <button className="editorial-link" onClick={() => setPage("services")}>View full services &amp; method →</button>
+      <button className="editorial-link" onClick={() => setPage("services", "method")}>View full services &amp; method →</button>
     </Section>
   );
 }
@@ -526,7 +531,7 @@ function HomeTrackRecord() {
   ];
   return <section className="home-track" id="track-record"><div className="home-track-inner">
     <div className="market-kicker"><span>07</span> Track Record &amp; Outcomes</div>
-    <h2>Measured outcomes, post-implementation.</h2><p className="track-intro">Representative outcomes from Hassan's institutional operating career—not Devonshire client case studies. The underlying governance systems are now adapted for lower-middle-market deals and portfolio companies.</p>
+    <h2>Measured outcomes. Delivered.</h2><p className="track-intro">Operating systems built and pressure-tested at institutional scale—now applied to lower-middle-market deals and portfolio companies.</p>
     <div className="home-case-grid">{cases.map(c => <article className="home-case" key={c.title}><div className="case-overline">{c.label}</div><h3>{c.title}</h3><p>{c.copy}</p><div className="home-metrics">{c.metrics.map((m) => <div className="outcome-visual" key={m.label}><div className="outcome-heading"><strong>{m.value}</strong><span>{m.label}</span></div><div className="outcome-change" aria-label={`${m.label}: ${m.before} to ${m.after}`}><span>{m.before}</span><i aria-hidden="true">→</i><span>{m.after}</span></div></div>)}</div></article>)}</div>
     <p className="home-nda">NDA protection is available as standard. Institutional outcome detail and illustrative work-product formats are available on request.</p>
   </div></section>;

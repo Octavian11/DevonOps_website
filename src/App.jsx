@@ -21,8 +21,15 @@ export default function App() {
   const pathSegment = location.pathname.replace(/^\/pe\/?/, "") || "levers";
   const page = VALID_PAGES.includes(pathSegment) ? pathSegment : "levers";
 
-  const setPage = (p) => {
-    navigate(p === "levers" ? "/pe/" : `/pe/${p}`);
+  const setPage = (p, section) => {
+    const route = p === "levers" ? "/pe/" : `/pe/${p}`;
+    const destination = section ? `${route}#${section}` : route;
+    if (`${location.pathname}${location.hash}` === destination && section) {
+      const target = document.getElementById(section);
+      if (target) window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 96, behavior: "smooth" });
+      return;
+    }
+    navigate(destination);
   };
 
   useEffect(() => {
@@ -34,7 +41,6 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     const titles = {
       levers: "Devonshire Operations — Operational Diligence & Post-Close Execution for Private Equity",
       services: "Services, Method & Representative Value-Creation Levers — Devonshire Operations",
@@ -76,18 +82,63 @@ export default function App() {
     setNameMeta("twitter:title", titles[page]);
     setNameMeta("twitter:description", descriptions[page]);
     setNameMeta("twitter:image", "https://www.devonshireops.com/img/hero-facade.jpg");
-    if (initialRoute.current) initialRoute.current = false;
-    else {
-      window.setTimeout(() => mainRef.current?.focus(), 75);
-      window.setTimeout(() => mainRef.current?.focus(), 250);
-    }
   }, [location.pathname, page]);
+
+  useEffect(() => {
+    let cancelled = false;
+    let retryTimer;
+    const correctionTimers = [];
+    const shouldMoveFocus = !initialRoute.current;
+    initialRoute.current = false;
+    const section = location.hash ? decodeURIComponent(location.hash.slice(1)) : "";
+
+    if (!section) {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      if (shouldMoveFocus) {
+        window.setTimeout(() => mainRef.current?.focus(), 75);
+      }
+      return undefined;
+    }
+
+    let attempts = 0;
+    const findAndScroll = () => {
+      if (cancelled) return;
+      const target = document.getElementById(section);
+      if (target) {
+        const alignTarget = (behavior = "auto") => {
+          if (cancelled || !target.isConnected) return;
+          const top = target.getBoundingClientRect().top + window.scrollY - 96;
+          window.scrollTo({ top, left: 0, behavior });
+        };
+        alignTarget(shouldMoveFocus ? "smooth" : "auto");
+        correctionTimers.push(window.setTimeout(() => alignTarget("auto"), 250));
+        correctionTimers.push(window.setTimeout(() => alignTarget("auto"), 900));
+        if (shouldMoveFocus) {
+          const heading = target.matches("h1,h2,h3") ? target : target.querySelector("h1,h2,h3");
+          if (heading) {
+            heading.setAttribute("tabindex", "-1");
+            heading.focus({ preventScroll: true });
+          }
+        }
+        return;
+      }
+      attempts += 1;
+      if (attempts < 50) retryTimer = window.setTimeout(findAndScroll, 40);
+    };
+    findAndScroll();
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(retryTimer);
+      correctionTimers.forEach((timer) => window.clearTimeout(timer));
+    };
+  }, [location.pathname, location.hash]);
 
   const pages = {
     levers: <LeverExplorer setPage={setPage} />,
     services: <ServicesPage setPage={setPage} />,
     scorer: <ScorerPage setPage={setPage} />,
-    about: <AboutPage />,
+    about: <AboutPage setPage={setPage} />,
     resources: <ResourcesPage setPage={setPage} />,
   };
 

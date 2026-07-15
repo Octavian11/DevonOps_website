@@ -396,7 +396,7 @@ export default function ScorerPage({ setPage }) {
 
             <section className="scorer-final-cta">
               <div><span className="scorer-kicker">From assessment to action</span><h2>{rating === "stable" ? "Make the operating evidence durable." : "Convert the gaps into an owned operating plan."}</h2></div>
-              <div><a href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => recordEvent("scorer_fit_check_click", { rating, context })}>Book a Fit Check (15 min)</a><button type="button" onClick={() => { recordEvent("scorer_services_click", { rating }); setPage ? setPage("services") : window.location.assign("/pe/services"); }}>View Services</button></div>
+              <div><a href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => recordEvent("scorer_fit_check_click", { rating, context })}>Book a Fit Check (15 min)</a><button type="button" onClick={() => { recordEvent("scorer_services_click", { rating }); setPage ? setPage("services", "offers") : window.location.assign("/pe/services#offers"); }}>View Engagement Options</button></div>
             </section>
           </section>
         )}

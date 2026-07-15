@@ -70,7 +70,7 @@ function MethodSpine() {
   const [open, setOpen] = useState(null);
   return (
     <Section noCTA variant="tinted" id="method">
-      <SectionTitle>The Method Behind Every Engagement</SectionTitle>
+      <SectionTitle>The Method Behind the Work</SectionTitle>
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "960px", marginBottom: "20px" }}>
         Every engagement runs the same eight-step method—from the sponsor's decision to an evidence-backed, management-owned 100-day plan. Tap any step for detail.
       </p>
@@ -112,10 +112,6 @@ function MethodSpine() {
             <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.charcoal, lineHeight: 1.55, margin: 0 }}>{d}</p>
           </div>
         ))}
-      </div>
-      <div className="method-outputs">
-        <div className="method-outputs-label">What it produces</div>
-        <ServicesSamplesRow />
       </div>
       </div>
     </Section>
@@ -160,25 +156,45 @@ function OperatingTranslation() {
   );
 }
 
-function MemoSampleScreenshots() {
+function WhatSponsorReceives() {
   const [open, setOpen] = useState(false);
+  const outputs = [
+    ["Execution Risk Memo", "What could impair the investment thesis?", "Material findings, supporting evidence, investment implications, and recommended actions."],
+    ["Execution Risk Scorecard", "Where is exposure concentrated?", "A severity and investment-impact view across six operating domains."],
+    ["Day-1 Critical Path", "What must be ready before close?", "The decisions, owners, dependencies, and immediate actions that must be ready before close."],
+    ["100-Day Operating Playbook", "What must management own?", "Sequenced initiatives, milestones, KPIs, and an operating cadence management can sustain."],
+  ];
   const samples = [
     { src: "/memo-samples/execution-risk-scorecard-preview.png", width:1200, height:900, alt: "Illustrative Execution Risk Scorecard executive summary", caption: "Execution Risk Scorecard — executive risk summary and six-domain findings" },
     { src: "/memo-samples/100-day-operating-playbook-preview.png", width:1200, height:900, alt: "Illustrative 100-Day Operating Playbook execution architecture", caption: "100-Day Operating Playbook — Visibility → Control → Cadence" },
   ];
 
   return (
-    <Section noCTA background={`${COLORS.navy}03`} title="Sample Deliverable Excerpts">
-      <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.55, marginBottom: "12px" }}>
-        Illustrative samples in the format used for Devonshire engagements. Based on institutional operating experience; not Devonshire client case studies.
-      </p>
+    <Section noCTA background={`${COLORS.navy}03`} title="What the Sponsor Receives" id="outputs">
+      <p className="sponsor-outputs-intro">The work converts operating evidence into decision-ready outputs for the IC, management team, and board.</p>
+      <div className="sponsor-output-grid">
+        {outputs.map(([title, question, copy], index) => (
+          <article className="sponsor-output-card" key={title}>
+            <span>0{index + 1}</span>
+            <h3>{title}</h3>
+            <strong>{question}</strong>
+            <p>{copy}</p>
+          </article>
+        ))}
+      </div>
+      <div className="sponsor-output-samples">
+        <div>
+          <span className="editorial-label">Illustrative work product</span>
+          <p>Review the format and level of specificity used in the Scorecard and 100-Day Playbook.</p>
+        </div>
+        <ServicesSamplesRow />
+      </div>
       <button
         onClick={() => setOpen(!open)}
         aria-expanded={open}
         aria-controls="memo-sample-grid"
-        className="sample-toggle"
-        style={{ background: "transparent", border: `1px solid ${COLORS.border}`, borderRadius: RADIUS.md, padding: "8px 16px", fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, fontWeight: 600, cursor: "pointer", marginBottom: "16px" }}>
-        {open ? "Hide sample excerpts ▾" : "Show 2 illustrative deliverable excerpts (Scorecard + 100-Day Playbook) ▸"}
+        className="sample-toggle">
+        {open ? "Hide sample excerpts ▾" : "Preview sample excerpts ▸"}
       </button>
 
       {open && (
@@ -199,21 +215,21 @@ function MemoSampleScreenshots() {
 
 function HowItWorks() {
   const steps = [
-    ["Fit Check", "15-minute call to confirm the operating trigger, scope, and fit."],
-    ["Scope + Underwrite", "Targeted evidence review translates the operating reality into a fixed-fee scope within 48 hours."],
-    ["Diligence Deliverable", "IC-ready, severity-rated, PE impact framed findings connect directly to Day-1 priorities."],
-    ["Value Creation Plan + 100-Day Execution", "The plan moves directly into owned execution and board cadence."],
+    ["Fit Check", "Trigger, timing, and fit."],
+    ["Scope + Underwrite", "Evidence and fixed-fee scope."],
+    ["Diligence Deliverable", "Severity-rated, PE impact framed, IC-ready findings."],
+    ["Plan + Execute", "Ownership, execution, and board cadence."],
   ];
   return (
     <div className="how-it-works-dark" id="process">
-    <Section title="How It Works" noCTA>
+    <Section title="How an Engagement Works" noCTA>
       <figure className="process-sline" aria-label="Four-stage engagement process from Fit Check through 100-Day Execution">
         <svg className="process-sline-curve" viewBox="0 0 1000 320" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M20 160C90 125 180 125 250 160S410 195 500 160S660 125 750 160S910 195 980 160" />
-          <circle cx="125" cy="134" r="7" />
-          <circle cx="375" cy="186" r="7" />
-          <circle cx="625" cy="134" r="7" />
-          <circle cx="875" cy="186" r="7" />
+          <path d="M20 160C90 145 180 145 250 160S410 175 500 160S660 145 750 160S910 175 980 160" />
+          <circle cx="125" cy="148" r="7" />
+          <circle cx="375" cy="172" r="7" />
+          <circle cx="625" cy="148" r="7" />
+          <circle cx="875" cy="172" r="7" />
         </svg>
         <svg className="process-sline-mobile" viewBox="0 0 320 780" preserveAspectRatio="none" aria-hidden="true">
           <path d="M74 20C248 82 248 178 74 240S-78 398 74 455S248 620 74 760" />
@@ -281,6 +297,7 @@ function LeverExplorerSection({ setPage }) {
   const [severityFilter, setSeverityFilter] = useState("All");
   const [expanded, setExpanded] = useState(null);
   const [showAll, setShowAll] = useState(false);
+  const [catalogOpen, setCatalogOpen] = useState(false);
 
   const filtered = LEVERS.filter(l => {
     if (domainFilter !== "All" && l.domain !== domainFilter) return false;
@@ -291,7 +308,8 @@ function LeverExplorerSection({ setPage }) {
   });
 
   const hasActiveFilter = search || domainFilter !== "All" || timingFilter !== "All" || severityFilter !== "All";
-  const visible = hasActiveFilter ? filtered : (showAll ? filtered : filtered.filter(l => l.common));
+  const compactPreview = Object.keys(DOMAINS).map((domain) => filtered.find((lever) => lever.domain === domain && lever.common)).filter(Boolean);
+  const visible = hasActiveFilter ? filtered : (showAll ? filtered : compactPreview);
   const clearFilters = () => { setSearch(""); setDomainFilter("All"); setTimingFilter("All"); setSeverityFilter("All"); setExpanded(null); };
   const selectMatrixCell = (domain, timing) => {
     const isActive = domainFilter === domain && timingFilter === timing;
@@ -301,6 +319,7 @@ function LeverExplorerSection({ setPage }) {
     setSearch("");
     setExpanded(null);
     setShowAll(true);
+    setCatalogOpen(true);
   };
 
   const selectStyle = { padding: "10px 14px", border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.charcoal, background: COLORS.white, cursor: "pointer", minWidth: "160px", boxShadow: "0 1px 2px rgba(20, 33, 61, 0.05)" };
@@ -309,11 +328,12 @@ function LeverExplorerSection({ setPage }) {
     <Section title="Representative Operational Lever Catalog" noCTA variant="tinted" id="lever-explorer">
       <div className="editorial-label">20 representative levers · proprietary 355-lever library</div>
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.65, maxWidth: "960px", marginBottom: "32px" }}>
-        These {LEVERS.length} examples are drawn from Devonshire’s proprietary 355-lever value-creation library. Each is severity-rated, PE impact framed and prioritized through a proprietary seven-factor PE-fit rubric, then validated against company evidence and the deal thesis—not applied as a checklist. {!showAll && !hasActiveFilter ? "Filter the catalog or open a lever to see symptoms, deal implications, and what good looks like." : "Open any result for symptoms, deal implications, and what good looks like."}
+        These {LEVERS.length} examples are drawn from Devonshire’s proprietary 355-lever value-creation library. Each is severity-rated, PE impact framed and prioritized through a proprietary seven-factor PE-fit rubric, then validated against company evidence and the deal thesis—not applied as a checklist. {!catalogOpen ? "The preview below shows one representative issue from each operating domain." : "Open any result for symptoms, deal implications, and what good looks like."}
       </p>
 
-      <OperatingControlMatrix domainFilter={domainFilter} timingFilter={timingFilter} onSelect={selectMatrixCell} />
+      {catalogOpen && <OperatingControlMatrix domainFilter={domainFilter} timingFilter={timingFilter} onSelect={selectMatrixCell} />}
 
+      {catalogOpen && (
       <div className="lever-filter-panel">
       <div className="lever-filters">
         <label className="filter-field filter-search"><span>Search</span><input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search names and definitions…" style={{ ...selectStyle, minWidth: "220px" }} /></label>
@@ -336,6 +356,7 @@ function LeverExplorerSection({ setPage }) {
       </div>
       <div className="lever-results-bar"><p role="status" aria-live="polite">Showing <strong>{visible.length}</strong> of {LEVERS.length} levers</p>{hasActiveFilter && <button onClick={clearFilters}>Clear filters</button>}</div>
       </div>
+      )}
 
       {visible.map((lever, idx) => {
         const showGroupHeader = domainFilter === "All" && (idx === 0 || visible[idx - 1].domain !== lever.domain);
@@ -349,7 +370,7 @@ function LeverExplorerSection({ setPage }) {
                 {domainInfo?.name || lever.domain}
               </span>
               <span className="domain-lever-count" style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.charcoal }}>
-                {domainCount} lever{domainCount !== 1 ? "s" : ""}
+                {catalogOpen ? `${domainCount} lever${domainCount !== 1 ? "s" : ""}` : "Representative example"}
               </span>
               <div style={{ flex: 1, height: "1px", background: COLORS.border }} />
             </div>
@@ -403,22 +424,11 @@ function LeverExplorerSection({ setPage }) {
 
       {!showAll && !hasActiveFilter && (
         <div style={{ textAlign: "center", marginTop: "24px" }}>
-          <button onClick={() => setShowAll(true)} style={{ padding: "12px 28px", background: "transparent", border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "0.9rem", color: COLORS.navy, cursor: "pointer", fontWeight: 500 }}>
-            Show all {LEVERS.length} levers ↓
+          <button onClick={() => { setCatalogOpen(true); setShowAll(true); }} style={{ padding: "12px 28px", background: "transparent", border: `1px solid ${COLORS.steel}`, borderRadius: RADIUS.md, fontFamily: FONTS.body, fontSize: "1rem", color: COLORS.navy, cursor: "pointer", fontWeight: 700 }}>
+            Explore the representative catalog ↓
           </button>
         </div>
       )}
-
-      <div className="lever-closing-action">
-        <div>
-          <span>Next step</span>
-          <strong>Not sure which operating issues are material to your deal?</strong>
-        </div>
-        <div className="lever-closing-links">
-          <button onClick={() => { track("services_scorer_click", { location: "closing_cta" }); setPage("scorer"); }}>Score Your Deal →</button>
-          <a href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => track("services_fit_check_click", { location: "closing_cta" })}>Book a Fit Check</a>
-        </div>
-      </div>
     </Section>
   );
 }
@@ -436,24 +446,16 @@ export default function ServicesPage({ setPage }) {
           Senior operating support for active deals and early platforms—from LOI through the first 30 days after close, then into a management-owned 100-day cadence. Fixed fees, board-ready deliverables, and clear ownership from Day 1.
         </p>
         <p className="services-trigger"><strong>Especially relevant for buy-and-build platforms when:</strong> multiple tuck-ins are moving, integration ownership is unclear, or the platform has not yet built the management and shared-services capacity to absorb them.</p>
-        <nav className="services-jump" aria-label="Services page sections"><a href="#offers">Engagements</a><a href="#method">Method</a><a href="#memo-samples">Deliverables</a><a href="#process">Process</a><a href="#levers">Representative Levers</a><a href="#faq">FAQ</a></nav>
+        <nav className="services-jump" aria-label="Services page sections"><a href="#operating-translation">Solution</a><a href="#method">Method</a><a href="#levers">Lever Library</a><a href="#outputs">Outputs</a><a href="#offers">Engagements</a><a href="#process">Process</a><a href="#faq">FAQ</a></nav>
         </div>
       </section>
 
-      <div id="offers"><OfferCards /></div>
-
-      <div className="mckinsey-quote">
-        <p>
-          <strong><span>53%</span> of 300 LPs ranked a GP's value-creation strategy among their top five manager-selection metrics</strong>—placing it ahead of sector expertise. Operational execution is now a <em>fund-level differentiator.</em>
-        </p>
-        <a className="mckinsey-source" href="https://www.mckinsey.com/industries/private-capital/our-insights/global-private-markets-report/private-equity" target="_blank" rel="noopener noreferrer">McKinsey Global Private Markets Report 2026 ↗</a>
-      </div>
-
-      <MethodSpine />
-      <div id="memo-samples"><MemoSampleScreenshots /></div>
-      <HowItWorks />
       <OperatingTranslation />
+      <MethodSpine />
       <div id="levers"><LeverExplorerSection setPage={setPage} /></div>
+      <WhatSponsorReceives />
+      <div id="offers"><OfferCards /></div>
+      <HowItWorks />
       <div id="faq"><FAQBlock variant="tinted" /></div>
     </div>
   );

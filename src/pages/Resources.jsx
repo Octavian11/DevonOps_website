@@ -178,7 +178,7 @@ export default function ResourcesPage({ setPage }) {
             </article>
             <article className="resource-tool-card">
               <ToolDiagram type="levers" />
-              <div><span>20 representative levers</span><h3>Operational Lever Catalog</h3><p>Explore representative operating-infrastructure levers by timing, domain, and severity.</p><ul><li>Symptoms and evidence</li><li>Sponsor implications</li><li>Control-state examples</li></ul><button type="button" onClick={() => { recordEvent("resource_tool_click", { tool: "lever_catalog" }); setPage("services"); }}>Explore the catalog →</button></div>
+              <div><span>20 representative levers</span><h3>Operational Lever Catalog</h3><p>Explore representative operating-infrastructure levers by timing, domain, and severity.</p><ul><li>Symptoms and evidence</li><li>Sponsor implications</li><li>Control-state examples</li></ul><button type="button" onClick={() => { recordEvent("resource_tool_click", { tool: "lever_catalog" }); setPage("services", "levers"); }}>Explore the catalog →</button></div>
             </article>
           </div>
         </section>

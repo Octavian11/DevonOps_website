@@ -28,11 +28,10 @@ const CAREER_CHAPTERS = [
   },
 ];
 
-const OPERATING_TRANSLATIONS = [
-  ["Incident command", "See execution risk before it becomes a board-level surprise", "Risk visibility and a credible Day-1 critical path"],
-  ["Vendor governance", "Separate addressable cost from structural dependency", "Savings opportunities with ownership and continuity controls"],
-  ["KPI architecture", "Distinguish reported activity from decision-useful operating evidence", "A management cadence the sponsor and board can govern"],
-  ["Organization and process", "Identify key-person fragility and unclear operating ownership", "An executable plan with named owners and handoff discipline"],
+const SPONSOR_ADVANTAGES = [
+  ["Recognize execution risk earlier", "Identify fragile ownership, dependencies, and management-capacity gaps before they become post-close surprises."],
+  ["Separate savings from structural risk", "Distinguish addressable cost opportunities from dependencies that must be preserved."],
+  ["Convert findings into owned action", "Give management clear priorities, named owners, and a cadence the sponsor can govern."],
 ];
 
 const OUTCOME_CASES = [
@@ -68,7 +67,7 @@ function recordEvent(name, properties = {}) {
   }
 }
 
-export default function AboutPage() {
+export default function AboutPage({ setPage }) {
   return (
     <div className="about-page fade-in">
       <header className="about-hero">
@@ -108,6 +107,25 @@ export default function AboutPage() {
           <blockquote>“The work should leave management with a stronger operating system—not a dependency on the advisor.”</blockquote>
         </section>
 
+        <section className="about-translation" aria-labelledby="about-translation-title">
+          <div className="about-translation-inner">
+            <div className="about-section-heading">
+              <span className="about-kicker">What changes for the sponsor</span>
+              <h2 id="about-translation-title">Why the operating background matters to a sponsor.</h2>
+              <p>Institutional operating experience becomes useful when it improves the sponsor’s decisions, clarifies ownership, and accelerates execution.</p>
+            </div>
+            <div className="about-sponsor-advantages">
+              {SPONSOR_ADVANTAGES.map(([title, copy], index) => (
+                <article key={title}>
+                  <span>0{index + 1}</span>
+                  <h3>{title}</h3>
+                  <p>{copy}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="about-career" aria-labelledby="about-career-title">
           <div className="about-section-heading">
             <span className="about-kicker">Experience and credentials</span>
@@ -124,26 +142,6 @@ export default function AboutPage() {
               </article>
             ))}
           </div>
-          <div className="about-institution-row" aria-label="Institutional background">
-            <span>Institutional background</span>
-            <strong>JPMorgan</strong><strong>Barclays</strong><strong>Bank of America</strong><strong>Lazard</strong><strong>Columbia MBA</strong>
-          </div>
-        </section>
-
-        <section className="about-translation" aria-labelledby="about-translation-title">
-          <div className="about-section-heading">
-            <span className="about-kicker">What changes for the sponsor</span>
-            <h2 id="about-translation-title">Operating experience, translated into investment judgment.</h2>
-            <p>The value of the background is not the résumé. It is the ability to recognize the operating pattern, frame its PE consequence, and stay accountable through implementation.</p>
-          </div>
-          <div className="about-translation-table" role="table" aria-label="How operating experience translates into sponsor value">
-            <div className="about-translation-head" role="row"><span role="columnheader">Operating experience</span><span role="columnheader">Advisor judgment</span><span role="columnheader">Sponsor receives</span></div>
-            {OPERATING_TRANSLATIONS.map(([experience, judgment, sponsor]) => (
-              <div className="about-translation-row" role="row" key={experience}>
-                <strong role="cell">{experience}</strong><span role="cell">{judgment}</span><span role="cell">{sponsor}</span>
-              </div>
-            ))}
-          </div>
         </section>
 
         <section className="about-outcomes" aria-labelledby="about-outcomes-title">
@@ -151,7 +149,7 @@ export default function AboutPage() {
             <div className="about-section-heading">
               <span className="about-kicker">Representative institutional outcomes</span>
               <h2 id="about-outcomes-title">Measured operating outcomes behind the advisory method.</h2>
-              <p>These are experience-based outcomes from Hassan’s institutional operating career—not Devonshire client case studies.</p>
+              <p>Operating systems built and pressure-tested through Hassan’s institutional operating career.</p>
             </div>
             <div className="about-outcome-grid">
               {OUTCOME_CASES.map((outcome) => (
@@ -182,7 +180,7 @@ export default function AboutPage() {
 
         <section className="about-final-cta">
           <div><span className="about-kicker">A focused first conversation</span><h2>Bring the operating question behind the deal.</h2><p>In 15 minutes, I can confirm the stage, operating trigger, and whether Devonshire is the right fit.</p></div>
-          <div><a href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => recordEvent("about_fit_check_click")}>Book a Fit Check (15 min)</a><a href="/pe/services" onClick={() => recordEvent("about_services_click")}>View Services</a></div>
+          <div><a href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => recordEvent("about_fit_check_click")}>Book a Fit Check (15 min)</a><a href="/pe/services#offers" onClick={(event) => { recordEvent("about_services_click"); if (setPage) { event.preventDefault(); setPage("services", "offers"); } }}>View Engagement Options</a></div>
         </section>
       </div>
     </div>
