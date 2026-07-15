@@ -381,7 +381,7 @@ function MarketBand() {
           <div><strong>52%</strong><p>of buyout-backed inventory — the highest share on record</p></div>
           <div><strong>6.6 yrs</strong><p>average holding period — every quarter of drift compounds</p></div>
         </div>
-        <a className="market-source" href="https://www.mckinsey.com/industries/private-capital/our-insights/global-private-markets-report/private-equity" target="_blank" rel="noopener noreferrer">— McKinsey Global Private Markets Report 2026 ↗</a>
+        <a className="market-source" href="https://www.mckinsey.com/industries/private-capital/our-insights/global-private-markets-report/private-equity" target="_blank" rel="noopener noreferrer">— McKinsey Global Private Markets Review 2026 ↗</a>
       </div>
     </section>
   );
