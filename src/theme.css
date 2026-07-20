@@ -341,7 +341,10 @@ footer button[type='submit'] { background: var(--claret) !important; border-radi
 #engagements-home .offer-price{font-size:30px!important}
 #engagements-home .offer-timing{margin:8px 0 18px;color:#303236!important}
 #engagements-home .offer-commercial>p{color:#303236!important;margin:0 0 20px}
+#engagements-home .offer-commercial>.offer-buyer-question{margin-bottom:12px!important;color:var(--ink)!important;font:600 18px/1.42 var(--serif)!important}
+#engagements-home .offer-commercial>.offer-integration-note{margin:-4px 0 22px!important;padding:11px 13px;border-left:3px solid var(--claret);background:rgba(110,31,46,.055);font-size:14px!important;line-height:1.5!important}
 #engagements-home .offer-deliverables{display:flex;flex:1;flex-direction:column}
+#engagements-home .offer-receives-label{display:block;margin:0 0 9px;color:var(--claret);font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
 #engagements-home .offer-deliverables ul{list-style:none;margin:0 0 28px;padding:0}
 #engagements-home .offer-deliverables li{font-size:15px!important;line-height:1.5!important;padding:11px 0 11px 22px;border-top:1px solid var(--line)}
 #engagements-home .offer-deliverables li::before{content:'';position:absolute;left:0;top:1.05em;width:11px;height:1px;background:var(--claret)}
@@ -620,6 +623,10 @@ footer .footer-tagline{
 .services-page .pricing-card .price,.services-page .pricing-card [class*="price"]{font-size:25px!important;color:var(--ink)!important}
 .services-page .pricing-card .price{margin-bottom:4px!important}
 .services-page .pricing-card .price-detail{margin:0 0 15px;color:var(--ink)!important;font-family:var(--sans);font-size:15px!important;line-height:1.45!important}
+.services-page .pricing-buyer-question{margin:0 0 10px!important;color:var(--ink)!important;font:600 18px/1.42 var(--serif)!important}
+.services-page .pricing-purpose{margin:0 0 16px!important;font-size:15px!important;line-height:1.55!important}
+.services-page .pricing-integration-note{margin:0 0 17px!important;padding:11px 13px;border-left:3px solid var(--claret);background:rgba(110,31,46,.055);font-size:14px!important;line-height:1.5!important}
+.services-page .path-buyer-question{margin:0 0 10px!important;color:var(--ink)!important;font:600 17px/1.42 var(--serif)!important}
 .services-page .path-cards-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:0!important;border:1px solid #d7d7d4}
 .services-page .path-card{border:0!important;border-left:1px solid #d7d7d4!important;border-radius:0!important;box-shadow:none!important}
 .services-page .path-card:first-child{border-left:0!important}
@@ -766,15 +773,15 @@ footer .footer-tagline{
 .services-page #offers .section-wrapper{padding-top:48px!important;padding-bottom:44px!important}
 .services-page .pricing-grid{gap:14px!important;margin-bottom:16px!important}
 .services-page .pricing-card{min-width:0!important;padding:24px 25px!important}
-.services-page .pricing-card:nth-child(4){grid-column:1/-1;display:grid!important;grid-template-columns:minmax(260px,.85fr) minmax(420px,1.5fr);grid-template-rows:auto auto auto 1fr;column-gap:48px;align-items:start;border-left:4px solid var(--claret)!important}
-.services-page .pricing-card:nth-child(4)>span,.services-page .pricing-card:nth-child(4)>h2,.services-page .pricing-card:nth-child(4)>.price,.services-page .pricing-card:nth-child(4)>.price-detail{grid-column:1}
-.services-page .pricing-card:nth-child(4)>ul{grid-column:2;grid-row:1/5;margin:0!important;padding:0 0 0 38px!important;border-left:1px solid #d7d7d4}
+.services-page .pricing-card:nth-child(4){grid-column:1/-1;display:grid!important;grid-template-columns:minmax(260px,.85fr) minmax(420px,1.5fr);grid-template-rows:auto auto auto auto auto 1fr;column-gap:48px;align-items:start;border-left:4px solid var(--claret)!important}
+.services-page .pricing-card:nth-child(4)>span,.services-page .pricing-card:nth-child(4)>h2,.services-page .pricing-card:nth-child(4)>.price,.services-page .pricing-card:nth-child(4)>.price-detail,.services-page .pricing-card:nth-child(4)>.pricing-buyer-question,.services-page .pricing-card:nth-child(4)>.pricing-purpose{grid-column:1}
+.services-page .pricing-card:nth-child(4)>ul{grid-column:2;grid-row:1/7;margin:0!important;padding:0 0 0 38px!important;border-left:1px solid #d7d7d4}
 .services-page .pricing-card:nth-child(4)>div:last-child{grid-column:2;padding-left:38px;margin-top:18px!important}
 .services-page .pricing-card ul{list-style:none!important;padding-left:0!important}
 .services-page .pricing-card li{position:relative;padding-left:25px!important;margin-bottom:11px!important}
 .services-page .pricing-card li::marker{content:''}
 .services-page .pricing-card li::before{content:''!important;position:absolute;left:0;top:.78em;width:11px;height:1px;background:var(--claret)}
-.offer-details-toggle{display:none}.services-page .section-wrapper>p.standalone-playbook-note{margin:0!important;padding:13px 16px;border-left:3px solid var(--claret);background:#f3f1ee;color:#303236!important;font-size:16px!important;line-height:1.5!important}.standalone-playbook-note strong{color:var(--claret)}
+.offer-details-toggle{display:none}.services-page .standalone-playbook-note{display:grid;gap:8px;margin:0!important;padding:20px 22px;border-left:3px solid var(--claret);background:#f3f1ee;color:#303236!important;font-size:16px!important;line-height:1.5!important}.standalone-playbook-note>strong{display:block;color:var(--claret);font-size:18px}.standalone-playbook-note>span{display:block;color:var(--ink);font:600 17px/1.42 var(--serif)}.services-page .standalone-playbook-note p{margin:0!important;font-size:15px!important;line-height:1.55!important}.standalone-playbook-note p strong{color:var(--claret)}
 
 /* Quote band uses the same white + claret hierarchy as the homepage market band. */
 .services-page .mckinsey-quote{text-align:left!important;padding-top:96px!important;padding-bottom:102px!important}

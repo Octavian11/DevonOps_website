@@ -582,13 +582,15 @@ export function OfferCards({ setPage }) {
 
   const pathLeft = {
     title: "Evaluating a Target",
-    description: "Decision-useful operational diligence designed for the IC and the ownership transition.",
-    items: ["Execution Risk Memo", "Evidence requests + severity-rated findings", "Day-1 Critical Path—decisions, owners, dependencies + immediate actions"]
+    question: OFFERS.executionRiskReview.buyerQuestion,
+    description: OFFERS.executionRiskReview.purpose,
+    items: ["Execution Risk Memo + Execution Risk Scorecard", "Targeted Evidence Request List", "Day-1 Critical Path + Day-1 to Day-100 Priority Map"]
   };
   const pathRight = {
     title: "First 100 Days Post-Close",
-    description: "Install a governance baseline so value creation isn't blocked by instability.",
-    items: ["Incident command (severity model, escalation, postmortems)", "Change governance (CAB-lite, risk classification, rollback discipline)", "KPI cadence (weekly operating reviews + board-ready pack)"],
+    question: OFFERS.operatingDesign.buyerQuestion,
+    description: OFFERS.operatingDesign.purpose,
+    items: OFFERS.operatingDesign.deliverables,
   };
 
   const pathAddon = {
@@ -614,6 +616,7 @@ export function OfferCards({ setPage }) {
           <div className="path-cards-grid" style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap" }}>
             <div className="path-card" style={{ flex: "1 1 260px", minWidth: "min(240px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
               <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{pathLeft.title}</div>
+              <p className="path-buyer-question">{pathLeft.question}</p>
               <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{pathLeft.description}</p>
               <ul style={{ paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
                 {pathLeft.items.map((item, i) => (
@@ -626,6 +629,7 @@ export function OfferCards({ setPage }) {
             </div>
             <div className="path-card" style={{ flex: "1 1 260px", minWidth: "min(240px, 100%)", border: `1px solid ${COLORS.border}`, borderTop: `3px solid ${COLORS.navy}`, borderRadius: RADIUS.lg, padding: "24px", background: COLORS.white, boxShadow: SHADOWS.sm, display: "flex", flexDirection: "column" }}>
               <div style={{ fontFamily: FONTS.heading, fontSize: "1rem", fontWeight: 700, color: COLORS.navy, marginBottom: "10px" }}>{pathRight.title}</div>
+              <p className="path-buyer-question">{pathRight.question}</p>
               <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.6, marginBottom: "12px" }}>{pathRight.description}</p>
               <ul style={{ paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
                 {pathRight.items.map((item, i) => (
@@ -663,12 +667,11 @@ export function OfferCards({ setPage }) {
           <SectionTitle sub>{OFFERS.executionRiskReview.name}</SectionTitle>
           <div className="price" style={tag}>{OFFERS.executionRiskReview.price}</div>
           <div className="price-detail">{OFFERS.executionRiskReview.timing}</div>
+          <p className="pricing-buyer-question">{OFFERS.executionRiskReview.buyerQuestion}</p>
+          <p className="pricing-purpose">{OFFERS.executionRiskReview.purpose}</p>
           <button className="offer-details-toggle" aria-expanded={!!mobileDetails.review} aria-controls="review-deliverables" onClick={() => toggleDetails("review")}>View deliverables <span>{mobileDetails.review ? "−" : "+"}</span></button>
           <ul id="review-deliverables" className={`offer-deliverables-list${mobileDetails.review ? " open" : ""}`} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0 }}>
-            <li style={li}>Execution Risk Memo</li>
-            <li style={li}>Evidence requests + severity-rated findings</li>
-            <li style={li}>Day-1 Critical Path—decisions, owners, dependencies + immediate actions</li>
-            <li style={li}>100-day priority map</li>
+            {OFFERS.executionRiskReview.deliverables.map((item) => <li key={item} style={li}>{item}</li>)}
           </ul>
           <div style={{ marginTop: "16px" }}>
             <button className="card-text-link" onClick={() => { track("pricing_cta", { offer: OFFERS.executionRiskReview.key, destination: "scorer" }); setPage ? setPage("scorer") : window.location.assign("/pe/scorer"); }}>Score Your Deal →</button>
@@ -679,12 +682,13 @@ export function OfferCards({ setPage }) {
           <span style={segLabel}>LOI → Day 100</span>
           <SectionTitle sub>{OFFERS.diligenceToExecution.name}</SectionTitle>
           <div className="price" style={tag}>{OFFERS.diligenceToExecution.price}</div>
-          <div className="price-detail">{OFFERS.diligenceToExecution.primaryDeliverable}</div>
+          <div className="price-detail">{OFFERS.diligenceToExecution.timing}</div>
+          <p className="pricing-buyer-question">{OFFERS.diligenceToExecution.buyerQuestion}</p>
+          <p className="pricing-purpose">{OFFERS.diligenceToExecution.purpose}</p>
+          <p className="pricing-integration-note"><strong>Integrated mandate:</strong> {OFFERS.diligenceToExecution.integrationNote}</p>
           <button className="offer-details-toggle" aria-expanded={!!mobileDetails.mandate} aria-controls="mandate-deliverables" onClick={() => toggleDetails("mandate")}>View deliverables <span>{mobileDetails.mandate ? "−" : "+"}</span></button>
           <ul id="mandate-deliverables" className={`offer-deliverables-list${mobileDetails.mandate ? " open" : ""}`} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
-            <li style={li}>Execution Risk Memo + Scorecard</li>
-            <li style={li}>Day-1 Readiness Plan + 100-Day Operating Playbook</li>
-            <li style={li}>Ownership, milestones + operating cadence</li>
+            {OFFERS.diligenceToExecution.deliverables.map((item) => <li key={item} style={li}>{item}</li>)}
           </ul>
           <div style={{ marginTop: "16px" }}>
             <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => track("pricing_cta", { offer: OFFERS.diligenceToExecution.key, destination: "calendly" })}>Book a Fit Check (15 min) →</a>
@@ -696,11 +700,11 @@ export function OfferCards({ setPage }) {
           <SectionTitle sub>{OFFERS.operatingControlSprint.name}</SectionTitle>
           <div className="price" style={tag}>{OFFERS.operatingControlSprint.price}</div>
           <div className="price-detail">{OFFERS.operatingControlSprint.timing}</div>
+          <p className="pricing-buyer-question">{OFFERS.operatingControlSprint.buyerQuestion}</p>
+          <p className="pricing-purpose">{OFFERS.operatingControlSprint.purpose}</p>
           <button className="offer-details-toggle" aria-expanded={!!mobileDetails.sprint} aria-controls="sprint-deliverables" onClick={() => toggleDetails("sprint")}>View deliverables <span>{mobileDetails.sprint ? "−" : "+"}</span></button>
           <ul id="sprint-deliverables" className={`offer-deliverables-list${mobileDetails.sprint ? " open" : ""}`} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
-            <li style={li}>One operating control or integration capability, fully installed</li>
-            <li style={li}>Working governance + ownership map</li>
-            <li style={li}>Capability Transfer Pack</li>
+            {OFFERS.operatingControlSprint.deliverables.map((item) => <li key={item} style={li}>{item}</li>)}
           </ul>
           <div style={{ marginTop: "16px" }}>
             <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => track("pricing_cta", { offer: OFFERS.operatingControlSprint.key, destination: "calendly" })}>Book a Fit Check (15 min) →</a>
@@ -712,11 +716,11 @@ export function OfferCards({ setPage }) {
           <SectionTitle sub>{OFFERS.postCloseControlTower.name}</SectionTitle>
           <div className="price" style={tag}>{OFFERS.postCloseControlTower.price}</div>
           <div className="price-detail">{OFFERS.postCloseControlTower.timing}</div>
+          <p className="pricing-buyer-question">{OFFERS.postCloseControlTower.buyerQuestion}</p>
+          <p className="pricing-purpose">{OFFERS.postCloseControlTower.purpose}</p>
           <button className="offer-details-toggle" aria-expanded={!!mobileDetails.tower} aria-controls="tower-deliverables" onClick={() => toggleDetails("tower")}>View deliverables <span>{mobileDetails.tower ? "−" : "+"}</span></button>
           <ul id="tower-deliverables" className={`offer-deliverables-list${mobileDetails.tower ? " open" : ""}`} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, paddingLeft: "18px", margin: 0, flexGrow: 1 }}>
-            <li style={li}>Sponsor Operating Pack + Control Tower Dashboard</li>
-            <li style={li}>Weekly review + decision and action register</li>
-            <li style={li}>Risk watchlist + monthly board-readiness pack</li>
+            {OFFERS.postCloseControlTower.deliverables.map((item) => <li key={item} style={li}>{item}</li>)}
           </ul>
           <div style={{ marginTop: "16px" }}>
             <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => track("pricing_cta", { offer: OFFERS.postCloseControlTower.key, destination: "calendly" })}>Book a Fit Check (15 min) →</a>
@@ -724,7 +728,13 @@ export function OfferCards({ setPage }) {
         </div>
       </div>
 
-      <p className="standalone-playbook-note"><strong>{OFFERS.operatingDesign.name}:</strong> {OFFERS.operatingDesign.price}; produces the 100-Day Operating Playbook. <strong>Continuity Credit:</strong> 100% of the Execution Risk Review fee is applied to a Diligence-to-Execution Mandate commissioned before close or within 30 days after close.</p>
+      <aside className="standalone-playbook-note" aria-labelledby="operating-design-title">
+        <strong id="operating-design-title">{OFFERS.operatingDesign.name}: {OFFERS.operatingDesign.price}</strong>
+        <span>{OFFERS.operatingDesign.buyerQuestion}</span>
+        <p>{OFFERS.operatingDesign.purpose}</p>
+        <p><strong>What you receive:</strong> {OFFERS.operatingDesign.deliverables.join("; ")}.</p>
+        <p><strong>Continuity Credit:</strong> 100% of the Execution Risk Review fee is applied to a Diligence-to-Execution Mandate commissioned before close or within 30 days after close.</p>
+      </aside>
 
       {!setPage && (
         <aside className="buy-build-use-case" aria-labelledby="buy-build-use-case-title">

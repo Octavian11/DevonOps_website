@@ -477,10 +477,10 @@ function CompactAboutBio({ setPage }) {
 
 function OfferTeaser({ setPage }) {
   const offers = [
-    { ...OFFERS.executionRiskReview, label: "Pre-Close · LOI to Close", description: "For one live deal: determine whether the platform can absorb the acquisition without weakening the core business—or carrying unresolved work into the next deal.", bullets: ["Execution Risk Memo", "Evidence requests + severity-rated findings", "Day-1 Critical Path—decisions, owners, dependencies + immediate actions", "100-day priority map"], action: "score" },
-    { ...OFFERS.diligenceToExecution, label: "LOI → Day 100", description: "Review findings carry directly into the 100-Day Operating Playbook—no reset between diligence and execution. What the platform learns becomes a stronger baseline for the next acquisition.", bullets: ["Execution Risk Memo + Scorecard", "Day-1 Readiness Plan + 100-Day Operating Playbook", "Ownership, milestones + operating cadence"], featured: true },
-    { ...OFFERS.operatingControlSprint, label: "Post-Close · Hands-On", description: "Install one high-priority operating control or integration capability, then transfer ownership to management.", bullets: ["One operating control, fully installed", "Working governance + ownership map", "Capability Transfer Pack"] },
-    { ...OFFERS.postCloseControlTower, label: "Ongoing Hold", description: "Ongoing execution governance and sponsor visibility without permanent operating-partner headcount.", bullets: ["Sponsor Operating Pack + Control Tower Dashboard", "Weekly review + action register", "Risk watchlist + board-readiness pack"] },
+    { ...OFFERS.executionRiskReview, label: "Pre-Close · LOI to Close", bullets: OFFERS.executionRiskReview.homepageDeliverables, action: "score" },
+    { ...OFFERS.diligenceToExecution, label: "LOI → Day 100", bullets: OFFERS.diligenceToExecution.homepageDeliverables, featured: true },
+    { ...OFFERS.operatingControlSprint, label: "Post-Close · Hands-On", bullets: OFFERS.operatingControlSprint.homepageDeliverables },
+    { ...OFFERS.postCloseControlTower, label: "Ongoing Hold", bullets: OFFERS.postCloseControlTower.homepageDeliverables },
   ];
   return (
     <Section title="Pick the track that matches your deal stage." noCTA id="engagements-home">
@@ -501,8 +501,8 @@ function OfferTeaser({ setPage }) {
           <article key={i} className={`home-offer${o.featured ? " featured" : ""}`}>
             {o.featured && <span className="offer-recommended">Recommended</span>}
             <div className="offer-identity"><div className="offer-stage">{o.label}</div><h3>{o.name}</h3></div>
-            <div className="offer-commercial"><div className="offer-price">{o.price}</div><div className="offer-timing">{o.timing}</div><p>{o.description}</p></div>
-            <div className="offer-deliverables"><ul>{o.bullets.map(b => <li key={b}>{b}</li>)}</ul>
+            <div className="offer-commercial"><div className="offer-price">{o.price}</div><div className="offer-timing">{o.timing}</div><p className="offer-buyer-question">{o.buyerQuestion}</p><p>{o.purpose}</p>{o.integrationNote && <p className="offer-integration-note">{o.integrationNote}</p>}</div>
+            <div className="offer-deliverables"><span className="offer-receives-label">What you receive</span><ul>{o.bullets.map(b => <li key={b}>{b}</li>)}</ul>
               {o.action === "score" ? <button className="editorial-link" onClick={() => { track("pricing_cta", { offer:o.key, destination:"scorer" }); setPage("scorer"); }}>Score Your Deal →</button> : <a className="editorial-link" href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => track("pricing_cta", { offer:o.key, destination:"calendly" })}>Book a Fit Check (15 min) →</a>}
             </div>
           </article>
