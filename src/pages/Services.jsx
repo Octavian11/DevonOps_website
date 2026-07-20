@@ -441,7 +441,7 @@ export default function ServicesPage({ setPage }) {
       <MethodSpine />
       <div id="levers"><LeverExplorerSection setPage={setPage} /></div>
       <aside className="services-market-note" aria-label="Private-equity value-creation research">
-        <p><span><strong>53%</strong> of LPs rank value creation among their top-five manager-selection criteria, ahead of sector expertise.</span><a href="https://www.mckinsey.com/industries/private-capital/our-insights/global-private-markets-report/private-equity" target="_blank" rel="noopener noreferrer">McKinsey Global Private Markets Review 2026 ↗</a></p>
+        <p><span><strong className="market-stat market-highlight">53%</strong> of LPs rank value creation among their <strong className="market-highlight">top-five</strong> manager-selection criteria, ahead of sector expertise.</span><a href="https://www.mckinsey.com/industries/private-capital/our-insights/global-private-markets-report/private-equity" target="_blank" rel="noopener noreferrer">McKinsey Global Private Markets Review 2026 ↗</a></p>
       </aside>
       <div id="offers"><OfferCards /></div>
       <IllustrativeWorkProduct />
