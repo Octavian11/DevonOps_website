@@ -705,19 +705,8 @@ footer .footer-tagline{
 .sample-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.sample-card{margin:0;border:1px solid #d7d7d4;background:#fff;transition:transform 180ms ease,border-color 180ms ease,box-shadow 180ms ease}.sample-card figcaption{padding:15px 17px;color:#303236;font-size:16px;line-height:1.5;border-top:1px solid #d7d7d4}
 .services-page .mckinsey-source{display:inline-block;margin-top:16px;color:var(--rose)!important;font-size:15px!important;font-weight:700;letter-spacing:.13em;text-decoration:none;text-transform:uppercase;border-bottom:1px solid var(--rose);padding-bottom:3px}
 
-/* Sponsor-facing deliverables appear before commercial options. */
-.sponsor-outputs-intro{max-width:760px!important;margin:0 0 34px!important}
-.sponsor-output-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border:1px solid #bfc0c1;background:#fff}
-.sponsor-output-card{position:relative;min-height:220px;padding:30px 32px;border-left:1px solid #d7d7d4;border-top:1px solid #d7d7d4}
-.sponsor-output-card:nth-child(odd){border-left:0}.sponsor-output-card:nth-child(-n+2){border-top:0}
-.sponsor-output-card>span{display:block;margin-bottom:16px;color:var(--claret);font-size:12px;font-weight:800;letter-spacing:.14em}
-.sponsor-output-card h3{margin:0 0 13px;color:var(--ink)!important;font:600 27px/1.12 var(--serif)!important}
-.sponsor-output-card>strong{display:block;margin-bottom:8px;color:var(--claret);font-size:16px;line-height:1.4}
-.services-page .section-wrapper .sponsor-output-card p{margin:0!important;color:#303236!important;font-size:16px!important;line-height:1.6!important}
-.sponsor-output-samples{display:flex;align-items:end;justify-content:space-between;gap:40px;margin-top:26px;padding:24px 0;border-top:2px solid var(--claret);border-bottom:1px solid #bfc0c1}
-.sponsor-output-samples>div:first-child{max-width:540px}.sponsor-output-samples .editorial-label{display:block;margin-bottom:6px}
-.services-page .section-wrapper .sponsor-output-samples p{margin:0!important;font-size:16px!important}
-.sponsor-output-samples>div:last-child{justify-content:flex-end;margin:0!important}
+/* Work-product proof remains separate from the offer-scope explanation. */
+.work-product-proof{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:42px;padding:28px 0;border-top:2px solid var(--claret);border-bottom:1px solid #bfc0c1}.work-product-proof>div:first-child{max-width:650px}.work-product-proof .editorial-label{display:block;margin-bottom:8px}.work-product-proof h3{margin:0 0 10px;color:var(--ink)!important;font:600 27px/1.18 var(--serif)!important}.services-page .section-wrapper .work-product-proof p{margin:0!important;font-size:16px!important;line-height:1.6!important}.services-page .section-wrapper .work-product-proof .work-product-note{margin-top:12px!important;padding-left:14px;border-left:3px solid var(--claret);color:#55585c!important;font-size:14px!important;line-height:1.5!important}.work-product-proof>div:last-child{justify-content:flex-end;margin:0!important}
 .sample-toggle{display:block;margin:18px 0 16px;padding:9px 17px;border:1px solid #bfc0c1;background:#fff;cursor:pointer}
 
 /* The About page translates the operating background into three sponsor advantages. */
@@ -729,7 +718,7 @@ footer .footer-tagline{
 .about-sponsor-advantages p{margin:0;color:#303236;font-size:17px;line-height:1.6}
 
 @media(max-width:700px){
-  .sponsor-output-grid{grid-template-columns:1fr}.sponsor-output-card,.sponsor-output-card:nth-child(odd),.sponsor-output-card:nth-child(-n+2){min-height:0;padding:25px 21px;border-left:0;border-top:1px solid #d7d7d4}.sponsor-output-card:first-child{border-top:0}.sponsor-output-samples{display:block}.sponsor-output-samples>div:last-child{justify-content:flex-start;margin-top:16px!important}
+  .work-product-proof{grid-template-columns:1fr;align-items:start;gap:20px;padding:24px 0}.work-product-proof>div:last-child{justify-content:flex-start;margin-top:0!important}
   .about-sponsor-advantages{grid-template-columns:1fr}.about-sponsor-advantages article{min-height:0;padding:25px 0;border-left:0;border-top:1px solid #bfc0c1}.about-sponsor-advantages article:first-child{border-top:0}.about-sponsor-advantages article>span{margin-bottom:12px}
 }
 
@@ -744,7 +733,7 @@ footer .footer-tagline{
 .about-translation .about-sponsor-advantages h3,.about-translation .about-sponsor-advantages p{color:#fff}
 
 /* Anchored route destinations clear the sticky navigation. */
-#method,#levers,#outputs,#offers,#process,#faq,#operating-translation{scroll-margin-top:96px}
+#method,#levers,#work-product,#offers,#process,#faq,#operating-translation{scroll-margin-top:96px}
 
 @media(max-width:1000px){.about-translation-inner{padding:76px 32px}}
 @media(max-width:700px){

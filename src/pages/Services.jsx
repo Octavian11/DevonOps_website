@@ -156,36 +156,21 @@ function OperatingTranslation() {
   );
 }
 
-function WhatSponsorReceives() {
+function IllustrativeWorkProduct() {
   const [open, setOpen] = useState(false);
-  const outputs = [
-    ["Execution Risk Memo", "What could impair the investment thesis?", "Material findings, supporting evidence, investment implications, and recommended actions."],
-    ["Execution Risk Scorecard", "Where is exposure concentrated?", "A severity and investment-impact view across six operating domains."],
-    ["Day-1 Critical Path", "What must be ready before close?", "The decisions, owners, dependencies, and immediate actions that must be ready before close."],
-    ["100-Day Operating Playbook", "What must management own?", "Sequenced initiatives, milestones, KPIs, and an operating cadence management can sustain."],
-  ];
   const samples = [
-    { src: "/memo-samples/execution-risk-scorecard-preview.png", width:1200, height:900, alt: "Illustrative Execution Risk Scorecard executive summary", caption: "Execution Risk Scorecard — executive risk summary and six-domain findings" },
-    { src: "/memo-samples/100-day-operating-playbook-preview.png", width:1200, height:900, alt: "Illustrative 100-Day Operating Playbook execution architecture", caption: "100-Day Operating Playbook — Visibility → Control → Cadence" },
+    { src: "/memo-samples/execution-risk-scorecard-preview.png", width:1200, height:900, alt: "Illustrative Execution Risk Scorecard executive summary", caption: "Execution Risk Scorecard: executive risk summary and six-domain findings" },
+    { src: "/memo-samples/100-day-operating-playbook-preview.png", width:1200, height:900, alt: "Illustrative 100-Day Operating Playbook execution architecture", caption: "100-Day Operating Playbook: Visibility to Control to Cadence" },
   ];
 
   return (
-    <Section noCTA background={`${COLORS.navy}03`} title="What the Sponsor Receives" id="outputs">
-      <p className="sponsor-outputs-intro">The work converts operating evidence into decision-ready outputs for the IC, management team, and board.</p>
-      <div className="sponsor-output-grid">
-        {outputs.map(([title, question, copy], index) => (
-          <article className="sponsor-output-card" key={title}>
-            <span>0{index + 1}</span>
-            <h3>{title}</h3>
-            <strong>{question}</strong>
-            <p>{copy}</p>
-          </article>
-        ))}
-      </div>
-      <div className="sponsor-output-samples">
+    <Section noCTA background={`${COLORS.navy}03`} title="Illustrative Work Product" id="work-product">
+      <div className="work-product-proof">
         <div>
-          <span className="editorial-label">Illustrative work product</span>
-          <p>Review the format and level of specificity used in the Scorecard and 100-Day Playbook.</p>
+          <span className="editorial-label">Representative formats</span>
+          <h3>See how operating evidence becomes a sponsor-ready decision tool.</h3>
+          <p>Review the format and level of specificity used in the Execution Risk Scorecard and 100-Day Operating Playbook.</p>
+          <p className="work-product-note">These are illustrative excerpts, not the complete deliverable set for every engagement. The Engagement Options section defines the scope of each offer.</p>
         </div>
         <ServicesSamplesRow />
       </div>
@@ -455,8 +440,8 @@ export default function ServicesPage({ setPage }) {
       <OperatingTranslation />
       <MethodSpine />
       <div id="levers"><LeverExplorerSection setPage={setPage} /></div>
-      <WhatSponsorReceives />
       <div id="offers"><OfferCards /></div>
+      <IllustrativeWorkProduct />
       <HowItWorks />
       <aside className="services-market-note" aria-label="Private-equity value-creation research">
         <p><span><strong>53%</strong> of LPs rank value creation among their top-five manager-selection criteria—above sector expertise.</span><a href="https://www.mckinsey.com/industries/private-capital/our-insights/global-private-markets-report/private-equity" target="_blank" rel="noopener noreferrer">McKinsey Global Private Markets Review 2026 ↗</a></p>
