@@ -605,7 +605,7 @@ footer .footer-tagline{
 .services-market-note{width:100vw;margin-left:calc(50% - 50vw);padding:25px max(36px,calc((100vw - 1168px)/2));background:var(--ink);border-top:6px solid var(--claret);border-bottom:1px solid rgba(255,255,255,.22);box-sizing:border-box}
 .services-market-note p{display:flex;align-items:baseline;justify-content:space-between;gap:24px;max-width:1168px;margin:0!important;color:#fff!important;font-size:16px!important;line-height:1.55!important}
 .services-market-note p>span,.services-market-note a{white-space:nowrap}
-.services-market-note .market-highlight{color:var(--claret);font-weight:800}
+.services-market-note .market-highlight{color:var(--rose);font-weight:800}
 .services-market-note .market-stat{font:700 25px/1 var(--serif)}
 .services-market-note a{color:#fff;font-weight:700;text-decoration:none;border-bottom:2px solid var(--claret);padding-bottom:3px}
 .services-market-note a:hover{color:var(--rose);border-bottom-color:var(--rose)}
