@@ -492,7 +492,7 @@ export function LeadMagnetLink({ pdfUrl, children, variant = "link", style: extr
         <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, marginBottom: "12px", fontWeight: 600 }}>
           Enter your email to download: <strong>{children}</strong>
         </p>
-        <form onSubmit={handleSubmit} noValidate style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+        <form onSubmit={handleSubmit} noValidate data-clarity-mask="True" style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <label htmlFor={`${fieldId}-name`} style={{ fontFamily: FONTS.body, color: COLORS.charcoal, fontSize: "0.9rem", fontWeight: 600 }}>Name <span style={{ fontWeight: 400 }}>(optional)</span></label>
           <input
             id={`${fieldId}-name`}
@@ -1115,7 +1115,7 @@ function FooterLeadCapture() {
       <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: `${COLORS.offWhite}B0`, lineHeight: 1.55, marginBottom: "14px" }}>
         Share your situation and I'll reply with fit and next steps.
       </p>
-      <form className="footer-form" onSubmit={submit} noValidate style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+      <form className="footer-form" onSubmit={submit} noValidate data-clarity-mask="True" style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
         <label className="footer-field-label" htmlFor="footer-situation">Situation</label>
         <select id="footer-situation" value={situation} onChange={e => setSituation(e.target.value)} style={inputStyle}>
           <option>Evaluating a target</option>
@@ -1212,6 +1212,9 @@ export function Footer({ setPage }) {
         <p style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.offWhite, opacity: 0.7, margin: 0 }}>
           NDA-friendly. Minimal data handling. Anonymized formats accepted.
         </p>
+        <a href="/pe/privacy" onClick={(e) => { e.preventDefault(); setPage("privacy"); }} style={{ fontFamily: FONTS.body, fontSize: "0.8rem", color: COLORS.offWhite, textDecoration: "underline", textUnderlineOffset: "3px" }}>
+          Privacy &amp; analytics choices
+        </a>
       </div>
     </footer>
   );

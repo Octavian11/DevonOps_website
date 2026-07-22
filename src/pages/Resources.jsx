@@ -126,7 +126,7 @@ function ResourceGate({ asset, onClose }) {
           <p role="status" aria-live="polite">{message}</p>
         </div>
       ) : (
-        <form className="resource-gate-form" onSubmit={submit} noValidate>
+        <form className="resource-gate-form" onSubmit={submit} noValidate data-clarity-mask="True">
           <label htmlFor="resource-name">Name <span>Optional</span></label>
           <input id="resource-name" name="name" autoComplete="name" value={name} onChange={(event) => setName(event.target.value)} />
           <label htmlFor="resource-email">Work email</label>
