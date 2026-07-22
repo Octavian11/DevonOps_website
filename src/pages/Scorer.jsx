@@ -129,7 +129,7 @@ function ScorerEmailCapture({ rating, score, context, buyerType }) {
           <li>Day-1 priority framing</li>
         </ul>
       </div>
-      <form className="scorer-lead-form" onSubmit={handleSubmit} noValidate>
+      <form className="scorer-lead-form" onSubmit={handleSubmit} noValidate data-clarity-mask="True">
         <label htmlFor="scorer-name">Name <span>Optional</span></label>
         <input id="scorer-name" name="name" type="text" autoComplete="name" value={name} onChange={(event) => setName(event.target.value)} />
         <label htmlFor="scorer-email">Work email</label>

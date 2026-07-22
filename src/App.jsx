@@ -8,9 +8,10 @@ const ServicesPage = lazy(() => import("./pages/Services.jsx"));
 const ScorerPage = lazy(() => import("./pages/Scorer.jsx"));
 const AboutPage = lazy(() => import("./pages/About.jsx"));
 const ResourcesPage = lazy(() => import("./pages/Resources.jsx"));
+const PrivacyPage = lazy(() => import("./pages/Privacy.jsx"));
 
-const VALID_PAGES = ["levers", "services", "scorer", "about", "resources"];
-const PAGE_ANNOUNCEMENTS = { levers: "Home", services: "Services and Method", scorer: "Score Your Deal", about: "About", resources: "Resources" };
+const VALID_PAGES = ["levers", "services", "scorer", "about", "resources", "privacy"];
+const PAGE_ANNOUNCEMENTS = { levers: "Home", services: "Services and Method", scorer: "Score Your Deal", about: "About", resources: "Resources", privacy: "Privacy" };
 
 export default function App() {
   const navigate = useNavigate();
@@ -46,14 +47,16 @@ export default function App() {
       services: "Services, Method & Representative Value-Creation Levers — Devonshire Operations",
       scorer: "How Operationally Ready Is Your Deal? — Devonshire Operations",
       about: "About Hassan Tariq — Devonshire Operations",
-      resources: "Resources & Tools — Devonshire Operations"
+      resources: "Resources & Tools — Devonshire Operations",
+      privacy: "Privacy & Analytics Choices — Devonshire Operations"
     };
     const descriptions = {
       levers: "Operator-led operational diligence and post-close execution for lower-middle-market PE, independent sponsors, and family offices—from LOI through the first 100 days.",
       services: "Fixed-fee operational diligence, Day-1 readiness, and 100-day execution, supported by a proprietary 355-lever research library and PE-fit rubric.",
       scorer: "A two-minute, six-domain assessment to identify possible operating risk in a private-equity deal and focus the next evidence request.",
       about: "Hassan Tariq applies 15+ years of institutional operating experience to lower-middle-market ownership transitions and post-close execution.",
-      resources: "Operational-risk tools, illustrative deliverables, and practical perspectives for private-equity investors."
+      resources: "Operational-risk tools, illustrative deliverables, and practical perspectives for private-equity investors.",
+      privacy: "How Devonshire Operations uses analytics and how visitors can control analytics collection."
     };
     document.title = titles[page] || "Devonshire Operations";
     let meta = document.querySelector('meta[name="description"]');
@@ -140,6 +143,7 @@ export default function App() {
     scorer: <ScorerPage setPage={setPage} />,
     about: <AboutPage setPage={setPage} />,
     resources: <ResourcesPage setPage={setPage} />,
+    privacy: <PrivacyPage />,
   };
 
   return (
