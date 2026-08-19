@@ -22,7 +22,7 @@ function HeroBlockWithNav({ setPage }) {
           Your deal team handles the financials. <em>Who's stress-testing the operations?</em>
         </h1>
         <p className="hero-subheadline" style={{ fontFamily: FONTS.body, color: "rgba(255,255,255,0.94)", lineHeight: 1.7, marginBottom: "24px", maxWidth: "600px" }}>
-          Financial diligence shows what the business earned. I test whether the operating model can deliver the investment thesis—then convert the evidence into an IC-ready risk view, pre-close priorities, and an owned 100-day plan.
+          The investment thesis lives or dies in operations. I test whether the target can deliver the value assumed by the thesis under new ownership—then convert the evidence into an IC-ready risk view, Day-1 priorities, and an owned 100-day plan.
         </p>
 
         <div className="hero-ctas" style={{ display: "flex", gap: "16px", flexWrap: "wrap", alignItems: "flex-start" }}>
@@ -42,6 +42,7 @@ function HeroBlockWithNav({ setPage }) {
           </a>
         </div>
         <div className="hero-availability"><span />Currently accepting 1–2 new engagements</div>
+        <div className="hero-fit-note">15 minutes. Confidential. Built around one live situation.</div>
         </div>
         <div className="hero-visual-panel">
           <div className="hero-photo-slice" aria-hidden="true" />
@@ -96,7 +97,6 @@ function DomainIcon({ code }) {
 function HeroCredStrip() {
   const metrics = [
     { value: "15+", label: "years in institutional platform operations" },
-    { value: "1,500+", label: "companies screened through a buyer's lens" },
     { value: "100+", label: "acquisition targets reviewed" },
     { value: "$2M+", label: "annual vendor savings delivered" },
     { value: "−50%", label: "critical incident reduction" },
@@ -153,7 +153,7 @@ function BuyerSegmentCards({ setPage }) {
     {
       code: "FO",
       title: "Family Offices",
-      pain: "Founder-led businesses often reach new ownership before institutional operating infrastructure is in place.",
+      pain: "Founder-led businesses often reach new ownership before a durable operating model is in place.",
       timing: "Most relevant: acquisition through longer hold",
       items: [
         "Key-person and process-dependency visibility",
@@ -398,7 +398,7 @@ function ObjectionHandlers() {
     <div className="positioning-dark">
     <Section noCTA variant="tinted">
       <div className="editorial-label">Positioning</div>
-      <h2 className="editorial-heading">The operating depth of an institution.<br/>The accountability of a principal.</h2>
+      <h2 className="editorial-heading">Institutional operating depth.<br/>Principal-level accountability.</h2>
       <p className="editorial-intro objection-intro">Different advisory models solve different problems. Devonshire is built for sponsors that need senior operating judgment to continue through implementation.</p>
       <div className="advisory-comparison" role="table" aria-label="Comparison of advisory delivery models">
         <div className="comparison-row comparison-head" role="row"><div role="columnheader">What matters</div><div role="columnheader">Large advisory firm</div><div role="columnheader">Solo generalist</div><div role="columnheader">Devonshire</div></div>
@@ -516,13 +516,13 @@ function OfferTeaser({ setPage }) {
 
 function HomeTrackRecord() {
   const cases = [
-    { label:"Institutional outcome · Platform Stabilization", title:"Critical incidents cut in half", copy:"A $10B+ platform running on verbal escalations and hero culture. Installed severity model, incident command, and KPI cadence.", metrics:[
+    { label:"Selected institutional outcome · Platform Stabilization", title:"Critical incidents cut in half", copy:"A $10B+ platform running on verbal escalations and hero culture. Installed severity model, incident command, and KPI cadence.", metrics:[
       {value:"−50%",label:"critical incidents over 18 months",before:"Prior rate",after:"50% lower"},
       {value:"99.2%",label:"platform availability",before:"94%",after:"99.2%"},
       {value:"−31%",label:"mean time to resolution",before:"Prior MTTR",after:"31% faster"},
       {value:"+22",label:"NPS improvement",before:"38",after:"60"},
     ] },
-    { label:"Institutional outcome · Vendor Optimization", title:"$2M+ out of a $40M vendor program", copy:"Unmanaged vendor sprawl, auto-renewals, and concentration risk. Rebuilt vendor governance, renegotiated licensing, and installed a scorecard cadence.", metrics:[
+    { label:"Selected institutional outcome · Vendor Optimization", title:"$2M+ out of a $40M vendor program", copy:"Unmanaged vendor sprawl, auto-renewals, and concentration risk. Rebuilt vendor governance, renegotiated licensing, and installed a scorecard cadence.", metrics:[
       {value:">$2M",label:"annual run-rate reduction",before:"Prior run rate",after:">$2M lower"},
       {value:"10–15%",label:"licensing savings",before:"Prior cost",after:"10–15% lower"},
       {value:"~28%",label:"cost per $1B AUM reduction",before:"Prior unit cost",after:"28% lower"},
@@ -531,7 +531,7 @@ function HomeTrackRecord() {
   ];
   return <section className="home-track" id="track-record"><div className="home-track-inner">
     <div className="market-kicker"><span>07</span> Track Record &amp; Outcomes</div>
-    <h2>Measured outcomes. Delivered.</h2><p className="track-intro">Operating systems built and pressure-tested at institutional scale—now applied to lower-middle-market deals and portfolio companies.</p>
+    <h2>Measured outcomes. Delivered.</h2><p className="track-intro">Selected institutional operating outcomes—built and pressure-tested in prior roles, then applied to lower-middle-market deals and portfolio companies.</p>
     <div className="home-case-grid">{cases.map(c => <article className="home-case" key={c.title}><div className="case-overline">{c.label}</div><h3>{c.title}</h3><p>{c.copy}</p><div className="home-metrics">{c.metrics.map((m) => <div className="outcome-visual" key={m.label}><div className="outcome-heading"><strong>{m.value}</strong><span>{m.label}</span></div><div className="outcome-change" aria-label={`${m.label}: ${m.before} to ${m.after}`}><span>{m.before}</span><i aria-hidden="true">→</i><span>{m.after}</span></div></div>)}</div></article>)}</div>
     <p className="home-nda">NDA protection is available as standard. Institutional outcome detail and illustrative work-product formats are available on request.</p>
   </div></section>;

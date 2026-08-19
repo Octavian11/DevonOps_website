@@ -149,7 +149,7 @@ export default function AboutPage({ setPage }) {
             <div className="about-section-heading">
               <span className="about-kicker">Representative institutional outcomes</span>
               <h2 id="about-outcomes-title">Measured operating outcomes behind the advisory method.</h2>
-              <p>Operating systems built and pressure-tested through Hassan’s institutional operating career.</p>
+              <p>Selected institutional operating outcomes built and pressure-tested through Hassan’s prior roles—not Devonshire client case studies.</p>
             </div>
             <div className="about-outcome-grid">
               {OUTCOME_CASES.map((outcome) => (

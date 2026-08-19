@@ -30,6 +30,12 @@ const SCORE_LABELS = {
   5: "Well governed",
 };
 
+const RATING_EXPLANATIONS = {
+  stable: "The operating model appears reasonably structured, but targeted diligence may still be warranted around thesis-critical assumptions.",
+  atRisk: "Several operating gaps may require clearer ownership, evidence, or Day-1 planning before close.",
+  critical: "The deal may contain material ownership, capacity, dependency, or control gaps that could create post-close drift or rework.",
+};
+
 function recordEvent(name, properties = {}) {
   try {
     track(name, properties);
@@ -165,7 +171,7 @@ export default function ScorerPage({ setPage }) {
     ? knownDims.reduce((sum, dimension) => sum + scores[dimension.key], 0) / knownDims.length
     : 0;
   const rating = avg >= 4 ? "stable" : avg >= 2.5 ? "atRisk" : "critical";
-  const ratingLabel = { stable: "STABLE", atRisk: "AT RISK", critical: "CRITICAL" }[rating];
+  const ratingLabel = { stable: "LOW VISIBLE RISK", atRisk: "MODERATE EXECUTION RISK", critical: "ELEVATED EXECUTION RISK" }[rating];
   const lowDims = knownDims.filter((dimension) => scores[dimension.key] <= 2);
   const midDims = knownDims.filter((dimension) => scores[dimension.key] === 3);
   const chartData = SCORER_DIMS.map((dimension) => ({
@@ -315,6 +321,7 @@ export default function ScorerPage({ setPage }) {
               <div className="scorer-result-copy">
                 <span className="result-status">{ratingLabel}</span>
                 <div className="result-score"><strong>{avg.toFixed(1)}</strong><span>out of 5</span></div>
+                <p className="result-explanation">{RATING_EXPLANATIONS[rating]}</p>
                 <p>{CONTEXT_CALLOUTS[rating][context]}</p>
                 {buyerType && BUYER_TYPE_FRAMING[buyerType] && <p className="buyer-framing">{BUYER_TYPE_FRAMING[buyerType]}</p>}
                 {unknownDims.length > 0 && <span className="result-coverage">Based on {knownDims.length} scored dimension{knownDims.length === 1 ? "" : "s"}; {unknownDims.length} visibility gap{unknownDims.length === 1 ? "" : "s"} flagged.</span>}

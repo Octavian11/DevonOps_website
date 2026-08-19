@@ -728,12 +728,13 @@ export function OfferCards({ setPage }) {
         </div>
       </div>
 
-      <aside className="standalone-playbook-note" aria-labelledby="operating-design-title">
+      <aside className="standalone-playbook-note continuity-credit-callout" aria-labelledby="operating-design-title">
+        <span className="continuity-credit-kicker">Commercial continuity</span>
         <strong id="operating-design-title">{OFFERS.operatingDesign.name}: {OFFERS.operatingDesign.price}</strong>
         <span>{OFFERS.operatingDesign.buyerQuestion}</span>
         <p>{OFFERS.operatingDesign.purpose}</p>
         <p><strong>What you receive:</strong> {OFFERS.operatingDesign.deliverables.join("; ")}.</p>
-        <p><strong>Continuity Credit:</strong> 100% of the Execution Risk Review fee is applied to a Diligence-to-Execution Mandate commissioned before close or within 30 days after close.</p>
+        <p><strong>Continuity Credit:</strong> Start with diligence and carry the insight into execution. 100% of the Execution Risk Review fee is applied to a Diligence-to-Execution Mandate commissioned before close or within 30 days after close.</p>
       </aside>
 
       {!setPage && (
