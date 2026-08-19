@@ -360,10 +360,13 @@ export function FAQBlock({ variant }) {
     { q: "How long does an Execution Risk Review take?", a: "Typically 2–3 weeks from data receipt to the Execution Risk Memo, assuming standard access to organization, process, KPI, vendor, control, and risk evidence. Expedited timelines may be possible for deals in exclusivity—discuss during the Fit Check." },
     { q: "What if we're still in LOI or haven't entered exclusivity yet?", a: "Earlier is better. A light-touch review can shape the diligence scope and identify the evidence required once access expands. Even limited materials—an organization chart, KPI pack, vendor list, process documentation, and management interviews—can reveal ownership, visibility, and key-person risks." },
     { q: "Do you work with family offices?", a: "Yes. The work is most relevant where a direct-investing family office inherits a founder-led operating model without a dedicated portfolio-operations bench. Depending on the trigger, the starting point may be an Execution Risk Review, an Operating Control Sprint, or a Post-Close Control Tower for longer-hold sponsor visibility." },
+    { q: "When should Devonshire become involved?", a: "Ideally during the LOI-to-close period, before operating assumptions become owned post-close problems." },
+    { q: "Can Devonshire support add-ons?", a: "Yes. Devonshire can assess operating risk, Day-1 readiness, integration capacity, ownership, reporting, and execution governance for add-on acquisitions." },
+    { q: "How much data is required?", a: "Devonshire uses a focused evidence request designed around the operating questions most relevant to the transaction. The objective is a decision-useful view, not a burdensome data-room exercise." },
   ];
 
-  const workingWithMe = faqs.filter((_, i) => [0,1,2,3,4,5,7,10].includes(i));
-  const engagementProcess = faqs.filter((_, i) => [6,8,9].includes(i));
+  const workingWithMe = faqs.filter((_, i) => [0,1,2,3,4,5,7,10,11,12].includes(i));
+  const engagementProcess = faqs.filter((_, i) => [6,8,9,13].includes(i));
 
   const q = { fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.navy, margin: 0, flex: 1 };
   const a = { fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, margin: 0, paddingBottom: "14px" };

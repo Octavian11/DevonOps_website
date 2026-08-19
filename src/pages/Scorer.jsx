@@ -58,6 +58,9 @@ function downloadDeliverable(url, filename, asset, source) {
 function ScorerEmailCapture({ rating, score, context, buyerType }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [firm, setFirm] = useState("");
+  const [role, setRole] = useState("");
+  const [dealStage, setDealStage] = useState(context || "");
   const [status, setStatus] = useState("idle");
   const [message, setMessage] = useState("");
 
@@ -78,6 +81,9 @@ function ScorerEmailCapture({ rating, score, context, buyerType }) {
         body: JSON.stringify({
           name: name || "(not provided)",
           email,
+          firm: firm || "(not provided)",
+          role: role || "(not provided)",
+          deal_stage: dealStage || context,
           scorer_rating: rating,
           scorer_score: score,
           scorer_context: context,
@@ -140,6 +146,15 @@ function ScorerEmailCapture({ rating, score, context, buyerType }) {
         <input id="scorer-name" name="name" type="text" autoComplete="name" value={name} onChange={(event) => setName(event.target.value)} />
         <label htmlFor="scorer-email">Work email</label>
         <input id="scorer-email" name="email" type="email" autoComplete="email" required aria-invalid={status === "error"} aria-describedby="scorer-form-message" value={email} onChange={(event) => { setEmail(event.target.value); if (status === "error") { setStatus("idle"); setMessage(""); } }} />
+        <label htmlFor="scorer-firm">Firm <span>Optional</span></label>
+        <input id="scorer-firm" name="firm" type="text" autoComplete="organization" value={firm} onChange={(event) => setFirm(event.target.value)} />
+        <label htmlFor="scorer-role">Role <span>Optional</span></label>
+        <input id="scorer-role" name="role" type="text" autoComplete="organization-title" value={role} onChange={(event) => setRole(event.target.value)} />
+        <label htmlFor="scorer-deal-stage">Deal stage <span>Optional</span></label>
+        <select id="scorer-deal-stage" name="deal_stage" value={dealStage} onChange={(event) => setDealStage(event.target.value)}>
+          <option value="">Prefer not to say</option>
+          {CONTEXT_OPTIONS.map((option) => <option key={option.key} value={option.key}>{option.label}</option>)}
+        </select>
         <button type="submit" disabled={status === "loading"}>{status === "loading" ? "Submitting…" : "Get the Sample Scorecard →"}</button>
         <p className="scorer-privacy">No spam. Your email is used only to respond to this assessment.</p>
         <p id="scorer-form-message" className={`scorer-form-message ${status}`} role={status === "error" ? "alert" : "status"} aria-live={status === "error" ? "assertive" : "polite"}>{message}</p>
@@ -215,8 +230,8 @@ export default function ScorerPage({ setPage }) {
       <header className="scorer-hero">
         <div className="scorer-hero-inner">
           <span className="scorer-kicker">Two-minute operating assessment</span>
-          <h1>How operationally ready is your deal?</h1>
-          <p>Score six operating domains. Surface where execution risk may be hiding before it reaches the IC, Day 1, or the board.</p>
+          <h1>How exposed is your deal to execution risk?</h1>
+          <p>Answer a short set of questions to identify where operating ownership, management capacity, dependencies, controls, or reporting may be weaker than the investment thesis assumes.</p>
           <div className="scorer-hero-facts" aria-label="Assessment facts"><span>6 dimensions</span><span>2 minutes</span><span>Immediate result</span></div>
         </div>
       </header>
@@ -403,7 +418,7 @@ export default function ScorerPage({ setPage }) {
 
             <section className="scorer-final-cta">
               <div><span className="scorer-kicker">From assessment to action</span><h2>{rating === "stable" ? "Make the operating evidence durable." : "Convert the gaps into an owned operating plan."}</h2></div>
-              <div><a href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => recordEvent("scorer_fit_check_click", { rating, context })}>Book a Fit Check (15 min)</a><button type="button" onClick={() => { recordEvent("scorer_services_click", { rating }); setPage ? setPage("services", "offers") : window.location.assign("/pe/services#offers"); }}>View Engagement Options</button></div>
+              <div><a href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => recordEvent("scorer_fit_check_click", { rating, context })}>Review Your Score with Hassan</a><button type="button" onClick={() => { recordEvent("scorer_services_click", { rating }); setPage ? setPage("services", "offers") : window.location.assign("/pe/services#offers"); }}>View Engagement Options</button></div>
             </section>
           </section>
         )}

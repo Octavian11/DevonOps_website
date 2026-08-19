@@ -158,6 +158,7 @@ export default function ResourcesPage({ setPage }) {
           <p>Assess operating risk, inspect the deliverables, and understand the judgment behind the work—before committing to an engagement.</p>
           <nav className="resources-jump" aria-label="Resources on this page">
             <a href="#tools">Decision tools</a>
+            <a href="#checklists">Checklists</a>
             <a href="#samples">Sample deliverables</a>
             <a href="#perspectives">Perspectives</a>
           </nav>
@@ -183,9 +184,39 @@ export default function ResourcesPage({ setPage }) {
           </div>
         </section>
 
+        <section id="checklists" className="resources-section resources-checklists" aria-labelledby="checklists-title">
+          <div className="resources-heading">
+            <span className="resources-kicker">02 · Practical checklists</span>
+            <h2 id="checklists-title">Use a focused operating discussion guide.</h2>
+            <p>These concise frameworks help a deal team surface the operating questions worth testing. They are not a substitute for company-specific diligence.</p>
+          </div>
+          <div className="resource-checklist-grid">
+            <details className="resource-checklist">
+              <summary><span>Operating Diligence Checklist</span><b>+</b></summary>
+              <ul><li>Thesis-critical operating assumptions translated into evidence requests</li><li>Management capacity, decision rights, and key-person dependencies tested</li><li>Reliability, vendor, control, and reporting exposure made visible</li><li>Findings framed for underwriting, Day 1, and the 100-day plan</li></ul>
+            </details>
+            <details className="resource-checklist">
+              <summary><span>Day 1 Readiness Checklist</span><b>+</b></summary>
+              <ul><li>Named owners for critical services, decisions, and dependencies</li><li>Known continuity protections and escalation paths</li><li>Communications, access, and vendor obligations sequenced</li><li>Open risks carried into an owned 100-day plan</li></ul>
+            </details>
+            <details className="resource-checklist">
+              <summary><span>Buy-and-Build Operating Capacity Check</span><b>+</b></summary>
+              <ul><li>Management capacity against the active acquisition pipeline</li><li>Platform and target ownership before close</li><li>Common reporting definitions and integration standards</li><li>Dependencies that could constrain the next add-on</li></ul>
+            </details>
+            <details className="resource-checklist">
+              <summary><span>Add-On Integration Risk Checklist</span><b>+</b></summary>
+              <ul><li>Day 1 dependencies across people, systems, vendors, and controls</li><li>Decision rights and escalation discipline across both businesses</li><li>Key-person dependencies and knowledge-transfer exposure</li><li>Risks requiring pre-close evidence or post-close ownership</li></ul>
+            </details>
+            <details className="resource-checklist">
+              <summary><span>Sponsor Visibility Dashboard Framework</span><b>+</b></summary>
+              <ul><li>Thesis-linked operating indicators and reporting definitions</li><li>Open decisions, owners, due dates, and escalation status</li><li>Material operating-risk watchlist and evidence status</li><li>Weekly management review and board-readiness cadence</li></ul>
+            </details>
+          </div>
+        </section>
+
         <section id="samples" className="resources-section resources-samples" aria-labelledby="samples-title">
           <div className="resources-heading light">
-            <span className="resources-kicker">02 · Sample deliverables</span>
+            <span className="resources-kicker">03 · Sample deliverables</span>
             <h2 id="samples-title">Inspect the work product.</h2>
             <p>These illustrative samples show the format and decision logic of Devonshire work products. They are based on institutional operating experience—not Devonshire client cases.</p>
           </div>
@@ -198,7 +229,7 @@ export default function ResourcesPage({ setPage }) {
 
         <section id="perspectives" className="resources-section resources-perspectives" aria-labelledby="perspectives-title">
           <div className="resources-heading">
-            <span className="resources-kicker">03 · Perspectives</span>
+            <span className="resources-kicker">04 · Perspectives</span>
             <h2 id="perspectives-title">The operating layer beneath the financials.</h2>
             <p>Practical perspectives on the risks that financial diligence cannot answer—and why the first 100 days matter.</p>
           </div>

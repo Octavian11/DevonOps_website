@@ -147,7 +147,7 @@ export default function AboutPage({ setPage }) {
         <section className="about-outcomes" aria-labelledby="about-outcomes-title">
           <div className="about-outcomes-inner">
             <div className="about-section-heading">
-              <span className="about-kicker">Representative institutional outcomes</span>
+              <span className="about-kicker">Selected institutional outcomes</span>
               <h2 id="about-outcomes-title">Measured operating outcomes behind the advisory method.</h2>
               <p>Selected institutional operating outcomes built and pressure-tested through Hassan’s prior roles—not Devonshire client case studies.</p>
             </div>

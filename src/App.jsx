@@ -85,6 +85,39 @@ export default function App() {
     setNameMeta("twitter:title", titles[page]);
     setNameMeta("twitter:description", descriptions[page]);
     setNameMeta("twitter:image", "https://www.devonshireops.com/img/hero-facade.jpg");
+    const breadcrumbs = page === "levers" ? null : {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.devonshireops.com/pe/" },
+        { "@type": "ListItem", position: 2, name: PAGE_ANNOUNCEMENTS[page], item: absoluteUrl },
+      ],
+    };
+    const pageSchema = page === "services" ? {
+      "@type": "FAQPage",
+      mainEntity: [
+        ["When should Devonshire become involved?", "Ideally during the LOI-to-close period, before operating assumptions become owned post-close problems."],
+        ["Does Devonshire replace financial diligence?", "No. Devonshire complements financial, legal, commercial, tax, and technology diligence by testing whether the operating model can support the value assumed by the investment thesis under new ownership."],
+        ["Does Devonshire work across sectors?", "Yes. Devonshire is sector-flexible and operations-led, with company-specific evidence requests and selected levers."],
+        ["Is implementation included?", "It can be. Devonshire offers both pre-close risk review and continuous diligence-to-execution support through Day 100."],
+        ["Who performs the work?", "Every engagement is led directly by Hassan Tariq."],
+        ["Can Devonshire support add-ons?", "Yes. Devonshire can assess operating risk, Day-1 readiness, integration capacity, ownership, reporting, and execution governance for add-on acquisitions."],
+        ["How much data is required?", "Devonshire uses a focused evidence request designed around the operating questions most relevant to the transaction."],
+      ].map(([name, text]) => ({ "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text } })),
+    } : page === "resources" ? {
+      "@type": "Article",
+      headline: "Why Ops Diligence Is the Most Underpriced Risk in PE",
+      description: "Practical operating-risk tools, illustrative deliverables, and perspectives for private-equity investors.",
+      mainEntityOfPage: absoluteUrl,
+      author: { "@id": "https://www.devonshireops.com/#hassan-tariq" },
+      publisher: { "@id": "https://www.devonshireops.com/#organization" },
+    } : null;
+    const schemaScript = document.createElement("script");
+    schemaScript.id = "devonshire-route-schema";
+    schemaScript.type = "application/ld+json";
+    schemaScript.textContent = JSON.stringify({ "@context": "https://schema.org", "@graph": [breadcrumbs, pageSchema].filter(Boolean) });
+    document.head.querySelector("#devonshire-route-schema")?.remove();
+    document.head.appendChild(schemaScript);
+    return () => schemaScript.remove();
   }, [location.pathname, page]);
 
   useEffect(() => {

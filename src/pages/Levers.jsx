@@ -22,7 +22,7 @@ function HeroBlockWithNav({ setPage }) {
           Your deal team handles the financials. <em>Who's stress-testing the operations?</em>
         </h1>
         <p className="hero-subheadline" style={{ fontFamily: FONTS.body, color: "rgba(255,255,255,0.94)", lineHeight: 1.7, marginBottom: "24px", maxWidth: "600px" }}>
-          The investment thesis lives or dies in operations. I test whether the target can deliver the value assumed by the thesis under new ownership—then convert the evidence into an IC-ready risk view, Day-1 priorities, and an owned 100-day plan.
+          The investment thesis lives or dies in operations. Devonshire tests whether the target can deliver the value assumed by the investment thesis under new ownership—then converts the findings into an IC-ready risk view, Day-1 priorities, and an owned 100-day plan.
         </p>
 
         <div className="hero-ctas" style={{ display: "flex", gap: "16px", flexWrap: "wrap", alignItems: "flex-start" }}>
@@ -48,7 +48,7 @@ function HeroBlockWithNav({ setPage }) {
           <div className="hero-photo-slice" aria-hidden="true" />
           <div className="hero-chart-card">
             <div className="hero-chart-label">The Window Where Value Is Won or Lost</div>
-            <h3>LOI → Close → Day 100</h3>
+            <h3>LOI → Close → Day 1 → Day 30 → Day 100</h3>
             <svg viewBox="0 0 520 226" role="img" aria-label="Operational risk from LOI through Day 100">
               <title>Operational risk from LOI through Day 100</title>
               <desc>Two lines compare operational risk surfaced at LOI and governed down by Day 100 with risk left unexamined and compounding under new ownership.</desc>
@@ -60,13 +60,13 @@ function HeroBlockWithNav({ setPage }) {
               <path d="M44 178 C150 169 250 145 326 98 C390 58 445 35 494 24" fill="none" stroke="#6E1F2E" strokeWidth="2.5"/>
               <path d="M44 178 C145 167 226 140 300 142 C370 143 432 158 494 166" fill="none" stroke="#212226" strokeWidth="2.4"/>
               <rect x="87" y="169" width="9" height="9" transform="rotate(45 91.5 173.5)" fill="#212226"/><circle cx="414" cy="153" r="5" fill="#212226"/>
-              <g className="chart-axis"><text x="92" y="220" textAnchor="middle">LOI</text><text x="260" y="220" textAnchor="middle">CLOSE</text><text x="414" y="220" textAnchor="middle">DAY 100</text></g>
+              <g className="chart-axis"><text x="74" y="220" textAnchor="middle">LOI</text><text x="174" y="220" textAnchor="middle">CLOSE</text><text x="278" y="220" textAnchor="middle">DAY 1</text><text x="378" y="220" textAnchor="middle">DAY 30</text><text x="466" y="220" textAnchor="middle">DAY 100</text></g>
             </svg>
             <div className="hero-chart-legend" aria-label="Chart legend">
               <span><i className="legend-governed" aria-hidden="true"/>Surfaced early; governed down</span>
               <span><i className="legend-unexamined" aria-hidden="true"/>Left unexamined; compounds</span>
             </div>
-            <p>Built for the window from LOI through close and the first 30 days afterward — when operating risks become owned problems. The earlier the diagnosis, the cheaper the fix.</p>
+            <p>The most expensive operating problems are often visible before close but remain unowned until after close. Devonshire identifies the gaps early, translates them into decision-useful sponsor priorities, and carries them into execution. The earlier the diagnosis, the cheaper the fix.</p>
           </div>
         </div>
       </div>
@@ -97,7 +97,7 @@ function DomainIcon({ code }) {
 function HeroCredStrip() {
   const metrics = [
     { value: "15+", label: "years in institutional platform operations" },
-    { value: "100+", label: "acquisition targets reviewed" },
+    { value: "100+", label: "targets reviewed through a buyer’s lens" },
     { value: "$2M+", label: "annual vendor savings delivered" },
     { value: "−50%", label: "critical incident reduction" },
   ];
@@ -545,7 +545,7 @@ function HomeTrackRecord() {
 }
 
 function FinalCTA() {
-  return <section className="home-final"><div className="home-final-inner"><h2>Start with <em>one live deal.</em></h2><p>A 15-minute Fit Check confirms the operating trigger, timing, and whether a dedicated workstream is warranted.</p><div className="final-cta-actions"><a href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => track("final_fit_check")}>Book a Fit Check (15 min)</a><a className="final-secondary-cta" href="#share-your-situation" onClick={() => track("final_share_situation")}>Share your situation</a></div><div className="final-availability"><span/>Limited concurrent capacity. Every engagement is led directly by Hassan.</div></div></section>;
+  return <section className="home-final"><div className="home-final-inner"><h2>Start with <em>one live deal.</em></h2><p>A 15-minute Fit Check confirms the operating trigger, timing, access requirements, and whether a dedicated workstream is warranted.</p><div className="final-cta-actions"><a href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => track("final_fit_check")}>Book a Fit Check (15 min)</a><a className="final-secondary-cta" href="#share-your-situation" onClick={() => track("final_share_situation")}>Share your situation</a></div><div className="final-availability"><span/>Limited concurrent capacity. Every engagement is led directly by Hassan.</div></div></section>;
 }
 
 // ─── LEVER EXPLORER PAGE ─────────────────────────────────────
