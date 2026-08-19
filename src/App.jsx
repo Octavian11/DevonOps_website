@@ -51,7 +51,7 @@ export default function App() {
       privacy: "Privacy & Analytics Choices — Devonshire Operations"
     };
     const descriptions = {
-      levers: "Operator-led operational diligence and post-close execution for lower-middle-market PE, independent sponsors, and family offices—from LOI through the first 100 days.",
+      levers: "Senior-led operational diligence, Day-1 readiness, and post-close execution for lower-middle-market private equity sponsors—from LOI through Day 100.",
       services: "Fixed-fee operational diligence, Day-1 readiness, and 100-day execution, supported by a proprietary 355-lever research library and PE-fit rubric.",
       scorer: "A two-minute, six-domain assessment to identify possible operating risk in a private-equity deal and focus the next evidence request.",
       about: "Hassan Tariq applies 15+ years of institutional operating experience to lower-middle-market ownership transitions and post-close execution.",

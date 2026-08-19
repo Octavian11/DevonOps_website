@@ -508,7 +508,14 @@ function OfferTeaser({ setPage }) {
           </article>
         ))}
       </div>
-      <p className="timing-note">Most engagements begin during the LOI → close window. The <strong>Continuity Credit</strong> applies 100% of the Execution Risk Review fee to a Diligence-to-Execution Mandate commissioned before close or within 30 days after close. 100-Day Operating Design is also available as a standalone engagement from $30,000. Add-on acquisition support is available for platform portcos.</p>
+      <aside className="home-continuity-credit" aria-labelledby="continuity-credit-title">
+        <div>
+          <span>Commercial continuity</span>
+          <h3 id="continuity-credit-title">Start with diligence. Carry the insight into execution.</h3>
+        </div>
+        <p>When an Execution Risk Review leads to a Diligence-to-Execution Mandate commissioned before close or within 30 days after close, 100% of the review fee is credited toward the larger engagement.</p>
+      </aside>
+      <p className="timing-note">Most engagements begin during the LOI → close window. 100-Day Operating Design is also available as a standalone engagement from $30,000. Add-on acquisition support is available for platform portcos.</p>
       <button className="editorial-link" onClick={() => setPage("services", "method")}>View full services &amp; method →</button>
     </Section>
   );
@@ -538,7 +545,7 @@ function HomeTrackRecord() {
 }
 
 function FinalCTA() {
-  return <section className="home-final"><div className="home-final-inner"><h2>Start with <em>one live deal.</em></h2><p>A 15-minute Fit Check confirms the operating trigger, timing, and whether a dedicated workstream is warranted.</p><a href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => track("final_fit_check")}>Book a Fit Check (15 min)</a><div className="final-availability"><span/>Limited concurrent capacity. Every engagement is led directly by Hassan.</div></div></section>;
+  return <section className="home-final"><div className="home-final-inner"><h2>Start with <em>one live deal.</em></h2><p>A 15-minute Fit Check confirms the operating trigger, timing, and whether a dedicated workstream is warranted.</p><div className="final-cta-actions"><a href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => track("final_fit_check")}>Book a Fit Check (15 min)</a><a className="final-secondary-cta" href="#share-your-situation" onClick={() => track("final_share_situation")}>Share your situation</a></div><div className="final-availability"><span/>Limited concurrent capacity. Every engagement is led directly by Hassan.</div></div></section>;
 }
 
 // ─── LEVER EXPLORER PAGE ─────────────────────────────────────

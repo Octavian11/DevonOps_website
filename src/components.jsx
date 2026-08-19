@@ -350,19 +350,20 @@ export function FAQBlock({ variant }) {
 
   const faqs = [
     { q: "Do you replace the operating team?", a: "No. I install the operating system—governance, cadence, and controls—while ownership stays internal." },
+    { q: "Do you replace financial diligence?", a: "No. Devonshire complements financial, legal, commercial, tax, and technology diligence by testing whether the operating model can support the value assumed by the investment thesis under new ownership." },
     { q: "How do you work with an Operating Partner or platform COO?", a: "Devonshire does not replace either. I own the transaction-specific evidence, dependencies, Day-1 sequence, and 100-day operating architecture that senior leaders need but may not have capacity to produce while running the platform and the deal pipeline." },
     { q: "What do you need from us?", a: "A lightweight, targeted artifact pull tailored to the deal—typically organization and process materials, KPI reporting, vendor and contract data, incident or escalation history, change records, and relevant audit evidence—plus focused stakeholder access." },
     { q: "How do you handle confidentiality?", a: "NDA-friendly by default. Minimal data handling; formats can be anonymized." },
     { q: "When are you not a fit?", a: "If the company already has mature incident/change governance, a live KPI cadence, and low volatility, you likely don't need stabilization—only optimization." },
     { q: "What does 100-Day Operating Design produce?", a: "The engagement produces a 100-Day Operating Playbook—not a slide deck. It defines which gaps to address, in what sequence, with what accountability structure, and how progress will be measured. It converts validated findings into an operating plan management can own after the engagement." },
-    { q: "What industries do you cover?", a: "Devonshire is designed for financial services, fintech, market infrastructure, and acquisition-heavy professional and tech-enabled services. The method travels across sectors; the evidence requests and selected levers remain company-specific." },
+    { q: "Do you work across sectors?", a: "Yes. Devonshire is sector-flexible and operations-led. The work focuses on transferable operating disciplines: ownership, decision rights, management capacity, critical dependencies, vendor governance, controls, metrics, and cadence. The evidence requests and selected levers remain company-specific." },
     { q: "How long does an Execution Risk Review take?", a: "Typically 2–3 weeks from data receipt to the Execution Risk Memo, assuming standard access to organization, process, KPI, vendor, control, and risk evidence. Expedited timelines may be possible for deals in exclusivity—discuss during the Fit Check." },
     { q: "What if we're still in LOI or haven't entered exclusivity yet?", a: "Earlier is better. A light-touch review can shape the diligence scope and identify the evidence required once access expands. Even limited materials—an organization chart, KPI pack, vendor list, process documentation, and management interviews—can reveal ownership, visibility, and key-person risks." },
     { q: "Do you work with family offices?", a: "Yes. The work is most relevant where a direct-investing family office inherits a founder-led operating model without a dedicated portfolio-operations bench. Depending on the trigger, the starting point may be an Execution Risk Review, an Operating Control Sprint, or a Post-Close Control Tower for longer-hold sponsor visibility." },
   ];
 
-  const workingWithMe = faqs.filter((_, i) => [0,1,2,3,4,6,9].includes(i));
-  const engagementProcess = faqs.filter((_, i) => [5,7,8].includes(i));
+  const workingWithMe = faqs.filter((_, i) => [0,1,2,3,4,5,7,10].includes(i));
+  const engagementProcess = faqs.filter((_, i) => [6,8,9].includes(i));
 
   const q = { fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.navy, margin: 0, flex: 1 };
   const a = { fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, margin: 0, paddingBottom: "14px" };
@@ -1116,7 +1117,7 @@ function FooterLeadCapture() {
       <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: `${COLORS.offWhite}B0`, lineHeight: 1.55, marginBottom: "14px" }}>
         Share your situation and I'll reply with fit and next steps.
       </p>
-      <form className="footer-form" onSubmit={submit} noValidate data-clarity-mask="True" style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+      <form id="share-your-situation" className="footer-form" onSubmit={submit} noValidate data-clarity-mask="True" style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
         <label className="footer-field-label" htmlFor="footer-situation">Situation</label>
         <select id="footer-situation" value={situation} onChange={e => setSituation(e.target.value)} style={inputStyle}>
           <option>Evaluating a target</option>

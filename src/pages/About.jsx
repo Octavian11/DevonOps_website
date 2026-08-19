@@ -85,7 +85,7 @@ export default function AboutPage({ setPage }) {
             <div className="about-name">Hassan Tariq</div>
             <p className="about-credentials">15+ years in institutional platform operations · Columbia Business School MBA '26</p>
             <p className="about-lead">I built operating systems inside global financial institutions and a $10B+ investment platform before bringing that discipline to lower-middle-market PE.</p>
-            <p>Devonshire exists because financial diligence can establish what a company earned without proving whether its operating model can deliver under new ownership. I now apply that discipline where sponsors need senior operating ownership before a full in-house operating or integration function makes economic sense.</p>
+            <p>Devonshire exists because financial diligence can establish what a company earned without proving whether its operating model can deliver the value assumed by the investment thesis under new ownership. I now apply that discipline where sponsors need senior operating ownership before a full in-house operating or integration function makes economic sense.</p>
             <div className="about-contact-links">
               <a href={`mailto:${CONTACT_EMAIL}`} onClick={() => recordEvent("about_email_click")}>Email Hassan</a>
               <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" onClick={() => recordEvent("about_linkedin_click")}>LinkedIn ↗</a>

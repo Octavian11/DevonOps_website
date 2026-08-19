@@ -426,9 +426,9 @@ export default function ServicesPage({ setPage }) {
       <section className="services-hero">
         <div className="services-hero-inner">
         <div className="services-kicker">Services · Method · Execution</div>
-        <h1>Services, Method &amp; the Operating Lever Library</h1>
+        <h1>Operational judgment from LOI through Day 100.</h1>
         <p className="services-lead">
-          Operator-led diligence and post-close execution for sponsors who need to know whether a business can deliver the investment thesis under new ownership. Devonshire converts operating evidence into an IC-ready risk view, pre-close priorities, and a management-owned 100-day plan.
+          Devonshire helps sponsors identify execution risk before close, establish Day-1 priorities, and install the ownership, controls, and operating cadence required to deliver the value assumed by the investment thesis.
         </p>
         <p className="services-trigger"><strong>Especially relevant for buy-and-build platforms:</strong> when acquisition pace is outrunning integration ownership, management capacity, or the operating baseline needed to absorb the next tuck-in.</p>
         <div className="services-proof-line" aria-label="Engagement characteristics">
