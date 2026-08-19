@@ -350,19 +350,23 @@ export function FAQBlock({ variant }) {
 
   const faqs = [
     { q: "Do you replace the operating team?", a: "No. I install the operating system—governance, cadence, and controls—while ownership stays internal." },
+    { q: "Do you replace financial diligence?", a: "No. Devonshire complements financial, legal, commercial, tax, and technology diligence by testing whether the operating model can support the value assumed by the investment thesis under new ownership." },
     { q: "How do you work with an Operating Partner or platform COO?", a: "Devonshire does not replace either. I own the transaction-specific evidence, dependencies, Day-1 sequence, and 100-day operating architecture that senior leaders need but may not have capacity to produce while running the platform and the deal pipeline." },
     { q: "What do you need from us?", a: "A lightweight, targeted artifact pull tailored to the deal—typically organization and process materials, KPI reporting, vendor and contract data, incident or escalation history, change records, and relevant audit evidence—plus focused stakeholder access." },
     { q: "How do you handle confidentiality?", a: "NDA-friendly by default. Minimal data handling; formats can be anonymized." },
     { q: "When are you not a fit?", a: "If the company already has mature incident/change governance, a live KPI cadence, and low volatility, you likely don't need stabilization—only optimization." },
     { q: "What does 100-Day Operating Design produce?", a: "The engagement produces a 100-Day Operating Playbook—not a slide deck. It defines which gaps to address, in what sequence, with what accountability structure, and how progress will be measured. It converts validated findings into an operating plan management can own after the engagement." },
-    { q: "What industries do you cover?", a: "Devonshire is designed for financial services, fintech, market infrastructure, and acquisition-heavy professional and tech-enabled services. The method travels across sectors; the evidence requests and selected levers remain company-specific." },
+    { q: "Do you work across sectors?", a: "Yes. Devonshire is sector-flexible and operations-led. The work focuses on transferable operating disciplines: ownership, decision rights, management capacity, critical dependencies, vendor governance, controls, metrics, and cadence. The evidence requests and selected levers remain company-specific." },
     { q: "How long does an Execution Risk Review take?", a: "Typically 2–3 weeks from data receipt to the Execution Risk Memo, assuming standard access to organization, process, KPI, vendor, control, and risk evidence. Expedited timelines may be possible for deals in exclusivity—discuss during the Fit Check." },
     { q: "What if we're still in LOI or haven't entered exclusivity yet?", a: "Earlier is better. A light-touch review can shape the diligence scope and identify the evidence required once access expands. Even limited materials—an organization chart, KPI pack, vendor list, process documentation, and management interviews—can reveal ownership, visibility, and key-person risks." },
     { q: "Do you work with family offices?", a: "Yes. The work is most relevant where a direct-investing family office inherits a founder-led operating model without a dedicated portfolio-operations bench. Depending on the trigger, the starting point may be an Execution Risk Review, an Operating Control Sprint, or a Post-Close Control Tower for longer-hold sponsor visibility." },
+    { q: "When should Devonshire become involved?", a: "Ideally during the LOI-to-close period, before operating assumptions become owned post-close problems." },
+    { q: "Can Devonshire support add-ons?", a: "Yes. Devonshire can assess operating risk, Day-1 readiness, integration capacity, ownership, reporting, and execution governance for add-on acquisitions." },
+    { q: "How much data is required?", a: "Devonshire uses a focused evidence request designed around the operating questions most relevant to the transaction. The objective is a decision-useful view, not a burdensome data-room exercise." },
   ];
 
-  const workingWithMe = faqs.filter((_, i) => [0,1,2,3,4,6,9].includes(i));
-  const engagementProcess = faqs.filter((_, i) => [5,7,8].includes(i));
+  const workingWithMe = faqs.filter((_, i) => [0,1,2,3,4,5,7,10,11,12].includes(i));
+  const engagementProcess = faqs.filter((_, i) => [6,8,9,13].includes(i));
 
   const q = { fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.navy, margin: 0, flex: 1 };
   const a = { fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, margin: 0, paddingBottom: "14px" };
@@ -728,12 +732,13 @@ export function OfferCards({ setPage }) {
         </div>
       </div>
 
-      <aside className="standalone-playbook-note" aria-labelledby="operating-design-title">
+      <aside className="standalone-playbook-note continuity-credit-callout" aria-labelledby="operating-design-title">
+        <span className="continuity-credit-kicker">Commercial continuity</span>
         <strong id="operating-design-title">{OFFERS.operatingDesign.name}: {OFFERS.operatingDesign.price}</strong>
         <span>{OFFERS.operatingDesign.buyerQuestion}</span>
         <p>{OFFERS.operatingDesign.purpose}</p>
         <p><strong>What you receive:</strong> {OFFERS.operatingDesign.deliverables.join("; ")}.</p>
-        <p><strong>Continuity Credit:</strong> 100% of the Execution Risk Review fee is applied to a Diligence-to-Execution Mandate commissioned before close or within 30 days after close.</p>
+        <p><strong>Continuity Credit:</strong> Start with diligence and carry the insight into execution. 100% of the Execution Risk Review fee is applied to a Diligence-to-Execution Mandate commissioned before close or within 30 days after close.</p>
       </aside>
 
       {!setPage && (
@@ -1115,7 +1120,7 @@ function FooterLeadCapture() {
       <p style={{ fontFamily: FONTS.body, fontSize: "0.9rem", color: `${COLORS.offWhite}B0`, lineHeight: 1.55, marginBottom: "14px" }}>
         Share your situation and I'll reply with fit and next steps.
       </p>
-      <form className="footer-form" onSubmit={submit} noValidate data-clarity-mask="True" style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+      <form id="share-your-situation" className="footer-form" onSubmit={submit} noValidate data-clarity-mask="True" style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
         <label className="footer-field-label" htmlFor="footer-situation">Situation</label>
         <select id="footer-situation" value={situation} onChange={e => setSituation(e.target.value)} style={inputStyle}>
           <option>Evaluating a target</option>

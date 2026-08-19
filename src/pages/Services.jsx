@@ -162,6 +162,16 @@ function IllustrativeWorkProduct() {
     { src: "/memo-samples/execution-risk-scorecard-preview.png", width:1200, height:900, alt: "Illustrative Execution Risk Scorecard executive summary", caption: "Execution Risk Scorecard: executive risk summary and six-domain findings" },
     { src: "/memo-samples/100-day-operating-playbook-preview.png", width:1200, height:900, alt: "Illustrative 100-Day Operating Playbook execution architecture", caption: "100-Day Operating Playbook: Visibility to Control to Cadence" },
   ];
+  const formatLibrary = [
+    ["IC-ready risk memo", "Decision, evidence, severity, and sponsor implication."],
+    ["Targeted evidence request list", "The minimum operating evidence needed to test the thesis."],
+    ["Day 1 critical path", "Must-happen protections, dependencies, and named owners."],
+    ["Ownership and governance map", "Decision rights, escalation paths, and accountability."],
+    ["Sponsor operating pack", "Thesis-linked indicators, actions, and cadence."],
+    ["Control tower dashboard", "Visibility into execution, risks, decisions, and blockers."],
+    ["Decision and action register", "Open decisions, owners, due dates, and escalation status."],
+    ["Operating risk watchlist", "Material risks, evidence, controls, and follow-through."],
+  ];
 
   return (
     <Section noCTA background={`${COLORS.navy}03`} title="Illustrative Work Product" id="work-product">
@@ -194,6 +204,21 @@ function IllustrativeWorkProduct() {
           ))}
         </div>
       )}
+      <div className="format-library" aria-labelledby="format-library-title">
+        <div className="format-library-heading">
+          <span className="editorial-label">Illustrative format library</span>
+          <h3 id="format-library-title">The broader work-product set.</h3>
+          <p>These are anonymized format descriptions, not client data or a promise that every item appears in every engagement.</p>
+        </div>
+        <div className="format-library-grid">
+          {formatLibrary.map(([title, detail], index) => (
+            <article key={title} className="format-library-card">
+              <div className="format-sheet" aria-hidden="true"><span>{String(index + 1).padStart(2, "0")}</span><i /><i /><i /></div>
+              <div><span>Illustrative format</span><h4>{title}</h4><p>{detail}</p></div>
+            </article>
+          ))}
+        </div>
+      </div>
     </Section>
   );
 }
@@ -426,9 +451,9 @@ export default function ServicesPage({ setPage }) {
       <section className="services-hero">
         <div className="services-hero-inner">
         <div className="services-kicker">Services · Method · Execution</div>
-        <h1>Services, Method &amp; the Operating Lever Library</h1>
+        <h1>Operational judgment from LOI through Day 100.</h1>
         <p className="services-lead">
-          Operator-led diligence and post-close execution for sponsors who need to know whether a business can deliver the investment thesis under new ownership. Devonshire converts operating evidence into an IC-ready risk view, pre-close priorities, and a management-owned 100-day plan.
+          Devonshire helps sponsors identify execution risk before close, establish Day-1 priorities, and install the ownership, controls, and operating cadence required to deliver the value assumed by the investment thesis.
         </p>
         <p className="services-trigger"><strong>Especially relevant for buy-and-build platforms:</strong> when acquisition pace is outrunning integration ownership, management capacity, or the operating baseline needed to absorb the next tuck-in.</p>
         <div className="services-proof-line" aria-label="Engagement characteristics">

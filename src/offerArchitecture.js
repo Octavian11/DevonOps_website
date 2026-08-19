@@ -12,7 +12,7 @@ export const OFFERS = Object.freeze({
     timing: "2–3 weeks",
     primaryDeliverable: "Execution Risk Memo",
     buyerQuestion: "What operating risks are we underestimating before we own this business?",
-    purpose: "Pressure-test whether the target's operating infrastructure can deliver the investment thesis under new ownership.",
+    purpose: "Pressure-test whether the target's operating model can deliver the value assumed by the investment thesis under new ownership.",
     homepageDeliverables: Object.freeze([
       "Execution Risk Memo + Execution Risk Scorecard",
       "Targeted Evidence Request List",

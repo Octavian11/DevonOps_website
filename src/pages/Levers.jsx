@@ -22,7 +22,7 @@ function HeroBlockWithNav({ setPage }) {
           Your deal team handles the financials. <em>Who's stress-testing the operations?</em>
         </h1>
         <p className="hero-subheadline" style={{ fontFamily: FONTS.body, color: "rgba(255,255,255,0.94)", lineHeight: 1.7, marginBottom: "24px", maxWidth: "600px" }}>
-          Financial diligence shows what the business earned. I test whether the operating model can deliver the investment thesis—then convert the evidence into an IC-ready risk view, pre-close priorities, and an owned 100-day plan.
+          The investment thesis lives or dies in operations. Devonshire tests whether the target can deliver the value assumed by the investment thesis under new ownership—then converts the findings into an IC-ready risk view, Day-1 priorities, and an owned 100-day plan.
         </p>
 
         <div className="hero-ctas" style={{ display: "flex", gap: "16px", flexWrap: "wrap", alignItems: "flex-start" }}>
@@ -42,12 +42,13 @@ function HeroBlockWithNav({ setPage }) {
           </a>
         </div>
         <div className="hero-availability"><span />Currently accepting 1–2 new engagements</div>
+        <div className="hero-fit-note">15 minutes. Confidential. Built around one live situation.</div>
         </div>
         <div className="hero-visual-panel">
           <div className="hero-photo-slice" aria-hidden="true" />
           <div className="hero-chart-card">
             <div className="hero-chart-label">The Window Where Value Is Won or Lost</div>
-            <h3>LOI → Close → Day 100</h3>
+            <h3>LOI → Close → Day 1 → Day 30 → Day 100</h3>
             <svg viewBox="0 0 520 226" role="img" aria-label="Operational risk from LOI through Day 100">
               <title>Operational risk from LOI through Day 100</title>
               <desc>Two lines compare operational risk surfaced at LOI and governed down by Day 100 with risk left unexamined and compounding under new ownership.</desc>
@@ -59,13 +60,13 @@ function HeroBlockWithNav({ setPage }) {
               <path d="M44 178 C150 169 250 145 326 98 C390 58 445 35 494 24" fill="none" stroke="#6E1F2E" strokeWidth="2.5"/>
               <path d="M44 178 C145 167 226 140 300 142 C370 143 432 158 494 166" fill="none" stroke="#212226" strokeWidth="2.4"/>
               <rect x="87" y="169" width="9" height="9" transform="rotate(45 91.5 173.5)" fill="#212226"/><circle cx="414" cy="153" r="5" fill="#212226"/>
-              <g className="chart-axis"><text x="92" y="220" textAnchor="middle">LOI</text><text x="260" y="220" textAnchor="middle">CLOSE</text><text x="414" y="220" textAnchor="middle">DAY 100</text></g>
+              <g className="chart-axis"><text x="74" y="220" textAnchor="middle">LOI</text><text x="174" y="220" textAnchor="middle">CLOSE</text><text x="278" y="220" textAnchor="middle">DAY 1</text><text x="378" y="220" textAnchor="middle">DAY 30</text><text x="466" y="220" textAnchor="middle">DAY 100</text></g>
             </svg>
             <div className="hero-chart-legend" aria-label="Chart legend">
               <span><i className="legend-governed" aria-hidden="true"/>Surfaced early; governed down</span>
               <span><i className="legend-unexamined" aria-hidden="true"/>Left unexamined; compounds</span>
             </div>
-            <p>Built for the window from LOI through close and the first 30 days afterward — when operating risks become owned problems. The earlier the diagnosis, the cheaper the fix.</p>
+            <p>The most expensive operating problems are often visible before close but remain unowned until after close. Devonshire identifies the gaps early, translates them into decision-useful sponsor priorities, and carries them into execution. The earlier the diagnosis, the cheaper the fix.</p>
           </div>
         </div>
       </div>
@@ -96,8 +97,7 @@ function DomainIcon({ code }) {
 function HeroCredStrip() {
   const metrics = [
     { value: "15+", label: "years in institutional platform operations" },
-    { value: "1,500+", label: "companies screened through a buyer's lens" },
-    { value: "100+", label: "acquisition targets reviewed" },
+    { value: "100+", label: "targets reviewed through a buyer’s lens" },
     { value: "$2M+", label: "annual vendor savings delivered" },
     { value: "−50%", label: "critical incident reduction" },
   ];
@@ -153,7 +153,7 @@ function BuyerSegmentCards({ setPage }) {
     {
       code: "FO",
       title: "Family Offices",
-      pain: "Founder-led businesses often reach new ownership before institutional operating infrastructure is in place.",
+      pain: "Founder-led businesses often reach new ownership before a durable operating model is in place.",
       timing: "Most relevant: acquisition through longer hold",
       items: [
         "Key-person and process-dependency visibility",
@@ -398,7 +398,7 @@ function ObjectionHandlers() {
     <div className="positioning-dark">
     <Section noCTA variant="tinted">
       <div className="editorial-label">Positioning</div>
-      <h2 className="editorial-heading">The operating depth of an institution.<br/>The accountability of a principal.</h2>
+      <h2 className="editorial-heading">Institutional operating depth.<br/>Principal-level accountability.</h2>
       <p className="editorial-intro objection-intro">Different advisory models solve different problems. Devonshire is built for sponsors that need senior operating judgment to continue through implementation.</p>
       <div className="advisory-comparison" role="table" aria-label="Comparison of advisory delivery models">
         <div className="comparison-row comparison-head" role="row"><div role="columnheader">What matters</div><div role="columnheader">Large advisory firm</div><div role="columnheader">Solo generalist</div><div role="columnheader">Devonshire</div></div>
@@ -508,7 +508,14 @@ function OfferTeaser({ setPage }) {
           </article>
         ))}
       </div>
-      <p className="timing-note">Most engagements begin during the LOI → close window. The <strong>Continuity Credit</strong> applies 100% of the Execution Risk Review fee to a Diligence-to-Execution Mandate commissioned before close or within 30 days after close. 100-Day Operating Design is also available as a standalone engagement from $30,000. Add-on acquisition support is available for platform portcos.</p>
+      <aside className="home-continuity-credit" aria-labelledby="continuity-credit-title">
+        <div>
+          <span>Commercial continuity</span>
+          <h3 id="continuity-credit-title">Start with diligence. Carry the insight into execution.</h3>
+        </div>
+        <p>When an Execution Risk Review leads to a Diligence-to-Execution Mandate commissioned before close or within 30 days after close, 100% of the review fee is credited toward the larger engagement.</p>
+      </aside>
+      <p className="timing-note">Most engagements begin during the LOI → close window. 100-Day Operating Design is also available as a standalone engagement from $30,000. Add-on acquisition support is available for platform portcos.</p>
       <button className="editorial-link" onClick={() => setPage("services", "method")}>View full services &amp; method →</button>
     </Section>
   );
@@ -516,13 +523,13 @@ function OfferTeaser({ setPage }) {
 
 function HomeTrackRecord() {
   const cases = [
-    { label:"Institutional outcome · Platform Stabilization", title:"Critical incidents cut in half", copy:"A $10B+ platform running on verbal escalations and hero culture. Installed severity model, incident command, and KPI cadence.", metrics:[
+    { label:"Selected institutional outcome · Platform Stabilization", title:"Critical incidents cut in half", copy:"A $10B+ platform running on verbal escalations and hero culture. Installed severity model, incident command, and KPI cadence.", metrics:[
       {value:"−50%",label:"critical incidents over 18 months",before:"Prior rate",after:"50% lower"},
       {value:"99.2%",label:"platform availability",before:"94%",after:"99.2%"},
       {value:"−31%",label:"mean time to resolution",before:"Prior MTTR",after:"31% faster"},
       {value:"+22",label:"NPS improvement",before:"38",after:"60"},
     ] },
-    { label:"Institutional outcome · Vendor Optimization", title:"$2M+ out of a $40M vendor program", copy:"Unmanaged vendor sprawl, auto-renewals, and concentration risk. Rebuilt vendor governance, renegotiated licensing, and installed a scorecard cadence.", metrics:[
+    { label:"Selected institutional outcome · Vendor Optimization", title:"$2M+ out of a $40M vendor program", copy:"Unmanaged vendor sprawl, auto-renewals, and concentration risk. Rebuilt vendor governance, renegotiated licensing, and installed a scorecard cadence.", metrics:[
       {value:">$2M",label:"annual run-rate reduction",before:"Prior run rate",after:">$2M lower"},
       {value:"10–15%",label:"licensing savings",before:"Prior cost",after:"10–15% lower"},
       {value:"~28%",label:"cost per $1B AUM reduction",before:"Prior unit cost",after:"28% lower"},
@@ -531,14 +538,14 @@ function HomeTrackRecord() {
   ];
   return <section className="home-track" id="track-record"><div className="home-track-inner">
     <div className="market-kicker"><span>07</span> Track Record &amp; Outcomes</div>
-    <h2>Measured outcomes. Delivered.</h2><p className="track-intro">Operating systems built and pressure-tested at institutional scale—now applied to lower-middle-market deals and portfolio companies.</p>
+    <h2>Measured outcomes. Delivered.</h2><p className="track-intro">Selected institutional operating outcomes—built and pressure-tested in prior roles, then applied to lower-middle-market deals and portfolio companies.</p>
     <div className="home-case-grid">{cases.map(c => <article className="home-case" key={c.title}><div className="case-overline">{c.label}</div><h3>{c.title}</h3><p>{c.copy}</p><div className="home-metrics">{c.metrics.map((m) => <div className="outcome-visual" key={m.label}><div className="outcome-heading"><strong>{m.value}</strong><span>{m.label}</span></div><div className="outcome-change" aria-label={`${m.label}: ${m.before} to ${m.after}`}><span>{m.before}</span><i aria-hidden="true">→</i><span>{m.after}</span></div></div>)}</div></article>)}</div>
     <p className="home-nda">NDA protection is available as standard. Institutional outcome detail and illustrative work-product formats are available on request.</p>
   </div></section>;
 }
 
 function FinalCTA() {
-  return <section className="home-final"><div className="home-final-inner"><h2>Start with <em>one live deal.</em></h2><p>A 15-minute Fit Check confirms the operating trigger, timing, and whether a dedicated workstream is warranted.</p><a href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => track("final_fit_check")}>Book a Fit Check (15 min)</a><div className="final-availability"><span/>Limited concurrent capacity. Every engagement is led directly by Hassan.</div></div></section>;
+  return <section className="home-final"><div className="home-final-inner"><h2>Start with <em>one live deal.</em></h2><p>A 15-minute Fit Check confirms the operating trigger, timing, access requirements, and whether a dedicated workstream is warranted.</p><div className="final-cta-actions"><a href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => track("final_fit_check")}>Book a Fit Check (15 min)</a><a className="final-secondary-cta" href="#share-your-situation" onClick={() => track("final_share_situation")}>Share your situation</a></div><div className="final-availability"><span/>Limited concurrent capacity. Every engagement is led directly by Hassan.</div></div></section>;
 }
 
 // ─── LEVER EXPLORER PAGE ─────────────────────────────────────

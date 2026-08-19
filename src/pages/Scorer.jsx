@@ -30,6 +30,12 @@ const SCORE_LABELS = {
   5: "Well governed",
 };
 
+const RATING_EXPLANATIONS = {
+  stable: "The operating model appears reasonably structured, but targeted diligence may still be warranted around thesis-critical assumptions.",
+  atRisk: "Several operating gaps may require clearer ownership, evidence, or Day-1 planning before close.",
+  critical: "The deal may contain material ownership, capacity, dependency, or control gaps that could create post-close drift or rework.",
+};
+
 function recordEvent(name, properties = {}) {
   try {
     track(name, properties);
@@ -52,6 +58,9 @@ function downloadDeliverable(url, filename, asset, source) {
 function ScorerEmailCapture({ rating, score, context, buyerType }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [firm, setFirm] = useState("");
+  const [role, setRole] = useState("");
+  const [dealStage, setDealStage] = useState(context || "");
   const [status, setStatus] = useState("idle");
   const [message, setMessage] = useState("");
 
@@ -72,6 +81,9 @@ function ScorerEmailCapture({ rating, score, context, buyerType }) {
         body: JSON.stringify({
           name: name || "(not provided)",
           email,
+          firm: firm || "(not provided)",
+          role: role || "(not provided)",
+          deal_stage: dealStage || context,
           scorer_rating: rating,
           scorer_score: score,
           scorer_context: context,
@@ -134,6 +146,15 @@ function ScorerEmailCapture({ rating, score, context, buyerType }) {
         <input id="scorer-name" name="name" type="text" autoComplete="name" value={name} onChange={(event) => setName(event.target.value)} />
         <label htmlFor="scorer-email">Work email</label>
         <input id="scorer-email" name="email" type="email" autoComplete="email" required aria-invalid={status === "error"} aria-describedby="scorer-form-message" value={email} onChange={(event) => { setEmail(event.target.value); if (status === "error") { setStatus("idle"); setMessage(""); } }} />
+        <label htmlFor="scorer-firm">Firm <span>Optional</span></label>
+        <input id="scorer-firm" name="firm" type="text" autoComplete="organization" value={firm} onChange={(event) => setFirm(event.target.value)} />
+        <label htmlFor="scorer-role">Role <span>Optional</span></label>
+        <input id="scorer-role" name="role" type="text" autoComplete="organization-title" value={role} onChange={(event) => setRole(event.target.value)} />
+        <label htmlFor="scorer-deal-stage">Deal stage <span>Optional</span></label>
+        <select id="scorer-deal-stage" name="deal_stage" value={dealStage} onChange={(event) => setDealStage(event.target.value)}>
+          <option value="">Prefer not to say</option>
+          {CONTEXT_OPTIONS.map((option) => <option key={option.key} value={option.key}>{option.label}</option>)}
+        </select>
         <button type="submit" disabled={status === "loading"}>{status === "loading" ? "Submitting…" : "Get the Sample Scorecard →"}</button>
         <p className="scorer-privacy">No spam. Your email is used only to respond to this assessment.</p>
         <p id="scorer-form-message" className={`scorer-form-message ${status}`} role={status === "error" ? "alert" : "status"} aria-live={status === "error" ? "assertive" : "polite"}>{message}</p>
@@ -165,7 +186,7 @@ export default function ScorerPage({ setPage }) {
     ? knownDims.reduce((sum, dimension) => sum + scores[dimension.key], 0) / knownDims.length
     : 0;
   const rating = avg >= 4 ? "stable" : avg >= 2.5 ? "atRisk" : "critical";
-  const ratingLabel = { stable: "STABLE", atRisk: "AT RISK", critical: "CRITICAL" }[rating];
+  const ratingLabel = { stable: "LOW VISIBLE RISK", atRisk: "MODERATE EXECUTION RISK", critical: "ELEVATED EXECUTION RISK" }[rating];
   const lowDims = knownDims.filter((dimension) => scores[dimension.key] <= 2);
   const midDims = knownDims.filter((dimension) => scores[dimension.key] === 3);
   const chartData = SCORER_DIMS.map((dimension) => ({
@@ -209,8 +230,8 @@ export default function ScorerPage({ setPage }) {
       <header className="scorer-hero">
         <div className="scorer-hero-inner">
           <span className="scorer-kicker">Two-minute operating assessment</span>
-          <h1>How operationally ready is your deal?</h1>
-          <p>Score six operating domains. Surface where execution risk may be hiding before it reaches the IC, Day 1, or the board.</p>
+          <h1>How exposed is your deal to execution risk?</h1>
+          <p>Answer a short set of questions to identify where operating ownership, management capacity, dependencies, controls, or reporting may be weaker than the investment thesis assumes.</p>
           <div className="scorer-hero-facts" aria-label="Assessment facts"><span>6 dimensions</span><span>2 minutes</span><span>Immediate result</span></div>
         </div>
       </header>
@@ -315,6 +336,7 @@ export default function ScorerPage({ setPage }) {
               <div className="scorer-result-copy">
                 <span className="result-status">{ratingLabel}</span>
                 <div className="result-score"><strong>{avg.toFixed(1)}</strong><span>out of 5</span></div>
+                <p className="result-explanation">{RATING_EXPLANATIONS[rating]}</p>
                 <p>{CONTEXT_CALLOUTS[rating][context]}</p>
                 {buyerType && BUYER_TYPE_FRAMING[buyerType] && <p className="buyer-framing">{BUYER_TYPE_FRAMING[buyerType]}</p>}
                 {unknownDims.length > 0 && <span className="result-coverage">Based on {knownDims.length} scored dimension{knownDims.length === 1 ? "" : "s"}; {unknownDims.length} visibility gap{unknownDims.length === 1 ? "" : "s"} flagged.</span>}
@@ -396,7 +418,7 @@ export default function ScorerPage({ setPage }) {
 
             <section className="scorer-final-cta">
               <div><span className="scorer-kicker">From assessment to action</span><h2>{rating === "stable" ? "Make the operating evidence durable." : "Convert the gaps into an owned operating plan."}</h2></div>
-              <div><a href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => recordEvent("scorer_fit_check_click", { rating, context })}>Book a Fit Check (15 min)</a><button type="button" onClick={() => { recordEvent("scorer_services_click", { rating }); setPage ? setPage("services", "offers") : window.location.assign("/pe/services#offers"); }}>View Engagement Options</button></div>
+              <div><a href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => recordEvent("scorer_fit_check_click", { rating, context })}>Review Your Score with Hassan</a><button type="button" onClick={() => { recordEvent("scorer_services_click", { rating }); setPage ? setPage("services", "offers") : window.location.assign("/pe/services#offers"); }}>View Engagement Options</button></div>
             </section>
           </section>
         )}

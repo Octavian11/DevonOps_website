@@ -51,7 +51,7 @@ export default function App() {
       privacy: "Privacy & Analytics Choices — Devonshire Operations"
     };
     const descriptions = {
-      levers: "Operator-led operational diligence and post-close execution for lower-middle-market PE, independent sponsors, and family offices—from LOI through the first 100 days.",
+      levers: "Senior-led operational diligence, Day-1 readiness, and post-close execution for lower-middle-market private equity sponsors—from LOI through Day 100.",
       services: "Fixed-fee operational diligence, Day-1 readiness, and 100-day execution, supported by a proprietary 355-lever research library and PE-fit rubric.",
       scorer: "A two-minute, six-domain assessment to identify possible operating risk in a private-equity deal and focus the next evidence request.",
       about: "Hassan Tariq applies 15+ years of institutional operating experience to lower-middle-market ownership transitions and post-close execution.",
@@ -85,6 +85,39 @@ export default function App() {
     setNameMeta("twitter:title", titles[page]);
     setNameMeta("twitter:description", descriptions[page]);
     setNameMeta("twitter:image", "https://www.devonshireops.com/img/hero-facade.jpg");
+    const breadcrumbs = page === "levers" ? null : {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.devonshireops.com/pe/" },
+        { "@type": "ListItem", position: 2, name: PAGE_ANNOUNCEMENTS[page], item: absoluteUrl },
+      ],
+    };
+    const pageSchema = page === "services" ? {
+      "@type": "FAQPage",
+      mainEntity: [
+        ["When should Devonshire become involved?", "Ideally during the LOI-to-close period, before operating assumptions become owned post-close problems."],
+        ["Does Devonshire replace financial diligence?", "No. Devonshire complements financial, legal, commercial, tax, and technology diligence by testing whether the operating model can support the value assumed by the investment thesis under new ownership."],
+        ["Does Devonshire work across sectors?", "Yes. Devonshire is sector-flexible and operations-led, with company-specific evidence requests and selected levers."],
+        ["Is implementation included?", "It can be. Devonshire offers both pre-close risk review and continuous diligence-to-execution support through Day 100."],
+        ["Who performs the work?", "Every engagement is led directly by Hassan Tariq."],
+        ["Can Devonshire support add-ons?", "Yes. Devonshire can assess operating risk, Day-1 readiness, integration capacity, ownership, reporting, and execution governance for add-on acquisitions."],
+        ["How much data is required?", "Devonshire uses a focused evidence request designed around the operating questions most relevant to the transaction."],
+      ].map(([name, text]) => ({ "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text } })),
+    } : page === "resources" ? {
+      "@type": "Article",
+      headline: "Why Ops Diligence Is the Most Underpriced Risk in PE",
+      description: "Practical operating-risk tools, illustrative deliverables, and perspectives for private-equity investors.",
+      mainEntityOfPage: absoluteUrl,
+      author: { "@id": "https://www.devonshireops.com/#hassan-tariq" },
+      publisher: { "@id": "https://www.devonshireops.com/#organization" },
+    } : null;
+    const schemaScript = document.createElement("script");
+    schemaScript.id = "devonshire-route-schema";
+    schemaScript.type = "application/ld+json";
+    schemaScript.textContent = JSON.stringify({ "@context": "https://schema.org", "@graph": [breadcrumbs, pageSchema].filter(Boolean) });
+    document.head.querySelector("#devonshire-route-schema")?.remove();
+    document.head.appendChild(schemaScript);
+    return () => schemaScript.remove();
   }, [location.pathname, page]);
 
   useEffect(() => {
