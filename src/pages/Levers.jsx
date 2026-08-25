@@ -22,7 +22,7 @@ function HeroBlockWithNav({ setPage }) {
           Your deal team handles the financials. <em>Who's stress-testing the operations?</em>
         </h1>
         <p className="hero-subheadline" style={{ fontFamily: FONTS.body, color: "rgba(255,255,255,0.94)", lineHeight: 1.7, marginBottom: "24px", maxWidth: "600px" }}>
-          The investment thesis lives or dies in operations. Devonshire tests whether the target can deliver the value assumed by the investment thesis under new ownership—then converts the findings into an IC-ready risk view, Day-1 priorities, and an owned 100-day plan.
+          The investment thesis lives or dies in operations. Devonshire tests whether the target’s operating model can support the investment thesis under new ownership—then converts the findings into an IC-ready risk view, Day-1 priorities, and an owned 100-day plan.
         </p>
 
         <div className="hero-ctas" style={{ display: "flex", gap: "16px", flexWrap: "wrap", alignItems: "flex-start" }}>
@@ -66,7 +66,7 @@ function HeroBlockWithNav({ setPage }) {
               <span><i className="legend-governed" aria-hidden="true"/>Surfaced early; governed down</span>
               <span><i className="legend-unexamined" aria-hidden="true"/>Left unexamined; compounds</span>
             </div>
-            <p>The most expensive operating problems are often visible before close but remain unowned until after close. Devonshire identifies the gaps early, translates them into decision-useful sponsor priorities, and carries them into execution. The earlier the diagnosis, the cheaper the fix.</p>
+            <p>The most expensive operating problems are often visible before close but remain unowned until after close. Devonshire identifies the gaps early, translates them into decision-useful sponsor priorities, and carries them into an owned operating plan. The earlier the diagnosis, the cheaper the fix.</p>
           </div>
         </div>
       </div>
@@ -172,7 +172,7 @@ function BuyerSegmentCards({ setPage }) {
     <Section title="Built for sponsors without spare operating capacity." noCTA type="windowWithCards">
       <div className="editorial-label">01 · Who This Is Built For</div>
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "20px" }}>
-        The operating trigger differs by buyer, but the need is consistent: senior ownership of work that cannot be allowed to fall between the deal team and management.
+        The operating trigger differs by buyer, but the need is consistent: senior leadership of operating work that cannot be allowed to fall between the deal team and management.
       </p>
       <div className="buyer-cards-wrapper" style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap" }}>
         {segments.map((seg, i) => (
@@ -390,7 +390,7 @@ function MarketBand() {
 function ObjectionHandlers() {
   const comparisons = [
     ["Senior involvement", "Team model varies", "Direct", "Direct throughout"],
-    ["Operating execution", "Often a separate workstream", "Depends on individual capacity", "Diligence through implementation"],
+    ["Diligence continuity", "Often a separate workstream", "Depends on individual capacity", "Diligence into operating design"],
     ["Institutional operating depth", "Broad functional bench", "Varies by practitioner", "15+ years in platform operations"],
     ["Lower-middle-market fit", "Enterprise delivery model", "Flexible", "Scoped to the deal and portco"],
   ];
@@ -399,7 +399,7 @@ function ObjectionHandlers() {
     <Section noCTA variant="tinted">
       <div className="editorial-label">Positioning</div>
       <h2 className="editorial-heading">Institutional operating depth.<br/>Principal-level accountability.</h2>
-      <p className="editorial-intro objection-intro">Different advisory models solve different problems. Devonshire is built for sponsors that need senior operating judgment to continue through implementation.</p>
+      <p className="editorial-intro objection-intro">Different advisory models solve different problems. Devonshire is built for sponsors that need senior operating judgment carried from diligence into an owned operating plan.</p>
       <div className="advisory-comparison" role="table" aria-label="Comparison of advisory delivery models">
         <div className="comparison-row comparison-head" role="row"><div role="columnheader">What matters</div><div role="columnheader">Large advisory firm</div><div role="columnheader">Solo generalist</div><div role="columnheader">Devonshire</div></div>
         {comparisons.map((row) => <div className="comparison-row" role="row" key={row[0]}>{row.map((cell, i) => <div role={i === 0 ? "rowheader" : "cell"} key={cell}>{cell}{i === 3 && <span aria-hidden="true">✓</span>}</div>)}</div>)}
@@ -408,13 +408,13 @@ function ObjectionHandlers() {
         <div className="objection-note">
           <div className="editorial-label">Why Not a Big 4 Firm?</div>
           <h3>Audit-grade frameworks aren't operating experience.</h3>
-          <p>Big 4 firms build excellent audit-grade frameworks. Devonshire installs practitioner-grade operating discipline through one accountable senior operator.</p>
-          <div className="editorial-kicker">That's not advisory. That's operating.</div>
+          <p>Big 4 firms build excellent audit-grade frameworks. Devonshire provides senior-led operating advisory designed to carry the work into operating design and implementation support where engaged.</p>
+          <div className="editorial-kicker">This is not a handoff. It is direct senior leadership of the scoped operating workstream.</div>
         </div>
         <div className="objection-note">
           <div className="editorial-label">Why Trust a Solo Practitioner?</div>
           <h3>No handoff to a team of juniors.</h3>
-          <p>I run the diagnostic, write the findings, and execute the plan. The operating system was pressure-tested at a $10B+ platform.</p>
+          <p>I lead the diagnostic, write the findings, and translate them into an owned operating plan. Management and the sponsor retain ownership of execution; I remain involved where the engagement calls for implementation support. The operating system was pressure-tested at a $10B+ platform.</p>
           <div className="editorial-kicker">Senior on day one. Senior on day one hundred.</div>
         </div>
       </div>
@@ -510,8 +510,8 @@ function OfferTeaser({ setPage }) {
       </div>
       <aside className="home-continuity-credit" aria-labelledby="continuity-credit-title">
         <div>
-          <span>Commercial continuity</span>
-          <h3 id="continuity-credit-title">Start with diligence. Carry the insight into execution.</h3>
+          <span>Continuity credit</span>
+          <h3 id="continuity-credit-title">Start with diligence. Carry the insight into the operating plan.</h3>
         </div>
         <p>When an Execution Risk Review leads to a Diligence-to-Execution Mandate commissioned before close or within 30 days after close, 100% of the review fee is credited toward the larger engagement.</p>
       </aside>
@@ -538,7 +538,7 @@ function HomeTrackRecord() {
   ];
   return <section className="home-track" id="track-record"><div className="home-track-inner">
     <div className="market-kicker"><span>07</span> Track Record &amp; Outcomes</div>
-    <h2>Measured outcomes. Delivered.</h2><p className="track-intro">Selected institutional operating outcomes—built and pressure-tested in prior roles, then applied to lower-middle-market deals and portfolio companies.</p>
+    <h2>Measured outcomes. Delivered.</h2><p className="track-intro">Selected institutional operating outcomes from prior roles—the experience informing Devonshire’s approach to lower-middle-market deals and portfolio companies.</p>
     <div className="home-case-grid">{cases.map(c => <article className="home-case" key={c.title}><div className="case-overline">{c.label}</div><h3>{c.title}</h3><p>{c.copy}</p><div className="home-metrics">{c.metrics.map((m) => <div className="outcome-visual" key={m.label}><div className="outcome-heading"><strong>{m.value}</strong><span>{m.label}</span></div><div className="outcome-change" aria-label={`${m.label}: ${m.before} to ${m.after}`}><span>{m.before}</span><i aria-hidden="true">→</i><span>{m.after}</span></div></div>)}</div></article>)}</div>
     <p className="home-nda">NDA protection is available as standard. Institutional outcome detail and illustrative work-product formats are available on request.</p>
   </div></section>;

@@ -33,7 +33,7 @@ const METHOD_STEPS = [
 const METHOD_PRINCIPLES = [
   ["Evidence before scoring", "The library structures inquiry; it never creates a finding without company-specific support."],
   ["Economics before activity", "Every recommendation ties to a measurable driver or an explicitly stated risk."],
-  ["Management ownership before advisor dependence", "The deliverable is not the document. I design, facilitate, and validate; management owns an operating system it can use and improve after Devonshire leaves."],
+  ["Management ownership before advisor dependence", "The deliverable is not the document. I design, facilitate, and validate the scoped operating workstream; management owns the operating system it uses and improves after Devonshire leaves."],
 ];
 
 function MethodFlowGraphic({ active, onSelect }) {
@@ -228,7 +228,7 @@ function HowItWorks() {
     ["Fit Check", "Trigger, timing, and fit."],
     ["Scope + Underwrite", "Evidence and fixed-fee scope."],
     ["Diligence Deliverable", "Severity-rated, PE impact framed, IC-ready findings."],
-    ["Plan + Execute", "Ownership, execution, and board cadence."],
+    ["Plan + Govern", "Ownership, operating cadence, and sponsor visibility."],
   ];
   return (
     <div className="how-it-works-dark" id="process">
@@ -453,11 +453,11 @@ export default function ServicesPage({ setPage }) {
         <div className="services-kicker">Services · Method · Execution</div>
         <h1>Operational judgment from LOI through Day 100.</h1>
         <p className="services-lead">
-          Devonshire helps sponsors identify execution risk before close, establish Day-1 priorities, and install the ownership, controls, and operating cadence required to deliver the value assumed by the investment thesis.
+          Devonshire helps sponsors identify execution risk before close, establish Day-1 priorities, and translate the findings into the ownership, controls, and operating cadence required to support the investment thesis.
         </p>
         <p className="services-trigger"><strong>Especially relevant for buy-and-build platforms:</strong> when acquisition pace is outrunning integration ownership, management capacity, or the operating baseline needed to absorb the next tuck-in.</p>
         <div className="services-proof-line" aria-label="Engagement characteristics">
-          <span>Fixed-fee engagements</span><span>Board-ready outputs</span><span>Senior ownership throughout</span>
+          <span>Fixed-fee engagements</span><span>Board-ready outputs</span><span>Senior leadership throughout</span>
         </div>
         </div>
       </section>

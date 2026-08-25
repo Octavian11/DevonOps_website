@@ -349,9 +349,9 @@ export function FAQBlock({ variant }) {
   const toggle = (i) => setOpen(open === i ? null : i);
 
   const faqs = [
-    { q: "Do you replace the operating team?", a: "No. I install the operating system—governance, cadence, and controls—while ownership stays internal." },
+    { q: "Do you replace the operating team?", a: "No. Devonshire advises and leads a defined operating workstream; the sponsor and management retain responsibility for operating the business and executing the broader value-creation plan." },
     { q: "Do you replace financial diligence?", a: "No. Devonshire complements financial, legal, commercial, tax, and technology diligence by testing whether the operating model can support the value assumed by the investment thesis under new ownership." },
-    { q: "How do you work with an Operating Partner or platform COO?", a: "Devonshire does not replace either. I own the transaction-specific evidence, dependencies, Day-1 sequence, and 100-day operating architecture that senior leaders need but may not have capacity to produce while running the platform and the deal pipeline." },
+    { q: "How do you work with an Operating Partner or platform COO?", a: "Devonshire does not replace either. I lead the transaction-specific evidence, dependencies, Day-1 sequence, and 100-day operating architecture that senior leaders need but may not have capacity to produce while running the platform and the deal pipeline." },
     { q: "What do you need from us?", a: "A lightweight, targeted artifact pull tailored to the deal—typically organization and process materials, KPI reporting, vendor and contract data, incident or escalation history, change records, and relevant audit evidence—plus focused stakeholder access." },
     { q: "How do you handle confidentiality?", a: "NDA-friendly by default. Minimal data handling; formats can be anonymized." },
     { q: "When are you not a fit?", a: "If the company already has mature incident/change governance, a live KPI cadence, and low volatility, you likely don't need stabilization—only optimization." },
@@ -363,9 +363,10 @@ export function FAQBlock({ variant }) {
     { q: "When should Devonshire become involved?", a: "Ideally during the LOI-to-close period, before operating assumptions become owned post-close problems." },
     { q: "Can Devonshire support add-ons?", a: "Yes. Devonshire can assess operating risk, Day-1 readiness, integration capacity, ownership, reporting, and execution governance for add-on acquisitions." },
     { q: "How much data is required?", a: "Devonshire uses a focused evidence request designed around the operating questions most relevant to the transaction. The objective is a decision-useful view, not a burdensome data-room exercise." },
+    { q: "Who owns execution once an engagement begins?", a: "The sponsor and management team retain ownership of business execution and the broader value-creation plan. Devonshire leads the scoped operating workstream—its evidence, operating design, decision architecture, and cadence—and may support a bounded control implementation where explicitly engaged." },
   ];
 
-  const workingWithMe = faqs.filter((_, i) => [0,1,2,3,4,5,7,10,11,12].includes(i));
+  const workingWithMe = faqs.filter((_, i) => [0,1,2,3,4,5,7,10,11,12,14].includes(i));
   const engagementProcess = faqs.filter((_, i) => [6,8,9,13].includes(i));
 
   const q = { fontFamily: FONTS.heading, fontSize: "1.1rem", color: COLORS.navy, margin: 0, flex: 1 };
@@ -733,12 +734,12 @@ export function OfferCards({ setPage }) {
       </div>
 
       <aside className="standalone-playbook-note continuity-credit-callout" aria-labelledby="operating-design-title">
-        <span className="continuity-credit-kicker">Commercial continuity</span>
+        <span className="continuity-credit-kicker">Continuity credit</span>
         <strong id="operating-design-title">{OFFERS.operatingDesign.name}: {OFFERS.operatingDesign.price}</strong>
         <span>{OFFERS.operatingDesign.buyerQuestion}</span>
         <p>{OFFERS.operatingDesign.purpose}</p>
         <p><strong>What you receive:</strong> {OFFERS.operatingDesign.deliverables.join("; ")}.</p>
-        <p><strong>Continuity Credit:</strong> Start with diligence and carry the insight into execution. 100% of the Execution Risk Review fee is applied to a Diligence-to-Execution Mandate commissioned before close or within 30 days after close.</p>
+        <p><strong>Continuity Credit:</strong> Start with diligence and carry the insight into the operating plan. 100% of the Execution Risk Review fee is applied to a Diligence-to-Execution Mandate commissioned before close or within 30 days after close.</p>
       </aside>
 
       {!setPage && (
