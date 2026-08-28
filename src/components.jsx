@@ -349,7 +349,7 @@ export function FAQBlock({ variant }) {
   const toggle = (i) => setOpen(open === i ? null : i);
 
   const faqs = [
-    { q: "Do you replace the operating team?", a: "No. Devonshire advises and leads a defined operating workstream; the sponsor and management retain responsibility for operating the business and executing the broader value-creation plan." },
+    { q: "Do you replace the operating team?", a: "No. Devonshire leads the scoped operating value-creation workstream; management continues to run the business and own day-to-day actions, while the sponsor retains investment oversight." },
     { q: "Do you replace financial diligence?", a: "No. Devonshire complements financial, legal, commercial, tax, and technology diligence by testing whether the operating model can support the value assumed by the investment thesis under new ownership." },
     { q: "How do you work with an Operating Partner or platform COO?", a: "Devonshire does not replace either. I lead the transaction-specific evidence, dependencies, Day-1 sequence, and 100-day operating architecture that senior leaders need but may not have capacity to produce while running the platform and the deal pipeline." },
     { q: "What do you need from us?", a: "A lightweight, targeted artifact pull tailored to the deal—typically organization and process materials, KPI reporting, vendor and contract data, incident or escalation history, change records, and relevant audit evidence—plus focused stakeholder access." },
@@ -363,7 +363,7 @@ export function FAQBlock({ variant }) {
     { q: "When should Devonshire become involved?", a: "Ideally during the LOI-to-close period, before operating assumptions become owned post-close problems." },
     { q: "Can Devonshire support add-ons?", a: "Yes. Devonshire can assess operating risk, Day-1 readiness, integration capacity, ownership, reporting, and execution governance for add-on acquisitions." },
     { q: "How much data is required?", a: "Devonshire uses a focused evidence request designed around the operating questions most relevant to the transaction. The objective is a decision-useful view, not a burdensome data-room exercise." },
-    { q: "Who owns execution once an engagement begins?", a: "The sponsor and management team retain ownership of business execution and the broader value-creation plan. Devonshire leads the scoped operating workstream—its evidence, operating design, decision architecture, and cadence—and may support a bounded control implementation where explicitly engaged." },
+    { q: "Who owns execution once an engagement begins?", a: "Devonshire leads the scoped operating value-creation workstream—its evidence, priorities, operating design, governance, cadence, and sponsor visibility. Management owns the day-to-day actions assigned to it; the sponsor retains investment oversight and deal-level decisions." },
   ];
 
   const workingWithMe = faqs.filter((_, i) => [0,1,2,3,4,5,7,10,11,12,14].includes(i));
@@ -613,7 +613,7 @@ export function OfferCards({ setPage }) {
       {setPage && (
         <>
           <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, maxWidth: "960px", marginBottom: "8px" }}>
-            Pick the track that matches where you are in the deal lifecycle. Both deliver risk-rated findings, PE impact framing, and a clear Day-1 critical path.
+            For a live deal, the Execution Risk Review is the default starting point. The Diligence-to-Execution Mandate is recommended when closing is expected and continuity into Day 100 is required.
           </p>
           <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, marginBottom: "24px" }}>
             Most engagements begin during the <strong>LOI → close window</strong> to avoid post-close rework.
@@ -668,7 +668,7 @@ export function OfferCards({ setPage }) {
       )}
       <div className="pricing-grid" style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap", marginBottom: "24px" }}>
         <div className="pricing-card" style={{...box, borderTop: `3px solid ${COLORS.steel}`}}>
-          <span style={segLabel}>Pre-Close · LOI to Close</span>
+          <span style={segLabel}>Start here for a live deal · Pre-Close</span>
           <SectionTitle sub>{OFFERS.executionRiskReview.name}</SectionTitle>
           <div className="price" style={tag}>{OFFERS.executionRiskReview.price}</div>
           <div className="price-detail">{OFFERS.executionRiskReview.timing}</div>
@@ -679,11 +679,12 @@ export function OfferCards({ setPage }) {
             {OFFERS.executionRiskReview.deliverables.map((item) => <li key={item} style={li}>{item}</li>)}
           </ul>
           <div style={{ marginTop: "16px" }}>
-            <button className="card-text-link" onClick={() => { track("pricing_cta", { offer: OFFERS.executionRiskReview.key, destination: "scorer" }); setPage ? setPage("scorer") : window.location.assign("/pe/scorer"); }}>Score Your Deal →</button>
+            <a className="card-text-link" href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => track("pricing_cta", { offer: OFFERS.executionRiskReview.key, destination: "calendly" })}>Discuss an Active Deal (15 min) →</a>
           </div>
         </div>
 
         <div className="pricing-card recommended" style={{...box, borderTop: `3px solid ${COLORS.gold}`}}>
+          <span className="offer-recommended">Recommended when closing is expected</span>
           <span style={segLabel}>LOI → Day 100</span>
           <SectionTitle sub>{OFFERS.diligenceToExecution.name}</SectionTitle>
           <div className="price" style={tag}>{OFFERS.diligenceToExecution.price}</div>
@@ -734,7 +735,7 @@ export function OfferCards({ setPage }) {
       </div>
 
       <aside className="standalone-playbook-note continuity-credit-callout" aria-labelledby="operating-design-title">
-        <span className="continuity-credit-kicker">Continuity credit</span>
+        <span className="continuity-credit-kicker">Continuity Credit</span>
         <strong id="operating-design-title">{OFFERS.operatingDesign.name}: {OFFERS.operatingDesign.price}</strong>
         <span>{OFFERS.operatingDesign.buyerQuestion}</span>
         <p>{OFFERS.operatingDesign.purpose}</p>
@@ -758,7 +759,7 @@ export function OfferCards({ setPage }) {
       )}
 
       {setPage && <ButtonPair
-        primaryText="Book a Fit Check (15 min)"
+        primaryText="Discuss an Active Deal (15 min)"
         secondaryText={setPage ? "View Full Services & Details" : undefined}
         secondaryAction={setPage ? () => setPage("services", "offers") : undefined}
         centered={true}
@@ -1035,7 +1036,7 @@ export function Nav({ page, setPage }) {
         <span className="nav-current-page">
           {items.find(i => i.key === page)?.label ?? ""}
         </span>
-        <div className="nav-cta"><CTAButton text="Book a Fit Check (15 min)" location="desktop_navigation" /></div>
+        <div className="nav-cta"><CTAButton text="Discuss an Active Deal" location="desktop_navigation" /></div>
         <button ref={toggleRef} className="nav-hamburger" onClick={() => setMenuOpen(o => !o)} aria-label="Toggle menu" aria-expanded={menuOpen} aria-controls="mobile-navigation">
           {menuOpen
             ? <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><line x1="4" y1="4" x2="18" y2="18" stroke={COLORS.navy} strokeWidth="2" strokeLinecap="round"/><line x1="18" y1="4" x2="4" y2="18" stroke={COLORS.navy} strokeWidth="2" strokeLinecap="round"/></svg>
@@ -1051,7 +1052,7 @@ export function Nav({ page, setPage }) {
               {label}
             </a>
           ))}
-          <div style={{ marginTop: "8px" }}><CTAButton text="Book a Fit Check (15 min)" location="mobile_navigation" /></div>
+          <div style={{ marginTop: "8px" }}><CTAButton text="Discuss an Active Deal" location="mobile_navigation" /></div>
         </div>
       )}
     </>

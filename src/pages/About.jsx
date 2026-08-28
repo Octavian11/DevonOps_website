@@ -174,7 +174,7 @@ export default function AboutPage({ setPage }) {
           <div className="about-principles">
             <article><span>01</span><h3>Evidence before assertion</h3><p>A framework structures the inquiry. Company evidence determines the finding.</p></article>
             <article><span>02</span><h3>Economics before activity</h3><p>Every priority connects to measurable value, explicit risk, or a necessary execution dependency.</p></article>
-            <article><span>03</span><h3>Continuity before handoff</h3><p>I lead the diagnostic and stay through the operating design. Management and the sponsor own execution of the plan that remains.</p></article>
+            <article><span>03</span><h3>Continuity before handoff</h3><p>I lead the diagnostic and the scoped operating value-creation workstream that follows. Management owns day-to-day actions; the sponsor retains investment oversight.</p></article>
           </div>
         </section>
 

@@ -1,5 +1,5 @@
 // Canonical public offer architecture.
-// Source: Devonshire_Offer_Architecture_Canonical.md (v1.4, July 20, 2026).
+// Source: Devonshire_Offer_Architecture_Canonical.md (v1.5, August 28, 2026).
 // Keep website copy, analytics values, and CRM-facing labels aligned to these values.
 
 export const OFFERS = Object.freeze({
@@ -48,13 +48,13 @@ export const OFFERS = Object.freeze({
   diligenceToExecution: Object.freeze({
     key: "diligence_to_execution_mandate",
     name: "Diligence-to-Execution Mandate",
-    category: "Operational diligence and operating-plan design",
+    category: "Operational diligence and execution planning",
     price: "From $45,000",
     timing: "LOI → Day 100",
     primaryDeliverable: "Execution Risk Memo + 100-Day Operating Playbook",
     buyerQuestion: "How do we turn the operating risks identified before close into Day-1 priorities and a 100-day operating plan without re-learning the business or losing context?",
-    purpose: "Translate pre-close operating findings into a sequenced 100-day plan with named management and sponsor owners.",
-    integrationNote: "One continuous advisory mandate from diligence through operating design, preserving decision context and clarifying ownership across the transition.",
+    purpose: "Translate pre-close operating findings into a sequenced 100-day operating value-creation plan with named management and sponsor owners.",
+    integrationNote: "One continuous mandate from diligence through operating design: Devonshire leads the scoped operating value-creation workstream while preserving decision context and clarifying ownership across the transition.",
     homepageDeliverables: Object.freeze([
       "Execution Risk Memo + Execution Risk Scorecard",
       "Targeted Evidence Request List + Day-1 Readiness Plan",
@@ -77,12 +77,12 @@ export const OFFERS = Object.freeze({
   operatingControlSprint: Object.freeze({
     key: "operating_control_sprint",
     name: "Operating Control Sprint",
-    category: "Targeted operating implementation",
+    category: "Embedded operating implementation",
     price: "From $25,000",
     timing: "2–6 weeks",
     primaryDeliverable: "Installed Operating Control + Capability Transfer Pack",
     buyerQuestion: "Which operating control must be installed now to prevent drift, firefighting, or loss of sponsor visibility?",
-    purpose: "Design and help install one defined operating capability or control, then transfer ownership to management.",
+    purpose: "Install one defined operating capability or control inside a sponsor-backed company and transfer ownership to management.",
     homepageDeliverables: Object.freeze([
       "Installed Operating Control or Capability",
       "Governance and Ownership Map",
@@ -101,7 +101,7 @@ export const OFFERS = Object.freeze({
   postCloseControlTower: Object.freeze({
     key: "post_close_control_tower",
     name: "Post-Close Control Tower",
-    category: "Post-close operating governance",
+    category: "Post-close execution governance",
     price: "From $10,000/month",
     timing: "3-month initial term",
     primaryDeliverable: "Sponsor Operating Pack + Control Tower Dashboard",

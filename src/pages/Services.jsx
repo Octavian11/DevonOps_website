@@ -33,7 +33,7 @@ const METHOD_STEPS = [
 const METHOD_PRINCIPLES = [
   ["Evidence before scoring", "The library structures inquiry; it never creates a finding without company-specific support."],
   ["Economics before activity", "Every recommendation ties to a measurable driver or an explicitly stated risk."],
-  ["Management ownership before advisor dependence", "The deliverable is not the document. I design, facilitate, and validate the scoped operating workstream; management owns the operating system it uses and improves after Devonshire leaves."],
+  ["Management ownership before advisor dependence", "The deliverable is not the document. Devonshire leads the scoped operating value-creation workstream and its governance; management owns the day-to-day actions that make the operating system work."],
 ];
 
 function MethodFlowGraphic({ active, onSelect }) {
