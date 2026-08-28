@@ -1,5 +1,5 @@
 // Canonical public offer architecture.
-// Source: Devonshire_Offer_Architecture_Canonical.md (v1.4, July 20, 2026).
+// Source: Devonshire_Offer_Architecture_Canonical.md (v1.5, August 28, 2026).
 // Keep website copy, analytics values, and CRM-facing labels aligned to these values.
 
 export const OFFERS = Object.freeze({
@@ -12,7 +12,7 @@ export const OFFERS = Object.freeze({
     timing: "2–3 weeks",
     primaryDeliverable: "Execution Risk Memo",
     buyerQuestion: "What operating risks are we underestimating before we own this business?",
-    purpose: "Pressure-test whether the target's operating model can deliver the value assumed by the investment thesis under new ownership.",
+    purpose: "Pressure-test whether the target's operating model can deliver what the investment thesis assumes under new ownership.",
     homepageDeliverables: Object.freeze([
       "Execution Risk Memo + Execution Risk Scorecard",
       "Targeted Evidence Request List",
@@ -36,7 +36,7 @@ export const OFFERS = Object.freeze({
     timing: "Scoped to the mandate",
     primaryDeliverable: "100-Day Operating Playbook",
     buyerQuestion: "What must management and the sponsor install, in what sequence, to establish operating control during the first 100 days?",
-    purpose: "Convert known operating priorities into a sequenced, owned, measurable execution architecture.",
+    purpose: "Translate known operating priorities into a sequenced operating plan with clear management ownership and sponsor visibility.",
     deliverables: Object.freeze([
       "100-Day Operating Playbook",
       "Initiative and Sequencing Map",
@@ -52,9 +52,9 @@ export const OFFERS = Object.freeze({
     price: "From $45,000",
     timing: "LOI → Day 100",
     primaryDeliverable: "Execution Risk Memo + 100-Day Operating Playbook",
-    buyerQuestion: "How do we carry the operating risks identified before close directly into Day-1 and 100-day execution without re-learning or losing ownership?",
-    purpose: "Carry pre-close operating findings directly into a sequenced and owned 100-day operating plan.",
-    integrationNote: "One continuous mandate from diligence through operating design, with overlapping artifacts consolidated and ownership preserved across the transition.",
+    buyerQuestion: "How do we turn the operating risks identified before close into Day-1 priorities and a 100-day operating plan without re-learning the business or losing context?",
+    purpose: "Translate pre-close operating findings into a sequenced 100-day operating value-creation plan with named management and sponsor owners.",
+    integrationNote: "One continuous mandate from diligence through operating design: Devonshire leads the scoped operating value-creation workstream while preserving decision context and clarifying ownership across the transition.",
     homepageDeliverables: Object.freeze([
       "Execution Risk Memo + Execution Risk Scorecard",
       "Targeted Evidence Request List + Day-1 Readiness Plan",
@@ -82,7 +82,7 @@ export const OFFERS = Object.freeze({
     timing: "2–6 weeks",
     primaryDeliverable: "Installed Operating Control + Capability Transfer Pack",
     buyerQuestion: "Which operating control must be installed now to prevent drift, firefighting, or loss of sponsor visibility?",
-    purpose: "Install one defined operating capability or control and transfer ownership to management.",
+    purpose: "Install one defined operating capability or control inside a sponsor-backed company and transfer ownership to management.",
     homepageDeliverables: Object.freeze([
       "Installed Operating Control or Capability",
       "Governance and Ownership Map",

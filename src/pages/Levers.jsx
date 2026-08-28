@@ -22,7 +22,7 @@ function HeroBlockWithNav({ setPage }) {
           Your deal team handles the financials. <em>Who's stress-testing the operations?</em>
         </h1>
         <p className="hero-subheadline" style={{ fontFamily: FONTS.body, color: "rgba(255,255,255,0.94)", lineHeight: 1.7, marginBottom: "24px", maxWidth: "600px" }}>
-          The investment thesis lives or dies in operations. Devonshire tests whether the target can deliver the value assumed by the investment thesis under new ownership—then converts the findings into an IC-ready risk view, Day-1 priorities, and an owned 100-day plan.
+          The investment thesis lives or dies in operations. Devonshire tests whether the target’s operating model can support the investment thesis under new ownership—then converts the findings into an IC-ready risk view, Day-1 priorities, and an owned 100-day plan.
         </p>
 
         <div className="hero-ctas" style={{ display: "flex", gap: "16px", flexWrap: "wrap", alignItems: "flex-start" }}>
@@ -31,7 +31,7 @@ function HeroBlockWithNav({ setPage }) {
               style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", minWidth: "220px", height: "52px", padding: "0 28px", background: COLORS.gold, color: "#FFFFFF", fontFamily: FONTS.body, fontSize: "0.9rem", fontWeight: 600, border: "none", borderRadius: RADIUS.md, cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap", transition: "all 0.2s" }}
               onMouseEnter={e => { e.currentTarget.style.background = "#571825"; }}
               onMouseLeave={e => { e.currentTarget.style.background = COLORS.gold; }}>
-              Book a Fit Check (15 min)
+              Discuss an Active Deal (15 min)
             </a>
           </div>
           <a className="hero-secondary" href="/pe/scorer" onClick={(e) => { track("hero_score_deal"); e.preventDefault(); setPage("scorer"); }}
@@ -42,7 +42,7 @@ function HeroBlockWithNav({ setPage }) {
           </a>
         </div>
         <div className="hero-availability"><span />Currently accepting 1–2 new engagements</div>
-        <div className="hero-fit-note">15 minutes. Confidential. Built around one live situation.</div>
+        <div className="hero-fit-note">For deals in LOI, exclusivity, or confirmatory diligence. 15 minutes. Confidential.</div>
         </div>
         <div className="hero-visual-panel">
           <div className="hero-photo-slice" aria-hidden="true" />
@@ -66,7 +66,7 @@ function HeroBlockWithNav({ setPage }) {
               <span><i className="legend-governed" aria-hidden="true"/>Surfaced early; governed down</span>
               <span><i className="legend-unexamined" aria-hidden="true"/>Left unexamined; compounds</span>
             </div>
-            <p>The most expensive operating problems are often visible before close but remain unowned until after close. Devonshire identifies the gaps early, translates them into decision-useful sponsor priorities, and carries them into execution. The earlier the diagnosis, the cheaper the fix.</p>
+            <p>The most expensive operating problems are often visible before close but remain unowned until after close. Devonshire identifies the gaps early, translates them into decision-useful sponsor priorities, and carries them into an owned operating plan. The earlier the diagnosis, the cheaper the fix.</p>
           </div>
         </div>
       </div>
@@ -97,7 +97,7 @@ function DomainIcon({ code }) {
 function HeroCredStrip() {
   const metrics = [
     { value: "15+", label: "years in institutional platform operations" },
-    { value: "100+", label: "targets reviewed through a buyer’s lens" },
+    { value: "100+", label: "structured operating reviews" },
     { value: "$2M+", label: "annual vendor savings delivered" },
     { value: "−50%", label: "critical incident reduction" },
   ];
@@ -119,6 +119,22 @@ function HeroCredStrip() {
 function BuyerSegmentCards({ setPage }) {
   const segments = [
     {
+      code: "PE",
+      title: "LMM PE Funds",
+      pain: "On an early buy-and-build platform, multiple tuck-ins can move before the management and shared-services bench is fully built. Devonshire gives the operating work a dedicated senior owner.",
+      timing: "Primary focus: LOI through Day 30",
+      items: [
+        "Absorption capacity and critical dependencies tested before close",
+        "Platform and target ownership established for Day 1",
+        "A common operating baseline that strengthens with each acquisition",
+      ],
+      proofLabel: "Operator proof",
+      proof: "More than $2M in annual savings from a $40M vendor program in under six months—delivered through an operating plan, not a slide deck.",
+      action: "calendly",
+      cta: "Discuss an Active Deal (15 min)",
+      accentColor: COLORS.navy,
+    },
+    {
       code: "IS",
       title: "Independent Sponsors",
       pain: "A lean deal team needs a decision-useful operating view before price, terms, and ownership plans are locked.",
@@ -133,22 +149,6 @@ function BuyerSegmentCards({ setPage }) {
       action: "scorer",
       cta: "Score Your Deal →",
       accentColor: COLORS.steel,
-    },
-    {
-      code: "PE",
-      title: "LMM PE Funds",
-      pain: "On an early buy-and-build platform, multiple tuck-ins can move before the management and shared-services bench is fully built. Devonshire gives the operating work a dedicated senior owner.",
-      timing: "Most relevant: LOI through Day 30",
-      items: [
-        "Absorption capacity and critical dependencies tested before close",
-        "Platform and target ownership established for Day 1",
-        "A common operating baseline that strengthens with each acquisition",
-      ],
-      proofLabel: "Operator proof",
-      proof: "More than $2M in annual savings from a $40M vendor program in under six months—delivered through an operating plan, not a slide deck.",
-      action: "calendly",
-      cta: "Book a Fit Check (15 min)",
-      accentColor: COLORS.navy,
     },
     {
       code: "FO",
@@ -169,10 +169,10 @@ function BuyerSegmentCards({ setPage }) {
   ];
 
   return (
-    <Section title="Built for sponsors without spare operating capacity." noCTA type="windowWithCards">
+    <Section title="Built first for institutional LMM PE deal teams." noCTA type="windowWithCards">
       <div className="editorial-label">01 · Who This Is Built For</div>
       <p style={{ fontFamily: FONTS.body, color: COLORS.charcoal, lineHeight: 1.7, marginBottom: "20px" }}>
-        The operating trigger differs by buyer, but the need is consistent: senior ownership of work that cannot be allowed to fall between the deal team and management.
+        Devonshire is designed for institutional lower-middle-market PE teams with live operating questions in a transaction. Independent sponsors and family offices are a fit where the deal is active and the operating need is defined.
       </p>
       <div className="buyer-cards-wrapper" style={{ display: "flex", gap: "20px", alignItems: "stretch", flexWrap: "wrap" }}>
         {segments.map((seg, i) => (
@@ -390,7 +390,7 @@ function MarketBand() {
 function ObjectionHandlers() {
   const comparisons = [
     ["Senior involvement", "Team model varies", "Direct", "Direct throughout"],
-    ["Operating execution", "Often a separate workstream", "Depends on individual capacity", "Diligence through implementation"],
+    ["Diligence continuity", "Often a separate workstream", "Depends on individual capacity", "Diligence into operating design"],
     ["Institutional operating depth", "Broad functional bench", "Varies by practitioner", "15+ years in platform operations"],
     ["Lower-middle-market fit", "Enterprise delivery model", "Flexible", "Scoped to the deal and portco"],
   ];
@@ -399,7 +399,7 @@ function ObjectionHandlers() {
     <Section noCTA variant="tinted">
       <div className="editorial-label">Positioning</div>
       <h2 className="editorial-heading">Institutional operating depth.<br/>Principal-level accountability.</h2>
-      <p className="editorial-intro objection-intro">Different advisory models solve different problems. Devonshire is built for sponsors that need senior operating judgment to continue through implementation.</p>
+      <p className="editorial-intro objection-intro">Different advisory models solve different problems. Devonshire is built for sponsors that need senior operating judgment carried from diligence into a scoped operating value-creation workstream.</p>
       <div className="advisory-comparison" role="table" aria-label="Comparison of advisory delivery models">
         <div className="comparison-row comparison-head" role="row"><div role="columnheader">What matters</div><div role="columnheader">Large advisory firm</div><div role="columnheader">Solo generalist</div><div role="columnheader">Devonshire</div></div>
         {comparisons.map((row) => <div className="comparison-row" role="row" key={row[0]}>{row.map((cell, i) => <div role={i === 0 ? "rowheader" : "cell"} key={cell}>{cell}{i === 3 && <span aria-hidden="true">✓</span>}</div>)}</div>)}
@@ -408,13 +408,13 @@ function ObjectionHandlers() {
         <div className="objection-note">
           <div className="editorial-label">Why Not a Big 4 Firm?</div>
           <h3>Audit-grade frameworks aren't operating experience.</h3>
-          <p>Big 4 firms build excellent audit-grade frameworks. Devonshire installs practitioner-grade operating discipline through one accountable senior operator.</p>
-          <div className="editorial-kicker">That's not advisory. That's operating.</div>
+          <p>Big 4 firms build excellent audit-grade frameworks. Devonshire provides senior-led operating advisory that carries the work into the scoped operating value-creation workstream and its execution governance.</p>
+          <div className="editorial-kicker">This is not a handoff. It is direct senior leadership of the scoped operating value-creation workstream.</div>
         </div>
         <div className="objection-note">
           <div className="editorial-label">Why Trust a Solo Practitioner?</div>
           <h3>No handoff to a team of juniors.</h3>
-          <p>I run the diagnostic, write the findings, and execute the plan. The operating system was pressure-tested at a $10B+ platform.</p>
+          <p>I lead the diagnostic, write the findings, and turn them into the scoped operating value-creation workstream. I lead its governance, cadence, and sponsor visibility. Management owns day-to-day actions; the sponsor retains investment oversight. The operating system was pressure-tested at a $10B+ platform.</p>
           <div className="editorial-kicker">Senior on day one. Senior on day one hundred.</div>
         </div>
       </div>
@@ -477,8 +477,8 @@ function CompactAboutBio({ setPage }) {
 
 function OfferTeaser({ setPage }) {
   const offers = [
-    { ...OFFERS.executionRiskReview, label: "Pre-Close · LOI to Close", bullets: OFFERS.executionRiskReview.homepageDeliverables, action: "score" },
-    { ...OFFERS.diligenceToExecution, label: "LOI → Day 100", bullets: OFFERS.diligenceToExecution.homepageDeliverables, featured: true },
+    { ...OFFERS.executionRiskReview, label: "Pre-Close · LOI to Close", bullets: OFFERS.executionRiskReview.homepageDeliverables, action: "discuss", recommendation: "Start here for a live deal" },
+    { ...OFFERS.diligenceToExecution, label: "LOI → Day 100", bullets: OFFERS.diligenceToExecution.homepageDeliverables, featured: true, recommendation: "Recommended when closing is expected" },
     { ...OFFERS.operatingControlSprint, label: "Post-Close · Hands-On", bullets: OFFERS.operatingControlSprint.homepageDeliverables },
     { ...OFFERS.postCloseControlTower, label: "Ongoing Hold", bullets: OFFERS.postCloseControlTower.homepageDeliverables },
   ];
@@ -486,6 +486,7 @@ function OfferTeaser({ setPage }) {
     <Section title="Pick the track that matches your deal stage." noCTA id="engagements-home">
       <div className="editorial-label">06 · Engagements</div>
       <p className="editorial-intro">Fixed fees scoped to transaction stage, complexity, and required access. Board-ready deliverables. Findings rated by severity and PE impact, with a clear Day-1 critical path.</p>
+      <p className="editorial-intro">For a live deal, begin with an Execution Risk Review. Choose the Diligence-to-Execution Mandate when closing is expected and continuity into Day 100 is required.</p>
       <figure className="engagement-lifecycle" aria-labelledby="engagement-lifecycle-title">
         <figcaption id="engagement-lifecycle-title">Engagement coverage across the deal lifecycle</figcaption>
         <div className="lifecycle-axis" aria-hidden="true"><span>LOI</span><span>Close</span><span>Day 100</span><span>Ongoing hold</span></div>
@@ -499,19 +500,19 @@ function OfferTeaser({ setPage }) {
       <div className="home-offer-grid">
         {offers.map((o, i) => (
           <article key={i} className={`home-offer${o.featured ? " featured" : ""}`}>
-            {o.featured && <span className="offer-recommended">Recommended</span>}
+            {o.recommendation && <span className="offer-recommended">{o.recommendation}</span>}
             <div className="offer-identity"><div className="offer-stage">{o.label}</div><h3>{o.name}</h3></div>
             <div className="offer-commercial"><div className="offer-price">{o.price}</div><div className="offer-timing">{o.timing}</div><p className="offer-buyer-question">{o.buyerQuestion}</p><p>{o.purpose}</p>{o.integrationNote && <p className="offer-integration-note">{o.integrationNote}</p>}</div>
             <div className="offer-deliverables"><span className="offer-receives-label">What you receive</span><ul>{o.bullets.map(b => <li key={b}>{b}</li>)}</ul>
-              {o.action === "score" ? <button className="editorial-link" onClick={() => { track("pricing_cta", { offer:o.key, destination:"scorer" }); setPage("scorer"); }}>Score Your Deal →</button> : <a className="editorial-link" href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => track("pricing_cta", { offer:o.key, destination:"calendly" })}>Book a Fit Check (15 min) →</a>}
+              {o.action === "score" ? <button className="editorial-link" onClick={() => { track("pricing_cta", { offer:o.key, destination:"scorer" }); setPage("scorer"); }}>Score Your Deal →</button> : <a className="editorial-link" href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => track("pricing_cta", { offer:o.key, destination:"calendly" })}>{o.action === "discuss" ? "Discuss an Active Deal (15 min) →" : "Book a Fit Check (15 min) →"}</a>}
             </div>
           </article>
         ))}
       </div>
       <aside className="home-continuity-credit" aria-labelledby="continuity-credit-title">
         <div>
-          <span>Commercial continuity</span>
-          <h3 id="continuity-credit-title">Start with diligence. Carry the insight into execution.</h3>
+          <span>Continuity Credit</span>
+          <h3 id="continuity-credit-title">Start with diligence. Carry the insight into the operating plan.</h3>
         </div>
         <p>When an Execution Risk Review leads to a Diligence-to-Execution Mandate commissioned before close or within 30 days after close, 100% of the review fee is credited toward the larger engagement.</p>
       </aside>
@@ -538,14 +539,14 @@ function HomeTrackRecord() {
   ];
   return <section className="home-track" id="track-record"><div className="home-track-inner">
     <div className="market-kicker"><span>07</span> Track Record &amp; Outcomes</div>
-    <h2>Measured outcomes. Delivered.</h2><p className="track-intro">Selected institutional operating outcomes—built and pressure-tested in prior roles, then applied to lower-middle-market deals and portfolio companies.</p>
+    <h2>Measured outcomes. Delivered.</h2><p className="track-intro">Selected institutional operating outcomes from prior roles—the experience informing Devonshire’s approach to lower-middle-market deals and portfolio companies.</p>
     <div className="home-case-grid">{cases.map(c => <article className="home-case" key={c.title}><div className="case-overline">{c.label}</div><h3>{c.title}</h3><p>{c.copy}</p><div className="home-metrics">{c.metrics.map((m) => <div className="outcome-visual" key={m.label}><div className="outcome-heading"><strong>{m.value}</strong><span>{m.label}</span></div><div className="outcome-change" aria-label={`${m.label}: ${m.before} to ${m.after}`}><span>{m.before}</span><i aria-hidden="true">→</i><span>{m.after}</span></div></div>)}</div></article>)}</div>
     <p className="home-nda">NDA protection is available as standard. Institutional outcome detail and illustrative work-product formats are available on request.</p>
   </div></section>;
 }
 
 function FinalCTA() {
-  return <section className="home-final"><div className="home-final-inner"><h2>Start with <em>one live deal.</em></h2><p>A 15-minute Fit Check confirms the operating trigger, timing, access requirements, and whether a dedicated workstream is warranted.</p><div className="final-cta-actions"><a href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => track("final_fit_check")}>Book a Fit Check (15 min)</a><a className="final-secondary-cta" href="#share-your-situation" onClick={() => track("final_share_situation")}>Share your situation</a></div><div className="final-availability"><span/>Limited concurrent capacity. Every engagement is led directly by Hassan.</div></div></section>;
+  return <section className="home-final"><div className="home-final-inner"><h2>Start with <em>one live deal.</em></h2><p>A 15-minute discussion confirms the operating trigger, timing, access requirements, and whether an Execution Risk Review is warranted.</p><div className="final-cta-actions"><a href={CALENDLY} target="_blank" rel="noopener noreferrer" onClick={() => track("final_fit_check")}>Discuss an Active Deal (15 min)</a><a className="final-secondary-cta" href="#share-your-situation" onClick={() => track("final_share_situation")}>Share your situation</a></div><div className="final-availability"><span/>Limited concurrent capacity. Every engagement is led directly by Hassan.</div></div></section>;
 }
 
 // ─── LEVER EXPLORER PAGE ─────────────────────────────────────
